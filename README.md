@@ -1,6 +1,8 @@
 # FlavorFinder
 App for matching and finding new flavors. Created for CS 98 Senior Project Implementation at Dartmouth College.
 
+Project by: Courtney Ligh, Jaki Kimball, Jon Preddy, Tristan Chu
+
 ## Pitch
 The Flavor Finder is a flavor lookup mobile app—a creative culinary tool for inspiration, experimentation, and reference with user-generated content. There is currently no easy mobile way to look up what flavors go well together or what flavors go well with the ingredients you currently have (except for wine+cheese pairing apps that don’t cover the scope of flavors we hope to cover). A book called [The Flavor Bible](http://www.amazon.com/The-Flavor-Bible-Creativity-Imaginative/dp/0316118400) exists with a flavor lookup section, but it is bulky and its eBook is not user-friendly; moreover, it is incomplete in certain respects. This app will be perfect for looking up flavors on the go (e.g. supermarket, farmer's market), but also handy in the kitchen
 
