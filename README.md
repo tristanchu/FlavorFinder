@@ -16,12 +16,10 @@ Advanced features beyond basic flavor lookup:
 ## Strategy & Timeline
 Essentially, this fall we are focusing on the core flavor lookup aspects of the app, and in the winter we are focusing on user experience and user-driven features/content.
 
-* *Sept. 28–October 10*: Familiarizing with Swift (do tutorial) & research technical design aspects
-* *October 1–October 12*: Create design doc / vision especially figuring out database tech
-* *October 10–21*: Skeleton ios app up
-* *October 10–17*: Crawler of ebook section (The Flavor Bible) for our development data set - manually mark some data for testing advanced filter options not in book’s data (ex. “vegetarian”)
-* *October 17–November 7*: Small scale beta version with sample data, with very basic search
-* *November 4–November 25*: Advanced search and/or filtering
+* *Sept. 28–October 10*: Familiarizing with Swift (do tutorial) & research technical design aspects; scrape eBook (The Flavor Bible) to populate model data set
+* *October 6–October 20*: Create design doc / vision especially figuring out database tech; ; skeleton iOS app
+* *October 17–November 7*: Small scale beta version with sample data, with very basic search; basic user accounts in app
+* *November 4–November 25*: Advanced search and/or filtering; final user account tech in place
 
 Winter term, we expect to focus more heavily on UX/UI testing/development and also develop community-driven data creation/modification; we may also make adjustments to advanced search during this time based on user testing. Favorites and more user-based features would exist. We would also have integration with a recipe website’s API for pulling recipes related to flavor lookups. Over winter break, we will likely be in contact and do some of the initial planning/research for these additional features, and also start lining up user testers.
 
