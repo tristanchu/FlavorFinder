@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>A413640D-8BB6-4B39-80A8-18CD081449DE</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>FlavorFinder</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>04556EE29AE3435A272EEF039BE41C68A1AAF8EF</key>
 		<string>https://github.com/tristanchu/FlavorFinder.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>FlavorFinder/FlavorFinder.xcodeproj/project.xcworkspace</string>
+	<string>FlavorFinder/FlavorFinder.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>04556EE29AE3435A272EEF039BE41C68A1AAF8EF</key>
