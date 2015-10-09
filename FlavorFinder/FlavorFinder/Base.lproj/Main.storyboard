@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="yDJ-pt-my1">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="oWC-1n-3cO">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <scenes>
-        <!--Match Table View Controller-->
+        <!--Flavor Matches-->
         <scene sceneID="I46-hR-Jw9">
             <objects>
                 <tableViewController id="yDJ-pt-my1" customClass="MatchTableViewController" customModule="FlavorFinder" customModuleProvider="target" sceneMemberID="viewController">
@@ -21,7 +21,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ndg-wR-OIq">
                                             <rect key="frame" x="27" y="11" width="565" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -36,8 +36,27 @@
                             <outlet property="delegate" destination="yDJ-pt-my1" id="2P9-sL-qly"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Flavor Matches" id="eQ5-0u-QHl"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XZF-Bl-251" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1267" y="475"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="XuT-By-HT0">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oWC-1n-3cO" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="HXZ-hJ-BA0">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="yDJ-pt-my1" kind="relationship" relationship="rootViewController" id="g4r-QM-zC9"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jnx-Vf-b0Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="455" y="475"/>
         </scene>

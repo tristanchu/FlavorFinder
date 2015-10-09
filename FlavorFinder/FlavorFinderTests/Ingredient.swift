@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Match {
+class Ingredient {
     // MARK: Properties
     
     var name: String

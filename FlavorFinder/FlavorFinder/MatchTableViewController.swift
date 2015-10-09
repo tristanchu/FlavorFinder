@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import SQLite
 
 class MatchTableViewController: UITableViewController {
-
     // MARK: Properties
     
-    var matches = [Match]()
+
+    
+    var allIngredients = [Ingredient]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,11 +29,19 @@ class MatchTableViewController: UITableViewController {
     }
     
     func loadMatches() {
-        let match1 = Match(name: "leeks")!
-        let match2 = Match(name: "bacon")!
-        let match3 = Match(name: "carrots")!
+        let dbpath = NSBundle.mainBundle().pathForResource("flavorbible", ofType: "db")
+        let db = Database(dbpath!)
         
-        matches += [match1, match2, match3]
+        let matches = db["matches"];
+        
+        let ingredients = db["ingredients"]
+        let ingredient = Expression<String>("ingredient")
+        
+        for i in ingredients {
+            allIngredients.append(Ingredient(name: i[ingredient])!)
+        }
+        
+//        allIngredients = Array(ingredients.select(ingredient))
     }
 
     override func didReceiveMemoryWarning() {
@@ -48,7 +58,7 @@ class MatchTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows in the section.
-        return matches.count
+        return allIngredients.count
     }
 
     
@@ -57,8 +67,8 @@ class MatchTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! MatchTableViewCell
 
         // Fetches the appropriate match to display.
-        let match = matches[indexPath.row]
-        cell.nameLabel.text = match.name
+        let ingredient = allIngredients[indexPath.row]
+        cell.nameLabel.text = ingredient.name
         
         return cell
     }
