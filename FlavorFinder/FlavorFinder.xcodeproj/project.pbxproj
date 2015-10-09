@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		56D23A31BA541208CC4BAC9D /* Pods_FlavorFinder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F0701BEA3C57EBBE60538B5 /* Pods_FlavorFinder.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		883AC6281BC1A3C0009136E9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883AC6271BC1A3C0009136E9 /* AppDelegate.swift */; };
 		883AC62D1BC1A3C0009136E9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 883AC62B1BC1A3C0009136E9 /* Main.storyboard */; };
 		883AC62F1BC1A3C0009136E9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 883AC62E1BC1A3C0009136E9 /* Images.xcassets */; };
@@ -29,6 +30,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2C3E9A246B0E3665372C6048 /* Pods-FlavorFinder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlavorFinder.release.xcconfig"; path = "Pods/Target Support Files/Pods-FlavorFinder/Pods-FlavorFinder.release.xcconfig"; sourceTree = "<group>"; };
+		6F0701BEA3C57EBBE60538B5 /* Pods_FlavorFinder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlavorFinder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7ED753512243C86842952CBD /* Pods-FlavorFinder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlavorFinder.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FlavorFinder/Pods-FlavorFinder.debug.xcconfig"; sourceTree = "<group>"; };
 		883AC6221BC1A3C0009136E9 /* FlavorFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlavorFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		883AC6261BC1A3C0009136E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		883AC6271BC1A3C0009136E9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -48,6 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				56D23A31BA541208CC4BAC9D /* Pods_FlavorFinder.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,12 +66,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6743D2DA03BF229740565999 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6F0701BEA3C57EBBE60538B5 /* Pods_FlavorFinder.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8053C7A060CD5366C2289856 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7ED753512243C86842952CBD /* Pods-FlavorFinder.debug.xcconfig */,
+				2C3E9A246B0E3665372C6048 /* Pods-FlavorFinder.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		883AC6191BC1A3C0009136E9 = {
 			isa = PBXGroup;
 			children = (
 				883AC6241BC1A3C0009136E9 /* FlavorFinder */,
 				883AC63A1BC1A3C0009136E9 /* FlavorFinderTests */,
 				883AC6231BC1A3C0009136E9 /* Products */,
+				8053C7A060CD5366C2289856 /* Pods */,
+				6743D2DA03BF229740565999 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -126,9 +150,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 883AC6411BC1A3C0009136E9 /* Build configuration list for PBXNativeTarget "FlavorFinder" */;
 			buildPhases = (
+				64D58810FDCD1F04073C3967 /* Check Pods Manifest.lock */,
 				883AC61E1BC1A3C0009136E9 /* Sources */,
 				883AC61F1BC1A3C0009136E9 /* Frameworks */,
 				883AC6201BC1A3C0009136E9 /* Resources */,
+				F9CD3946F6C94A17119AD15C /* Embed Pods Frameworks */,
+				DE0322DFDFC322A2C013FF7B /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -213,6 +240,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		64D58810FDCD1F04073C3967 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		DE0322DFDFC322A2C013FF7B /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FlavorFinder/Pods-FlavorFinder-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F9CD3946F6C94A17119AD15C /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FlavorFinder/Pods-FlavorFinder-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		883AC61E1BC1A3C0009136E9 /* Sources */ = {
@@ -350,6 +425,7 @@
 		};
 		883AC6421BC1A3C0009136E9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7ED753512243C86842952CBD /* Pods-FlavorFinder.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = FlavorFinder/Info.plist;
@@ -360,6 +436,7 @@
 		};
 		883AC6431BC1A3C0009136E9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2C3E9A246B0E3665372C6048 /* Pods-FlavorFinder.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = FlavorFinder/Info.plist;
