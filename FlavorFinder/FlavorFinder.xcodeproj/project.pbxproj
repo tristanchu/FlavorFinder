@@ -13,7 +13,7 @@
 		883AC62F1BC1A3C0009136E9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 883AC62E1BC1A3C0009136E9 /* Images.xcassets */; };
 		883AC6321BC1A3C0009136E9 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 883AC6301BC1A3C0009136E9 /* LaunchScreen.xib */; };
 		883AC63E1BC1A3C0009136E9 /* FlavorFinderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883AC63D1BC1A3C0009136E9 /* FlavorFinderTests.swift */; };
-		883F67DE1BC7892E005473F5 /* flavorbible.db in Resources */ = {isa = PBXBuildFile; fileRef = 883F67DD1BC76C0A005473F5 /* flavorbible.db */; };
+		884778211BC8B3E200A9DA4F /* flavorbible.db in Resources */ = {isa = PBXBuildFile; fileRef = 884778201BC8B3D600A9DA4F /* flavorbible.db */; };
 		88F413FA1BC74A00000C0093 /* MatchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F413F91BC74A00000C0093 /* MatchTableViewCell.swift */; };
 		88F413FC1BC74EC8000C0093 /* MatchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F413FB1BC74EC8000C0093 /* MatchTableViewController.swift */; };
 		88F414011BC7513F000C0093 /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F414001BC7513F000C0093 /* Ingredient.swift */; };
@@ -43,7 +43,7 @@
 		883AC6371BC1A3C0009136E9 /* FlavorFinderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlavorFinderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		883AC63C1BC1A3C0009136E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		883AC63D1BC1A3C0009136E9 /* FlavorFinderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlavorFinderTests.swift; sourceTree = "<group>"; };
-		883F67DD1BC76C0A005473F5 /* flavorbible.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = flavorbible.db; sourceTree = "<group>"; };
+		884778201BC8B3D600A9DA4F /* flavorbible.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = flavorbible.db; sourceTree = "<group>"; };
 		88F413F91BC74A00000C0093 /* MatchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchTableViewCell.swift; sourceTree = "<group>"; };
 		88F413FB1BC74EC8000C0093 /* MatchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchTableViewController.swift; sourceTree = "<group>"; };
 		88F414001BC7513F000C0093 /* Ingredient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Ingredient.swift; path = FlavorFinderTests/Ingredient.swift; sourceTree = SOURCE_ROOT; };
@@ -109,7 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				883AC6271BC1A3C0009136E9 /* AppDelegate.swift */,
-				883F67DD1BC76C0A005473F5 /* flavorbible.db */,
+				884778201BC8B3D600A9DA4F /* flavorbible.db */,
 				883AC62B1BC1A3C0009136E9 /* Main.storyboard */,
 				88F414001BC7513F000C0093 /* Ingredient.swift */,
 				88F413F91BC74A00000C0093 /* MatchTableViewCell.swift */,
@@ -229,7 +229,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				883F67DE1BC7892E005473F5 /* flavorbible.db in Resources */,
+				884778211BC8B3E200A9DA4F /* flavorbible.db in Resources */,
 				883AC62D1BC1A3C0009136E9 /* Main.storyboard in Resources */,
 				883AC6321BC1A3C0009136E9 /* LaunchScreen.xib in Resources */,
 				883AC62F1BC1A3C0009136E9 /* Images.xcassets in Resources */,

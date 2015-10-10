@@ -9,12 +9,17 @@
 import UIKit
 import SQLite
 
-class MatchTableViewController: UITableViewController {
+class MatchTableViewController: UITableViewController, UITableViewDelegate {
     // MARK: Properties
     
+    var matchesTable: Query!
+    var ingredientsTable: Query!
+    let nameCol = Expression<String>("name")
+    let matchCol = Expression<String>("match")
 
-    
     var allIngredients = [Ingredient]()
+    var displayedCells = [Ingredient]()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,16 +37,14 @@ class MatchTableViewController: UITableViewController {
         let dbpath = NSBundle.mainBundle().pathForResource("flavorbible", ofType: "db")
         let db = Database(dbpath!)
         
-        let matches = db["matches"];
+        matchesTable = db["matches"];
+        ingredientsTable = db["ingredients"]
         
-        let ingredients = db["ingredients"]
-        let ingredient = Expression<String>("ingredient")
-        
-        for i in ingredients {
-            allIngredients.append(Ingredient(name: i[ingredient])!)
+        for ingredient in ingredientsTable {
+            allIngredients.append(Ingredient(name: ingredient[nameCol])!)
         }
         
-//        allIngredients = Array(ingredients.select(ingredient))
+        displayedCells = allIngredients
     }
 
     override func didReceiveMemoryWarning() {
@@ -58,7 +61,7 @@ class MatchTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows in the section.
-        return allIngredients.count
+        return displayedCells.count
     }
 
     
@@ -67,10 +70,27 @@ class MatchTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! MatchTableViewCell
 
         // Fetches the appropriate match to display.
-        let ingredient = allIngredients[indexPath.row]
+        let ingredient = displayedCells[indexPath.row]
         cell.nameLabel.text = ingredient.name
         
         return cell
+    }
+    
+    override func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
+        let ingredient = displayedCells[indexPath.row]
+        
+        let matches = matchesTable.filter(nameCol == ingredient.name)
+        
+        displayedCells.removeAll()
+        
+        for m in matches {
+            if let found = find(lazy(allIngredients).map({ $0.name == m[self.matchCol] }), true) {
+                displayedCells.append(allIngredients[found])
+            }
+        }
+        
+        self.tableView.reloadData()
+        //        self.performSegueWithIdentifier("yourIdentifier", sender: self)
     }
     
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Bucket
-   type = "1"
+   type = "0"
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FlavorFinder/MatchTableViewController.swift"
-            timestampString = "466129821.726283"
+            timestampString = "466129835.701084"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
-            landmarkName = "tableView(_:cellForRowAtIndexPath:)"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
+            landmarkName = "tableView(_:didSelectRowAtIndexPath:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -26,12 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FlavorFinder/MatchTableViewController.swift"
-            timestampString = "466129821.726283"
+            timestampString = "466137714.069457"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "72"
-            endingLineNumber = "72"
-            landmarkName = "tableView(_:cellForRowAtIndexPath:)"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
+            landmarkName = "loadMatches()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -42,12 +42,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FlavorFinder/MatchTableViewController.swift"
-            timestampString = "466129821.726283"
+            timestampString = "466137836.686139"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "73"
-            endingLineNumber = "73"
-            landmarkName = "tableView(_:cellForRowAtIndexPath:)"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "loadMatches()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
