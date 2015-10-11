@@ -11,9 +11,11 @@ import UIKit
 class Ingredient {
     // MARK: Properties
     
+    var id: Int
     var name: String
     
-    init?(name: String) {
+    init?(id: Int, name: String) {
+        self.id = id
         self.name = name
         
         // Initialization should fail if there is no name.

@@ -14,8 +14,11 @@ class MatchTableViewController: UITableViewController, UITableViewDelegate {
     
     var matchesTable: Query!
     var ingredientsTable: Query!
-    let nameCol = Expression<String>("name")
-    let matchCol = Expression<String>("match")
+    let SCHEMA_TABLE_INGREDIENTS = "ingredients"
+    let SCHEMA_TABLE_MATCHES = "matches"
+    let SCHEMA_COL_ID = Expression<Int>("id")
+    let SCHEMA_COL_MATCHID = Expression<Int>("match_id")
+    let SCHEMA_COL_NAME = Expression<String>("name")
 
     var allIngredients = [Ingredient]()
     var displayedCells = [Ingredient]()
@@ -37,11 +40,18 @@ class MatchTableViewController: UITableViewController, UITableViewDelegate {
         let dbpath = NSBundle.mainBundle().pathForResource("flavorbible", ofType: "db")
         let db = Database(dbpath!)
         
-        matchesTable = db["matches"];
-        ingredientsTable = db["ingredients"]
+        ingredientsTable = db[SCHEMA_TABLE_INGREDIENTS]
+        matchesTable = db[SCHEMA_TABLE_MATCHES];
         
         for ingredient in ingredientsTable {
-            allIngredients.append(Ingredient(name: ingredient[nameCol])!)
+            let possible_id : Int? = ingredient[SCHEMA_COL_ID]
+            let possible_name : String? = ingredient[SCHEMA_COL_NAME]
+            if let id = possible_id, let name = possible_name {
+                if name.isEmpty == false {
+                    var i = Ingredient(id: id, name: name)!
+                    allIngredients.append(Ingredient(id: id, name: name)!)
+                }
+            }
         }
         
         displayedCells = allIngredients
@@ -69,7 +79,7 @@ class MatchTableViewController: UITableViewController, UITableViewDelegate {
         let cellIdentifier = "MatchTableViewCell"
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! MatchTableViewCell
 
-        // Fetches the appropriate match to display.
+        // Fetches the appropriate ingredient to display.
         let ingredient = displayedCells[indexPath.row]
         cell.nameLabel.text = ingredient.name
         
@@ -79,12 +89,12 @@ class MatchTableViewController: UITableViewController, UITableViewDelegate {
     override func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
         let ingredient = displayedCells[indexPath.row]
         
-        let matches = matchesTable.filter(nameCol == ingredient.name)
+        let matches = matchesTable.filter(SCHEMA_COL_ID == ingredient.id)
         
         displayedCells.removeAll()
         
         for m in matches {
-            if let found = find(lazy(allIngredients).map({ $0.name == m[self.matchCol] }), true) {
+            if let found = find(lazy(allIngredients).map({ $0.id == m[self.SCHEMA_COL_MATCHID] }), true) {
                 displayedCells.append(allIngredients[found])
             }
         }
