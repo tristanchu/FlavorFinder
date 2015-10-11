@@ -8,88 +8,178 @@ from ebooklib import epub
 from bs4 import BeautifulSoup
 import sqlite3
 import re
+import csv
+
 
 conn = sqlite3.connect('flavorbible.db')
 c = conn.cursor()
-c.execute('''CREATE TABLE matches
-            (ingredient text, match_low text, match_medium text,
-            match_high text, match_holy text, affinity text,
-            quote text)''')
 
-c.execute('''CREATE TABLE ingredients
-            (ingredient text, season text, taste text, weight text,
-            volume text)''')
+c.execute('''CREATE TABLE ingredients(
+            id int,
+            name text PRIMARY KEY, 
+            season text,
+            taste text,
+            weight text,
+            volume text
+          )''')
 
-book = epub.read_epub('flavorbible.epub')
-result = ""
-for item in book.get_items():
-    type = item.get_type()
-    if type == ebooklib.ITEM_DOCUMENT:
-        soup = BeautifulSoup(item.content, 'lxml')
+c.execute('''CREATE TABLE matches(
+            id int,
+            match_id int,
+            match_level text,
+            affinity text,
+            quote text
+          )''')
 
-        # Find ingredient listings.
-        for i in soup.find_all('p', {'class' : ['lh', 'lh1']}):
-            print('HEADING: ', i)
 
-            itext = re.sub(r'\s?\(See also.*\)', '', i.text)
+latest_id = 0
+
+def addMatches(ingredients, matches, ingredient_ids, id, i, s, match_level):
+    global latest_id
+
+    if s.lower() in ingredient_ids:
+        match_id = ingredient_ids[s.lower()]
+    else:
+        match_id = latest_id
+        ingredients[match_id] = [match_id, s, '', '', '', '']
+        ingredient_ids[s.lower()] = match_id
+        latest_id += 1
+
+    match1 = str(id) + '_' + str(match_id)
+    match2 = str(match_id) + '_' + str(id)
+
+    if not match1 in matches:
+        matches[match1] = [id, match_id, match_level, '', '']
+    if not match2 in matches:
+        matches[match2] = [match_id, id, match_level, '', '']
+
+
+def writeIngredientsToCSV(filename, fieldnames, data):
+    with open(filename, 'w') as csvfile:
+        writer = csv.DictWriter(csvfile, delimiter='|', fieldnames=fieldnames)
+        writer.writeheader()
+        for key in data:
+            row = data[key]
+            writer.writerow({fieldnames[0]: row[0], fieldnames[1]: row[1], fieldnames[2]: row[2], fieldnames[3]: row[3], fieldnames[4]: row[4], fieldnames[5]: row[5]})
+
+def writeMatchesToCSV(filename, fieldnames, data):
+    with open(filename, 'w') as csvfile:
+        writer = csv.DictWriter(csvfile, delimiter='|', fieldnames=fieldnames)
+        writer.writeheader()
+        for key in data:
+            row = data[key]
+            writer.writerow({fieldnames[0]: row[0], fieldnames[1]: row[1], fieldnames[2]: row[2], fieldnames[3]: row[3], fieldnames[4]: row[4]})
+
+def writeIngredientsToTable(data):
+    for key in data:
+        row = data[key]
+        c.execute("INSERT INTO ingredients VALUES ('%s', '%s', '%s', '%s', '%s', '%s')" % (row[0], row[1], row[2], row[3], row[4], row[5]))
+
+def writeMatchesToTable(data):
+    for key in data:
+        row = data[key]
+        c.execute("INSERT INTO matches VALUES ('%s', '%s', '%s', '%s', '%s')" % (row[0], row[1], row[2], row[3], row[4]))
+
+
+
+if __name__ == '__main__':
+    global latest_id
+    ingredients_fieldnames = ['id', 'name', 'season', 'taste', 'weight', 'volume']
+    matches_fieldnames = ['name', 'match', 'match_level', 'affinity', 'quote']
+
+    ingredients = {}
+    matches = {}
+    
+    ingredient_ids = {}
+
+    book = epub.read_epub('flavorbible.epub')
+    result = ""
+    for item in book.get_items():
+        type = item.get_type()
+        if type == ebooklib.ITEM_DOCUMENT:
+            soup = BeautifulSoup(item.content, 'lxml')
+    
+            # Find ingredient listings.
+            for ingredient in soup.find_all('p', {'class' : ['lh', 'lh1']}):
+                print('HEADING: ', ingredient)
+
+                i = re.sub(r'\s?\(See also.*\)', '', ingredient.text)
+                i = i.lower()
             
-            # Find what goes well with these ingredients.
-            s = i.find_next_sibling()
-            while s != None:
-                try:
-                    if s['class'] in (['lh'], ['lh1']):
-                        break
-                except:
-                    break
-                print('content: ', s)
-                
-                # season, taste, weight, volume
-                if s.text.startswith('Season:'):
-                    c.execute("INSERT INTO ingredients VALUES ('%s', '%s', '', '', '')" % (itext.lower(), s.text[8:]))
-                elif s.text.startswith('Taste:'):
-                    #c.execute("INSERT INTO ingredients VALUES ('%s', '', '%s', '', '')" % (itext.lower(), s.text[7:]))
-                    c.execute("UPDATE ingredients SET taste='%s' WHERE ingredient='%s'" % (s.text[7:], itext.lower()))
-                elif s.text.startswith('Weight:'):
-                    #c.execute("INSERT INTO ingredients VALUES ('%s', '', '', '%s', '')" % (itext.lower(), s.text[8:]))
-                    c.execute("UPDATE ingredients SET weight='%s' WHERE ingredient='%s'" % (s.text[8:], itext.lower()))
-                elif s.text.startswith('Volume:'):
-                    #c.execute("INSERT INTO ingredients VALUES ('%s', '', '', '', '%s')" % (itext.lower(), s.text[8:]))
-                    c.execute("UPDATE ingredients SET volume='%s' WHERE ingredient='%s'" % (s.text[8:], itext.lower()))
-
-                # quote
-                elif s['class'] == ['p1']:
-                    quote = s.text
-                    s = s.find_next_sibling()
-                    quote += ' ' + s.text
-                    c.execute("INSERT INTO matches VALUES ('%s', '', '', '', '', '', '%s')" % (itext.lower(), quote))
-                # flavor affinities
-                elif s['class'] == ['h4']:
-                    s = s.find_next_sibling()
-                    while s != None:
-                        c.execute("INSERT INTO matches VALUES ('%s', '', '', '', '', '%s', '')" % (itext.lower(), s.text))
-
-                        try:
-                            if s.find_next_sibling()['class'] in (['lh'], ['lh1'], ['p1']):
-                                break
-                        except:
-                            break
-                        s = s.find_next_sibling()
-                # match-low
-                elif s.find('strong') == None:
-                    c.execute("INSERT INTO matches VALUES ('%s', '%s', '', '', '', '', '')" % (itext.lower(), s.text.lower()))
+                if i in ingredient_ids:
+                    id = ingredient_ids[i]
                 else:
-                    # match-medium
-                    if s.text.islower():
-                        c.execute("INSERT INTO matches VALUES ('%s', '', '%s', '', '', '', '')" % (itext.lower(), s.text.lower()))
-                    # match-high
-                    elif s.text.isupper() and s.text.startswith('*') == False:
-                        c.execute("INSERT INTO matches VALUES ('%s', '', '', '%s', '', '', '')" % (itext.lower(), s.text.lower()))
-                    # match-holy
-                    elif s.text.isupper() and s.text.startswith('*') == True:
-                        c.execute("INSERT INTO matches VALUES ('%s', '', '', '', '%s', '', '')" % (itext.lower(), s.text.lower()[1:]))
+                    id = latest_id
+                    ingredients[id] = [id, i, '', '', '', '']
+                    ingredient_ids[i] = id
+                    latest_id += 1
+            
+            
+                # Find what goes well with these ingredients.
+                sibling = ingredient.find_next_sibling()
+            
+                while sibling != None:
+                    s = sibling.text
+                    try:
+                        if sibling['class'] in (['lh'], ['lh1']):
+                            break
+                    except:
+                        break
+                    print('content: ', sibling)
+                    
+                    # season, taste, weight, volume
+                    if s.startswith('Season:'):
+                        ingredients[id][2] = s[8:]
+                    elif s.startswith('Taste:'):
+                        ingredients[id][3] = s[7:]
+                    elif s.startswith('Weight:'):
+                        ingredients[id][4] = s[8:]
+                    elif s.startswith('Volume:'):
+                        ingredients[id][5] = s[8:]
+            
+                    # quote
+                    elif sibling['class'] == ['p1']:
+                        quote = s
+                        sibling = sibling.find_next_sibling()
+                        s = sibling.text
+                        quote += ' ' + s
+                        #c.execute("INSERT INTO matches VALUES ('%s', '', '', '', '%s')" % (i, quote))
+                    # flavor affinities
+                    elif sibling['class'] == ['h4']:
+                        sibling = sibling.find_next_sibling()
+                        while sibling != None:
+                            #c.execute("INSERT INTO matches VALUES ('%s', '', '', '%s', '')" % (i, s))
+                            try:
+                                if sibling.find_next_sibling()['class'] in (['lh'], ['lh1'], ['p1']):
+                                    break
+                            except:
+                                break
+                            sibling = sibling.find_next_sibling()
+            
+                    # match-low
+                    elif sibling.find('strong') == None:
+                        addMatches(ingredients, matches, ingredient_ids, id, i, s, 1)
+                    else:
+                        # match-medium
+                        if s.islower():
+                            addMatches(ingredients, matches, ingredient_ids, id, i, s, 2)
+                        # match-high
+                        elif s.isupper() and s.startswith('*') == False:
+                            addMatches(ingredients, matches, ingredient_ids, id, i, s, 3)
+                        # match-holy
+                        elif s.isupper() and s.startswith('*') == True:
+                            addMatches(ingredients, matches, ingredient_ids, id, i, s[1:], 4)
+            
+                    sibling = sibling.find_next_sibling()
+    
+    
+                print('')
+    
+    writeIngredientsToCSV('ingredients.csv', ingredients_fieldnames, ingredients)
+    writeMatchesToCSV('matches.csv', matches_fieldnames, matches)
 
-                s = s.find_next_sibling()
-            print('')
+    writeIngredientsToTable(ingredients)
+    writeMatchesToTable(matches)
 
-conn.commit()
-conn.close()
+    conn.commit()
+    conn.close()
