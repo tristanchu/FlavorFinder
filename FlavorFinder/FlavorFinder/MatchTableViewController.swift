@@ -79,9 +79,11 @@ class MatchTableViewController: UITableViewController, UITableViewDelegate, UISe
             if let pastIngredient = history.pop() {
                 showIngredient(pastIngredient!)
             } else {
+                goBackBtn.enabled = false
                 showAllIngredients()
             }
             future.push(curr)
+            goForwardBtn.enabled = true
         }
     }
     
@@ -89,6 +91,7 @@ class MatchTableViewController: UITableViewController, UITableViewDelegate, UISe
         if let futureIngredient = future.pop() {
             if let curr = currentIngredient {
                 history.push(curr)
+                goBackBtn.enabled = true
             }
             showIngredient(futureIngredient!)
         }
@@ -99,11 +102,15 @@ class MatchTableViewController: UITableViewController, UITableViewDelegate, UISe
         if let curr = currentIngredient {
             history.push(curr)
         }
+        goBackBtn.enabled = true
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("hello")
+        
+        goBackBtn.enabled = false
+        goForwardBtn.enabled = false
+        
         loadIngredients()
         
         // Uncomment the following line to preserve selection between presentations

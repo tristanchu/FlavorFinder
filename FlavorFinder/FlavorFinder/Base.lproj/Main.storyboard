@@ -37,12 +37,14 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="All Ingredients" id="eQ5-0u-QHl">
-                        <barButtonItem key="leftBarButtonItem" title="&lt;" id="UUL-Fa-7ff">
+                        <barButtonItem key="leftBarButtonItem" title="〈" id="UUL-Fa-7ff">
+                            <color key="tintColor" red="0.89195993439999999" green="1" blue="0.94924983230000004" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="goBack:" destination="yDJ-pt-my1" id="rbG-Ac-V0k"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="&gt;" id="LuI-qR-nEs">
+                        <barButtonItem key="rightBarButtonItem" title="〉" id="LuI-qR-nEs">
+                            <color key="tintColor" red="0.89195993439999999" green="1" blue="0.94924983230000004" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="goForward:" destination="yDJ-pt-my1" id="zpe-xo-uTR"/>
                             </connections>
