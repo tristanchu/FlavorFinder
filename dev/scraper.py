@@ -15,8 +15,8 @@ conn = sqlite3.connect('flavorbible.db')
 c = conn.cursor()
 
 c.execute('''CREATE TABLE ingredients(
-            id int,
-            name text PRIMARY KEY, 
+            id int PRIMARY KEY,
+            name text UNIQUE, 
             season text,
             taste text,
             weight text,
@@ -26,9 +26,10 @@ c.execute('''CREATE TABLE ingredients(
 c.execute('''CREATE TABLE matches(
             id int,
             match_id int,
-            match_level text,
+            match_level int,
             affinity text,
-            quote text
+            quote text,
+            PRIMARY KEY(id, match_id)
           )''')
 
 

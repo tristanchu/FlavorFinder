@@ -13,6 +13,7 @@ class Ingredient {
     
     var id: Int
     var name: String
+    var matchLevel = 0
     
     init?(id: Int, name: String) {
         self.id = id
