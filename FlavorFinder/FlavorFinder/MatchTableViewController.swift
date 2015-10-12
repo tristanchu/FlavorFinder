@@ -110,6 +110,7 @@ class MatchTableViewController: UITableViewController, UITableViewDelegate, UISe
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        searchBar.delegate = self
         
         goBackBtn.enabled = false
         goForwardBtn.enabled = false
@@ -272,7 +273,11 @@ class MatchTableViewController: UITableViewController, UITableViewDelegate, UISe
         
         showIngredient(ingredient)
     }
+    // ---------------------------------------------------------
     
+    
+    // SEARCHBAR FUNCTIONS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // -------------------
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         filteredCells.removeAll()
         
