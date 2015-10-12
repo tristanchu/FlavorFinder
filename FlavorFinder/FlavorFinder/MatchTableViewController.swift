@@ -105,6 +105,7 @@ class MatchTableViewController: UITableViewController, UITableViewDelegate, UISe
             history.push(curr)
         }
         goBackBtn.enabled = true
+        goForwardBtn.enabled = false
     }
     // ---------------------------------------------------------
     
