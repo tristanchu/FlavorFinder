@@ -38,7 +38,7 @@ class MatchTableViewController: UITableViewController, UITableViewDelegate, UISe
     @IBOutlet weak var goBackBtn: UIBarButtonItem!
     @IBOutlet weak var goForwardBtn: UIBarButtonItem!
     
-    // GLOBALS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // GLOBALS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // -------
     var matchesTable: Query!
     var ingredientsTable: Query!
@@ -74,6 +74,8 @@ class MatchTableViewController: UITableViewController, UITableViewDelegate, UISe
     // ---------------------------------------------------------
     
     
+    // NAVI FUNCTIONS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // --------------
     @IBAction func goBack(sender: UIBarButtonItem) {
         if let curr = currentIngredient {
             if let pastIngredient = history.pop() {
@@ -104,6 +106,7 @@ class MatchTableViewController: UITableViewController, UITableViewDelegate, UISe
         }
         goBackBtn.enabled = true
     }
+    // ---------------------------------------------------------
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -120,13 +123,15 @@ class MatchTableViewController: UITableViewController, UITableViewDelegate, UISe
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
+    
+    
     func showAllIngredients() {
         allCells = allIngredients
         filteredCells = allIngredients
         self.title = "All Ingredients"
         currentIngredient = nil
         
-        self.tableView.reloadData()
+        animateTable()
     }
     
     func showIngredient(ingredient: Ingredient) {
@@ -154,9 +159,8 @@ class MatchTableViewController: UITableViewController, UITableViewDelegate, UISe
         // We only want to show the colors when viewing matches, not the list of all ingredients.
         viewingMatches = true
         
-        // Show the new ingredients on our table.
-        self.tableView.reloadData()
-        
+        // Show the new ingredients on our table with animation.
+        animateTable()
         //        self.performSegueWithIdentifier("yourIdentifier", sender: self)
     }
     
@@ -187,8 +191,35 @@ class MatchTableViewController: UITableViewController, UITableViewDelegate, UISe
         // Dispose of any resources that can be recreated.
     }
 
-    // MARK: - Table view data source
-
+    // TABLE FUNCTIONS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // ---------------
+    override func viewWillAppear(animated: Bool) {
+        animateTable()
+    }
+    
+    func animateTable() {
+        tableView.reloadData()
+        
+        let cells = tableView.visibleCells()
+        let tableWidth: CGFloat = tableView.bounds.size.width
+        
+        for i in cells {
+            let cell: UITableViewCell = i as! UITableViewCell
+            cell.transform = CGAffineTransformMakeTranslation(tableWidth, 0)
+        }
+        
+        var index = 0
+        
+        for a in cells {
+            let cell: UITableViewCell = a as! UITableViewCell
+            UIView.animateWithDuration(0.75, delay: 0.03 * Double(index), usingSpringWithDamping: 0.9, initialSpringVelocity: 0, options: nil, animations: {
+                cell.transform = CGAffineTransformMakeTranslation(0, 0);
+                }, completion: nil)
+            
+            index += 1
+        }
+    }
+    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // Return the number of sections.
         return 1
@@ -257,6 +288,8 @@ class MatchTableViewController: UITableViewController, UITableViewDelegate, UISe
         
         self.tableView.reloadData()
     }
+    // ---------------------------------------------------------
+
     
     /*
     // Override to support conditional editing of the table view.
