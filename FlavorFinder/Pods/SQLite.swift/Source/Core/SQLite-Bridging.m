@@ -1,7 +1,7 @@
 //
 // SQLite.swift
 // https://github.com/stephencelis/SQLite.swift
-// Copyright (c) 2014-2015 Stephen Celis.
+// Copyright © 2014-2015 Stephen Celis.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,85 +24,11 @@
 
 #import "SQLite-Bridging.h"
 
-#import "fts3_tokenizer.h"
-
-static int __SQLiteBusyHandler(void * context, int tries) {
-    return ((__bridge _SQLiteBusyHandlerCallback)context)(tries);
-}
-
-int _SQLiteBusyHandler(SQLiteHandle * handle, _SQLiteBusyHandlerCallback callback) {
-    if (callback) {
-        return sqlite3_busy_handler((sqlite3 *)handle, __SQLiteBusyHandler, (__bridge void *)callback);
-    } else {
-        return sqlite3_busy_handler((sqlite3 *)handle, 0, 0);
-    }
-}
-
-static void __SQLiteTrace(void * context, const char * SQL) {
-    ((__bridge _SQLiteTraceCallback)context)(SQL);
-}
-
-void _SQLiteTrace(SQLiteHandle * handle, _SQLiteTraceCallback callback) {
-    if (callback) {
-        sqlite3_trace((sqlite3 *)handle, __SQLiteTrace, (__bridge void *)callback);
-    } else {
-        sqlite3_trace((sqlite3 *)handle, 0, 0);
-    }
-}
-
-static void __SQLiteUpdateHook(void * context, int operation, const char * db, const char * table, long long rowid) {
-    ((__bridge _SQLiteUpdateHookCallback)context)(operation, db, table, rowid);
-}
-
-void _SQLiteUpdateHook(SQLiteHandle * handle, _SQLiteUpdateHookCallback callback) {
-    sqlite3_update_hook((sqlite3 *)handle, __SQLiteUpdateHook, (__bridge void *)callback);
-}
-
-static int __SQLiteCommitHook(void * context) {
-    return ((__bridge _SQLiteCommitHookCallback)context)();
-}
-
-void _SQLiteCommitHook(SQLiteHandle * handle, _SQLiteCommitHookCallback callback) {
-    sqlite3_commit_hook((sqlite3 *)handle, __SQLiteCommitHook, (__bridge void *)callback);
-}
-
-static void __SQLiteRollbackHook(void * context) {
-    ((__bridge _SQLiteRollbackHookCallback)context)();
-}
-
-void _SQLiteRollbackHook(SQLiteHandle * handle, _SQLiteRollbackHookCallback callback) {
-    sqlite3_rollback_hook((sqlite3 *)handle, __SQLiteRollbackHook, (__bridge void *)callback);
-}
-
-static void __SQLiteCreateFunction(sqlite3_context * context, int argc, sqlite3_value ** argv) {
-    ((__bridge _SQLiteCreateFunctionCallback)sqlite3_user_data(context))((SQLiteContext *)context, argc, (SQLiteValue **)argv);
-}
-
-int _SQLiteCreateFunction(SQLiteHandle * handle, const char * name, int argc, int deterministic, _SQLiteCreateFunctionCallback callback) {
-    if (callback) {
-        int flags = SQLITE_UTF8;
-        if (deterministic) {
-#ifdef SQLITE_DETERMINISTIC
-            flags |= SQLITE_DETERMINISTIC;
+#ifdef COCOAPODS
+#import "sqlite3.h"
 #endif
-        }
-        return sqlite3_create_function_v2((sqlite3 *)handle, name, -1, flags, (__bridge void *)callback, &__SQLiteCreateFunction, 0, 0, 0);
-    } else {
-        return sqlite3_create_function_v2((sqlite3 *)handle, name, 0, 0, 0, 0, 0, 0, 0);
-    }
-}
 
-static int __SQLiteCreateCollation(void * context, int len_lhs, const void * lhs, int len_rhs, const void * rhs) {
-    return ((__bridge _SQLiteCreateCollationCallback)context)(lhs, rhs);
-}
-
-int _SQLiteCreateCollation(SQLiteHandle * handle, const char * name, _SQLiteCreateCollationCallback callback) {
-    if (callback) {
-        return sqlite3_create_collation_v2((sqlite3 *)handle, name, SQLITE_UTF8, (__bridge void *)callback, &__SQLiteCreateCollation, 0);
-    } else {
-        return sqlite3_create_collation_v2((sqlite3 *)handle, name, 0, 0, 0, 0);
-    }
-}
+#import "fts3_tokenizer.h"
 
 #pragma mark - FTS
 
@@ -126,7 +52,7 @@ static int __SQLiteTokenizerCreate(int argc, const char * const * argv, sqlite3_
     if (!tokenizer) {
         return SQLITE_NOMEM;
     }
-    memset(tokenizer, 0, sizeof(* tokenizer)); // FIXME: needed?
+    memset(tokenizer, 0, sizeof(* tokenizer));
 
     NSString * key = [NSString stringWithUTF8String:argv[0]];
     tokenizer->callback = [__SQLiteTokenizerMap objectForKey:key];

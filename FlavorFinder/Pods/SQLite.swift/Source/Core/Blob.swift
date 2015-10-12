@@ -1,7 +1,7 @@
 //
 // SQLite.swift
 // https://github.com/stephencelis/SQLite.swift
-// Copyright (c) 2014-2015 Stephen Celis.
+// Copyright © 2014-2015 Stephen Celis.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,8 +22,40 @@
 // THE SOFTWARE.
 //
 
-public func rtree<T: Value, U: Value where T.Datatype == Int64, U.Datatype == Double>(primaryKey: Expression<T>, columns: Expression<U>...) -> Expression<Void> {
-    var definitions: [Expressible] = [primaryKey]
-    definitions.extend(columns.map { $0 })
-    return wrap(__FUNCTION__, Expression<Void>.join(", ", definitions))
+public struct Blob {
+
+    public let bytes: [UInt8]
+
+    public init(bytes: [UInt8]) {
+        self.bytes = bytes
+    }
+
+    public init(bytes: UnsafePointer<Void>, length: Int) {
+        self.init(bytes: [UInt8](UnsafeBufferPointer(
+            start: UnsafePointer(bytes), count: length
+        )))
+    }
+
+    public func toHex() -> String {
+        return bytes.map {
+            ($0 < 16 ? "0" : "") + String($0, radix: 16, uppercase: false)
+        }.joinWithSeparator("")
+    }
+
+}
+
+extension Blob : CustomStringConvertible {
+
+    public var description: String {
+        return "x'\(toHex())'"
+    }
+
+}
+
+extension Blob : Equatable {
+
+}
+
+public func ==(lhs: Blob, rhs: Blob) -> Bool {
+    return lhs.bytes == rhs.bytes
 }

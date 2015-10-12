@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		56D23A31BA541208CC4BAC9D /* Pods_FlavorFinder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F0701BEA3C57EBBE60538B5 /* Pods_FlavorFinder.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		56D23A31BA541208CC4BAC9D /* Pods_FlavorFinder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F0701BEA3C57EBBE60538B5 /* Pods_FlavorFinder.framework */; };
 		881017B61BCB4072004691E1 /* flavorbible.db in Resources */ = {isa = PBXBuildFile; fileRef = 881017B51BCB406B004691E1 /* flavorbible.db */; };
 		883AC6281BC1A3C0009136E9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883AC6271BC1A3C0009136E9 /* AppDelegate.swift */; };
 		883AC62D1BC1A3C0009136E9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 883AC62B1BC1A3C0009136E9 /* Main.storyboard */; };
@@ -193,7 +193,9 @@
 		883AC61A1BC1A3C0009136E9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0640;
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = TeamFive;
 				TargetAttributes = {
 					883AC6211BC1A3C0009136E9 = {
@@ -365,6 +367,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -434,6 +437,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = FlavorFinder/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.teamfive.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -445,6 +449,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = FlavorFinder/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.teamfive.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -463,6 +468,7 @@
 				);
 				INFOPLIST_FILE = FlavorFinderTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.teamfive.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FlavorFinder.app/FlavorFinder";
 			};
@@ -478,6 +484,7 @@
 				);
 				INFOPLIST_FILE = FlavorFinderTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.teamfive.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FlavorFinder.app/FlavorFinder";
 			};

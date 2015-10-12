@@ -1,1 +1,1 @@
-../../../SQLite.swift/SQLite/SQLite.h
+../../../SQLite.swift/Supporting Files/SQLite/SQLite.h

@@ -29,7 +29,7 @@ struct Stack<Element> {
     }
 }
 
-class MatchTableViewController: UITableViewController, UITableViewDelegate, UISearchBarDelegate {
+class MatchTableViewController: UITableViewController, UISearchBarDelegate {
     // MARK: Properties
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -40,8 +40,9 @@ class MatchTableViewController: UITableViewController, UITableViewDelegate, UISe
     
     // GLOBALS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // -------
-    var matchesTable: Query!
-    var ingredientsTable: Query!
+    var db: Connection!
+    var matchesTable: Table!
+    var ingredientsTable: Table!
     
     // Constants for schema strings.
     let SCHEMA_TABLE_INGREDIENTS = "ingredients"
@@ -147,8 +148,9 @@ class MatchTableViewController: UITableViewController, UITableViewDelegate, UISe
         
         // Reset 'allCells' with the ingredients that have those match ids.
         allCells.removeAll()
-        for m in matches {
-            if let found = find(lazy(allIngredients).map({ $0.id == m[self.SCHEMA_COL_MATCHID] }), true) {
+        for m in db.prepare(matches) {
+            if let found = allIngredients.lazy.map({ $0.id == m[self.SCHEMA_COL_MATCHID] }).indexOf(true) {
+//            if let found = find(lazy(allIngredients).map({ $0.id == m[self.SCHEMA_COL_MATCHID] }), true) {
                 allIngredients[found].matchLevel = m[SCHEMA_COL_MATCHLEVEL]
                 allCells.append(allIngredients[found])
             }
@@ -168,13 +170,18 @@ class MatchTableViewController: UITableViewController, UITableViewDelegate, UISe
     
     func loadIngredients() {
         let dbpath = NSBundle.mainBundle().pathForResource("flavorbible", ofType: "db")
-        let db = Database(dbpath!)
+        do {
+            db = try Connection(dbpath!)
+        } catch {
+            
+        }
+        
         
         // Fetch our ingredient
-        ingredientsTable = db[SCHEMA_TABLE_INGREDIENTS]
-        matchesTable = db[SCHEMA_TABLE_MATCHES];
+        ingredientsTable = Table(SCHEMA_TABLE_INGREDIENTS)
+        matchesTable = Table(SCHEMA_TABLE_MATCHES);
         
-        for ingredient in ingredientsTable {
+        for ingredient in db.prepare(ingredientsTable) {
             let possible_id : Int? = ingredient[SCHEMA_COL_ID]
             let possible_name : String? = ingredient[SCHEMA_COL_NAME]
             if let id = possible_id, let name = possible_name {
@@ -202,19 +209,19 @@ class MatchTableViewController: UITableViewController, UITableViewDelegate, UISe
     func animateTable() {
         tableView.reloadData()
         
-        let cells = tableView.visibleCells()
+        let cells = tableView.visibleCells
         let tableWidth: CGFloat = tableView.bounds.size.width
         
         for i in cells {
-            let cell: UITableViewCell = i as! UITableViewCell
+            let cell: UITableViewCell = i 
             cell.transform = CGAffineTransformMakeTranslation(tableWidth, 0)
         }
         
         var index = 0
         
         for a in cells {
-            let cell: UITableViewCell = a as! UITableViewCell
-            UIView.animateWithDuration(0.75, delay: 0.03 * Double(index), usingSpringWithDamping: 0.9, initialSpringVelocity: 0, options: nil, animations: {
+            let cell: UITableViewCell = a 
+            UIView.animateWithDuration(0.75, delay: 0.03 * Double(index), usingSpringWithDamping: 0.9, initialSpringVelocity: 0, options: [], animations: {
                 cell.transform = CGAffineTransformMakeTranslation(0, 0);
                 }, completion: nil)
             
@@ -282,7 +289,7 @@ class MatchTableViewController: UITableViewController, UITableViewDelegate, UISe
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         filteredCells.removeAll()
         
-        if searchBar.text.isEmpty {
+        if searchBar.text!.isEmpty {
             filteredCells = allCells
         } else {
             for ingredient in allCells {
