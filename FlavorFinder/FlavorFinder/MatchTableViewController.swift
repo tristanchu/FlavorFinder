@@ -281,6 +281,46 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
         
         showIngredient(ingredient)
     }
+    
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) ->
+        [UITableViewRowAction]? {
+        let more = UITableViewRowAction(style: .Normal, title: "Edit") { action, index in
+            print("edit button tapped")
+        }
+        more.backgroundColor = UIColor(red: 249/255.0, green: 69/255.0, blue: 255/255.0, alpha: CGFloat(0.3))
+        
+        let favorite = UITableViewRowAction(style: .Normal, title: "Yucky") { action, index in
+            print("yucky button tapped")
+        }
+        favorite.backgroundColor = UIColor(red: 255/255.0, green: 109/255.0, blue: 69/255.0, alpha: CGFloat(0.3))
+        
+        let share = UITableViewRowAction(style: .Normal, title: "Yummy") { action, index in
+            print("yummy button tapped")
+        }
+        share.backgroundColor = UIColor(red: 61/255.0, green: 235/255.0, blue: 64/255.0, alpha: CGFloat(0.3))
+        
+        return [share, favorite, more]
+    }
+//    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+//        let edit = UITableViewRowAction(style: .Normal, title: "Edit") { action, index in
+//            // OPEN UIPresentationController HERE
+//            let vc = UIViewController(nibName: nil, bundle: nil)
+//            vc.view.frame = CGRect(x: 0, y: 0, width: 100, height: 200)
+//            vc.view.backgroundColor = UIColor.orangeColor()
+//            vc.modalPresentationStyle = .Popover
+//            
+//            let popover = vc.popoverPresentationController!
+//            let cell = tableView.cellForRowAtIndexPath(indexPath)!
+//            
+//            var cellAbsolutePosition = cell.superview!.convertPoint(cell.frame.origin, toView: nil)
+//            cellAbsolutePosition.x = cell.frame.width - 60
+//            popover.sourceRect = CGRect(origin: cellAbsolutePosition, size: cell.frame.size)
+//            popover.sourceView = tableView
+//            
+//            self.presentViewController(vc, animated: true, completion: nil)
+//        }
+//        return [edit]
+//    }
     // ---------------------------------------------------------
     
     
