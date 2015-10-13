@@ -186,8 +186,8 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
             let possible_name : String? = ingredient[SCHEMA_COL_NAME]
             if let id = possible_id, let name = possible_name {
                 if name.isEmpty == false {
-                    var i = Ingredient(id: id, name: name)!
-                    allIngredients.append(Ingredient(id: id, name: name)!)
+                    let i = Ingredient(id: id, name: name)!
+                    allIngredients.append(i)
                 }
             }
         }
