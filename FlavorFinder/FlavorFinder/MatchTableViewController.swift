@@ -94,8 +94,9 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
         if let futureIngredient = future.pop() {
             if let curr = currentIngredient {
                 history.push(curr)
-                goBackBtn.enabled = true
             }
+            
+            goBackBtn.enabled = true
             showIngredient(futureIngredient!)
         }
     }
@@ -129,6 +130,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
     
     
     func showAllIngredients() {
+        viewingMatches = false
         allCells = allIngredients
         filteredCells = allIngredients
         self.title = "All Ingredients"
@@ -150,7 +152,6 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
         allCells.removeAll()
         for m in db.prepare(matches) {
             if let found = allIngredients.lazy.map({ $0.id == m[self.SCHEMA_COL_MATCHID] }).indexOf(true) {
-//            if let found = find(lazy(allIngredients).map({ $0.id == m[self.SCHEMA_COL_MATCHID] }), true) {
                 allIngredients[found].matchLevel = m[SCHEMA_COL_MATCHLEVEL]
                 allCells.append(allIngredients[found])
             }
@@ -175,7 +176,6 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
         } catch {
             
         }
-        
         
         // Fetch our ingredient
         ingredientsTable = Table(SCHEMA_TABLE_INGREDIENTS)
@@ -269,7 +269,10 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
             default:
                 cell.backgroundColor = UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: CGFloat(0.3))
             }
+        } else {
+            cell.backgroundColor = UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: CGFloat(0.3))
         }
+        
         return cell
     }
     
