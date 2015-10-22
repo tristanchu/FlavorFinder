@@ -8,6 +8,7 @@
 
 import UIKit
 import SQLite
+import Parse
 
 struct Stack<Element> {
     var items = [Element]()
@@ -119,6 +120,12 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
         goForwardBtn.enabled = false
         
         loadIngredients()
+        
+        let testObject = PFObject(className: "TestObject")
+        testObject["foo"] = "bar"
+        testObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+            print("Object has been saved.")
+        }
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false

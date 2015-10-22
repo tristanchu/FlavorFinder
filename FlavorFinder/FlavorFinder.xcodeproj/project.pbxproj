@@ -9,6 +9,18 @@
 /* Begin PBXBuildFile section */
 		56D23A31BA541208CC4BAC9D /* Pods_FlavorFinder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F0701BEA3C57EBBE60538B5 /* Pods_FlavorFinder.framework */; };
 		881017B61BCB4072004691E1 /* flavorbible.db in Resources */ = {isa = PBXBuildFile; fileRef = 881017B51BCB406B004691E1 /* flavorbible.db */; };
+		882FFD661BD9A48D00710F35 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 882FFD641BD9A48D00710F35 /* Bolts.framework */; settings = {ASSET_TAGS = (); }; };
+		882FFD671BD9A48D00710F35 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 882FFD651BD9A48D00710F35 /* Parse.framework */; settings = {ASSET_TAGS = (); }; };
+		882FFD691BD9A55F00710F35 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 882FFD681BD9A55F00710F35 /* AudioToolbox.framework */; };
+		882FFD6B1BD9A56400710F35 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 882FFD6A1BD9A56400710F35 /* CFNetwork.framework */; };
+		882FFD6D1BD9A56C00710F35 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 882FFD6C1BD9A56C00710F35 /* CoreGraphics.framework */; };
+		882FFD6F1BD9A57500710F35 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 882FFD6E1BD9A57500710F35 /* CoreLocation.framework */; };
+		882FFD711BD9A57E00710F35 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 882FFD701BD9A57E00710F35 /* QuartzCore.framework */; };
+		882FFD731BD9A58600710F35 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 882FFD721BD9A58600710F35 /* Security.framework */; };
+		882FFD751BD9A58E00710F35 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 882FFD741BD9A58E00710F35 /* StoreKit.framework */; };
+		882FFD771BD9A59800710F35 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 882FFD761BD9A59800710F35 /* SystemConfiguration.framework */; };
+		882FFD791BD9A5A300710F35 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 882FFD781BD9A5A300710F35 /* libz.tbd */; };
+		882FFD7B1BD9A5B000710F35 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 882FFD7A1BD9A5B000710F35 /* libsqlite3.tbd */; };
 		883AC6281BC1A3C0009136E9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883AC6271BC1A3C0009136E9 /* AppDelegate.swift */; };
 		883AC62D1BC1A3C0009136E9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 883AC62B1BC1A3C0009136E9 /* Main.storyboard */; };
 		883AC62F1BC1A3C0009136E9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 883AC62E1BC1A3C0009136E9 /* Images.xcassets */; };
@@ -35,6 +47,18 @@
 		6F0701BEA3C57EBBE60538B5 /* Pods_FlavorFinder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlavorFinder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7ED753512243C86842952CBD /* Pods-FlavorFinder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlavorFinder.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FlavorFinder/Pods-FlavorFinder.debug.xcconfig"; sourceTree = "<group>"; };
 		881017B51BCB406B004691E1 /* flavorbible.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = flavorbible.db; sourceTree = "<group>"; };
+		882FFD641BD9A48D00710F35 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		882FFD651BD9A48D00710F35 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		882FFD681BD9A55F00710F35 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		882FFD6A1BD9A56400710F35 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		882FFD6C1BD9A56C00710F35 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		882FFD6E1BD9A57500710F35 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		882FFD701BD9A57E00710F35 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		882FFD721BD9A58600710F35 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		882FFD741BD9A58E00710F35 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		882FFD761BD9A59800710F35 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		882FFD781BD9A5A300710F35 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		882FFD7A1BD9A5B000710F35 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		883AC6221BC1A3C0009136E9 /* FlavorFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlavorFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		883AC6261BC1A3C0009136E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		883AC6271BC1A3C0009136E9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -54,7 +78,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				882FFD7B1BD9A5B000710F35 /* libsqlite3.tbd in Frameworks */,
+				882FFD791BD9A5A300710F35 /* libz.tbd in Frameworks */,
+				882FFD771BD9A59800710F35 /* SystemConfiguration.framework in Frameworks */,
+				882FFD751BD9A58E00710F35 /* StoreKit.framework in Frameworks */,
+				882FFD731BD9A58600710F35 /* Security.framework in Frameworks */,
+				882FFD711BD9A57E00710F35 /* QuartzCore.framework in Frameworks */,
+				882FFD6F1BD9A57500710F35 /* CoreLocation.framework in Frameworks */,
+				882FFD6D1BD9A56C00710F35 /* CoreGraphics.framework in Frameworks */,
+				882FFD6B1BD9A56400710F35 /* CFNetwork.framework in Frameworks */,
+				882FFD691BD9A55F00710F35 /* AudioToolbox.framework in Frameworks */,
 				56D23A31BA541208CC4BAC9D /* Pods_FlavorFinder.framework in Frameworks */,
+				882FFD671BD9A48D00710F35 /* Parse.framework in Frameworks */,
+				882FFD661BD9A48D00710F35 /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,6 +107,18 @@
 		6743D2DA03BF229740565999 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				882FFD7A1BD9A5B000710F35 /* libsqlite3.tbd */,
+				882FFD781BD9A5A300710F35 /* libz.tbd */,
+				882FFD761BD9A59800710F35 /* SystemConfiguration.framework */,
+				882FFD741BD9A58E00710F35 /* StoreKit.framework */,
+				882FFD721BD9A58600710F35 /* Security.framework */,
+				882FFD701BD9A57E00710F35 /* QuartzCore.framework */,
+				882FFD6E1BD9A57500710F35 /* CoreLocation.framework */,
+				882FFD6C1BD9A56C00710F35 /* CoreGraphics.framework */,
+				882FFD6A1BD9A56400710F35 /* CFNetwork.framework */,
+				882FFD681BD9A55F00710F35 /* AudioToolbox.framework */,
+				882FFD641BD9A48D00710F35 /* Bolts.framework */,
+				882FFD651BD9A48D00710F35 /* Parse.framework */,
 				6F0701BEA3C57EBBE60538B5 /* Pods_FlavorFinder.framework */,
 			);
 			name = Frameworks;
@@ -435,6 +483,10 @@
 			baseConfigurationReference = 7ED753512243C86842952CBD /* Pods-FlavorFinder.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = FlavorFinder/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.teamfive.$(PRODUCT_NAME:rfc1034identifier)";
@@ -447,6 +499,10 @@
 			baseConfigurationReference = 2C3E9A246B0E3665372C6048 /* Pods-FlavorFinder.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = FlavorFinder/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.teamfive.$(PRODUCT_NAME:rfc1034identifier)";
