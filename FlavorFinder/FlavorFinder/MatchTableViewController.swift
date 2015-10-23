@@ -116,9 +116,12 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
         super.viewDidLoad()
         searchBar.delegate = self
         
+        // Disable buttons by default.
         goBackBtn.enabled = false
         goForwardBtn.enabled = false
         
+        
+        // Show all ingredients to start.
         loadIngredients()
         
         let testObject = PFObject(className: "TestObject")
@@ -177,6 +180,8 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     func loadIngredients() {
+        
+        // Connect to database.
         let dbpath = NSBundle.mainBundle().pathForResource("flavorbible", ofType: "db")
         do {
             db = try Connection(dbpath!)
@@ -184,10 +189,11 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
             
         }
         
-        // Fetch our ingredient
+        // Define our tables.
         ingredientsTable = Table(SCHEMA_TABLE_INGREDIENTS)
         matchesTable = Table(SCHEMA_TABLE_MATCHES);
         
+        // Create all Ingredients from database.
         for ingredient in db.prepare(ingredientsTable) {
             let possible_id : Int? = ingredient[SCHEMA_COL_ID]
             let possible_name : String? = ingredient[SCHEMA_COL_NAME]
@@ -199,6 +205,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
             }
         }
         
+        // Showed the newly created Ingredient instances.
         showAllIngredients()
     }
 
@@ -213,6 +220,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
         animateTable()
     }
     
+    // Function to animate all table cells on load.
     func animateTable() {
         tableView.reloadData()
         

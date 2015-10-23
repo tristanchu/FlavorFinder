@@ -1,7 +1,7 @@
+#!/usr/bin/env python
 """
 Scraper for the 'The Flavor Bible'.
 """
-#!/usr/env/python
 
 import ebooklib
 from ebooklib import epub
@@ -20,7 +20,11 @@ c.execute('''CREATE TABLE ingredients(
             season text,
             taste text,
             weight text,
-            volume text
+            volume text,
+            vegetarian int,
+            dairy int,
+            kosher int,
+            nuts int
           )''')
 
 c.execute('''CREATE TABLE matches(
@@ -42,7 +46,7 @@ def addMatches(ingredients, matches, ingredient_ids, id, i, s, match_level):
         match_id = ingredient_ids[s.lower()]
     else:
         match_id = latest_id
-        ingredients[match_id] = [match_id, s, '', '', '', '']
+        ingredients[match_id] = [match_id, s, '', '', '', '', '1', '0', '0', '0']
         ingredient_ids[s.lower()] = match_id
         latest_id += 1
 
@@ -61,7 +65,11 @@ def writeIngredientsToCSV(filename, fieldnames, data):
         writer.writeheader()
         for key in data:
             row = data[key]
-            writer.writerow({fieldnames[0]: row[0], fieldnames[1]: row[1], fieldnames[2]: row[2], fieldnames[3]: row[3], fieldnames[4]: row[4], fieldnames[5]: row[5]})
+            print(row)
+            writer.writerow({fieldnames[0]: row[0], fieldnames[1]: row[1], fieldnames[2]: row[2], 
+                             fieldnames[3]: row[3], fieldnames[4]: row[4], fieldnames[5]: row[5],
+                             fieldnames[6]: row[6], fieldnames[7]: row[7], fieldnames[8]: row[8],
+                             fieldnames[9]: row[9]})
 
 def writeMatchesToCSV(filename, fieldnames, data):
     with open(filename, 'w') as csvfile:
@@ -69,12 +77,13 @@ def writeMatchesToCSV(filename, fieldnames, data):
         writer.writeheader()
         for key in data:
             row = data[key]
-            writer.writerow({fieldnames[0]: row[0], fieldnames[1]: row[1], fieldnames[2]: row[2], fieldnames[3]: row[3], fieldnames[4]: row[4]})
+            writer.writerow({fieldnames[0]: row[0], fieldnames[1]: row[1], fieldnames[2]: row[2], 
+                             fieldnames[3]: row[3], fieldnames[4]: row[4]})
 
 def writeIngredientsToTable(data):
     for key in data:
         row = data[key]
-        c.execute("INSERT INTO ingredients VALUES ('%s', '%s', '%s', '%s', '%s', '%s')" % (row[0], row[1], row[2], row[3], row[4], row[5]))
+        c.execute("INSERT INTO ingredients VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')" % (row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9]))
 
 def writeMatchesToTable(data):
     for key in data:
@@ -85,7 +94,7 @@ def writeMatchesToTable(data):
 
 if __name__ == '__main__':
     global latest_id
-    ingredients_fieldnames = ['id', 'name', 'season', 'taste', 'weight', 'volume']
+    ingredients_fieldnames = ['id', 'name', 'season', 'taste', 'weight', 'volume', 'vegetarian', 'dairy', 'kosher', 'nuts']
     matches_fieldnames = ['name', 'match', 'match_level', 'affinity', 'quote']
 
     ingredients = {}
@@ -111,7 +120,7 @@ if __name__ == '__main__':
                     id = ingredient_ids[i]
                 else:
                     id = latest_id
-                    ingredients[id] = [id, i, '', '', '', '']
+                    ingredients[id] = [id, i, '', '', '', '', 1, 0, 0, 0]
                     ingredient_ids[i] = id
                     latest_id += 1
             
