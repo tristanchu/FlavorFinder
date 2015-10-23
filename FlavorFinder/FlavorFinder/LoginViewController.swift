@@ -18,11 +18,13 @@ class LoginViewController: UIViewController {
     
     
     // MARK: Actions
-    @IBAction func goTableViewTEMP(sender: UIButton) {
-    }
-    
     @IBAction func loginActionBtn(sender: UIButton) {
     }
+    
+    @IBAction func goTableViewTEMP(sender: UIButton) {
+        self.performSegueWithIdentifier("segueLoginToMatchTable", sender: self)
+    }
+    
     
     
 }

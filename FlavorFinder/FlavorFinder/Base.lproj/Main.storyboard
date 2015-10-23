@@ -8,7 +8,7 @@
         <!--Login View Controller-->
         <scene sceneID="4Jp-rt-Y0j">
             <objects>
-                <viewController id="FZQ-A2-GaM" customClass="LoginViewController" sceneMemberID="viewController">
+                <viewController id="FZQ-A2-GaM" customClass="LoginViewController" customModule="FlavorFinder" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Oec-4F-Uxv"/>
                         <viewControllerLayoutGuide type="bottom" id="t0R-Kl-bIo"/>
@@ -30,12 +30,12 @@
                                     <action selector="goTableViewTEMP:" destination="FZQ-A2-GaM" eventType="touchUpInside" id="ll7-0D-riF"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="t0d-AJ-TDq" customClass="loginUserTextField">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="t0d-AJ-TDq">
                                 <rect key="frame" x="218" y="203" width="165" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zm4-fb-B07" customClass="loginPassTextField">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zm4-fb-B07">
                                 <rect key="frame" x="218" y="252" width="165" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -47,13 +47,22 @@
                                     <action selector="loginActionBtn:" destination="FZQ-A2-GaM" eventType="touchUpInside" id="z9Y-jo-gWa"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qSC-C0-kB1">
+                                <rect key="frame" x="230" y="420" width="140" height="30"/>
+                                <state key="normal" title="Go Straight To Table"/>
+                                <connections>
+                                    <action selector="goTableViewTEMP:" destination="FZQ-A2-GaM" eventType="touchUpInside" id="ifW-PW-pbq"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="QXq-QC-lOr"/>
                     <connections>
                         <outlet property="loginLabel" destination="Geq-sk-8Eg" id="hFs-CG-EI7"/>
                         <outlet property="loginPassTextField" destination="Zm4-fb-B07" id="KZA-ii-Fy6"/>
                         <outlet property="loginUserTextField" destination="t0d-AJ-TDq" id="Fyq-2e-F1J"/>
+                        <segue destination="yDJ-pt-my1" kind="show" identifier="segueLoginToMatchTable" id="yCh-I4-cTX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Q7-vC-caE" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -141,7 +150,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="yDJ-pt-my1" kind="relationship" relationship="rootViewController" id="g4r-QM-zC9"/>
+                        <segue destination="FZQ-A2-GaM" kind="relationship" relationship="rootViewController" id="UId-6A-Kca"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jnx-Vf-b0Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
