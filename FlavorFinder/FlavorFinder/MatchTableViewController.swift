@@ -374,6 +374,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         hideSearchBar()
+        filterResults("")
     }
     
     func showSearchBar() {
@@ -417,9 +418,13 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        filterResults(searchText)
+    }
+    
+    func filterResults(searchText: String) {
         filteredCells.removeAll()
         
-        if searchBar.text!.isEmpty {
+        if searchText.isEmpty {
             filteredCells = allCells
         } else {
             for ingredient in allCells {
