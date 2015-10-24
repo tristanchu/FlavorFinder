@@ -21,6 +21,11 @@ class LoginViewController: UIViewController {
     @IBAction func loginActionBtn(sender: UIButton) {
     }
     
+    
+    @IBAction func goRegisterActionBtn(sender: UIButton) {
+        self.performSegueWithIdentifier("segueLoginToRegister", sender: self)
+    }
+    
     @IBAction func goTableViewTEMP(sender: UIButton) {
         self.performSegueWithIdentifier("segueLoginToMatchTable", sender: self)
     }
