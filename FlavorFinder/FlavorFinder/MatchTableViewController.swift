@@ -9,6 +9,7 @@
 import UIKit
 import SQLite
 import Parse
+import FontAwesome_swift
 
 struct Stack<Element> {
     var items = [Element]()
@@ -32,7 +33,14 @@ struct Stack<Element> {
 
 class MatchTableViewController: UITableViewController, UISearchBarDelegate {
     // MARK: Properties
-    @IBOutlet weak var searchBar: UISearchBar!
+    lazy var searchBar = UISearchBar(frame: CGRectMake(0, 0, 0, 0))
+//    @IBOutlet weak var searchBar: UISearchBar!
+//    @IBOutlet weak var searchBarActivateBtn: UIBarButtonItem!
+    var activateBtn: UIButton = UIButton()
+
+    var searchBarActivateBtn:UIBarButtonItem = UIBarButtonItem()
+
+//    var searchBarActivateBtn : [String : AnyObject] = UIBarButtonItem(title: "test", style: .Plain, target: self, action: "barButtonItemClicked:")
     
     
     // MARK: Actions
@@ -119,8 +127,20 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
         // Disable buttons by default.
         goBackBtn.enabled = false
         goForwardBtn.enabled = false
+
+        searchBar.hidden = true
+        searchBar.setShowsCancelButton(true, animated: false)
         
+        activateBtn.titleLabel?.font = UIFont.fontAwesomeOfSize(30)
+        activateBtn.setTitle(String.fontAwesomeIconWithName(.Github), forState: .Normal)
         
+//        searchBarActivateBtn.customView = activateBtn
+        let attributes = [NSFontAttributeName: UIFont.fontAwesomeOfSize(20)] as Dictionary!
+        searchBarActivateBtn.setTitleTextAttributes(attributes, forState: .Normal)
+        searchBarActivateBtn.title = String.fontAwesomeIconWithName(.Github)
+        
+        self.navigationItem.setLeftBarButtonItems([self.goBackBtn, self.searchBarActivateBtn], animated: true)
+
         // Show all ingredients to start.
         loadIngredients()
         
@@ -344,6 +364,58 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
     
     // SEARCHBAR FUNCTIONS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // -------------------
+    
+    @IBAction func activateSearchBar(sender: AnyObject) {
+//        self.searchBar.hidden = false
+//        self.navigationItem.titleView = searchBar
+//        self.navigationItem.setLeftBarButtonItems([goBackBtn], animated: true)
+        showSearchBar()
+    }
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        hideSearchBar()
+    }
+    
+    func showSearchBar() {
+        navigationItem.titleView = searchBar
+        searchBar.alpha = 0
+        self.searchBar.hidden = false
+//        self.navigationItem.titleView = searchBar
+        self.navigationItem.setLeftBarButtonItems([goBackBtn], animated: true)
+        
+//        navigationItem.setLeftBarButtonItem(nil, animated: true)
+        UIView.animateWithDuration(0.5, animations: {
+            self.searchBar.alpha = 1
+            }, completion: { finished in
+                self.searchBar.becomeFirstResponder()
+        })
+    }
+    
+    func hideSearchBar() {
+//        navigationItem.setLeftBarButtonItem(searchBarButtonItem, animated: true)
+//        logoImageView.alpha = 0
+        var newTitle = ""
+        if let curr = currentIngredient {
+            newTitle = curr.name
+        } else {
+            newTitle = "All Ingredients"
+        }
+        
+        self.searchBar.alpha = 1
+        UIView.animateWithDuration(0.3, animations: {
+//            self.navigationItem.titleView = self.logoImageView
+//            self.logoImageView.alpha = 1
+
+            self.searchBar.alpha = 0
+            self.title = newTitle
+            
+            self.navigationItem.setLeftBarButtonItems([self.goBackBtn, self.searchBarActivateBtn], animated: true)
+
+            }, completion: { finished in
+                self.navigationItem.titleView = nil
+        })
+    }
+    
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         filteredCells.removeAll()
         
