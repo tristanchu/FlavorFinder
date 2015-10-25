@@ -403,8 +403,22 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
 //            cell.contentView.backgroundColor = UIColor.clearColor()
 //            cell.backgroundColor = UIColor.clearColor()
 //            tableView.backgroundColor = UIColor.clearColor()
-            
-            cell.backgroundColor = UIColor(red: 105/255.0, green: 230/255.0, blue: 255/255.0, alpha: CGFloat(1.0))
+            switch indexPath.row {
+            case 0:
+                cell.backgroundColor = UIColor(red: 59/255.0, green: 247/255.0, blue: 194/255.0, alpha: CGFloat(1.0))
+                break
+            case 1:
+                cell.backgroundColor = UIColor(red: 105/255.0, green: 230/255.0, blue: 255/255.0, alpha: CGFloat(1.0))
+                break
+            case 2:
+                cell.backgroundColor = UIColor(red: 227/255.0, green: 78/255.0, blue: 59/255.0, alpha: CGFloat(1.0))
+              
+                break
+            default:
+                cell.backgroundColor = UIColor(red: 105/255.0, green: 230/255.0, blue: 255/255.0, alpha: CGFloat(1.0))
+                break
+            }
+
             
             
             return cell
