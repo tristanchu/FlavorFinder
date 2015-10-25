@@ -136,8 +136,11 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="By clicking the button below, I certify that I am 13 years of age or older." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ifX-C3-tVL">
-                                <rect key="frame" x="146" y="293" width="308" height="66"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="By clicking the button below, I certify that I am 13 years of age or older." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="ifX-C3-tVL">
+                                <rect key="frame" x="146" y="293" width="350" height="66"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="350" id="3dL-3m-dDS"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -154,6 +157,7 @@
                         <constraints>
                             <constraint firstItem="692-E8-NQh" firstAttribute="centerX" secondItem="nsi-Pa-HHQ" secondAttribute="centerX" id="Fp0-Pk-lMr"/>
                             <constraint firstItem="98s-Lv-fsr" firstAttribute="centerX" secondItem="nsi-Pa-HHQ" secondAttribute="centerX" id="Isx-En-fjc"/>
+                            <constraint firstItem="ifX-C3-tVL" firstAttribute="centerX" secondItem="nsi-Pa-HHQ" secondAttribute="centerX" id="MWb-uZ-9JZ"/>
                             <constraint firstItem="ffs-dJ-FNO" firstAttribute="centerX" secondItem="nsi-Pa-HHQ" secondAttribute="centerX" id="aQT-3V-hUc"/>
                             <constraint firstItem="9en-v4-ss2" firstAttribute="centerX" secondItem="nsi-Pa-HHQ" secondAttribute="centerX" id="doj-SK-QIJ"/>
                             <constraint firstItem="ifX-C3-tVL" firstAttribute="centerX" secondItem="nsi-Pa-HHQ" secondAttribute="centerX" id="mtI-3i-bIe"/>
