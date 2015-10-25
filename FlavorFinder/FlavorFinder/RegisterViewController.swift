@@ -14,6 +14,12 @@ class RegisterViewController: UIViewController {
     
     //// somewhere we need a privacy policy :)
     
+    /// arbitrarily chosen atm but we can set these...
+    var USRNAME_CHAR_MAX = 15;
+    var USRNAME_CHAR_MIN = 4;
+    var PW_CHAR_MIN = 6;
+    var PW_CHAR_MAX = 20;
+    
     // MARK: Properties -----------------------------------------------
     @IBOutlet weak var registerLabel: UILabel!
     @IBOutlet weak var registerEmail: UITextField!
@@ -53,7 +59,7 @@ class RegisterViewController: UIViewController {
     
     // VALIDATION FUNCTIONS ------------------------------------------
     func hasInvalidEmail(email: String) -> Bool {
-        if (email.isEmpty) {
+        if (email.isEmpty || !email.containsString("@") || !email.containsString(".")) {
             return true;
         }
         return false;
