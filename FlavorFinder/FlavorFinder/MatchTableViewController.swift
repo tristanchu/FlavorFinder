@@ -426,6 +426,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
         
         if searchText.isEmpty {
             filteredCells = allCells
+            searchBar.text = ""
         } else {
             for ingredient in allCells {
                 if ingredient.name.rangeOfString(searchText.lowercaseString) != nil {
