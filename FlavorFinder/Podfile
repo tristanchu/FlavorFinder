@@ -2,9 +2,10 @@ platform :ios, '8.0'
 use_frameworks!
 
 target 'FlavorFinder' do
-pod 'SQLite.swift', git: 'https://github.com/stephencelis/SQLite.swift.git', :branch => ‘swift-2’
+pod 'SQLite.swift', git: 'https://github.com/stephencelis/SQLite.swift.git', :branch => 'swift-2'
 pod 'Parse'
-pod ‘FontAwesome.swift’
+pod 'FontAwesome.swift'
+pod 'Locksmith'
 end
 
 target 'FlavorFinderTests' do
