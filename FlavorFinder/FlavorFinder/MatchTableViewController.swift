@@ -32,19 +32,9 @@ struct Stack<Element> {
     }
 }
 
-class MatchTableViewController: UITableViewController, UISearchBarDelegate {
-    // MARK: Properties
-    lazy var searchBar = UISearchBar(frame: CGRectMake(0, 0, 0, 0))
-//    @IBOutlet weak var searchBar: UISearchBar!
-//    @IBOutlet weak var searchBarActivateBtn: UIBarButtonItem!
-    var activateBtn: UIButton = UIButton()
-    var searchBarActivateBtn: UIBarButtonItem = UIBarButtonItem()
 
-    var menuBtn: UIButton = UIButton()
-    var menuBarBtn: UIBarButtonItem = UIBarButtonItem()
+class MatchTableViewController: UITableViewController, UISearchBarDelegate {
 //    var searchBarActivateBtn : [String : AnyObject] = UIBarButtonItem(title: "test", style: .Plain, target: self, action: "barButtonItemClicked:")
-    
-    
     // MARK: Actions
     @IBOutlet weak var goBackBtn: UIBarButtonItem!
     @IBOutlet weak var goForwardBtn: UIBarButtonItem!
@@ -62,31 +52,33 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
     let SCHEMA_COL_MATCHID = Expression<Int>("match_id")
     let SCHEMA_COL_MATCHLEVEL = Expression<Int>("match_level")
     let SCHEMA_COL_NAME = Expression<String>("name")
-
-    // Array of all ingredients from database.
-    var allIngredients = [Ingredient]()
     
-    // Array of all cells that CAN be displayed.
-    var allCells = [Ingredient]()
+    var allIngredients = [Ingredient]() // Array of all ingredients from database.
+    var allCells = [Ingredient]()       // Array of all cells that CAN be displayed.
+    var filteredCells = [Ingredient]()  // Array of all cells that ARE displayed (filtered version of 'allCells').
+    var viewingMatches = false          // Activates colored backgrounds. Only want to show colors when viewing matches, not all ingredients.
+    var currentIngredient : Ingredient? // Stores the ingredient being viewed (nil for all ingredients).
     
-    // Array of all cells that ARE displayed (filtered version of 'allCells').
-    var filteredCells = [Ingredient]()
-    
-    // This boolean will activate the colored backgrounds.
-    // We only want to show the colors when viewing matches, not the list of all ingredients.
-    var viewingMatches = false
-    
-    var currentIngredient : Ingredient?
-    
-    // Used for going backward.
-    var history = Stack<Ingredient?>()
-    
-    // Used for going forward.
-    var future = Stack<Ingredient?>()
+    var history = Stack<Ingredient?>()  // Used for going backward.
+    var future = Stack<Ingredient?>()   // Used for going forward.
     
     var menuTableView: UITableView = UITableView()
-    var menuItems = [UIButton]()
-    // ---------------------------------------------------------
+//    var menuItems = [UIButton]()
+    var menuTableItems = [  String.fontAwesomeIconWithName(.User) + " Profile",
+                            String.fontAwesomeIconWithName(.Cutlery) + " Ingredients",
+                            String.fontAwesomeIconWithName(.SignOut) + " Sign Out"
+                         ]
+    var menuBtn: UIButton = UIButton()
+    var menuBarBtn: UIBarButtonItem = UIBarButtonItem()
+    
+    var activateBtn: UIButton = UIButton()
+    var searchBarActivateBtn: UIBarButtonItem = UIBarButtonItem()
+    lazy var searchBar = UISearchBar(frame: CGRectMake(0, 0, 0, 0))
+    
+    let SEGUE_LOGOUT = "segueLogout"
+    let TITLE_ALL_INGREDIENTS = "All Ingredients"
+    let CELLIDENTIFIER_MENU = "menuCell"
+    let CELLIDENTIFIER_MATCH = "MatchTableViewCell"
     
     
     // NAVI FUNCTIONS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -123,23 +115,25 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
         goBackBtn.enabled = true
         goForwardBtn.enabled = false
     }
-    // ---------------------------------------------------------
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    // SETUP FUNCTIONS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // ---------------
+    
+    func configureSearchBar() {
         searchBar.delegate = self
-        
+        searchBar.hidden = true
+        searchBar.setShowsCancelButton(true, animated: false)
+    }
+    
+    func configureNavigationBar() {
         // Disable buttons by default.
         goBackBtn.enabled = false
         goForwardBtn.enabled = false
-
-        searchBar.hidden = true
-        searchBar.setShowsCancelButton(true, animated: false)
         
         activateBtn.titleLabel?.font = UIFont.fontAwesomeOfSize(30)
         activateBtn.setTitle(String.fontAwesomeIconWithName(.Github), forState: .Normal)
         
-//        searchBarActivateBtn.customView = activateBtn
+        //        searchBarActivateBtn.customView = activateBtn
         var attributes = [NSFontAttributeName: UIFont.fontAwesomeOfSize(20)] as Dictionary!
         searchBarActivateBtn.setTitleTextAttributes(attributes, forState: .Normal)
         searchBarActivateBtn.title = String.fontAwesomeIconWithName(.Github)
@@ -152,45 +146,29 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
         
         self.navigationItem.setLeftBarButtonItems([self.goBackBtn, self.searchBarActivateBtn], animated: true)
         self.navigationItem.setRightBarButtonItems([self.goForwardBtn, self.menuBarBtn], animated: true)
-
+    }
+    
+    func configureMenuTableView() {
         menuTableView.frame = CGRectMake(0, 0, self.view.frame.width, 200);
-        
         menuTableView.delegate = self
         menuTableView.dataSource = self
-        menuTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "menuCell")
+        menuTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: CELLIDENTIFIER_MENU)
         menuTableView.separatorStyle = UITableViewCellSeparatorStyle.None
         menuTableView.tableFooterView = UIView.init(frame: CGRectZero)
         menuTableView.tableFooterView!.hidden = true
         menuTableView.backgroundColor = UIColor.clearColor()
         self.view.addSubview(menuTableView)
         menuTableView.hidden = true
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-
-        let menuProfileBtn = UIButton()
-        menuProfileBtn.titleLabel?.text = String.fontAwesomeIconWithName(.User) + " Profile"
+        configureSearchBar()
+        configureNavigationBar()
+        configureMenuTableView()
         
-        let menuIngredientsBtn = UIButton()
-        menuIngredientsBtn.setTitle(String.fontAwesomeIconWithName(.Cutlery) + " Ingredients", forState: .Normal)
-        
-        let menuSignInOutBtn = UIButton()
-        menuSignInOutBtn.setTitle(String.fontAwesomeIconWithName(.SignOut) + " Sign Out", forState: .Normal)
-        
-        menuItems = [menuProfileBtn, menuIngredientsBtn, menuSignInOutBtn]
-        
-        // Show all ingredients to start.
-        loadIngredients()
-        
-        let testObject = PFObject(className: "TestObject")
-        testObject["foo"] = "bar"
-        testObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
-            print("Object has been saved.")
-        }
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        loadIngredients()           // Show all ingredients to start.
     }
     
     func menuBtnClicked() {
@@ -208,7 +186,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
         viewingMatches = false
         allCells = allIngredients
         filteredCells = allIngredients
-        self.title = "All Ingredients"
+        self.title = TITLE_ALL_INGREDIENTS
         currentIngredient = nil
         
         animateTable()
@@ -353,7 +331,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
             // Return the number of rows in the section.
             return filteredCells.count
         } else {
-            return self.menuItems.count
+            return self.menuTableItems.count
         }
 
     }
@@ -361,7 +339,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if (tableView == self.tableView) {
-            let cellIdentifier = "MatchTableViewCell"
+            let cellIdentifier = CELLIDENTIFIER_MATCH
             let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! MatchTableViewCell
 
             // Fetches the appropriate ingredient to display.
@@ -395,9 +373,9 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
             
             return cell
         } else {
-            let cell: UITableViewCell = menuTableView.dequeueReusableCellWithIdentifier("menuCell", forIndexPath: indexPath) as UITableViewCell
+            let cell: UITableViewCell = menuTableView.dequeueReusableCellWithIdentifier(CELLIDENTIFIER_MENU, forIndexPath: indexPath) as UITableViewCell
             cell.textLabel!.font = UIFont.fontAwesomeOfSize(15)
-            cell.textLabel?.text = self.menuItems[indexPath.row].titleLabel!.text
+            cell.textLabel?.text = self.menuTableItems[indexPath.row]
             cell.textLabel?.textAlignment = .Center
             
 //            cell.contentView.backgroundColor = UIColor.clearColor()
@@ -436,7 +414,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
         } else {
             print("You selected cell #\(indexPath.row)!")
             if (indexPath.row == 2) {
-                self.performSegueWithIdentifier("segueLogout", sender: self)
+                self.performSegueWithIdentifier(SEGUE_LOGOUT, sender: self)
             }
         }
 
@@ -521,7 +499,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
         if let curr = currentIngredient {
             newTitle = curr.name
         } else {
-            newTitle = "All Ingredients"
+            newTitle = TITLE_ALL_INGREDIENTS
         }
         
         self.searchBar.alpha = 1
