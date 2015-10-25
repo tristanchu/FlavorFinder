@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Parse
 
 class LoginViewController: UIViewController {
     
@@ -24,7 +25,7 @@ class LoginViewController: UIViewController {
 
     // MARK: Actions --------------------------------------------------
     @IBAction func loginActionBtn(sender: UIButton) {
-        loginUser(loginUserTextField, pwField: loginPassTextField)
+        loginUser(loginUserTextField.text, pwField: loginPassTextField.text, msg: loginLabel)
     }
     
     // Send user to RegisterViewController page.
@@ -38,16 +39,29 @@ class LoginViewController: UIViewController {
     }
     
     
-    // LOGIN FUNCTIONS -------------------------------------------------
+    // FUNCTIONS -------------------------------------------------------
     
-    func loginUser(usernameField: UITextField!, pwField: UITextField!) {
-        if usernameField.text != "" && pwField.text != "" {
-            // Fields not empty; check if valid user
-            self.loginLabel.text = "Tried to login"
-            // Change to PFUser.logInWithUsernameInBackground
+    func loginUser(userField: String!, pwField: String!, msg: UILabel!) {
+        // Check if empty fields:
+        if userField != "" && pwField != "" {
+ 
+            // Authenticate user with Parse
+            PFUser.logInWithUsernameInBackground(
+                    userField!, password: pwField!) {
+                (user: PFUser?, error: NSError?) -> Void in
+
+                if user != nil {
+                    // User exists - login and go to matches
+                    msg.text = "User exists!"
+
+                } else {
+                    // User does not exist.
+                    msg.text = "Username and Password not found."
+                }
+            }
+        // Empty Fields:
         } else {
-            // Empty Fields:
-            self.loginLabel.text = "Must enter both fields to Login"
+            msg.text = "Must enter both fields to Login"
         }
     }
 }
