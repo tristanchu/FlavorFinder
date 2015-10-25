@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
-        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--Login View Controller-->
@@ -212,31 +211,8 @@
                             <outlet property="delegate" destination="yDJ-pt-my1" id="2P9-sL-qly"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="All Ingredients" id="eQ5-0u-QHl">
-                        <leftBarButtonItems>
-                            <barButtonItem title="〈" id="UUL-Fa-7ff">
-                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <connections>
-                                    <action selector="goBack:" destination="yDJ-pt-my1" id="rbG-Ac-V0k"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem systemItem="search" id="Qhu-2x-QjX">
-                                <connections>
-                                    <action selector="activateSearchBar:" destination="yDJ-pt-my1" id="9pz-Mp-ZPK"/>
-                                </connections>
-                            </barButtonItem>
-                        </leftBarButtonItems>
-                        <barButtonItem key="rightBarButtonItem" title="〉" id="LuI-qR-nEs">
-                            <color key="tintColor" red="0.89195993439999999" green="1" blue="0.94924983230000004" alpha="1" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <action selector="goForward:" destination="yDJ-pt-my1" id="zpe-xo-uTR"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="All Ingredients" id="eQ5-0u-QHl"/>
                     <connections>
-                        <outlet property="goBackBtn" destination="UUL-Fa-7ff" id="RzH-sa-Qqy"/>
-                        <outlet property="goForwardBtn" destination="LuI-qR-nEs" id="ju7-mQ-82F"/>
-                        <outlet property="searchBarActivateBtn" destination="Qhu-2x-QjX" id="CsD-lj-Jpo"/>
                         <segue destination="FZQ-A2-GaM" kind="show" identifier="segueLogout" id="1W5-J6-Asb"/>
                     </connections>
                 </tableViewController>

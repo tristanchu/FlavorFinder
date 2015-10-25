@@ -36,8 +36,8 @@ struct Stack<Element> {
 class MatchTableViewController: UITableViewController, UISearchBarDelegate {
 //    var searchBarActivateBtn : [String : AnyObject] = UIBarButtonItem(title: "test", style: .Plain, target: self, action: "barButtonItemClicked:")
     // MARK: Actions
-    @IBOutlet weak var goBackBtn: UIBarButtonItem!
-    @IBOutlet weak var goForwardBtn: UIBarButtonItem!
+//    @IBOutlet weak var goBackBtn: UIBarButtonItem!
+//    @IBOutlet weak var goForwardBtn: UIBarButtonItem!
     
     // GLOBALS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // -------
@@ -71,7 +71,11 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
     var menuBtn: UIButton = UIButton()
     var menuBarBtn: UIBarButtonItem = UIBarButtonItem()
     
-    var activateBtn: UIButton = UIButton()
+    var goBackBtn: UIBarButtonItem = UIBarButtonItem()
+    var goForwardBtn: UIBarButtonItem = UIBarButtonItem()
+
+    
+//    var activateBtn: UIButton = UIButton()
     var searchBarActivateBtn: UIBarButtonItem = UIBarButtonItem()
     lazy var searchBar = UISearchBar(frame: CGRectMake(0, 0, 0, 0))
     
@@ -80,12 +84,12 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
     let CELLIDENTIFIER_MENU = "menuCell"
     let CELLIDENTIFIER_MATCH = "MatchTableViewCell"
     
-    let BUTTON_COLOR = UIColor(red: 189/255.0, green: 252/255.0, blue: 235/255.0, alpha: CGFloat(1))
+    let BUTTON_COLOR = UIColor(red: 165/255.0, green: 242/255.0, blue: 216/255.0, alpha: CGFloat(1))
     
     
     // NAVI FUNCTIONS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // --------------
-    @IBAction func goBack(sender: UIBarButtonItem) {
+    func goBackBtnClicked() {
         if let curr = currentIngredient {
             if let pastIngredient = history.pop() {
                 showIngredient(pastIngredient!)
@@ -98,7 +102,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
         }
     }
     
-    @IBAction func goForward(sender: UIBarButtonItem) {
+    func goForwardBtnClicked() {
         if let futureIngredient = future.pop() {
             if let curr = currentIngredient {
                 history.push(curr)
@@ -132,13 +136,30 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
         goBackBtn.enabled = false
         goForwardBtn.enabled = false
         
-        activateBtn.titleLabel?.font = UIFont.fontAwesomeOfSize(30)
-        activateBtn.setTitle(String.fontAwesomeIconWithName(.Github), forState: .Normal)
+//        activateBtn.titleLabel?.font = UIFont.fontAwesomeOfSize(30)
+//        activateBtn.setTitle(String.fontAwesomeIconWithName(.Github), forState: .Normal)
         
         //        searchBarActivateBtn.customView = activateBtn
         var attributes = [NSFontAttributeName: UIFont.fontAwesomeOfSize(20)] as Dictionary!
+        goBackBtn.setTitleTextAttributes(attributes, forState: .Normal)
+        goBackBtn.title = String.fontAwesomeIconWithName(.ChevronLeft)
+        goBackBtn.tintColor = BUTTON_COLOR
+        goBackBtn.target = self
+        goBackBtn.action = "goBackBtnClicked"
+        
+        attributes = [NSFontAttributeName: UIFont.fontAwesomeOfSize(20)] as Dictionary!
+        goForwardBtn.setTitleTextAttributes(attributes, forState: .Normal)
+        goForwardBtn.title = String.fontAwesomeIconWithName(.ChevronRight)
+        goForwardBtn.tintColor = BUTTON_COLOR
+        goForwardBtn.target = self
+        goForwardBtn.action = "goForwardBtnClicked"
+        
+        attributes = [NSFontAttributeName: UIFont.fontAwesomeOfSize(20)] as Dictionary!
         searchBarActivateBtn.setTitleTextAttributes(attributes, forState: .Normal)
-        searchBarActivateBtn.title = String.fontAwesomeIconWithName(.Github)
+        searchBarActivateBtn.title = String.fontAwesomeIconWithName(.Search)
+        searchBarActivateBtn.tintColor = BUTTON_COLOR
+        searchBarActivateBtn.target = self
+        searchBarActivateBtn.action = "searchBarActivateBtnClicked"
         
         attributes = [NSFontAttributeName: UIFont.fontAwesomeOfSize(20)] as Dictionary!
         menuBarBtn.setTitleTextAttributes(attributes, forState: .Normal)
@@ -470,10 +491,14 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
     // SEARCHBAR FUNCTIONS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // -------------------
     
-    @IBAction func activateSearchBar(sender: AnyObject) {
-//        self.searchBar.hidden = false
-//        self.navigationItem.titleView = searchBar
-//        self.navigationItem.setLeftBarButtonItems([goBackBtn], animated: true)
+//    @IBAction func activateSearchBar(sender: AnyObject) {
+////        self.searchBar.hidden = false
+////        self.navigationItem.titleView = searchBar
+////        self.navigationItem.setLeftBarButtonItems([goBackBtn], animated: true)
+//        showSearchBar()
+//    }
+    
+    func searchBarActivateBtnClicked() {
         showSearchBar()
     }
     
