@@ -80,6 +80,8 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
     let CELLIDENTIFIER_MENU = "menuCell"
     let CELLIDENTIFIER_MATCH = "MatchTableViewCell"
     
+    let BUTTON_COLOR = UIColor(red: 189/255.0, green: 252/255.0, blue: 235/255.0, alpha: CGFloat(1))
+    
     
     // NAVI FUNCTIONS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // --------------
@@ -141,6 +143,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
         attributes = [NSFontAttributeName: UIFont.fontAwesomeOfSize(20)] as Dictionary!
         menuBarBtn.setTitleTextAttributes(attributes, forState: .Normal)
         menuBarBtn.title = String.fontAwesomeIconWithName(.Bars)
+        menuBarBtn.tintColor = BUTTON_COLOR
         menuBarBtn.target = self
         menuBarBtn.action = "menuBtnClicked"
         
@@ -175,10 +178,12 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
         print("menuBtn clicked.")
         if (menuTableView.hidden) {
             menuTableView.hidden = false
+            menuBarBtn.title = String.fontAwesomeIconWithName(.Times)
             animateMenuTableView(false)
         } else {
 //            animateMenuTableView(true)
             menuTableView.hidden = true
+            menuBarBtn.title = String.fontAwesomeIconWithName(.Bars)
         }
     }
     

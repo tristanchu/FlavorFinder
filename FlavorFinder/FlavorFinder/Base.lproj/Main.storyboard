@@ -215,7 +215,7 @@
                     <navigationItem key="navigationItem" title="All Ingredients" id="eQ5-0u-QHl">
                         <leftBarButtonItems>
                             <barButtonItem title="〈" id="UUL-Fa-7ff">
-                                <color key="tintColor" red="0.89195993439999999" green="1" blue="0.94924983230000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <action selector="goBack:" destination="yDJ-pt-my1" id="rbG-Ac-V0k"/>
                                 </connections>
