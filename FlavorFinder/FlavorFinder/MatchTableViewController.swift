@@ -38,9 +38,10 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
 //    @IBOutlet weak var searchBar: UISearchBar!
 //    @IBOutlet weak var searchBarActivateBtn: UIBarButtonItem!
     var activateBtn: UIButton = UIButton()
+    var searchBarActivateBtn: UIBarButtonItem = UIBarButtonItem()
 
-    var searchBarActivateBtn:UIBarButtonItem = UIBarButtonItem()
-
+    var menuBtn: UIButton = UIButton()
+    var menuBarBtn: UIBarButtonItem = UIBarButtonItem()
 //    var searchBarActivateBtn : [String : AnyObject] = UIBarButtonItem(title: "test", style: .Plain, target: self, action: "barButtonItemClicked:")
     
     
@@ -82,6 +83,9 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
     
     // Used for going forward.
     var future = Stack<Ingredient?>()
+    
+    var menuTableView: UITableView = UITableView()
+    var menuItems = [UIButton]()
     // ---------------------------------------------------------
     
     
@@ -136,12 +140,43 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
         activateBtn.setTitle(String.fontAwesomeIconWithName(.Github), forState: .Normal)
         
 //        searchBarActivateBtn.customView = activateBtn
-        let attributes = [NSFontAttributeName: UIFont.fontAwesomeOfSize(20)] as Dictionary!
+        var attributes = [NSFontAttributeName: UIFont.fontAwesomeOfSize(20)] as Dictionary!
         searchBarActivateBtn.setTitleTextAttributes(attributes, forState: .Normal)
         searchBarActivateBtn.title = String.fontAwesomeIconWithName(.Github)
         
+        attributes = [NSFontAttributeName: UIFont.fontAwesomeOfSize(20)] as Dictionary!
+        menuBarBtn.setTitleTextAttributes(attributes, forState: .Normal)
+        menuBarBtn.title = String.fontAwesomeIconWithName(.Bars)
+        menuBarBtn.target = self
+        menuBarBtn.action = "menuBtnClicked"
+        
         self.navigationItem.setLeftBarButtonItems([self.goBackBtn, self.searchBarActivateBtn], animated: true)
+        self.navigationItem.setRightBarButtonItems([self.goForwardBtn, self.menuBarBtn], animated: true)
 
+        menuTableView.frame = CGRectMake(0, 0, self.view.frame.width, 200);
+        
+        menuTableView.delegate = self
+        menuTableView.dataSource = self
+        menuTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "menuCell")
+        menuTableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        menuTableView.tableFooterView = UIView.init(frame: CGRectZero)
+        menuTableView.tableFooterView!.hidden = true
+        menuTableView.backgroundColor = UIColor.clearColor()
+        self.view.addSubview(menuTableView)
+        menuTableView.hidden = true
+        
+
+        let menuProfileBtn = UIButton()
+        menuProfileBtn.titleLabel?.text = String.fontAwesomeIconWithName(.User) + " Profile"
+        
+        let menuIngredientsBtn = UIButton()
+        menuIngredientsBtn.setTitle(String.fontAwesomeIconWithName(.Cutlery) + " Ingredients", forState: .Normal)
+        
+        let menuSignInOutBtn = UIButton()
+        menuSignInOutBtn.setTitle(String.fontAwesomeIconWithName(.SignOut) + " Sign Out", forState: .Normal)
+        
+        menuItems = [menuProfileBtn, menuIngredientsBtn, menuSignInOutBtn]
+        
         // Show all ingredients to start.
         loadIngredients()
         
@@ -158,7 +193,16 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
-    
+    func menuBtnClicked() {
+        print("menuBtn clicked.")
+        if (menuTableView.hidden) {
+            menuTableView.hidden = false
+            animateMenuTableView(false)
+        } else {
+//            animateMenuTableView(true)
+            menuTableView.hidden = true
+        }
+    }
     
     func showAllIngredients() {
         viewingMatches = false
@@ -265,60 +309,120 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
         }
     }
     
+    func animateMenuTableView(dismiss: Bool) {
+        menuTableView.reloadData()
+        
+        let cells = menuTableView.visibleCells
+        let tableHeight: CGFloat = menuTableView.bounds.size.height
+        
+        let start = dismiss ? 0 : -1*tableHeight
+        let end = dismiss ? tableHeight : 0
+        
+        for i in cells {
+            let cell: UITableViewCell = i
+            cell.transform = CGAffineTransformMakeTranslation(0, start)
+        }
+        
+        var index = 0
+        
+        for a in cells {
+            let cell: UITableViewCell = a
+            UIView.animateWithDuration(0.5, delay: 0.03 * Double(index), usingSpringWithDamping: 0.9, initialSpringVelocity: 0, options: [], animations: {
+                cell.transform = CGAffineTransformMakeTranslation(0, end);
+                }, completion: nil
+//                { finished in
+//                    if dismiss {
+//                        self.menuTableView.hidden = true
+//                    } else {
+//                        self.menuTableView.hidden = false
+//                    }
+//                }
+            )
+            
+            index += 1
+        }
+    }
+    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // Return the number of sections.
         return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // Return the number of rows in the section.
-        return filteredCells.count
+        if (tableView == self.tableView) {
+            // Return the number of rows in the section.
+            return filteredCells.count
+        } else {
+            return self.menuItems.count
+        }
+
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cellIdentifier = "MatchTableViewCell"
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! MatchTableViewCell
+        if (tableView == self.tableView) {
+            let cellIdentifier = "MatchTableViewCell"
+            let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! MatchTableViewCell
 
-        // Fetches the appropriate ingredient to display.
-        let ingredient = filteredCells[indexPath.row]
-        
-        // Set's the cell label to the ingredient's name.
-        cell.nameLabel.text = ingredient.name
-        
-        if viewingMatches {
-            switch ingredient.matchLevel {
-                
-            // Match: low. White.
-            case 1:
-                cell.backgroundColor = UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: CGFloat(0.3))
-            // Match: medium. Yellow.
-            case 2:
-                cell.backgroundColor = UIColor(red: 255/255.0, green: 237/255.0, blue: 105/255.0, alpha: CGFloat(0.3))
-            // Match: high. Blue.
-            case 3:
-                cell.backgroundColor = UIColor(red: 105/255.0, green: 230/255.0, blue: 255/255.0, alpha: CGFloat(0.3))
-            // Match: greatest. Green.
-            case 4:
-                cell.backgroundColor = UIColor(red: 105/255.0, green: 255/255.0, blue: 150/255.0, alpha: CGFloat(0.3))
-            // Default. White.
-            default:
+            // Fetches the appropriate ingredient to display.
+            let ingredient = filteredCells[indexPath.row]
+            
+            // Set's the cell label to the ingredient's name.
+            cell.nameLabel.text = ingredient.name
+            
+            if viewingMatches {
+                switch ingredient.matchLevel {
+                    
+                // Match: low. White.
+                case 1:
+                    cell.backgroundColor = UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: CGFloat(0.3))
+                // Match: medium. Yellow.
+                case 2:
+                    cell.backgroundColor = UIColor(red: 255/255.0, green: 237/255.0, blue: 105/255.0, alpha: CGFloat(0.3))
+                // Match: high. Blue.
+                case 3:
+                    cell.backgroundColor = UIColor(red: 105/255.0, green: 230/255.0, blue: 255/255.0, alpha: CGFloat(0.3))
+                // Match: greatest. Green.
+                case 4:
+                    cell.backgroundColor = UIColor(red: 105/255.0, green: 255/255.0, blue: 150/255.0, alpha: CGFloat(0.3))
+                // Default. White.
+                default:
+                    cell.backgroundColor = UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: CGFloat(0.3))
+                }
+            } else {
                 cell.backgroundColor = UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: CGFloat(0.3))
             }
+            
+            return cell
         } else {
-            cell.backgroundColor = UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: CGFloat(0.3))
+            let cell: UITableViewCell = menuTableView.dequeueReusableCellWithIdentifier("menuCell", forIndexPath: indexPath) as UITableViewCell
+            cell.textLabel!.font = UIFont.fontAwesomeOfSize(15)
+            cell.textLabel?.text = self.menuItems[indexPath.row].titleLabel!.text
+            cell.textLabel?.textAlignment = .Center
+            
+//            cell.contentView.backgroundColor = UIColor.clearColor()
+//            cell.backgroundColor = UIColor.clearColor()
+//            tableView.backgroundColor = UIColor.clearColor()
+            
+            cell.backgroundColor = UIColor(red: 105/255.0, green: 230/255.0, blue: 255/255.0, alpha: CGFloat(1.0))
+            
+            
+            return cell
         }
-        
-        return cell
     }
     
     override func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
-        pushToHistory()
-        
-        // Get tapped ingredient.
-        let ingredient = filteredCells[indexPath.row]
-        
-        showIngredient(ingredient)
+        if (tableView == self.tableView) {
+            pushToHistory()
+            
+            // Get tapped ingredient.
+            let ingredient = filteredCells[indexPath.row]
+            
+            showIngredient(ingredient)
+        } else {
+            print("You selected cell #\(indexPath.row)!")
+        }
+
     }
     
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) ->
