@@ -421,6 +421,9 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
             showIngredient(ingredient)
         } else {
             print("You selected cell #\(indexPath.row)!")
+            if (indexPath.row == 2) {
+                self.performSegueWithIdentifier("segueLogout", sender: self)
+            }
         }
 
     }
