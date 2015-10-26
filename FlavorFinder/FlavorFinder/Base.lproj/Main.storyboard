@@ -213,6 +213,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="All Ingredients" id="eQ5-0u-QHl"/>
                     <connections>
+                        <outlet property="matchTableView" destination="yEc-b6-IbE" id="Fh6-1d-Lgu"/>
                         <segue destination="FZQ-A2-GaM" kind="show" identifier="segueLogout" id="1W5-J6-Asb"/>
                     </connections>
                 </tableViewController>
