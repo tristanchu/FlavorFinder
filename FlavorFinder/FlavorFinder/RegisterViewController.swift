@@ -17,10 +17,11 @@ class RegisterViewController: UIViewController {
     //// somewhere we need a privacy policy :)
     
     /// arbitrarily chosen atm but we can set these...
-    var USRNAME_CHAR_MAX = 15;
-    var USRNAME_CHAR_MIN = 4;
+    /// CHECK PARSE!
+    var USRNAME_CHAR_MAX = 50;
+    var USRNAME_CHAR_MIN = 1;
     var PW_CHAR_MIN = 6;
-    var PW_CHAR_MAX = 20;
+    var PW_CHAR_MAX = 50;
     
     // error messages
     var GENERIC_ERROR = "Oops! An error occurred.";
@@ -111,6 +112,7 @@ class RegisterViewController: UIViewController {
     
     // VALIDATION FUNCTIONS ------------------------------------------
     func hasInvalidEmail(email: String) -> Bool {
+        //// http://stackoverflow.com/questions/32074590/what-is-the-current-parse-email-verification-regex-pattern/32074866#32074866 --> good advice for validating
         if (email.isEmpty || !email.containsString("@") || !email.containsString(".")) {
             return true;
         }
