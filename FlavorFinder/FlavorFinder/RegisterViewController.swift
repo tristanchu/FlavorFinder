@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Parse
 import TextFieldEffects
 
 
@@ -15,8 +16,21 @@ class RegisterViewController: UIViewController {
     
     //// somewhere we need a privacy policy :)
     
+    /// arbitrarily chosen atm but we can set these...
+    /// CHECK PARSE!
+    var USRNAME_CHAR_MAX = 50;
+    var USRNAME_CHAR_MIN = 1;
+    var PW_CHAR_MIN = 6;
+    var PW_CHAR_MAX = 50;
+    
+    // error messages
+    var GENERIC_ERROR = "Oops! An error occurred.";
+    var USERNAME_IN_USE = "Username already in use.";
+    var EMAIL_IN_USE = "Email associated with an account.";
+    
     // MARK: Properties -----------------------------------------------
     @IBOutlet weak var registerLabel: UILabel!
+    @IBOutlet weak var registerMsg: UILabel!
     @IBOutlet weak var registerEmail: TextFieldEffects!
     @IBOutlet weak var registerUsername: TextFieldEffects!
     @IBOutlet weak var registerPassword: TextFieldEffects!
@@ -46,15 +60,60 @@ class RegisterViewController: UIViewController {
         }
         
      /// here, send new parse request for new user credentials
+        //// trim excess spaces?
+        changeStatus(false);
+        var newUser = PFUser();
+        newUser.username = username;
+        newUser.email = email;
+        newUser.password = pw;
+        newUser.signUpInBackgroundWithBlock { (succeeded, error) -> Void in
+            if error == nil {
+                if succeeded {
+                    self.registerSuccess()
+                } else {
+                    self.handleError(error);
+                }
+            } else {
+                self.handleError(error);
+            }
+        }
     }
     
     func registerSuccess() {
         //// success!
     }
     
+    func changeStatus(submitDisabled: Bool) {
+        if submitDisabled {
+            
+        } else {
+            
+        }
+    }
+    
+    func handleError(error: NSError?) {
+        self.changeStatus(false); // allow resubmission
+        if let error = error {
+            print("\(error)");
+            if error.code == 202 {
+                registerMsg.text = USERNAME_IN_USE;
+            } else if error.code == 203 {
+                registerMsg.text = EMAIL_IN_USE;
+            } else {
+                registerMsg.text = GENERIC_ERROR;
+            }
+        } else {
+            print("nil error");
+            registerMsg.text = GENERIC_ERROR;
+        }
+    }
+    
+    
+    
     // VALIDATION FUNCTIONS ------------------------------------------
     func hasInvalidEmail(email: String) -> Bool {
-        if (email.isEmpty) {
+        //// http://stackoverflow.com/questions/32074590/what-is-the-current-parse-email-verification-regex-pattern/32074866#32074866 --> good advice for validating
+        if (email.isEmpty || !email.containsString("@") || !email.containsString(".")) {
             return true;
         }
         return false;

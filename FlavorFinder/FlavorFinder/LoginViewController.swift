@@ -15,6 +15,7 @@ class LoginViewController: UIViewController {
     
     // MARK: Properties -----------------------------------------------
     @IBOutlet weak var loginLabel: UILabel!
+    
     @IBOutlet weak var loginUserTextField: TextFieldEffects!
     @IBOutlet weak var loginPassTextField: UITextField!
     
