@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import TextFieldEffects
 
 
 class RegisterViewController: UIViewController {
@@ -16,9 +17,9 @@ class RegisterViewController: UIViewController {
     
     // MARK: Properties -----------------------------------------------
     @IBOutlet weak var registerLabel: UILabel!
-    @IBOutlet weak var registerEmail: UITextField!
-    @IBOutlet weak var registerUsername: UITextField!
-    @IBOutlet weak var registerPassword: UITextField!
+    @IBOutlet weak var registerEmail: TextFieldEffects!
+    @IBOutlet weak var registerUsername: TextFieldEffects!
+    @IBOutlet weak var registerPassword: TextFieldEffects!
     @IBOutlet weak var registerCOPPA: UILabel!
     
     // MARK: Segue Identifiers ----------------------------------------
