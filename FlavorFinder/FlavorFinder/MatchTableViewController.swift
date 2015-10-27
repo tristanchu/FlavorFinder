@@ -178,8 +178,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
             menuBarBtn.title = String.fontAwesomeIconWithName(.Times)
             animateMenuTableView(false)
         } else {
-//            animateMenuTableView(true)
-            menuTableView.hidden = true
+            animateMenuTableView(true)
             menuBarBtn.title = String.fontAwesomeIconWithName(.Bars)
         }
     }
@@ -282,28 +281,34 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
         let cells = menuTableView.visibleCells
         let tableHeight: CGFloat = menuTableView.bounds.size.height
         
-        let start = dismiss ? 0 : -1*tableHeight
-        let end = dismiss ? tableHeight : 0
+        let start = dismiss ? CGFloat(0) : -1*tableHeight
+//        let end = dismiss ? -1*tableHeight : CGFloat(0)
+        let end = dismiss ? CGFloat(0) : CGFloat(0)
         
-        for i in cells {
-            let cell: UITableViewCell = i
-            cell.transform = CGAffineTransformMakeTranslation(0, start)
+        var orderedCells: [UITableViewCell]
+        
+        if dismiss {
+            orderedCells = cells.reverse()
+        } else {
+            orderedCells = cells
+            for i in cells {
+                let cell: UITableViewCell = i
+                cell.transform = CGAffineTransformMakeTranslation(0, -1*tableHeight)
+            }
         }
         
         var index = 0
-        
-        for a in cells {
+
+        for a in orderedCells {
             let cell: UITableViewCell = a
             UIView.animateWithDuration(0.5, delay: 0.03 * Double(index), usingSpringWithDamping: 0.9, initialSpringVelocity: 0, options: [], animations: {
                 cell.transform = CGAffineTransformMakeTranslation(0, end);
-                }, completion: nil
-//                { finished in
-//                    if dismiss {
-//                        self.menuTableView.hidden = true
-//                    } else {
-//                        self.menuTableView.hidden = false
-//                    }
-//                }
+                }, completion:
+                { finished in
+                    if dismiss {
+                        self.menuTableView.hidden = true
+                    }
+                }
             )
             
             index += 1
