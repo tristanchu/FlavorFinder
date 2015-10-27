@@ -9,14 +9,13 @@
 import Foundation
 import UIKit
 import Parse
-import TextFieldEffects
 
 class LoginViewController: UIViewController {
     
     // MARK: Properties -----------------------------------------------
     @IBOutlet weak var loginLabel: UILabel!
     
-    @IBOutlet weak var loginUserTextField: TextFieldEffects!
+    @IBOutlet weak var loginUserTextField: UITextField!
     @IBOutlet weak var loginPassTextField: UITextField!
     
     
@@ -45,6 +44,9 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.hidesBackButton = true;
+        
+        loginUserTextField.setTextLeftPadding(5)
+        loginPassTextField.setTextLeftPadding(5)
     }
     
     func loginUser(userField: String!, pwField: String!, msg: UILabel!) {
@@ -62,12 +64,12 @@ class LoginViewController: UIViewController {
 
                 } else {
                     // User does not exist.
-                    msg.text = "Username and Password not found."
+                    msg.text = "Username and password not found."
                 }
             }
         // Empty Fields:
         } else {
-            msg.text = "Must enter both fields to Login"
+            msg.text = "Must enter both fields to login"
         }
     }
 }
