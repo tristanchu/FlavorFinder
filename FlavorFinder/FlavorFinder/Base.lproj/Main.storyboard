@@ -8,7 +8,7 @@
         <!--Login View Controller-->
         <scene sceneID="4Jp-rt-Y0j">
             <objects>
-                <viewController id="FZQ-A2-GaM" customClass="LoginViewController" customModule="FlavorFinder" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewControllerIdentifier" id="FZQ-A2-GaM" customClass="LoginViewController" customModule="FlavorFinder" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Oec-4F-Uxv"/>
                         <viewControllerLayoutGuide type="bottom" id="t0R-Kl-bIo"/>
@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Login to Flavor Finder" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Geq-sk-8Eg">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login to Flavor Finder" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Geq-sk-8Eg">
                                 <rect key="frame" x="218" y="144" width="165" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="1Qf-fT-nte"/>
@@ -33,31 +33,31 @@
                                     <action selector="goTableViewTEMP:" destination="FZQ-A2-GaM" eventType="touchUpInside" id="ll7-0D-riF"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="t0d-AJ-TDq">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="t0d-AJ-TDq">
                                 <rect key="frame" x="218" y="203" width="165" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zm4-fb-B07">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zm4-fb-B07">
                                 <rect key="frame" x="218" y="252" width="165" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pxX-xv-m3i">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pxX-xv-m3i">
                                 <rect key="frame" x="281" y="306" width="38" height="30"/>
                                 <state key="normal" title="Login"/>
                                 <connections>
                                     <action selector="loginActionBtn:" destination="FZQ-A2-GaM" eventType="touchUpInside" id="z9Y-jo-gWa"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qSC-C0-kB1">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qSC-C0-kB1">
                                 <rect key="frame" x="230" y="420" width="140" height="30"/>
                                 <state key="normal" title="Go Straight To Table"/>
                                 <connections>
                                     <action selector="goTableViewTEMP:" destination="FZQ-A2-GaM" eventType="touchUpInside" id="ifW-PW-pbq"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lIq-hj-vHE">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lIq-hj-vHE">
                                 <rect key="frame" x="272" y="352" width="57" height="30"/>
                                 <state key="normal" title="Register"/>
                                 <connections>
@@ -101,6 +101,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Q7-vC-caE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1319" y="494"/>
+        </scene>
+        <!--Profile View Controller-->
+        <scene sceneID="PEF-T2-zbh">
+            <objects>
+                <viewController storyboardIdentifier="ProfileViewControllerIdentifier" id="leV-JT-XQg" customClass="ProfileViewController" customModule="FlavorFinder" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bs6-RQ-Hov"/>
+                        <viewControllerLayoutGuide type="bottom" id="xgG-lA-4at"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Bbg-AR-Zd4">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="z8U-I1-yy5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1411" y="1219"/>
         </scene>
         <!--Register View Controller-->
         <scene sceneID="veb-7d-s5O">
@@ -180,14 +198,14 @@
         <!--All Ingredients-->
         <scene sceneID="I46-hR-Jw9">
             <objects>
-                <tableViewController id="yDJ-pt-my1" customClass="MatchTableViewController" customModule="FlavorFinder" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="MatchTableViewControllerIdentifier" id="yDJ-pt-my1" customClass="MatchTableViewController" customModule="FlavorFinder" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="yEc-b6-IbE">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="MatchTableViewCell" rowHeight="80" id="VSI-oZ-nxd" customClass="MatchTableViewCell" customModule="FlavorFinder" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="22" width="600" height="80"/>
+                                <rect key="frame" x="0.0" y="86" width="600" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VSI-oZ-nxd" id="emG-AP-STX">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="79"/>
@@ -214,7 +232,6 @@
                     <navigationItem key="navigationItem" title="All Ingredients" id="eQ5-0u-QHl"/>
                     <connections>
                         <outlet property="matchTableView" destination="yEc-b6-IbE" id="Fh6-1d-Lgu"/>
-                        <segue destination="FZQ-A2-GaM" kind="show" identifier="segueLogout" id="1W5-J6-Asb"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XZF-Bl-251" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -244,7 +261,4 @@
             <point key="canvasLocation" x="455" y="475"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="1W5-J6-Asb"/>
-    </inferredMetricsTieBreakers>
 </document>

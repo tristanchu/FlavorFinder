@@ -397,8 +397,21 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
             showIngredient(ingredient)
         } else {
             print("You selected cell #\(indexPath.row)!")
-            if (indexPath.row == 2) {
-                self.performSegueWithIdentifier(SEGUE_LOGOUT, sender: self)
+            switch indexPath.row {
+            case 0:
+                let profileViewControllerObject = self.storyboard?.instantiateViewControllerWithIdentifier("ProfileViewControllerIdentifier") as? ProfileViewController
+                self.navigationController?.pushViewController(profileViewControllerObject!, animated: true)
+                break
+            case 1:
+                let matchTableViewControllerObject = self.storyboard?.instantiateViewControllerWithIdentifier("MatchTableViewControllerIdentifier") as? MatchTableViewController
+                self.navigationController?.pushViewController(matchTableViewControllerObject!, animated: true)
+                break
+            case 2:
+                let loginViewControllerObject = self.storyboard?.instantiateViewControllerWithIdentifier("LoginViewControllerIdentifier") as? LoginViewController
+                self.navigationController?.pushViewController(loginViewControllerObject!, animated: true)
+                break
+            default:
+                break
             }
         }
 
