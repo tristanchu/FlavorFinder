@@ -6,6 +6,7 @@ pod 'SQLite.swift', git: 'https://github.com/stephencelis/SQLite.swift.git', :br
 pod 'Parse'
 pod 'FontAwesome.swift'
 pod 'Locksmith'
+pod 'TextFieldEffects'
 end
 
 target 'FlavorFinderTests' do
