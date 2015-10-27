@@ -9,12 +9,13 @@
 import Foundation
 import UIKit
 import Parse
+import TextFieldEffects
 
 class LoginViewController: UIViewController {
     
     // MARK: Properties -----------------------------------------------
     @IBOutlet weak var loginLabel: UILabel!
-    @IBOutlet weak var loginUserTextField: UITextField!
+    @IBOutlet weak var loginUserTextField: TextFieldEffects!
     @IBOutlet weak var loginPassTextField: UITextField!
     
     

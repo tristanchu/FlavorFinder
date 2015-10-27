@@ -33,37 +33,53 @@
                                     <action selector="goTableViewTEMP:" destination="FZQ-A2-GaM" eventType="touchUpInside" id="ll7-0D-riF"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="t0d-AJ-TDq">
-                                <rect key="frame" x="218" y="203" width="165" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="t0d-AJ-TDq" customClass="MinoruTextField" customModule="TextFieldEffects">
+                                <rect key="frame" x="218" y="188" width="165" height="60"/>
+                                <color key="backgroundColor" red="0.9496330492424242" green="0.9496330492424242" blue="0.9496330492424242" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
+                                <color key="textColor" red="0.4039215686" green="0.58823529409999997" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                        <color key="value" red="0.34180714600000001" green="0.40016933119999998" blue="0.46281793710000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zm4-fb-B07">
-                                <rect key="frame" x="218" y="252" width="165" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pxX-xv-m3i">
-                                <rect key="frame" x="281" y="306" width="38" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pxX-xv-m3i">
+                                <rect key="frame" x="281" y="345" width="38" height="30"/>
                                 <state key="normal" title="Login"/>
                                 <connections>
                                     <action selector="loginActionBtn:" destination="FZQ-A2-GaM" eventType="touchUpInside" id="z9Y-jo-gWa"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qSC-C0-kB1">
-                                <rect key="frame" x="230" y="420" width="140" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qSC-C0-kB1">
+                                <rect key="frame" x="230" y="459" width="140" height="30"/>
                                 <state key="normal" title="Go Straight To Table"/>
                                 <connections>
                                     <action selector="goTableViewTEMP:" destination="FZQ-A2-GaM" eventType="touchUpInside" id="ifW-PW-pbq"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lIq-hj-vHE">
-                                <rect key="frame" x="272" y="352" width="57" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lIq-hj-vHE">
+                                <rect key="frame" x="272" y="391" width="57" height="30"/>
                                 <state key="normal" title="Register"/>
                                 <connections>
                                     <action selector="goRegisterActionBtn:" destination="FZQ-A2-GaM" eventType="touchUpInside" id="ARb-nX-w2t"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zm4-fb-B07" customClass="MinoruTextField" customModule="TextFieldEffects">
+                                <rect key="frame" x="218" y="270" width="165" height="60"/>
+                                <color key="backgroundColor" red="0.94963304920000002" green="0.94963304920000002" blue="0.94963304920000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.94963304920000002" green="0.94963304920000002" blue="0.94963304920000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.4039215686" green="0.58823529409999997" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                        <color key="value" red="0.34180714600000001" green="0.40016933119999998" blue="0.46281793710000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -74,19 +90,13 @@
                             <constraint firstItem="Geq-sk-8Eg" firstAttribute="centerX" secondItem="mcQ-1v-X3h" secondAttribute="centerX" id="Cw6-0c-TAl"/>
                             <constraint firstItem="lIq-hj-vHE" firstAttribute="centerX" secondItem="mcQ-1v-X3h" secondAttribute="centerX" id="IfZ-PS-NhY"/>
                             <constraint firstItem="pxX-xv-m3i" firstAttribute="centerX" secondItem="mcQ-1v-X3h" secondAttribute="centerX" id="LjZ-dt-Mmq"/>
-                            <constraint firstItem="Zm4-fb-B07" firstAttribute="centerX" secondItem="mcQ-1v-X3h" secondAttribute="centerX" id="OUz-og-5G7"/>
                             <constraint firstItem="qSC-C0-kB1" firstAttribute="top" secondItem="lIq-hj-vHE" secondAttribute="bottom" constant="38" id="Tn0-2v-4cI"/>
-                            <constraint firstItem="Zm4-fb-B07" firstAttribute="top" secondItem="t0d-AJ-TDq" secondAttribute="bottom" constant="19" id="Wrf-Sf-Xt8"/>
-                            <constraint firstItem="t0d-AJ-TDq" firstAttribute="top" secondItem="Geq-sk-8Eg" secondAttribute="bottom" constant="38" id="ZAQ-nt-6x4"/>
-                            <constraint firstItem="t0d-AJ-TDq" firstAttribute="centerX" secondItem="mcQ-1v-X3h" secondAttribute="centerX" id="cCd-2N-ufW"/>
-                            <constraint firstItem="t0d-AJ-TDq" firstAttribute="leading" secondItem="Zm4-fb-B07" secondAttribute="leading" id="fSv-9M-De1"/>
                             <constraint firstItem="Geq-sk-8Eg" firstAttribute="leading" secondItem="t0d-AJ-TDq" secondAttribute="leading" id="gOB-Ek-hP3"/>
                             <constraint firstItem="lIq-hj-vHE" firstAttribute="top" secondItem="pxX-xv-m3i" secondAttribute="bottom" constant="16" id="god-ON-Keb"/>
                             <constraint firstItem="lIq-hj-vHE" firstAttribute="centerX" secondItem="mcQ-1v-X3h" secondAttribute="centerX" id="hEo-SX-eka"/>
                             <constraint firstItem="Zm4-fb-B07" firstAttribute="centerX" secondItem="mcQ-1v-X3h" secondAttribute="centerX" id="hwy-JS-pDq"/>
                             <constraint firstItem="qSC-C0-kB1" firstAttribute="centerX" secondItem="mcQ-1v-X3h" secondAttribute="centerX" id="pSS-fr-ibC"/>
                             <constraint firstItem="Geq-sk-8Eg" firstAttribute="centerX" secondItem="mcQ-1v-X3h" secondAttribute="centerX" id="umU-S3-KXH"/>
-                            <constraint firstItem="t0d-AJ-TDq" firstAttribute="centerX" secondItem="mcQ-1v-X3h" secondAttribute="centerX" id="x6l-iQ-efV"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="QXq-QC-lOr"/>
