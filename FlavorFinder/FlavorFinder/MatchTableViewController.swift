@@ -57,6 +57,8 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
     
     let BUTTON_COLOR = UIColor(red: 165/255.0, green: 242/255.0, blue: 216/255.0, alpha: CGFloat(1))
     
+    var dropdownIsDown = false
+    
     @IBOutlet var matchTableView: UITableView!
     
     // NAVI FUNCTIONS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -81,6 +83,9 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
             }
             
             goBackBtn.enabled = true
+            if (future.isEmpty()) {
+                goForwardBtn.enabled = false
+            }
             showIngredient(futureIngredient!)
         }
     }
@@ -100,6 +105,10 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
         searchBar.delegate = self
         searchBar.hidden = true
         searchBar.setShowsCancelButton(true, animated: false)
+        let cancelButton = searchBar.valueForKey("cancelButton") as! UIButton
+        let attributes = [NSFontAttributeName: UIFont.fontAwesomeOfSize(20)] as Dictionary!
+        UIBarButtonItem.appearance().setTitleTextAttributes(attributes, forState: UIControlState.Normal)
+        cancelButton.setTitle(String.fontAwesomeIconWithName(.ChevronLeft), forState: UIControlState.Normal)
     }
     
     func configureNavigationBar() {
@@ -174,13 +183,23 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
     func menuBtnClicked() {
         print("menuBtn clicked.")
         if (menuTableView.hidden) {
-            menuTableView.hidden = false
-            menuBarBtn.title = String.fontAwesomeIconWithName(.Times)
-            animateMenuTableView(false)
+            showMenuTableView()
         } else {
-            animateMenuTableView(true)
-            menuBarBtn.title = String.fontAwesomeIconWithName(.Bars)
+            dismissMenuTableView()
         }
+    }
+    
+    func showMenuTableView() {
+        menuTableView.hidden = false
+        menuBarBtn.title = String.fontAwesomeIconWithName(.Times)
+        animateMenuTableView(false)
+        dropdownIsDown = true
+    }
+    
+    func dismissMenuTableView() {
+        animateMenuTableView(true)
+        menuBarBtn.title = String.fontAwesomeIconWithName(.Bars)
+        dropdownIsDown = false
     }
     
     func showAllIngredients() {
@@ -396,10 +415,14 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
     
     override func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
         if (tableView == self.tableView) {
-            pushToHistory()                                                           // Push current ingredient to history stack.
-            tableView.contentOffset = CGPointMake(0, 0 - tableView.contentInset.top); // Reset scroll position.
-            let ingredient = filteredCells[indexPath.row]                             // Get tapped ingredient.
-            showIngredient(ingredient)
+            if (dropdownIsDown) {
+                dismissMenuTableView()
+            } else {
+                pushToHistory()                                                           // Push current ingredient to history stack.
+                tableView.contentOffset = CGPointMake(0, 0 - tableView.contentInset.top); // Reset scroll position.
+                let ingredient = filteredCells[indexPath.row]                             // Get tapped ingredient.
+                showIngredient(ingredient)
+            }
         } else {
             print("You selected cell #\(indexPath.row)!")
             switch indexPath.row {
