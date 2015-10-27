@@ -3,13 +3,12 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
-        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--Login View Controller-->
         <scene sceneID="4Jp-rt-Y0j">
             <objects>
-                <viewController id="FZQ-A2-GaM" customClass="LoginViewController" customModule="FlavorFinder" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewControllerIdentifier" id="FZQ-A2-GaM" customClass="LoginViewController" customModule="FlavorFinder" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Oec-4F-Uxv"/>
                         <viewControllerLayoutGuide type="bottom" id="t0R-Kl-bIo"/>
@@ -34,37 +33,53 @@
                                     <action selector="goTableViewTEMP:" destination="FZQ-A2-GaM" eventType="touchUpInside" id="ll7-0D-riF"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="t0d-AJ-TDq">
-                                <rect key="frame" x="218" y="203" width="165" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="t0d-AJ-TDq" customClass="MinoruTextField" customModule="TextFieldEffects">
+                                <rect key="frame" x="218" y="188" width="165" height="60"/>
+                                <color key="backgroundColor" red="0.9496330492424242" green="0.9496330492424242" blue="0.9496330492424242" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
+                                <color key="textColor" red="0.4039215686" green="0.58823529409999997" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                        <color key="value" red="0.34180714600000001" green="0.40016933119999998" blue="0.46281793710000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zm4-fb-B07">
-                                <rect key="frame" x="218" y="252" width="165" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pxX-xv-m3i">
-                                <rect key="frame" x="281" y="306" width="38" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pxX-xv-m3i">
+                                <rect key="frame" x="281" y="345" width="38" height="30"/>
                                 <state key="normal" title="Login"/>
                                 <connections>
                                     <action selector="loginActionBtn:" destination="FZQ-A2-GaM" eventType="touchUpInside" id="z9Y-jo-gWa"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qSC-C0-kB1">
-                                <rect key="frame" x="230" y="420" width="140" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qSC-C0-kB1">
+                                <rect key="frame" x="230" y="459" width="140" height="30"/>
                                 <state key="normal" title="Go Straight To Table"/>
                                 <connections>
                                     <action selector="goTableViewTEMP:" destination="FZQ-A2-GaM" eventType="touchUpInside" id="ifW-PW-pbq"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lIq-hj-vHE">
-                                <rect key="frame" x="272" y="352" width="57" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lIq-hj-vHE">
+                                <rect key="frame" x="272" y="391" width="57" height="30"/>
                                 <state key="normal" title="Register"/>
                                 <connections>
                                     <action selector="goRegisterActionBtn:" destination="FZQ-A2-GaM" eventType="touchUpInside" id="ARb-nX-w2t"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zm4-fb-B07" customClass="MinoruTextField" customModule="TextFieldEffects">
+                                <rect key="frame" x="218" y="270" width="165" height="60"/>
+                                <color key="backgroundColor" red="0.94963304920000002" green="0.94963304920000002" blue="0.94963304920000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.94963304920000002" green="0.94963304920000002" blue="0.94963304920000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.4039215686" green="0.58823529409999997" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                        <color key="value" red="0.34180714600000001" green="0.40016933119999998" blue="0.46281793710000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -75,19 +90,13 @@
                             <constraint firstItem="Geq-sk-8Eg" firstAttribute="centerX" secondItem="mcQ-1v-X3h" secondAttribute="centerX" id="Cw6-0c-TAl"/>
                             <constraint firstItem="lIq-hj-vHE" firstAttribute="centerX" secondItem="mcQ-1v-X3h" secondAttribute="centerX" id="IfZ-PS-NhY"/>
                             <constraint firstItem="pxX-xv-m3i" firstAttribute="centerX" secondItem="mcQ-1v-X3h" secondAttribute="centerX" id="LjZ-dt-Mmq"/>
-                            <constraint firstItem="Zm4-fb-B07" firstAttribute="centerX" secondItem="mcQ-1v-X3h" secondAttribute="centerX" id="OUz-og-5G7"/>
                             <constraint firstItem="qSC-C0-kB1" firstAttribute="top" secondItem="lIq-hj-vHE" secondAttribute="bottom" constant="38" id="Tn0-2v-4cI"/>
-                            <constraint firstItem="Zm4-fb-B07" firstAttribute="top" secondItem="t0d-AJ-TDq" secondAttribute="bottom" constant="19" id="Wrf-Sf-Xt8"/>
-                            <constraint firstItem="t0d-AJ-TDq" firstAttribute="top" secondItem="Geq-sk-8Eg" secondAttribute="bottom" constant="38" id="ZAQ-nt-6x4"/>
-                            <constraint firstItem="t0d-AJ-TDq" firstAttribute="centerX" secondItem="mcQ-1v-X3h" secondAttribute="centerX" id="cCd-2N-ufW"/>
-                            <constraint firstItem="t0d-AJ-TDq" firstAttribute="leading" secondItem="Zm4-fb-B07" secondAttribute="leading" id="fSv-9M-De1"/>
                             <constraint firstItem="Geq-sk-8Eg" firstAttribute="leading" secondItem="t0d-AJ-TDq" secondAttribute="leading" id="gOB-Ek-hP3"/>
                             <constraint firstItem="lIq-hj-vHE" firstAttribute="top" secondItem="pxX-xv-m3i" secondAttribute="bottom" constant="16" id="god-ON-Keb"/>
                             <constraint firstItem="lIq-hj-vHE" firstAttribute="centerX" secondItem="mcQ-1v-X3h" secondAttribute="centerX" id="hEo-SX-eka"/>
                             <constraint firstItem="Zm4-fb-B07" firstAttribute="centerX" secondItem="mcQ-1v-X3h" secondAttribute="centerX" id="hwy-JS-pDq"/>
                             <constraint firstItem="qSC-C0-kB1" firstAttribute="centerX" secondItem="mcQ-1v-X3h" secondAttribute="centerX" id="pSS-fr-ibC"/>
                             <constraint firstItem="Geq-sk-8Eg" firstAttribute="centerX" secondItem="mcQ-1v-X3h" secondAttribute="centerX" id="umU-S3-KXH"/>
-                            <constraint firstItem="t0d-AJ-TDq" firstAttribute="centerX" secondItem="mcQ-1v-X3h" secondAttribute="centerX" id="x6l-iQ-efV"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="QXq-QC-lOr"/>
@@ -102,6 +111,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Q7-vC-caE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1319" y="494"/>
+        </scene>
+        <!--Profile View Controller-->
+        <scene sceneID="PEF-T2-zbh">
+            <objects>
+                <viewController storyboardIdentifier="ProfileViewControllerIdentifier" id="leV-JT-XQg" customClass="ProfileViewController" customModule="FlavorFinder" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bs6-RQ-Hov"/>
+                        <viewControllerLayoutGuide type="bottom" id="xgG-lA-4at"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Bbg-AR-Zd4">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="z8U-I1-yy5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1411" y="1219"/>
         </scene>
         <!--Register View Controller-->
         <scene sceneID="veb-7d-s5O">
@@ -121,37 +148,61 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="98s-Lv-fsr">
-                                <rect key="frame" x="217" y="168" width="165" height="30"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="98s-Lv-fsr" customClass="MinoruTextField" customModule="TextFieldEffects">
+                                <rect key="frame" x="219" y="161" width="163" height="45"/>
+                                <color key="backgroundColor" red="0.94963304920000002" green="0.94963304920000002" blue="0.94963304920000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.94963304920000002" green="0.94963304920000002" blue="0.94963304920000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.4039215686" green="0.58823529409999997" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="12"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                        <color key="value" red="0.34180714600000001" green="0.40016933119999998" blue="0.46281793710000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="692-E8-NQh">
-                                <rect key="frame" x="217" y="212" width="165" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="692-E8-NQh" customClass="MinoruTextField" customModule="TextFieldEffects">
+                                <rect key="frame" x="217" y="227" width="165" height="45"/>
+                                <color key="backgroundColor" red="0.94963304920000002" green="0.94963304920000002" blue="0.94963304920000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.94963304920000002" green="0.94963304920000002" blue="0.94963304920000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.4039215686" green="0.58823529409999997" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="12"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                        <color key="value" red="0.34180714600000001" green="0.40016933119999998" blue="0.46281793710000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9en-v4-ss2">
-                                <rect key="frame" x="217" y="255" width="165" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9en-v4-ss2" customClass="MinoruTextField" customModule="TextFieldEffects">
+                                <rect key="frame" x="217" y="289" width="165" height="45"/>
+                                <color key="backgroundColor" red="0.94963304920000002" green="0.94963304920000002" blue="0.94963304920000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.94963304920000002" green="0.94963304920000002" blue="0.94963304920000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.4039215686" green="0.58823529409999997" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="12"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                        <color key="value" red="0.34180714600000001" green="0.40016933119999998" blue="0.46281793710000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="By clicking the button below, I certify that I am 13 years of age or older." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="ifX-C3-tVL">
-                                <rect key="frame" x="146" y="293" width="350" height="66"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="350" id="3dL-3m-dDS"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jkh-Ln-Knn">
-                                <rect key="frame" x="218" y="359" width="163" height="30"/>
+                                <rect key="frame" x="219" y="433" width="163" height="30"/>
                                 <state key="normal" title="Create Account"/>
                                 <connections>
                                     <action selector="registerSubmitActionBtn:" destination="JAI-Ms-6hY" eventType="touchUpInside" id="xPg-LB-qHI"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="By clicking the button below, I certify that I am 13 years of age or older." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="ifX-C3-tVL">
+                                <rect key="frame" x="125" y="365" width="350" height="66"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="350" id="3dL-3m-dDS"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -181,7 +232,7 @@
         <!--All Ingredients-->
         <scene sceneID="I46-hR-Jw9">
             <objects>
-                <tableViewController id="yDJ-pt-my1" customClass="MatchTableViewController" customModule="FlavorFinder" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="MatchTableViewControllerIdentifier" id="yDJ-pt-my1" customClass="MatchTableViewController" customModule="FlavorFinder" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="yEc-b6-IbE">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -212,36 +263,14 @@
                             <outlet property="delegate" destination="yDJ-pt-my1" id="2P9-sL-qly"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="All Ingredients" id="eQ5-0u-QHl">
-                        <leftBarButtonItems>
-                            <barButtonItem title="〈" id="UUL-Fa-7ff">
-                                <color key="tintColor" red="0.89195993439999999" green="1" blue="0.94924983230000004" alpha="1" colorSpace="calibratedRGB"/>
-                                <connections>
-                                    <action selector="goBack:" destination="yDJ-pt-my1" id="rbG-Ac-V0k"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem systemItem="search" id="Qhu-2x-QjX">
-                                <connections>
-                                    <action selector="activateSearchBar:" destination="yDJ-pt-my1" id="9pz-Mp-ZPK"/>
-                                </connections>
-                            </barButtonItem>
-                        </leftBarButtonItems>
-                        <barButtonItem key="rightBarButtonItem" title="〉" id="LuI-qR-nEs">
-                            <color key="tintColor" red="0.89195993439999999" green="1" blue="0.94924983230000004" alpha="1" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <action selector="goForward:" destination="yDJ-pt-my1" id="zpe-xo-uTR"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="All Ingredients" id="eQ5-0u-QHl"/>
                     <connections>
-                        <outlet property="goBackBtn" destination="UUL-Fa-7ff" id="RzH-sa-Qqy"/>
-                        <outlet property="goForwardBtn" destination="LuI-qR-nEs" id="ju7-mQ-82F"/>
-                        <outlet property="searchBarActivateBtn" destination="Qhu-2x-QjX" id="CsD-lj-Jpo"/>
+                        <outlet property="matchTableView" destination="yEc-b6-IbE" id="Fh6-1d-Lgu"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XZF-Bl-251" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1183" y="1227"/>
+            <point key="canvasLocation" x="644" y="1198"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="XuT-By-HT0">

@@ -25,3 +25,9 @@ Winter term, we expect to focus more heavily on UX/UI testing/development and al
 
 ## Implementation
 We have decided that we want to do an iOS app and use Swift for the components related to that. We will use Github for version control and file sharing among the group. For our initial test data, as a model set, we will use a small portion of The Flavor Bible book. Ideally, we will move into having some sort of community-driven data set, but we chose this resource for initial educational development purposes as it closely models the type of data and relations that we want to capture, convey, and query.
+
+## Frameworks Used
+* [**Parse**](https://www.parse.com/?) to host our User data and allow for secure User authentication.
+
+* [**Locksmith**](https://github.com/matthewpalmer/Locksmith) to wrap around the iOS keychain for secure session data storage.
+* [**Cocoapods**](https://cocoapods.org/) for package management.

@@ -5,6 +5,7 @@ PODS:
   - Parse (1.9.0):
     - Bolts/Tasks (>= 1.3.0)
   - SQLite.swift (1.0.0.pre)
+  - TextFieldEffects (0.4.6)
 
 DEPENDENCIES:
   - FontAwesome.swift
@@ -12,6 +13,7 @@ DEPENDENCIES:
   - Parse
   - SQLite.swift (from `https://github.com/stephencelis/SQLite.swift.git`, branch
     `swift-2`)
+  - TextFieldEffects
 
 EXTERNAL SOURCES:
   SQLite.swift:
@@ -29,5 +31,6 @@ SPEC CHECKSUMS:
   Locksmith: 7f2b68448449a7712348f9a4ed60604c1cc8dfa6
   Parse: 712efbc476d4f47b0f96b70db7e53101575753aa
   SQLite.swift: 5dfee5c783b93f4c0035c0317a11c3c92cc91910
+  TextFieldEffects: a1f812534e7639b372374704e7f5aa8dd2007eb9
 
 COCOAPODS: 0.39.0
