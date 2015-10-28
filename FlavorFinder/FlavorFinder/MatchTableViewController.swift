@@ -20,8 +20,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
     var viewingMatches = false          // Activates colored backgrounds. Only want to show colors when viewing matches, not all ingredients.
     var currentIngredient : Ingredient? // Stores the ingredient being viewed (nil for all ingredients).
     
-    var history = Stack<Ingredient?>()  // Used for going backward.
-    var future = Stack<Ingredient?>()   // Used for going forward.
+
     
     var menuTableView: UITableView = UITableView()
     var menuTableItems = [  String.fontAwesomeIconWithName(.User) + " Profile",
@@ -52,19 +51,24 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
     // --------------
     func goBackBtnClicked() {
         if let curr = currentIngredient {
-            if let pastIngredient = history.pop() {
-                showIngredient(pastIngredient!)
+            future.push(curr)
+            goForwardBtn.enabled = true
+            
+            if let pastObject = history.pop() {
+                if let pastView = pastObject as? String {
+                    
+                } else if let pastIngredient = pastObject as? Ingredient {
+                    showIngredient(pastIngredient)
+                }
             } else {
                 goBackBtn.enabled = false
                 showAllIngredients()
             }
-            future.push(curr)
-            goForwardBtn.enabled = true
         }
     }
     
     func goForwardBtnClicked() {
-        if let futureIngredient = future.pop() {
+        if let futureObject = future.pop() {
             if let curr = currentIngredient {
                 history.push(curr)
             }
@@ -73,7 +77,12 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
             if (future.isEmpty()) {
                 goForwardBtn.enabled = false
             }
-            showIngredient(futureIngredient!)
+            
+            if let futureView = futureObject as? String {
+                
+            } else if let futureIngredient = futureObject as? Ingredient {
+                showIngredient(futureIngredient)
+            }
         }
     }
     
