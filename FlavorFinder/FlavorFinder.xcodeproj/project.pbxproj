@@ -233,9 +233,9 @@
 			children = (
 				8875DE311BE051B100CD50EA /* Database.swift */,
 				88F414001BC7513F000C0093 /* Ingredient.swift */,
+				8875DE2B1BE04DD900CD50EA /* LoginUtils.swift */,
 				888D1A3F1BDEF816007F09AE /* Stack.swift */,
 				8875DE291BE041D200CD50EA /* UITextField+LeftMargin.swift */,
-				8875DE2B1BE04DD900CD50EA /* LoginUtils.swift */,
 				8875DE341BE053ED00CD50EA /* Voting.swift */,
 			);
 			name = Models;

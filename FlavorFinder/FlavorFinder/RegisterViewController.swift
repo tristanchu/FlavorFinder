@@ -21,7 +21,6 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     var EMAIL_IN_USE = "Email associated with an account.";
     
     var isValid: Bool = true
-    var backgroundColor_normal: UIColor!
     // MARK: Properties -----------------------------------------------
     @IBOutlet weak var registerLabel: UILabel!
     @IBOutlet weak var registerMsg: UILabel!
@@ -68,7 +67,6 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
             isValid = false
         }
         if isValid {
-            isValid = true
             changeStatus(false)
             let newUser = PFUser()
             newUser.username = username
@@ -86,6 +84,8 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                 }
             }
         }
+        
+        isValid = true
     }
     
     func registerSuccess() {
@@ -116,7 +116,6 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
             registerMsg.text = GENERIC_ERROR
         }
     }
-    
     
     func textFieldDidBeginEditing(textField: UITextField) {
         textField.backgroundColor = backgroundColor_normal

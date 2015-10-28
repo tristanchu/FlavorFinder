@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Parse
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Properties -----------------------------------------------
     @IBOutlet weak var loginLabel: UILabel!
@@ -18,6 +18,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var loginUserTextField: UITextField!
     @IBOutlet weak var loginPassTextField: UITextField!
     
+    var isValid: Bool = true
     
     // MARK: Segue Identifiers ----------------------------------------
     let loginToRegister = "segueLoginToRegister"
@@ -44,22 +45,24 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.hidesBackButton = true;
+        backgroundColor_normal = loginUserTextField.backgroundColor!
         
+        loginUserTextField.delegate = self
+        loginPassTextField.delegate = self
         loginUserTextField.setTextLeftPadding(5)
         loginPassTextField.setTextLeftPadding(5)
     }
     
     func loginUser(username: String!, password: String!, msg: UILabel!) {
-        // Check if empty fields:
         if isInvalidUsername(username) {
-            
+            loginUserTextField.backgroundColor = backgroundColor_error
+            isValid = false
         }
         if isInvalidPassword(password) {
-            
+            loginPassTextField.backgroundColor = backgroundColor_error
+            isValid = false
         }
-        
-        if username != "" && password != "" {
- 
+        if isValid {
             // Authenticate user with Parse
             PFUser.logInWithUsernameInBackground(
                     username!, password: password!) {
@@ -74,9 +77,13 @@ class LoginViewController: UIViewController {
                     msg.text = "Incorrect username or password."
                 }
             }
-        // Empty Fields:
         } else {
-            msg.text = "Must enter both fields to login"
+            msg.text = "Invalid username or password."
+            isValid = true
         }
+    }
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        textField.backgroundColor = backgroundColor_normal
     }
 }
