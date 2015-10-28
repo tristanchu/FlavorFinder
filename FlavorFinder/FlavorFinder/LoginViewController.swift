@@ -26,7 +26,7 @@ class LoginViewController: UIViewController {
 
     // MARK: Actions --------------------------------------------------
     @IBAction func loginActionBtn(sender: UIButton) {
-        loginUser(loginUserTextField.text, pwField: loginPassTextField.text, msg: loginLabel)
+        loginUser(loginUserTextField.text, password: loginPassTextField.text, msg: loginLabel)
     }
     
     // Send user to RegisterViewController page.
@@ -49,13 +49,20 @@ class LoginViewController: UIViewController {
         loginPassTextField.setTextLeftPadding(5)
     }
     
-    func loginUser(userField: String!, pwField: String!, msg: UILabel!) {
+    func loginUser(username: String!, password: String!, msg: UILabel!) {
         // Check if empty fields:
-        if userField != "" && pwField != "" {
+        if isInvalidUsername(username) {
+            
+        }
+        if isInvalidPassword(password) {
+            
+        }
+        
+        if username != "" && password != "" {
  
             // Authenticate user with Parse
             PFUser.logInWithUsernameInBackground(
-                    userField!, password: pwField!) {
+                    username!, password: password!) {
                 (user: PFUser?, error: NSError?) -> Void in
 
                 if user != nil {
@@ -64,7 +71,7 @@ class LoginViewController: UIViewController {
 
                 } else {
                     // User does not exist.
-                    msg.text = "Username and password not found."
+                    msg.text = "Incorrect username or password."
                 }
             }
         // Empty Fields:

@@ -15,19 +15,6 @@ import Darwin
 class MatchTableViewController: UITableViewController, UISearchBarDelegate {
     // GLOBALS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // -------
-    var db: Connection!
-    var matchesTable: Table!
-    var ingredientsTable: Table!
-    
-    // Constants for schema strings.
-    let SCHEMA_TABLE_INGREDIENTS = "ingredients"
-    let SCHEMA_TABLE_MATCHES = "matches"
-    let SCHEMA_COL_ID = Expression<Int>("id")
-    let SCHEMA_COL_MATCHID = Expression<Int>("match_id")
-    let SCHEMA_COL_MATCHLEVEL = Expression<Int>("match_level")
-    let SCHEMA_COL_NAME = Expression<String>("name")
-    
-    var allIngredients = [Ingredient]() // Array of all ingredients from database.
     var allCells = [Ingredient]()       // Array of all cells that CAN be displayed.
     var filteredCells = [Ingredient]()  // Array of all cells that ARE displayed (filtered version of 'allCells').
     var viewingMatches = false          // Activates colored backgrounds. Only want to show colors when viewing matches, not all ingredients.
@@ -177,7 +164,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
         configureNavigationBar()
         configureMenuTableView()
         
-        loadIngredients()           // Show all ingredients to start.
+        showAllIngredients()
     }
     
     func menuBtnClicked() {
@@ -220,7 +207,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
         // Reset 'allCells' with the ingredients that have those match ids.
         allCells.removeAll()
         for m in db.prepare(matches) {
-            if let found = allIngredients.lazy.map({ $0.id == m[self.SCHEMA_COL_MATCHID] }).indexOf(true) {
+            if let found = allIngredients.lazy.map({ $0.id == m[SCHEMA_COL_MATCHID] }).indexOf(true) {
                 allIngredients[found].matchLevel = m[SCHEMA_COL_MATCHLEVEL]
                 allCells.append(allIngredients[found])
             }
@@ -229,34 +216,6 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
         filteredCells = allCells        // Reset 'filteredCells' with new matches.
         viewingMatches = true           // Activates colored backgrounds. Only want to show colors when viewing matches, not all ingredients.
         animateTable()                  // Show the new ingredients on our table with animation.
-    }
-    
-    func loadIngredients() {
-        
-        // Connect to database.
-        let dbpath = NSBundle.mainBundle().pathForResource("flavorbible", ofType: "db")
-        do {
-            db = try Connection(dbpath!)
-        } catch {}
-        
-        // Define our tables.
-        ingredientsTable = Table(SCHEMA_TABLE_INGREDIENTS)
-        matchesTable = Table(SCHEMA_TABLE_MATCHES);
-        
-        // Create all Ingredients from database.
-        for ingredient in db.prepare(ingredientsTable) {
-            let possible_id : Int? = ingredient[SCHEMA_COL_ID]
-            let possible_name : String? = ingredient[SCHEMA_COL_NAME]
-            if let id = possible_id, let name = possible_name {
-                if name.isEmpty == false {
-                    let i = Ingredient(id: id, name: name)!
-                    allIngredients.append(i)
-                }
-            }
-        }
-        
-        // Showed the newly created Ingredient instances.
-        showAllIngredients()
     }
 
     override func didReceiveMemoryWarning() {
@@ -496,7 +455,6 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
 //        }
 //        return [edit]
 //    }
-    // ---------------------------------------------------------
     
     
     // SEARCHBAR FUNCTIONS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -563,30 +521,6 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
         
         self.tableView.reloadData()
     }
-    
-    func _confidence(ups: Int, downs: Int) -> Double {
-        let n = Double(ups) + Double(downs)
-        
-        if (n == 0) {
-            return 0
-        }
-        
-        let z = 1.0
-        let phat = Double(ups) / n;
-        
-        let comp1 = phat*(1-phat)
-        let comp2 = ((comp1+z*z/(4*n))/n)
-        return sqrt(phat+z*z/(2*n)-z*comp2)/(1+z*z/n)
-    }
-    
-    func confidence(ups: Int, downs: Int) -> Double {
-        if (ups + downs == 0) {
-            return 0
-        } else {
-            return _confidence(ups, downs: downs)
-        }
-    }
-    // ---------------------------------------------------------
 
     
     /*
