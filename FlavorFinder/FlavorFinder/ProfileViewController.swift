@@ -12,7 +12,13 @@ class ProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.hidesBackButton = true;
+        self.navigationItem.hidesBackButton = true
+        
+        if let navi = self.navigationController as? MainNavigationController {
+            navi.navigationItem.setLeftBarButtonItems([navi.searchBarActivateBtn], animated: true)
+            navi.navigationItem.setRightBarButtonItems([navi.menuBarBtn], animated: true)
+            navi.reset_navigationBar()
+        }
     }
 
     override func didReceiveMemoryWarning() {

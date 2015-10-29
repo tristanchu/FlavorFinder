@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="oWC-1n-3cO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="oWC-1n-3cO">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
     <scenes>
         <!--Login View Controller-->
@@ -30,8 +30,8 @@
                                     <action selector="goTableViewTEMP:" destination="FZQ-A2-GaM" eventType="touchUpInside" id="ll7-0D-riF"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="t0d-AJ-TDq" customClass="MinoruTextField" customModule="TextFieldEffects">
-                                <rect key="frame" x="218" y="188" width="165" height="60"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="t0d-AJ-TDq">
+                                <rect key="frame" x="218" y="188" width="165" height="45"/>
                                 <color key="backgroundColor" red="0.9496330492424242" green="0.9496330492424242" blue="0.9496330492424242" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
                                 <color key="textColor" red="0.4039215686" green="0.58823529409999997" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
@@ -45,6 +45,7 @@
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pxX-xv-m3i">
                                 <rect key="frame" x="281" y="345" width="38" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <state key="normal" title="Login"/>
                                 <connections>
                                     <action selector="loginActionBtn:" destination="FZQ-A2-GaM" eventType="touchUpInside" id="z9Y-jo-gWa"/>
@@ -64,8 +65,8 @@
                                     <action selector="goRegisterActionBtn:" destination="FZQ-A2-GaM" eventType="touchUpInside" id="ARb-nX-w2t"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zm4-fb-B07" customClass="MinoruTextField" customModule="TextFieldEffects">
-                                <rect key="frame" x="218" y="270" width="165" height="60"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zm4-fb-B07">
+                                <rect key="frame" x="218" y="270" width="165" height="45"/>
                                 <color key="backgroundColor" red="0.94963304920000002" green="0.94963304920000002" blue="0.94963304920000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" red="0.94963304920000002" green="0.94963304920000002" blue="0.94963304920000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="textColor" red="0.4039215686" green="0.58823529409999997" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
@@ -90,16 +91,19 @@
                     </view>
                     <navigationItem key="navigationItem" id="QXq-QC-lOr"/>
                     <connections>
+                        <outlet property="goToTableButton" destination="qSC-C0-kB1" id="Ha1-iO-BxI"/>
+                        <outlet property="loginButton" destination="pxX-xv-m3i" id="x1z-au-JAf"/>
                         <outlet property="loginLabel" destination="Geq-sk-8Eg" id="hFs-CG-EI7"/>
                         <outlet property="loginPassTextField" destination="Zm4-fb-B07" id="KZA-ii-Fy6"/>
                         <outlet property="loginUserTextField" destination="t0d-AJ-TDq" id="Fyq-2e-F1J"/>
+                        <outlet property="registerButton" destination="lIq-hj-vHE" id="WGx-lb-MIb"/>
                         <segue destination="yDJ-pt-my1" kind="show" identifier="segueLoginToMatchTable" id="yCh-I4-cTX"/>
                         <segue destination="JAI-Ms-6hY" kind="show" identifier="segueLoginToRegister" id="Eha-zK-ZsO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Q7-vC-caE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1319" y="494"/>
+            <point key="canvasLocation" x="2131" y="494"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="PEF-T2-zbh">
@@ -137,10 +141,10 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="98s-Lv-fsr" customClass="MinoruTextField" customModule="TextFieldEffects">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="98s-Lv-fsr">
                                 <rect key="frame" x="219" y="161" width="163" height="45"/>
                                 <color key="backgroundColor" red="0.94963304920000002" green="0.94963304920000002" blue="0.94963304920000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="tintColor" red="0.94963304920000002" green="0.94963304920000002" blue="0.94963304920000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
                                 <color key="textColor" red="0.4039215686" green="0.58823529409999997" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="12"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -150,10 +154,10 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="692-E8-NQh" customClass="MinoruTextField" customModule="TextFieldEffects">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="692-E8-NQh">
                                 <rect key="frame" x="217" y="227" width="165" height="45"/>
                                 <color key="backgroundColor" red="0.94963304920000002" green="0.94963304920000002" blue="0.94963304920000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="tintColor" red="0.94963304920000002" green="0.94963304920000002" blue="0.94963304920000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
                                 <color key="textColor" red="0.4039215686" green="0.58823529409999997" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="12"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -163,10 +167,10 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9en-v4-ss2" customClass="MinoruTextField" customModule="TextFieldEffects">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9en-v4-ss2">
                                 <rect key="frame" x="217" y="289" width="165" height="45"/>
                                 <color key="backgroundColor" red="0.94963304920000002" green="0.94963304920000002" blue="0.94963304920000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="tintColor" red="0.94963304920000002" green="0.94963304920000002" blue="0.94963304920000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
                                 <color key="textColor" red="0.4039215686" green="0.58823529409999997" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="12"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
@@ -224,7 +228,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hBF-3m-D8a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2127" y="490"/>
+            <point key="canvasLocation" x="2939" y="490"/>
         </scene>
         <!--All Ingredients-->
         <scene sceneID="I46-hR-Jw9">
@@ -239,7 +243,7 @@
                                 <rect key="frame" x="0.0" y="86" width="600" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VSI-oZ-nxd" id="emG-AP-STX">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="79.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="79"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ndg-wR-OIq">
@@ -269,10 +273,10 @@
             </objects>
             <point key="canvasLocation" x="644" y="1198"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Main Navigation Controller-->
         <scene sceneID="XuT-By-HT0">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oWC-1n-3cO" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oWC-1n-3cO" customClass="MainNavigationController" customModule="FlavorFinder" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="HXZ-hJ-BA0">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -284,12 +288,31 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="FZQ-A2-GaM" kind="relationship" relationship="rootViewController" id="UId-6A-Kca"/>
+                        <segue destination="9L3-3p-cyH" kind="relationship" relationship="rootViewController" id="UId-6A-Kca"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jnx-Vf-b0Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="455" y="475"/>
+        </scene>
+        <!--Main Navigation Controller-->
+        <scene sceneID="uU8-YU-WFt">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9L3-3p-cyH" customClass="MainNavigationController" customModule="FlavorFinder" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="itH-i1-Lzi"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="bmx-1A-EYt">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="FZQ-A2-GaM" kind="relationship" relationship="rootViewController" id="1gm-iF-az1"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="R24-WX-Tl7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1319" y="494"/>
         </scene>
     </scenes>
 </document>

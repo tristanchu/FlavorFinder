@@ -9,16 +9,20 @@
 import Foundation
 import UIKit
 import Parse
-import TextFieldEffects
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Properties -----------------------------------------------
     @IBOutlet weak var loginLabel: UILabel!
     
-    @IBOutlet weak var loginUserTextField: TextFieldEffects!
+    @IBOutlet weak var loginUserTextField: UITextField!
     @IBOutlet weak var loginPassTextField: UITextField!
     
+    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var registerButton: UIButton!
+    @IBOutlet weak var goToTableButton: UIButton!
+    
+    var isValid: Bool = true
     
     // MARK: Segue Identifiers ----------------------------------------
     let loginToRegister = "segueLoginToRegister"
@@ -27,7 +31,7 @@ class LoginViewController: UIViewController {
 
     // MARK: Actions --------------------------------------------------
     @IBAction func loginActionBtn(sender: UIButton) {
-        loginUser(loginUserTextField.text, pwField: loginPassTextField.text, msg: loginLabel)
+        loginUser(loginUserTextField.text, password: loginPassTextField.text, msg: loginLabel)
     }
     
     // Send user to RegisterViewController page.
@@ -44,16 +48,34 @@ class LoginViewController: UIViewController {
     // FUNCTIONS -------------------------------------------------------
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.hidesBackButton = true;
+        self.navigationItem.hidesBackButton = true
+        backgroundColor_normal = loginUserTextField.backgroundColor!
+        
+        loginUserTextField.delegate = self
+        loginPassTextField.delegate = self
+        loginUserTextField.setTextLeftPadding(5)
+        loginPassTextField.setTextLeftPadding(5)
+        
+        if let navi = self.navigationController as? MainNavigationController {
+            navi.navigationItem.setLeftBarButtonItems([], animated: true)
+            navi.navigationItem.setRightBarButtonItems([], animated: true)
+            navi.reset_navigationBar()
+        }
     }
     
-    func loginUser(userField: String!, pwField: String!, msg: UILabel!) {
-        // Check if empty fields:
-        if userField != "" && pwField != "" {
- 
+    func loginUser(username: String!, password: String!, msg: UILabel!) {
+        if isInvalidUsername(username) {
+            loginUserTextField.backgroundColor = backgroundColor_error
+            isValid = false
+        }
+        if isInvalidPassword(password) {
+            loginPassTextField.backgroundColor = backgroundColor_error
+            isValid = false
+        }
+        if isValid {
             // Authenticate user with Parse
             PFUser.logInWithUsernameInBackground(
-                    userField!, password: pwField!) {
+                    username!, password: password!) {
                 (user: PFUser?, error: NSError?) -> Void in
 
                 if user != nil {
@@ -62,12 +84,16 @@ class LoginViewController: UIViewController {
 
                 } else {
                     // User does not exist.
-                    msg.text = "Username and Password not found."
+                    msg.text = "Incorrect username or password."
                 }
             }
-        // Empty Fields:
         } else {
-            msg.text = "Must enter both fields to Login"
+            msg.text = "Invalid username or password."
+            isValid = true
         }
+    }
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        textField.backgroundColor = backgroundColor_normal
     }
 }
