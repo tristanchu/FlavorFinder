@@ -9,7 +9,11 @@
 import UIKit
 import FontAwesome_swift
 
+
 class MainNavigationController: UINavigationController {
+    var history = Stack<AnyObject?>()  // Used for going backward.
+    var future = Stack<AnyObject?>()   // Used for going forward.
+    
     var goBackBtn: UIBarButtonItem = UIBarButtonItem()
     var goForwardBtn: UIBarButtonItem = UIBarButtonItem()
     
@@ -48,12 +52,8 @@ class MainNavigationController: UINavigationController {
         menuTableView.tableFooterView = UIView.init(frame: CGRectZero)
         menuTableView.tableFooterView!.hidden = true
         menuTableView.backgroundColor = UIColor.clearColor()
-        self.view.addSubview(menuTableView)
-//        self.view.insertSubview(menuTableView, belowSubview: self.navigationBar)
-//        self.navigationBar.addSubview(menuTableView)
-//        self.visibleViewController!.view.addSubview(menuTableView)
-//        self.visibleViewController!.view.insertSubview(menuTableView, belowSubview: self.navigationBar)
         menuTableView.hidden = true
+        self.view.addSubview(menuTableView)
     }
     
     func goBackBtnClicked() {
@@ -94,6 +94,17 @@ class MainNavigationController: UINavigationController {
                     matchCtrl.showIngredient(futureIngredient)
                 }
             }
+        }
+    }
+    
+    func pushToHistory() {
+        if let matchCtrl = self.visibleViewController as? MatchTableViewController {
+            future.removeAll()
+            if let curr = matchCtrl.currentIngredient {
+                history.push(curr)
+            }
+            goBackBtn.enabled = true
+            goForwardBtn.enabled = false
         }
     }
     
@@ -165,7 +176,9 @@ class MainNavigationController: UINavigationController {
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         hideSearchBar()
-//        filterResults("")
+        if let matchCtrl = self.visibleViewController as? MatchTableViewController {
+            matchCtrl.filterResults("")
+        }
     }
     
     func showSearchBar() {
@@ -184,11 +197,11 @@ class MainNavigationController: UINavigationController {
     func hideSearchBar() {
         var newTitle = ""
         if let matchCtrl = self.visibleViewController as? MatchTableViewController {
-//            if let curr = currentIngredient {
-//                newTitle = curr.name
-//            } else {
-//                newTitle = TITLE_ALL_INGREDIENTS
-//            }
+            if let curr = matchCtrl.currentIngredient {
+                newTitle = curr.name
+            } else {
+                newTitle = matchCtrl.TITLE_ALL_INGREDIENTS
+            }
         }
         
         self.searchBar.alpha = 1

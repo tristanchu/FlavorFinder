@@ -44,16 +44,18 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     // FUNCTIONS -------------------------------------------------------
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.hidesBackButton = true;
+        self.navigationItem.hidesBackButton = true
         backgroundColor_normal = loginUserTextField.backgroundColor!
         
         loginUserTextField.delegate = self
         loginPassTextField.delegate = self
         loginUserTextField.setTextLeftPadding(5)
         loginPassTextField.setTextLeftPadding(5)
+        
         if let navi = self.navigationController as? MainNavigationController {
             navi.navigationItem.setLeftBarButtonItems([navi.goBackBtn, navi.searchBarActivateBtn], animated: true)
             navi.navigationItem.setRightBarButtonItems([navi.goForwardBtn, navi.menuBarBtn], animated: true)
+            navi.navigationItem.title = ""
             navi.dismissMenuTableView()
         }
     }

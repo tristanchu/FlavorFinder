@@ -119,39 +119,6 @@
             </objects>
             <point key="canvasLocation" x="1411" y="1219"/>
         </scene>
-        <!--Menu Table View Controller-->
-        <scene sceneID="yiQ-TO-Rni">
-            <objects>
-                <tableViewController storyboardIdentifier="MenuTableViewControllerIdentifier" id="bzj-Vv-o4u" customClass="MenuTableViewController" customModule="FlavorFinder" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="KnE-ON-Uhu">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="C1J-V1-hHU">
-                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="C1J-V1-hHU" id="1zb-8A-ziu">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="bzj-Vv-o4u" id="A1j-Vn-yCE"/>
-                            <outlet property="delegate" destination="bzj-Vv-o4u" id="zr2-fm-Qz9"/>
-                        </connections>
-                    </tableView>
-                    <connections>
-                        <segue destination="yDJ-pt-my1" kind="show" identifier="segueMenuToMatch" id="mF0-W4-RcZ"/>
-                        <segue destination="leV-JT-XQg" kind="show" identifier="segueMenuToProfile" id="VX7-Fs-w9g"/>
-                        <segue destination="FZQ-A2-GaM" kind="show" identifier="segueMenuToLogin" id="iW6-xA-fCF"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pbj-60-teV" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2143" y="1234"/>
-        </scene>
         <!--Register View Controller-->
         <scene sceneID="veb-7d-s5O">
             <objects>
@@ -344,8 +311,4 @@
             <point key="canvasLocation" x="1319" y="494"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="1gm-iF-az1"/>
-        <segue reference="yCh-I4-cTX"/>
-    </inferredMetricsTieBreakers>
 </document>

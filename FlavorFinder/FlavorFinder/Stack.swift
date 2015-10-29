@@ -8,9 +8,6 @@
 
 import Foundation
 
-var history = Stack<AnyObject?>()  // Used for going backward.
-var future = Stack<AnyObject?>()   // Used for going forward.
-
 struct Stack<Element> {
     var items = [Element]()
     mutating func push(item: Element) {

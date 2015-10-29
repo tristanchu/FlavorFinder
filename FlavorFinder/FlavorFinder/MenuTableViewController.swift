@@ -63,69 +63,7 @@ class MenuTableViewController: UITableViewController {
     
     var navi: MainNavigationController?
     
-//    var menuTableView: UITableView = UITableView()
 
-    override func viewDidLoad() {
-        self.tableView.frame = CGRectMake(0, 0, self.view.frame.width, 200);
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
-        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: CELLIDENTIFIER_MENU)
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
-        self.tableView.tableFooterView = UIView.init(frame: CGRectZero)
-        self.tableView.tableFooterView!.hidden = true
-        self.tableView.backgroundColor = UIColor.clearColor()
-//        self.view.addSubview(self.tableView)
-        self.tableView.hidden = true
-    }
-    
-//    init(storyboard: UIStoryboard) {
-//        mainStoryboard = storyboard
-//        super.init(nibName: nil, bundle: nil)
-//    }
-//
-//    required init?(coder aDecoder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
-//
-//    func animateMenuTableView(dismiss: Bool) {
-//        self.tableView.reloadData()
-//        
-//        let cells = self.tableView.visibleCells
-//        let tableHeight: CGFloat = self.tableView.bounds.size.height
-//        
-//        let start = dismiss ? CGFloat(0) : -1*tableHeight
-//        //        let end = dismiss ? -1*tableHeight : CGFloat(0)
-//        let end = dismiss ? CGFloat(0) : CGFloat(0)
-//        
-//        var orderedCells: [UITableViewCell]
-//        
-//        if dismiss {
-//            orderedCells = cells.reverse()
-//        } else {
-//            orderedCells = cells
-//            for i in cells {
-//                let cell: UITableViewCell = i
-//                cell.transform = CGAffineTransformMakeTranslation(0, -1*tableHeight)
-//            }
-//        }
-//        
-//        var index = 0
-//        
-//        for a in orderedCells {
-//            let cell: UITableViewCell = a
-//            UIView.animateWithDuration(0.5, delay: 0.03 * Double(index), usingSpringWithDamping: 0.9, initialSpringVelocity: 0, options: [], animations: {
-//                cell.transform = CGAffineTransformMakeTranslation(0, end);
-//                }, completion:
-//                { finished in
-//                    if dismiss {
-//                        self.tableView.hidden = true
-//                    }
-//                }
-//            )
-//            
-//            index += 1
-//        }
-//    }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier(CELLIDENTIFIER_MENU, forIndexPath: indexPath) as UITableViewCell
         cell.textLabel!.font = UIFont.fontAwesomeOfSize(15)
@@ -161,23 +99,10 @@ class MenuTableViewController: UITableViewController {
             break
         case 1:
             let matchTableViewControllerObject = mainStoryboard.instantiateViewControllerWithIdentifier("MatchTableViewControllerIdentifier") as? MatchTableViewController
-//            self.navigationController?.pushViewController(matchTableViewControllerObject!, animated: true)
-//            let matchTableViewControllerObject: MatchTableViewController = MatchTableViewController()
-//            let navi = MainNavigationController(rootViewController: matchTableViewControllerObject!)
-//            self.presentViewController(navi, animated: true, completion: nil)
             navi?.pushViewController(matchTableViewControllerObject!, animated: true)
             break
         case 2:
-//            if let navi = self.navigationController as? MainNavigationController {
-//                let loginViewControllerObject = self.storyboard?.instantiateViewControllerWithIdentifier("LoginViewControllerIdentifier") as? LoginViewController
-//                navi.pushViewController(loginViewControllerObject!, animated: true)
-////                self.navigationController?.pushViewController(loginViewControllerObject!, animated: true)
-//            }
-//            self.performSegueWithIdentifier(segueMenuToLogin, sender:self)
-//            let loginViewControllerObject: LoginViewController = LoginViewController()
             let loginViewControllerObject = mainStoryboard.instantiateViewControllerWithIdentifier("LoginViewControllerIdentifier") as? LoginViewController
-//            let navi = MainNavigationController(rootViewController: loginViewControllerObject!)
-//            self.presentViewController(navi, animated: true, completion: nil)
             navi?.pushViewController(loginViewControllerObject!, animated: true)
             break
         default:
