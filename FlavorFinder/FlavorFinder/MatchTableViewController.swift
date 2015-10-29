@@ -97,7 +97,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
     
     // SETUP FUNCTIONS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // ---------------
-    func configureSearchBar() {
+    func configure_searchBar() {
         searchBar.delegate = self
         searchBar.hidden = true
         searchBar.setShowsCancelButton(true, animated: false)
@@ -107,33 +107,31 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
         cancelButton.setTitle(String.fontAwesomeIconWithName(.ChevronLeft), forState: UIControlState.Normal)
     }
     
-    func configureNavigationBar() {
+    func configure_navigationBar() {
         // Disable buttons by default.
         goBackBtn.enabled = false
         goForwardBtn.enabled = false
         
-        var attributes = [NSFontAttributeName: UIFont.fontAwesomeOfSize(20)] as Dictionary!
+        let attributes = [NSFontAttributeName: UIFont.fontAwesomeOfSize(20)] as Dictionary!
+        
         goBackBtn.setTitleTextAttributes(attributes, forState: .Normal)
         goBackBtn.title = String.fontAwesomeIconWithName(.ChevronLeft)
         goBackBtn.tintColor = BUTTON_COLOR
         goBackBtn.target = self
         goBackBtn.action = "goBackBtnClicked"
         
-        attributes = [NSFontAttributeName: UIFont.fontAwesomeOfSize(20)] as Dictionary!
         goForwardBtn.setTitleTextAttributes(attributes, forState: .Normal)
         goForwardBtn.title = String.fontAwesomeIconWithName(.ChevronRight)
         goForwardBtn.tintColor = BUTTON_COLOR
         goForwardBtn.target = self
         goForwardBtn.action = "goForwardBtnClicked"
         
-        attributes = [NSFontAttributeName: UIFont.fontAwesomeOfSize(20)] as Dictionary!
         searchBarActivateBtn.setTitleTextAttributes(attributes, forState: .Normal)
         searchBarActivateBtn.title = String.fontAwesomeIconWithName(.Search)
         searchBarActivateBtn.tintColor = BUTTON_COLOR
         searchBarActivateBtn.target = self
         searchBarActivateBtn.action = "searchBarActivateBtnClicked"
         
-        attributes = [NSFontAttributeName: UIFont.fontAwesomeOfSize(20)] as Dictionary!
         menuBarBtn.setTitleTextAttributes(attributes, forState: .Normal)
         menuBarBtn.title = String.fontAwesomeIconWithName(.Bars)
         menuBarBtn.tintColor = BUTTON_COLOR
@@ -144,7 +142,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
         self.navigationItem.setRightBarButtonItems([self.goForwardBtn, self.menuBarBtn], animated: true)
     }
     
-    func configureMenuTableView() {
+    func configure_menuTableView() {
         menuTableView.frame = CGRectMake(0, 0, self.view.frame.width, 200);
         menuTableView.delegate = self
         menuTableView.dataSource = self
@@ -168,11 +166,22 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+//        self.tableView.registerClass(MatchTableViewCell.self, forCellReuseIdentifier: CELLIDENTIFIER_MATCH)
+
+        configure_searchBar()
+//        configure_navigationBar()
+        configure_menuTableView()
         
-        configureSearchBar()
-        configureNavigationBar()
-        configureMenuTableView()
+//        self.view.addSubview(MatchTableViewController.view)
         
+        if let navi = self.navigationController as? MainNavigationController {
+            //            navi.show_goBackBtn()
+            navi.dismissMenuTableView()
+            navi.navigationItem.setLeftBarButtonItems([navi.goBackBtn, navi.searchBarActivateBtn], animated: true)
+            navi.navigationItem.setRightBarButtonItems([navi.goForwardBtn, navi.menuBarBtn], animated: true)
+            //            navi.setNavigationBarHidden(false, animated: false)
+            
+        }
         showAllIngredients()
     }
     
@@ -392,25 +401,24 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
                 showIngredient(ingredient)
             }
         } else {
-            print("You selected cell #\(indexPath.row)!")
-            switch indexPath.row {
-            case 0:
-                let profileViewControllerObject = self.storyboard?.instantiateViewControllerWithIdentifier("ProfileViewControllerIdentifier") as? ProfileViewController
-                self.navigationController?.pushViewController(profileViewControllerObject!, animated: true)
-                break
-            case 1:
-                let matchTableViewControllerObject = self.storyboard?.instantiateViewControllerWithIdentifier("MatchTableViewControllerIdentifier") as? MatchTableViewController
-                self.navigationController?.pushViewController(matchTableViewControllerObject!, animated: true)
-                break
-            case 2:
-                let loginViewControllerObject = self.storyboard?.instantiateViewControllerWithIdentifier("LoginViewControllerIdentifier") as? LoginViewController
-                self.navigationController?.pushViewController(loginViewControllerObject!, animated: true)
-                break
-            default:
-                break
-            }
+//            print("You selected cell #\(indexPath.row)!")
+//            switch indexPath.row {
+//            case 0:
+//                let profileViewControllerObject = self.storyboard?.instantiateViewControllerWithIdentifier("ProfileViewControllerIdentifier") as? ProfileViewController
+//                self.navigationController?.pushViewController(profileViewControllerObject!, animated: true)
+//                break
+//            case 1:
+//                let matchTableViewControllerObject = self.storyboard?.instantiateViewControllerWithIdentifier("MatchTableViewControllerIdentifier") as? MatchTableViewController
+//                self.navigationController?.pushViewController(matchTableViewControllerObject!, animated: true)
+//                break
+//            case 2:
+//                let loginViewControllerObject = self.storyboard?.instantiateViewControllerWithIdentifier("LoginViewControllerIdentifier") as? LoginViewController
+//                self.navigationController?.pushViewController(loginViewControllerObject!, animated: true)
+//                break
+//            default:
+//                break
+//            }
         }
-
     }
     
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {

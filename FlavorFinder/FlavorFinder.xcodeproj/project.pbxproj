@@ -32,6 +32,8 @@
 		8875DE2C1BE04DD900CD50EA /* LoginUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8875DE2B1BE04DD900CD50EA /* LoginUtils.swift */; settings = {ASSET_TAGS = (); }; };
 		8875DE321BE051B100CD50EA /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8875DE311BE051B100CD50EA /* Database.swift */; settings = {ASSET_TAGS = (); }; };
 		8875DE351BE053ED00CD50EA /* Voting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8875DE341BE053ED00CD50EA /* Voting.swift */; settings = {ASSET_TAGS = (); }; };
+		8875DE391BE06FB300CD50EA /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8875DE381BE06FB300CD50EA /* MenuTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		8875DE3B1BE0751B00CD50EA /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8875DE3A1BE0751B00CD50EA /* MainNavigationController.swift */; settings = {ASSET_TAGS = (); }; };
 		888D1A401BDEF816007F09AE /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888D1A3F1BDEF816007F09AE /* Stack.swift */; settings = {ASSET_TAGS = (); }; };
 		888D1A441BDEF8FE007F09AE /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888D1A431BDEF8FE007F09AE /* ProfileViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		88F413FA1BC74A00000C0093 /* MatchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F413F91BC74A00000C0093 /* MatchTableViewCell.swift */; };
@@ -82,6 +84,8 @@
 		8875DE2B1BE04DD900CD50EA /* LoginUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginUtils.swift; sourceTree = "<group>"; };
 		8875DE311BE051B100CD50EA /* Database.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		8875DE341BE053ED00CD50EA /* Voting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Voting.swift; sourceTree = "<group>"; };
+		8875DE381BE06FB300CD50EA /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
+		8875DE3A1BE0751B00CD50EA /* MainNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		888D1A3F1BDEF816007F09AE /* Stack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		888D1A431BDEF8FE007F09AE /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		88F413F91BC74A00000C0093 /* MatchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchTableViewCell.swift; sourceTree = "<group>"; };
@@ -221,7 +225,9 @@
 			isa = PBXGroup;
 			children = (
 				60322EA21BD9CE150099030B /* LoginViewController.swift */,
+				8875DE3A1BE0751B00CD50EA /* MainNavigationController.swift */,
 				88F413FB1BC74EC8000C0093 /* MatchTableViewController.swift */,
+				8875DE381BE06FB300CD50EA /* MenuTableViewController.swift */,
 				888D1A431BDEF8FE007F09AE /* ProfileViewController.swift */,
 				6001830E1BDC31DE00265B72 /* RegisterViewController.swift */,
 			);
@@ -404,6 +410,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8875DE3B1BE0751B00CD50EA /* MainNavigationController.swift in Sources */,
 				88F413FC1BC74EC8000C0093 /* MatchTableViewController.swift in Sources */,
 				8875DE321BE051B100CD50EA /* Database.swift in Sources */,
 				88F413FA1BC74A00000C0093 /* MatchTableViewCell.swift in Sources */,
@@ -412,6 +419,7 @@
 				6001830F1BDC31DE00265B72 /* RegisterViewController.swift in Sources */,
 				8875DE2C1BE04DD900CD50EA /* LoginUtils.swift in Sources */,
 				60322EA31BD9CE150099030B /* LoginViewController.swift in Sources */,
+				8875DE391BE06FB300CD50EA /* MenuTableViewController.swift in Sources */,
 				888D1A441BDEF8FE007F09AE /* ProfileViewController.swift in Sources */,
 				8875DE2A1BE041D200CD50EA /* UITextField+LeftMargin.swift in Sources */,
 				8875DE351BE053ED00CD50EA /* Voting.swift in Sources */,

@@ -51,6 +51,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         loginPassTextField.delegate = self
         loginUserTextField.setTextLeftPadding(5)
         loginPassTextField.setTextLeftPadding(5)
+        if let navi = self.navigationController as? MainNavigationController {
+            navi.navigationItem.setLeftBarButtonItems([navi.goBackBtn, navi.searchBarActivateBtn], animated: true)
+            navi.navigationItem.setRightBarButtonItems([navi.goForwardBtn, navi.menuBarBtn], animated: true)
+            navi.dismissMenuTableView()
+        }
     }
     
     func loginUser(username: String!, password: String!, msg: UILabel!) {
