@@ -45,6 +45,7 @@
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pxX-xv-m3i">
                                 <rect key="frame" x="281" y="345" width="38" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <state key="normal" title="Login"/>
                                 <connections>
                                     <action selector="loginActionBtn:" destination="FZQ-A2-GaM" eventType="touchUpInside" id="z9Y-jo-gWa"/>
@@ -90,9 +91,12 @@
                     </view>
                     <navigationItem key="navigationItem" id="QXq-QC-lOr"/>
                     <connections>
+                        <outlet property="goToTableButton" destination="qSC-C0-kB1" id="Ha1-iO-BxI"/>
+                        <outlet property="loginButton" destination="pxX-xv-m3i" id="x1z-au-JAf"/>
                         <outlet property="loginLabel" destination="Geq-sk-8Eg" id="hFs-CG-EI7"/>
                         <outlet property="loginPassTextField" destination="Zm4-fb-B07" id="KZA-ii-Fy6"/>
                         <outlet property="loginUserTextField" destination="t0d-AJ-TDq" id="Fyq-2e-F1J"/>
+                        <outlet property="registerButton" destination="lIq-hj-vHE" id="WGx-lb-MIb"/>
                         <segue destination="yDJ-pt-my1" kind="show" identifier="segueLoginToMatchTable" id="yCh-I4-cTX"/>
                         <segue destination="JAI-Ms-6hY" kind="show" identifier="segueLoginToRegister" id="Eha-zK-ZsO"/>
                     </connections>

@@ -10,6 +10,7 @@
 		56D23A31BA541208CC4BAC9D /* Pods_FlavorFinder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F0701BEA3C57EBBE60538B5 /* Pods_FlavorFinder.framework */; };
 		6001830F1BDC31DE00265B72 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6001830E1BDC31DE00265B72 /* RegisterViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		60322EA31BD9CE150099030B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60322EA21BD9CE150099030B /* LoginViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		880DA78C1BE1FB03003C67F0 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880DA78B1BE1FB03003C67F0 /* Globals.swift */; settings = {ASSET_TAGS = (); }; };
 		882FFD661BD9A48D00710F35 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 882FFD641BD9A48D00710F35 /* Bolts.framework */; settings = {ASSET_TAGS = (); }; };
 		882FFD671BD9A48D00710F35 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 882FFD651BD9A48D00710F35 /* Parse.framework */; settings = {ASSET_TAGS = (); }; };
 		882FFD691BD9A55F00710F35 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 882FFD681BD9A55F00710F35 /* AudioToolbox.framework */; };
@@ -58,6 +59,7 @@
 		60322EA21BD9CE150099030B /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		6F0701BEA3C57EBBE60538B5 /* Pods_FlavorFinder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlavorFinder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7ED753512243C86842952CBD /* Pods-FlavorFinder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlavorFinder.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FlavorFinder/Pods-FlavorFinder.debug.xcconfig"; sourceTree = "<group>"; };
+		880DA78B1BE1FB03003C67F0 /* Globals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
 		882FFD641BD9A48D00710F35 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		882FFD651BD9A48D00710F35 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		882FFD681BD9A55F00710F35 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -177,6 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				883AC6271BC1A3C0009136E9 /* AppDelegate.swift */,
+				880DA78B1BE1FB03003C67F0 /* Globals.swift */,
 				8875DE2F1BE0500100CD50EA /* Models */,
 				8875DE2D1BE04FBC00CD50EA /* Views */,
 				8875DE2E1BE04FDF00CD50EA /* Controllers */,
@@ -418,6 +421,7 @@
 				88F414011BC7513F000C0093 /* Ingredient.swift in Sources */,
 				6001830F1BDC31DE00265B72 /* RegisterViewController.swift in Sources */,
 				8875DE2C1BE04DD900CD50EA /* LoginUtils.swift in Sources */,
+				880DA78C1BE1FB03003C67F0 /* Globals.swift in Sources */,
 				60322EA31BD9CE150099030B /* LoginViewController.swift in Sources */,
 				8875DE391BE06FB300CD50EA /* MenuTableViewController.swift in Sources */,
 				888D1A441BDEF8FE007F09AE /* ProfileViewController.swift in Sources */,

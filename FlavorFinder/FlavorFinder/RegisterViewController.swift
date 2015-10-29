@@ -50,6 +50,12 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         registerEmail.setTextLeftPadding(5)
         registerUsername.setTextLeftPadding(5)
         registerPassword.setTextLeftPadding(5)
+        
+        if let navi = self.navigationController as? MainNavigationController {
+            navi.navigationItem.setLeftBarButtonItems([navi.goBackBtn], animated: true)
+            navi.navigationItem.setRightBarButtonItems([], animated: true)
+            navi.reset_navigationBar()
+        }
     }
     
     // REGISTER FUNCTIONS ---------------------------------------------

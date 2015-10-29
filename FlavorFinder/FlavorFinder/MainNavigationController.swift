@@ -26,6 +26,7 @@ class MainNavigationController: UINavigationController {
     
     var dropdownIsDown = false
 
+    let mainStoryboard = UIStoryboard(name: "Main", bundle:nil)
     let attributes = [NSFontAttributeName: UIFont.fontAwesomeOfSize(20)] as Dictionary!
     let BUTTON_COLOR = UIColor(red: 165/255.0, green: 242/255.0, blue: 216/255.0, alpha: CGFloat(1))
     let CELLIDENTIFIER_MENU = "menuCell"
@@ -56,30 +57,56 @@ class MainNavigationController: UINavigationController {
         self.view.addSubview(menuTableView)
     }
     
+    func reset_navigationBar() {
+        self.navigationItem.title = ""
+        self.dismissMenuTableView()
+    }
+    
     func goBackBtnClicked() {
-        if let matchCtrl = self.visibleViewController as? MatchTableViewController {
-            if let curr = matchCtrl.currentIngredient {
-                future.push(curr)
+        if self.visibleViewController is RegisterViewController {
+            let transition: CATransition = CATransition()
+            
+            //            transition.duration = 0.25
+            //            transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+            transition.type = kCATransitionPush; //kCATransitionMoveIn; //, kCATransitionPush, kCATransitionReveal, kCATransitionFade
+            transition.subtype = kCATransitionFromLeft; //kCATransitionFromLeft, kCATransitionFromRight, kCATransitionFromTop, kCATransitionFromBottom
+            
+            self.view.layer.addAnimation(transition, forKey: "kCATransition")
+            
+            let loginViewControllerObject = mainStoryboard.instantiateViewControllerWithIdentifier(LoginViewControllerIdentifier) as? LoginViewController
+            self.pushViewController(loginViewControllerObject!, animated: true)
+        } else if let matchTableViewControllerObject = self.visibleViewController as? MatchTableViewController {
+            if let curr = matchTableViewControllerObject.currentIngredient {
                 goForwardBtn.enabled = true
-                
+                future.push(curr)
+
                 if let pastObject = history.pop() {
-                    if let pastView = pastObject as? String {
-                        
-                    } else if let pastIngredient = pastObject as? Ingredient {
-                        matchCtrl.showIngredient(pastIngredient)
+                    if let pastIngredient = pastObject as? Ingredient {
+                        matchTableViewControllerObject.showIngredient(pastIngredient)
                     }
                 } else {
                     goBackBtn.enabled = false
-                    matchCtrl.showAllIngredients()
+                    matchTableViewControllerObject.showAllIngredients()
                 }
             }
         }
     }
     
+    func getVisibleViewControllerIdentifier() -> String {
+        switch self.visibleViewController {
+        case is MatchTableViewController:
+            return MatchTableViewControllerIdentifier
+        case is ProfileViewController:
+            return ProfileViewControllerIdentifier
+        default:
+            return ""
+        }
+    }
+    
     func goForwardBtnClicked() {
-        if let matchCtrl = self.visibleViewController as? MatchTableViewController {
+        if let matchTableViewControllerObject = self.visibleViewController as? MatchTableViewController {
             if let futureObject = future.pop() {
-                if let curr = matchCtrl.currentIngredient {
+                if let curr = matchTableViewControllerObject.currentIngredient {
                     history.push(curr)
                 }
                 
@@ -88,19 +115,19 @@ class MainNavigationController: UINavigationController {
                     goForwardBtn.enabled = false
                 }
                 
-                if let futureView = futureObject as? String {
+                if let futureViewIdentifier = futureObject as? String {
                     
                 } else if let futureIngredient = futureObject as? Ingredient {
-                    matchCtrl.showIngredient(futureIngredient)
+                    matchTableViewControllerObject.showIngredient(futureIngredient)
                 }
             }
         }
     }
     
     func pushToHistory() {
-        if let matchCtrl = self.visibleViewController as? MatchTableViewController {
+        if let matchTableViewControllerObject = self.visibleViewController as? MatchTableViewController {
             future.removeAll()
-            if let curr = matchCtrl.currentIngredient {
+            if let curr = matchTableViewControllerObject.currentIngredient {
                 history.push(curr)
             }
             goBackBtn.enabled = true
@@ -176,8 +203,8 @@ class MainNavigationController: UINavigationController {
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         hideSearchBar()
-        if let matchCtrl = self.visibleViewController as? MatchTableViewController {
-            matchCtrl.filterResults("")
+        if let matchTableViewControllerObject = self.visibleViewController as? MatchTableViewController {
+            matchTableViewControllerObject.filterResults("")
         }
     }
     
@@ -196,11 +223,11 @@ class MainNavigationController: UINavigationController {
     
     func hideSearchBar() {
         var newTitle = ""
-        if let matchCtrl = self.visibleViewController as? MatchTableViewController {
-            if let curr = matchCtrl.currentIngredient {
+        if let matchTableViewControllerObject = self.visibleViewController as? MatchTableViewController {
+            if let curr = matchTableViewControllerObject.currentIngredient {
                 newTitle = curr.name
             } else {
-                newTitle = matchCtrl.TITLE_ALL_INGREDIENTS
+                newTitle = matchTableViewControllerObject.TITLE_ALL_INGREDIENTS
             }
         }
         

@@ -19,15 +19,8 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
     var filteredCells = [Ingredient]()  // Array of all cells that ARE displayed (filtered version of 'allCells').
     var viewingMatches = false          // Activates colored backgrounds. Only want to show colors when viewing matches, not all ingredients.
     var currentIngredient : Ingredient? // Stores the ingredient being viewed (nil for all ingredients).
-    
+    var dropdownIsDown = false
 
-    
-    var menuTableView: UITableView = UITableView()
-    var menuTableItems = [  String.fontAwesomeIconWithName(.User) + " Profile",
-                            String.fontAwesomeIconWithName(.Cutlery) + " Ingredients",
-                            String.fontAwesomeIconWithName(.SignOut) + " Sign Out"
-                         ]
-    var menuBtn: UIButton = UIButton()
     var menuBarBtn: UIBarButtonItem = UIBarButtonItem()
     
     var goBackBtn: UIBarButtonItem = UIBarButtonItem()
@@ -36,20 +29,12 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
     var searchBarActivateBtn: UIBarButtonItem = UIBarButtonItem()
     lazy var searchBar = UISearchBar(frame: CGRectMake(0, 0, 0, 0))
     
-    let SEGUE_LOGOUT = "segueLogout"
     let TITLE_ALL_INGREDIENTS = "All Ingredients"
-    let CELLIDENTIFIER_MENU = "menuCell"
     let CELLIDENTIFIER_MATCH = "MatchTableViewCell"
-    
     let BUTTON_COLOR = UIColor(red: 165/255.0, green: 242/255.0, blue: 216/255.0, alpha: CGFloat(1))
-    
-    var dropdownIsDown = false
     
     @IBOutlet var matchTableView: UITableView!
     
-    // NAVI FUNCTIONS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    // --------------
-
     
     // SETUP FUNCTIONS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // ---------------
@@ -69,16 +54,6 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
 //        goForwardBtn.enabled = false
 //    }
     
-    override func scrollViewDidScroll(scrollView: UIScrollView) {
-        // Update position of menu so it stays on screen.
-        var frame = self.menuTableView.frame
-        frame.origin.y = UIApplication.sharedApplication().statusBarFrame.size.height +
-                            (self.navigationController?.navigationBar.frame.height)! +
-                            scrollView.contentOffset.y
-        self.menuTableView.frame = frame
-        self.view.bringSubviewToFront(menuTableView)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -87,8 +62,9 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
         if let navi = self.navigationController as? MainNavigationController {
             navi.navigationItem.setLeftBarButtonItems([navi.goBackBtn, navi.searchBarActivateBtn], animated: true)
             navi.navigationItem.setRightBarButtonItems([navi.goForwardBtn, navi.menuBarBtn], animated: true)
-            navi.navigationItem.title = ""
-            navi.dismissMenuTableView()
+            navi.reset_navigationBar()
+            navi.goBackBtn.enabled = false
+            navi.goForwardBtn.enabled = false
         }
         showAllIngredients()
     }

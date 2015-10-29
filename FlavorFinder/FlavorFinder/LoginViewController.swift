@@ -18,6 +18,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var loginUserTextField: UITextField!
     @IBOutlet weak var loginPassTextField: UITextField!
     
+    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var registerButton: UIButton!
+    @IBOutlet weak var goToTableButton: UIButton!
+    
     var isValid: Bool = true
     
     // MARK: Segue Identifiers ----------------------------------------
@@ -53,10 +57,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         loginPassTextField.setTextLeftPadding(5)
         
         if let navi = self.navigationController as? MainNavigationController {
-            navi.navigationItem.setLeftBarButtonItems([navi.goBackBtn, navi.searchBarActivateBtn], animated: true)
-            navi.navigationItem.setRightBarButtonItems([navi.goForwardBtn, navi.menuBarBtn], animated: true)
-            navi.navigationItem.title = ""
-            navi.dismissMenuTableView()
+            navi.navigationItem.setLeftBarButtonItems([], animated: true)
+            navi.navigationItem.setRightBarButtonItems([], animated: true)
+            navi.reset_navigationBar()
         }
     }
     

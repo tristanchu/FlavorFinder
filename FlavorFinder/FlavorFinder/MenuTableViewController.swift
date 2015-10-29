@@ -56,10 +56,6 @@ class MenuTableViewController: UITableViewController {
         String.fontAwesomeIconWithName(.SignOut) + " Sign Out"
     ]
     let CELLIDENTIFIER_MENU = "menuCell"
-
-    let segueMenuToLogin = "segueMenuToLogin"
-    let segueMenuToMatch = "segueMenuToMatch"
-    let segueMenuToProfile = "segueMenuToProfile"
     
     var navi: MainNavigationController?
     
@@ -79,7 +75,6 @@ class MenuTableViewController: UITableViewController {
             break
         case 2:
             cell.backgroundColor = UIColor(red: 227/255.0, green: 78/255.0, blue: 59/255.0, alpha: CGFloat(1.0))
-            
             break
         default:
             cell.backgroundColor = UIColor(red: 105/255.0, green: 230/255.0, blue: 255/255.0, alpha: CGFloat(1.0))
@@ -94,16 +89,36 @@ class MenuTableViewController: UITableViewController {
         let mainStoryboard = UIStoryboard(name: "Main", bundle:nil)
         switch indexPath.row {
         case 0:
-            let profileViewControllerObject = mainStoryboard.instantiateViewControllerWithIdentifier("ProfileViewControllerIdentifier") as? ProfileViewController
-            navi?.pushViewController(profileViewControllerObject!, animated: true)
+            if navi?.visibleViewController is ProfileViewController {
+                navi?.dismissMenuTableView()
+            } else {
+//                navi?.history.push(navi?.getVisibleViewControllerIdentifier())
+                let profileViewControllerObject = mainStoryboard.instantiateViewControllerWithIdentifier(ProfileViewControllerIdentifier) as? ProfileViewController
+                navi?.pushViewController(profileViewControllerObject!, animated: true)
+            }
             break
         case 1:
-            let matchTableViewControllerObject = mainStoryboard.instantiateViewControllerWithIdentifier("MatchTableViewControllerIdentifier") as? MatchTableViewController
-            navi?.pushViewController(matchTableViewControllerObject!, animated: true)
+            if let matchTableViewControllerObject = navi?.visibleViewController as? MatchTableViewController {
+                navi?.dismissMenuTableView()
+                matchTableViewControllerObject.showAllIngredients()
+            } else {
+//                navi?.history.push(navi?.getVisibleViewControllerIdentifier())
+                let matchTableViewControllerObject = mainStoryboard.instantiateViewControllerWithIdentifier(MatchTableViewControllerIdentifier) as? MatchTableViewController
+                navi?.pushViewController(matchTableViewControllerObject!, animated: true)
+            }
             break
         case 2:
-            let loginViewControllerObject = mainStoryboard.instantiateViewControllerWithIdentifier("LoginViewControllerIdentifier") as? LoginViewController
-            navi?.pushViewController(loginViewControllerObject!, animated: true)
+            if navi?.visibleViewController is LoginViewController {
+                navi?.dismissMenuTableView()
+            } else {
+                let transition: CATransition = CATransition()
+                transition.type = kCATransitionPush
+                transition.subtype = kCATransitionFromLeft
+                navi?.view.layer.addAnimation(transition, forKey: "kCATransition")
+                
+                let loginViewControllerObject = mainStoryboard.instantiateViewControllerWithIdentifier(LoginViewControllerIdentifier) as? LoginViewController
+                navi?.pushViewController(loginViewControllerObject!, animated: true)
+            }
             break
         default:
             break
