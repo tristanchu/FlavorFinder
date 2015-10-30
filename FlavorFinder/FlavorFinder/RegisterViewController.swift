@@ -15,12 +15,19 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     
     //// somewhere we need a privacy policy :)
     
-    // error messages
-    var GENERIC_ERROR = "Oops! An error occurred.";
-    var USERNAME_IN_USE = "Username already in use.";
-    var EMAIL_IN_USE = "Email associated with an account.";
+    // validation error messages
+    var EMAIL_INVALID = "That doesn't look like an email!"
+    var USERNAME_INVALID = "Usernames must be between \(USERNAME_CHAR_MIN) and \(USERNAME_CHAR_MAX) characters."
+    var PASSWORD_INVALID = "Passwords must be between \(PASSWORD_CHAR_MIN) and \(PASSWORD_CHAR_MAX) characters."
+    var MULTIPLE_INVALID = "Please fix errors and resubmit."
+    //// somewhere other than error messaging we'll want to surface our
+    //// pw/username requirements!
     
-    var isValid: Bool = true
+    // request error messages
+    var GENERIC_ERROR = "Oops! An error occurred."
+    var USERNAME_IN_USE = "Username already in use."
+    var EMAIL_IN_USE = "Email associated with an account."
+    
     // MARK: Properties -----------------------------------------------
     @IBOutlet weak var registerLabel: UILabel!
     @IBOutlet weak var registerMsg: UILabel!
@@ -28,6 +35,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var registerUsername: UITextField!
     @IBOutlet weak var registerPassword: UITextField!
     @IBOutlet weak var registerCOPPA: UILabel!
+    @IBOutlet weak var registerSubmitBtn: UIButton!
     
     // MARK: Segue Identifiers ----------------------------------------
     /// eventually segue to logged in!
@@ -39,6 +47,8 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
             requestNewUser(registerEmail.text!, username: registerUsername.text!, password: registerPassword.text!)
         }
     }
+    
+    // REGISTER VIEW FUNCTIONS -----------------------------------------
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,22 +68,19 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    // REGISTER FUNCTIONS ---------------------------------------------
+    func changeDisabledStatus(submitDisabled: Bool) {
+        // anything we want to toggle enabled/disabled based on form submission status
+        registerSubmitBtn.enabled = !submitDisabled
+    }
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        textField.backgroundColor = backgroundColor_normal
+    }
+    
+    // REGISTER REQUEST FUNCTIONS ---------------------------------------
     func requestNewUser(email: String, username: String, password: String) {
-        if isInvalidEmail(email) {
-            registerEmail.backgroundColor = backgroundColor_error
-            isValid = false
-        }
-        if isInvalidUsername(username) {
-            registerUsername.backgroundColor = backgroundColor_error
-            isValid = false
-        }
-        if isInvalidPassword(password) {
-            registerPassword.backgroundColor = backgroundColor_error
-            isValid = false
-        }
-        if isValid {
-            changeStatus(false)
+        if fieldsAreValid(email, username: username, password: password) {
+            changeDisabledStatus(true)
             let newUser = PFUser()
             newUser.username = username
             newUser.email = email
@@ -90,26 +97,46 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                 }
             }
         }
-        
-        isValid = true
+    }
+    
+    func fieldsAreValid(email: String, username: String, password: String) -> Bool {
+        var isValid = true
+        if isInvalidEmail(email) {
+            registerEmail.backgroundColor = backgroundColor_error
+            registerMsg.text = EMAIL_INVALID
+            isValid = false
+        }
+        if isInvalidUsername(username) {
+            registerUsername.backgroundColor = backgroundColor_error
+            if (isValid) {
+                registerMsg.text = USERNAME_INVALID
+            } else {
+                registerMsg.text = MULTIPLE_INVALID
+            }
+            isValid = false
+        }
+        if isInvalidPassword(password) {
+            registerPassword.backgroundColor = backgroundColor_error
+            if (isValid) {
+                registerMsg.text = PASSWORD_INVALID
+            } else {
+                registerMsg.text = MULTIPLE_INVALID
+            }
+            isValid = false
+        }
+        return isValid
     }
     
     func registerSuccess() {
-        //// success!
-    }
-    
-    func changeStatus(submitDisabled: Bool) {
-        if submitDisabled {
-            
-        } else {
-            
-        }
+        //// success! ////
+        registerMsg.text = ""
+        print("Successfully added new user")
     }
     
     func handleError(error: NSError?) {
-        self.changeStatus(false); // allow resubmission
+        self.changeDisabledStatus(false) // allow resubmission
         if let error = error {
-            print("\(error)");
+            print("\(error)")
             if error.code == 202 {
                 registerMsg.text = USERNAME_IN_USE
             } else if error.code == 203 {
@@ -123,7 +150,4 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    func textFieldDidBeginEditing(textField: UITextField) {
-        textField.backgroundColor = backgroundColor_normal
-    }
 }
