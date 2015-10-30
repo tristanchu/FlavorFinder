@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="oWC-1n-3cO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="oWC-1n-3cO">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
     </dependencies>
     <scenes>
         <!--Login View Controller-->
@@ -223,6 +223,7 @@
                         <outlet property="registerLabel" destination="ffs-dJ-FNO" id="d1D-1N-lkB"/>
                         <outlet property="registerMsg" destination="awg-Zu-3RJ" id="Zmz-gH-wAm"/>
                         <outlet property="registerPassword" destination="9en-v4-ss2" id="u8Y-bS-gA8"/>
+                        <outlet property="registerSubmitBtn" destination="jkh-Ln-Knn" id="fPS-9J-HUC"/>
                         <outlet property="registerUsername" destination="692-E8-NQh" id="EIP-1c-urz"/>
                     </connections>
                 </viewController>
