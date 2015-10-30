@@ -48,6 +48,8 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    // REGISTER VIEW FUNCTIONS -----------------------------------------
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         backgroundColor_normal = registerEmail.backgroundColor!
@@ -66,34 +68,19 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    // REGISTER FUNCTIONS ---------------------------------------------
+    func changeDisabledStatus(submitDisabled: Bool) {
+        // anything we want to toggle enabled/disabled based on form submission status
+        registerSubmitBtn.enabled = !submitDisabled
+    }
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        textField.backgroundColor = backgroundColor_normal
+    }
+    
+    // REGISTER REQUEST FUNCTIONS ---------------------------------------
     func requestNewUser(email: String, username: String, password: String) {
-        var isValid = true;
-        if isInvalidEmail(email) {
-            registerEmail.backgroundColor = backgroundColor_error
-            registerMsg.text = EMAIL_INVALID;
-            isValid = false
-        }
-        if isInvalidUsername(username) {
-            registerUsername.backgroundColor = backgroundColor_error
-            if (isValid) {
-                registerMsg.text = USERNAME_INVALID;
-            } else {
-                registerMsg.text = MULTIPLE_INVALID;
-            }
-            isValid = false
-        }
-        if isInvalidPassword(password) {
-            registerPassword.backgroundColor = backgroundColor_error
-            if (isValid) {
-                registerMsg.text = PASSWORD_INVALID;
-            } else {
-                registerMsg.text = MULTIPLE_INVALID;
-            }
-            isValid = false
-        }
-        if isValid {
-            changeStatus(false)
+        if fieldsAreValid(email, username: username, password: password) {
+            changeDisabledStatus(true)
             let newUser = PFUser()
             newUser.username = username
             newUser.email = email
@@ -112,22 +99,44 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    func registerSuccess() {
-        //// success!
+    func fieldsAreValid(email: String, username: String, password: String) -> Bool {
+        var isValid = true
+        if isInvalidEmail(email) {
+            registerEmail.backgroundColor = backgroundColor_error
+            registerMsg.text = EMAIL_INVALID
+            isValid = false
+        }
+        if isInvalidUsername(username) {
+            registerUsername.backgroundColor = backgroundColor_error
+            if (isValid) {
+                registerMsg.text = USERNAME_INVALID
+            } else {
+                registerMsg.text = MULTIPLE_INVALID
+            }
+            isValid = false
+        }
+        if isInvalidPassword(password) {
+            registerPassword.backgroundColor = backgroundColor_error
+            if (isValid) {
+                registerMsg.text = PASSWORD_INVALID
+            } else {
+                registerMsg.text = MULTIPLE_INVALID
+            }
+            isValid = false
+        }
+        return isValid
     }
     
-    func changeStatus(submitDisabled: Bool) {
-        if submitDisabled {
-            registerSubmitBtn.enabled = false;
-        } else {
-            registerSubmitBtn.enabled = true;
-        }
+    func registerSuccess() {
+        //// success! ////
+        registerMsg.text = ""
+        print("Successfully added new user")
     }
     
     func handleError(error: NSError?) {
-        self.changeStatus(false); // allow resubmission
+        self.changeDisabledStatus(false) // allow resubmission
         if let error = error {
-            print("\(error)");
+            print("\(error)")
             if error.code == 202 {
                 registerMsg.text = USERNAME_IN_USE
             } else if error.code == 203 {
@@ -141,7 +150,4 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    func textFieldDidBeginEditing(textField: UITextField) {
-        textField.backgroundColor = backgroundColor_normal
-    }
 }
