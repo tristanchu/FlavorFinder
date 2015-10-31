@@ -2,11 +2,10 @@
 //  Utils.swift
 //  FlavorFinder
 //
-//  Created by Sudikoff Lab iMac on 10/27/15.
+//  Created by Jon on 10/27/15.
 //  Copyright © 2015 TeamFive. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 var USERNAME_CHAR_MAX = 50

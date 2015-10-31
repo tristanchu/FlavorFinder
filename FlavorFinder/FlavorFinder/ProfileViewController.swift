@@ -2,7 +2,7 @@
 //  ProfileViewController.swift
 //  FlavorFinder
 //
-//  Created by Sudikoff Lab iMac on 10/26/15.
+//  Created by Jon on 10/26/15.
 //  Copyright © 2015 TeamFive. All rights reserved.
 //
 
@@ -15,7 +15,7 @@ class ProfileViewController: UIViewController {
         ///self.navigationItem.hidesBackButton = true
         
         if let navi = self.navigationController as? MainNavigationController {
-            navi.navigationItem.setLeftBarButtonItems([navi.searchBarActivateBtn], animated: true)
+            navi.navigationItem.setLeftBarButtonItems([], animated: true)
             navi.navigationItem.setRightBarButtonItems([navi.menuBarBtn], animated: true)
             navi.reset_navigationBar()
         }

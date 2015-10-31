@@ -2,7 +2,7 @@
 //  MatchTableViewController.swift
 //  FlavorFinder
 //
-//  Created by Sudikoff Lab iMac on 10/8/15.
+//  Created by Jon on 10/8/15.
 //  Copyright (c) 2015 TeamFive. All rights reserved.
 //
 
@@ -27,17 +27,48 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
     var goForwardBtn: UIBarButtonItem = UIBarButtonItem()
 
     var searchBarActivateBtn: UIBarButtonItem = UIBarButtonItem()
-    lazy var searchBar = UISearchBar(frame: CGRectMake(0, 0, 0, 0))
-    
-    let TITLE_ALL_INGREDIENTS = "All Ingredients"
-    let CELLIDENTIFIER_MATCH = "MatchTableViewCell"
-    let BUTTON_COLOR = UIColor(red: 165/255.0, green: 242/255.0, blue: 216/255.0, alpha: CGFloat(1))
+    var searchBar = UISearchBar()
     
     @IBOutlet var matchTableView: UITableView!
     
+    let EDIT_COLOR = UIColor(red: 249/255.0, green: 69/255.0, blue: 255/255.0, alpha: CGFloat(0.3))
+    let YUCK_COLOR = UIColor(red: 255/255.0, green: 109/255.0, blue: 69/255.0, alpha: CGFloat(0.3))
+    let YUM_COLOR = UIColor(red: 61/255.0, green: 235/255.0, blue: 64/255.0, alpha: CGFloat(0.3))
     
     // SETUP FUNCTIONS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // ---------------
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        configure_searchBar()
+        configure_searchBarActivateBtn()
+        
+        if let navi = self.navigationController as? MainNavigationController {
+            navi.navigationItem.setLeftBarButtonItems([navi.goBackBtn, self.searchBarActivateBtn], animated: true)
+            navi.navigationItem.setRightBarButtonItems([navi.goForwardBtn, navi.menuBarBtn], animated: true)
+            navi.reset_navigationBar()
+            navi.goBackBtn.enabled = false
+            navi.goForwardBtn.enabled = false
+        }
+        showAllIngredients()
+    }
+    
+    func configure_searchBarActivateBtn() {
+        searchBarActivateBtn.setTitleTextAttributes(attributes, forState: .Normal)
+        searchBarActivateBtn.title = String.fontAwesomeIconWithName(.Search)
+        searchBarActivateBtn.tintColor = NAVI_BUTTON_COLOR
+        searchBarActivateBtn.target = self
+        searchBarActivateBtn.action = "searchBarActivateBtnClicked"
+    }
+    
+    func configure_localSearchBar() {
+        searchBar.delegate = self
+        let y_offset = UIApplication.sharedApplication().statusBarFrame.size.height + (self.navigationController?.navigationBar.frame.height)!
+        let screenWidth: CGFloat = UIScreen.mainScreen().bounds.width
+        searchBar.frame = CGRect(x: 0, y: y_offset, width: screenWidth, height: 44)
+        self.tableView.tableHeaderView = self.searchBar
+    }
+    
     func configure_searchBar() {
         searchBar.delegate = self
         searchBar.hidden = true
@@ -48,27 +79,6 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
         cancelButton.setTitle(String.fontAwesomeIconWithName(.ChevronLeft), forState: UIControlState.Normal)
     }
     
-//    func configure_navigationBar() {
-//        // Disable buttons by default.
-//        goBackBtn.enabled = false
-//        goForwardBtn.enabled = false
-//    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        configure_searchBar()
-        
-        if let navi = self.navigationController as? MainNavigationController {
-            navi.navigationItem.setLeftBarButtonItems([navi.goBackBtn, navi.searchBarActivateBtn], animated: true)
-            navi.navigationItem.setRightBarButtonItems([navi.goForwardBtn, navi.menuBarBtn], animated: true)
-            navi.reset_navigationBar()
-            navi.goBackBtn.enabled = false
-            navi.goForwardBtn.enabled = false
-        }
-        showAllIngredients()
-    }
-    
     func showAllIngredients() {
         viewingMatches = false
         allCells = allIngredients
@@ -76,7 +86,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
         self.navigationController?.navigationItem.title = TITLE_ALL_INGREDIENTS
         currentIngredient = nil
         
-        animateTable()
+        animateTableViewCellsToLeft(self.tableView)
     }
     
     func showIngredient(ingredient: Ingredient) {
@@ -93,9 +103,9 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
             }
         }
         
-        filteredCells = allCells        // Reset 'filteredCells' with new matches.
-        viewingMatches = true           // Activates colored backgrounds. Only want to show colors when viewing matches, not all ingredients.
-        animateTable()                  // Show the new ingredients on our table with animation.
+        filteredCells = allCells                        // Reset 'filteredCells' with new matches.
+        viewingMatches = true                           // Activates colored backgrounds. Only want to show colors when viewing matches, not all ingredients.
+        animateTableViewCellsToLeft(self.tableView)     // Show the new ingredients on our table with animation.
     }
 
     override func didReceiveMemoryWarning() {
@@ -106,33 +116,9 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
     // TABLE FUNCTIONS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // ---------------
     override func viewWillAppear(animated: Bool) {
-        animateTable()
+        animateTableViewCellsToLeft(self.tableView)
     }
-    
-    // Function to animate all table cells on load.
-    func animateTable() {
-        tableView.reloadData()
-        
-        let cells = tableView.visibleCells
-        let tableWidth: CGFloat = tableView.bounds.size.width
-        
-        for i in cells {
-            let cell: UITableViewCell = i 
-            cell.transform = CGAffineTransformMakeTranslation(tableWidth, 0)
-        }
-        
-        var index = 0
-        
-        for a in cells {
-            let cell: UITableViewCell = a 
-            UIView.animateWithDuration(0.75, delay: 0.03 * Double(index), usingSpringWithDamping: 0.9, initialSpringVelocity: 0, options: [], animations: {
-                cell.transform = CGAffineTransformMakeTranslation(0, 0);
-                }, completion: nil)
-            
-            index += 1
-        }
-    }
-    
+
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // Return the number of sections.
         return 1
@@ -146,33 +132,25 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
         let cellIdentifier = CELLIDENTIFIER_MATCH
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! MatchTableViewCell
 
-        // Fetches the appropriate ingredient to display.
-        let ingredient = filteredCells[indexPath.row]
-        
-        // Set's the cell label to the ingredient's name.
-        cell.nameLabel.text = ingredient.name
+        let ingredient = filteredCells[indexPath.row]   // Fetches the appropriate ingredient to display.
+        cell.nameLabel.text = ingredient.name           // Set's the cell label to the ingredient's name.
         
         if viewingMatches {
             switch ingredient.matchLevel {
                 
-            // Match: low. White.
             case 1:
-                cell.backgroundColor = UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: CGFloat(0.3))
-            // Match: medium. Yellow.
+                cell.backgroundColor = MATCH_LOW_COLOR          // match: low, white
             case 2:
-                cell.backgroundColor = UIColor(red: 255/255.0, green: 237/255.0, blue: 105/255.0, alpha: CGFloat(0.3))
-            // Match: high. Blue.
+                cell.backgroundColor = MATCH_MEDIUM_COLOR       // match: medium, yellow
             case 3:
-                cell.backgroundColor = UIColor(red: 105/255.0, green: 230/255.0, blue: 255/255.0, alpha: CGFloat(0.3))
-            // Match: greatest. Green.
+                cell.backgroundColor = MATCH_HIGH_COLOR         // match: high, blue
             case 4:
-                cell.backgroundColor = UIColor(red: 105/255.0, green: 255/255.0, blue: 150/255.0, alpha: CGFloat(0.3))
-            // Default. White.
+                cell.backgroundColor = MATCH_GREATEST_COLOR     // match: greatest, green
             default:
-                cell.backgroundColor = UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: CGFloat(0.3))
+                cell.backgroundColor = MATCH_LOW_COLOR
             }
         } else {
-            cell.backgroundColor = UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: CGFloat(0.3))
+            cell.backgroundColor = MATCH_LOW_COLOR
         }
         
         return cell
@@ -192,53 +170,34 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-        let edit = UITableViewRowAction(style: .Normal, title: "Edit") { action, index in
-            print("edit button tapped")
-        }
-        edit.backgroundColor = UIColor(red: 249/255.0, green: 69/255.0, blue: 255/255.0, alpha: CGFloat(0.3))
-        
-        let yucky = UITableViewRowAction(style: .Normal, title: "Yucky") { action, index in
-            print("yucky button tapped")
-        }
-        yucky.backgroundColor = UIColor(red: 255/255.0, green: 109/255.0, blue: 69/255.0, alpha: CGFloat(0.3))
-        
-        let yummy = UITableViewRowAction(style: .Normal, title: "Yummy") { action, index in
-            print("yummy button tapped")
-        }
-        yummy.backgroundColor = UIColor(red: 61/255.0, green: 235/255.0, blue: 64/255.0, alpha: CGFloat(0.3))
-        
-        return [edit, yucky, yummy]
-    }
-    
-    override func tableView(tableView: UITableView, shouldIndentWhileEditingRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return false
-    }
-    
-    override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
-        return UITableViewCellEditingStyle.None
-    }
-    
-//    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-//        let edit = UITableViewRowAction(style: .Normal, title: "Edit") { action, index in
-//            // OPEN UIPresentationController HERE
-//            let vc = UIViewController(nibName: nil, bundle: nil)
-//            vc.view.frame = CGRect(x: 0, y: 0, width: 100, height: 200)
-//            vc.view.backgroundColor = UIColor.orangeColor()
-//            vc.modalPresentationStyle = .Popover
-//            
-//            let popover = vc.popoverPresentationController!
-//            let cell = tableView.cellForRowAtIndexPath(indexPath)!
-//            
-//            var cellAbsolutePosition = cell.superview!.convertPoint(cell.frame.origin, toView: nil)
-//            cellAbsolutePosition.x = cell.frame.width - 60
-//            popover.sourceRect = CGRect(origin: cellAbsolutePosition, size: cell.frame.size)
-//            popover.sourceView = tableView
-//            
-//            self.presentViewController(vc, animated: true, completion: nil)
+//        if let curr = currentIngredient {
+            UIButton.appearance().setAttributedTitle(NSAttributedString(string: "", attributes: attributes), forState: .Normal)
+            
+            let edit = UITableViewRowAction(style: .Normal, title: "Edit") { action, index in
+                print("edit button tapped")
+            }
+            edit.backgroundColor = EDIT_COLOR
+            
+            let yuck = UITableViewRowAction(style: .Normal, title: "Yuck") { action, index in
+                print("yuck button tapped")
+                if let curr = self.currentIngredient {
+                    downvoteMatch(curr.id, matchID2: self.filteredCells[indexPath.row].id)
+                }
+            }
+            yuck.backgroundColor = YUCK_COLOR
+            
+            let yum = UITableViewRowAction(style: .Normal, title: "Yum") { action, index in
+                print("yum button tapped")
+                if let curr = self.currentIngredient {
+                    upvoteMatch(curr.id, matchID2: self.filteredCells[indexPath.row].id)
+                }
+            }
+            yum.backgroundColor = YUM_COLOR
+            
+            return [yum, yuck, edit]
 //        }
-//        return [edit]
-//    }
     
+    }
     
     // SEARCHBAR FUNCTIONS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // -------------------
@@ -252,10 +211,12 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     func showSearchBar() {
-        navigationItem.titleView = searchBar
+        self.navigationController?.navigationItem.titleView = searchBar
         searchBar.alpha = 0
         self.searchBar.hidden = false
-        self.navigationItem.setLeftBarButtonItems([goBackBtn], animated: true)
+        if let navi = self.navigationController as? MainNavigationController {
+            navi.navigationItem.setLeftBarButtonItems([navi.goBackBtn], animated: true)
+        }
         
         UIView.animateWithDuration(0.5, animations: {
             self.searchBar.alpha = 1
@@ -265,23 +226,25 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     func hideSearchBar() {
-        var newTitle = ""
-        if let curr = currentIngredient {
-            newTitle = curr.name
-        } else {
-            newTitle = TITLE_ALL_INGREDIENTS
-        }
-        
-        self.searchBar.alpha = 1
-        UIView.animateWithDuration(0.3, animations: {
-            self.searchBar.alpha = 0
-            self.navigationController?.navigationItem.title = newTitle
+        if let navi = self.navigationController as? MainNavigationController {
+            var newTitle = ""
+            if let curr = currentIngredient {
+                newTitle = curr.name
+            } else {
+                newTitle = TITLE_ALL_INGREDIENTS
+            }
             
-            self.navigationItem.setLeftBarButtonItems([self.goBackBtn, self.searchBarActivateBtn], animated: true)
+            self.searchBar.alpha = 1
+            UIView.animateWithDuration(0.3, animations: {
+                self.searchBar.alpha = 0
+                navi.navigationItem.title = newTitle
+                
+                navi.navigationItem.setLeftBarButtonItems([navi.goBackBtn, self.searchBarActivateBtn], animated: true)
 
-            }, completion: { finished in
-                self.navigationItem.titleView = nil
-        })
+                }, completion: { finished in
+                    navi.navigationItem.titleView = nil
+            })
+        }
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {

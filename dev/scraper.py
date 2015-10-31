@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 """
 Scraper for the 'The Flavor Bible'.
+
+Created by Jon.
 """
 
 import ebooklib
@@ -31,6 +33,8 @@ c.execute('''CREATE TABLE matches(
             id int,
             match_id int,
             match_level int,
+            upvotes int,
+            downvotes int,
             affinity text,
             quote text,
             PRIMARY KEY(id, match_id)
@@ -54,9 +58,9 @@ def addMatches(ingredients, matches, ingredient_ids, id, i, s, match_level):
     match2 = str(match_id) + '_' + str(id)
 
     if not match1 in matches:
-        matches[match1] = [id, match_id, match_level, '', '']
+        matches[match1] = [id, match_id, match_level, '0', '0', '', '']
     if not match2 in matches:
-        matches[match2] = [match_id, id, match_level, '', '']
+        matches[match2] = [match_id, id, match_level, '0', '0', '', '']
 
 
 def writeIngredientsToCSV(filename, fieldnames, data):
@@ -88,14 +92,14 @@ def writeIngredientsToTable(data):
 def writeMatchesToTable(data):
     for key in data:
         row = data[key]
-        c.execute("INSERT INTO matches VALUES ('%s', '%s', '%s', '%s', '%s')" % (row[0], row[1], row[2], row[3], row[4]))
+        c.execute("INSERT INTO matches VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s')" % (row[0], row[1], row[2], row[3], row[4], row[5], row[6]))
 
 
 
 if __name__ == '__main__':
     global latest_id
     ingredients_fieldnames = ['id', 'name', 'season', 'taste', 'weight', 'volume', 'vegetarian', 'dairy', 'kosher', 'nuts']
-    matches_fieldnames = ['name', 'match', 'match_level', 'affinity', 'quote']
+    matches_fieldnames = ['name', 'match', 'match_level', 'upvotes', 'downvotes', 'affinity', 'quote']
 
     ingredients = {}
     matches = {}

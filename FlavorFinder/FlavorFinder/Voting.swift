@@ -2,7 +2,7 @@
 //  Voting.swift
 //  FlavorFinder
 //
-//  Created by Sudikoff Lab iMac on 10/27/15.
+//  Created by Jon on 10/27/15.
 //  Copyright © 2015 TeamFive. All rights reserved.
 //
 
@@ -29,4 +29,12 @@ func confidence(ups: Int, downs: Int) -> Double {
     } else {
         return _confidence(ups, downs: downs)
     }
+}
+
+func upvoteMatch(matchID1: Int, matchID2: Int) {
+    
+}
+
+func downvoteMatch(matchID1: Int, matchID2: Int) {
+    
 }
