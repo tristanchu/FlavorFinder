@@ -6,7 +6,6 @@
 //  Copyright © 2015 TeamFive. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 var USERNAME_CHAR_MAX = 50

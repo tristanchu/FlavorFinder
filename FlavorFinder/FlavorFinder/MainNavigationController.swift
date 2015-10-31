@@ -42,6 +42,42 @@ class MainNavigationController: UINavigationController {
         configure_menuTableView()
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
+    func configure_goBackBtn() {
+        goBackBtn.setTitleTextAttributes(attributes, forState: .Normal)
+        goBackBtn.title = String.fontAwesomeIconWithName(.ChevronLeft)
+        goBackBtn.tintColor = NAVI_BUTTON_COLOR
+        goBackBtn.target = self
+        goBackBtn.action = "goBackBtnClicked"
+    }
+    
+    func configure_goForwardBtn() {
+        goForwardBtn.setTitleTextAttributes(attributes, forState: .Normal)
+        goForwardBtn.title = String.fontAwesomeIconWithName(.ChevronRight)
+        goForwardBtn.tintColor = NAVI_BUTTON_COLOR
+        goForwardBtn.target = self
+        goForwardBtn.action = "goForwardBtnClicked"
+    }
+    
+    func configure_searchBarActivateBtn() {
+        searchBarActivateBtn.setTitleTextAttributes(attributes, forState: .Normal)
+        searchBarActivateBtn.title = String.fontAwesomeIconWithName(.Search)
+        searchBarActivateBtn.tintColor = NAVI_BUTTON_COLOR
+        searchBarActivateBtn.target = self
+        searchBarActivateBtn.action = "searchBarActivateBtnClicked"
+    }
+    
+    func configure_menuBarBtn() {
+        menuBarBtn.setTitleTextAttributes(attributes, forState: .Normal)
+        menuBarBtn.title = String.fontAwesomeIconWithName(.Bars)
+        menuBarBtn.tintColor = NAVI_BUTTON_COLOR
+        menuBarBtn.target = self
+        menuBarBtn.action = "menuBtnClicked"
+    }
+    
     func configure_menuTableView() {
         menuTableViewController.navi = self
         menuTableView = menuTableViewController.tableView
@@ -88,15 +124,26 @@ class MainNavigationController: UINavigationController {
         self.dismissMenuTableView()
     }
     
+    func getVisibleViewControllerIdentifier() -> String {
+        switch self.visibleViewController {
+        case is MatchTableViewController:
+            return MatchTableViewControllerIdentifier
+        case is ProfileViewController:
+            return ProfileViewControllerIdentifier
+        default:
+            return ""
+        }
+    }
+    
+    // HISTORY/FUTURE FUNCTIONS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // ------------------------
     func goBackBtnClicked() {
         if self.visibleViewController is RegisterViewController {
             let transition: CATransition = CATransition()
-            
-            //            transition.duration = 0.25
-            //            transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+            // transition.duration = 0.25
+            // transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
             transition.type = kCATransitionPush; //kCATransitionMoveIn; //, kCATransitionPush, kCATransitionReveal, kCATransitionFade
             transition.subtype = kCATransitionFromLeft; //kCATransitionFromLeft, kCATransitionFromRight, kCATransitionFromTop, kCATransitionFromBottom
-            
             self.view.layer.addAnimation(transition, forKey: "kCATransition")
             
             let loginViewControllerObject = mainStoryboard.instantiateViewControllerWithIdentifier(LoginViewControllerIdentifier) as? LoginViewController
@@ -115,17 +162,6 @@ class MainNavigationController: UINavigationController {
                     matchTableViewControllerObject.showAllIngredients()
                 }
             }
-        }
-    }
-    
-    func getVisibleViewControllerIdentifier() -> String {
-        switch self.visibleViewController {
-        case is MatchTableViewController:
-            return MatchTableViewControllerIdentifier
-        case is ProfileViewController:
-            return ProfileViewControllerIdentifier
-        default:
-            return ""
         }
     }
     
@@ -161,6 +197,8 @@ class MainNavigationController: UINavigationController {
         }
     }
     
+    // MENU FUNCTIONS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // --------------
     func menuBtnClicked() {
         print("menuBtn clicked.")
         if (menuTableView.hidden) {
@@ -183,51 +221,12 @@ class MainNavigationController: UINavigationController {
         dropdownIsDown = false
     }
 
-
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    func configure_goBackBtn() {
-        goBackBtn.setTitleTextAttributes(attributes, forState: .Normal)
-        goBackBtn.title = String.fontAwesomeIconWithName(.ChevronLeft)
-        goBackBtn.tintColor = NAVI_BUTTON_COLOR
-        goBackBtn.target = self
-        goBackBtn.action = "goBackBtnClicked"
-    }
-    
-    func configure_goForwardBtn() {
-        goForwardBtn.setTitleTextAttributes(attributes, forState: .Normal)
-        goForwardBtn.title = String.fontAwesomeIconWithName(.ChevronRight)
-        goForwardBtn.tintColor = NAVI_BUTTON_COLOR
-        goForwardBtn.target = self
-        goForwardBtn.action = "goForwardBtnClicked"
-    }
-    
-    func configure_searchBarActivateBtn() {
-        searchBarActivateBtn.setTitleTextAttributes(attributes, forState: .Normal)
-        searchBarActivateBtn.title = String.fontAwesomeIconWithName(.Search)
-        searchBarActivateBtn.tintColor = NAVI_BUTTON_COLOR
-        searchBarActivateBtn.target = self
-        searchBarActivateBtn.action = "searchBarActivateBtnClicked"
-    }
-    
-    func configure_menuBarBtn() {
-        menuBarBtn.setTitleTextAttributes(attributes, forState: .Normal)
-        menuBarBtn.title = String.fontAwesomeIconWithName(.Bars)
-        menuBarBtn.tintColor = NAVI_BUTTON_COLOR
-        menuBarBtn.target = self
-        menuBarBtn.action = "menuBtnClicked"
-    }
-    
-    
+    // SEARCH FUNCTIONS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // ----------------
     func searchBarActivateBtnClicked() {
         showSearchBar()
     }
-    
-
     
     func showSearchBar() {
         navigationItem.titleView = searchBar

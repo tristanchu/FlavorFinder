@@ -11,14 +11,18 @@ import UIKit
 
 class MenuTableViewController: UITableViewController {
 
-    var menuTableItems = [  String.fontAwesomeIconWithName(.User) + " Profile",
+    let menuTableItems = [ String.fontAwesomeIconWithName(.User) + " Profile",
         String.fontAwesomeIconWithName(.Cutlery) + " Ingredients",
         String.fontAwesomeIconWithName(.SignOut) + " Sign Out"
     ]
     
     var navi: MainNavigationController?
     
+    let PROFILE_BGCOLOR = UIColor(red: 59/255.0, green: 247/255.0, blue: 194/255.0, alpha: CGFloat(1.0))
+    let INGREDIENTS_BGCOLOR = UIColor(red: 105/255.0, green: 230/255.0, blue: 255/255.0, alpha: CGFloat(1.0))
+    let SIGNIN_BGCOLOR = UIColor(red: 227/255.0, green: 78/255.0, blue: 59/255.0, alpha: CGFloat(1.0))
 
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier(CELLIDENTIFIER_MENU, forIndexPath: indexPath) as UITableViewCell
         cell.textLabel!.font = UIFont.fontAwesomeOfSize(15)
@@ -27,16 +31,16 @@ class MenuTableViewController: UITableViewController {
         
         switch indexPath.row {
         case 0:
-            cell.backgroundColor = UIColor(red: 59/255.0, green: 247/255.0, blue: 194/255.0, alpha: CGFloat(1.0))
+            cell.backgroundColor = PROFILE_BGCOLOR
             break
         case 1:
-            cell.backgroundColor = UIColor(red: 105/255.0, green: 230/255.0, blue: 255/255.0, alpha: CGFloat(1.0))
+            cell.backgroundColor = INGREDIENTS_BGCOLOR
             break
         case 2:
-            cell.backgroundColor = UIColor(red: 227/255.0, green: 78/255.0, blue: 59/255.0, alpha: CGFloat(1.0))
+            cell.backgroundColor = SIGNIN_BGCOLOR
             break
         default:
-            cell.backgroundColor = UIColor(red: 105/255.0, green: 230/255.0, blue: 255/255.0, alpha: CGFloat(1.0))
+            cell.backgroundColor = INGREDIENTS_BGCOLOR
             break
         }
         

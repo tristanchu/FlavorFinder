@@ -31,6 +31,9 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
     
     @IBOutlet var matchTableView: UITableView!
     
+    let EDIT_COLOR = UIColor(red: 249/255.0, green: 69/255.0, blue: 255/255.0, alpha: CGFloat(0.3))
+    let YUCK_COLOR = UIColor(red: 255/255.0, green: 109/255.0, blue: 69/255.0, alpha: CGFloat(0.3))
+    let YUM_COLOR = UIColor(red: 61/255.0, green: 235/255.0, blue: 64/255.0, alpha: CGFloat(0.3))
     
     // SETUP FUNCTIONS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // ---------------
@@ -100,9 +103,9 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
             }
         }
         
-        filteredCells = allCells        // Reset 'filteredCells' with new matches.
-        viewingMatches = true           // Activates colored backgrounds. Only want to show colors when viewing matches, not all ingredients.
-        animateTableViewCellsToLeft(self.tableView)                  // Show the new ingredients on our table with animation.
+        filteredCells = allCells                        // Reset 'filteredCells' with new matches.
+        viewingMatches = true                           // Activates colored backgrounds. Only want to show colors when viewing matches, not all ingredients.
+        animateTableViewCellsToLeft(self.tableView)     // Show the new ingredients on our table with animation.
     }
 
     override func didReceiveMemoryWarning() {
@@ -115,9 +118,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
     override func viewWillAppear(animated: Bool) {
         animateTableViewCellsToLeft(self.tableView)
     }
-    
 
-    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // Return the number of sections.
         return 1
@@ -131,33 +132,25 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
         let cellIdentifier = CELLIDENTIFIER_MATCH
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! MatchTableViewCell
 
-        // Fetches the appropriate ingredient to display.
-        let ingredient = filteredCells[indexPath.row]
-        
-        // Set's the cell label to the ingredient's name.
-        cell.nameLabel.text = ingredient.name
+        let ingredient = filteredCells[indexPath.row]   // Fetches the appropriate ingredient to display.
+        cell.nameLabel.text = ingredient.name           // Set's the cell label to the ingredient's name.
         
         if viewingMatches {
             switch ingredient.matchLevel {
                 
-            // Match: low. White.
             case 1:
-                cell.backgroundColor = UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: CGFloat(0.3))
-            // Match: medium. Yellow.
+                cell.backgroundColor = MATCH_LOW_COLOR          // match: low, white
             case 2:
-                cell.backgroundColor = UIColor(red: 255/255.0, green: 237/255.0, blue: 105/255.0, alpha: CGFloat(0.3))
-            // Match: high. Blue.
+                cell.backgroundColor = MATCH_MEDIUM_COLOR       // match: medium, yellow
             case 3:
-                cell.backgroundColor = UIColor(red: 105/255.0, green: 230/255.0, blue: 255/255.0, alpha: CGFloat(0.3))
-            // Match: greatest. Green.
+                cell.backgroundColor = MATCH_HIGH_COLOR         // match: high, blue
             case 4:
-                cell.backgroundColor = UIColor(red: 105/255.0, green: 255/255.0, blue: 150/255.0, alpha: CGFloat(0.3))
-            // Default. White.
+                cell.backgroundColor = MATCH_GREATEST_COLOR     // match: greatest, green
             default:
-                cell.backgroundColor = UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: CGFloat(0.3))
+                cell.backgroundColor = MATCH_LOW_COLOR
             }
         } else {
-            cell.backgroundColor = UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: CGFloat(0.3))
+            cell.backgroundColor = MATCH_LOW_COLOR
         }
         
         return cell
@@ -177,53 +170,34 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-        let edit = UITableViewRowAction(style: .Normal, title: "Edit") { action, index in
-            print("edit button tapped")
-        }
-        edit.backgroundColor = UIColor(red: 249/255.0, green: 69/255.0, blue: 255/255.0, alpha: CGFloat(0.3))
-        
-        let yucky = UITableViewRowAction(style: .Normal, title: "Yucky") { action, index in
-            print("yucky button tapped")
-        }
-        yucky.backgroundColor = UIColor(red: 255/255.0, green: 109/255.0, blue: 69/255.0, alpha: CGFloat(0.3))
-        
-        let yummy = UITableViewRowAction(style: .Normal, title: "Yummy") { action, index in
-            print("yummy button tapped")
-        }
-        yummy.backgroundColor = UIColor(red: 61/255.0, green: 235/255.0, blue: 64/255.0, alpha: CGFloat(0.3))
-        
-        return [edit, yucky, yummy]
-    }
-    
-    override func tableView(tableView: UITableView, shouldIndentWhileEditingRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return false
-    }
-    
-    override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
-        return UITableViewCellEditingStyle.None
-    }
-    
-//    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-//        let edit = UITableViewRowAction(style: .Normal, title: "Edit") { action, index in
-//            // OPEN UIPresentationController HERE
-//            let vc = UIViewController(nibName: nil, bundle: nil)
-//            vc.view.frame = CGRect(x: 0, y: 0, width: 100, height: 200)
-//            vc.view.backgroundColor = UIColor.orangeColor()
-//            vc.modalPresentationStyle = .Popover
-//            
-//            let popover = vc.popoverPresentationController!
-//            let cell = tableView.cellForRowAtIndexPath(indexPath)!
-//            
-//            var cellAbsolutePosition = cell.superview!.convertPoint(cell.frame.origin, toView: nil)
-//            cellAbsolutePosition.x = cell.frame.width - 60
-//            popover.sourceRect = CGRect(origin: cellAbsolutePosition, size: cell.frame.size)
-//            popover.sourceView = tableView
-//            
-//            self.presentViewController(vc, animated: true, completion: nil)
+//        if let curr = currentIngredient {
+            UIButton.appearance().setAttributedTitle(NSAttributedString(string: "", attributes: attributes), forState: .Normal)
+            
+            let edit = UITableViewRowAction(style: .Normal, title: "Edit") { action, index in
+                print("edit button tapped")
+            }
+            edit.backgroundColor = EDIT_COLOR
+            
+            let yuck = UITableViewRowAction(style: .Normal, title: "Yuck") { action, index in
+                print("yuck button tapped")
+                if let curr = self.currentIngredient {
+                    downvoteMatch(curr.id, matchID2: self.filteredCells[indexPath.row].id)
+                }
+            }
+            yuck.backgroundColor = YUCK_COLOR
+            
+            let yum = UITableViewRowAction(style: .Normal, title: "Yum") { action, index in
+                print("yum button tapped")
+                if let curr = self.currentIngredient {
+                    upvoteMatch(curr.id, matchID2: self.filteredCells[indexPath.row].id)
+                }
+            }
+            yum.backgroundColor = YUM_COLOR
+            
+            return [yum, yuck, edit]
 //        }
-//        return [edit]
-//    }
     
+    }
     
     // SEARCHBAR FUNCTIONS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // -------------------
