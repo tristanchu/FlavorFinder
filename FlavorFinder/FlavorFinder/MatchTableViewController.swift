@@ -29,9 +29,6 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
     var searchBarActivateBtn: UIBarButtonItem = UIBarButtonItem()
     var searchBar = UISearchBar()
     
-
-    let BUTTON_COLOR = UIColor(red: 165/255.0, green: 242/255.0, blue: 216/255.0, alpha: CGFloat(1))
-    
     @IBOutlet var matchTableView: UITableView!
     
     
@@ -56,7 +53,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
     func configure_searchBarActivateBtn() {
         searchBarActivateBtn.setTitleTextAttributes(attributes, forState: .Normal)
         searchBarActivateBtn.title = String.fontAwesomeIconWithName(.Search)
-        searchBarActivateBtn.tintColor = BUTTON_COLOR
+        searchBarActivateBtn.tintColor = NAVI_BUTTON_COLOR
         searchBarActivateBtn.target = self
         searchBarActivateBtn.action = "searchBarActivateBtnClicked"
     }
@@ -86,7 +83,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
         self.navigationController?.navigationItem.title = TITLE_ALL_INGREDIENTS
         currentIngredient = nil
         
-        animateTable()
+        animateTableViewCellsToLeft(self.tableView)
     }
     
     func showIngredient(ingredient: Ingredient) {
@@ -105,7 +102,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
         
         filteredCells = allCells        // Reset 'filteredCells' with new matches.
         viewingMatches = true           // Activates colored backgrounds. Only want to show colors when viewing matches, not all ingredients.
-        animateTable()                  // Show the new ingredients on our table with animation.
+        animateTableViewCellsToLeft(self.tableView)                  // Show the new ingredients on our table with animation.
     }
 
     override func didReceiveMemoryWarning() {
@@ -116,32 +113,10 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
     // TABLE FUNCTIONS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // ---------------
     override func viewWillAppear(animated: Bool) {
-        animateTable()
+        animateTableViewCellsToLeft(self.tableView)
     }
     
-    // Function to animate all table cells on load.
-    func animateTable() {
-        tableView.reloadData()
-        
-        let cells = tableView.visibleCells
-        let tableWidth: CGFloat = tableView.bounds.size.width
-        
-        for i in cells {
-            let cell: UITableViewCell = i 
-            cell.transform = CGAffineTransformMakeTranslation(tableWidth, 0)
-        }
-        
-        var index = 0
-        
-        for a in cells {
-            let cell: UITableViewCell = a 
-            UIView.animateWithDuration(0.75, delay: 0.03 * Double(index), usingSpringWithDamping: 0.9, initialSpringVelocity: 0, options: [], animations: {
-                cell.transform = CGAffineTransformMakeTranslation(0, 0);
-                }, completion: nil)
-            
-            index += 1
-        }
-    }
+
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // Return the number of sections.

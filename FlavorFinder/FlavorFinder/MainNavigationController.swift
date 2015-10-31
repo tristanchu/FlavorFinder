@@ -29,8 +29,6 @@ class MainNavigationController: UINavigationController {
     var dropdownIsDown = false
 
     let mainStoryboard = UIStoryboard(name: "Main", bundle:nil)
-    let BUTTON_COLOR = UIColor(red: 165/255.0, green: 242/255.0, blue: 216/255.0, alpha: CGFloat(1))
-    let CELLIDENTIFIER_MENU = "menuCell"
 
     // SETUP FUNCTIONS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // ---------------
@@ -175,12 +173,12 @@ class MainNavigationController: UINavigationController {
     func showMenuTableView() {
         menuTableView.hidden = false
         menuBarBtn.title = String.fontAwesomeIconWithName(.Times)
-        animateMenuTableView(menuTableView, dismiss: false)
+        animateDropdownTableView(menuTableView, dismiss: false)
         dropdownIsDown = true
     }
     
     func dismissMenuTableView() {
-        animateMenuTableView(menuTableView, dismiss: true)
+        animateDropdownTableView(menuTableView, dismiss: true)
         menuBarBtn.title = String.fontAwesomeIconWithName(.Bars)
         dropdownIsDown = false
     }
@@ -195,7 +193,7 @@ class MainNavigationController: UINavigationController {
     func configure_goBackBtn() {
         goBackBtn.setTitleTextAttributes(attributes, forState: .Normal)
         goBackBtn.title = String.fontAwesomeIconWithName(.ChevronLeft)
-        goBackBtn.tintColor = BUTTON_COLOR
+        goBackBtn.tintColor = NAVI_BUTTON_COLOR
         goBackBtn.target = self
         goBackBtn.action = "goBackBtnClicked"
     }
@@ -203,7 +201,7 @@ class MainNavigationController: UINavigationController {
     func configure_goForwardBtn() {
         goForwardBtn.setTitleTextAttributes(attributes, forState: .Normal)
         goForwardBtn.title = String.fontAwesomeIconWithName(.ChevronRight)
-        goForwardBtn.tintColor = BUTTON_COLOR
+        goForwardBtn.tintColor = NAVI_BUTTON_COLOR
         goForwardBtn.target = self
         goForwardBtn.action = "goForwardBtnClicked"
     }
@@ -211,7 +209,7 @@ class MainNavigationController: UINavigationController {
     func configure_searchBarActivateBtn() {
         searchBarActivateBtn.setTitleTextAttributes(attributes, forState: .Normal)
         searchBarActivateBtn.title = String.fontAwesomeIconWithName(.Search)
-        searchBarActivateBtn.tintColor = BUTTON_COLOR
+        searchBarActivateBtn.tintColor = NAVI_BUTTON_COLOR
         searchBarActivateBtn.target = self
         searchBarActivateBtn.action = "searchBarActivateBtnClicked"
     }
@@ -219,7 +217,7 @@ class MainNavigationController: UINavigationController {
     func configure_menuBarBtn() {
         menuBarBtn.setTitleTextAttributes(attributes, forState: .Normal)
         menuBarBtn.title = String.fontAwesomeIconWithName(.Bars)
-        menuBarBtn.tintColor = BUTTON_COLOR
+        menuBarBtn.tintColor = NAVI_BUTTON_COLOR
         menuBarBtn.target = self
         menuBarBtn.action = "menuBtnClicked"
     }
