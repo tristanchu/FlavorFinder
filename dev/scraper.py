@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 """
 Scraper for the 'The Flavor Bible'.
+
+Created by Jon.
 """
 
 import ebooklib

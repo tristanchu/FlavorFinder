@@ -2,7 +2,7 @@
 //  Match.swift
 //  FlavorFinder
 //
-//  Created by Sudikoff Lab iMac on 10/8/15.
+//  Created by Jon on 10/8/15.
 //  Copyright (c) 2015 TeamFive. All rights reserved.
 //
 
