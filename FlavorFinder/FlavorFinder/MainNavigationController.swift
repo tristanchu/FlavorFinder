@@ -19,7 +19,9 @@ class MainNavigationController: UINavigationController {
     
     var searchBarActivateBtn: UIBarButtonItem = UIBarButtonItem()
     lazy var searchBar = UISearchBar(frame: CGRectMake(0, 0, 0, 0))
-
+    var searchTableView: UITableView = UITableView()
+    var globalSearchViewController: GlobalSearchController = GlobalSearchController()
+    
     var menuBarBtn: UIBarButtonItem = UIBarButtonItem()
     var menuTableView: UITableView = UITableView()
     var menuTableViewController: MenuTableViewController = MenuTableViewController()
@@ -27,7 +29,6 @@ class MainNavigationController: UINavigationController {
     var dropdownIsDown = false
 
     let mainStoryboard = UIStoryboard(name: "Main", bundle:nil)
-    let attributes = [NSFontAttributeName: UIFont.fontAwesomeOfSize(20)] as Dictionary!
     let BUTTON_COLOR = UIColor(red: 165/255.0, green: 242/255.0, blue: 216/255.0, alpha: CGFloat(1))
     let CELLIDENTIFIER_MENU = "menuCell"
 
@@ -38,6 +39,7 @@ class MainNavigationController: UINavigationController {
         configure_goBackBtn()
         configure_goForwardBtn()
         configure_menuBarBtn()
+//        configure_searchBar()
         configure_searchBarActivateBtn()
         configure_menuTableView()
     }
@@ -58,15 +60,30 @@ class MainNavigationController: UINavigationController {
         self.view.addSubview(menuTableView)
     }
     
-//    func configure_searchBar() {
-//        searchBar.delegate = self
-//        searchBar.hidden = true
-//        searchBar.setShowsCancelButton(true, animated: false)
-//        let cancelButton = searchBar.valueForKey("cancelButton") as! UIButton
-//        let attributes = [NSFontAttributeName: UIFont.fontAwesomeOfSize(20)] as Dictionary!
-//        UIBarButtonItem.appearance().setTitleTextAttributes(attributes, forState: UIControlState.Normal)
-//        cancelButton.setTitle(String.fontAwesomeIconWithName(.ChevronLeft), forState: UIControlState.Normal)
-//    }
+    func configure_searchBar() {
+        globalSearchViewController.navi = self
+        searchBar.delegate = globalSearchViewController
+        searchBar.hidden = true
+        searchBar.setShowsCancelButton(true, animated: false)
+        let cancelButton = searchBar.valueForKey("cancelButton") as! UIButton
+        let attributes = [NSFontAttributeName: UIFont.fontAwesomeOfSize(20)] as Dictionary!
+        UIBarButtonItem.appearance().setTitleTextAttributes(attributes, forState: UIControlState.Normal)
+        cancelButton.setTitle(String.fontAwesomeIconWithName(.ChevronLeft), forState: UIControlState.Normal)
+        
+        let y_offset = UIApplication.sharedApplication().statusBarFrame.size.height + self.navigationBar.frame.height
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        searchTableView.frame = CGRect(x: 0, y: y_offset, width: screenSize.width, height: screenSize.height*0.5)
+//        searchTableView.sizeToFit()
+        searchTableView.delegate = globalSearchViewController
+        searchTableView.dataSource = globalSearchViewController
+        searchTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: CELLIDENTIFIER_MATCH)
+        searchTableView.tableFooterView = UIView.init(frame: CGRectZero)
+        searchTableView.tableFooterView!.hidden = true
+        searchTableView.backgroundColor = UIColor.clearColor()
+        searchTableView.reloadData()
+        searchTableView.hidden = true
+        self.view.addSubview(searchTableView)
+    }
     
     func reset_navigationBar() {
         self.navigationItem.title = ""
@@ -212,56 +229,54 @@ class MainNavigationController: UINavigationController {
         showSearchBar()
     }
     
-    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-        hideSearchBar()
-        if let matchTableViewControllerObject = self.visibleViewController as? MatchTableViewController {
-            matchTableViewControllerObject.filterResults("")
-        }
-    }
+
     
     func showSearchBar() {
         navigationItem.titleView = searchBar
         searchBar.alpha = 0
-        self.searchBar.hidden = false
+        searchBar.hidden = false
         self.navigationItem.setLeftBarButtonItems([goBackBtn], animated: true)
+        
+        searchTableView.alpha = 0
+        searchTableView.hidden = false
         
         UIView.animateWithDuration(0.5, animations: {
             self.searchBar.alpha = 1
+            self.searchTableView.alpha = 1
             }, completion: { finished in
                 self.searchBar.becomeFirstResponder()
         })
     }
     
+//    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+//        hideSearchBar()
+//        if let matchTableViewControllerObject = self.visibleViewController as? MatchTableViewController {
+//            matchTableViewControllerObject.filterResults("")
+//        }
+//    }
+//    
     func hideSearchBar() {
         var newTitle = ""
         if let matchTableViewControllerObject = self.visibleViewController as? MatchTableViewController {
             if let curr = matchTableViewControllerObject.currentIngredient {
                 newTitle = curr.name
             } else {
-                newTitle = matchTableViewControllerObject.TITLE_ALL_INGREDIENTS
+                newTitle = TITLE_ALL_INGREDIENTS
             }
         }
         
         self.searchBar.alpha = 1
+        searchTableView.alpha = 1
         UIView.animateWithDuration(0.3, animations: {
             self.searchBar.alpha = 0
             self.title = newTitle
             
             self.navigationItem.setLeftBarButtonItems([self.goBackBtn, self.searchBarActivateBtn], animated: true)
             
+            self.searchTableView.alpha = 0
             }, completion: { finished in
                 self.navigationItem.titleView = nil
         })
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

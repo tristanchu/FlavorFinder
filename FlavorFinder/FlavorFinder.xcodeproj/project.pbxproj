@@ -37,6 +37,7 @@
 		8875DE3B1BE0751B00CD50EA /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8875DE3A1BE0751B00CD50EA /* MainNavigationController.swift */; settings = {ASSET_TAGS = (); }; };
 		888D1A401BDEF816007F09AE /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888D1A3F1BDEF816007F09AE /* Stack.swift */; settings = {ASSET_TAGS = (); }; };
 		888D1A441BDEF8FE007F09AE /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888D1A431BDEF8FE007F09AE /* ProfileViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		88F0E4FF1BE51E7F003CB35B /* GlobalSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F0E4FE1BE51E7F003CB35B /* GlobalSearchController.swift */; settings = {ASSET_TAGS = (); }; };
 		88F413FA1BC74A00000C0093 /* MatchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F413F91BC74A00000C0093 /* MatchTableViewCell.swift */; };
 		88F413FC1BC74EC8000C0093 /* MatchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F413FB1BC74EC8000C0093 /* MatchTableViewController.swift */; };
 		88F414011BC7513F000C0093 /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F414001BC7513F000C0093 /* Ingredient.swift */; };
@@ -90,6 +91,7 @@
 		8875DE3A1BE0751B00CD50EA /* MainNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		888D1A3F1BDEF816007F09AE /* Stack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		888D1A431BDEF8FE007F09AE /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		88F0E4FE1BE51E7F003CB35B /* GlobalSearchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalSearchController.swift; sourceTree = "<group>"; };
 		88F413F91BC74A00000C0093 /* MatchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchTableViewCell.swift; sourceTree = "<group>"; };
 		88F413FB1BC74EC8000C0093 /* MatchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchTableViewController.swift; sourceTree = "<group>"; };
 		88F414001BC7513F000C0093 /* Ingredient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Ingredient.swift; path = FlavorFinderTests/Ingredient.swift; sourceTree = SOURCE_ROOT; };
@@ -227,6 +229,7 @@
 		8875DE2E1BE04FDF00CD50EA /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				88F0E4FE1BE51E7F003CB35B /* GlobalSearchController.swift */,
 				60322EA21BD9CE150099030B /* LoginViewController.swift */,
 				8875DE3A1BE0751B00CD50EA /* MainNavigationController.swift */,
 				88F413FB1BC74EC8000C0093 /* MatchTableViewController.swift */,
@@ -415,6 +418,7 @@
 			files = (
 				8875DE3B1BE0751B00CD50EA /* MainNavigationController.swift in Sources */,
 				88F413FC1BC74EC8000C0093 /* MatchTableViewController.swift in Sources */,
+				88F0E4FF1BE51E7F003CB35B /* GlobalSearchController.swift in Sources */,
 				8875DE321BE051B100CD50EA /* Database.swift in Sources */,
 				88F413FA1BC74A00000C0093 /* MatchTableViewCell.swift in Sources */,
 				888D1A401BDEF816007F09AE /* Stack.swift in Sources */,

@@ -29,8 +29,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
     var searchBarActivateBtn: UIBarButtonItem = UIBarButtonItem()
     var searchBar = UISearchBar()
     
-    let TITLE_ALL_INGREDIENTS = "All Ingredients"
-    let CELLIDENTIFIER_MATCH = "MatchTableViewCell"
+
     let BUTTON_COLOR = UIColor(red: 165/255.0, green: 242/255.0, blue: 216/255.0, alpha: CGFloat(1))
     
     @IBOutlet var matchTableView: UITableView!
@@ -42,9 +41,10 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
         super.viewDidLoad()
 
         configure_searchBar()
+        configure_searchBarActivateBtn()
         
         if let navi = self.navigationController as? MainNavigationController {
-            navi.navigationItem.setLeftBarButtonItems([navi.goBackBtn, navi.searchBarActivateBtn], animated: true)
+            navi.navigationItem.setLeftBarButtonItems([navi.goBackBtn, self.searchBarActivateBtn], animated: true)
             navi.navigationItem.setRightBarButtonItems([navi.goForwardBtn, navi.menuBarBtn], animated: true)
             navi.reset_navigationBar()
             navi.goBackBtn.enabled = false
@@ -53,12 +53,30 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
         showAllIngredients()
     }
     
-    func configure_searchBar() {
+    func configure_searchBarActivateBtn() {
+        searchBarActivateBtn.setTitleTextAttributes(attributes, forState: .Normal)
+        searchBarActivateBtn.title = String.fontAwesomeIconWithName(.Search)
+        searchBarActivateBtn.tintColor = BUTTON_COLOR
+        searchBarActivateBtn.target = self
+        searchBarActivateBtn.action = "searchBarActivateBtnClicked"
+    }
+    
+    func configure_localSearchBar() {
         searchBar.delegate = self
         let y_offset = UIApplication.sharedApplication().statusBarFrame.size.height + (self.navigationController?.navigationBar.frame.height)!
         let screenWidth: CGFloat = UIScreen.mainScreen().bounds.width
         searchBar.frame = CGRect(x: 0, y: y_offset, width: screenWidth, height: 44)
         self.tableView.tableHeaderView = self.searchBar
+    }
+    
+    func configure_searchBar() {
+        searchBar.delegate = self
+        searchBar.hidden = true
+        searchBar.setShowsCancelButton(true, animated: false)
+        let cancelButton = searchBar.valueForKey("cancelButton") as! UIButton
+        let attributes = [NSFontAttributeName: UIFont.fontAwesomeOfSize(20)] as Dictionary!
+        UIBarButtonItem.appearance().setTitleTextAttributes(attributes, forState: UIControlState.Normal)
+        cancelButton.setTitle(String.fontAwesomeIconWithName(.ChevronLeft), forState: UIControlState.Normal)
     }
     
     func showAllIngredients() {
@@ -244,10 +262,12 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     func showSearchBar() {
-        navigationItem.titleView = searchBar
+        self.navigationController?.navigationItem.titleView = searchBar
         searchBar.alpha = 0
         self.searchBar.hidden = false
-        self.navigationItem.setLeftBarButtonItems([goBackBtn], animated: true)
+        if let navi = self.navigationController as? MainNavigationController {
+            navi.navigationItem.setLeftBarButtonItems([navi.goBackBtn], animated: true)
+        }
         
         UIView.animateWithDuration(0.5, animations: {
             self.searchBar.alpha = 1
@@ -257,23 +277,25 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     func hideSearchBar() {
-        var newTitle = ""
-        if let curr = currentIngredient {
-            newTitle = curr.name
-        } else {
-            newTitle = TITLE_ALL_INGREDIENTS
-        }
-        
-        self.searchBar.alpha = 1
-        UIView.animateWithDuration(0.3, animations: {
-            self.searchBar.alpha = 0
-            self.navigationController?.navigationItem.title = newTitle
+        if let navi = self.navigationController as? MainNavigationController {
+            var newTitle = ""
+            if let curr = currentIngredient {
+                newTitle = curr.name
+            } else {
+                newTitle = TITLE_ALL_INGREDIENTS
+            }
             
-            self.navigationItem.setLeftBarButtonItems([self.goBackBtn, self.searchBarActivateBtn], animated: true)
+            self.searchBar.alpha = 1
+            UIView.animateWithDuration(0.3, animations: {
+                self.searchBar.alpha = 0
+                navi.navigationItem.title = newTitle
+                
+                navi.navigationItem.setLeftBarButtonItems([navi.goBackBtn, self.searchBarActivateBtn], animated: true)
 
-            }, completion: { finished in
-                self.navigationItem.titleView = nil
-        })
+                }, completion: { finished in
+                    navi.navigationItem.titleView = nil
+            })
+        }
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {

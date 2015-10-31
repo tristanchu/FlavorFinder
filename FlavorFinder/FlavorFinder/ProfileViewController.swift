@@ -15,7 +15,7 @@ class ProfileViewController: UIViewController {
         self.navigationItem.hidesBackButton = true
         
         if let navi = self.navigationController as? MainNavigationController {
-            navi.navigationItem.setLeftBarButtonItems([navi.searchBarActivateBtn], animated: true)
+//            navi.navigationItem.setLeftBarButtonItems([navi.searchBarActivateBtn], animated: true)
             navi.navigationItem.setRightBarButtonItems([navi.menuBarBtn], animated: true)
             navi.reset_navigationBar()
         }
