@@ -116,12 +116,17 @@
                     <view key="view" contentMode="scaleToFill" id="Bbg-AR-Zd4">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="l6w-eF-TQX">
+                                <rect key="frame" x="225" y="299" width="150" height="2"/>
+                            </progressView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z8U-I1-yy5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1411" y="1219"/>
+            <point key="canvasLocation" x="1415" y="1206"/>
         </scene>
         <!--Register View Controller-->
         <scene sceneID="veb-7d-s5O">
@@ -314,6 +319,23 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R24-WX-Tl7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1319" y="494"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="se3-N4-2cp">
+            <objects>
+                <viewController id="WKn-ri-Ptu" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="JiM-SI-h6y"/>
+                        <viewControllerLayoutGuide type="bottom" id="v0o-Xo-URK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="lA3-cC-hvW">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EB0-fc-K34" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
         </scene>
     </scenes>
 </document>
