@@ -9,6 +9,9 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
+    
+    var savedMatchIds: [Int] = [Int]()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,32 +22,36 @@ class ProfileViewController: UIViewController {
             navi.navigationItem.setRightBarButtonItems([navi.menuBarBtn], animated: true)
             navi.reset_navigationBar()
         }
+        print("!")
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+
     
     override func viewDidAppear(animated: Bool) {
         // if view revisted in app, load again
-        load();
-        super.viewDidAppear(animated);
+        self.load();
+        super.viewDidAppear(animated)
     }
     
     func load() {
         /// need offline vs online options
+        loadUserData() /// might be from cached source
+        loadSavedMatches()
+    }
+    
+    func loadUserData() {
+        ///
     }
     
     func loadSavedMatches() { // a.k.a. load favorites
         //// NSUserDefaults to cache favorites for offline recall too?
+        savedMatchIds.append(1)
+        print(savedMatchIds[0])
     }
-    
-    /// viewDidLoad vs. viewWillAppear vs. loading indicator
-    /// "If you pack all of your network communication into viewDidLoad or viewWillAppear, they will be executed before the user gets to see the view - possibly resulting a short freeze of your app. It may be good idea to first show the user an unpopulated view with an activity indicator of some sort. When you are done with your networking, which may take a second or two (or may even fail - who knows?), you can populate the view with your data."
-    /// http://stackoverflow.com/questions/1579550/uiviewcontroller-viewdidload-vs-viewwillappear-what-is-the-proper-division-of
-    /// another person advises viewDidAppear for those server calls to avoid lagginess in animations etc http://stackoverflow.com/questions/5630649/what-is-the-difference-between-viewwillappear-and-viewdidappear
-
 
     /*
     // MARK: - Navigation
