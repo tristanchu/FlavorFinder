@@ -27,7 +27,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
     var goForwardBtn: UIBarButtonItem = UIBarButtonItem()
 
     var searchBarActivateBtn: UIBarButtonItem = UIBarButtonItem()
-    lazy var searchBar = UISearchBar(frame: CGRectMake(0, 0, 0, 0))
+    var searchBar = UISearchBar()
     
     let TITLE_ALL_INGREDIENTS = "All Ingredients"
     let CELLIDENTIFIER_MATCH = "MatchTableViewCell"
@@ -38,22 +38,6 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
     
     // SETUP FUNCTIONS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // ---------------
-    func configure_searchBar() {
-        searchBar.delegate = self
-        searchBar.hidden = true
-        searchBar.setShowsCancelButton(true, animated: false)
-        let cancelButton = searchBar.valueForKey("cancelButton") as! UIButton
-        let attributes = [NSFontAttributeName: UIFont.fontAwesomeOfSize(20)] as Dictionary!
-        UIBarButtonItem.appearance().setTitleTextAttributes(attributes, forState: UIControlState.Normal)
-        cancelButton.setTitle(String.fontAwesomeIconWithName(.ChevronLeft), forState: UIControlState.Normal)
-    }
-    
-//    func configure_navigationBar() {
-//        // Disable buttons by default.
-//        goBackBtn.enabled = false
-//        goForwardBtn.enabled = false
-//    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -67,6 +51,14 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
             navi.goForwardBtn.enabled = false
         }
         showAllIngredients()
+    }
+    
+    func configure_searchBar() {
+        searchBar.delegate = self
+        let y_offset = UIApplication.sharedApplication().statusBarFrame.size.height + (self.navigationController?.navigationBar.frame.height)!
+        let screenWidth: CGFloat = UIScreen.mainScreen().bounds.width
+        searchBar.frame = CGRect(x: 0, y: y_offset, width: screenWidth, height: 44)
+        self.tableView.tableHeaderView = self.searchBar
     }
     
     func showAllIngredients() {

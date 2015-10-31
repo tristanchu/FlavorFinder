@@ -31,7 +31,8 @@ class MainNavigationController: UINavigationController {
     let BUTTON_COLOR = UIColor(red: 165/255.0, green: 242/255.0, blue: 216/255.0, alpha: CGFloat(1))
     let CELLIDENTIFIER_MENU = "menuCell"
 
-    
+    // SETUP FUNCTIONS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // ---------------
     override func viewDidLoad() {
         super.viewDidLoad()
         configure_goBackBtn()
@@ -44,8 +45,8 @@ class MainNavigationController: UINavigationController {
     func configure_menuTableView() {
         menuTableViewController.navi = self
         menuTableView = menuTableViewController.tableView
-        let height = UIApplication.sharedApplication().statusBarFrame.size.height + self.navigationBar.frame.height
-        menuTableView.frame = CGRectMake(0, height, self.view.frame.width, 200);
+        let y_offset = UIApplication.sharedApplication().statusBarFrame.size.height + self.navigationBar.frame.height
+        menuTableView.frame = CGRectMake(0, y_offset, self.view.frame.width, 200);
         menuTableView.delegate = menuTableViewController
         menuTableView.dataSource = menuTableViewController
         menuTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: CELLIDENTIFIER_MENU)
@@ -56,6 +57,16 @@ class MainNavigationController: UINavigationController {
         menuTableView.hidden = true
         self.view.addSubview(menuTableView)
     }
+    
+//    func configure_searchBar() {
+//        searchBar.delegate = self
+//        searchBar.hidden = true
+//        searchBar.setShowsCancelButton(true, animated: false)
+//        let cancelButton = searchBar.valueForKey("cancelButton") as! UIButton
+//        let attributes = [NSFontAttributeName: UIFont.fontAwesomeOfSize(20)] as Dictionary!
+//        UIBarButtonItem.appearance().setTitleTextAttributes(attributes, forState: UIControlState.Normal)
+//        cancelButton.setTitle(String.fontAwesomeIconWithName(.ChevronLeft), forState: UIControlState.Normal)
+//    }
     
     func reset_navigationBar() {
         self.navigationItem.title = ""
