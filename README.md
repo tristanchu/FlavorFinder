@@ -29,5 +29,4 @@ We have decided that we want to do an iOS app and use Swift for the components r
 ## Frameworks Used
 * [**Parse**](https://www.parse.com/?) to host our User data and allow for secure User authentication.
 
-* [**Locksmith**](https://github.com/matthewpalmer/Locksmith) to wrap around the iOS keychain for secure session data storage.
 * [**Cocoapods**](https://cocoapods.org/) for package management.
