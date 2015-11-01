@@ -10,12 +10,6 @@ import UIKit
 import Parse
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
-    
-    // Keychain testing ----------------------------------------------
-//    let MyKeychainWrapper = KeychainWrapper()
-//    let createLoginButtonTag = 0
-//    let loginButtonTag = 1
-
 
     // MARK: Properties -----------------------------------------------
     @IBOutlet weak var loginLabel: UILabel!
@@ -37,7 +31,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     // MARK: Actions --------------------------------------------------
     // Login button
     @IBAction func loginActionBtn(sender: UIButton) {
-        loginUser(loginUserTextField.text, password: loginPassTextField.text, msg: loginLabel)
+        loginUser(loginUserTextField.text, password: loginPassTextField.text)
     }
     
     // Register button - sends user to RegisterViewController page.
@@ -69,7 +63,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    func loginUser(username: String!, password: String!, msg: UILabel!) {
+    func loginUser(username: String!, password: String!) {
         // Default to true:
         isValid = true
 
@@ -89,22 +83,38 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 (user: PFUser?, error: NSError?) -> Void in
 
                 if user != nil {
-                    // User exists - login and go to matches
-                    msg.text = "User exists!"
+                    // User exists - set user session & go to Match Table
+                    setUserSession(username, password: password)
+                    self.performSegueWithIdentifier(self.loginToMatchTable,
+                        sender: self)
 
                 } else {
-                    // User does not exist.
-                    msg.text = "Incorrect username or password."
+                    // Alert Username and Password pair does not exist.
+                    let alertView = UIAlertController(
+                        title: "Incorrect Username or Password",
+                        message: "Username and Password do not match." as String,
+                        preferredStyle:.Alert)
+                    let okAction = UIAlertAction(title: "Ok", style: .Default,
+                        handler: nil)
+                    alertView.addAction(okAction)
+                    self.presentViewController(alertView, animated: true,
+                        completion: nil)
+                    return;
                 }
             }
         } else {
-            // Give alert if missing username or password fields:
-            let alertView = UIAlertController(title: "Invalid Username or Password",
-                message: "You must enter both a valid username and password." as String,
+            // Alert missing username or password fields:
+            let alertView = UIAlertController(
+                title: "Invalid Username or Password",
+                message: "You must enter a valid username and password." as String,
                 preferredStyle:.Alert)
-            let okAction = UIAlertAction(title: "Ok", style: .Default, handler: nil)
+            let okAction = UIAlertAction(title: "Ok",
+                style: .Default,
+                handler: nil)
             alertView.addAction(okAction)
-            self.presentViewController(alertView, animated: true, completion: nil)
+            self.presentViewController(alertView,
+                animated: true,
+                completion: nil)
             return;
         }
     }
