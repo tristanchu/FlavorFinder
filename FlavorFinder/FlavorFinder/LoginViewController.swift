@@ -11,6 +11,12 @@ import Parse
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
     
+    // Keychain testing ----------------------------------------------
+//    let MyKeychainWrapper = KeychainWrapper()
+//    let createLoginButtonTag = 0
+//    let loginButtonTag = 1
+
+
     // MARK: Properties -----------------------------------------------
     @IBOutlet weak var loginLabel: UILabel!
     
@@ -29,11 +35,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 
 
     // MARK: Actions --------------------------------------------------
+    // Login button
     @IBAction func loginActionBtn(sender: UIButton) {
         loginUser(loginUserTextField.text, password: loginPassTextField.text, msg: loginLabel)
     }
     
-    // Send user to RegisterViewController page.
+    // Register button - sends user to RegisterViewController page.
     @IBAction func goRegisterActionBtn(sender: UIButton) {
         self.performSegueWithIdentifier(loginToRegister, sender: self)
     }
@@ -63,6 +70,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     func loginUser(username: String!, password: String!, msg: UILabel!) {
+        // Default to true:
+        isValid = true
+
+        // Validate username and password input:
         if isInvalidUsername(username) {
             loginUserTextField.backgroundColor = backgroundColor_error
             isValid = false
@@ -87,8 +98,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 }
             }
         } else {
-            msg.text = "Invalid username or password."
-            isValid = true
+            // Give alert if missing username or password fields:
+            let alertView = UIAlertController(title: "Invalid Username or Password",
+                message: "You must enter both a valid username and password." as String,
+                preferredStyle:.Alert)
+            let okAction = UIAlertAction(title: "Ok", style: .Default, handler: nil)
+            alertView.addAction(okAction)
+            self.presentViewController(alertView, animated: true, completion: nil)
+            return;
         }
     }
     

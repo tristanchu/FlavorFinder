@@ -86,14 +86,12 @@ strip_invalid_archs() {
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-FlavorFinder/Bolts.framework"
   install_framework "Pods-FlavorFinder/FontAwesome_swift.framework"
-  install_framework "Pods-FlavorFinder/Locksmith.framework"
   install_framework "Pods-FlavorFinder/Parse.framework"
   install_framework "Pods-FlavorFinder/SQLite.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-FlavorFinder/Bolts.framework"
   install_framework "Pods-FlavorFinder/FontAwesome_swift.framework"
-  install_framework "Pods-FlavorFinder/Locksmith.framework"
   install_framework "Pods-FlavorFinder/Parse.framework"
   install_framework "Pods-FlavorFinder/SQLite.framework"
 fi
