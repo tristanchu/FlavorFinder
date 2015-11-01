@@ -9,14 +9,24 @@
 import UIKit
 import FontAwesome_swift
 
+// Keychain wrapping:
+let MyKeychainWrapper = KeychainWrapper()
+
+// Keychain / NSUserDefaults keys:
+let IS_LOGGED_IN_KEY = "isLoggedInKey"
+let USERNAME_KEY = "username"
+
+// Controller Identifiers:
 let ProfileViewControllerIdentifier = "ProfileViewControllerIdentifier"
 let MatchTableViewControllerIdentifier = "MatchTableViewControllerIdentifier"
 let LoginViewControllerIdentifier = "LoginViewControllerIdentifier"
 
+// DB Labels:
 let TITLE_ALL_INGREDIENTS = "All Ingredients"
 let CELLIDENTIFIER_MATCH = "MatchTableViewCell"
 let CELLIDENTIFIER_MENU = "menuCell"
 
+// Colors:
 let NAVI_BUTTON_COLOR = UIColor(red: 165/255.0, green: 242/255.0, blue: 216/255.0, alpha: CGFloat(1))
 
 let MATCH_LOW_COLOR = UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: CGFloat(0.3))
