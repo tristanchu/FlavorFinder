@@ -1,17 +1,26 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """
 Scraper for the 'The Flavor Bible'.
 
 Created by Jon.
 """
 
+import sqlite3
+import re
+import json
+import os
+
 import ebooklib
 from ebooklib import epub
 from bs4 import BeautifulSoup
-import sqlite3
-import re
-import csv
 
+
+if os.path.isfile("flavorbible.db"):
+    os.remove("flavorbible.db")
+if os.path.isfile("ingredients.json"):
+    os.remove("ingredients.json")
+if os.path.isfile("matches.json"):
+    os.remove("matches.json")
 
 conn = sqlite3.connect('flavorbible.db')
 c = conn.cursor()
@@ -43,63 +52,107 @@ c.execute('''CREATE TABLE matches(
 
 latest_id = 0
 
+def fixName(s):
+    s = s.lower()
+    if " —" in s:
+        index = s.find(" —")
+        s = s[:index]
+    if ", esp." in s:
+        index = s.find(", esp.")
+        s = s[:index]
+    elif ", (" in s:
+        index = s.find(", (")
+        s = s[:index]
+    elif ", e.g." in s:
+        index = s.find(", e.g.")
+        s = s[:index]
+    elif " (e.g." in s:
+        index = s.find(" (e.g.")
+        s = s[:index]
+    elif bool(re.search('\(.*\)', s)):
+        s = re.sub(r'\s?\(.*\)', '', s)
+
+    if s.count(',') == 1 and s.count(':') == 0:
+        index = s.find(',')
+        s = s[index+2:]+" "+s[:index]
+
+    return s
+
 def addMatches(ingredients, matches, ingredient_ids, id, i, s, match_level):
     global latest_id
-
-    if s.lower() in ingredient_ids:
-        match_id = ingredient_ids[s.lower()]
+    
+    s = fixName(s)
+    
+    if s in ingredient_ids:
+        match_id = ingredient_ids[s]
     else:
         match_id = latest_id
-        ingredients[match_id] = [match_id, s, '', '', '', '', '1', '0', '0', '0']
-        ingredient_ids[s.lower()] = match_id
+        ingredients[match_id] = {
+            "tmp_id": match_id,
+            "name": s.lower(),
+            "season": '',
+            "taste": '',
+            "weight": '',
+            "volume": '',
+            "vegetarian": 1,
+            "dairy": 0,
+            "kosher": 0,
+            "nuts": 0
+        }
+        ingredient_ids[s] = match_id
         latest_id += 1
 
     match1 = str(id) + '_' + str(match_id)
     match2 = str(match_id) + '_' + str(id)
 
     if not match1 in matches:
-        matches[match1] = [id, match_id, match_level, '0', '0', '', '']
+        matches[match1] = {
+            "ingredient_id": id,
+            "match_id": match_id,
+            "match_level": match_level,
+            "upvotes": 0,
+            "downvotes": 0,
+            "affinity": '',
+            "quote": ''
+        }
     if not match2 in matches:
-        matches[match2] = [match_id, id, match_level, '0', '0', '', '']
+        matches[match2] = {
+            "ingredient_id": match_id,
+            "match_id": id,
+            "match_level": match_level,
+            "upvotes": 0,
+            "downvotes": 0,
+            "affinity": '',
+            "quote": ''
+        }
 
 
-def writeIngredientsToCSV(filename, fieldnames, data):
-    with open(filename, 'w') as csvfile:
-        writer = csv.DictWriter(csvfile, delimiter='|', fieldnames=fieldnames)
-        writer.writeheader()
-        for key in data:
-            row = data[key]
-            print(row)
-            writer.writerow({fieldnames[0]: row[0], fieldnames[1]: row[1], fieldnames[2]: row[2], 
-                             fieldnames[3]: row[3], fieldnames[4]: row[4], fieldnames[5]: row[5],
-                             fieldnames[6]: row[6], fieldnames[7]: row[7], fieldnames[8]: row[8],
-                             fieldnames[9]: row[9]})
+def writeResultsToJSON(filename, data):
+    results = {}
+    results["results"] = []
+    for key in data:
+        row = data[key]
+        results["results"].append(row)
+    with open(filename, 'w') as jsonfile:
+        json.dump(results, jsonfile, indent=4)
 
-def writeMatchesToCSV(filename, fieldnames, data):
-    with open(filename, 'w') as csvfile:
-        writer = csv.DictWriter(csvfile, delimiter='|', fieldnames=fieldnames)
-        writer.writeheader()
-        for key in data:
-            row = data[key]
-            writer.writerow({fieldnames[0]: row[0], fieldnames[1]: row[1], fieldnames[2]: row[2], 
-                             fieldnames[3]: row[3], fieldnames[4]: row[4]})
 
 def writeIngredientsToTable(data):
     for key in data:
         row = data[key]
-        c.execute("INSERT INTO ingredients VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')" % (row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9]))
+        c.execute("INSERT INTO ingredients VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')" % (row["tmp_id"], row["name"], row["season"], row["taste"], row["weight"], row["volume"], row["vegetarian"], row["dairy"], row["kosher"], row["nuts"]))
 
 def writeMatchesToTable(data):
     for key in data:
         row = data[key]
-        c.execute("INSERT INTO matches VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s')" % (row[0], row[1], row[2], row[3], row[4], row[5], row[6]))
+        c.execute("INSERT INTO matches VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s')" % (row["ingredient_id"], row["match_id"], row["match_level"], row["upvotes"], row["downvotes"], row["affinity"], row["quote"]))
 
 
 
 if __name__ == '__main__':
     global latest_id
-    ingredients_fieldnames = ['id', 'name', 'season', 'taste', 'weight', 'volume', 'vegetarian', 'dairy', 'kosher', 'nuts']
-    matches_fieldnames = ['name', 'match', 'match_level', 'upvotes', 'downvotes', 'affinity', 'quote']
+    ingredients_fieldnames = ['tmp_id', 'name', 'season', 'taste', 'weight', 'volume', 'vegetarian', 'dairy', 'kosher', 'nuts']
+    matches_fieldnames = ['ingredient_id', 'match_id', 'match_level', 'upvotes', 'downvotes', 'affinity', 'quote']
 
     ingredients = {}
     matches = {}
@@ -117,14 +170,24 @@ if __name__ == '__main__':
             for ingredient in soup.find_all('p', {'class' : ['lh', 'lh1']}):
                 print('HEADING: ', ingredient)
 
-                i = re.sub(r'\s?\(See also.*\)', '', ingredient.text)
-                i = i.lower()
+                i = fixName(ingredient.text)
             
                 if i in ingredient_ids:
                     id = ingredient_ids[i]
                 else:
                     id = latest_id
-                    ingredients[id] = [id, i, '', '', '', '', 1, 0, 0, 0]
+                    ingredients[id] = {
+                        "tmp_id": id,
+                        "name": i,
+                        "season": '',
+                        "taste": '',
+                        "weight": '',
+                        "volume": '',
+                        "vegetarian":  '1',
+                        "dairy": '0',
+                        "kosher": '0',
+                        "nuts": '0'
+                    }
                     ingredient_ids[i] = id
                     latest_id += 1
             
@@ -143,21 +206,50 @@ if __name__ == '__main__':
                     
                     # season, taste, weight, volume
                     if s.startswith('Season:'):
-                        ingredients[id][2] = s[8:]
+                        ingredients[id]["season"] = s[8:]
                     elif s.startswith('Taste:'):
-                        ingredients[id][3] = s[7:]
+                        ingredients[id]["taste"] = s[7:]
                     elif s.startswith('Weight:'):
-                        ingredients[id][4] = s[8:]
+                        ingredients[id]["weight"] = s[8:]
                     elif s.startswith('Volume:'):
-                        ingredients[id][5] = s[8:]
+                        ingredients[id]["volume"] = s[8:]
+                    elif s.startswith('Tips'):
+                        sibling = sibling.find_next_sibling()
+                        continue
+                    elif sibling['class'] == ['ul3']:
+                        sibling = sibling.find_next_sibling()
+                        continue
             
                     # quote
                     elif sibling['class'] == ['p1']:
-                        quote = s
                         sibling = sibling.find_next_sibling()
-                        s = sibling.text
-                        quote += ' ' + s
+                        continue
+#                        quote = s
+#                        sibling = sibling.find_next_sibling()
+#                        s = sibling.text
+#                        quote += ' ' + s
                         #c.execute("INSERT INTO matches VALUES ('%s', '', '', '', '%s')" % (i, quote))
+                    elif sibling['class'] == ['ca'] or sibling['class'] == ['ca3']:
+                        sibling = sibling.find_next_sibling()
+                        continue
+                    elif sibling['class'] == ['img']:
+                        sibling = sibling.find_next_sibling()
+                        continue
+                    elif sibling['class'] == ['boxh']:
+                        sibling = sibling.find_next_sibling()
+                        continue
+                    elif sibling['class'] == ['ext']:
+                        sibling = sibling.find_next_sibling()
+                        continue
+                    elif sibling['class'] == ['exts']:
+                        sibling = sibling.find_next_sibling()
+                        continue
+                    elif sibling['class'] == ['bl'] or sibling['class'] == ['bl1'] or sibling['class'] == ['bl3']:
+                        sibling = sibling.find_next_sibling()
+                        continue
+                    elif sibling['class'] == ['sbh'] or sibling['class'] == ['sbtx1']:
+                        sibling = sibling.find_next_sibling()
+                        continue
                     # flavor affinities
                     elif sibling['class'] == ['h4']:
                         sibling = sibling.find_next_sibling()
@@ -189,8 +281,10 @@ if __name__ == '__main__':
     
                 print('')
     
-    writeIngredientsToCSV('ingredients.csv', ingredients_fieldnames, ingredients)
-    writeMatchesToCSV('matches.csv', matches_fieldnames, matches)
+
+
+    writeResultsToJSON('ingredients.json', ingredients)
+    writeResultsToJSON('matches.json', matches)
 
     writeIngredientsToTable(ingredients)
     writeMatchesToTable(matches)
