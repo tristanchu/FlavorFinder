@@ -10,7 +10,7 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     let TITLE_PROFILE_PAGE = "Profile"
-    var savedMatchIds: [Int] = [Int]()
+    private lazy var savedMatchIds: [Int] = [Int]()
     
 // OVERRIDE FUNCTIONS
     
@@ -59,7 +59,7 @@ class ProfileViewController: UIViewController {
 // FLUSH CONTENT FUNCTIONS
     
     func flushData() {
-        savedMatchIds = [Int]()
+        savedMatchIds.removeAll()
     }
     
 }
