@@ -19,6 +19,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var registerButton: UIButton!
+    
+    // DEBUG
     @IBOutlet weak var goToTableButton: UIButton!
     
     var isValid: Bool = true
@@ -26,6 +28,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     // MARK: Segue Identifiers ----------------------------------------
     let loginToRegister = "segueLoginToRegister"
     let loginToMatchTable = "segueLoginToMatchTable"
+    let loginToProfilePage = "segueLoginToProfilePage"
 
 
     // MARK: Actions --------------------------------------------------
@@ -39,11 +42,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         self.performSegueWithIdentifier(loginToRegister, sender: self)
     }
     
-    // Temporary button to go to main page without logging in
+    // DEBUG: Temporary button to go to main page without logging in
     @IBAction func goTableViewTEMP(sender: UIButton) {
         self.performSegueWithIdentifier(loginToMatchTable, sender: self)
     }
-    
     
     // FUNCTIONS -------------------------------------------------------
     override func viewDidLoad() {
