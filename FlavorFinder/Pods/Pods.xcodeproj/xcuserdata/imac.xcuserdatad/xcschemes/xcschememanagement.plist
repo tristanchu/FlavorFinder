@@ -19,11 +19,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Locksmith.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Parse.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -42,6 +37,16 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>45942BD76A4B5F04CDA264BD77B4F9BF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6D0A25D8D57E684025B73A103ECA1A80</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>6D9EDCF48A5AA1A0B1FB393CB904CF6F</key>
 		<dict>
 			<key>primary</key>
@@ -57,22 +62,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>81B464654015E6F8C4968F8C825A9E1F</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>92943306EC8070DF9CD02ECD505D2CD5</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>B8A759F57254B6094CF99273E5ECEE8B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>C890CCD5764E5DE67E53E5CD106779B1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
