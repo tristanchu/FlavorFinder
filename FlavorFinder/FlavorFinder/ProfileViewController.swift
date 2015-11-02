@@ -11,7 +11,9 @@ import UIKit
 class ProfileViewController: UIViewController {
     let TITLE_PROFILE_PAGE = "Profile"
     var savedMatchIds: [Int] = [Int]()
-
+    
+// OVERRIDE FUNCTIONS
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.hidesBackButton = true
@@ -26,7 +28,7 @@ class ProfileViewController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        self.flushData()
     }
 
     
@@ -35,6 +37,8 @@ class ProfileViewController: UIViewController {
         self.loadContent()
         super.viewDidAppear(animated)
     }
+    
+// LOAD CONTENT FUNCTIONS
     
     func loadContent() {
         /// need offline vs online options
@@ -52,4 +56,10 @@ class ProfileViewController: UIViewController {
         print(savedMatchIds[0])
     }
 
+// FLUSH CONTENT FUNCTIONS
+    
+    func flushData() {
+        savedMatchIds = [Int]()
+    }
+    
 }
