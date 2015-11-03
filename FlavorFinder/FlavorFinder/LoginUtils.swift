@@ -21,17 +21,21 @@ var backgroundColor_error: UIColor = UIColor(red: 250/255.0, green: 126/255.0, b
 
 // SESSION VALIDATION FUNCTIONS ---------------------------------------
 
-// isUserLoggedIn
-//
-// @return: True if user is currently logged into a session
+/**
+    isUserLoggedIn
+
+    @return: Bool - True if user is currently logged into a session
+*/
 func isUserLoggedIn() -> Bool {
     return NSUserDefaults.standardUserDefaults().boolForKey(IS_LOGGED_IN_KEY)
 }
 
-// setUserSession
-//
-// @param: username - String - validated, existing username
-// @param: password - String - validated, existing password
+/**
+    setUserSession
+
+    @param: username - String - validated, existing username
+    @param: password - String - validated, existing password
+*/
 func setUserSession(username: String, password: String) -> Void {
     // Store username and password in keychain:
     MyKeychainWrapper.mySetObject(password, forKey: kSecValueData)
@@ -43,10 +47,12 @@ func setUserSession(username: String, password: String) -> Void {
     NSUserDefaults.standardUserDefaults().synchronize()
 }
 
-// removeUserSession
-//
-// Removes username and password from Keychain and sets session bool to False.
-// Called within Logout button.
+/**
+    removeUserSession
+
+    Removes username and password from Keychain by setting both to "default."
+    Sets session bool to False. Called within Logout button.
+*/
 func removeUserSession() -> Void {
     // Remove Keychain data:
     MyKeychainWrapper.mySetObject("default", forKey: kSecValueData)
@@ -59,16 +65,26 @@ func removeUserSession() -> Void {
     NSUserDefaults.standardUserDefaults().synchronize()
 }
 
-// getUsernameFromKeychain
-//
-// @return: username - String
+/**
+    getUsernameFromKeychain
+
+    Gets username currently stored in the Keychain. If no user stored, gets
+    the default username "default" as String.
+
+    @return: username - String
+*/
 func getUsernameFromKeychain() -> String {
     return MyKeychainWrapper.myObjectForKey(kSecAttrAccount) as! String
 }
 
-// getPasswordFromKeychain
-//
-// @return: password - String
+/**
+    getPasswordFromKeychain
+
+    Gets password currently stored in the Keychain. If no user stored, gets
+    the default password "default" as String.
+
+    @return: password - String
+*/
 func getPasswordFromKeychain() -> String {
     return MyKeychainWrapper.myObjectForKey(kSecValueData) as! String
 }
@@ -76,10 +92,12 @@ func getPasswordFromKeychain() -> String {
 
 // INPUT VALIDATION FUNCTIONS ------------------------------------------
 
-// isInvalidUsername
-//
-// @param: email - String
-// @return: True if email is not a valid email.
+/**
+    isInvalidEmail
+
+    @param: email - String
+    @return: True if email is not a valid email.
+*/
 func isInvalidEmail(email:String) -> Bool {
     let emailRegex = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
     
@@ -87,20 +105,24 @@ func isInvalidEmail(email:String) -> Bool {
     return !emailTest.evaluateWithObject(email)
 }
 
-// isInvalidUsername
-//
-// @param: username - String
-// @return: True if username = empty, too long, or too short.
+/**
+    isInvalidUsername
+
+    @param: username - String
+    @return: True if username = empty, too long, or too short.
+*/
 func isInvalidUsername(username: String) -> Bool {
     return (username.isEmpty ||
         username.characters.count > USERNAME_CHAR_MAX ||
         username.characters.count < USERNAME_CHAR_MIN)
 }
 
-// isInvalidPassword
-//
-// @param: password - String
-// @return: True if password = empty, too long, or too short.
+/**
+    isInvalidPassword
+
+    @param: password - String
+    @return: True if password = empty, too long, or too short.
+*/
 func isInvalidPassword(password: String) -> Bool {
     return (password.isEmpty ||
         password.characters.count > PASSWORD_CHAR_MAX ||
