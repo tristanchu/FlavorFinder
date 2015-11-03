@@ -200,7 +200,6 @@ class MainNavigationController: UINavigationController {
     // MENU FUNCTIONS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // --------------
     func menuBtnClicked() {
-        print("menuBtn clicked.")
         if (menuTableView.hidden) {
             showMenuTableView()
         } else {
@@ -254,6 +253,8 @@ class MainNavigationController: UINavigationController {
 //    
     func hideSearchBar() {
         var newTitle = ""
+        
+        // Special title conditions.
         if let matchTableViewControllerObject = self.visibleViewController as? MatchTableViewController {
             if let curr = matchTableViewControllerObject.currentIngredient {
                 newTitle = curr.name

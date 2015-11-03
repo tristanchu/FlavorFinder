@@ -19,13 +19,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
     var filteredCells = [Ingredient]()  // Array of all cells that ARE displayed (filtered version of 'allCells').
     var viewingMatches = false          // Activates colored backgrounds. Only want to show colors when viewing matches, not all ingredients.
     var currentIngredient : Ingredient? // Stores the ingredient being viewed (nil for all ingredients).
-    var dropdownIsDown = false
-
-    var menuBarBtn: UIBarButtonItem = UIBarButtonItem()
     
-    var goBackBtn: UIBarButtonItem = UIBarButtonItem()
-    var goForwardBtn: UIBarButtonItem = UIBarButtonItem()
-
     var searchBarActivateBtn: UIBarButtonItem = UIBarButtonItem()
     var searchBar = UISearchBar()
     
