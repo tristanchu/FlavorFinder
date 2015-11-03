@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 class ProfileViewController: UIViewController {
     let TITLE_PROFILE_PAGE = "Profile"
@@ -55,20 +56,48 @@ class ProfileViewController: UIViewController {
         
         
         /// need offline vs online options
-        loadUserData() /// might be from cached source
-        loadSavedMatches()
+        let offline = false /// DEBUG
+        loadUserData(offline)
+        loadSavedMatches(offline)
     }
     
-    func loadUserData() {
-        ///
+    func loadUserData(offline: Bool) {
+        if offline {
+            /// load cached data
+        } else {
+            /// load user data via query
+        }
     }
     
-    func loadSavedMatches() { // a.k.a. load favorites
+    func loadSavedMatches(offline: Bool) { // a.k.a. load favorites
         /// DEBUG:
         print("loading saved matches...")
         if let debugMatch = Match(matchId: 1, ingredientIds: [1, 5], names: ["bacon", "leeks"]) {
             savedMatchIds.append(debugMatch)
             print(savedMatchIds[0].description)
+        }
+        return /// because we just want debug dummy data for now
+        /// skeleton
+        if offline {
+            /// get from cached
+        } else {
+            let userId = 1 /// DEBUG dummy data
+            let query = PFQuery(className: "Favorites")
+            query.whereKey("userId", equalTo: userId)
+            query.findObjectsInBackgroundWithBlock {
+                (objects: [PFObject]?, error: NSError?) -> Void in
+                
+                if error == nil { // success
+                    if let matches = objects {
+                        for match in matches {
+                            ////// do something
+                            print("Got a match!") /// DEBUG
+                        }
+                    }
+                } else {
+                    print("Error loading saved matches: \(error!) \(error!.userInfo)")
+                }
+            }
         }
     }
 
@@ -76,6 +105,7 @@ class ProfileViewController: UIViewController {
     
     func flushData() {
         savedMatchIds.removeAll()
+        /// empty caches
     }
     
 }
