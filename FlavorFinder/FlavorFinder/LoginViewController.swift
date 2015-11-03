@@ -20,7 +20,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var registerButton: UIButton!
     
-    // DEBUG
+    // Debug:
     @IBOutlet weak var goToTableButton: UIButton!
     
     var isValid: Bool = true
@@ -47,7 +47,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         self.performSegueWithIdentifier(loginToMatchTable, sender: self)
     }
     
-    // FUNCTIONS -------------------------------------------------------
+    // OVERRIDE FUNCTIONS ---------------------------------------------
+
+    /**
+    viewDidLoad
+    
+    Controls visuals upon loading view.
+    */
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.hidesBackButton = true
@@ -65,6 +71,26 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    /**
+    textFieldDidBeginEditing
+
+    Sets textField background color to "normal" color.
+    */
+    func textFieldDidBeginEditing(textField: UITextField) {
+        textField.backgroundColor = backgroundColor_normal
+    }
+
+    // FUNCTIONS -------------------------------------------------------
+
+    /** 
+    loginUser
+
+    Checks input for user and pw fields as valid strings, authenticates
+    using Parse, then logs in user if successful.
+    
+    @param: username - String! - string given in username input field
+    @param: password - String! - string given in password input field
+    */
     func loginUser(username: String!, password: String!) {
         // Default to true:
         isValid = true
@@ -120,8 +146,5 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             return;
         }
     }
-    
-    func textFieldDidBeginEditing(textField: UITextField) {
-        textField.backgroundColor = backgroundColor_normal
-    }
+
 }
