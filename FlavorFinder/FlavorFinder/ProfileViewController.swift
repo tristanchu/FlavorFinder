@@ -11,10 +11,12 @@ import Parse
 
 class ProfileViewController: UIViewController {
 
-    // MARK: Properties----------------------------------------------
+    // MARK: Attributes ----------------------------------------
     let TITLE_PROFILE_PAGE = "Profile"
     private lazy var savedMatchIds: [Match] = [Match]()
 
+    // MARK: Properties ----------------------------------------------
+    @IBOutlet weak var ProfileWelcomeLabel: UILabel!
 
     // OVERRIDE FUNCTIONS ---------------------------------------------
     
@@ -33,6 +35,12 @@ class ProfileViewController: UIViewController {
             navi.reset_navigationBar()
             navi.navigationItem.title = TITLE_PROFILE_PAGE
         }
+
+        // Update Welcome Label:
+        // TODO: get username from variable set by loadContent
+        let user = getUsernameFromKeychain()
+        ProfileWelcomeLabel.text = "Hello " + user + "!"
+
     }
 
     /**
@@ -54,6 +62,8 @@ class ProfileViewController: UIViewController {
             // if view revisted in app, load again
             self.loadContent()
             super.viewDidAppear(animated)
+
+        // User not logged in:
         } else {
             // DEBUG:
             print("user is not logged in! oops")
@@ -151,4 +161,7 @@ class ProfileViewController: UIViewController {
         /// empty caches
     }
     
+    // PROFILE PAGE FUNCTIONS -------------------------------
+
+
 }
