@@ -10,11 +10,19 @@ import UIKit
 import Parse
 
 class ProfileViewController: UIViewController {
+
+    // MARK: Properties----------------------------------------------
     let TITLE_PROFILE_PAGE = "Profile"
     private lazy var savedMatchIds: [Match] = [Match]()
+
+
+    // OVERRIDE FUNCTIONS ---------------------------------------------
     
-// OVERRIDE FUNCTIONS
+    /**
+    viewDidLoad  --override
     
+    Sets visuals for navigation.
+    */
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.hidesBackButton = true
@@ -27,12 +35,20 @@ class ProfileViewController: UIViewController {
         }
     }
 
+    /**
+    didReceiveMemoryWarning --override
+    */
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         self.flushData()
     }
 
+    /**
+    viewDidAppear
     
+    Checks that user is logged in before loading content. If no user, redirects
+    to the login page.
+    */
     override func viewDidAppear(animated: Bool) {
         if isUserLoggedIn() {
             // if view revisted in app, load again
@@ -42,12 +58,18 @@ class ProfileViewController: UIViewController {
             // DEBUG:
             print("user is not logged in! oops")
             super.viewDidAppear(animated)
+
             //// TODO: segue to login screen
         }
     }
     
-// LOAD CONTENT FUNCTIONS
+    // LOAD CONTENT FUNCTIONS ---------------------------------------------
     
+    /**
+    loadContent
+
+    Loads user data and saved matches (favorites)
+    */
     func loadContent() {
         //// https://developer.apple.com/icloud/documentation/data-storage/index.html
         /// "Data that can be downloaded again or regenerated should be stored in the <Application_Home>/Library/Caches directory. Examples of files you should put in the Caches directory include database cache files and downloadable content, such as that used by magazine, newspaper, and map applications." --> database cache!
@@ -61,6 +83,13 @@ class ProfileViewController: UIViewController {
         loadSavedMatches(offline)
     }
     
+    /**
+    loadUserData
+
+    TODO: Load user data from Parse using username stored in Keychain
+
+    @param: offline - Bool -- if user is offline
+    */
     func loadUserData(offline: Bool) {
         if offline {
             /// load cached data
@@ -69,6 +98,13 @@ class ProfileViewController: UIViewController {
         }
     }
     
+    /**
+    loadSavedMatches
+
+    TODO: Get matches (favorites) for user from Parse.
+    
+    @param: offline - Bool -- if user is offline
+    */
     func loadSavedMatches(offline: Bool) { // a.k.a. load favorites
         /// DEBUG:
         print("loading saved matches...")
@@ -78,6 +114,8 @@ class ProfileViewController: UIViewController {
         }
         return /// because we just want debug dummy data for now
         /// skeleton
+        
+        // NOT BEING RUN BECAUSE OF RETURN ^
         if offline {
             /// get from cached
         } else {
@@ -101,8 +139,13 @@ class ProfileViewController: UIViewController {
         }
     }
 
-// FLUSH CONTENT FUNCTIONS
-    
+    // FLUSH CONTENT FUNCTIONS ---------------------------------------------
+
+    /**
+    flushData
+
+    Clears all stored matches for user.
+    */
     func flushData() {
         savedMatchIds.removeAll()
         /// empty caches
