@@ -10,7 +10,7 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     let TITLE_PROFILE_PAGE = "Profile"
-    private lazy var savedMatchIds: [Int] = [Int]()
+    private lazy var savedMatchIds: [Match] = [Match]()
     
 // OVERRIDE FUNCTIONS
     
@@ -33,14 +33,27 @@ class ProfileViewController: UIViewController {
 
     
     override func viewDidAppear(animated: Bool) {
-        // if view revisted in app, load again
-        self.loadContent()
-        super.viewDidAppear(animated)
+        if isUserLoggedIn() {
+            // if view revisted in app, load again
+            self.loadContent()
+            super.viewDidAppear(animated)
+        } else {
+            // DEBUG:
+            print("user is not logged in! oops")
+            super.viewDidAppear(animated)
+            //// TODO: segue to login screen
+        }
     }
     
 // LOAD CONTENT FUNCTIONS
     
     func loadContent() {
+        //// https://developer.apple.com/icloud/documentation/data-storage/index.html
+        /// "Data that can be downloaded again or regenerated should be stored in the <Application_Home>/Library/Caches directory. Examples of files you should put in the Caches directory include database cache files and downloadable content, such as that used by magazine, newspaper, and map applications." --> database cache!
+        /// "Data that is used only temporarily should be stored in the <Application_Home>/tmp directory. Although these files are not backed up to iCloud, remember to delete those files when you are done with them so that they do not continue to consume space on the user’s device." --> really short-term cache
+        /// "Use the "do not back up" attribute for specifying files that should remain on device, even in low storage situations. Use this attribute with data that can be recreated but needs to persist even in low storage situations for proper functioning of your app or because customers expect it to be available during offline use...Because these files do use on-device storage space, your app is responsible for monitoring and purging these files periodically." --> offline access to favorites?
+        
+        
         /// need offline vs online options
         loadUserData() /// might be from cached source
         loadSavedMatches()
@@ -51,9 +64,12 @@ class ProfileViewController: UIViewController {
     }
     
     func loadSavedMatches() { // a.k.a. load favorites
-        //// NSUserDefaults to cache favorites for offline recall too?
-        savedMatchIds.append(1)
-        print(savedMatchIds[0])
+        /// DEBUG:
+        print("loading saved matches...")
+        if let debugMatch = Match(matchId: 1, ingredientIds: [1, 5], names: ["bacon", "leeks"]) {
+            savedMatchIds.append(debugMatch)
+            print(savedMatchIds[0].description)
+        }
     }
 
 // FLUSH CONTENT FUNCTIONS
