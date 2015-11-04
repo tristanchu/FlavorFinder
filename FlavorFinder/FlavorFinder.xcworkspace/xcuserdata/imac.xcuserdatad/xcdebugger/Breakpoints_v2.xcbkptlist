@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FlavorFinder/MatchTableViewController.swift"
-            timestampString = "468281145.762374"
+            timestampString = "468288415.138927"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "125"
-            endingLineNumber = "125"
+            startingLineNumber = "135"
+            endingLineNumber = "135"
             landmarkName = "tableView(_:cellForRowAtIndexPath:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -154,11 +154,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FlavorFinder/MainNavigationController.swift"
-            timestampString = "468013923.327753"
+            timestampString = "468290442.721396"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
             landmarkName = "configure_menuTableView()"
             landmarkType = "5">
          </BreakpointContent>
@@ -170,11 +170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FlavorFinder/MainNavigationController.swift"
-            timestampString = "468281098.121151"
+            timestampString = "468290442.721396"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "204"
-            endingLineNumber = "204"
+            startingLineNumber = "205"
+            endingLineNumber = "205"
             landmarkName = "menuBtnClicked()"
             landmarkType = "5">
          </BreakpointContent>
@@ -186,11 +186,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FlavorFinder/MainNavigationController.swift"
-            timestampString = "468281098.121151"
+            timestampString = "468290442.721396"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "206"
-            endingLineNumber = "206"
+            startingLineNumber = "207"
+            endingLineNumber = "207"
             landmarkName = "menuBtnClicked()"
             landmarkType = "5">
          </BreakpointContent>
@@ -202,11 +202,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FlavorFinder/MainNavigationController.swift"
-            timestampString = "468281098.121151"
+            timestampString = "468290442.721396"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "211"
-            endingLineNumber = "211"
+            startingLineNumber = "212"
+            endingLineNumber = "212"
             landmarkName = "showMenuTableView()"
             landmarkType = "5">
          </BreakpointContent>
@@ -362,11 +362,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FlavorFinder/MainNavigationController.swift"
-            timestampString = "468013923.327753"
+            timestampString = "468290442.721396"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "183"
-            endingLineNumber = "183"
+            startingLineNumber = "184"
+            endingLineNumber = "184"
             landmarkName = "goForwardBtnClicked()"
             landmarkType = "5">
          </BreakpointContent>
@@ -378,11 +378,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FlavorFinder/MainNavigationController.swift"
-            timestampString = "468013923.327753"
+            timestampString = "468290442.721396"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "171"
-            endingLineNumber = "171"
+            startingLineNumber = "172"
+            endingLineNumber = "172"
             landmarkName = "goForwardBtnClicked()"
             landmarkType = "5">
          </BreakpointContent>
@@ -410,11 +410,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FlavorFinder/MainNavigationController.swift"
-            timestampString = "468013923.327753"
+            timestampString = "468290442.721396"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "99"
-            endingLineNumber = "99"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
             landmarkName = "configure_searchBar()"
             landmarkType = "5">
          </BreakpointContent>
@@ -474,27 +474,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FlavorFinder/MatchTableViewController.swift"
-            timestampString = "468281145.762374"
+            timestampString = "468288415.138927"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "249"
-            endingLineNumber = "249"
-            landmarkName = "filterResults(_:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "FlavorFinder/MatchTableViewController.swift"
-            timestampString = "468281145.762374"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "245"
-            endingLineNumber = "245"
+            startingLineNumber = "259"
+            endingLineNumber = "259"
             landmarkName = "searchBar(_:textDidChange:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -506,12 +490,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FlavorFinder/MatchTableViewController.swift"
-            timestampString = "468281145.762374"
+            timestampString = "468288415.138927"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "199"
-            endingLineNumber = "199"
-            landmarkName = "searchBarActivateBtnClicked()"
+            startingLineNumber = "255"
+            endingLineNumber = "255"
+            landmarkName = "hideSearchBar()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -522,12 +506,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FlavorFinder/MatchTableViewController.swift"
-            timestampString = "468281145.762374"
+            timestampString = "468288415.138927"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "208"
-            endingLineNumber = "208"
-            landmarkName = "showSearchBar()"
+            startingLineNumber = "209"
+            endingLineNumber = "209"
+            landmarkName = "MatchTableViewController"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FlavorFinder/MatchTableViewController.swift"
+            timestampString = "468288415.138927"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "218"
+            endingLineNumber = "218"
+            landmarkName = "searchBarCancelButtonClicked(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -538,11 +538,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FlavorFinder/MatchTableViewController.swift"
-            timestampString = "468281145.762374"
+            timestampString = "468288415.138927"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "191"
-            endingLineNumber = "191"
+            startingLineNumber = "201"
+            endingLineNumber = "201"
             landmarkName = "tableView(_:editActionsForRowAtIndexPath:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -554,13 +554,93 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FlavorFinder/MatchTableViewController.swift"
-            timestampString = "468281145.762374"
+            timestampString = "468288415.138927"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "190"
-            endingLineNumber = "190"
+            startingLineNumber = "200"
+            endingLineNumber = "200"
             landmarkName = "tableView(_:editActionsForRowAtIndexPath:)"
             landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FlavorFinder/Database.swift"
+            timestampString = "468296941.635529"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
+            landmarkName = "_readMatches()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FlavorFinder/Database.swift"
+            timestampString = "468296941.635529"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
+            landmarkName = "_readIngredients()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FlavorFinder/Database.swift"
+            timestampString = "468296941.635529"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "97"
+            endingLineNumber = "97"
+            landmarkName = "_readMatches()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FlavorFinder/Database.swift"
+            timestampString = "468296941.635529"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
+            landmarkName = "_readMatches()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FlavorFinder/Database.swift"
+            timestampString = "468296941.635529"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
+            landmarkName = "_readIngredients()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

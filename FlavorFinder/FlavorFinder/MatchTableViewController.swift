@@ -15,10 +15,10 @@ import Darwin
 class MatchTableViewController: UITableViewController, UISearchBarDelegate {
     // GLOBALS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // -------
-    var allCells = [Ingredient]()       // Array of all cells that CAN be displayed.
-    var filteredCells = [Ingredient]()  // Array of all cells that ARE displayed (filtered version of 'allCells').
+    var allCells = [PFObject]()       // Array of all cells that CAN be displayed.
+    var filteredCells = [PFObject]()  // Array of all cells that ARE displayed (filtered version of 'allCells').
     var viewingMatches = false          // Activates colored backgrounds. Only want to show colors when viewing matches, not all ingredients.
-    var currentIngredient : Ingredient? // Stores the ingredient being viewed (nil for all ingredients).
+    var currentIngredient : PFObject? // Stores the ingredient being viewed (nil for all ingredients).
     
     var searchBarActivateBtn: UIBarButtonItem = UIBarButtonItem()
     var searchBar = UISearchBar()
@@ -75,27 +75,37 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
     
     func showAllIngredients() {
         viewingMatches = false
-        allCells = allIngredients
-        filteredCells = allIngredients
+        allCells = _allIngredients
+        filteredCells = _allIngredients
         self.navigationController?.navigationItem.title = TITLE_ALL_INGREDIENTS
         currentIngredient = nil
         
         animateTableViewCellsToLeft(self.tableView)
     }
     
-    func showIngredient(ingredient: Ingredient) {
+    func showIngredient(ingredient: PFObject) {
         currentIngredient = ingredient
-        self.navigationController?.navigationItem.title = ingredient.name   // Set navigation title to ingredient's name.
-        let matches = matchesTable.filter(SCHEMA_COL_ID == ingredient.id)   // Get all the match ids of matches for this ingredient.
+        self.navigationController?.navigationItem.title = ingredient[_s_name] as? String   // Set navigation title to ingredient's name.
         
-        // Reset 'allCells' with the ingredients that have those match ids.
         allCells.removeAll()
-        for m in db.prepare(matches) {
-            if let found = allIngredients.lazy.map({ $0.id == m[SCHEMA_COL_MATCHID] }).indexOf(true) {
-                allIngredients[found].matchLevel = m[SCHEMA_COL_MATCHLEVEL]
-                allCells.append(allIngredients[found])
+
+        let matches = _getMatchesForIngredient(ingredient)
+        for match in matches {
+            let matchIngredient: PFObject? = _getIngredientForMatch(match)
+            if let matchIngredient = matchIngredient {
+                allCells.append(matchIngredient)
             }
         }
+//        let matches = matchesTable.filter(SCHEMA_COL_ID == ingredient[_s_objectId])   // Get all the match ids of matches for this ingredient.
+//        
+//        // Reset 'allCells' with the ingredients that have those match ids.
+//        allCells.removeAll()
+//        for m in db.prepare(matches) {
+//            if let found = allIngredients.lazy.map({ $0.id == m[SCHEMA_COL_MATCHID] }).indexOf(true) {
+//                allIngredients[found].matchLevel = m[SCHEMA_COL_MATCHLEVEL]
+//                allCells.append(allIngredients[found])
+//            }
+//        }
         
         filteredCells = allCells                        // Reset 'filteredCells' with new matches.
         viewingMatches = true                           // Activates colored backgrounds. Only want to show colors when viewing matches, not all ingredients.
@@ -126,11 +136,11 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
         let cellIdentifier = CELLIDENTIFIER_MATCH
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! MatchTableViewCell
 
-        let ingredient = filteredCells[indexPath.row]   // Fetches the appropriate ingredient to display.
-        cell.nameLabel.text = ingredient.name           // Set's the cell label to the ingredient's name.
+        let ingredient = filteredCells[indexPath.row]           // Fetches the appropriate ingredient to display.
+        cell.nameLabel.text = ingredient[_s_name] as? String    // Set's the cell label to the ingredient's name.
         
         if viewingMatches {
-            switch ingredient.matchLevel {
+            switch _getMatchLevelForIngredientAndMatch(currentIngredient!, Ingredient_match: ingredient) {
                 
             case 1:
                 cell.backgroundColor = MATCH_LOW_COLOR          // match: low, white
@@ -175,7 +185,9 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
             let yuck = UITableViewRowAction(style: .Normal, title: "Yuck") { action, index in
                 print("yuck button tapped")
                 if let curr = self.currentIngredient {
-                    downvoteMatch(curr.id, matchID2: self.filteredCells[indexPath.row].id)
+                    let match1_objectId = curr[_s_objectId] as! String
+                    let match2_objectId = self.filteredCells[indexPath.row][_s_objectId] as! String
+                    downvoteMatch(match1_objectId, match2_objectId: match2_objectId)
                 }
             }
             yuck.backgroundColor = YUCK_COLOR
@@ -183,7 +195,9 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
             let yum = UITableViewRowAction(style: .Normal, title: "Yum") { action, index in
                 print("yum button tapped")
                 if let curr = self.currentIngredient {
-                    upvoteMatch(curr.id, matchID2: self.filteredCells[indexPath.row].id)
+                    let match1_objectId = curr[_s_objectId] as! String
+                    let match2_objectId = self.filteredCells[indexPath.row][_s_objectId] as! String
+                    upvoteMatch(match1_objectId, match2_objectId: match2_objectId)
                 }
             }
             yum.backgroundColor = YUM_COLOR
@@ -223,7 +237,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
         if let navi = self.navigationController as? MainNavigationController {
             var newTitle = ""
             if let curr = currentIngredient {
-                newTitle = curr.name
+                newTitle = curr[_s_name] as! String
             } else {
                 newTitle = TITLE_ALL_INGREDIENTS
             }
@@ -253,7 +267,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
             searchBar.text = ""
         } else {
             for ingredient in allCells {
-                if ingredient.name.rangeOfString(searchText.lowercaseString) != nil {
+                if (ingredient[_s_name] as! String).rangeOfString(searchText.lowercaseString) != nil {
                     filteredCells.append(ingredient)
                 }
             }

@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // [Optional] Power your app with Local Datastore. For more info, go to
         // https://parse.com/docs/ios_guide#localdatastore/iOS
-//        Parse.enableLocalDatastore()
+        Parse.enableLocalDatastore()
         
         // Initialize Parse.
         Parse.setApplicationId("Z3QSJK9S9vUR53eiE6skFSe0OBLRLoxwJbDtfWgM",
@@ -28,7 +28,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // [Optional] Track statistics around application opens.
 //        PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
         
-        readDatabase()
+//        readDatabase()
+        _readIngredients()
+        _readMatches()
         
         return true
     }

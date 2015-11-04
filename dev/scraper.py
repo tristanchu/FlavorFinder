@@ -35,13 +35,13 @@ def createTables(c):
 
     c.execute('''CREATE TABLE matches(
                 id int,
-                match_id int,
-                match_level int,
+                matchId int,
+                matchLevel int,
                 upvotes int,
                 downvotes int,
                 affinity text,
                 quote text,
-                PRIMARY KEY(id, match_id)
+                PRIMARY KEY(id, matchId)
               )''')
 
 def fixName(s):
@@ -49,19 +49,26 @@ def fixName(s):
     if " —" in s:
         index = s.find(" —")
         s = s[:index]
+    
     if ", esp." in s:
         index = s.find(", esp.")
         s = s[:index]
-    elif ", (" in s:
+
+    if ", (" in s:
         index = s.find(", (")
         s = s[:index]
-    elif ", e.g." in s:
+    elif " (" in s:
+        index = s.find(" (")
+        s = s[:index]
+
+    if ", e.g." in s:
         index = s.find(", e.g.")
         s = s[:index]
     elif " (e.g." in s:
         index = s.find(" (e.g.")
         s = s[:index]
-    elif bool(re.search('\(.*\)', s)):
+
+    if bool(re.search('\(.*\)', s)):
         s = re.sub(r'\s?\(.*\)', '', s)
 
     if s.count(',') == 1 and s.count(':') == 0:
@@ -80,7 +87,7 @@ def addMatches(ingredients, matches, ingredient_ids, id, i, s, match_level):
     else:
         match_id = latest_id
         ingredients[match_id] = {
-            "tmp_id": match_id,
+            "tmpId": match_id,
             "name": s.lower(),
             "season": '',
             "taste": '',
@@ -99,9 +106,9 @@ def addMatches(ingredients, matches, ingredient_ids, id, i, s, match_level):
 
     if not match1 in matches:
         matches[match1] = {
-            "ingredient_id": id,
-            "match_id": match_id,
-            "match_level": match_level,
+            "ingredientId": id,
+            "matchId": match_id,
+            "matchLevel": match_level,
             "upvotes": 0,
             "downvotes": 0,
             "affinity": '',
@@ -109,9 +116,9 @@ def addMatches(ingredients, matches, ingredient_ids, id, i, s, match_level):
         }
     if not match2 in matches:
         matches[match2] = {
-            "ingredient_id": match_id,
-            "match_id": id,
-            "match_level": match_level,
+            "ingredientId": match_id,
+            "matchId": id,
+            "matchLevel": match_level,
             "upvotes": 0,
             "downvotes": 0,
             "affinity": '',
@@ -149,26 +156,26 @@ def loadResultsFromJSON(filename):
 def writeIngredientsToTable(c, data):
     for key in data:
         row = data[key]
-        c.execute("INSERT INTO ingredients VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')" % (row["tmp_id"], row["name"], row["season"], row["taste"], row["weight"], row["volume"], row["vegetarian"], row["dairy"], row["kosher"], row["nuts"]))
+        c.execute("INSERT INTO ingredients VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')" % (row["tmpId"], row["name"], row["season"], row["taste"], row["weight"], row["volume"], row["vegetarian"], row["dairy"], row["kosher"], row["nuts"]))
 
 def writeMatchesToTable(c, data):
     for key in data:
         row = data[key]
-        c.execute("INSERT INTO matches VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s')" % (row["ingredient_id"], row["match_id"], row["match_level"], row["upvotes"], row["downvotes"], row["affinity"], row["quote"]))
+        c.execute("INSERT INTO matches VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s')" % (row["ingredientId"], row["matchId"], row["matchLevel"], row["upvotes"], row["downvotes"], row["affinity"], row["quote"]))
 
 def updateMatchesToUseParseIds(matches, parseIngredients):
     for match in matches:
-        i_ingredient = next( (i for i in parseIngredients if i["tmp_id"] == match["ingredient_id"]) )
-        m_ingredient = next( (i for i in parseIngredients if i["tmp_id"] == match["match_id"]) )
-        match["ingredient_id"] = i_ingredient["objectId"]
-        match["match_id"] = m_ingredient["objectId"]
+        i_ingredient = next( (i for i in parseIngredients if i["tmpId"] == match["ingredientId"]) )
+        m_ingredient = next( (i for i in parseIngredients if i["tmpId"] == match["matchId"]) )
+        match["ingredientId"] = i_ingredient["objectId"]
+        match["matchId"] = m_ingredient["objectId"]
 
 
 if __name__ == '__main__':
     
     if len(sys.argv) > 1 and sys.argv[1] == "update":
         parseIngredients = loadResultsFromJSON('Ingredient.json')
-        matches = loadResultsFromJSON('matches.json')
+        matches = loadResultsFromJSON('Match_tmp.json')
         updateMatchesToUseParseIds(matches, parseIngredients)
         writeUpdatesToJSON('Match.json', matches)
     else:
@@ -178,10 +185,10 @@ if __name__ == '__main__':
         matches = {}
         ingredient_ids = {}
         
-        ingredients_fieldnames = ['tmp_id', 'name', 'season', 'taste', 'weight', 'volume', 'vegetarian', 'dairy', 'kosher', 'nuts']
-        matches_fieldnames = ['ingredient_id', 'match_id', 'match_level', 'upvotes', 'downvotes', 'affinity', 'quote']
+        ingredients_fieldnames = ['tmpId', 'name', 'season', 'taste', 'weight', 'volume', 'vegetarian', 'dairy', 'kosher', 'nuts']
+        matches_fieldnames = ['ingredientId', 'matchId', 'matchLevel', 'upvotes', 'downvotes', 'affinity', 'quote']
 
-        removeExistingFiles(['flavorbible.db', 'ingredients.json', 'matches.json'])
+        removeExistingFiles(['flavorbible.db', 'Ingredient_tmp.json', 'Match_tmp.json'])
         conn = sqlite3.connect('flavorbible.db')
         c = conn.cursor()
         createTables(c)
@@ -204,7 +211,7 @@ if __name__ == '__main__':
                     else:
                         id = latest_id
                         ingredients[id] = {
-                            "tmp_id": id,
+                            "tmpId": id,
                             "name": i,
                             "season": '',
                             "taste": '',
@@ -265,16 +272,13 @@ if __name__ == '__main__':
                         elif sibling['class'] == ['boxh']:
                             sibling = sibling.find_next_sibling()
                             continue
-                        elif sibling['class'] == ['ext']:
-                            sibling = sibling.find_next_sibling()
-                            continue
-                        elif sibling['class'] == ['exts']:
+                        elif sibling['class'] == ['ext'] or sibling['class'] == ['exts'] or sibling['class'] == ['ext4']:
                             sibling = sibling.find_next_sibling()
                             continue
                         elif sibling['class'] == ['bl'] or sibling['class'] == ['bl1'] or sibling['class'] == ['bl3']:
                             sibling = sibling.find_next_sibling()
                             continue
-                        elif sibling['class'] == ['sbh'] or sibling['class'] == ['sbtx1']:
+                        elif sibling['class'] == ['sbh'] or sibling['class'] == ['sbtx'] or sibling['class'] == ['sbtx1'] or sibling['class'] == ['sbtx3'] or sibling['class'] == ['sbtx4'] or sibling['class'] == ['sbtx11'] or sibling['class'] == ['sbtx31']:
                             sibling = sibling.find_next_sibling()
                             continue
                         # flavor affinities
@@ -308,8 +312,8 @@ if __name__ == '__main__':
         
                     print('')
 
-        writeResultsToJSON('ingredients.json', ingredients)
-        writeResultsToJSON('matches.json', matches)
+        writeResultsToJSON('Ingredient_tmp.json', ingredients)
+        writeResultsToJSON('Match_tmp.json', matches)
 
         writeIngredientsToTable(c, ingredients)
         writeMatchesToTable(c, matches)
