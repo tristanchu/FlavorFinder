@@ -8,6 +8,7 @@
 
 import UIKit
 import FontAwesome_swift
+import Parse
 
 
 class MainNavigationController: UINavigationController {
@@ -154,7 +155,7 @@ class MainNavigationController: UINavigationController {
                 future.push(curr)
 
                 if let pastObject = history.pop() {
-                    if let pastIngredient = pastObject as? Ingredient {
+                    if let pastIngredient = pastObject as? PFObject {
                         matchTableViewControllerObject.showIngredient(pastIngredient)
                     }
                 } else {
@@ -179,7 +180,7 @@ class MainNavigationController: UINavigationController {
                 
                 if let futureViewIdentifier = futureObject as? String {
                     
-                } else if let futureIngredient = futureObject as? Ingredient {
+                } else if let futureIngredient = futureObject as? PFObject {
                     matchTableViewControllerObject.showIngredient(futureIngredient)
                 }
             }
@@ -200,7 +201,6 @@ class MainNavigationController: UINavigationController {
     // MENU FUNCTIONS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // --------------
     func menuBtnClicked() {
-        print("menuBtn clicked.")
         if (menuTableView.hidden) {
             showMenuTableView()
         } else {
@@ -254,9 +254,11 @@ class MainNavigationController: UINavigationController {
 //    
     func hideSearchBar() {
         var newTitle = ""
+        
+        // Special title conditions.
         if let matchTableViewControllerObject = self.visibleViewController as? MatchTableViewController {
             if let curr = matchTableViewControllerObject.currentIngredient {
-                newTitle = curr.name
+                newTitle = curr[_s_name] as! String
             } else {
                 newTitle = TITLE_ALL_INGREDIENTS
             }

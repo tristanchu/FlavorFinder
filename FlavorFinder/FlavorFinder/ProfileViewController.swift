@@ -13,12 +13,12 @@ class ProfileViewController: UIViewController {
 
     // MARK: Attributes ----------------------------------------
     let TITLE_PROFILE_PAGE = "Profile"
-    private lazy var savedMatchIds: [Match] = [Match]()
 
     // MARK: Properties ----------------------------------------------
     @IBOutlet weak var ProfileWelcomeLabel: UILabel!
 
     // OVERRIDE FUNCTIONS ---------------------------------------------
+    private lazy var savedMatchIds: [PFMatch] = [PFMatch]()
     
     /**
     viewDidLoad  --override
@@ -118,10 +118,10 @@ class ProfileViewController: UIViewController {
     func loadSavedMatches(offline: Bool) { // a.k.a. load favorites
         /// DEBUG:
         print("loading saved matches...")
-        if let debugMatch = Match(matchId: 1, ingredientIds: [1, 5], names: ["bacon", "leeks"]) {
-            savedMatchIds.append(debugMatch)
-            print(savedMatchIds[0].description)
-        }
+//        if let debugMatch = Match(matchId: 1, ingredientIds: [1, 5], names: ["bacon", "leeks"]) {
+//            savedMatchIds.append(debugMatch)
+//            print(savedMatchIds[0].description)
+//        }
         return /// because we just want debug dummy data for now
         /// skeleton
         
@@ -130,7 +130,7 @@ class ProfileViewController: UIViewController {
             /// get from cached
         } else {
             let userId = 1 /// DEBUG dummy data
-            let query = PFQuery(className: "Favorites")
+            let query = PFQuery(className: "Favorite")
             query.whereKey("userId", equalTo: userId)
             query.findObjectsInBackgroundWithBlock {
                 (objects: [PFObject]?, error: NSError?) -> Void in

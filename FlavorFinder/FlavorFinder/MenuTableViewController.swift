@@ -11,9 +11,10 @@ import UIKit
 
 class MenuTableViewController: UITableViewController {
 
-    let menuTableItems = [ String.fontAwesomeIconWithName(.User) + " Profile",
+    // Default to logged out state.
+    var menuTableItems = [ String.fontAwesomeIconWithName(.User) + " Profile",
         String.fontAwesomeIconWithName(.Cutlery) + " Ingredients",
-        String.fontAwesomeIconWithName(.SignOut) + " Sign Out"
+        String.fontAwesomeIconWithName(.SignIn) + " Sign In"
     ]
     
     var navi: MainNavigationController?
@@ -23,8 +24,19 @@ class MenuTableViewController: UITableViewController {
     let INGREDIENTS_BGCOLOR = UIColor(red: 105/255.0, green: 230/255.0, blue: 255/255.0, alpha: CGFloat(1.0))
     let SIGNIN_BGCOLOR = UIColor(red: 227/255.0, green: 78/255.0, blue: 59/255.0, alpha: CGFloat(1.0))
 
+    func setMenuTableItems() {
+        // Change "Sign In" to "Sign Out" if not logged in.
+        if isUserLoggedIn() {
+            menuTableItems = [ String.fontAwesomeIconWithName(.User) + " Profile",
+                String.fontAwesomeIconWithName(.Cutlery) + " Ingredients",
+                String.fontAwesomeIconWithName(.SignOut) + " Sign Out"
+            ]
+        }
+    }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        setMenuTableItems()
+        
         let cell: UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier(CELLIDENTIFIER_MENU, forIndexPath: indexPath) as UITableViewCell
         cell.textLabel!.font = UIFont.fontAwesomeOfSize(15)
         cell.textLabel?.text = self.menuTableItems[indexPath.row]
@@ -84,6 +96,7 @@ class MenuTableViewController: UITableViewController {
             } else {
                 // Log out user (remove session data)
                 removeUserSession()
+                
                 // Transition to Login View:
                 let transition: CATransition = CATransition()
                 transition.type = kCATransitionPush
