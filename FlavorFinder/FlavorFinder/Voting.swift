@@ -30,11 +30,3 @@ func confidence(ups: Int, downs: Int) -> Double {
         return _confidence(ups, downs: downs)
     }
 }
-
-func upvoteMatch(match1_objectId: String, match2_objectId: String) {
-    
-}
-
-func downvoteMatch(match1_objectId: String, match2_objectId: String) {
-    
-}

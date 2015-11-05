@@ -42,9 +42,9 @@
 		88F0E5011BE54111003CB35B /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F0E5001BE54111003CB35B /* Animations.swift */; };
 		88F413FA1BC74A00000C0093 /* MatchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F413F91BC74A00000C0093 /* MatchTableViewCell.swift */; };
 		88F413FC1BC74EC8000C0093 /* MatchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F413FB1BC74EC8000C0093 /* MatchTableViewController.swift */; };
-		88F414011BC7513F000C0093 /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F414001BC7513F000C0093 /* Ingredient.swift */; };
-		88F414021BC7513F000C0093 /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F414001BC7513F000C0093 /* Ingredient.swift */; };
-		B6F3B74F1BE8833E00AF791A /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F3B74E1BE8833E00AF791A /* Match.swift */; };
+		88F414011BC7513F000C0093 /* PFIngredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F414001BC7513F000C0093 /* PFIngredient.swift */; };
+		88F414021BC7513F000C0093 /* PFIngredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F414001BC7513F000C0093 /* PFIngredient.swift */; };
+		B6F3B74F1BE8833E00AF791A /* PFMatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F3B74E1BE8833E00AF791A /* PFMatch.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,8 +101,8 @@
 		88F0E5001BE54111003CB35B /* Animations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animations.swift; sourceTree = "<group>"; };
 		88F413F91BC74A00000C0093 /* MatchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchTableViewCell.swift; sourceTree = "<group>"; };
 		88F413FB1BC74EC8000C0093 /* MatchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchTableViewController.swift; sourceTree = "<group>"; };
-		88F414001BC7513F000C0093 /* Ingredient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Ingredient.swift; path = FlavorFinderTests/Ingredient.swift; sourceTree = SOURCE_ROOT; };
-		B6F3B74E1BE8833E00AF791A /* Match.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
+		88F414001BC7513F000C0093 /* PFIngredient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PFIngredient.swift; path = FlavorFinderTests/PFIngredient.swift; sourceTree = SOURCE_ROOT; };
+		B6F3B74E1BE8833E00AF791A /* PFMatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PFMatch.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -256,12 +256,12 @@
 			isa = PBXGroup;
 			children = (
 				8875DE311BE051B100CD50EA /* Database.swift */,
-				88F414001BC7513F000C0093 /* Ingredient.swift */,
 				8875DE2B1BE04DD900CD50EA /* LoginUtils.swift */,
+				88F414001BC7513F000C0093 /* PFIngredient.swift */,
+				B6F3B74E1BE8833E00AF791A /* PFMatch.swift */,
 				888D1A3F1BDEF816007F09AE /* Stack.swift */,
 				8875DE291BE041D200CD50EA /* UITextField+LeftMargin.swift */,
 				8875DE341BE053ED00CD50EA /* Voting.swift */,
-				B6F3B74E1BE8833E00AF791A /* Match.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -436,8 +436,8 @@
 				8875DE321BE051B100CD50EA /* Database.swift in Sources */,
 				88F413FA1BC74A00000C0093 /* MatchTableViewCell.swift in Sources */,
 				888D1A401BDEF816007F09AE /* Stack.swift in Sources */,
-				88F414011BC7513F000C0093 /* Ingredient.swift in Sources */,
-				B6F3B74F1BE8833E00AF791A /* Match.swift in Sources */,
+				88F414011BC7513F000C0093 /* PFIngredient.swift in Sources */,
+				B6F3B74F1BE8833E00AF791A /* PFMatch.swift in Sources */,
 				6001830F1BDC31DE00265B72 /* RegisterViewController.swift in Sources */,
 				60FEE38F1BE570E100F51BE8 /* KeychainWrapper.m in Sources */,
 				8875DE2C1BE04DD900CD50EA /* LoginUtils.swift in Sources */,
@@ -456,7 +456,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				883AC63E1BC1A3C0009136E9 /* FlavorFinderTests.swift in Sources */,
-				88F414021BC7513F000C0093 /* Ingredient.swift in Sources */,
+				88F414021BC7513F000C0093 /* PFIngredient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

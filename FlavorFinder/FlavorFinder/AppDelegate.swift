@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
 //        readDatabase()
         _readIngredients()
-        _readMatches()
+//        _readMatches()
         
         return true
     }

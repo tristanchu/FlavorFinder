@@ -15,10 +15,11 @@ import Darwin
 class MatchTableViewController: UITableViewController, UISearchBarDelegate {
     // GLOBALS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // -------
-    var allCells = [PFObject]()       // Array of all cells that CAN be displayed.
-    var filteredCells = [PFObject]()  // Array of all cells that ARE displayed (filtered version of 'allCells').
-    var viewingMatches = false          // Activates colored backgrounds. Only want to show colors when viewing matches, not all ingredients.
-    var currentIngredient : PFObject? // Stores the ingredient being viewed (nil for all ingredients).
+    var allCells = [PFObject]()         // Array of all cells that CAN be displayed.
+    var filteredCells = [PFObject]()    // Array of all cells that ARE displayed (filtered version of 'allCells').
+    var viewingMatches = false              // Activates colored backgrounds. Only want to show colors when viewing matches, not all ingredients.
+    var currentIngredient : PFObject?   // Stores the ingredient being viewed (nil for all ingredients).
+    var matchLevels = [Int]()
     
     var searchBarActivateBtn: UIBarButtonItem = UIBarButtonItem()
     var searchBar = UISearchBar()
@@ -88,12 +89,16 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
         self.navigationController?.navigationItem.title = ingredient[_s_name] as? String   // Set navigation title to ingredient's name.
         
         allCells.removeAll()
+        matchLevels.removeAll()
 
         let matches = _getMatchesForIngredient(ingredient)
         for match in matches {
             let matchIngredient: PFObject? = _getIngredientForMatch(match)
             if let matchIngredient = matchIngredient {
                 allCells.append(matchIngredient)
+                let matchLevel = match[_s_matchLevel] as! Int
+//                let matchLevel = _getMatchLevelForIngredientAndMatch(ingredient, Ingredient_match: matchIngredient)
+                matchLevels.append(matchLevel)
             }
         }
 //        let matches = matchesTable.filter(SCHEMA_COL_ID == ingredient[_s_objectId])   // Get all the match ids of matches for this ingredient.
@@ -140,8 +145,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
         cell.nameLabel.text = ingredient[_s_name] as? String    // Set's the cell label to the ingredient's name.
         
         if viewingMatches {
-            switch _getMatchLevelForIngredientAndMatch(currentIngredient!, Ingredient_match: ingredient) {
-                
+            switch matchLevels[indexPath.row] {
             case 1:
                 cell.backgroundColor = MATCH_LOW_COLOR          // match: low, white
             case 2:
@@ -185,9 +189,9 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
             let yuck = UITableViewRowAction(style: .Normal, title: "Yuck") { action, index in
                 print("yuck button tapped")
                 if let curr = self.currentIngredient {
-                    let match1_objectId = curr[_s_objectId] as! String
-                    let match2_objectId = self.filteredCells[indexPath.row][_s_objectId] as! String
-                    downvoteMatch(match1_objectId, match2_objectId: match2_objectId)
+                    let match1_objectId = curr.objectId!
+                    let match2_objectId = self.filteredCells[indexPath.row].objectId!
+                    downvoteMatch(match1_objectId, objectId2: match2_objectId)
                 }
             }
             yuck.backgroundColor = YUCK_COLOR
@@ -195,9 +199,9 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
             let yum = UITableViewRowAction(style: .Normal, title: "Yum") { action, index in
                 print("yum button tapped")
                 if let curr = self.currentIngredient {
-                    let match1_objectId = curr[_s_objectId] as! String
-                    let match2_objectId = self.filteredCells[indexPath.row][_s_objectId] as! String
-                    upvoteMatch(match1_objectId, match2_objectId: match2_objectId)
+                    let match1_objectId = curr.objectId!
+                    let match2_objectId = self.filteredCells[indexPath.row].objectId!
+                    upvoteMatch(match1_objectId, objectId2: match2_objectId)
                 }
             }
             yum.backgroundColor = YUM_COLOR
