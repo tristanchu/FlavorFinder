@@ -108,6 +108,7 @@ def addMatches(ingredients, matches, ingredient_ids, id, i, s, match_level):
         matches[match1] = {
             "ingredientId": id,
             "matchId": match_id,
+            "matchName": "",
             "matchLevel": match_level,
             "upvotes": 0,
             "downvotes": 0,
@@ -118,6 +119,7 @@ def addMatches(ingredients, matches, ingredient_ids, id, i, s, match_level):
         matches[match2] = {
             "ingredientId": match_id,
             "matchId": id,
+            "matchName": "",
             "matchLevel": match_level,
             "upvotes": 0,
             "downvotes": 0,
@@ -163,12 +165,13 @@ def writeMatchesToTable(c, data):
         row = data[key]
         c.execute("INSERT INTO matches VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s')" % (row["ingredientId"], row["matchId"], row["matchLevel"], row["upvotes"], row["downvotes"], row["affinity"], row["quote"]))
 
-def updateMatchesToUseParseIds(matches, parseIngredients):
+def updateMatchesToUseParseData(matches, parseIngredients):
     for match in matches:
         i_ingredient = next( (i for i in parseIngredients if i["tmpId"] == match["ingredientId"]) )
         m_ingredient = next( (i for i in parseIngredients if i["tmpId"] == match["matchId"]) )
         match["ingredientId"] = i_ingredient["objectId"]
         match["matchId"] = m_ingredient["objectId"]
+        match["matchName"] = m_ingredient["name"]
 
 
 if __name__ == '__main__':
@@ -176,7 +179,7 @@ if __name__ == '__main__':
     if len(sys.argv) > 1 and sys.argv[1] == "update":
         parseIngredients = loadResultsFromJSON('Ingredient.json')
         matches = loadResultsFromJSON('Match_tmp.json')
-        updateMatchesToUseParseIds(matches, parseIngredients)
+        updateMatchesToUseParseData(matches, parseIngredients)
         writeUpdatesToJSON('Match.json', matches)
     else:
         global latest_id

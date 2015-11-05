@@ -19,7 +19,6 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
     var filteredCells = [PFObject]()    // Array of all cells that ARE displayed (filtered version of 'allCells').
     var viewingMatches = false              // Activates colored backgrounds. Only want to show colors when viewing matches, not all ingredients.
     var currentIngredient : PFObject?   // Stores the ingredient being viewed (nil for all ingredients).
-    var matchLevels = [Int]()
     
     var searchBarActivateBtn: UIBarButtonItem = UIBarButtonItem()
     var searchBar = UISearchBar()
@@ -89,29 +88,12 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
         self.navigationController?.navigationItem.title = ingredient[_s_name] as? String   // Set navigation title to ingredient's name.
         
         allCells.removeAll()
-        matchLevels.removeAll()
 
         let matches = _getMatchesForIngredient(ingredient)
         for match in matches {
-            let matchIngredient: PFObject? = _getIngredientForMatch(match)
-            if let matchIngredient = matchIngredient {
-                allCells.append(matchIngredient)
-                let matchLevel = match[_s_matchLevel] as! Int
-//                let matchLevel = _getMatchLevelForIngredientAndMatch(ingredient, Ingredient_match: matchIngredient)
-                matchLevels.append(matchLevel)
-            }
+            allCells.append(match)
         }
-//        let matches = matchesTable.filter(SCHEMA_COL_ID == ingredient[_s_objectId])   // Get all the match ids of matches for this ingredient.
-//        
-//        // Reset 'allCells' with the ingredients that have those match ids.
-//        allCells.removeAll()
-//        for m in db.prepare(matches) {
-//            if let found = allIngredients.lazy.map({ $0.id == m[SCHEMA_COL_MATCHID] }).indexOf(true) {
-//                allIngredients[found].matchLevel = m[SCHEMA_COL_MATCHLEVEL]
-//                allCells.append(allIngredients[found])
-//            }
-//        }
-        
+
         filteredCells = allCells                        // Reset 'filteredCells' with new matches.
         viewingMatches = true                           // Activates colored backgrounds. Only want to show colors when viewing matches, not all ingredients.
         animateTableViewCellsToLeft(self.tableView)     // Show the new ingredients on our table with animation.
@@ -141,23 +123,25 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
         let cellIdentifier = CELLIDENTIFIER_MATCH
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! MatchTableViewCell
 
-        let ingredient = filteredCells[indexPath.row]           // Fetches the appropriate ingredient to display.
-        cell.nameLabel.text = ingredient[_s_name] as? String    // Set's the cell label to the ingredient's name.
-        
+        let match = filteredCells[indexPath.row]                    // Fetches the appropriate match to display.
+
         if viewingMatches {
-            switch matchLevels[indexPath.row] {
+            cell.nameLabel.text = match[_s_matchName] as? String    // Set's the cell label to the ingredient's name.
+            
+            switch match[_s_matchLevel] as! Int {
             case 1:
-                cell.backgroundColor = MATCH_LOW_COLOR          // match: low, white
+                cell.backgroundColor = MATCH_LOW_COLOR              // match: low, white
             case 2:
-                cell.backgroundColor = MATCH_MEDIUM_COLOR       // match: medium, yellow
+                cell.backgroundColor = MATCH_MEDIUM_COLOR           // match: medium, yellow
             case 3:
-                cell.backgroundColor = MATCH_HIGH_COLOR         // match: high, blue
+                cell.backgroundColor = MATCH_HIGH_COLOR             // match: high, blue
             case 4:
-                cell.backgroundColor = MATCH_GREATEST_COLOR     // match: greatest, green
+                cell.backgroundColor = MATCH_GREATEST_COLOR         // match: greatest, green
             default:
                 cell.backgroundColor = MATCH_LOW_COLOR
             }
         } else {
+            cell.nameLabel.text = match[_s_name] as? String
             cell.backgroundColor = MATCH_LOW_COLOR
         }
         
@@ -171,8 +155,14 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
             } else {
                 navi.pushToHistory()                                                      // Push current ingredient to history stack.
                 tableView.contentOffset = CGPointMake(0, 0 - tableView.contentInset.top); // Reset scroll position.
-                let ingredient = filteredCells[indexPath.row]                             // Get tapped ingredient.
-                showIngredient(ingredient)
+                if let curr = currentIngredient {
+                    let match = filteredCells[indexPath.row]                              // Get tapped match.
+                    let ingredient = _getIngredientForMatch(match)
+                    showIngredient(ingredient!)
+                } else {
+                    let ingredient = filteredCells[indexPath.row]                         // Get tapped ingredient.
+                    showIngredient(ingredient)
+                }
             }
         }
     }
