@@ -261,8 +261,14 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
             searchBar.text = ""
         } else {
             for ingredient in allCells {
-                if (ingredient[_s_name] as! String).rangeOfString(searchText.lowercaseString) != nil {
-                    filteredCells.append(ingredient)
+                if viewingMatches {
+                    if (ingredient[_s_matchName] as! String).rangeOfString(searchText.lowercaseString) != nil {
+                        filteredCells.append(ingredient)
+                    }
+                } else {
+                    if (ingredient[_s_name] as! String).rangeOfString(searchText.lowercaseString) != nil {
+                        filteredCells.append(ingredient)
+                    }
                 }
             }
         }
