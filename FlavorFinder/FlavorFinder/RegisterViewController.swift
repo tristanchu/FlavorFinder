@@ -39,7 +39,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var registerSubmitBtn: UIButton!
     
     // MARK: Segue Identifiers ----------------------------------------
-    /// eventually segue to logged in!
+    let registerToMatchTable = "segueRegisterToMatchTable"
 
     // MARK: Actions --------------------------------------------------
 
@@ -90,7 +90,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
             newUser.signUpInBackgroundWithBlock { (succeeded, error) -> Void in
                 if error == nil {
                     if succeeded {
-                        self.registerSuccess()
+                        self.registerSuccess(username, password: password)
                     } else {
                         self.handleError(error)
                     }
@@ -145,10 +145,13 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         return isValid
     }
     
-    func registerSuccess() {
-        //// success! ////
+    func registerSuccess(username: String, password: String) {
         registerMsg.text = ""
-        print("Successfully added new user")
+        print("Successfully added new user \(username)")
+        // now log user in to app and go to table
+        setUserSession(username, password: password)
+        self.performSegueWithIdentifier(self.registerToMatchTable,
+            sender: self)
     }
     
     func handleError(error: NSError?) {
