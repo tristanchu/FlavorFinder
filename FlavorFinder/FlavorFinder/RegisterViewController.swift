@@ -15,17 +15,18 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     //// somewhere we need a privacy policy :)
     
     // validation error messages
-    var EMAIL_INVALID = "That doesn't look like an email!"
-    var USERNAME_INVALID = "Usernames must be between \(USERNAME_CHAR_MIN) and \(USERNAME_CHAR_MAX) characters."
-    var PASSWORD_INVALID = "Passwords must be between \(PASSWORD_CHAR_MIN) and \(PASSWORD_CHAR_MAX) characters."
-    var MULTIPLE_INVALID = "Please fix errors and resubmit."
+    let EMAIL_INVALID = "That doesn't look like an email!"
+    let USERNAME_INVALID = "Usernames must be between \(USERNAME_CHAR_MIN) and \(USERNAME_CHAR_MAX) characters."
+    let PASSWORD_INVALID = "Passwords must be between \(PASSWORD_CHAR_MIN) and \(PASSWORD_CHAR_MAX) characters."
+    let PW_MISMATCH = "Passwords don't match."
+    let MULTIPLE_INVALID = "Please fix errors and resubmit."
     //// somewhere other than error messaging we'll want to surface our
     //// pw/username requirements!
     
     // request error messages
-    var GENERIC_ERROR = "Oops! An error occurred."
-    var USERNAME_IN_USE = "Username already in use."
-    var EMAIL_IN_USE = "Email associated with an account."
+    let GENERIC_ERROR = "Oops! An error occurred."
+    let USERNAME_IN_USE = "Username already in use."
+    let EMAIL_IN_USE = "Email associated with an account."
     
     // MARK: Properties -----------------------------------------------
     @IBOutlet weak var registerLabel: UILabel!
@@ -33,6 +34,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var registerEmail: UITextField!
     @IBOutlet weak var registerUsername: UITextField!
     @IBOutlet weak var registerPassword: UITextField!
+    @IBOutlet weak var registerPasswordRetype: UITextField!
     @IBOutlet weak var registerCOPPA: UILabel!
     @IBOutlet weak var registerSubmitBtn: UIButton!
     
@@ -42,8 +44,8 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     // MARK: Actions --------------------------------------------------
 
     @IBAction func registerSubmitActionBtn(sender: UIButton) {
-        if (registerEmail.text != nil && registerUsername.text != nil && registerPassword.text != nil) {
-            requestNewUser(registerEmail.text!, username: registerUsername.text!, password: registerPassword.text!)
+        if (registerEmail.text != nil && registerUsername.text != nil && registerPassword.text != nil && registerPasswordRetype.text != nil) {
+            requestNewUser(registerEmail.text!, username: registerUsername.text!, password: registerPassword.text!, pwRetyped: registerPasswordRetype.text!)
         }
     }
     
@@ -55,10 +57,11 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         registerEmail.delegate = self
         registerUsername.delegate = self
         registerPassword.delegate = self
-        
+        registerPasswordRetype.delegate = self
         registerEmail.setTextLeftPadding(5)
         registerUsername.setTextLeftPadding(5)
         registerPassword.setTextLeftPadding(5)
+        registerPasswordRetype.setTextLeftPadding(5)
         
         if let navi = self.navigationController as? MainNavigationController {
             navi.navigationItem.setLeftBarButtonItems([navi.goBackBtn], animated: true)
@@ -77,8 +80,8 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     }
     
     // REGISTER REQUEST FUNCTIONS ---------------------------------------
-    func requestNewUser(email: String, username: String, password: String) {
-        if fieldsAreValid(email, username: username, password: password) {
+    func requestNewUser(email: String, username: String, password: String, pwRetyped: String) {
+        if fieldsAreValid(email, username: username, password: password, pwRetyped: pwRetyped) {
             changeDisabledStatus(true)
             let newUser = PFUser()
             newUser.username = username
@@ -98,7 +101,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    func fieldsAreValid(email: String, username: String, password: String) -> Bool {
+    func fieldsAreValid(email: String, username: String, password: String, pwRetyped: String) -> Bool {
         var isValid = true
         if isInvalidEmail(email) {
             registerEmail.backgroundColor = backgroundColor_error
@@ -109,19 +112,35 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
             registerUsername.backgroundColor = backgroundColor_error
             if (isValid) {
                 registerMsg.text = USERNAME_INVALID
+                isValid = false
             } else {
                 registerMsg.text = MULTIPLE_INVALID
             }
-            isValid = false
         }
         if isInvalidPassword(password) {
             registerPassword.backgroundColor = backgroundColor_error
             if (isValid) {
                 registerMsg.text = PASSWORD_INVALID
+                isValid = false
             } else {
                 registerMsg.text = MULTIPLE_INVALID
             }
+        }
+        if pwRetyped.isEmpty {
+            registerPasswordRetype.backgroundColor = backgroundColor_error
+            registerMsg.text = MULTIPLE_INVALID
             isValid = false
+            
+            return isValid
+        }
+        if password != pwRetyped {
+            registerPasswordRetype.backgroundColor = backgroundColor_error
+            if (isValid) {
+                registerMsg.text = PW_MISMATCH
+                isValid = false
+            } else {
+                registerMsg.text = MULTIPLE_INVALID
+            }
         }
         return isValid
     }
