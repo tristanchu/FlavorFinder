@@ -36,6 +36,7 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         self.navigationItem.hidesBackButton = true
         
+        // Display "Profile" in navigation bar
         if let navi = self.navigationController as? MainNavigationController {
             navi.navigationItem.setLeftBarButtonItems([], animated: true)
             navi.navigationItem.setRightBarButtonItems([navi.menuBarBtn], animated: true)
