@@ -118,32 +118,18 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 
                 } else {
                     // Alert Username and Password pair does not exist.
-                    let alertView = UIAlertController(
-                        title: "Incorrect Username or Password",
-                        message: "Username and Password do not match." as String,
-                        preferredStyle:.Alert)
-                    let okAction = UIAlertAction(title: "Ok", style: .Default,
-                        handler: nil)
-                    alertView.addAction(okAction)
-                    self.presentViewController(alertView, animated: true,
-                        completion: nil)
-                    return;
+                    loginAlertPopup("Incorrect Username or Password",
+                        msg: "Username and Password do not match." as String,
+                        actionTitle: "Ok",
+                        currController: self)
                 }
             }
         } else {
             // Alert missing username or password fields:
-            let alertView = UIAlertController(
-                title: "Invalid Username or Password",
-                message: "You must enter a valid username and password." as String,
-                preferredStyle:.Alert)
-            let okAction = UIAlertAction(title: "Ok",
-                style: .Default,
-                handler: nil)
-            alertView.addAction(okAction)
-            self.presentViewController(alertView,
-                animated: true,
-                completion: nil)
-            return;
+            loginAlertPopup("Invalid Username or Password",
+                msg: "You must enter a valid username and password." as String,
+                actionTitle: "Ok",
+                currController: self)
         }
     }
 
