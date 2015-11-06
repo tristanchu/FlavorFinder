@@ -129,33 +129,3 @@ func isInvalidPassword(password: String) -> Bool {
     return (password.isEmpty ||
         password.characters.count > PASSWORD_CHAR_MAX ||
         password.characters.count < PASSWORD_CHAR_MIN)}
-
-// ----------------------------------------------------------------------
-// ALERT FUNCTIONS ------------------------------------------------------
-// ----------------------------------------------------------------------
-
-/**
-    loginAlertPopup
-
-    Gives user an alert notification with the given text.
-
-    @param: title - String - the Bolded text in the notification
-    @param: msg - String - the non-bold text in the notificaiton
-    @param: actionTitle - String - the button text
-    @param: currController - UIViewController - the controller sending the alert.
-*/
-func loginAlertPopup(title: String, msg: String, actionTitle: String,
-        currController: UIViewController) -> Void {
-
-    let alertView = UIAlertController(title: title,
-        message: msg,
-        preferredStyle:.Alert)
-    let okAction = UIAlertAction(title: actionTitle,
-        style: .Default,
-        handler: nil)
-    alertView.addAction(okAction)
-    currController.presentViewController(alertView,
-        animated: true,
-        completion: nil)
-}
-
