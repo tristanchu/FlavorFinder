@@ -28,8 +28,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     // MARK: Segue Identifiers ----------------------------------------
     let loginToRegister = "segueLoginToRegister"
     let loginToMatchTable = "segueLoginToMatchTable"
-    let loginToProfilePage = "segueLoginToProfilePage"
-
 
     // MARK: Actions --------------------------------------------------
     // Login button
