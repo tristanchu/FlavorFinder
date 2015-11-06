@@ -116,7 +116,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 
                 } else {
                     // Alert Username and Password pair does not exist.
-                    loginAlertPopup("Incorrect Username or Password",
+                    alertPopup("Incorrect Username or Password",
                         msg: "Username and Password do not match." as String,
                         actionTitle: "Ok",
                         currController: self)
@@ -124,7 +124,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             }
         } else {
             // Alert missing username or password fields:
-            loginAlertPopup("Invalid Username or Password",
+            alertPopup("Invalid Username or Password",
                 msg: "You must enter a valid username and password." as String,
                 actionTitle: "Ok",
                 currController: self)
