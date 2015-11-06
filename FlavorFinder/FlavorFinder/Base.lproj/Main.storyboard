@@ -106,6 +106,40 @@
             </objects>
             <point key="canvasLocation" x="2111" y="470"/>
         </scene>
+        <!--User Settings View Controller-->
+        <scene sceneID="DTH-2E-td0">
+            <objects>
+                <viewController id="kXY-t1-zaG" customClass="UserSettingsViewController" customModule="FlavorFinder" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Twi-bo-rW8"/>
+                        <viewControllerLayoutGuide type="bottom" id="yoN-Sb-YbX"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="DB3-V2-Hb9">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings Page!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sFj-pe-qEV">
+                                <rect key="frame" x="244.5" y="105" width="111" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="sFj-pe-qEV" firstAttribute="centerX" secondItem="DB3-V2-Hb9" secondAttribute="centerX" id="Epg-g0-msM"/>
+                            <constraint firstItem="sFj-pe-qEV" firstAttribute="top" secondItem="Twi-bo-rW8" secondAttribute="bottom" constant="85" id="glY-Xr-qKs"/>
+                            <constraint firstItem="yoN-Sb-YbX" firstAttribute="top" secondItem="sFj-pe-qEV" secondAttribute="bottom" constant="474" id="tEu-oU-1ME"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="userSettingsLabel" destination="sFj-pe-qEV" id="lHa-Pl-5Pl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4n4-5A-RaY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2003" y="1233"/>
+        </scene>
         <!--Profile View Controller-->
         <scene sceneID="PEF-T2-zbh">
             <objects>
@@ -119,22 +153,34 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello. How are you?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LeR-3W-QO4">
-                                <rect key="frame" x="62" y="90" width="441" height="21"/>
+                                <rect key="frame" x="62" y="90" width="476" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="7p5-ub-27j"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n5D-NH-eBG">
+                                <rect key="frame" x="256.5" y="151" width="87" height="30"/>
+                                <state key="normal" title="Edit Settings"/>
+                                <connections>
+                                    <action selector="goToSettings:" destination="leV-JT-XQg" eventType="touchUpInside" id="hAf-Wp-HrA"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="LeR-3W-QO4" firstAttribute="leading" secondItem="Bbg-AR-Zd4" secondAttribute="leadingMargin" constant="42" id="92A-w4-Kk0"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="LeR-3W-QO4" secondAttribute="trailing" constant="77" id="9pp-ux-G2l"/>
-                            <constraint firstItem="xgG-lA-4at" firstAttribute="top" secondItem="LeR-3W-QO4" secondAttribute="bottom" constant="489" id="JwO-Pc-R6l"/>
-                            <constraint firstItem="LeR-3W-QO4" firstAttribute="top" secondItem="bs6-RQ-Hov" secondAttribute="bottom" constant="70" id="ngm-aV-kn0"/>
+                            <constraint firstItem="LeR-3W-QO4" firstAttribute="leading" secondItem="Bbg-AR-Zd4" secondAttribute="leadingMargin" constant="42" id="8mu-xY-Udm"/>
+                            <constraint firstItem="n5D-NH-eBG" firstAttribute="top" secondItem="LeR-3W-QO4" secondAttribute="bottom" constant="40" id="HqQ-U7-pft"/>
+                            <constraint firstItem="LeR-3W-QO4" firstAttribute="top" secondItem="bs6-RQ-Hov" secondAttribute="bottom" constant="70" id="gvL-jl-raE"/>
+                            <constraint firstItem="n5D-NH-eBG" firstAttribute="centerX" secondItem="Bbg-AR-Zd4" secondAttribute="centerX" id="isV-cg-fyN"/>
+                            <constraint firstItem="LeR-3W-QO4" firstAttribute="centerX" secondItem="Bbg-AR-Zd4" secondAttribute="centerX" id="x6S-or-lQb"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="ProfileWelcomeLabel" destination="LeR-3W-QO4" id="tIR-Iu-3zj"/>
+                        <segue destination="kXY-t1-zaG" kind="show" identifier="segueProfileToUserSettings" id="Tnc-8s-y0L"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z8U-I1-yy5" userLabel="First Responder" sceneMemberID="firstResponder"/>

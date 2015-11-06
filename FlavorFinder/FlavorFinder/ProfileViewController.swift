@@ -11,15 +11,22 @@ import Parse
 
 class ProfileViewController: UIViewController {
 
-    // MARK: Attributes ----------------------------------------
+    // MARK: Attributes -----------------------------------------------
     let TITLE_PROFILE_PAGE = "Profile"
 
-    // MARK: Properties ----------------------------------------------
+    let segueToUserSettings = "segueProfileToUserSettings"
+
+    // MARK: Properties -----------------------------------------------
     @IBOutlet weak var ProfileWelcomeLabel: UILabel!
+
+    // MARK: Actions --------------------------------------------------
+    @IBAction func goToSettings(sender: UIButton) {
+        self.performSegueWithIdentifier(segueToUserSettings, sender: self)
+    }
 
     // OVERRIDE FUNCTIONS ---------------------------------------------
     private lazy var savedMatchIds: [PFMatch] = [PFMatch]()
-    
+
     /**
     viewDidLoad  --override
     
@@ -29,6 +36,7 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         self.navigationItem.hidesBackButton = true
         
+        // Display "Profile" in navigation bar
         if let navi = self.navigationController as? MainNavigationController {
             navi.navigationItem.setLeftBarButtonItems([], animated: true)
             navi.navigationItem.setRightBarButtonItems([navi.menuBarBtn], animated: true)
@@ -38,8 +46,8 @@ class ProfileViewController: UIViewController {
 
         // Update Welcome Label:
         // TODO: get username from variable set by loadContent
-        let user = getUsernameFromKeychain()
-        ProfileWelcomeLabel.text = "Hello " + user + "!"
+        let userName = getUsernameFromKeychain()
+        ProfileWelcomeLabel.text = "Hello " + userName + "!"
 
     }
 
