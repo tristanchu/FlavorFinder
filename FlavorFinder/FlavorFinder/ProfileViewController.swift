@@ -14,12 +14,14 @@ class ProfileViewController: UIViewController {
     // MARK: Attributes -----------------------------------------------
     let TITLE_PROFILE_PAGE = "Profile"
 
+    let segueToUserSettings = "segueProfileToUserSettings"
+
     // MARK: Properties -----------------------------------------------
     @IBOutlet weak var ProfileWelcomeLabel: UILabel!
 
     // MARK: Actions --------------------------------------------------
     @IBAction func goToSettings(sender: UIButton) {
-        print("pressed button")
+        self.performSegueWithIdentifier(segueToUserSettings, sender: self)
     }
 
     // OVERRIDE FUNCTIONS ---------------------------------------------
