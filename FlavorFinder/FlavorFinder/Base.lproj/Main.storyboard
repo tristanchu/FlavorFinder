@@ -132,6 +132,9 @@
                             <constraint firstItem="yoN-Sb-YbX" firstAttribute="top" secondItem="sFj-pe-qEV" secondAttribute="bottom" constant="474" id="tEu-oU-1ME"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="userSettingsLabel" destination="sFj-pe-qEV" id="lHa-Pl-5Pl"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4n4-5A-RaY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

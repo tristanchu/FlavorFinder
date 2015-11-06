@@ -45,8 +45,8 @@ class ProfileViewController: UIViewController {
 
         // Update Welcome Label:
         // TODO: get username from variable set by loadContent
-        let user = getUsernameFromKeychain()
-        ProfileWelcomeLabel.text = "Hello " + user + "!"
+        let userName = getUsernameFromKeychain()
+        ProfileWelcomeLabel.text = "Hello " + userName + "!"
 
     }
 
