@@ -11,15 +11,20 @@ import Parse
 
 class ProfileViewController: UIViewController {
 
-    // MARK: Attributes ----------------------------------------
+    // MARK: Attributes -----------------------------------------------
     let TITLE_PROFILE_PAGE = "Profile"
 
-    // MARK: Properties ----------------------------------------------
+    // MARK: Properties -----------------------------------------------
     @IBOutlet weak var ProfileWelcomeLabel: UILabel!
+
+    // MARK: Actions --------------------------------------------------
+    @IBAction func goToSettings(sender: UIButton) {
+        print("pressed button")
+    }
 
     // OVERRIDE FUNCTIONS ---------------------------------------------
     private lazy var savedMatchIds: [PFMatch] = [PFMatch]()
-    
+
     /**
     viewDidLoad  --override
     
