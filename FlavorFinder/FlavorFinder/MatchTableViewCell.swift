@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import MGSwipeTableCell
 
-class MatchTableViewCell: UITableViewCell {
+class MatchTableViewCell: MGSwipeTableCell {
     // MARK: Properties
     @IBOutlet weak var nameLabel: UILabel!
     

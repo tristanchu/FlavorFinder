@@ -19,6 +19,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>MGSwipeTableCell.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Parse.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -37,12 +42,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>45942BD76A4B5F04CDA264BD77B4F9BF</key>
+		<key>3501AAD089C1CDB4A8E21DDA2E2C6503</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6D0A25D8D57E684025B73A103ECA1A80</key>
+		<key>3BCCFA7C1E1C668E0BB5878B9F7DF6F8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4E1263BFF45F6446CF3DE29AE234C893</key>
 		<dict>
 			<key>primary</key>
 			<true/>

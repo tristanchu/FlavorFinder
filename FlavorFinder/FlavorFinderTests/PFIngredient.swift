@@ -13,7 +13,7 @@ class PFIngredient : PFObject, PFSubclassing {
     
     @NSManaged var name: String
     
-    init(id: Int, name: String) {
+    init(name: String) {
         super.init()
         self.name = name
     }
