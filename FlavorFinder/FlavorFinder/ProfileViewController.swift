@@ -140,17 +140,13 @@ class ProfileViewController: UIViewController {
         } else {
             if let userId = currentUser?.objectId {
                 queryFavorites(userId)
-            }
-        }
-    }
-    
+
     /**
      queryFavorites
      
      @param: userId - Bool -- user objectId in Parse
      */
     func queryFavorites(userId: String) {
-        
         let query = PFQuery(className: "Favorite")
         query.whereKey("userId", equalTo: userId)
         query.findObjectsInBackgroundWithBlock {
