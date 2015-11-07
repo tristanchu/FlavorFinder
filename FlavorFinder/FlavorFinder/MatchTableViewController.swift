@@ -10,6 +10,7 @@ import UIKit
 import SQLite
 import Parse
 import FontAwesome_swift
+import MGSwipeTableCell
 import Darwin
 
 class MatchTableViewController: UITableViewController, UISearchBarDelegate {
@@ -17,7 +18,6 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
     // -------
     var allCells = [PFObject]()         // Array of all cells that CAN be displayed.
     var filteredCells = [PFObject]()    // Array of all cells that ARE displayed (filtered version of 'allCells').
-    var viewingMatches = false              // Activates colored backgrounds. Only want to show colors when viewing matches, not all ingredients.
     var currentIngredient : PFObject?   // Stores the ingredient being viewed (nil for all ingredients).
     
     var searchBarActivateBtn: UIBarButtonItem = UIBarButtonItem()
@@ -25,9 +25,9 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
     
     @IBOutlet var matchTableView: UITableView!
     
-    let EDIT_COLOR = UIColor(red: 249/255.0, green: 69/255.0, blue: 255/255.0, alpha: CGFloat(0.3))
-    let YUCK_COLOR = UIColor(red: 255/255.0, green: 109/255.0, blue: 69/255.0, alpha: CGFloat(0.3))
-    let YUM_COLOR = UIColor(red: 61/255.0, green: 235/255.0, blue: 64/255.0, alpha: CGFloat(0.3))
+    let editCellBtnColor = UIColor(red: 249/255.0, green: 69/255.0, blue: 255/255.0, alpha: CGFloat(0.3))
+    let downvoteCellBtnColor = UIColor(red: 255/255.0, green: 109/255.0, blue: 69/255.0, alpha: CGFloat(0.3))
+    let upvoteCellBtnColor = UIColor(red: 61/255.0, green: 235/255.0, blue: 64/255.0, alpha: CGFloat(0.3))
     
     // SETUP FUNCTIONS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // ---------------
@@ -74,11 +74,11 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     func showAllIngredients() {
-        viewingMatches = false
         allCells = _allIngredients
         filteredCells = _allIngredients
-        self.navigationController?.navigationItem.title = TITLE_ALL_INGREDIENTS
         currentIngredient = nil
+
+        self.navigationController?.navigationItem.title = TITLE_ALL_INGREDIENTS
         
         animateTableViewCellsToLeft(self.tableView)
     }
@@ -88,14 +88,13 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
         self.navigationController?.navigationItem.title = ingredient[_s_name] as? String   // Set navigation title to ingredient's name.
         
         allCells.removeAll()
-
         let matches = _getMatchesForIngredient(ingredient)
+        
         for match in matches {
             allCells.append(match)
         }
 
         filteredCells = allCells                        // Reset 'filteredCells' with new matches.
-        viewingMatches = true                           // Activates colored backgrounds. Only want to show colors when viewing matches, not all ingredients.
         animateTableViewCellsToLeft(self.tableView)     // Show the new ingredients on our table with animation.
     }
 
@@ -125,7 +124,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
 
         let match = filteredCells[indexPath.row]                    // Fetches the appropriate match to display.
 
-        if viewingMatches {
+        if currentIngredient != nil {
             cell.nameLabel.text = match[_s_matchName] as? String    // Set's the cell label to the ingredient's name.
             
             switch match[_s_matchLevel] as! Int {
@@ -140,10 +139,39 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
             default:
                 cell.backgroundColor = MATCH_LOW_COLOR
             }
+            
+            cell.rightButtons = [
+                MGSwipeButton(title: "", icon: UIImage.fontAwesomeIconWithName(.Pencil, textColor: UIColor.blackColor(), size: CGSizeMake(30, 30)), backgroundColor: editCellBtnColor, callback: {
+                    (sender: MGSwipeTableCell!) -> Bool in
+                    print("edit button tapped")
+                    return true
+                }),
+                MGSwipeButton(title: "", icon: UIImage.fontAwesomeIconWithName(.CaretUp, textColor: UIColor.blackColor(), size: CGSizeMake(30, 30)), backgroundColor: upvoteCellBtnColor, callback: {
+                    (sender: MGSwipeTableCell!) -> Bool in
+                    if let user = currentUser {
+                        downvoteMatch(user.objectId!, match: self.filteredCells[indexPath.row])
+                    } else {
+                        print("Can't vote - not logged in.")
+                    }
+                    return true
+                }),
+                MGSwipeButton(title: "", icon: UIImage.fontAwesomeIconWithName(.CaretDown, textColor: UIColor.blackColor(), size: CGSizeMake(30, 30)), backgroundColor: downvoteCellBtnColor, callback: {
+                    (sender: MGSwipeTableCell!) -> Bool in
+                    if let user = currentUser {
+                        upvoteMatch(user.objectId!, match: self.filteredCells[indexPath.row])
+                    } else {
+                        print("Can't vote - not logged in.")
+                    }
+                    return true
+                })
+            ]
+            cell.rightSwipeSettings.transition = MGSwipeTransition.Rotate3D
         } else {
             cell.nameLabel.text = match[_s_name] as? String
             cell.backgroundColor = MATCH_LOW_COLOR
+            cell.rightButtons = []
         }
+        
         
         return cell
     }
@@ -154,8 +182,9 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
                 navi.dismissMenuTableView()
             } else {
                 navi.pushToHistory()                                                      // Push current ingredient to history stack.
+
                 tableView.contentOffset = CGPointMake(0, 0 - tableView.contentInset.top); // Reset scroll position.
-                if let curr = currentIngredient {
+                if currentIngredient != nil {
                     let match = filteredCells[indexPath.row]                              // Get tapped match.
                     let ingredient = _getIngredientForMatch(match)
                     showIngredient(ingredient!)
@@ -163,43 +192,12 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
                     let ingredient = filteredCells[indexPath.row]                         // Get tapped ingredient.
                     showIngredient(ingredient)
                 }
+                
+                searchBarCancelButtonClicked(searchBar)
             }
         }
     }
     
-    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-//        if let curr = currentIngredient {
-            UIButton.appearance().setAttributedTitle(NSAttributedString(string: "", attributes: attributes), forState: .Normal)
-            
-            let edit = UITableViewRowAction(style: .Normal, title: "Edit") { action, index in
-                print("edit button tapped")
-            }
-            edit.backgroundColor = EDIT_COLOR
-            
-            let yuck = UITableViewRowAction(style: .Normal, title: "Yuck") { action, index in
-                print("yuck button tapped")
-                if let curr = self.currentIngredient {
-                    let match1_objectId = curr.objectId!
-                    let match2_objectId = self.filteredCells[indexPath.row].objectId!
-                    downvoteMatch(match1_objectId, objectId2: match2_objectId)
-                }
-            }
-            yuck.backgroundColor = YUCK_COLOR
-            
-            let yum = UITableViewRowAction(style: .Normal, title: "Yum") { action, index in
-                print("yum button tapped")
-                if let curr = self.currentIngredient {
-                    let match1_objectId = curr.objectId!
-                    let match2_objectId = self.filteredCells[indexPath.row].objectId!
-                    upvoteMatch(match1_objectId, objectId2: match2_objectId)
-                }
-            }
-            yum.backgroundColor = YUM_COLOR
-            
-            return [yum, yuck, edit]
-//        }
-    
-    }
     
     // SEARCHBAR FUNCTIONS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // -------------------
@@ -261,7 +259,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
             searchBar.text = ""
         } else {
             for ingredient in allCells {
-                if viewingMatches {
+                if currentIngredient != nil {
                     if (ingredient[_s_matchName] as! String).rangeOfString(searchText.lowercaseString) != nil {
                         filteredCells.append(ingredient)
                     }

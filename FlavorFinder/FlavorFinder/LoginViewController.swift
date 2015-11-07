@@ -9,6 +9,8 @@
 import UIKit
 import Parse
 
+var currentUser: PFUser?
+
 class LoginViewController: UIViewController, UITextFieldDelegate {
 
     // MARK: Properties -----------------------------------------------
@@ -110,6 +112,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 
                 if user != nil {
                     // User exists - set user session & go to Match Table
+                    currentUser = user
                     setUserSession(username, password: password)
                     self.performSegueWithIdentifier(self.loginToMatchTable,
                         sender: self)
