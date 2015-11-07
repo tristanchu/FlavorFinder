@@ -124,35 +124,40 @@ class ProfileViewController: UIViewController {
     @param: offline - Bool -- if user is offline
     */
     func loadSavedMatches(offline: Bool) { // a.k.a. load favorites
-        /// DEBUG:
         print("loading saved matches...")
-//        if let debugMatch = Match(matchId: 1, ingredientIds: [1, 5], names: ["bacon", "leeks"]) {
-//            savedMatchIds.append(debugMatch)
-//            print(savedMatchIds[0].description)
-//        }
-        return /// because we just want debug dummy data for now
-        /// skeleton
-        
-        // NOT BEING RUN BECAUSE OF RETURN ^
         if offline {
-            /// get from cached
+            /// what do we do if offline?
         } else {
-            let userId = 1 /// DEBUG dummy data
-            let query = PFQuery(className: "Favorite")
-            query.whereKey("userId", equalTo: userId)
-            query.findObjectsInBackgroundWithBlock {
+            let username = getUsernameFromKeychain()
+            /// if we store userId somewhere, do that instead of what I'm about to do:
+            let userIdQuery = PFQuery(className: "User")
+            userIdQuery.whereKey("username", equalTo: username)
+            userIdQuery.findObjectsInBackgroundWithBlock {
                 (objects: [PFObject]?, error: NSError?) -> Void in
-                
-                if error == nil { // success
-                    if let matches = objects {
-                        for match in matches {
-                            ////// do something
-                            print("Got a match!") /// DEBUG
-                        }
+                if error == nil {
+                    if let user = objects {
+                        queryFavorites(user[0].objectId)
                     }
-                } else {
-                    print("Error loading saved matches: \(error!) \(error!.userInfo)")
                 }
+            }
+        }
+    }
+    
+    func queryFavorites(userId: String) {
+        let query = PFQuery(className: "Favorite")
+        query.whereKey("userId", equalTo: userId)
+        query.findObjectsInBackgroundWithBlock {
+            (objects: [PFObject]?, error: NSError?) -> Void in
+            
+            if error == nil { // success
+                if let matches = objects {
+                    for match in matches {
+                        ////// do something
+                        print("Got a fav!") /// DEBUG
+                    }
+                }
+            } else {
+                print("Error loading favorites: \(error!) \(error!.userInfo)")
             }
         }
     }
