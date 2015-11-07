@@ -118,17 +118,15 @@ class ProfileViewController: UIViewController {
     
     /**
     loadSavedMatches
-
-    TODO: Get matches (favorites) for user from Parse.
     
     @param: offline - Bool -- if user is offline
     */
     func loadSavedMatches(offline: Bool) { // a.k.a. load favorites
-        print("loading saved matches...")
+        let username = getUsernameFromKeychain()
+        print("loading saved matches for user \(username)...")
         if offline {
             /// what do we do if offline?
         } else {
-            let username = getUsernameFromKeychain()
             /// if we store userId somewhere, do that instead of what I'm about to do:
             let userIdQuery = PFQuery(className: "User")
             userIdQuery.whereKey("username", equalTo: username)
@@ -136,14 +134,24 @@ class ProfileViewController: UIViewController {
                 (objects: [PFObject]?, error: NSError?) -> Void in
                 if error == nil {
                     if let user = objects {
-                        queryFavorites(user[0].objectId)
+                        print("Got userId") //// getting objects = 0 values in debugger
+                        print("Got userId \(user[0].objectId!)")
+                        self.queryFavorites(user[0].objectId!)
                     }
+                } else {
+                    print("Error retrieving user object for username \(username): \(error)")
                 }
             }
         }
     }
     
+    /**
+     queryFavorites
+     
+     @param: userId - Bool -- user objectId in Parse
+     */
     func queryFavorites(userId: String) {
+        print("Querying for favorites...")
         let query = PFQuery(className: "Favorite")
         query.whereKey("userId", equalTo: userId)
         query.findObjectsInBackgroundWithBlock {
@@ -155,6 +163,7 @@ class ProfileViewController: UIViewController {
                         ////// do something
                         print("Got a fav!") /// DEBUG
                     }
+                    print("Got favs")
                 }
             } else {
                 print("Error loading favorites: \(error!) \(error!.userInfo)")
@@ -167,10 +176,9 @@ class ProfileViewController: UIViewController {
     /**
     flushData
 
-    Clears all stored matches for user.
+    Clears out any local/cached data.
     */
     func flushData() {
-        savedMatchIds.removeAll()
         /// empty caches
     }
     
