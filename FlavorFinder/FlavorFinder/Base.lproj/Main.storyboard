@@ -171,6 +171,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="na6-R0-BJZ">
                                 <rect key="frame" x="225" y="320" width="151" height="30"/>
                                 <state key="normal" title="Submit new password"/>
+                                <connections>
+                                    <action selector="setNewPasswordAction:" destination="kXY-t1-zaG" eventType="touchUpInside" id="aSa-4M-ZLe"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -191,6 +194,10 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="changePasswordLabel" destination="fiM-CP-ULN" id="yp6-8w-cBP"/>
+                        <outlet property="currPasswordField" destination="fJH-cU-pab" id="Pbo-Jj-Nac"/>
+                        <outlet property="newPasswordOneField" destination="AbY-Db-Mx1" id="BSI-Od-nvC"/>
+                        <outlet property="newPasswordTwoField" destination="pbt-m8-BoP" id="hDJ-Zi-nVW"/>
                         <outlet property="userSettingsLabel" destination="sFj-pe-qEV" id="lHa-Pl-5Pl"/>
                     </connections>
                 </viewController>
