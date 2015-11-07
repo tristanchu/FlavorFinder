@@ -31,22 +31,25 @@ let matchPinDate = "matchPinDate"
 
 // Reads all Ingredient objects from parse database into _allIngredients.
 func _readIngredients() {
-    let query = PFQuery(className: _s_Ingredient)
-    query.limit = 1000
-
-    query.findObjectsInBackgroundWithBlock {
-        (objects: [PFObject]?, error: NSError?) -> Void in
-        if let error = error {
-            // Handle error
-            print(error)
-        } else {
-            _allIngredients = objects!
-            for object in objects! {
-                object.pinInBackground()
+    
+    for iteration in [0, 1, 2] {
+        let query = PFQuery(className: _s_Ingredient)
+        query.limit = 1000
+        query.skip = 1000 * iteration
+        query.findObjectsInBackgroundWithBlock {
+            (objects: [PFObject]?, error: NSError?) -> Void in
+            if let error = error {
+                print(error)
+            } else {
+                for object in objects! {
+                    _allIngredients.append(object)
+                }
+                
             }
-            NSUserDefaults.standardUserDefaults().setObject(NSDate(), forKey: ingredientPinDate)
         }
     }
+
+    NSUserDefaults.standardUserDefaults().setObject(NSDate(), forKey: ingredientPinDate)
 }
 
 func _readMatches() {
@@ -85,8 +88,7 @@ func _getIngredientWithNameSubstring(nameSubstring: String) -> [PFObject] {
 func _getMatchesForIngredient(Ingredient: PFObject) -> [PFObject] {
     let query = PFQuery(className: _s_Match)
     query.whereKey(_s_ingredientId, equalTo: Ingredient.objectId!)
-    query.limit = 30
-//    query.fromLocalDatastore()
+    query.limit = 1000
     
     let _matches: [PFObject]
     do {
@@ -95,16 +97,6 @@ func _getMatchesForIngredient(Ingredient: PFObject) -> [PFObject] {
         _matches = []
     }
     
-//    var _matches: [PFObject] = []
-//    query.findObjectsInBackgroundWithBlock {
-//        (matches: [PFObject]?, error: NSError?) -> Void in
-//        if let error = error {
-//            print(error)
-//        } else {
-//            _matches = matches!
-//        }
-//    }
-    
     return _matches
 }
 
@@ -112,7 +104,6 @@ func _getMatchesForIngredient(Ingredient: PFObject) -> [PFObject] {
 func _getIngredientForMatch(Match: PFObject) -> PFObject? {
     let query = PFQuery(className: _s_Ingredient)
     query.whereKey(_s_objectId, equalTo: Match[_s_matchId])
-//    query.fromLocalDatastore()
     
     let _ingredient: PFObject?
     do {
@@ -120,16 +111,6 @@ func _getIngredientForMatch(Match: PFObject) -> PFObject? {
     } catch {
         _ingredient = nil
     }
-
-//    var _ingredient: PFObject?
-//    query.getFirstObjectInBackgroundWithBlock {
-//        (ingredient: PFObject?, error: NSError?) -> Void in
-//        if error == nil && ingredient != nil {
-//            _ingredient = ingredient!
-//        } else {
-//            print(error)
-//        }
-//    }
     
     return _ingredient
 }

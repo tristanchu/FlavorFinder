@@ -182,6 +182,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
                 navi.dismissMenuTableView()
             } else {
                 navi.pushToHistory()                                                      // Push current ingredient to history stack.
+
                 tableView.contentOffset = CGPointMake(0, 0 - tableView.contentInset.top); // Reset scroll position.
                 if currentIngredient != nil {
                     let match = filteredCells[indexPath.row]                              // Get tapped match.
@@ -191,6 +192,8 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
                     let ingredient = filteredCells[indexPath.row]                         // Get tapped ingredient.
                     showIngredient(ingredient)
                 }
+                
+                searchBarCancelButtonClicked(searchBar)
             }
         }
     }
