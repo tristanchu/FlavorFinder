@@ -25,9 +25,9 @@ class UserSettingsViewController: UIViewController, UITextFieldDelegate {
     // MARK: Actions -----------------------------------------------
 
     @IBAction func setNewPasswordAction(sender: UIButton) {
-        print("pressed submit new password")
-        print("old password was:", currPasswordField.text)
-        print("new 1:", newPasswordOneField.text, "new 2:", newPasswordTwoField.text)
+        resetPassword(currPasswordField,
+            newPW1: newPasswordOneField,
+            newPW2: newPasswordTwoField)
     }
 
 
@@ -41,6 +41,12 @@ class UserSettingsViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // Text field stuff:
+        backgroundColor_normal = currPasswordField.backgroundColor!
+        currPasswordField.delegate = self
+        newPasswordOneField.delegate = self
+        newPasswordTwoField.delegate = self
+
         // Display "Profile" in navigation bar
         if let navi = self.navigationController as? MainNavigationController {
             navi.navigationItem.setLeftBarButtonItems([], animated: true)
@@ -52,4 +58,51 @@ class UserSettingsViewController: UIViewController, UITextFieldDelegate {
         // Change page label to say "<User>'s Settings"
         userSettingsLabel.text = getUsernameFromKeychain() + "'s Settings"
     }
+
+    /**
+    textFieldDidBeginEditing
+
+    Sets textField background color to "normal" color.
+    */
+    func textFieldDidBeginEditing(textField: UITextField) {
+        textField.backgroundColor = backgroundColor_normal
+    }
+
+    // FUNCTIONS -------------------------------------------------------
+
+    /**
+    resetPassword
+
+    validates password input, checks against current saved password, updates
+    new password to both parse and keychain.
+    */
+    func resetPassword(currPW: UITextField, newPW1: UITextField, newPW2: UITextField) {
+        // Default to true
+        var isValidInput = true
+
+        // Check that fields are not empty and new password is in length range:
+        if currPW.text!.isEmpty {
+            currPW.backgroundColor = backgroundColor_error
+            isValidInput = false
+        }
+        if isInvalidPassword(newPW1.text!){
+            newPW1.backgroundColor = backgroundColor_error
+            isValidInput = false
+        }
+        if isInvalidPassword(newPW2.text!){
+            newPW2.backgroundColor = backgroundColor_error
+            isValidInput = false
+        }
+
+        if isValidInput {
+            // User entered valid input; proceed:
+            print("got valid input. currPW", currPW.text!, "new1:", newPW1.text!, "new2:", newPW2.text!)
+        }
+        else {
+            // Missing a field, tell them:
+            print("Something is invalid")
+        }
+    }
+
+
 }
