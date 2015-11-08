@@ -22,7 +22,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
     
     var searchBarActivateBtn: UIBarButtonItem = UIBarButtonItem()
     var searchBar = UISearchBar()
-    let refreshAlert = UIAlertController(title: "Not Signed In", message: "You need to sign in to do this!", preferredStyle: UIAlertControllerStyle.Alert)
+    let notSignedInAlert = UIAlertController(title: "Not Signed In", message: "You need to sign in to do this!", preferredStyle: UIAlertControllerStyle.Alert)
 
     
     @IBOutlet var matchTableView: UITableView!
@@ -47,14 +47,14 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
             navi.goForwardBtn.enabled = false
             
             
-            refreshAlert.addAction(UIAlertAction(title: "Sign In", style: .Default, handler: { (action: UIAlertAction!) in
+            notSignedInAlert.addAction(UIAlertAction(title: "Sign In", style: .Default, handler: { (action: UIAlertAction!) in
                 let mainStoryboard = UIStoryboard(name: "Main", bundle:nil)
                 let loginViewControllerObject = mainStoryboard.instantiateViewControllerWithIdentifier(LoginViewControllerIdentifier) as? LoginViewController
                 navi.pushViewController(loginViewControllerObject!, animated: true)
             }))
             
-            refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction!) in
-                self.refreshAlert.dismissViewControllerAnimated(true, completion: nil)
+            notSignedInAlert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: { (action: UIAlertAction!) in
+                self.notSignedInAlert.dismissViewControllerAnimated(true, completion: nil)
             }))
         }
         
@@ -161,7 +161,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
                     (sender: MGSwipeTableCell!) -> Bool in
                     if currentUser != nil {
                     } else {
-                        self.presentViewController(self.refreshAlert, animated: true, completion: nil)
+                        self.presentViewController(self.notSignedInAlert, animated: true, completion: nil)
                     }
                     return true
                 }),
@@ -170,7 +170,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
                     if let user = currentUser {
                         downvoteMatch(user.objectId!, match: self.filteredCells[indexPath.row])
                     } else {
-                        self.presentViewController(self.refreshAlert, animated: true, completion: nil)
+                        self.presentViewController(self.notSignedInAlert, animated: true, completion: nil)
                     }
                     return true
                 }),
@@ -179,7 +179,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
                     if let user = currentUser {
                         upvoteMatch(user.objectId!, match: self.filteredCells[indexPath.row])
                     } else {
-                        self.presentViewController(self.refreshAlert, animated: true, completion: nil)
+                        self.presentViewController(self.notSignedInAlert, animated: true, completion: nil)
                     }
                     return true
                 })
@@ -190,7 +190,6 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
             cell.backgroundColor = MATCH_LOW_COLOR
             cell.rightButtons = []
         }
-        
         
         return cell
     }

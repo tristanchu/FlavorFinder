@@ -72,6 +72,23 @@ class MenuTableViewController: UITableViewController {
         case 0:
             if navi?.visibleViewController is ProfileViewController {
                 navi?.dismissMenuTableView()
+            } else if currentUser == nil {
+                navi?.dismissMenuTableView()
+                
+                let notSignedInAlert = UIAlertController(title: "Not Signed In", message: "You need to sign in to do this!", preferredStyle: UIAlertControllerStyle.Alert)
+                
+                notSignedInAlert.addAction(UIAlertAction(title: "Sign In", style: .Default, handler: { (action: UIAlertAction!) in
+                    let mainStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                    let loginViewControllerObject = mainStoryboard.instantiateViewControllerWithIdentifier(LoginViewControllerIdentifier) as? LoginViewController
+                    self.navi?.pushViewController(loginViewControllerObject!, animated: true)
+                }))
+                
+                notSignedInAlert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: { (action: UIAlertAction!) in
+                    notSignedInAlert.dismissViewControllerAnimated(true, completion: nil)
+                }))
+                
+                navi?.presentViewController(notSignedInAlert, animated: true, completion: nil)
+
             } else {
 //                navi?.history.push(navi?.getVisibleViewControllerIdentifier())
                 let profileViewControllerObject = mainStoryboard.instantiateViewControllerWithIdentifier(ProfileViewControllerIdentifier) as? ProfileViewController
