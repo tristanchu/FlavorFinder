@@ -178,7 +178,7 @@ class MainNavigationController: UINavigationController {
                     goForwardBtn.enabled = false
                 }
                 
-                if let futureViewIdentifier = futureObject as? String {
+                if let _ = futureObject as? String {
                     
                 } else if let futureIngredient = futureObject as? PFObject {
                     matchTableViewControllerObject.showIngredient(futureIngredient)

@@ -14,7 +14,7 @@ func animateDropdownTableView(tableView: UITableView, dismiss: Bool) {
     let cells = tableView.visibleCells
     let tableHeight: CGFloat = tableView.bounds.size.height
     
-    let start = dismiss ? CGFloat(0) : -1*tableHeight
+//    let start = dismiss ? CGFloat(0) : -1*tableHeight
     //        let end = dismiss ? -1*tableHeight : CGFloat(0)
     let end = dismiss ? CGFloat(0) : CGFloat(0)
     

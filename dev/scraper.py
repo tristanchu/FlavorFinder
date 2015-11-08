@@ -46,26 +46,30 @@ def createTables(c):
 
 def fixName(s):
     s = s.lower()
-    if " —" in s:
-        index = s.find(" —")
+    if ' and ' in s:
+        index = s.find(' and ')
+        s = s[:index]
+
+    if ' —' in s:
+        index = s.find(' —')
         s = s[:index]
     
-    if ", esp." in s:
-        index = s.find(", esp.")
+    if ', esp.' in s:
+        index = s.find(', esp.')
         s = s[:index]
 
-    if ", (" in s:
-        index = s.find(", (")
+    if ', (' in s:
+        index = s.find(', (')
         s = s[:index]
-    elif " (" in s:
-        index = s.find(" (")
+    elif ' (' in s:
+        index = s.find(' (')
         s = s[:index]
 
-    if ", e.g." in s:
-        index = s.find(", e.g.")
+    if ', e.g.' in s:
+        index = s.find(', e.g.')
         s = s[:index]
-    elif " (e.g." in s:
-        index = s.find(" (e.g.")
+    elif ' (e.g.' in s:
+        index = s.find(' (e.g.')
         s = s[:index]
 
     if bool(re.search('\(.*\)', s)):
@@ -73,9 +77,30 @@ def fixName(s):
 
     if s.count(',') == 1 and s.count(':') == 0:
         index = s.find(',')
-        s = s[index+2:]+" "+s[:index]
+        s = s[index+2:]+' '+s[:index]
 
     return s
+
+def containsBlacklistedString(s):
+    blacklistedStrings = [':', ' and ', ' or ', '/' ]
+    
+    if any(str in s for str in blacklistedStrings):
+        return True
+    elif s.count(','):
+        return True
+    elif not s.strip():
+        return True
+    else:
+        return False
+
+def hasBlacklistedClass(sibling):
+    blacklistedClasses = ['ul3', 'p1', 'ca', 'ca3', 'ep', 'eps', 'h3', 'img', 'boxh', 'ext', 'exts', 'ext4',
+                          'bl', 'bl1', 'bl3', 'sbh', 'sbtx', 'sbtx1', 'sbtx3', 'sbtx4', 'sbtx11', 'sbtx31']
+    
+    if any(c == sibling['class'] for c in blacklistedClasses):
+        return True
+    else:
+        return False
 
 def addMatches(ingredients, matches, ingredient_ids, id, i, s, match_level):
     global latest_id
@@ -87,16 +112,16 @@ def addMatches(ingredients, matches, ingredient_ids, id, i, s, match_level):
     else:
         match_id = latest_id
         ingredients[match_id] = {
-            "tmpId": match_id,
-            "name": s.lower(),
-            "season": '',
-            "taste": '',
-            "weight": '',
-            "volume": '',
-            "vegetarian": 1,
-            "dairy": 0,
-            "kosher": 0,
-            "nuts": 0
+            'tmpId': match_id,
+            'name': s.lower(),
+            'season': '',
+            'taste': '',
+            'weight': '',
+            'volume': '',
+            'vegetarian': 1,
+            'dairy': 0,
+            'kosher': 0,
+            'nuts': 0
         }
         ingredient_ids[s] = match_id
         latest_id += 1
@@ -106,25 +131,25 @@ def addMatches(ingredients, matches, ingredient_ids, id, i, s, match_level):
 
     if not match1 in matches:
         matches[match1] = {
-            "ingredientId": id,
-            "matchId": match_id,
-            "matchName": "",
-            "matchLevel": match_level,
-            "upvotes": 0,
-            "downvotes": 0,
-            "affinity": '',
-            "quote": ''
+            'ingredientId': id,
+            'matchId': match_id,
+            'matchName': '',
+            'matchLevel': match_level,
+            'upvotes': 0,
+            'downvotes': 0,
+            'affinity': '',
+            'quote': ''
         }
     if not match2 in matches:
         matches[match2] = {
-            "ingredientId": match_id,
-            "matchId": id,
-            "matchName": "",
-            "matchLevel": match_level,
-            "upvotes": 0,
-            "downvotes": 0,
-            "affinity": '',
-            "quote": ''
+            'ingredientId': match_id,
+            'matchId': id,
+            'matchName': '',
+            'matchLevel': match_level,
+            'upvotes': 0,
+            'downvotes': 0,
+            'affinity': '',
+            'quote': ''
         }
 
 
@@ -135,48 +160,48 @@ def removeExistingFiles(files):
 
 def writeResultsToJSON(filename, data):
     results = {}
-    results["results"] = []
+    results['results'] = []
     for key in data:
         row = data[key]
-        results["results"].append(row)
+        results['results'].append(row)
     with open(filename, 'w') as jsonfile:
         json.dump(results, jsonfile, indent=4)
 
 def writeUpdatesToJSON(filename, data):
     results = {}
-    results["results"] = []
+    results['results'] = []
     for item in data:
-        results["results"].append(item)
+        results['results'].append(item)
     with open(filename, 'w') as jsonfile:
         json.dump(results, jsonfile, indent=4)
 
 def loadResultsFromJSON(filename):
     with open(filename) as file:
         results = json.load(file)
-        return results["results"]
+        return results['results']
 
 def writeIngredientsToTable(c, data):
     for key in data:
         row = data[key]
-        c.execute("INSERT INTO ingredients VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')" % (row["tmpId"], row["name"], row["season"], row["taste"], row["weight"], row["volume"], row["vegetarian"], row["dairy"], row["kosher"], row["nuts"]))
+        c.execute("INSERT INTO ingredients VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')" % (row['tmpId'], row['name'], row['season'], row['taste'], row['weight'], row['volume'], row['vegetarian'], row['dairy'], row['kosher'], row['nuts']))
 
 def writeMatchesToTable(c, data):
     for key in data:
         row = data[key]
-        c.execute("INSERT INTO matches VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s')" % (row["ingredientId"], row["matchId"], row["matchLevel"], row["upvotes"], row["downvotes"], row["affinity"], row["quote"]))
+        c.execute("INSERT INTO matches VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s')" % (row['ingredientId'], row['matchId'], row['matchLevel'], row['upvotes'], row['downvotes'], row['affinity'], row['quote']))
 
 def updateMatchesToUseParseData(matches, parseIngredients):
     for match in matches:
-        i_ingredient = next( (i for i in parseIngredients if i["tmpId"] == match["ingredientId"]) )
-        m_ingredient = next( (i for i in parseIngredients if i["tmpId"] == match["matchId"]) )
-        match["ingredientId"] = i_ingredient["objectId"]
-        match["matchId"] = m_ingredient["objectId"]
-        match["matchName"] = m_ingredient["name"]
+        i_ingredient = next( (i for i in parseIngredients if i['tmpId'] == match['ingredientId']) )
+        m_ingredient = next( (i for i in parseIngredients if i['tmpId'] == match['matchId']) )
+        match['ingredientId'] = i_ingredient['objectId']
+        match['matchId'] = m_ingredient['objectId']
+        match['matchName'] = m_ingredient['name']
 
 
 if __name__ == '__main__':
     
-    if len(sys.argv) > 1 and sys.argv[1] == "update":
+    if len(sys.argv) > 1 and sys.argv[1] == 'update':
         parseIngredients = loadResultsFromJSON('Ingredient.json')
         matches = loadResultsFromJSON('Match_tmp.json')
         updateMatchesToUseParseData(matches, parseIngredients)
@@ -197,7 +222,7 @@ if __name__ == '__main__':
         createTables(c)
         
         book = epub.read_epub('flavorbible.epub')
-        result = ""
+        result = ''
         for item in book.get_items():
             type = item.get_type()
             if type == ebooklib.ITEM_DOCUMENT:
@@ -208,22 +233,24 @@ if __name__ == '__main__':
                     print('HEADING: ', ingredient)
 
                     i = fixName(ingredient.text)
-                
+                    if containsBlacklistedString(i):
+                        continue
+                    
                     if i in ingredient_ids:
                         id = ingredient_ids[i]
                     else:
                         id = latest_id
                         ingredients[id] = {
-                            "tmpId": id,
-                            "name": i,
-                            "season": '',
-                            "taste": '',
-                            "weight": '',
-                            "volume": '',
-                            "vegetarian":  1,
-                            "dairy": 0,
-                            "kosher": 0,
-                            "nuts": 0
+                            'tmpId': id,
+                            'name': i,
+                            'season': '',
+                            'taste': '',
+                            'weight': '',
+                            'volume': '',
+                            'vegetarian':  1,
+                            'dairy': 0,
+                            'kosher': 0,
+                            'nuts': 0
                         }
                         ingredient_ids[i] = id
                         latest_id += 1
@@ -243,52 +270,28 @@ if __name__ == '__main__':
                         
                         # season, taste, weight, volume
                         if s.startswith('Season:'):
-                            ingredients[id]["season"] = s[8:]
+                            ingredients[id]['season'] = s[8:]
                         elif s.startswith('Taste:'):
-                            ingredients[id]["taste"] = s[7:]
+                            ingredients[id]['taste'] = s[7:]
                         elif s.startswith('Weight:'):
-                            ingredients[id]["weight"] = s[8:]
+                            ingredients[id]['weight'] = s[8:]
                         elif s.startswith('Volume:'):
-                            ingredients[id]["volume"] = s[8:]
-                        elif s.startswith('Tips'):
+                            ingredients[id]['volume'] = s[8:]
+                        elif s.startswith('Tips:'):
                             sibling = sibling.find_next_sibling()
                             continue
-                        elif sibling['class'] == ['ul3']:
+                        elif s.startswith('Techniques:'):
                             sibling = sibling.find_next_sibling()
                             continue
-                
-                        # quote
-                        elif sibling['class'] == ['p1']:
+                        
+                        elif hasBlacklistedClass(sibling):
                             sibling = sibling.find_next_sibling()
                             continue
-    #                        quote = s
-    #                        sibling = sibling.find_next_sibling()
-    #                        s = sibling.text
-    #                        quote += ' ' + s
-                            #c.execute("INSERT INTO matches VALUES ('%s', '', '', '', '%s')" % (i, quote))
-                        elif sibling['class'] == ['ca'] or sibling['class'] == ['ca3']:
-                            sibling = sibling.find_next_sibling()
-                            continue
-                        elif sibling['class'] == ['img']:
-                            sibling = sibling.find_next_sibling()
-                            continue
-                        elif sibling['class'] == ['boxh']:
-                            sibling = sibling.find_next_sibling()
-                            continue
-                        elif sibling['class'] == ['ext'] or sibling['class'] == ['exts'] or sibling['class'] == ['ext4']:
-                            sibling = sibling.find_next_sibling()
-                            continue
-                        elif sibling['class'] == ['bl'] or sibling['class'] == ['bl1'] or sibling['class'] == ['bl3']:
-                            sibling = sibling.find_next_sibling()
-                            continue
-                        elif sibling['class'] == ['sbh'] or sibling['class'] == ['sbtx'] or sibling['class'] == ['sbtx1'] or sibling['class'] == ['sbtx3'] or sibling['class'] == ['sbtx4'] or sibling['class'] == ['sbtx11'] or sibling['class'] == ['sbtx31']:
-                            sibling = sibling.find_next_sibling()
-                            continue
+                        
                         # flavor affinities
                         elif sibling['class'] == ['h4']:
                             sibling = sibling.find_next_sibling()
                             while sibling != None:
-                                #c.execute("INSERT INTO matches VALUES ('%s', '', '', '%s', '')" % (i, s))
                                 try:
                                     if sibling.find_next_sibling()['class'] in (['lh'], ['lh1'], ['p1']):
                                         break
@@ -296,18 +299,26 @@ if __name__ == '__main__':
                                     break
                                 sibling = sibling.find_next_sibling()
                 
-                        # match-low
-                        elif sibling.find('strong') == None:
-                            addMatches(ingredients, matches, ingredient_ids, id, i, s, 1)
-                        else:
-                            # match-medium
-                            if s.islower():
+                
+                            sibling = sibling.find_next_sibling()
+                            continue
+            
+                        elif containsBlacklistedString(fixName(s)):
+                            sibling = sibling.find_next_sibling()
+                            continue
+                        
+                        if sibling['class'] == ['ul'] or sibling['class'] == ['ul1']:
+                            if sibling.find('strong') == None:
+                                # match-low
+                                addMatches(ingredients, matches, ingredient_ids, id, i, s, 1)
+                            elif s.islower():
+                                # match-medium
                                 addMatches(ingredients, matches, ingredient_ids, id, i, s, 2)
-                            # match-high
                             elif s.isupper() and s.startswith('*') == False:
+                                # match-high
                                 addMatches(ingredients, matches, ingredient_ids, id, i, s, 3)
-                            # match-holy
                             elif s.isupper() and s.startswith('*') == True:
+                                # match-holy
                                 addMatches(ingredients, matches, ingredient_ids, id, i, s[1:], 4)
                 
                         sibling = sibling.find_next_sibling()
