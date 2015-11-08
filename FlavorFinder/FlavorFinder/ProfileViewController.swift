@@ -143,14 +143,14 @@ class ProfileViewController: UIViewController {
 			}
 		}
 	}
-	
+
     /**
      queryFavorites
      
      @param: userId - Bool -- user objectId in Parse
      */
     func queryFavorites(userId: String) {
-        print("Querying for favorites...")
+        print("querying for favorites...")
         let query = PFQuery(className: "Favorite")
         query.whereKey("userId", equalTo: userId)
         query.findObjectsInBackgroundWithBlock {
@@ -166,6 +166,7 @@ class ProfileViewController: UIViewController {
                     //// reload
                     print(favs)
                 }
+                print("done getting favorites")
             } else {
                 print("Error loading favorites: \(error!) \(error!.userInfo)")
             }
