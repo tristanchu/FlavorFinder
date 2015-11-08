@@ -13,6 +13,18 @@ class UserSettingsViewController: UIViewController, UITextFieldDelegate {
     // MARK: Attributes ------------------------------------------------
     let TITLE_USER_SETTINGS_PAGE = "Settings"
     
+    // MARK: Error Messages --------------------------------------------
+    let PASSWORD_INVALID_TITLE = "Invalid password input"
+    let PASSWORD_INVALID_MSG = "Passwords must be between \(PASSWORD_CHAR_MIN) and \(PASSWORD_CHAR_MAX) characters."
+
+    let NEW_PASSWORD_MISMATCH_TITLE = "New password entries do not match"
+    let NEW_PASSWORD_MISMATCH_MSG = "New password entries must match."
+
+    let CURR_PASSWORD_WRONG_TITLE = "Current password not found."
+    let CURR_PASSWORD_WRONG_MSG = "Please re-enter your current password"
+
+    let OK_BUTTON = "Ok"
+
     // MARK: Properties ------------------------------------------------
     @IBOutlet weak var userSettingsLabel: UILabel!
     @IBOutlet weak var changePasswordLabel: UILabel!
@@ -94,18 +106,45 @@ class UserSettingsViewController: UIViewController, UITextFieldDelegate {
             isValidInput = false
         }
 
+        // User entered valid input; proceed:
         if isValidInput {
-            // User entered valid input; proceed:
-            print("got valid input. currPW", currPW.text!, "new1:", newPW1.text!, "new2:", newPW2.text!)
+            // New Passwords are the same:
+            if newPW1.text == newPW2.text {
+                // Check currPassword is correct:
+                if currPW.text == getPasswordFromKeychain(){
+
+                    // Change user's password in Parse and Keychain.
+                    // Update current user.
+
+                    // DEBUG STATEMEMT:
+                    print("got valid input. currPW", currPW.text!, "new1:", newPW1.text!, "new2:", newPW2.text!)
+                }
+                else {
+                // Current Password is wrong:
+                    currPW.backgroundColor = backgroundColor_error
+                    alertPopup(CURR_PASSWORD_WRONG_TITLE,
+                        msg: CURR_PASSWORD_WRONG_MSG,
+                        actionTitle: OK_BUTTON,
+                        currController: self)
+                }
+            }
+            else {
+            // New Passwords do not match:
+                newPW1.backgroundColor = backgroundColor_error
+                newPW2.backgroundColor = backgroundColor_error
+                alertPopup(NEW_PASSWORD_MISMATCH_TITLE,
+                    msg: NEW_PASSWORD_MISMATCH_MSG,
+                    actionTitle: OK_BUTTON,
+                    currController: self)
+            }
         }
         else {
-            // Missing a field, tell them:
-            alertPopup("Missing fields",
-                msg: "Must fill in password fields",
-                actionTitle: "Ok",
+        // Invalid password input:
+            alertPopup(PASSWORD_INVALID_TITLE,
+                msg: PASSWORD_INVALID_MSG,
+                actionTitle: OK_BUTTON,
                 currController: self)
         }
     }
-
 
 }
