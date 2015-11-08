@@ -22,6 +22,8 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
     
     var searchBarActivateBtn: UIBarButtonItem = UIBarButtonItem()
     var searchBar = UISearchBar()
+    let refreshAlert = UIAlertController(title: "Not Signed In", message: "You need to sign in to do this!", preferredStyle: UIAlertControllerStyle.Alert)
+
     
     @IBOutlet var matchTableView: UITableView!
     
@@ -43,7 +45,21 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
             navi.reset_navigationBar()
             navi.goBackBtn.enabled = false
             navi.goForwardBtn.enabled = false
+            
+            
+            refreshAlert.addAction(UIAlertAction(title: "Sign In", style: .Default, handler: { (action: UIAlertAction!) in
+                let mainStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                let loginViewControllerObject = mainStoryboard.instantiateViewControllerWithIdentifier(LoginViewControllerIdentifier) as? LoginViewController
+                navi.pushViewController(loginViewControllerObject!, animated: true)
+            }))
+            
+            refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction!) in
+                self.refreshAlert.dismissViewControllerAnimated(true, completion: nil)
+            }))
         }
+        
+
+        
         showAllIngredients()
     }
     
@@ -143,7 +159,10 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
             cell.rightButtons = [
                 MGSwipeButton(title: "", icon: UIImage.fontAwesomeIconWithName(.Pencil, textColor: UIColor.blackColor(), size: CGSizeMake(30, 30)), backgroundColor: editCellBtnColor, callback: {
                     (sender: MGSwipeTableCell!) -> Bool in
-                    print("edit button tapped")
+                    if currentUser != nil {
+                    } else {
+                        self.presentViewController(self.refreshAlert, animated: true, completion: nil)
+                    }
                     return true
                 }),
                 MGSwipeButton(title: "", icon: UIImage.fontAwesomeIconWithName(.CaretUp, textColor: UIColor.blackColor(), size: CGSizeMake(30, 30)), backgroundColor: upvoteCellBtnColor, callback: {
@@ -151,7 +170,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
                     if let user = currentUser {
                         downvoteMatch(user.objectId!, match: self.filteredCells[indexPath.row])
                     } else {
-                        print("Can't vote - not logged in.")
+                        self.presentViewController(self.refreshAlert, animated: true, completion: nil)
                     }
                     return true
                 }),
@@ -160,7 +179,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
                     if let user = currentUser {
                         upvoteMatch(user.objectId!, match: self.filteredCells[indexPath.row])
                     } else {
-                        print("Can't vote - not logged in.")
+                        self.presentViewController(self.refreshAlert, animated: true, completion: nil)
                     }
                     return true
                 })
@@ -176,7 +195,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
         return cell
     }
     
-    override func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if let navi = self.navigationController as? MainNavigationController {
             if (navi.dropdownIsDown) {
                 navi.dismissMenuTableView()

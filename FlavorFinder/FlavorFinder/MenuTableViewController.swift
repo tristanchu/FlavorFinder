@@ -60,11 +60,14 @@ class MenuTableViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         print("You selected cell #\(indexPath.row)!")
         let mainStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        
+        navi?.history.removeAll()
+        navi?.future.removeAll()
+        
         switch indexPath.row {
-
         // Profile Button:
         case 0:
             if navi?.visibleViewController is ProfileViewController {

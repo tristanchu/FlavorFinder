@@ -49,14 +49,14 @@ class GlobalSearchController: UITableViewController, UISearchBarDelegate {
         let ingredient = filteredCells[indexPath.row]
         
         // Set's the cell label to the ingredient's name.
-        cell.nameLabel.text = ingredient[_s_name] as! String
+        cell.nameLabel.text = ingredient[_s_name] as? String
         
         cell.backgroundColor = UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: CGFloat(0.3))
 
         return cell
     }
     
-    override func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if let navi = self.navigationController as? MainNavigationController {
             if let matchTableViewControllerObject = navi.visibleViewController as? MatchTableViewController {
                 matchTableViewControllerObject.showAllIngredients()
