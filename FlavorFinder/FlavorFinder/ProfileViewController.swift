@@ -46,8 +46,8 @@ class ProfileViewController: UIViewController {
 
         // Update Welcome Label:
         // TODO: get username from variable set by loadContent
-        let userName = getUsernameFromKeychain()
-        ProfileWelcomeLabel.text = "Hello " + userName + "!"
+        let username = currentUser?.username
+        ProfileWelcomeLabel.text = "Hello \(username!)!"
 
     }
 
@@ -119,28 +119,17 @@ class ProfileViewController: UIViewController {
     /**
     loadSavedMatches
     
+    Loads saved matches for display in table
     @param: offline - Bool -- if user is offline
     */
-    func loadSavedMatches(offline: Bool) { // a.k.a. load favorites
-        let username = getUsernameFromKeychain()
-        print("loading saved matches for user \(username)...")
+    func loadSavedMatches(offline: Bool) {
+        print("loading favorites for user \(currentUser?.username)...")
         if offline {
             /// what do we do if offline?
         } else {
-            /// if we store userId somewhere, do that instead of what I'm about to do:
-            let userIdQuery = PFQuery(className: "User")
-            userIdQuery.whereKey("username", equalTo: username)
-            userIdQuery.findObjectsInBackgroundWithBlock {
-                (objects: [PFObject]?, error: NSError?) -> Void in
-                if error == nil {
-                    if let user = objects {
-                        print("Got userId") //// getting objects = 0 values in debugger
-                        print("Got userId \(user[0].objectId!)")
-                        self.queryFavorites(user[0].objectId!)
-                    }
-                } else {
-                    print("Error retrieving user object for username \(username): \(error)")
-                }
+            if let userId = currentUser?.objectId {
+                queryFavorites(userId)
+                //// do stuff
             }
         }
     }
@@ -151,7 +140,7 @@ class ProfileViewController: UIViewController {
      @param: userId - Bool -- user objectId in Parse
      */
     func queryFavorites(userId: String) {
-        print("Querying for favorites...")
+        print("querying for favorites...")
         let query = PFQuery(className: "Favorite")
         query.whereKey("userId", equalTo: userId)
         query.findObjectsInBackgroundWithBlock {
@@ -163,8 +152,8 @@ class ProfileViewController: UIViewController {
                         ////// do something
                         print("Got a fav!") /// DEBUG
                     }
-                    print("Got favs")
                 }
+                print("done getting favorites")
             } else {
                 print("Error loading favorites: \(error!) \(error!.userInfo)")
             }

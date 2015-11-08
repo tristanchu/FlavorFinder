@@ -52,7 +52,9 @@ func setUserSession(username: String, password: String) -> Void {
     removeUserSession
 
     Removes username and password from Keychain by setting both to "default."
-    Sets session bool to False. Called within Logout button.
+    Sets session bool to False.
+    Purges global variable user data.
+    Called within Logout button.
 */
 func removeUserSession() -> Void {
     // Remove Keychain data:
@@ -64,6 +66,9 @@ func removeUserSession() -> Void {
     // Reset session bool
     NSUserDefaults.standardUserDefaults().setBool(false, forKey: IS_LOGGED_IN_KEY)
     NSUserDefaults.standardUserDefaults().synchronize()
+    
+    // Purge currentUser global
+    currentUser = nil
 }
 
 /**
