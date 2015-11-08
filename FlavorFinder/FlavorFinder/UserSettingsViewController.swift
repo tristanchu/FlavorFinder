@@ -100,7 +100,10 @@ class UserSettingsViewController: UIViewController, UITextFieldDelegate {
         }
         else {
             // Missing a field, tell them:
-            print("Something is invalid")
+            alertPopup("Missing fields",
+                msg: "Must fill in password fields",
+                actionTitle: "Ok",
+                currController: self)
         }
     }
 
