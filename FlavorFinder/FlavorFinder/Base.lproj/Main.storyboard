@@ -139,37 +139,49 @@
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings Page!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sFj-pe-qEV">
                                 <rect key="frame" x="245" y="28" width="111" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="wga-ju-iQz"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fiM-CP-ULN">
-                                <rect key="frame" x="232" y="154" width="138" height="21"/>
+                                <rect key="frame" x="232" y="107" width="138" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="138" id="Ic2-S7-YLD"/>
-                                    <constraint firstAttribute="height" constant="21" id="UXa-Qd-hxv"/>
+                                    <constraint firstAttribute="width" constant="138" id="7FC-yg-o3a"/>
+                                    <constraint firstAttribute="height" constant="21" id="FcH-9Z-Cy1"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="type current password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fJH-cU-pab">
-                                <rect key="frame" x="217" y="183" width="166" height="30"/>
+                                <rect key="frame" x="217" y="136" width="166" height="30"/>
+                                <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.93725490196078431" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="type new password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AbY-Db-Mx1">
-                                <rect key="frame" x="227" y="244" width="146" height="30"/>
+                                <rect key="frame" x="219" y="197" width="162" height="30"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="162" id="xMg-LY-XwT"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="retype new password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pbt-m8-BoP">
-                                <rect key="frame" x="221" y="282" width="159" height="30"/>
+                                <rect key="frame" x="218" y="235" width="166" height="30"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="166" id="58v-jn-nO2"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="na6-R0-BJZ">
-                                <rect key="frame" x="225" y="320" width="151" height="30"/>
+                                <rect key="frame" x="225" y="273" width="151" height="30"/>
                                 <state key="normal" title="Submit new password"/>
                                 <connections>
                                     <action selector="setNewPasswordAction:" destination="kXY-t1-zaG" eventType="touchUpInside" id="aSa-4M-ZLe"/>
@@ -178,19 +190,18 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="na6-R0-BJZ" firstAttribute="top" secondItem="pbt-m8-BoP" secondAttribute="bottom" constant="8" symbolic="YES" id="0k5-2Y-7FU"/>
-                            <constraint firstItem="sFj-pe-qEV" firstAttribute="centerX" secondItem="DB3-V2-Hb9" secondAttribute="centerX" id="Epg-g0-msM"/>
-                            <constraint firstItem="AbY-Db-Mx1" firstAttribute="top" secondItem="fJH-cU-pab" secondAttribute="bottom" constant="31" id="Ig3-mL-cOs"/>
-                            <constraint firstItem="na6-R0-BJZ" firstAttribute="centerX" secondItem="DB3-V2-Hb9" secondAttribute="centerX" id="N69-zr-Rrj"/>
-                            <constraint firstItem="fJH-cU-pab" firstAttribute="top" secondItem="fiM-CP-ULN" secondAttribute="bottom" constant="8" symbolic="YES" id="SvV-04-AMp"/>
-                            <constraint firstItem="fJH-cU-pab" firstAttribute="centerX" secondItem="DB3-V2-Hb9" secondAttribute="centerX" id="X54-Xh-QjC"/>
-                            <constraint firstItem="yoN-Sb-YbX" firstAttribute="top" secondItem="na6-R0-BJZ" secondAttribute="bottom" constant="250" id="bh0-My-veK"/>
-                            <constraint firstItem="sFj-pe-qEV" firstAttribute="top" secondItem="Twi-bo-rW8" secondAttribute="bottom" constant="8" id="glY-Xr-qKs"/>
-                            <constraint firstItem="AbY-Db-Mx1" firstAttribute="centerX" secondItem="DB3-V2-Hb9" secondAttribute="centerX" id="o5Y-74-uhG"/>
-                            <constraint firstItem="pbt-m8-BoP" firstAttribute="top" secondItem="AbY-Db-Mx1" secondAttribute="bottom" constant="8" symbolic="YES" id="r6Y-XB-yik"/>
-                            <constraint firstItem="yoN-Sb-YbX" firstAttribute="top" secondItem="sFj-pe-qEV" secondAttribute="bottom" constant="551" id="tEu-oU-1ME"/>
-                            <constraint firstItem="fiM-CP-ULN" firstAttribute="centerX" secondItem="DB3-V2-Hb9" secondAttribute="centerX" constant="1" id="vEZ-AX-MFj"/>
-                            <constraint firstItem="pbt-m8-BoP" firstAttribute="centerX" secondItem="DB3-V2-Hb9" secondAttribute="centerX" id="zTN-dg-Ubc"/>
+                            <constraint firstItem="sFj-pe-qEV" firstAttribute="centerX" secondItem="fiM-CP-ULN" secondAttribute="centerX" id="4cB-Ck-JHf"/>
+                            <constraint firstItem="AbY-Db-Mx1" firstAttribute="top" secondItem="fJH-cU-pab" secondAttribute="bottom" constant="31" id="6aa-QZ-YBT"/>
+                            <constraint firstItem="sFj-pe-qEV" firstAttribute="top" secondItem="Twi-bo-rW8" secondAttribute="bottom" constant="8" symbolic="YES" id="Edc-vw-gLS"/>
+                            <constraint firstItem="yoN-Sb-YbX" firstAttribute="top" secondItem="na6-R0-BJZ" secondAttribute="bottom" constant="297" id="M9g-G3-kOS"/>
+                            <constraint firstItem="fiM-CP-ULN" firstAttribute="centerX" secondItem="pbt-m8-BoP" secondAttribute="centerX" id="ZfU-H4-lcp"/>
+                            <constraint firstItem="na6-R0-BJZ" firstAttribute="top" secondItem="pbt-m8-BoP" secondAttribute="bottom" constant="8" symbolic="YES" id="aNs-vm-tmK"/>
+                            <constraint firstItem="AbY-Db-Mx1" firstAttribute="centerX" secondItem="DB3-V2-Hb9" secondAttribute="centerX" id="bDV-tw-BTz"/>
+                            <constraint firstItem="na6-R0-BJZ" firstAttribute="centerX" secondItem="pbt-m8-BoP" secondAttribute="centerX" id="bpR-jB-xoA"/>
+                            <constraint firstItem="na6-R0-BJZ" firstAttribute="centerX" secondItem="AbY-Db-Mx1" secondAttribute="centerX" id="co1-ql-nAr"/>
+                            <constraint firstItem="pbt-m8-BoP" firstAttribute="top" secondItem="AbY-Db-Mx1" secondAttribute="bottom" constant="8" symbolic="YES" id="hPi-mr-ajQ"/>
+                            <constraint firstItem="fJH-cU-pab" firstAttribute="centerX" secondItem="AbY-Db-Mx1" secondAttribute="centerX" id="rl2-qg-OG5"/>
+                            <constraint firstItem="fJH-cU-pab" firstAttribute="top" secondItem="fiM-CP-ULN" secondAttribute="bottom" constant="8" symbolic="YES" id="uTl-6T-4WT"/>
                         </constraints>
                     </view>
                     <connections>
@@ -500,6 +511,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="vhT-hz-2ur"/>
+        <segue reference="yCh-I4-cTX"/>
     </inferredMetricsTieBreakers>
 </document>
