@@ -86,12 +86,21 @@ class ProfileViewController: UIViewController {
     Shows welcome label with username
     */
     func displayUserWelcomeLabel() {
-        // Update Welcome Label:
-        // TODO: get username from variable set by loadContent
         let username = currentUser?.username
         ProfileWelcomeLabel.text = "Hello \(username!)!"
     }
     
+    /**
+    displayUserFavorites
+    
+    Shows user favorites in view
+    */
+    func displayUserFavorites() {
+        /// want a table etc. at some point when we decidw how this should look
+        /// for now, just surfacing to user at a minimal level
+    }
+     
+     
     // LOAD CONTENT FUNCTIONS ---------------------------------------------
     
     /**
@@ -115,8 +124,9 @@ class ProfileViewController: UIViewController {
     /**
     loadUserData
 
-    TODO: Load user data from Parse using username stored in Keychain
-
+    Load any user data beyond what is stored in curerntUser global -- photo, etc.
+    // TODO: do something with this function
+     
     @param: offline - Bool -- if user is offline
     */
     func loadUserData(offline: Bool) {
@@ -163,8 +173,8 @@ class ProfileViewController: UIViewController {
                             self.favs.append(fav!)
                         }
                     }
-                    //// reload
-                    print(favs)
+                    self.displayUserFavorites()
+                    print(favs) // DEBUG
                 }
             } else {
                 print("Error loading favorites: \(error!) \(error!.userInfo)")
@@ -181,6 +191,7 @@ class ProfileViewController: UIViewController {
     */
     func flushData() {
         /// empty caches
+        favs = []
     }
     
     // PROFILE PAGE FUNCTIONS -------------------------------
