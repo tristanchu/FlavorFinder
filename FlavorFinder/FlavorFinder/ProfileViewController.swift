@@ -19,6 +19,8 @@ class ProfileViewController: UIViewController {
     // MARK: Properties -----------------------------------------------
     @IBOutlet weak var ProfileWelcomeLabel: UILabel!
 
+    @IBOutlet weak var profileFavoritesLabel: UILabel! /// DEBUG
+    
     // MARK: Actions --------------------------------------------------
     @IBAction func goToSettings(sender: UIButton) {
         self.performSegueWithIdentifier(segueToUserSettings, sender: self)
@@ -98,6 +100,7 @@ class ProfileViewController: UIViewController {
     func displayUserFavorites() {
         /// want a table etc. at some point when we decidw how this should look
         /// for now, just surfacing to user at a minimal level
+        profileFavoritesLabel.text?.appendContentsOf(" ! ")
     }
      
      

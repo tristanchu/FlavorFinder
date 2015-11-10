@@ -244,11 +244,22 @@
                                     <action selector="goToSettings:" destination="leV-JT-XQg" eventType="touchUpInside" id="hAf-Wp-HrA"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DEBUG Favorites: " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Oo-dL-RlG">
+                                <rect key="frame" x="171" y="245" width="302" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="302" id="eDf-Bo-m6L"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="LeR-3W-QO4" firstAttribute="leading" secondItem="Bbg-AR-Zd4" secondAttribute="leadingMargin" constant="42" id="8mu-xY-Udm"/>
+                            <constraint firstItem="2Oo-dL-RlG" firstAttribute="leading" secondItem="Bbg-AR-Zd4" secondAttribute="leading" constant="171" id="8rU-ea-fKv"/>
                             <constraint firstItem="n5D-NH-eBG" firstAttribute="top" secondItem="LeR-3W-QO4" secondAttribute="bottom" constant="40" id="HqQ-U7-pft"/>
+                            <constraint firstItem="2Oo-dL-RlG" firstAttribute="top" secondItem="n5D-NH-eBG" secondAttribute="bottom" constant="64" id="WzP-mc-81O"/>
                             <constraint firstItem="LeR-3W-QO4" firstAttribute="top" secondItem="bs6-RQ-Hov" secondAttribute="bottom" constant="70" id="gvL-jl-raE"/>
                             <constraint firstItem="n5D-NH-eBG" firstAttribute="centerX" secondItem="Bbg-AR-Zd4" secondAttribute="centerX" id="isV-cg-fyN"/>
                             <constraint firstItem="LeR-3W-QO4" firstAttribute="centerX" secondItem="Bbg-AR-Zd4" secondAttribute="centerX" id="x6S-or-lQb"/>
@@ -256,6 +267,7 @@
                     </view>
                     <connections>
                         <outlet property="ProfileWelcomeLabel" destination="LeR-3W-QO4" id="tIR-Iu-3zj"/>
+                        <outlet property="profileFavoritesLabel" destination="2Oo-dL-RlG" id="pXI-PN-39C"/>
                         <segue destination="kXY-t1-zaG" kind="show" identifier="segueProfileToUserSettings" id="Tnc-8s-y0L"/>
                     </connections>
                 </viewController>
