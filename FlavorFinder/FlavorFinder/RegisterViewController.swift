@@ -90,7 +90,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
             newUser.signUpInBackgroundWithBlock { (succeeded, error) -> Void in
                 if error == nil {
                     if succeeded {
-                        self.registerSuccess(username, password: password)
+                        self.registerSuccess(newUser)
                     } else {
                         self.handleError(error)
                     }
@@ -145,11 +145,12 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         return isValid
     }
     
-    func registerSuccess(username: String, password: String) {
+    func registerSuccess(user: PFUser) {
         registerMsg.text = ""
-        print("Successfully added new user \(username)")
+        let username = user.username
+        print("Successfully added new user \(username!)")
         // now log user in to app and go to table
-        setUserSession(username, password: password)
+        setUserSession(user)
         self.performSegueWithIdentifier(self.registerToMatchTable,
             sender: self)
     }

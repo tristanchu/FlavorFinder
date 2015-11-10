@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 // Input validation values:
 var USERNAME_CHAR_MAX = 50
@@ -28,46 +29,26 @@ var backgroundColor_error: UIColor = UIColor(red: 250/255.0, green: 126/255.0, b
     @return: Bool - True if user is currently logged into a session
 */
 func isUserLoggedIn() -> Bool {
-    return NSUserDefaults.standardUserDefaults().boolForKey(IS_LOGGED_IN_KEY)
+    return currentUser != nil
 }
 
 /**
     setUserSession
 
-    @param: username - String - validated, existing username
-    @param: password - String - validated, existing password
+    @param: user - PFUser
 */
-func setUserSession(username: String, password: String) -> Void {
-    // Store username and password in keychain:
-    MyKeychainWrapper.mySetObject(password, forKey: kSecValueData)
-    MyKeychainWrapper.mySetObject(username, forKey: kSecAttrAccount)
-    MyKeychainWrapper.writeToKeychain()
-    
-    // Store session bool in NSUserDefaults:
-    NSUserDefaults.standardUserDefaults().setBool(true, forKey: IS_LOGGED_IN_KEY)
-    NSUserDefaults.standardUserDefaults().synchronize()
+func setUserSession(user: PFUser) -> Void {
+    // Store current PFUser
+    currentUser = user
 }
 
 /**
     removeUserSession
 
-    Removes username and password from Keychain by setting both to "default."
-    Sets session bool to False.
-    Purges global variable user data.
-    Called within Logout button.
+    Removes stored PFUser
 */
 func removeUserSession() -> Void {
-    // Remove Keychain data:
-    MyKeychainWrapper.mySetObject("default", forKey: kSecValueData)
-    MyKeychainWrapper.mySetObject("default", forKey: kSecAttrAccount)
-    MyKeychainWrapper.writeToKeychain()
-    // MyKeychainWrapper.resetKeychainItem() // <- why isn't this working?
-    
-    // Reset session bool
-    NSUserDefaults.standardUserDefaults().setBool(false, forKey: IS_LOGGED_IN_KEY)
-    NSUserDefaults.standardUserDefaults().synchronize()
-    
-    // Purge currentUser global
+    // remove stored PFUser:
     currentUser = nil
 }
 
