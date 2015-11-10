@@ -112,8 +112,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 
                 if user != nil {
                     // User exists - set user session & go to Match Table
-                    currentUser = user
-                    setUserSession(username, password: password)
+                    setUserSession(user!)
                     self.performSegueWithIdentifier(self.loginToMatchTable,
                         sender: self)
 

@@ -37,9 +37,10 @@ class UserSettingsViewController: UIViewController, UITextFieldDelegate {
     // MARK: Actions -----------------------------------------------
 
     @IBAction func setNewPasswordAction(sender: UIButton) {
-        resetPassword(currPasswordField,
-            newPW1: newPasswordOneField,
-            newPW2: newPasswordTwoField)
+        let currPW = currPasswordField.text
+        let newPW1 = newPasswordOneField.text
+        let newPW2 = newPasswordTwoField.text
+        print("pressed Reset password with \(currPW!), \(newPW1!), \(newPW2!)")
     }
 
 
@@ -68,7 +69,7 @@ class UserSettingsViewController: UIViewController, UITextFieldDelegate {
         }
         
         // Change page label to say "<User>'s Settings"
-        userSettingsLabel.text = getUsernameFromKeychain() + "'s Settings"
+        userSettingsLabel.text = "\(currentUser!.username!)'s Settings"
     }
 
     /**
@@ -81,70 +82,5 @@ class UserSettingsViewController: UIViewController, UITextFieldDelegate {
     }
 
     // FUNCTIONS -------------------------------------------------------
-
-    /**
-    resetPassword
-
-    validates password input, checks against current saved password, updates
-    new password to both parse and keychain.
-    */
-    func resetPassword(currPW: UITextField, newPW1: UITextField, newPW2: UITextField) {
-        // Default to true
-        var isValidInput = true
-
-        // Check that fields are not empty and new password is in length range:
-        if currPW.text!.isEmpty {
-            currPW.backgroundColor = backgroundColor_error
-            isValidInput = false
-        }
-        if isInvalidPassword(newPW1.text!){
-            newPW1.backgroundColor = backgroundColor_error
-            isValidInput = false
-        }
-        if isInvalidPassword(newPW2.text!){
-            newPW2.backgroundColor = backgroundColor_error
-            isValidInput = false
-        }
-
-        // User entered valid input; proceed:
-        if isValidInput {
-            // New Passwords are the same:
-            if newPW1.text == newPW2.text {
-                // Check currPassword is correct:
-                if currPW.text == getPasswordFromKeychain(){
-
-                    // Change user's password in Parse and Keychain.
-                    // Update current user.
-
-                    // DEBUG STATEMEMT:
-                    print("got valid input. currPW", currPW.text!, "new1:", newPW1.text!, "new2:", newPW2.text!)
-                }
-                else {
-                // Current Password is wrong:
-                    currPW.backgroundColor = backgroundColor_error
-                    alertPopup(CURR_PASSWORD_WRONG_TITLE,
-                        msg: CURR_PASSWORD_WRONG_MSG,
-                        actionTitle: OK_BUTTON,
-                        currController: self)
-                }
-            }
-            else {
-            // New Passwords do not match:
-                newPW1.backgroundColor = backgroundColor_error
-                newPW2.backgroundColor = backgroundColor_error
-                alertPopup(NEW_PASSWORD_MISMATCH_TITLE,
-                    msg: NEW_PASSWORD_MISMATCH_MSG,
-                    actionTitle: OK_BUTTON,
-                    currController: self)
-            }
-        }
-        else {
-        // Invalid password input:
-            alertPopup(PASSWORD_INVALID_TITLE,
-                msg: PASSWORD_INVALID_MSG,
-                actionTitle: OK_BUTTON,
-                currController: self)
-        }
-    }
 
 }

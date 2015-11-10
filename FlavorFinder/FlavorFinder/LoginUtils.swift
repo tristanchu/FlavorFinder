@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 // Input validation values:
 var USERNAME_CHAR_MAX = 50
@@ -28,71 +29,27 @@ var backgroundColor_error: UIColor = UIColor(red: 250/255.0, green: 126/255.0, b
     @return: Bool - True if user is currently logged into a session
 */
 func isUserLoggedIn() -> Bool {
-    return NSUserDefaults.standardUserDefaults().boolForKey(IS_LOGGED_IN_KEY)
+    return currentUser != nil
 }
 
 /**
     setUserSession
 
-    @param: username - String - validated, existing username
-    @param: password - String - validated, existing password
+    @param: user - PFUser
 */
-func setUserSession(username: String, password: String) -> Void {
-    // Store username and password in keychain:
-    MyKeychainWrapper.mySetObject(password, forKey: kSecValueData)
-    MyKeychainWrapper.mySetObject(username, forKey: kSecAttrAccount)
-    MyKeychainWrapper.writeToKeychain()
-    
-    // Store session bool in NSUserDefaults:
-    NSUserDefaults.standardUserDefaults().setBool(true, forKey: IS_LOGGED_IN_KEY)
-    NSUserDefaults.standardUserDefaults().synchronize()
+func setUserSession(user: PFUser) -> Void {
+    // Store current PFUser
+    currentUser = user
 }
 
 /**
     removeUserSession
 
-    Removes username and password from Keychain by setting both to "default."
-    Sets session bool to False.
-    Purges global variable user data.
-    Called within Logout button.
+    Removes stored PFUser
 */
 func removeUserSession() -> Void {
-    // Remove Keychain data:
-    MyKeychainWrapper.mySetObject("default", forKey: kSecValueData)
-    MyKeychainWrapper.mySetObject("default", forKey: kSecAttrAccount)
-    MyKeychainWrapper.writeToKeychain()
-    // MyKeychainWrapper.resetKeychainItem() // <- why isn't this working?
-    
-    // Reset session bool
-    NSUserDefaults.standardUserDefaults().setBool(false, forKey: IS_LOGGED_IN_KEY)
-    NSUserDefaults.standardUserDefaults().synchronize()
-    
-    // Purge currentUser global
+    // remove stored PFUser:
     currentUser = nil
-}
-
-/**
-    getUsernameFromKeychain
-
-    Gets username currently stored in the Keychain. If no user stored, gets
-    the default username "default" as String.
-
-    @return: username - String
-*/
-func getUsernameFromKeychain() -> String {
-    return MyKeychainWrapper.myObjectForKey(kSecAttrAccount) as! String
-}
-
-/**
-    getPasswordFromKeychain
-
-    Gets password currently stored in the Keychain. If no user stored, gets
-    the default password "default" as String.
-
-    @return: password - String
-*/
-func getPasswordFromKeychain() -> String {
-    return MyKeychainWrapper.myObjectForKey(kSecValueData) as! String
 }
 
 // ----------------------------------------------------------------------
@@ -134,3 +91,49 @@ func isInvalidPassword(password: String) -> Bool {
     return (password.isEmpty ||
         password.characters.count > PASSWORD_CHAR_MAX ||
         password.characters.count < PASSWORD_CHAR_MIN)}
+
+
+// ----------------------------------------------------------------------
+// KEYCHAIN FUNCTIONS ---------------------------------------------------
+// ----------------------------------------------------------------------
+
+
+// NOTE: Keeping Keychain functions for when we develop persistent data since
+//       now we will need it when dealing with exiting and re-entering the app.
+
+/**
+storeLoginInKeychain
+
+Stores current user's username and password in the Keychain
+
+@param: user - PFUser
+*/
+func storeLoginInKeychain(username: String, password: String) -> Void {
+    MyKeychainWrapper.mySetObject(password, forKey: kSecValueData)
+    MyKeychainWrapper.mySetObject(username, forKey: kSecAttrAccount)
+    MyKeychainWrapper.writeToKeychain()
+}
+
+/**
+getUsernameFromKeychain
+
+Gets username currently stored in the Keychain. If no user stored, gets
+the default username "default" as String.
+
+@return: username - String
+*/
+func getUsernameFromKeychain() -> String {
+    return MyKeychainWrapper.myObjectForKey(kSecAttrAccount) as! String
+}
+
+/**
+getPasswordFromKeychain
+
+Gets password currently stored in the Keychain. If no user stored, gets
+the default password "default" as String.
+
+@return: password - String
+*/
+func getPasswordFromKeychain() -> String {
+    return MyKeychainWrapper.myObjectForKey(kSecValueData) as! String
+}
