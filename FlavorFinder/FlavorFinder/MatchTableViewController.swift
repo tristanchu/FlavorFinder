@@ -11,9 +11,10 @@ import SQLite
 import Parse
 import FontAwesome_swift
 import MGSwipeTableCell
+import DZNEmptyDataSet
 import Darwin
 
-class MatchTableViewController: UITableViewController, UISearchBarDelegate {
+class MatchTableViewController: UITableViewController, UISearchBarDelegate, MGSwipeTableCellDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     // GLOBALS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // -------
     var allCells = [PFObject]()         // Array of all cells that CAN be displayed.
@@ -39,6 +40,12 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
         configure_searchBar()
         configure_searchBarActivateBtn()
         
+        self.tableView.emptyDataSetSource = self
+        self.tableView.emptyDataSetDelegate = self
+        
+        // A little trick for removing the cell separators
+        self.tableView.tableFooterView = UIView();
+        
         if let navi = self.navigationController as? MainNavigationController {
             navi.navigationItem.setLeftBarButtonItems([navi.goBackBtn, self.searchBarActivateBtn], animated: true)
             navi.navigationItem.setRightBarButtonItems([navi.goForwardBtn, navi.menuBarBtn], animated: true)
@@ -63,6 +70,18 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
         showAllIngredients()
     }
     
+    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        let text = String.fontAwesomeIconWithName(.FrownO)
+        let attributes = [NSFontAttributeName: UIFont.fontAwesomeOfSize(100)] as Dictionary!
+
+        return NSAttributedString(string: text, attributes: attributes)
+    }
+    
+    func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        let text = "No matches for this ingredient yet - add a match you enjoy!"
+        return NSAttributedString(string: text, attributes: attributes)
+
+    }
     func configure_searchBarActivateBtn() {
         searchBarActivateBtn.setTitleTextAttributes(attributes, forState: .Normal)
         searchBarActivateBtn.title = String.fontAwesomeIconWithName(.Search)
@@ -156,8 +175,8 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
                 cell.backgroundColor = MATCH_LOW_COLOR
             }
             
-            cell.rightButtons = [
-                MGSwipeButton(title: "", icon: UIImage.fontAwesomeIconWithName(.Pencil, textColor: UIColor.blackColor(), size: CGSizeMake(30, 30)), backgroundColor: editCellBtnColor, callback: {
+            cell.leftButtons = [
+                MGSwipeButton(title: "", icon: UIImage.fontAwesomeIconWithName(.HeartO, textColor: UIColor.blackColor(), size: CGSizeMake(30, 30)), backgroundColor: editCellBtnColor, callback: {
                     (sender: MGSwipeTableCell!) -> Bool in
                     if currentUser != nil {
                     } else {
@@ -165,7 +184,17 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
                     }
                     return true
                 }),
-                MGSwipeButton(title: "", icon: UIImage.fontAwesomeIconWithName(.CaretUp, textColor: UIColor.blackColor(), size: CGSizeMake(30, 30)), backgroundColor: upvoteCellBtnColor, callback: {
+                MGSwipeButton(title: "", icon: UIImage.fontAwesomeIconWithName(.Pencil, textColor: UIColor.blackColor(), size: CGSizeMake(30, 30)), backgroundColor: editCellBtnColor, callback: {
+                    (sender: MGSwipeTableCell!) -> Bool in
+                    if currentUser != nil {
+                    } else {
+                        self.presentViewController(self.notSignedInAlert, animated: true, completion: nil)
+                    }
+                    return true
+                })
+            ]
+            cell.rightButtons = [
+                MGSwipeButton(title: "", icon: UIImage.fontAwesomeIconWithName(.CaretUp, textColor: UIColor.grayColor(), size: CGSizeMake(30, 30)), backgroundColor: upvoteCellBtnColor, callback: {
                     (sender: MGSwipeTableCell!) -> Bool in
                     if let user = currentUser {
                         downvoteMatch(user.objectId!, match: self.filteredCells[indexPath.row])
@@ -174,7 +203,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
                     }
                     return true
                 }),
-                MGSwipeButton(title: "", icon: UIImage.fontAwesomeIconWithName(.CaretDown, textColor: UIColor.blackColor(), size: CGSizeMake(30, 30)), backgroundColor: downvoteCellBtnColor, callback: {
+                MGSwipeButton(title: "", icon: UIImage.fontAwesomeIconWithName(.CaretDown, textColor: UIColor.grayColor(), size: CGSizeMake(30, 30)), backgroundColor: downvoteCellBtnColor, callback: {
                     (sender: MGSwipeTableCell!) -> Bool in
                     if let user = currentUser {
                         upvoteMatch(user.objectId!, match: self.filteredCells[indexPath.row])
@@ -184,14 +213,25 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate {
                     return true
                 })
             ]
+            cell.leftSwipeSettings.transition = MGSwipeTransition.Rotate3D
             cell.rightSwipeSettings.transition = MGSwipeTransition.Rotate3D
         } else {
             cell.nameLabel.text = match[_s_name] as? String
             cell.backgroundColor = MATCH_LOW_COLOR
+            cell.leftButtons = []
             cell.rightButtons = []
         }
         
         return cell
+    }
+    
+    func swipeTableCell(cell: MGSwipeTableCell!, canSwipe direction: MGSwipeDirection) -> Bool {
+        return true
+    }
+    
+    func swipeTableCell(cell: MGSwipeTableCell!, tappedButtonAtIndex index: Int, direction: MGSwipeDirection, fromExpansion: Bool) -> Bool {
+        cell.leftButtons[index] = MGSwipeButton(title: "", icon: UIImage.fontAwesomeIconWithName(.HeartO, textColor: UIColor.blackColor(), size: CGSizeMake(30, 30)), backgroundColor: editCellBtnColor)
+        return false
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

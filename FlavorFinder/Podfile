@@ -5,7 +5,8 @@ target 'FlavorFinder' do
 pod 'SQLite.swift', git: 'https://github.com/stephencelis/SQLite.swift.git', :branch => 'swift-2'
 pod 'Parse'
 pod 'FontAwesome.swift'
-pod ‘MGSwipeTableCell’
+pod 'MGSwipeTableCell'
+pod 'DZNEmptyDataSet'
 end
 
 target 'FlavorFinderTests' do
