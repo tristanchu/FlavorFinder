@@ -25,7 +25,7 @@ class ProfileViewController: UIViewController {
     }
 
     // OVERRIDE FUNCTIONS ---------------------------------------------
-    private lazy var savedMatchIds: [PFMatch] = [PFMatch]()
+    private lazy var favs: [PFFavorite] = [PFFavorite]()
 
     /**
     viewDidLoad  --override
@@ -44,10 +44,7 @@ class ProfileViewController: UIViewController {
             navi.navigationItem.title = TITLE_PROFILE_PAGE
         }
 
-        // Update Welcome Label:
-        // TODO: get username from variable set by loadContent
-        let username = currentUser?.username
-        ProfileWelcomeLabel.text = "Hello \(username!)!"
+        displayUserWelcomeLabel()
 
     }
 
@@ -79,6 +76,20 @@ class ProfileViewController: UIViewController {
 
             //// TODO: segue to login screen
         }
+    }
+    
+    // DISPLAY CONTENT FUNCTIONS ------------------------------------------
+    
+    /**
+    displayUserWelcomeLabel
+    
+    Shows welcome label with username
+    */
+    func displayUserWelcomeLabel() {
+        // Update Welcome Label:
+        // TODO: get username from variable set by loadContent
+        let username = currentUser?.username
+        ProfileWelcomeLabel.text = "Hello \(username!)!"
     }
     
     // LOAD CONTENT FUNCTIONS ---------------------------------------------
@@ -123,13 +134,12 @@ class ProfileViewController: UIViewController {
     @param: offline - Bool -- if user is offline
     */
     func loadSavedMatches(offline: Bool) {
-        print("loading favorites for user \(currentUser?.username)...")
+        print("loading favorites for user \((currentUser?.username)!)...")
         if offline {
             /// what do we do if offline?
         } else {
             if let userId = currentUser?.objectId {
                 queryFavorites(userId)
-                //// do stuff
             }
         }
     }
@@ -140,20 +150,22 @@ class ProfileViewController: UIViewController {
      @param: userId - Bool -- user objectId in Parse
      */
     func queryFavorites(userId: String) {
-        print("querying for favorites...")
+        
         let query = PFQuery(className: "Favorite")
         query.whereKey("userId", equalTo: userId)
         query.findObjectsInBackgroundWithBlock {
             (objects: [PFObject]?, error: NSError?) -> Void in
-            
             if error == nil { // success
-                if let matches = objects {
-                    for match in matches {
-                        ////// do something
-                        print("Got a fav!") /// DEBUG
+                if let favs = objects {
+                    for f in favs {
+                        let fav:PFFavorite? = (f as! PFFavorite)
+                        if fav != nil {
+                            self.favs.append(fav!)
+                        }
                     }
+                    //// reload
+                    print(favs)
                 }
-                print("done getting favorites")
             } else {
                 print("Error loading favorites: \(error!) \(error!.userInfo)")
             }
