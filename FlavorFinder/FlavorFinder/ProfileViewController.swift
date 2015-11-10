@@ -25,7 +25,7 @@ class ProfileViewController: UIViewController {
     }
 
     // OVERRIDE FUNCTIONS ---------------------------------------------
-    private lazy var savedMatchIds: [PFMatch] = [PFMatch]()
+    private lazy var favs: [PFFavorite] = [PFFavorite]()
 
     /**
     viewDidLoad  --override
@@ -44,10 +44,7 @@ class ProfileViewController: UIViewController {
             navi.navigationItem.title = TITLE_PROFILE_PAGE
         }
 
-        // Update Welcome Label:
-        // TODO: get username from variable set by loadContent
-        let userName = getUsernameFromKeychain()
-        ProfileWelcomeLabel.text = "Hello " + userName + "!"
+        displayUserWelcomeLabel()
 
     }
 
@@ -79,6 +76,20 @@ class ProfileViewController: UIViewController {
 
             //// TODO: segue to login screen
         }
+    }
+    
+    // DISPLAY CONTENT FUNCTIONS ------------------------------------------
+    
+    /**
+    displayUserWelcomeLabel
+    
+    Shows welcome label with username
+    */
+    func displayUserWelcomeLabel() {
+        // Update Welcome Label:
+        // TODO: get username from variable set by loadContent
+        let username = currentUser?.username
+        ProfileWelcomeLabel.text = "Hello \(username!)!"
     }
     
     // LOAD CONTENT FUNCTIONS ---------------------------------------------
@@ -118,41 +129,45 @@ class ProfileViewController: UIViewController {
     
     /**
     loadSavedMatches
-
-    TODO: Get matches (favorites) for user from Parse.
     
+    Loads saved matches for display in table
     @param: offline - Bool -- if user is offline
     */
-    func loadSavedMatches(offline: Bool) { // a.k.a. load favorites
-        /// DEBUG:
-        print("loading saved matches...")
-//        if let debugMatch = Match(matchId: 1, ingredientIds: [1, 5], names: ["bacon", "leeks"]) {
-//            savedMatchIds.append(debugMatch)
-//            print(savedMatchIds[0].description)
-//        }
-        return /// because we just want debug dummy data for now
-        /// skeleton
-        
-        // NOT BEING RUN BECAUSE OF RETURN ^
+    func loadSavedMatches(offline: Bool) {
+        print("loading favorites for user \((currentUser?.username)!)...")
         if offline {
-            /// get from cached
+            /// what do we do if offline?
         } else {
-            let userId = 1 /// DEBUG dummy data
-            let query = PFQuery(className: "Favorite")
-            query.whereKey("userId", equalTo: userId)
-            query.findObjectsInBackgroundWithBlock {
-                (objects: [PFObject]?, error: NSError?) -> Void in
-                
-                if error == nil { // success
-                    if let matches = objects {
-                        for match in matches {
-                            ////// do something
-                            print("Got a match!") /// DEBUG
+            if let userId = currentUser?.objectId {
+                queryFavorites(userId)
+            }
+        }
+    }
+    
+    /**
+     queryFavorites
+     
+     @param: userId - Bool -- user objectId in Parse
+     */
+    func queryFavorites(userId: String) {
+        
+        let query = PFQuery(className: "Favorite")
+        query.whereKey("userId", equalTo: userId)
+        query.findObjectsInBackgroundWithBlock {
+            (objects: [PFObject]?, error: NSError?) -> Void in
+            if error == nil { // success
+                if let favs = objects {
+                    for f in favs {
+                        let fav:PFFavorite? = (f as! PFFavorite)
+                        if fav != nil {
+                            self.favs.append(fav!)
                         }
                     }
-                } else {
-                    print("Error loading saved matches: \(error!) \(error!.userInfo)")
+                    //// reload
+                    print(favs)
                 }
+            } else {
+                print("Error loading favorites: \(error!) \(error!.userInfo)")
             }
         }
     }
@@ -162,10 +177,9 @@ class ProfileViewController: UIViewController {
     /**
     flushData
 
-    Clears all stored matches for user.
+    Clears out any local/cached data.
     */
     func flushData() {
-        savedMatchIds.removeAll()
         /// empty caches
     }
     
