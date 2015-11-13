@@ -21,6 +21,8 @@ class ProfileViewController: UIViewController {
 
     @IBOutlet weak var profileFavoritesLabel: UILabel! /// DEBUG
     
+    @IBOutlet weak var favsCollectionView: UICollectionView!
+    
     // MARK: Actions --------------------------------------------------
     @IBAction func goToSettings(sender: UIButton) {
         self.performSegueWithIdentifier(segueToUserSettings, sender: self)
@@ -32,11 +34,12 @@ class ProfileViewController: UIViewController {
     /**
     viewDidLoad  --override
     
-    Sets visuals for navigation.
+    Sets visuals for navigation, loads initial visuals
     */
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.hidesBackButton = true
+        self.view.autoresizesSubviews = true
         
         // Display "Profile" in navigation bar
         if let navi = self.navigationController as? MainNavigationController {
@@ -47,7 +50,9 @@ class ProfileViewController: UIViewController {
         }
 
         displayUserWelcomeLabel()
-
+//        favsCollectionView.autoresizingMask(UIViewAutoresizingFlexibleWidth |
+//        UIViewAutoresizingFlexibleLeftMargin |
+//        UIViewAutoresizingFlexibleRightMargin)
     }
 
     /**
@@ -68,16 +73,10 @@ class ProfileViewController: UIViewController {
         if isUserLoggedIn() {
             // if view revisted in app, load again
             self.loadContent()
-            super.viewDidAppear(animated)
-
-        // User not logged in:
         } else {
-            // DEBUG:
-            print("user is not logged in! oops")
-            super.viewDidAppear(animated)
-
-            //// TODO: segue to login screen
+            print("user is not logged in!")
         }
+        super.viewDidAppear(animated)
     }
     
     // DISPLAY CONTENT FUNCTIONS ------------------------------------------
@@ -101,6 +100,8 @@ class ProfileViewController: UIViewController {
         /// want a table etc. at some point when we decidw how this should look
         /// for now, just surfacing to user at a minimal level
         profileFavoritesLabel.text?.appendContentsOf(" ! ")
+        favsCollectionView.backgroundColor = MATCH_GREATEST_COLOR
+        favsCollectionView.visibleCells()[0].backgroundColor = MATCH_LOW_COLOR
     }
      
      
