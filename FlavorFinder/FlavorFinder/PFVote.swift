@@ -17,8 +17,8 @@ class PFVote : PFObject, PFSubclassing {
     @NSManaged var matchId: String
     @NSManaged var voteType: String
     
-    init(voteType: String, userId: String, matchId: String) {
-        super.init()
+    convenience init(voteType: String, userId: String, matchId: String) {
+        self.init()
         self.voteType = voteType
         self.userId = userId
         self.matchId = matchId

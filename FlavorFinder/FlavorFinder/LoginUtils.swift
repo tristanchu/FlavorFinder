@@ -40,6 +40,8 @@ func isUserLoggedIn() -> Bool {
 func setUserSession(user: PFUser) -> Void {
     // Store current PFUser
     currentUser = user
+    getUserVotes(user.objectId!)
+    getUserFavorites(user.objectId!)
 }
 
 /**

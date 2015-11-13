@@ -25,12 +25,20 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, MGSw
     var searchBar = UISearchBar()
     let notSignedInAlert = UIAlertController(title: "Not Signed In", message: "You need to sign in to do this!", preferredStyle: UIAlertControllerStyle.Alert)
 
-    
     @IBOutlet var matchTableView: UITableView!
     
     let editCellBtnColor = UIColor(red: 249/255.0, green: 69/255.0, blue: 255/255.0, alpha: CGFloat(0.3))
     let downvoteCellBtnColor = UIColor(red: 255/255.0, green: 109/255.0, blue: 69/255.0, alpha: CGFloat(0.3))
     let upvoteCellBtnColor = UIColor(red: 61/255.0, green: 235/255.0, blue: 64/255.0, alpha: CGFloat(0.3))
+    
+    let upvoteEmptyImage = UIImage.fontAwesomeIconWithName(.ThumbsOUp, textColor: UIColor.blackColor(), size: CGSizeMake(30, 30))
+    let upvoteImage = UIImage.fontAwesomeIconWithName(.ThumbsUp, textColor: UIColor.blackColor(), size: CGSizeMake(30, 30))
+    let downvoteEmptyImage = UIImage.fontAwesomeIconWithName(.ThumbsODown, textColor: UIColor.blackColor(), size: CGSizeMake(30, 30))
+    let downvoteImage = UIImage.fontAwesomeIconWithName(.ThumbsDown, textColor: UIColor.blackColor(), size: CGSizeMake(30, 30))
+    let editImage = UIImage.fontAwesomeIconWithName(.Pencil, textColor: UIColor.blackColor(), size: CGSizeMake(30, 30))
+    let favoriteEmptyImage = UIImage.fontAwesomeIconWithName(.HeartO, textColor: UIColor.blackColor(), size: CGSizeMake(30, 30))
+    let favoriteImage = UIImage.fontAwesomeIconWithName(.Heart, textColor: UIColor.blackColor(), size: CGSizeMake(30, 30))
+
     
     // SETUP FUNCTIONS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // ---------------
@@ -156,7 +164,8 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, MGSw
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellIdentifier = CELLIDENTIFIER_MATCH
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! MatchTableViewCell
-
+        cell.delegate = self
+        
         let match = filteredCells[indexPath.row]                    // Fetches the appropriate match to display.
 
         if currentIngredient != nil {
@@ -174,52 +183,9 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, MGSw
             default:
                 cell.backgroundColor = MATCH_LOW_COLOR
             }
-            
-            cell.leftButtons = [
-                MGSwipeButton(title: "", icon: UIImage.fontAwesomeIconWithName(.HeartO, textColor: UIColor.blackColor(), size: CGSizeMake(30, 30)), backgroundColor: editCellBtnColor, callback: {
-                    (sender: MGSwipeTableCell!) -> Bool in
-                    if currentUser != nil {
-                    } else {
-                        self.presentViewController(self.notSignedInAlert, animated: true, completion: nil)
-                    }
-                    return true
-                }),
-                MGSwipeButton(title: "", icon: UIImage.fontAwesomeIconWithName(.Pencil, textColor: UIColor.blackColor(), size: CGSizeMake(30, 30)), backgroundColor: editCellBtnColor, callback: {
-                    (sender: MGSwipeTableCell!) -> Bool in
-                    if currentUser != nil {
-                    } else {
-                        self.presentViewController(self.notSignedInAlert, animated: true, completion: nil)
-                    }
-                    return true
-                })
-            ]
-            cell.rightButtons = [
-                MGSwipeButton(title: "", icon: UIImage.fontAwesomeIconWithName(.CaretUp, textColor: UIColor.grayColor(), size: CGSizeMake(30, 30)), backgroundColor: upvoteCellBtnColor, callback: {
-                    (sender: MGSwipeTableCell!) -> Bool in
-                    if let user = currentUser {
-                        downvoteMatch(user.objectId!, match: self.filteredCells[indexPath.row])
-                    } else {
-                        self.presentViewController(self.notSignedInAlert, animated: true, completion: nil)
-                    }
-                    return true
-                }),
-                MGSwipeButton(title: "", icon: UIImage.fontAwesomeIconWithName(.CaretDown, textColor: UIColor.grayColor(), size: CGSizeMake(30, 30)), backgroundColor: downvoteCellBtnColor, callback: {
-                    (sender: MGSwipeTableCell!) -> Bool in
-                    if let user = currentUser {
-                        upvoteMatch(user.objectId!, match: self.filteredCells[indexPath.row])
-                    } else {
-                        self.presentViewController(self.notSignedInAlert, animated: true, completion: nil)
-                    }
-                    return true
-                })
-            ]
-            cell.leftSwipeSettings.transition = MGSwipeTransition.Rotate3D
-            cell.rightSwipeSettings.transition = MGSwipeTransition.Rotate3D
         } else {
             cell.nameLabel.text = match[_s_name] as? String
             cell.backgroundColor = MATCH_LOW_COLOR
-            cell.leftButtons = []
-            cell.rightButtons = []
         }
         
         return cell
@@ -229,9 +195,163 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, MGSw
         return true
     }
     
+    func swipeTableCell(cell: MGSwipeTableCell!, didChangeSwipeState state: MGSwipeState, gestureIsActive: Bool) {
+        
+    }
+    
     func swipeTableCell(cell: MGSwipeTableCell!, tappedButtonAtIndex index: Int, direction: MGSwipeDirection, fromExpansion: Bool) -> Bool {
-        cell.leftButtons[index] = MGSwipeButton(title: "", icon: UIImage.fontAwesomeIconWithName(.HeartO, textColor: UIColor.blackColor(), size: CGSizeMake(30, 30)), backgroundColor: editCellBtnColor)
-        return false
+        let indexPath = tableView.indexPathForCell(cell)!
+        let match = filteredCells[indexPath.row]
+        
+        switch direction {
+        case MGSwipeDirection.LeftToRight:
+            let btn = cell.leftButtons[index] as! MGSwipeButton
+            switch index {
+            case 0:
+                // Favorite action
+                if let user = currentUser {
+                    if let _ = isFavorite(user.objectId!, match: match) {
+                        unfavoriteMatch(user.objectId!, match: match)
+                        btn.setImage(favoriteEmptyImage, forState: UIControlState.Normal)
+                    } else {
+                        favoriteMatch(user.objectId!, match: match)
+                        btn.setImage(favoriteImage, forState: UIControlState.Normal)
+                    }
+
+                    return false
+                } else {
+                    self.presentViewController(self.notSignedInAlert, animated: true, completion: nil)
+                    return true
+                }
+            case 1:
+                // Edit action
+                if currentUser != nil {
+                } else {
+                    self.presentViewController(self.notSignedInAlert, animated: true, completion: nil)
+                }
+                return true
+            default:
+                return true
+            }
+        case MGSwipeDirection.RightToLeft:
+            let btn = cell.rightButtons[index] as! MGSwipeButton
+
+            switch index {
+            case 0:
+                // Upvote action
+                if let user = currentUser {
+                    if let vote = hasVoted(user.objectId!, match: match) {
+                        let voteType = vote[_s_voteType] as! String
+                        
+                        if voteType == _s_upvotes {
+                            // Already upvoted
+                            unvoteMatch(_s_upvotes, userId: user.objectId!, match: match)
+                            btn.setImage(upvoteEmptyImage, forState: UIControlState.Normal)
+                        } else if voteType == _s_downvotes {
+                            // Already downvoted
+                            unvoteMatch(_s_downvotes, userId: user.objectId!, match: match)
+                            upvoteMatch(user.objectId!, match: match)
+                            (cell.rightButtons[1] as! MGSwipeButton).setImage(downvoteEmptyImage, forState: UIControlState.Normal)
+                            btn.setImage(upvoteImage, forState: UIControlState.Normal)
+                        }
+                    } else {
+                        // Neither voted
+                        upvoteMatch(user.objectId!, match: match)
+                        btn.setImage(upvoteImage, forState: UIControlState.Normal)
+                    }
+                    
+                    return false
+                } else {
+                    self.presentViewController(self.notSignedInAlert, animated: true, completion: nil)
+                    return true
+                }
+            case 1:
+                // Downvote action
+                if let user = currentUser {
+                    if let vote = hasVoted(user.objectId!, match: match) {
+                        let voteType = vote[_s_voteType] as! String
+                        
+                        if voteType == _s_downvotes {
+                            // Already downvoted
+                            unvoteMatch(_s_downvotes, userId: user.objectId!, match: match)
+                            btn.setImage(downvoteEmptyImage, forState: UIControlState.Normal)
+                        } else if voteType == _s_upvotes {
+                            // Already upvoted
+                            unvoteMatch(_s_upvotes, userId: user.objectId!, match: match)
+                            downvoteMatch(user.objectId!, match: match)
+                            (cell.rightButtons[0] as! MGSwipeButton).setImage(upvoteEmptyImage, forState: UIControlState.Normal)
+                            btn.setImage(downvoteImage, forState: UIControlState.Normal)
+                        }
+                    } else {
+                        // Neither voted
+                        downvoteMatch(user.objectId!, match: match)
+                        btn.setImage(downvoteImage, forState: UIControlState.Normal)
+                    }
+                    
+                    return false
+                } else {
+                    self.presentViewController(self.notSignedInAlert, animated: true, completion: nil)
+                    return true
+                }
+            default:
+                return true
+            }
+        }
+    }
+    
+    func swipeTableCell(cell: MGSwipeTableCell!, swipeButtonsForDirection direction: MGSwipeDirection, swipeSettings: MGSwipeSettings!, expansionSettings: MGSwipeExpansionSettings!) -> [AnyObject]! {
+        
+        let indexPath = tableView.indexPathForCell(cell)!
+        let match = filteredCells[indexPath.row]
+        
+        if currentIngredient != nil {
+            swipeSettings.transition = MGSwipeTransition.Drag
+            
+            switch direction {
+            case MGSwipeDirection.LeftToRight:
+                var favBtn: MGSwipeButton?
+                
+                if let user = currentUser {
+                    if let _ = isFavorite(user.objectId!, match: match) {
+                        favBtn = MGSwipeButton(title: "", icon: favoriteImage, backgroundColor: editCellBtnColor)
+                    } else {
+                        favBtn = MGSwipeButton(title: "", icon: favoriteEmptyImage, backgroundColor: editCellBtnColor)
+                    }
+                } else {
+                    favBtn = MGSwipeButton(title: "", icon: favoriteEmptyImage, backgroundColor: editCellBtnColor)
+                }
+                
+                let editBtn = MGSwipeButton(title: "", icon: editImage, backgroundColor: editCellBtnColor)
+                
+                return [favBtn!, editBtn]
+                
+            case MGSwipeDirection.RightToLeft:
+                var upvoteBtn: MGSwipeButton?
+                var downvoteBtn: MGSwipeButton?
+                
+                if let user = currentUser {
+                    if let vote = hasVoted(user.objectId!, match: match) {
+                        if vote[_s_voteType] as! String == _s_upvotes {
+                            upvoteBtn = MGSwipeButton(title: "", icon: upvoteImage, backgroundColor: upvoteCellBtnColor)
+                            downvoteBtn = MGSwipeButton(title: "", icon: downvoteEmptyImage, backgroundColor: downvoteCellBtnColor)
+                        } else if vote[_s_voteType] as! String == _s_downvotes {
+                            upvoteBtn = MGSwipeButton(title: "", icon: upvoteEmptyImage, backgroundColor: upvoteCellBtnColor)
+                            downvoteBtn = MGSwipeButton(title: "", icon: downvoteImage, backgroundColor: downvoteCellBtnColor)
+                        }
+                    } else {
+                        upvoteBtn = MGSwipeButton(title: "", icon: upvoteEmptyImage, backgroundColor: upvoteCellBtnColor)
+                        downvoteBtn = MGSwipeButton(title: "", icon: downvoteEmptyImage, backgroundColor: downvoteCellBtnColor)
+                    }
+                } else {
+                    upvoteBtn = MGSwipeButton(title: "", icon: upvoteEmptyImage, backgroundColor: upvoteCellBtnColor)
+                    downvoteBtn = MGSwipeButton(title: "", icon: downvoteEmptyImage, backgroundColor: downvoteCellBtnColor)
+                }
+                
+                return [upvoteBtn!, downvoteBtn!]
+            }
+        } else {
+            return []
+        }
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -255,6 +375,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, MGSw
             }
         }
     }
+    
     
     
     // SEARCHBAR FUNCTIONS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -273,8 +273,8 @@ class MainNavigationController: UINavigationController {
             self.navigationItem.setLeftBarButtonItems([self.goBackBtn, self.searchBarActivateBtn], animated: true)
             
             self.searchTableView.alpha = 0
-            }, completion: { finished in
-                self.navigationItem.titleView = nil
+        }, completion: { finished in
+            self.navigationItem.titleView = nil
         })
     }
 
