@@ -50,9 +50,6 @@ class ProfileViewController: UIViewController {
         }
 
         displayUserWelcomeLabel()
-//        favsCollectionView.autoresizingMask(UIViewAutoresizingFlexibleWidth |
-//        UIViewAutoresizingFlexibleLeftMargin |
-//        UIViewAutoresizingFlexibleRightMargin)
     }
 
     /**
