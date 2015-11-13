@@ -13,8 +13,8 @@ class PFFavorite : PFObject, PFSubclassing {
     
     @NSManaged var userId: String
     @NSManaged var matchId: String
-    
-    init(userId: String, matchId: String) {
+
+    init(uesrId: String, matchId: String) {
         super.init()
         self.userId = userId
         self.matchId = matchId
