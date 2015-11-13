@@ -67,6 +67,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
             navi.navigationItem.setLeftBarButtonItems([navi.goBackBtn], animated: true)
             navi.navigationItem.setRightBarButtonItems([], animated: true)
             navi.reset_navigationBar()
+            navi.goBackBtn.enabled = true
         }
     }
     
