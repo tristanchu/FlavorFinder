@@ -25,7 +25,7 @@ class ProfileViewController: UIViewController {
     }
 
     // OVERRIDE FUNCTIONS ---------------------------------------------
-    private lazy var favs: [PFFavorite] = [PFFavorite]()
+    private lazy var favorites: [PFObject] = [PFObject]()
 
     /**
     viewDidLoad  --override
@@ -139,35 +139,7 @@ class ProfileViewController: UIViewController {
             /// what do we do if offline?
         } else {
             if let userId = currentUser?.objectId {
-                queryFavorites(userId)
-            }
-        }
-    }
-    
-    /**
-     queryFavorites
-     
-     @param: userId - Bool -- user objectId in Parse
-     */
-    func queryFavorites(userId: String) {
-        
-        let query = PFQuery(className: "Favorite")
-        query.whereKey("userId", equalTo: userId)
-        query.findObjectsInBackgroundWithBlock {
-            (objects: [PFObject]?, error: NSError?) -> Void in
-            if error == nil { // success
-                if let favs = objects {
-                    for f in favs {
-                        let fav:PFFavorite? = (f as! PFFavorite)
-                        if fav != nil {
-                            self.favs.append(fav!)
-                        }
-                    }
-                    //// reload
-                    print(favs)
-                }
-            } else {
-                print("Error loading favorites: \(error!) \(error!.userInfo)")
+                favorites = getUserFavoritesFromLocal(userId)
             }
         }
     }

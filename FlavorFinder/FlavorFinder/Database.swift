@@ -207,9 +207,10 @@ func hasVoted(userId: String, match: PFObject) -> PFObject? {
     return _vote
 }
 
-func getUserVotes(userId: String) {
+func getUserVotesFromCloud(userId: String) {
     let query = PFQuery(className: _s_Vote)
     query.whereKey(_s_userId, equalTo: userId)
+    query.limit = 1000
     
     query.findObjectsInBackgroundWithBlock {
         (objects: [PFObject]?, error: NSError?) -> Void in
@@ -260,9 +261,10 @@ func isFavorite(userId: String, match: PFObject) -> PFObject? {
     return _favorite
 }
 
-func getUserFavorites(userId: String) {
+func getUserFavoritesFromCloud(userId: String) {
     let query = PFQuery(className: _s_Favorite)
     query.whereKey(_s_userId, equalTo: userId)
+    query.limit = 1000
     
     query.findObjectsInBackgroundWithBlock {
         (objects: [PFObject]?, error: NSError?) -> Void in
@@ -274,4 +276,20 @@ func getUserFavorites(userId: String) {
             }
         }
     }
+}
+
+func getUserFavoritesFromLocal(userId: String) -> [PFObject] {
+    let query = PFQuery(className: _s_Favorite)
+    query.whereKey(_s_userId, equalTo: userId)
+    query.limit = 1000
+    query.fromLocalDatastore()
+    
+    let _favorites: [PFObject]
+    do {
+        _favorites = try query.findObjects()
+    } catch {
+        _favorites = []
+    }
+    
+    return _favorites
 }
