@@ -224,8 +224,12 @@ func getUserVotesFromCloud(userId: String) {
     }
 }
 
-func favoriteMatch(userId: String, match: PFObject) {
-    let _favorite = PFFavorite(userId: userId, matchId: match.objectId!)
+func favoriteMatch(userId: String, ingredient: PFObject, match: PFObject) {
+    let _favorite = PFFavorite(userId: userId,
+                                ingredientId: ingredient.objectId!,
+                                matchId: match.objectId!,
+                                ingredientName: ingredient[_s_name] as! String,
+                                matchName: match[_s_matchName] as! String)
     _favorite.pinInBackground()
     _favorite.saveInBackground()
 }
