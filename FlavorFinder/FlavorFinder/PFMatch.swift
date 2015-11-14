@@ -17,8 +17,8 @@ class PFMatch : PFObject, PFSubclassing {
     @NSManaged var upvotes: Int
     @NSManaged var downvotes: Int
     
-    init(ingredientId: Int?, matchId: Int?) {
-        super.init()
+    convenience init(ingredientId: Int?, matchId: Int?) {
+        self.init()
         self.ingredientId = ingredientId!
         self.matchId = matchId!
     }

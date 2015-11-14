@@ -13,6 +13,8 @@ import Parse
 
 let _s_Ingredient = "Ingredient"
 let _s_Match = "Match"
+let _s_Favorite = "Favorite"
+let _s_Vote = "Vote"
 let _s_objectId = "objectId"
 let _s_name = "name"
 let _s_ingredientId = "ingredientId"
@@ -21,6 +23,8 @@ let _s_matchName = "matchName"
 let _s_matchLevel = "matchLevel"
 let _s_upvotes = "upvotes"
 let _s_downvotes = "downvotes"
+let _s_userId = "userId"
+let _s_voteType = "voteType"
 
 var _allIngredients = [PFObject]()
 var _allMatches = [PFObject]()
@@ -115,10 +119,10 @@ func _getIngredientForMatch(Match: PFObject) -> PFObject? {
     return _ingredient
 }
 
-func _getMatchObjectIdForIngredientIdAndMatchId(ingredientId: String, matchId: String) -> PFObject? {
+func _getEquivalentMatch(match: PFObject) -> PFObject? {
     let query = PFQuery(className: _s_Match)
-    query.whereKey(_s_ingredientId, equalTo: ingredientId)
-    query.whereKey(_s_matchId, equalTo: matchId)
+    query.whereKey(_s_ingredientId, equalTo: match[_s_matchId] as! String)
+    query.whereKey(_s_matchId, equalTo: match[_s_ingredientId] as! String)
     
     var _match: PFObject? = nil
     
@@ -135,26 +139,157 @@ func _getMatchObjectIdForIngredientIdAndMatchId(ingredientId: String, matchId: S
 }
 
 func upvoteMatch(userId: String, match: PFObject) {
-    incrementVote(_s_upvotes, userId: userId, match: match)
+    _voteMatch(_s_upvotes, userId: userId, match: match)
     
-    if let match2 = _getMatchObjectIdForIngredientIdAndMatchId(match[_s_matchId] as! String, matchId: match[_s_ingredientId] as! String) {
-        incrementVote(_s_upvotes, userId: userId, match: match2)
+    if let match2 = _getEquivalentMatch(match) {
+        _voteMatch(_s_upvotes, userId: userId, match: match2)
     }
 }
 
 func downvoteMatch(userId: String, match: PFObject) {
-    incrementVote(_s_downvotes, userId: userId, match: match)
+    _voteMatch(_s_downvotes, userId: userId, match: match)
     
-    if let match2 = _getMatchObjectIdForIngredientIdAndMatchId(match[_s_matchId] as! String, matchId: match[_s_ingredientId] as! String) {
-        incrementVote(_s_downvotes, userId: userId, match: match2)
+    if let match2 = _getEquivalentMatch(match) {
+        _voteMatch(_s_downvotes, userId: userId, match: match2)
     }
 }
 
-func incrementVote(voteType: String, userId: String, match: PFObject) {
+func _voteMatch(voteType: String, userId: String, match: PFObject) {
     let _votes = match[voteType] as! Int
     match[voteType] = _votes + 1
     match.saveInBackground()
     
     let _vote = PFVote(voteType: voteType, userId: userId, matchId: match.objectId!)
+    _vote.pinInBackground()
     _vote.saveInBackground()
+}
+
+func unvoteMatch(voteType: String, userId: String, match: PFObject) {
+    _unvoteMatch(voteType, userId: userId, match: match)
+    
+    if let match2 = _getEquivalentMatch(match) {
+        _unvoteMatch(voteType, userId: userId, match: match2)
+    }
+}
+
+func _unvoteMatch(voteType: String, userId: String, match: PFObject) {
+    let _votes = match[voteType] as! Int
+    match[voteType] = _votes - 1
+    match.saveInBackground()
+    
+    let query = PFQuery(className: _s_Vote)
+    query.whereKey(_s_userId, equalTo: userId)
+    query.whereKey(_s_matchId, equalTo: match.objectId!)
+    query.fromLocalDatastore()
+    
+    let _vote: PFObject?
+    do {
+        _vote = try query.getFirstObject()
+        _vote?.deleteInBackground()
+    } catch {
+        _vote = nil
+    }
+}
+
+func hasVoted(userId: String, match: PFObject) -> PFObject? {
+    let query = PFQuery(className: _s_Vote)
+    query.whereKey(_s_userId, equalTo: userId)
+    query.whereKey(_s_matchId, equalTo: match.objectId!)
+    query.fromLocalDatastore()
+    
+    let _vote: PFObject?
+    do {
+        _vote = try query.getFirstObject()
+    } catch {
+        _vote = nil
+    }
+    
+    return _vote
+}
+
+func getUserVotesFromCloud(userId: String) {
+    let query = PFQuery(className: _s_Vote)
+    query.whereKey(_s_userId, equalTo: userId)
+    query.limit = 1000
+    
+    query.findObjectsInBackgroundWithBlock {
+        (objects: [PFObject]?, error: NSError?) -> Void in
+        if let error = error {
+            print(error)
+        } else {
+            for object in objects! {
+                object.pinInBackground()
+            }
+        }
+    }
+}
+
+func favoriteMatch(userId: String, match: PFObject) {
+    let _favorite = PFFavorite(userId: userId, matchId: match.objectId!)
+    _favorite.pinInBackground()
+    _favorite.saveInBackground()
+}
+
+func unfavoriteMatch(userId: String, match: PFObject) {
+    let query = PFQuery(className: _s_Favorite)
+    query.whereKey(_s_userId, equalTo: userId)
+    query.whereKey(_s_matchId, equalTo: match.objectId!)
+    query.fromLocalDatastore()
+    
+    let _favorite: PFObject?
+    do {
+        _favorite = try query.getFirstObject()
+        _favorite?.deleteInBackground()
+    } catch {
+        _favorite = nil
+    }
+}
+
+func isFavorite(userId: String, match: PFObject) -> PFObject? {
+    let query = PFQuery(className: _s_Favorite)
+    query.whereKey(_s_userId, equalTo: userId)
+    query.whereKey(_s_matchId, equalTo: match.objectId!)
+    query.fromLocalDatastore()
+    
+    let _favorite: PFObject?
+    do {
+        _favorite = try query.getFirstObject()
+    } catch {
+        _favorite = nil
+    }
+    
+    return _favorite
+}
+
+func getUserFavoritesFromCloud(userId: String) {
+    let query = PFQuery(className: _s_Favorite)
+    query.whereKey(_s_userId, equalTo: userId)
+    query.limit = 1000
+    
+    query.findObjectsInBackgroundWithBlock {
+        (objects: [PFObject]?, error: NSError?) -> Void in
+        if let error = error {
+            print(error)
+        } else {
+            for object in objects! {
+                object.pinInBackground()
+            }
+        }
+    }
+}
+
+func getUserFavoritesFromLocal(userId: String) -> [PFObject] {
+    let query = PFQuery(className: _s_Favorite)
+    query.whereKey(_s_userId, equalTo: userId)
+    query.limit = 1000
+    query.fromLocalDatastore()
+    
+    let _favorites: [PFObject]
+    do {
+        _favorites = try query.findObjects()
+    } catch {
+        _favorites = []
+    }
+    
+    return _favorites
 }

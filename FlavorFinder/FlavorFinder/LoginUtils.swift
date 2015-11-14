@@ -19,6 +19,8 @@ var PASSWORD_CHAR_MAX = 50
 var backgroundColor_normal: UIColor!
 var backgroundColor_error: UIColor = UIColor(red: 250/255.0, green: 126/255.0, blue: 107/255.0, alpha: 0.5)
 
+var currentUser: PFUser?
+
 // ----------------------------------------------------------------------
 // SESSION VALIDATION FUNCTIONS ---------------------------------------
 // ----------------------------------------------------------------------
@@ -40,6 +42,8 @@ func isUserLoggedIn() -> Bool {
 func setUserSession(user: PFUser) -> Void {
     // Store current PFUser
     currentUser = user
+    getUserVotesFromCloud(user.objectId!)
+    getUserFavoritesFromCloud(user.objectId!)
 }
 
 /**
