@@ -9,7 +9,6 @@
 import UIKit
 import Parse
 
-var currentUser: PFUser?
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
 
