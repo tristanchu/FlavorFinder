@@ -22,6 +22,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var profileFavoritesLabel: UILabel! /// DEBUG
     
     @IBOutlet weak var favsCollectionView: UICollectionView!
+
     
     // MARK: Actions --------------------------------------------------
     @IBAction func goToSettings(sender: UIButton) {
