@@ -15,6 +15,7 @@ class ProfileViewController: UIViewController {
     let TITLE_PROFILE_PAGE = "Profile"
 
     let segueToUserSettings = "segueProfileToUserSettings"
+    let segueToSavedMatchesDEBUG = "segueProfileToSM"
 
     // MARK: Properties -----------------------------------------------
     @IBOutlet weak var ProfileWelcomeLabel: UILabel!
@@ -27,6 +28,10 @@ class ProfileViewController: UIViewController {
     // MARK: Actions --------------------------------------------------
     @IBAction func goToSettings(sender: UIButton) {
         self.performSegueWithIdentifier(segueToUserSettings, sender: self)
+    }
+    
+    @IBAction func goToSavedMatchesDEBUG(sender: UIButton) {
+        self.performSegueWithIdentifier(segueToSavedMatchesDEBUG, sender: self)
     }
 
     // OVERRIDE FUNCTIONS ---------------------------------------------

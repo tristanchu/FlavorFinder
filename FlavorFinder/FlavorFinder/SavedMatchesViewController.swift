@@ -9,13 +9,67 @@
 import UIKit
 import Parse
 
-class SavedMatchesViewController: UIViewController {
+class SavedMatchesViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+    
+    
+    //// using for some inspiration and direction: http://www.raywenderlich.com/78550/beginning-ios-collection-views-swift-part-1
+    
+    @IBOutlet weak var savedMatchesView: UICollectionView!
+    
     private let reuseIdentifier = "SavedMatchesCell"
+    
     private let sectionInsets = UIEdgeInsets(top: 50.0, left: 20.0, bottom: 50.0, right: 20.0)
+    
     private var savedMatches = [[PFObject]]()
     
     func matchForIndexPath(indexPath: NSIndexPath) -> PFObject {
         return savedMatches[indexPath.section][indexPath.row]
     }
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return savedMatches.count
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        
+        let cell : SavedMatchesCell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! SavedMatchesCell
+        
+        cell.savedMatchLabel.text = "Fav"
+        
+        return cell
+    }
+    
+    func collectionView(collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+            return sectionInsets
+    }
+    
+    func addMatches(matches: [PFObject]) {
+        savedMatches.insert(matches, atIndex: 0)
+        savedMatchesView.reloadData()
+    }
+    
+    
+    /**
+     viewDidLoad  --override
+     
+     DEBUG because this is going to be a subview...
+     */
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // Display "Profile" in navigation bar
+        if let navi = self.navigationController as? MainNavigationController {
+            navi.navigationItem.setLeftBarButtonItems([], animated: true)
+            navi.navigationItem.setRightBarButtonItems([navi.menuBarBtn], animated: true)
+            navi.reset_navigationBar()
+            navi.navigationItem.title = "FAVORITES (debug version)"
+        }
+        
+        ///
+    }
+    
+    
 
 }

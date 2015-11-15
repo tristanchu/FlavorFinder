@@ -9,5 +9,7 @@
 import UIKit
 
 class SavedMatchesCell: UICollectionViewCell {
-
+    
+    @IBOutlet weak var savedMatchLabel: UILabel!
+    
 }
