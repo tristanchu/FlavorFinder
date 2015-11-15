@@ -40,6 +40,7 @@ func _readIngredients() {
         let query = PFQuery(className: _s_Ingredient)
         query.limit = 1000
         query.skip = 1000 * iteration
+//        query.orderByAscending(_s_name)
         query.findObjectsInBackgroundWithBlock {
             (objects: [PFObject]?, error: NSError?) -> Void in
             if let error = error {
@@ -48,7 +49,6 @@ func _readIngredients() {
                 for object in objects! {
                     _allIngredients.append(object)
                 }
-                
             }
         }
     }
@@ -92,6 +92,8 @@ func _getIngredientWithNameSubstring(nameSubstring: String) -> [PFObject] {
 func _getMatchesForIngredient(Ingredient: PFObject) -> [PFObject] {
     let query = PFQuery(className: _s_Match)
     query.whereKey(_s_ingredientId, equalTo: Ingredient.objectId!)
+    query.orderByDescending(_s_matchLevel)
+    query.addAscendingOrder(_s_matchName)
     query.limit = 1000
     
     let _matches: [PFObject]

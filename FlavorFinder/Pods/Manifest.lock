@@ -1,5 +1,6 @@
 PODS:
   - Bolts/Tasks (1.3.0)
+  - DOFavoriteButton (0.0.4)
   - DZNEmptyDataSet (1.7.2)
   - FontAwesome.swift (0.6.2)
   - MGSwipeTableCell (1.5.1)
@@ -8,6 +9,7 @@ PODS:
   - SQLite.swift (1.0.0.pre)
 
 DEPENDENCIES:
+  - DOFavoriteButton
   - DZNEmptyDataSet
   - FontAwesome.swift
   - MGSwipeTableCell
@@ -27,6 +29,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Bolts: 805a4a87413e49d4a0c2b7d469084cbc46b09342
+  DOFavoriteButton: 866e15af173d2dd5233971a1f657a5f31d2491d5
   DZNEmptyDataSet: 0ec00bfc230d7450997b60c127afdd0b9f24f3b6
   FontAwesome.swift: d40ac0a660f079c77945bab632ca20bf46ddc1ac
   MGSwipeTableCell: a51fa670c01f0aa048f12af040acebf315223137

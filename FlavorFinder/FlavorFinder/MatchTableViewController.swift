@@ -12,6 +12,7 @@ import Parse
 import FontAwesome_swift
 import MGSwipeTableCell
 import DZNEmptyDataSet
+import DOFavoriteButton
 import Darwin
 
 class MatchTableViewController: UITableViewController, UISearchBarDelegate, MGSwipeTableCellDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
@@ -73,8 +74,6 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, MGSw
             }))
         }
         
-
-        
         showAllIngredients()
     }
     
@@ -86,9 +85,13 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, MGSw
     }
     
     func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
-        let text = "No matches for this ingredient yet - add a match you enjoy!"
-        return NSAttributedString(string: text, attributes: attributes)
-
+        if let _ = currentIngredient {
+            let text = "No matches for this ingredient yet - add a match you enjoy!"
+            return NSAttributedString(string: text, attributes: attributes)
+        } else {
+            let text = "The ingredient you were looking for could not be found it - add it yourself!"
+            return NSAttributedString(string: text, attributes: attributes)
+        }
     }
     func configure_searchBarActivateBtn() {
         searchBarActivateBtn.setTitleTextAttributes(attributes, forState: .Normal)
@@ -205,17 +208,17 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, MGSw
         
         switch direction {
         case MGSwipeDirection.LeftToRight:
-            let btn = cell.leftButtons[index] as! MGSwipeButton
+            let btn = cell.leftButtons[index] as! DOFavoriteButton
             switch index {
             case 0:
                 // Favorite action
                 if let user = currentUser {
                     if let _ = isFavorite(user.objectId!, match: match) {
                         unfavoriteMatch(user.objectId!, match: match)
-                        btn.setImage(favoriteEmptyImage, forState: UIControlState.Normal)
+                        btn.deselect()
                     } else {
                         favoriteMatch(user.objectId!, ingredient: currentIngredient!, match: match)
-                        btn.setImage(favoriteImage, forState: UIControlState.Normal)
+                        btn.select()
                     }
 
                     return false
@@ -234,7 +237,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, MGSw
                 return true
             }
         case MGSwipeDirection.RightToLeft:
-            let btn = cell.rightButtons[index] as! MGSwipeButton
+            let btn = cell.rightButtons[index] as! DOFavoriteButton
 
             switch index {
             case 0:
@@ -246,18 +249,18 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, MGSw
                         if voteType == _s_upvotes {
                             // Already upvoted
                             unvoteMatch(_s_upvotes, userId: user.objectId!, match: match)
-                            btn.setImage(upvoteEmptyImage, forState: UIControlState.Normal)
+                            btn.deselect()
                         } else if voteType == _s_downvotes {
                             // Already downvoted
                             unvoteMatch(_s_downvotes, userId: user.objectId!, match: match)
                             upvoteMatch(user.objectId!, match: match)
-                            (cell.rightButtons[1] as! MGSwipeButton).setImage(downvoteEmptyImage, forState: UIControlState.Normal)
-                            btn.setImage(upvoteImage, forState: UIControlState.Normal)
+                            (cell.rightButtons[1] as! DOFavoriteButton).deselect()
+                            btn.select()
                         }
                     } else {
                         // Neither voted
                         upvoteMatch(user.objectId!, match: match)
-                        btn.setImage(upvoteImage, forState: UIControlState.Normal)
+                        btn.select()
                     }
                     
                     return false
@@ -274,18 +277,18 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, MGSw
                         if voteType == _s_downvotes {
                             // Already downvoted
                             unvoteMatch(_s_downvotes, userId: user.objectId!, match: match)
-                            btn.setImage(downvoteEmptyImage, forState: UIControlState.Normal)
+                            btn.deselect()
                         } else if voteType == _s_upvotes {
                             // Already upvoted
                             unvoteMatch(_s_upvotes, userId: user.objectId!, match: match)
                             downvoteMatch(user.objectId!, match: match)
-                            (cell.rightButtons[0] as! MGSwipeButton).setImage(upvoteEmptyImage, forState: UIControlState.Normal)
-                            btn.setImage(downvoteImage, forState: UIControlState.Normal)
+                            (cell.rightButtons[0] as! DOFavoriteButton).deselect()
+                            btn.select()
                         }
                     } else {
                         // Neither voted
                         downvoteMatch(user.objectId!, match: match)
-                        btn.setImage(downvoteImage, forState: UIControlState.Normal)
+                        btn.select()
                     }
                     
                     return false
@@ -309,45 +312,53 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, MGSw
             
             switch direction {
             case MGSwipeDirection.LeftToRight:
-                var favBtn: MGSwipeButton?
+                let favBtn = DOFavoriteButton(frame: CGRectMake(0, 0, 50, 50), image: favoriteImage)
+                favBtn.imageColorOff = UIColor.grayColor()
+                favBtn.imageColorOn = UIColor.redColor()
+                favBtn.backgroundColor = editCellBtnColor
                 
                 if let user = currentUser {
                     if let _ = isFavorite(user.objectId!, match: match) {
-                        favBtn = MGSwipeButton(title: "", icon: favoriteImage, backgroundColor: editCellBtnColor)
+                        favBtn.selected = true
                     } else {
-                        favBtn = MGSwipeButton(title: "", icon: favoriteEmptyImage, backgroundColor: editCellBtnColor)
+                        favBtn.selected = false
                     }
                 } else {
-                    favBtn = MGSwipeButton(title: "", icon: favoriteEmptyImage, backgroundColor: editCellBtnColor)
+                    favBtn.selected = false
                 }
                 
-                let editBtn = MGSwipeButton(title: "", icon: editImage, backgroundColor: editCellBtnColor)
-                
-                return [favBtn!, editBtn]
+                return [favBtn]
                 
             case MGSwipeDirection.RightToLeft:
-                var upvoteBtn: MGSwipeButton?
-                var downvoteBtn: MGSwipeButton?
-                
+                let upvoteBtn = DOFavoriteButton(frame: CGRectMake(0, 0, 50, 50), image: upvoteImage)
+                upvoteBtn.imageColorOff = UIColor.grayColor()
+                upvoteBtn.imageColorOn = UIColor.blackColor()
+                upvoteBtn.backgroundColor = upvoteCellBtnColor
+
+                let downvoteBtn = DOFavoriteButton(frame: CGRectMake(0, 0, 50, 50), image: downvoteImage)
+                downvoteBtn.imageColorOff = UIColor.grayColor()
+                downvoteBtn.imageColorOn = UIColor.blackColor()
+                downvoteBtn.backgroundColor = downvoteCellBtnColor
+
                 if let user = currentUser {
                     if let vote = hasVoted(user.objectId!, match: match) {
                         if vote[_s_voteType] as! String == _s_upvotes {
-                            upvoteBtn = MGSwipeButton(title: "", icon: upvoteImage, backgroundColor: upvoteCellBtnColor)
-                            downvoteBtn = MGSwipeButton(title: "", icon: downvoteEmptyImage, backgroundColor: downvoteCellBtnColor)
+                            upvoteBtn.selected = true
+                            downvoteBtn.selected = false
                         } else if vote[_s_voteType] as! String == _s_downvotes {
-                            upvoteBtn = MGSwipeButton(title: "", icon: upvoteEmptyImage, backgroundColor: upvoteCellBtnColor)
-                            downvoteBtn = MGSwipeButton(title: "", icon: downvoteImage, backgroundColor: downvoteCellBtnColor)
+                            upvoteBtn.selected = false
+                            downvoteBtn.selected = true
                         }
                     } else {
-                        upvoteBtn = MGSwipeButton(title: "", icon: upvoteEmptyImage, backgroundColor: upvoteCellBtnColor)
-                        downvoteBtn = MGSwipeButton(title: "", icon: downvoteEmptyImage, backgroundColor: downvoteCellBtnColor)
+                        upvoteBtn.selected = false
+                        downvoteBtn.selected = false
                     }
                 } else {
-                    upvoteBtn = MGSwipeButton(title: "", icon: upvoteEmptyImage, backgroundColor: upvoteCellBtnColor)
-                    downvoteBtn = MGSwipeButton(title: "", icon: downvoteEmptyImage, backgroundColor: downvoteCellBtnColor)
+                    upvoteBtn.selected = false
+                    downvoteBtn.selected = false
                 }
                 
-                return [upvoteBtn!, downvoteBtn!]
+                return [upvoteBtn, downvoteBtn]
             }
         } else {
             return []
