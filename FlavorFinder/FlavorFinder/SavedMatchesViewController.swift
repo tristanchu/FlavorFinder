@@ -27,14 +27,22 @@ class SavedMatchesViewController: UIViewController, UICollectionViewDataSource, 
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return savedMatches.count
+        return savedMatches[section].count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         let cell : SavedMatchesCell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! SavedMatchesCell
         
-        cell.savedMatchLabel.text = "Fav"
+        let match = matchForIndexPath(indexPath)
+        if let ingredientName: String = match.objectForKey("ingredientName") as? String {
+            if let matchName: String = match.objectForKey("matchName") as? String {
+                cell.savedMatchLabel.text = "\(ingredientName)\n + \n\(matchName)"
+            }
+        } else {
+            cell.savedMatchLabel.text = "???"
+            print(match)
+        }
         
         return cell
     }
@@ -68,6 +76,7 @@ class SavedMatchesViewController: UIViewController, UICollectionViewDataSource, 
         }
         
         if let userId = currentUser?.objectId {
+            print("adding matches")
             addMatches(getUserFavoritesFromLocal(userId))
         }
     }

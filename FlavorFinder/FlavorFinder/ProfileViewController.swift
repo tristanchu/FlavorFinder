@@ -172,14 +172,14 @@ class ProfileViewController: UIViewController {
     @param: offline - Bool -- if user is offline
     */
     func loadSavedMatches(offline: Bool) {
-        print("loading favorites for user \((currentUser?.username)!)...")
-        if offline {
-            /// what do we do if offline?
-        } else {
-            if let userId = currentUser?.objectId {
-                favorites = getUserFavoritesFromLocal(userId)
-            }
-        }
+//        print("loading favorites for user \((currentUser?.username)!)...")
+//        if offline {
+//            /// what do we do if offline?
+//        } else {
+//            if let userId = currentUser?.objectId {
+//                favorites = getUserFavoritesFromLocal(userId)
+//            }
+//        }
     }
 
     // FLUSH CONTENT FUNCTIONS ---------------------------------------------
