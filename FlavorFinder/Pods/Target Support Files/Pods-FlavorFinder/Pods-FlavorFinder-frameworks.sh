@@ -85,6 +85,7 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-FlavorFinder/Bolts.framework"
+  install_framework "Pods-FlavorFinder/DOFavoriteButton.framework"
   install_framework "Pods-FlavorFinder/DZNEmptyDataSet.framework"
   install_framework "Pods-FlavorFinder/FontAwesome_swift.framework"
   install_framework "Pods-FlavorFinder/MGSwipeTableCell.framework"
@@ -93,6 +94,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-FlavorFinder/Bolts.framework"
+  install_framework "Pods-FlavorFinder/DOFavoriteButton.framework"
   install_framework "Pods-FlavorFinder/DZNEmptyDataSet.framework"
   install_framework "Pods-FlavorFinder/FontAwesome_swift.framework"
   install_framework "Pods-FlavorFinder/MGSwipeTableCell.framework"

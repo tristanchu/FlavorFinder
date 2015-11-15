@@ -117,13 +117,14 @@ class ProfileViewController: UIViewController {
     */
     func displayUserPhoto(profileView: UIImageView!) {
 
-        let userImage = currentUser!["profilePicture"] as! PFFile
-        userImage.getDataInBackgroundWithBlock {
-            (imageData: NSData?, error: NSError?) -> Void in
-            if error == nil {
-                if let imageData = imageData {
-                    let image = UIImage(data:imageData)
-                    profileView.image = image
+        if let userImage = currentUser!["profilePicture"] as? PFFile {
+            userImage.getDataInBackgroundWithBlock {
+                (imageData: NSData?, error: NSError?) -> Void in
+                if error == nil {
+                    if let imageData = imageData {
+                        let image = UIImage(data:imageData)
+                        profileView.image = image
+                    }
                 }
             }
         }
