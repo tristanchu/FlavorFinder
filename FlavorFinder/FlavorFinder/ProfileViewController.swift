@@ -18,6 +18,7 @@ class ProfileViewController: UIViewController {
 
     // MARK: Properties -----------------------------------------------
     @IBOutlet weak var ProfileWelcomeLabel: UILabel!
+    @IBOutlet weak var profilePictureView: UIImageView!
 
     // MARK: Actions --------------------------------------------------
     @IBAction func goToSettings(sender: UIButton) {
@@ -45,6 +46,7 @@ class ProfileViewController: UIViewController {
         }
 
         displayUserWelcomeLabel()
+        displayUserPhoto(profilePictureView)
 
     }
 
@@ -79,10 +81,10 @@ class ProfileViewController: UIViewController {
     }
     
     // DISPLAY CONTENT FUNCTIONS ------------------------------------------
-    
+
     /**
     displayUserWelcomeLabel
-    
+
     Shows welcome label with username
     */
     func displayUserWelcomeLabel() {
@@ -91,7 +93,26 @@ class ProfileViewController: UIViewController {
         let username = currentUser?.username
         ProfileWelcomeLabel.text = "Hello \(username!)!"
     }
-    
+
+    /**
+    displayUserPhoto
+
+    Fetches and displays the UserPhoto
+    */
+    func displayUserPhoto(profileView: UIImageView!) {
+
+        let userImage = currentUser!["profilePicture"] as! PFFile
+        userImage.getDataInBackgroundWithBlock {
+            (imageData: NSData?, error: NSError?) -> Void in
+            if error == nil {
+                if let imageData = imageData {
+                    let image = UIImage(data:imageData)
+                    profileView.image = image
+                }
+            }
+        }
+    }
+
     // LOAD CONTENT FUNCTIONS ---------------------------------------------
     
     /**
