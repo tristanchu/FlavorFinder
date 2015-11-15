@@ -196,16 +196,22 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello. How are you?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LeR-3W-QO4">
-                                <rect key="frame" x="62" y="90" width="476" height="21"/>
+                                <rect key="frame" x="62" y="60" width="476" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="7p5-ub-27j"/>
+                                    <constraint firstAttribute="height" constant="21" id="XPR-It-mG4"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5kE-9Y-XFb">
+                                <rect key="frame" x="200" y="115" width="200" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="0kc-EM-Zz2"/>
+                                </constraints>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n5D-NH-eBG">
-                                <rect key="frame" x="257" y="151" width="87" height="30"/>
+                                <rect key="frame" x="257" y="352" width="87" height="30"/>
                                 <state key="normal" title="Edit Settings"/>
                                 <connections>
                                     <action selector="goToSettings:" destination="leV-JT-XQg" eventType="touchUpInside" id="hAf-Wp-HrA"/>
@@ -214,15 +220,20 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="LeR-3W-QO4" firstAttribute="leading" secondItem="Bbg-AR-Zd4" secondAttribute="leadingMargin" constant="42" id="8mu-xY-Udm"/>
-                            <constraint firstItem="n5D-NH-eBG" firstAttribute="top" secondItem="LeR-3W-QO4" secondAttribute="bottom" constant="40" id="HqQ-U7-pft"/>
-                            <constraint firstItem="LeR-3W-QO4" firstAttribute="top" secondItem="bs6-RQ-Hov" secondAttribute="bottom" constant="70" id="gvL-jl-raE"/>
-                            <constraint firstItem="n5D-NH-eBG" firstAttribute="centerX" secondItem="Bbg-AR-Zd4" secondAttribute="centerX" id="isV-cg-fyN"/>
-                            <constraint firstItem="LeR-3W-QO4" firstAttribute="centerX" secondItem="Bbg-AR-Zd4" secondAttribute="centerX" id="x6S-or-lQb"/>
+                            <constraint firstItem="n5D-NH-eBG" firstAttribute="centerX" secondItem="Bbg-AR-Zd4" secondAttribute="centerX" id="03K-ZG-e9y"/>
+                            <constraint firstItem="LeR-3W-QO4" firstAttribute="centerX" secondItem="Bbg-AR-Zd4" secondAttribute="centerX" id="3gY-MF-qzG"/>
+                            <constraint firstItem="5kE-9Y-XFb" firstAttribute="top" secondItem="LeR-3W-QO4" secondAttribute="bottom" constant="34" id="ETb-Mh-vha"/>
+                            <constraint firstItem="LeR-3W-QO4" firstAttribute="leading" secondItem="Bbg-AR-Zd4" secondAttribute="leadingMargin" constant="42" id="KHX-sc-74d"/>
+                            <constraint firstItem="LeR-3W-QO4" firstAttribute="top" secondItem="bs6-RQ-Hov" secondAttribute="bottom" constant="40" id="ZUF-f4-11E"/>
+                            <constraint firstItem="5kE-9Y-XFb" firstAttribute="centerX" secondItem="Bbg-AR-Zd4" secondAttribute="centerX" id="d0n-TT-CIV"/>
+                            <constraint firstItem="n5D-NH-eBG" firstAttribute="top" secondItem="5kE-9Y-XFb" secondAttribute="bottom" constant="37" id="hGw-UG-nwp"/>
+                            <constraint firstItem="xgG-lA-4at" firstAttribute="top" secondItem="n5D-NH-eBG" secondAttribute="bottom" constant="218" id="khv-2j-pts"/>
+                            <constraint firstItem="n5D-NH-eBG" firstAttribute="centerX" secondItem="Bbg-AR-Zd4" secondAttribute="centerX" id="uqj-F6-5LE"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="ProfileWelcomeLabel" destination="LeR-3W-QO4" id="tIR-Iu-3zj"/>
+                        <outlet property="profilePictureView" destination="5kE-9Y-XFb" id="qOf-CT-w5C"/>
                         <segue destination="kXY-t1-zaG" kind="show" identifier="segueProfileToUserSettings" id="Tnc-8s-y0L"/>
                     </connections>
                 </viewController>
