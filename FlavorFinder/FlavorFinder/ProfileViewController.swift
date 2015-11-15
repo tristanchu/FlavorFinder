@@ -15,14 +15,24 @@ class ProfileViewController: UIViewController {
     let TITLE_PROFILE_PAGE = "Profile"
 
     let segueToUserSettings = "segueProfileToUserSettings"
+    let segueToSavedMatchesDEBUG = "segueProfileToSM"
 
     // MARK: Properties -----------------------------------------------
     @IBOutlet weak var ProfileWelcomeLabel: UILabel!
     @IBOutlet weak var profilePictureView: UIImageView!
 
+    @IBOutlet weak var profileFavoritesLabel: UILabel! /// DEBUG
+    
+    @IBOutlet weak var favsCollectionView: UICollectionView!
+
+    
     // MARK: Actions --------------------------------------------------
     @IBAction func goToSettings(sender: UIButton) {
         self.performSegueWithIdentifier(segueToUserSettings, sender: self)
+    }
+    
+    @IBAction func goToSavedMatchesDEBUG(sender: UIButton) {
+        self.performSegueWithIdentifier(segueToSavedMatchesDEBUG, sender: self)
     }
 
     // OVERRIDE FUNCTIONS ---------------------------------------------
@@ -31,11 +41,12 @@ class ProfileViewController: UIViewController {
     /**
     viewDidLoad  --override
     
-    Sets visuals for navigation.
+    Sets visuals for navigation, loads initial visuals
     */
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.hidesBackButton = true
+        self.view.autoresizesSubviews = true
         
         // Display "Profile" in navigation bar
         if let navi = self.navigationController as? MainNavigationController {
@@ -68,16 +79,10 @@ class ProfileViewController: UIViewController {
         if isUserLoggedIn() {
             // if view revisted in app, load again
             self.loadContent()
-            super.viewDidAppear(animated)
-
-        // User not logged in:
         } else {
-            // DEBUG:
-            print("user is not logged in! oops")
-            super.viewDidAppear(animated)
-
-            //// TODO: segue to login screen
+            print("user is not logged in!")
         }
+        super.viewDidAppear(animated)
     }
     
     // DISPLAY CONTENT FUNCTIONS ------------------------------------------
@@ -88,11 +93,22 @@ class ProfileViewController: UIViewController {
     Shows welcome label with username
     */
     func displayUserWelcomeLabel() {
-        // Update Welcome Label:
-        // TODO: get username from variable set by loadContent
         let username = currentUser?.username
         ProfileWelcomeLabel.text = "Hello \(username!)!"
     }
+    
+    /**
+    displayUserFavorites
+    
+    Shows user favorites in view
+    */
+    func displayUserFavorites() {
+        /// for now, just surfacing to user at a minimal level
+        /// in separate view, with own controller...
+        /// subviews were getting messy while
+        /// still developing, will merge into one controller
+    }
+    
 
     /**
     displayUserPhoto
@@ -101,13 +117,14 @@ class ProfileViewController: UIViewController {
     */
     func displayUserPhoto(profileView: UIImageView!) {
 
-        let userImage = currentUser!["profilePicture"] as! PFFile
-        userImage.getDataInBackgroundWithBlock {
-            (imageData: NSData?, error: NSError?) -> Void in
-            if error == nil {
-                if let imageData = imageData {
-                    let image = UIImage(data:imageData)
-                    profileView.image = image
+        if let userImage = currentUser!["profilePicture"] as? PFFile {
+            userImage.getDataInBackgroundWithBlock {
+                (imageData: NSData?, error: NSError?) -> Void in
+                if error == nil {
+                    if let imageData = imageData {
+                        let image = UIImage(data:imageData)
+                        profileView.image = image
+                    }
                 }
             }
         }
@@ -136,8 +153,9 @@ class ProfileViewController: UIViewController {
     /**
     loadUserData
 
-    TODO: Load user data from Parse using username stored in Keychain
-
+    Load any user data beyond what is stored in curerntUser global -- photo, etc.
+    // TODO: do something with this function
+     
     @param: offline - Bool -- if user is offline
     */
     func loadUserData(offline: Bool) {
@@ -155,14 +173,14 @@ class ProfileViewController: UIViewController {
     @param: offline - Bool -- if user is offline
     */
     func loadSavedMatches(offline: Bool) {
-        print("loading favorites for user \((currentUser?.username)!)...")
-        if offline {
-            /// what do we do if offline?
-        } else {
-            if let userId = currentUser?.objectId {
-                favorites = getUserFavoritesFromLocal(userId)
-            }
-        }
+//        print("loading favorites for user \((currentUser?.username)!)...")
+//        if offline {
+//            /// what do we do if offline?
+//        } else {
+//            if let userId = currentUser?.objectId {
+//                favorites = getUserFavoritesFromLocal(userId)
+//            }
+//        }
     }
 
     // FLUSH CONTENT FUNCTIONS ---------------------------------------------
@@ -174,6 +192,7 @@ class ProfileViewController: UIViewController {
     */
     func flushData() {
         /// empty caches
+        favorites = []
     }
     
     // PROFILE PAGE FUNCTIONS -------------------------------
