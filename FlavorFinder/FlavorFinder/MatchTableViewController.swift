@@ -214,7 +214,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, MGSw
                         unfavoriteMatch(user.objectId!, match: match)
                         btn.setImage(favoriteEmptyImage, forState: UIControlState.Normal)
                     } else {
-                        favoriteMatch(user.objectId!, match: match)
+                        favoriteMatch(user.objectId!, ingredient: currentIngredient!, match: match)
                         btn.setImage(favoriteImage, forState: UIControlState.Normal)
                     }
 

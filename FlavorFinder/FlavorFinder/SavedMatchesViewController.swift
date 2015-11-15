@@ -59,7 +59,7 @@ class SavedMatchesViewController: UIViewController, UICollectionViewDataSource, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Display "Profile" in navigation bar
+        // navigation bar
         if let navi = self.navigationController as? MainNavigationController {
             navi.navigationItem.setLeftBarButtonItems([], animated: true)
             navi.navigationItem.setRightBarButtonItems([navi.menuBarBtn], animated: true)
@@ -67,9 +67,8 @@ class SavedMatchesViewController: UIViewController, UICollectionViewDataSource, 
             navi.navigationItem.title = "FAVORITES (debug version)"
         }
         
-        ///
+        if let userId = currentUser?.objectId {
+            addMatches(getUserFavoritesFromLocal(userId))
+        }
     }
-    
-    
-
 }

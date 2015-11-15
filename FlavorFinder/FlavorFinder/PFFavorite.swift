@@ -12,12 +12,18 @@ import Parse
 class PFFavorite : PFObject, PFSubclassing {
     
     @NSManaged var userId: String
+    @NSManaged var ingredientId: String
     @NSManaged var matchId: String
+    @NSManaged var ingredientName: String
+    @NSManaged var matchName: String
     
-    convenience init(userId: String, matchId: String) {
+    convenience init(userId: String, ingredientId: String, matchId: String, ingredientName: String, matchName: String) {
         self.init()
         self.userId = userId
+        self.ingredientId = ingredientId
         self.matchId = matchId
+        self.ingredientName = ingredientName
+        self.matchName = matchName
     }
     
     override class func initialize() {

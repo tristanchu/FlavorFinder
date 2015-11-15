@@ -19,6 +19,7 @@ class ProfileViewController: UIViewController {
 
     // MARK: Properties -----------------------------------------------
     @IBOutlet weak var ProfileWelcomeLabel: UILabel!
+    @IBOutlet weak var profilePictureView: UIImageView!
 
     @IBOutlet weak var profileFavoritesLabel: UILabel! /// DEBUG
     
@@ -56,6 +57,8 @@ class ProfileViewController: UIViewController {
         }
 
         displayUserWelcomeLabel()
+        displayUserPhoto(profilePictureView)
+
     }
 
     /**
@@ -83,10 +86,10 @@ class ProfileViewController: UIViewController {
     }
     
     // DISPLAY CONTENT FUNCTIONS ------------------------------------------
-    
+
     /**
     displayUserWelcomeLabel
-    
+
     Shows welcome label with username
     */
     func displayUserWelcomeLabel() {
@@ -100,14 +103,32 @@ class ProfileViewController: UIViewController {
     Shows user favorites in view
     */
     func displayUserFavorites() {
-        /// want a table etc. at some point when we decidw how this should look
         /// for now, just surfacing to user at a minimal level
-        profileFavoritesLabel.text?.appendContentsOf(" ! ")
-        favsCollectionView.backgroundColor = MATCH_GREATEST_COLOR
-        favsCollectionView.visibleCells()[0].backgroundColor = MATCH_LOW_COLOR
+        /// in separate view, with own controller...
+        /// subviews were getting messy while
+        /// still developing, will merge into one controller
     }
-     
-     
+    
+
+    /**
+    displayUserPhoto
+
+    Fetches and displays the UserPhoto
+    */
+    func displayUserPhoto(profileView: UIImageView!) {
+
+        let userImage = currentUser!["profilePicture"] as! PFFile
+        userImage.getDataInBackgroundWithBlock {
+            (imageData: NSData?, error: NSError?) -> Void in
+            if error == nil {
+                if let imageData = imageData {
+                    let image = UIImage(data:imageData)
+                    profileView.image = image
+                }
+            }
+        }
+    }
+
     // LOAD CONTENT FUNCTIONS ---------------------------------------------
     
     /**

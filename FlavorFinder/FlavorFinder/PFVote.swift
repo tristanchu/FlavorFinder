@@ -36,4 +36,5 @@ class PFVote : PFObject, PFSubclassing {
     static func parseClassName() -> String {
         return "Vote"
     }
+    
 }

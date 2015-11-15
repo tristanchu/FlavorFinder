@@ -195,62 +195,76 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello. How are you?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LeR-3W-QO4">
-                                <rect key="frame" x="62" y="90" width="476" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Hello. How are you?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LeR-3W-QO4">
+                                <rect key="frame" x="62" y="60" width="476" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="XPR-It-mG4"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n5D-NH-eBG">
-                                <rect key="frame" x="257" y="151" width="87" height="30"/>
+                                <rect key="frame" x="257" y="323" width="87" height="30"/>
                                 <state key="normal" title="Edit Settings"/>
                                 <connections>
                                     <action selector="goToSettings:" destination="leV-JT-XQg" eventType="touchUpInside" id="hAf-Wp-HrA"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Favorites" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Oo-dL-RlG">
-                                <rect key="frame" x="149" y="232" width="302" height="21"/>
+                                <rect key="frame" x="149" y="380" width="302" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="302" id="28g-b5-bo2"/>
+                                    <constraint firstAttribute="width" constant="302" id="cqJ-Qs-D3x"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dpa-NF-ykY">
-                                <rect key="frame" x="199" y="267" width="203" height="30"/>
+                                <rect key="frame" x="199" y="409" width="203" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="203" id="GdT-Qy-eTF"/>
+                                    <constraint firstAttribute="width" constant="203" id="SaE-hn-bt2"/>
                                 </constraints>
                                 <state key="normal" title="DEBUG: favorites"/>
                                 <connections>
                                     <action selector="goToSavedMatchesDEBUG:" destination="leV-JT-XQg" eventType="touchUpInside" id="Qne-bm-a9j"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5kE-9Y-XFb">
+                                <rect key="frame" x="200" y="96" width="200" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="0kc-EM-Zz2"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Dpa-NF-ykY" firstAttribute="top" secondItem="2Oo-dL-RlG" secondAttribute="bottom" constant="14" id="3LL-mt-2a4"/>
+                            <constraint firstItem="n5D-NH-eBG" firstAttribute="centerX" secondItem="5kE-9Y-XFb" secondAttribute="centerX" id="28W-Lw-UJQ"/>
+                            <constraint firstItem="n5D-NH-eBG" firstAttribute="top" secondItem="5kE-9Y-XFb" secondAttribute="bottom" constant="8" id="5dz-bY-b99"/>
+                            <constraint firstItem="Dpa-NF-ykY" firstAttribute="top" secondItem="2Oo-dL-RlG" secondAttribute="bottom" constant="8" symbolic="YES" id="8DY-Gb-GjS"/>
                             <constraint firstItem="LeR-3W-QO4" firstAttribute="top" secondItem="bs6-RQ-Hov" secondAttribute="bottom" constant="70" id="BO6-33-jhT"/>
-                            <constraint firstItem="n5D-NH-eBG" firstAttribute="centerX" secondItem="Bbg-AR-Zd4" secondAttribute="centerX" id="Gjt-AM-wUH"/>
-                            <constraint firstItem="LeR-3W-QO4" firstAttribute="centerX" secondItem="n5D-NH-eBG" secondAttribute="centerX" id="OCf-Xb-gge"/>
-                            <constraint firstItem="2Oo-dL-RlG" firstAttribute="top" secondItem="n5D-NH-eBG" secondAttribute="bottom" constant="51" id="fDp-St-4CU"/>
-                            <constraint firstItem="n5D-NH-eBG" firstAttribute="top" secondItem="LeR-3W-QO4" secondAttribute="bottom" constant="40" id="gfS-ix-fz4"/>
+                            <constraint firstItem="5kE-9Y-XFb" firstAttribute="top" secondItem="LeR-3W-QO4" secondAttribute="bottom" constant="15" id="Dd4-lV-Xpo"/>
+                            <constraint firstItem="xgG-lA-4at" firstAttribute="top" secondItem="Dpa-NF-ykY" secondAttribute="bottom" constant="161" id="KRT-Id-KwR"/>
+                            <constraint firstItem="2Oo-dL-RlG" firstAttribute="top" secondItem="n5D-NH-eBG" secondAttribute="bottom" constant="27" id="MQW-uk-ICs"/>
+                            <constraint firstItem="n5D-NH-eBG" firstAttribute="top" secondItem="5kE-9Y-XFb" secondAttribute="bottom" constant="8" symbolic="YES" id="NJu-gv-dL5"/>
+                            <constraint firstItem="n5D-NH-eBG" firstAttribute="centerX" secondItem="LeR-3W-QO4" secondAttribute="centerX" id="PWX-rr-R5i"/>
+                            <constraint firstItem="2Oo-dL-RlG" firstAttribute="centerX" secondItem="Bbg-AR-Zd4" secondAttribute="centerX" id="PrU-Bs-8Cv"/>
+                            <constraint firstItem="2Oo-dL-RlG" firstAttribute="centerX" secondItem="Dpa-NF-ykY" secondAttribute="centerX" id="Yd2-MC-tqx"/>
                             <constraint firstItem="LeR-3W-QO4" firstAttribute="leading" secondItem="Bbg-AR-Zd4" secondAttribute="leadingMargin" constant="42" id="j6h-KR-KJr"/>
-                            <constraint firstItem="2Oo-dL-RlG" firstAttribute="centerX" secondItem="n5D-NH-eBG" secondAttribute="centerX" id="uBX-K6-CiZ"/>
-                            <constraint firstItem="Dpa-NF-ykY" firstAttribute="centerX" secondItem="2Oo-dL-RlG" secondAttribute="centerX" id="vcj-dc-Yzg"/>
+                            <constraint firstItem="n5D-NH-eBG" firstAttribute="centerX" secondItem="2Oo-dL-RlG" secondAttribute="centerX" id="tL6-BL-hrX"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="ProfileWelcomeLabel" destination="LeR-3W-QO4" id="tIR-Iu-3zj"/>
                         <outlet property="profileFavoritesLabel" destination="2Oo-dL-RlG" id="pXI-PN-39C"/>
+                        <outlet property="profilePictureView" destination="5kE-9Y-XFb" id="qOf-CT-w5C"/>
                         <segue destination="kXY-t1-zaG" kind="show" identifier="segueProfileToUserSettings" id="Tnc-8s-y0L"/>
                         <segue destination="Zmg-Zw-Qie" kind="show" identifier="segueProfileToSM" id="POM-yy-ujG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z8U-I1-yy5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1313" y="1236"/>
+            <point key="canvasLocation" x="1271" y="1220"/>
         </scene>
         <!--Saved Matches View Controller-->
         <scene sceneID="jPM-Ek-pkk">
