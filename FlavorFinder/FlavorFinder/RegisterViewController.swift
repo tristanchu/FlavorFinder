@@ -88,6 +88,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
             newUser.username = username
             newUser.email = email
             newUser.password = password
+            setDefaultProfilePicture(newUser)
             newUser.signUpInBackgroundWithBlock { (succeeded, error) -> Void in
                 if error == nil {
                     if succeeded {
@@ -101,7 +102,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
             }
         }
     }
-    
+
     func fieldsAreValid(email: String, username: String, password: String, pwRetyped: String) -> Bool {
         var isValid = true
         if isInvalidEmail(email) {
@@ -173,4 +174,27 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    /**
+    setDefaultProfilePicture
+
+    gets defaultProfilePicture from Parse Config and sets it as the
+    profilePicture on the new user.
+    */
+    func setDefaultProfilePicture(user: PFUser!){
+
+        PFConfig.getConfigInBackgroundWithBlock {
+            (var config: PFConfig?, error: NSError?) -> Void in
+            if error == nil {
+                print("Config was fetched on server! (TO DELETE).")
+            } else {
+                print("Failed to fetch config. Using Cached Config.")
+                config = PFConfig.currentConfig()
+            }
+
+            if let userImage = config!["defaultProfilePicture"] as? PFFile {
+                user["profilePicture"] = userImage
+            }
+        }
+    }
+
 }
