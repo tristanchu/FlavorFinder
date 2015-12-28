@@ -1,0 +1,6 @@
+framework module FilterBar {
+  umbrella header "FilterBar-umbrella.h"
+
+  export *
+  module * { export * }
+}

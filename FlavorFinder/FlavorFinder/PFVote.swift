@@ -13,15 +13,15 @@ import Parse
 
 class PFVote : PFObject, PFSubclassing {
     
-    @NSManaged var userId: String
-    @NSManaged var matchId: String
+    @NSManaged var user: PFUser
+    @NSManaged var match: PFObject
     @NSManaged var voteType: String
     
-    convenience init(voteType: String, userId: String, matchId: String) {
+    convenience init(user: PFUser, match: PFObject, voteType: String) {
         self.init()
+        self.user = user
+        self.match = match
         self.voteType = voteType
-        self.userId = userId
-        self.matchId = matchId
     }
     
     override class func initialize() {

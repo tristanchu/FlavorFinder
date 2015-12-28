@@ -75,9 +75,9 @@ class SavedMatchesViewController: UIViewController, UICollectionViewDataSource, 
             navi.navigationItem.title = "FAVORITES (debug version)"
         }
         
-        if let userId = currentUser?.objectId {
+        if let user = currentUser {
             print("adding matches")
-            addMatches(getUserFavoritesFromLocal(userId))
+            addMatches(getUserFavoritesFromLocal(user))
         }
     }
 }

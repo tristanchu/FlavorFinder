@@ -42,8 +42,8 @@ func isUserLoggedIn() -> Bool {
 func setUserSession(user: PFUser) -> Void {
     // Store current PFUser
     currentUser = user
-    getUserVotesFromCloud(user.objectId!)
-    getUserFavoritesFromCloud(user.objectId!)
+    getUserVotesFromCloud(user)
+    getUserFavoritesFromCloud(user)
 }
 
 /**

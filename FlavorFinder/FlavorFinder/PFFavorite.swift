@@ -11,19 +11,13 @@ import Parse
 
 class PFFavorite : PFObject, PFSubclassing {
     
-    @NSManaged var userId: String
-    @NSManaged var ingredientId: String
-    @NSManaged var matchId: String
-    @NSManaged var ingredientName: String
-    @NSManaged var matchName: String
+    @NSManaged var user: PFUser
+    @NSManaged var match: PFObject
     
-    convenience init(userId: String, ingredientId: String, matchId: String, ingredientName: String, matchName: String) {
+    convenience init(user: PFUser, match: PFObject) {
         self.init()
-        self.userId = userId
-        self.ingredientId = ingredientId
-        self.matchId = matchId
-        self.ingredientName = ingredientName
-        self.matchName = matchName
+        self.user = user
+        self.match = match
     }
     
     override class func initialize() {

@@ -27,7 +27,10 @@ let CELLIDENTIFIER_MATCH = "MatchTableViewCell"
 let CELLIDENTIFIER_MENU = "menuCell"
 
 // Colors:
+let LIGHTGRAY_COLOR = UIColor(red: 220/255.0, green: 220/255.0, blue: 220/255.0, alpha: CGFloat(1))
+
 let NAVI_BUTTON_COLOR = UIColor(red: 165/255.0, green: 242/255.0, blue: 216/255.0, alpha: CGFloat(1))
+let NAVI_BUTTON_DARK_COLOR = UIColor(red: 135/255.0, green: 212/255.0, blue: 186/255.0, alpha: CGFloat(1))
 
 let MATCH_LOW_COLOR = UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: CGFloat(0.3))
 let MATCH_MEDIUM_COLOR = UIColor(red: 255/255.0, green: 237/255.0, blue: 105/255.0, alpha: CGFloat(0.3))

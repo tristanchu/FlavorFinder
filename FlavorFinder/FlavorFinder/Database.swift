@@ -10,21 +10,32 @@ import Foundation
 import SQLite
 import Parse
 
+let _s_objectId = "objectId"
 
 let _s_Ingredient = "Ingredient"
-let _s_Match = "Match"
-let _s_Favorite = "Favorite"
-let _s_Vote = "Vote"
-let _s_objectId = "objectId"
 let _s_name = "name"
-let _s_ingredientId = "ingredientId"
-let _s_matchId = "matchId"
+let _s_kosher = "kosher"
+let _s_dairy = "dairy"
+let _s_nuts = "nuts"
+let _s_vegetarian = "vegetarian"
+
+let _s_Match = "Match"
+let _s_match = "match"
 let _s_matchName = "matchName"
-let _s_matchLevel = "matchLevel"
+let _s_firstIngredient = "firstIngredient"
+let _s_secondIngredient = "secondIngredient"
+let _s_matchLevel = "level"
 let _s_upvotes = "upvotes"
 let _s_downvotes = "downvotes"
-let _s_userId = "userId"
+
+let _s_Favorite = "Favorite"
+
+let _s_Vote = "Vote"
 let _s_voteType = "voteType"
+
+let _s_user = "user"
+let _s_userId = "userId"
+
 
 var _allIngredients = [PFObject]()
 var _allMatches = [PFObject]()
@@ -89,12 +100,28 @@ func _getIngredientWithNameSubstring(nameSubstring: String) -> [PFObject] {
 }
 
 // Queries parse database for Match objects for given ingredient.
-func _getMatchesForIngredient(Ingredient: PFObject) -> [PFObject] {
+func _getMatchesForIngredient(Ingredient: PFObject, filters: [String: Bool]) -> [PFObject] {
     let query = PFQuery(className: _s_Match)
-    query.whereKey(_s_ingredientId, equalTo: Ingredient.objectId!)
+    query.whereKey(_s_firstIngredient, equalTo: Ingredient)
     query.orderByDescending(_s_matchLevel)
     query.addAscendingOrder(_s_matchName)
     query.limit = 1000
+    
+    let getIngredients = PFQuery (className: _s_Ingredient)
+    if filters["kosher"]! {
+        getIngredients.whereKey(_s_kosher, equalTo: true)
+    }
+    if filters["dairy"]! {
+        getIngredients.whereKey(_s_dairy, equalTo: true)
+    }
+    if filters["nuts"]! {
+        getIngredients.whereKey(_s_nuts, equalTo: true)
+    }
+    if filters["vegetarian"]! {
+        getIngredients.whereKey(_s_vegetarian, equalTo: true)
+    }
+    
+    query.whereKey(_s_secondIngredient, matchesQuery: getIngredients)
     
     let _matches: [PFObject]
     do {
@@ -109,7 +136,7 @@ func _getMatchesForIngredient(Ingredient: PFObject) -> [PFObject] {
 // Gets Ingredient object for match in given Match object.
 func _getIngredientForMatch(Match: PFObject) -> PFObject? {
     let query = PFQuery(className: _s_Ingredient)
-    query.whereKey(_s_objectId, equalTo: Match[_s_matchId])
+    query.whereKey(_s_objectId, equalTo: Match[_s_secondIngredient])
     
     let _ingredient: PFObject?
     do {
@@ -123,8 +150,8 @@ func _getIngredientForMatch(Match: PFObject) -> PFObject? {
 
 func _getEquivalentMatch(match: PFObject) -> PFObject? {
     let query = PFQuery(className: _s_Match)
-    query.whereKey(_s_ingredientId, equalTo: match[_s_matchId] as! String)
-    query.whereKey(_s_matchId, equalTo: match[_s_ingredientId] as! String)
+    query.whereKey(_s_firstIngredient, equalTo: match[_s_secondIngredient] as! PFObject)
+    query.whereKey(_s_secondIngredient, equalTo: match[_s_firstIngredient] as! PFObject)
     
     var _match: PFObject? = nil
     
@@ -140,48 +167,48 @@ func _getEquivalentMatch(match: PFObject) -> PFObject? {
     return _match
 }
 
-func upvoteMatch(userId: String, match: PFObject) {
-    _voteMatch(_s_upvotes, userId: userId, match: match)
+func upvoteMatch(user: PFUser, match: PFObject) {
+    _voteMatch(user, match: match, voteType: _s_upvotes)
     
     if let match2 = _getEquivalentMatch(match) {
-        _voteMatch(_s_upvotes, userId: userId, match: match2)
+        _voteMatch(user, match: match2, voteType: _s_upvotes)
     }
 }
 
-func downvoteMatch(userId: String, match: PFObject) {
-    _voteMatch(_s_downvotes, userId: userId, match: match)
+func downvoteMatch(user: PFUser, match: PFObject) {
+    _voteMatch(user, match: match, voteType: _s_downvotes)
     
     if let match2 = _getEquivalentMatch(match) {
-        _voteMatch(_s_downvotes, userId: userId, match: match2)
+        _voteMatch(user, match: match2, voteType: _s_downvotes)
     }
 }
 
-func _voteMatch(voteType: String, userId: String, match: PFObject) {
+func _voteMatch(user: PFUser, match: PFObject, voteType: String) {
     let _votes = match[voteType] as! Int
     match[voteType] = _votes + 1
     match.saveInBackground()
     
-    let _vote = PFVote(voteType: voteType, userId: userId, matchId: match.objectId!)
+    let _vote = PFVote(user: user, match: match, voteType: voteType)
     _vote.pinInBackground()
     _vote.saveInBackground()
 }
 
-func unvoteMatch(voteType: String, userId: String, match: PFObject) {
-    _unvoteMatch(voteType, userId: userId, match: match)
+func unvoteMatch(user: PFUser, match: PFObject, voteType: String) {
+    _unvoteMatch(user, match: match, voteType: voteType)
     
     if let match2 = _getEquivalentMatch(match) {
-        _unvoteMatch(voteType, userId: userId, match: match2)
+        _unvoteMatch(user, match: match2, voteType: voteType)
     }
 }
 
-func _unvoteMatch(voteType: String, userId: String, match: PFObject) {
+func _unvoteMatch(user: PFUser, match: PFObject, voteType: String) {
     let _votes = match[voteType] as! Int
     match[voteType] = _votes - 1
     match.saveInBackground()
     
     let query = PFQuery(className: _s_Vote)
-    query.whereKey(_s_userId, equalTo: userId)
-    query.whereKey(_s_matchId, equalTo: match.objectId!)
+    query.whereKey(_s_user, equalTo: user)
+    query.whereKey(_s_match, equalTo: match)
     query.fromLocalDatastore()
     
     let _vote: PFObject?
@@ -193,10 +220,10 @@ func _unvoteMatch(voteType: String, userId: String, match: PFObject) {
     }
 }
 
-func hasVoted(userId: String, match: PFObject) -> PFObject? {
+func hasVoted(user: PFUser, match: PFObject) -> PFObject? {
     let query = PFQuery(className: _s_Vote)
-    query.whereKey(_s_userId, equalTo: userId)
-    query.whereKey(_s_matchId, equalTo: match.objectId!)
+    query.whereKey(_s_user, equalTo: user)
+    query.whereKey(_s_match, equalTo: match)
     query.fromLocalDatastore()
     
     let _vote: PFObject?
@@ -209,9 +236,9 @@ func hasVoted(userId: String, match: PFObject) -> PFObject? {
     return _vote
 }
 
-func getUserVotesFromCloud(userId: String) {
+func getUserVotesFromCloud(user: PFUser) {
     let query = PFQuery(className: _s_Vote)
-    query.whereKey(_s_userId, equalTo: userId)
+    query.whereKey(_s_user, equalTo: user)
     query.limit = 1000
     
     query.findObjectsInBackgroundWithBlock {
@@ -226,20 +253,17 @@ func getUserVotesFromCloud(userId: String) {
     }
 }
 
-func favoriteMatch(userId: String, ingredient: PFObject, match: PFObject) {
-    let _favorite = PFFavorite(userId: userId,
-                                ingredientId: ingredient.objectId!,
-                                matchId: match.objectId!,
-                                ingredientName: ingredient[_s_name] as! String,
-                                matchName: match[_s_matchName] as! String)
+func favoriteMatch(user: PFUser, match: PFObject) {
+    let _favorite = PFFavorite(user: user, match: match)
+    
     _favorite.pinInBackground()
     _favorite.saveInBackground()
 }
 
-func unfavoriteMatch(userId: String, match: PFObject) {
+func unfavoriteMatch(user: PFUser, match: PFObject) {
     let query = PFQuery(className: _s_Favorite)
-    query.whereKey(_s_userId, equalTo: userId)
-    query.whereKey(_s_matchId, equalTo: match.objectId!)
+    query.whereKey(_s_user, equalTo: user)
+    query.whereKey(_s_match, equalTo: match)
     query.fromLocalDatastore()
     
     let _favorite: PFObject?
@@ -251,10 +275,10 @@ func unfavoriteMatch(userId: String, match: PFObject) {
     }
 }
 
-func isFavorite(userId: String, match: PFObject) -> PFObject? {
+func isFavorite(user: PFUser, match: PFObject) -> PFObject? {
     let query = PFQuery(className: _s_Favorite)
-    query.whereKey(_s_userId, equalTo: userId)
-    query.whereKey(_s_matchId, equalTo: match.objectId!)
+    query.whereKey(_s_user, equalTo: user)
+    query.whereKey(_s_match, equalTo: match)
     query.fromLocalDatastore()
     
     let _favorite: PFObject?
@@ -267,9 +291,9 @@ func isFavorite(userId: String, match: PFObject) -> PFObject? {
     return _favorite
 }
 
-func getUserFavoritesFromCloud(userId: String) {
+func getUserFavoritesFromCloud(user: PFUser) {
     let query = PFQuery(className: _s_Favorite)
-    query.whereKey(_s_userId, equalTo: userId)
+    query.whereKey(_s_user, equalTo: user)
     query.limit = 1000
     
     query.findObjectsInBackgroundWithBlock {
@@ -284,9 +308,9 @@ func getUserFavoritesFromCloud(userId: String) {
     }
 }
 
-func getUserFavoritesFromLocal(userId: String) -> [PFObject] {
+func getUserFavoritesFromLocal(user: PFUser) -> [PFObject] {
     let query = PFQuery(className: _s_Favorite)
-    query.whereKey(_s_userId, equalTo: userId)
+    query.whereKey(_s_user, equalTo: user)
     query.limit = 1000
     query.fromLocalDatastore()
     
