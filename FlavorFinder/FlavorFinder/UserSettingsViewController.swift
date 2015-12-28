@@ -26,6 +26,9 @@ class UserSettingsViewController: UIViewController, UITextFieldDelegate {
         requestPasswordReset()
     }
 
+    @IBAction func deleteProfilePicAction(sender: UIButton) {
+        setDefaultProfilePicture(currentUser)
+    }
 
     // OVERRIDE FUNCTIONS ---------------------------------------------
 
