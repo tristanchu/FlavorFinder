@@ -108,7 +108,6 @@ class ProfileViewController: UIViewController {
         /// subviews were getting messy while
         /// still developing, will merge into one controller
     }
-    
 
     /**
     displayUserPhoto

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="oWC-1n-3cO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="oWC-1n-3cO">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -146,7 +146,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Change Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fiM-CP-ULN">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fiM-CP-ULN">
                                 <rect key="frame" x="232" y="107" width="138" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="138" id="NTl-cz-pRJ"/>
@@ -163,12 +163,21 @@
                                     <action selector="setNewPasswordAction:" destination="kXY-t1-zaG" eventType="touchUpInside" id="aSa-4M-ZLe"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zf9-bB-jN0">
+                                <rect key="frame" x="229" y="230" width="144" height="30"/>
+                                <state key="normal" title="Delete profile picture"/>
+                                <connections>
+                                    <action selector="deleteProfilePicAction:" destination="kXY-t1-zaG" eventType="touchUpInside" id="m43-SC-Acc"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="sFj-pe-qEV" firstAttribute="top" secondItem="Twi-bo-rW8" secondAttribute="bottom" constant="8" symbolic="YES" id="Kmj-8z-j8d"/>
-                            <constraint firstItem="fiM-CP-ULN" firstAttribute="centerX" secondItem="DB3-V2-Hb9" secondAttribute="centerX" id="Ky2-qv-kg1"/>
+                            <constraint firstItem="fiM-CP-ULN" firstAttribute="centerX" secondItem="DB3-V2-Hb9" secondAttribute="centerX" constant="1" id="Ky2-qv-kg1"/>
+                            <constraint firstItem="Zf9-bB-jN0" firstAttribute="top" secondItem="na6-R0-BJZ" secondAttribute="bottom" constant="30" id="QKR-eC-7WM"/>
                             <constraint firstItem="sFj-pe-qEV" firstAttribute="centerX" secondItem="DB3-V2-Hb9" secondAttribute="centerX" id="WHX-Bj-yXo"/>
+                            <constraint firstItem="Zf9-bB-jN0" firstAttribute="centerX" secondItem="DB3-V2-Hb9" secondAttribute="centerX" constant="1" id="edM-j5-fvW"/>
                             <constraint firstItem="na6-R0-BJZ" firstAttribute="centerX" secondItem="DB3-V2-Hb9" secondAttribute="centerX" id="eks-L3-x5P"/>
                             <constraint firstItem="fiM-CP-ULN" firstAttribute="top" secondItem="sFj-pe-qEV" secondAttribute="bottom" constant="58" id="iKh-mD-Asr"/>
                             <constraint firstItem="na6-R0-BJZ" firstAttribute="top" secondItem="fiM-CP-ULN" secondAttribute="bottom" constant="42" id="wrH-bb-S0F"/>
@@ -490,7 +499,7 @@
                                 <rect key="frame" x="0.0" y="86" width="600" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VSI-oZ-nxd" id="emG-AP-STX">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="79"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="79.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ndg-wR-OIq">
