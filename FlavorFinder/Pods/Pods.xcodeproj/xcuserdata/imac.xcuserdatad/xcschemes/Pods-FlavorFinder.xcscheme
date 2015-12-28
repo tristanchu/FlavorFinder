@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '29EB5F7F52D482075E81C3E8'
+               BlueprintIdentifier = '1AFE513303D3EBD3FB639376'
                BlueprintName = 'Pods-FlavorFinder'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'Pods_FlavorFinder.framework'>

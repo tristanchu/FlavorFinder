@@ -14,6 +14,8 @@ import MGSwipeTableCell
 import DZNEmptyDataSet
 import DOFavoriteButton
 import Darwin
+import ASHorizontalScrollView
+
 
 class MatchTableViewController: UITableViewController, UISearchBarDelegate, MGSwipeTableCellDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     // GLOBALS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -39,7 +41,14 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, MGSw
     let editImage = UIImage.fontAwesomeIconWithName(.Pencil, textColor: UIColor.blackColor(), size: CGSizeMake(30, 30))
     let favoriteEmptyImage = UIImage.fontAwesomeIconWithName(.HeartO, textColor: UIColor.blackColor(), size: CGSizeMake(30, 30))
     let favoriteImage = UIImage.fontAwesomeIconWithName(.Heart, textColor: UIColor.blackColor(), size: CGSizeMake(30, 30))
-
+    
+    var filterBtn: UIBarButtonItem = UIBarButtonItem()
+    var filterView: ASHorizontalScrollView = ASHorizontalScrollView()
+    
+    var filters: [String: Bool] = ["kosher": false,
+        "dairy": false,
+        "vegetarian": false,
+        "nuts": false]
     
     // SETUP FUNCTIONS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // ---------------
@@ -48,6 +57,8 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, MGSw
 
         configure_searchBar()
         configure_searchBarActivateBtn()
+        configure_filterBtn()
+        configure_filterView()
         
         self.tableView.emptyDataSetSource = self
         self.tableView.emptyDataSetDelegate = self
@@ -57,7 +68,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, MGSw
         
         if let navi = self.navigationController as? MainNavigationController {
             navi.navigationItem.setLeftBarButtonItems([navi.goBackBtn, self.searchBarActivateBtn], animated: true)
-            navi.navigationItem.setRightBarButtonItems([navi.goForwardBtn, navi.menuBarBtn], animated: true)
+            navi.navigationItem.setRightBarButtonItems([navi.goForwardBtn, navi.menuBarBtn, self.filterBtn], animated: true)
             navi.reset_navigationBar()
             navi.goBackBtn.enabled = false
             navi.goForwardBtn.enabled = false
@@ -119,6 +130,67 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, MGSw
         cancelButton.setTitle(String.fontAwesomeIconWithName(.ChevronLeft), forState: UIControlState.Normal)
     }
     
+    func configure_filterBtn() {
+        filterBtn.setTitleTextAttributes(attributes, forState: .Normal)
+        filterBtn.title = String.fontAwesomeIconWithName(.Filter)
+        filterBtn.tintColor = NAVI_BUTTON_COLOR
+        filterBtn.target = self
+        filterBtn.action = "filterBtnClicked"
+    }
+    
+    func configure_filterView() {
+        let kCellHeight:CGFloat = 40.0
+        if let navi = self.navigationController as? MainNavigationController {
+            let y_offset = UIApplication.sharedApplication().statusBarFrame.size.height + navi.navigationBar.frame.height
+            filterView.frame = CGRectMake(0, y_offset, navi.navigationBar.frame.width, kCellHeight)
+            filterView.backgroundColor = LIGHTGRAY_COLOR
+            filterView.hidden = true
+            
+            filterView.miniAppearPxOfLastItem = 10
+            filterView.uniformItemSize = CGSizeMake(80, 30)
+            // this must be called after changing any size or margin property of this class to get accurate margin
+            filterView.setItemsMarginOnce()
+            
+            let kosherBtn = UIButton()
+            kosherBtn.setTitle("Kosher", forState: .Normal)
+            kosherBtn.backgroundColor = NAVI_BUTTON_COLOR
+            kosherBtn.layer.cornerRadius = 10
+            kosherBtn.titleLabel?.font = UIFont.fontAwesomeOfSize(15)
+            kosherBtn.tag = 1
+            kosherBtn.addTarget(self, action: "filterToggleBtnClicked:", forControlEvents: UIControlEvents.TouchUpInside)
+            filterView.addItem(kosherBtn)
+            
+            let dairyBtn = UIButton()
+            dairyBtn.setTitle("Dairy", forState: .Normal)
+            dairyBtn.backgroundColor = NAVI_BUTTON_COLOR
+            dairyBtn.layer.cornerRadius = 10
+            dairyBtn.titleLabel?.font = UIFont.fontAwesomeOfSize(15)
+            dairyBtn.tag = 2
+            dairyBtn.addTarget(self, action: "filterToggleBtnClicked:", forControlEvents: UIControlEvents.TouchUpInside)
+            filterView.addItem(dairyBtn)
+            
+            let vegeBtn = UIButton()
+            vegeBtn.setTitle("Vege", forState: .Normal)
+            vegeBtn.backgroundColor = NAVI_BUTTON_COLOR
+            vegeBtn.layer.cornerRadius = 10
+            vegeBtn.titleLabel?.font = UIFont.fontAwesomeOfSize(15)
+            vegeBtn.tag = 3
+            vegeBtn.addTarget(self, action: "filterToggleBtnClicked:", forControlEvents: UIControlEvents.TouchUpInside)
+            filterView.addItem(vegeBtn)
+            
+            let nutsBtn = UIButton()
+            nutsBtn.setTitle("Nuts", forState: .Normal)
+            nutsBtn.backgroundColor = NAVI_BUTTON_COLOR
+            nutsBtn.layer.cornerRadius = 10
+            nutsBtn.titleLabel?.font = UIFont.fontAwesomeOfSize(15)
+            nutsBtn.tag = 4
+            nutsBtn.addTarget(self, action: "filterToggleBtnClicked:", forControlEvents: UIControlEvents.TouchUpInside)
+            filterView.addItem(nutsBtn)
+            
+            navi.view.addSubview(filterView)
+        }
+    }
+    
     func showAllIngredients() {
         allCells = _allIngredients
         filteredCells = _allIngredients
@@ -134,7 +206,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, MGSw
         self.navigationController?.navigationItem.title = ingredient[_s_name] as? String   // Set navigation title to ingredient's name.
         
         allCells.removeAll()
-        let matches = _getMatchesForIngredient(ingredient)
+        let matches = _getMatchesForIngredient(ingredient, filters: filters)
         
         for match in matches {
             allCells.append(match)
@@ -172,7 +244,9 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, MGSw
         let match = filteredCells[indexPath.row]                    // Fetches the appropriate match to display.
 
         if currentIngredient != nil {
-            cell.nameLabel.text = match[_s_matchName] as? String    // Set's the cell label to the ingredient's name.
+//            cell.nameLabel.text = match[_s_matchName] as? String    // Set's the cell label to the ingredient's name.
+            let matchObj = match[_s_secondIngredient] as! PFObject    // Set's the cell label to the ingredient's name.
+            cell.nameLabel.text = matchObj[_s_name] as? String
             
             switch match[_s_matchLevel] as! Int {
             case 1:
@@ -213,11 +287,11 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, MGSw
             case 0:
                 // Favorite action
                 if let user = currentUser {
-                    if let _ = isFavorite(user.objectId!, match: match) {
-                        unfavoriteMatch(user.objectId!, match: match)
+                    if let _ = isFavorite(user, match: match) {
+                        unfavoriteMatch(user, match: match)
                         btn.deselect()
                     } else {
-                        favoriteMatch(user.objectId!, ingredient: currentIngredient!, match: match)
+                        favoriteMatch(user, match: match)
                         btn.select()
                     }
 
@@ -243,23 +317,23 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, MGSw
             case 0:
                 // Upvote action
                 if let user = currentUser {
-                    if let vote = hasVoted(user.objectId!, match: match) {
+                    if let vote = hasVoted(user, match: match) {
                         let voteType = vote[_s_voteType] as! String
                         
                         if voteType == _s_upvotes {
                             // Already upvoted
-                            unvoteMatch(_s_upvotes, userId: user.objectId!, match: match)
+                            unvoteMatch(user, match: match, voteType: _s_upvotes)
                             btn.deselect()
                         } else if voteType == _s_downvotes {
                             // Already downvoted
-                            unvoteMatch(_s_downvotes, userId: user.objectId!, match: match)
-                            upvoteMatch(user.objectId!, match: match)
+                            unvoteMatch(user, match: match, voteType: _s_downvotes)
+                            upvoteMatch(user, match: match)
                             (cell.rightButtons[1] as! DOFavoriteButton).deselect()
                             btn.select()
                         }
                     } else {
                         // Neither voted
-                        upvoteMatch(user.objectId!, match: match)
+                        upvoteMatch(user, match: match)
                         btn.select()
                     }
                     
@@ -271,23 +345,23 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, MGSw
             case 1:
                 // Downvote action
                 if let user = currentUser {
-                    if let vote = hasVoted(user.objectId!, match: match) {
+                    if let vote = hasVoted(user, match: match) {
                         let voteType = vote[_s_voteType] as! String
                         
                         if voteType == _s_downvotes {
                             // Already downvoted
-                            unvoteMatch(_s_downvotes, userId: user.objectId!, match: match)
+                            unvoteMatch(user, match: match, voteType: _s_downvotes)
                             btn.deselect()
                         } else if voteType == _s_upvotes {
                             // Already upvoted
-                            unvoteMatch(_s_upvotes, userId: user.objectId!, match: match)
-                            downvoteMatch(user.objectId!, match: match)
+                            unvoteMatch(user, match: match, voteType: _s_upvotes)
+                            downvoteMatch(user, match: match)
                             (cell.rightButtons[0] as! DOFavoriteButton).deselect()
                             btn.select()
                         }
                     } else {
                         // Neither voted
-                        downvoteMatch(user.objectId!, match: match)
+                        downvoteMatch(user, match: match)
                         btn.select()
                     }
                     
@@ -318,7 +392,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, MGSw
                 favBtn.backgroundColor = editCellBtnColor
                 
                 if let user = currentUser {
-                    if let _ = isFavorite(user.objectId!, match: match) {
+                    if let _ = isFavorite(user, match: match) {
                         favBtn.selected = true
                     } else {
                         favBtn.selected = false
@@ -341,7 +415,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, MGSw
                 downvoteBtn.backgroundColor = downvoteCellBtnColor
 
                 if let user = currentUser {
-                    if let vote = hasVoted(user.objectId!, match: match) {
+                    if let vote = hasVoted(user, match: match) {
                         if vote[_s_voteType] as! String == _s_upvotes {
                             upvoteBtn.selected = true
                             downvoteBtn.selected = false
@@ -375,8 +449,9 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, MGSw
                 tableView.contentOffset = CGPointMake(0, 0 - tableView.contentInset.top); // Reset scroll position.
                 if currentIngredient != nil {
                     let match = filteredCells[indexPath.row]                              // Get tapped match.
-                    let ingredient = _getIngredientForMatch(match)
-                    showIngredient(ingredient!)
+//                    let ingredient = _getIngredientForMatch(match)
+                    let ingredient = match[_s_secondIngredient] as! PFObject
+                    showIngredient(ingredient)
                 } else {
                     let ingredient = filteredCells[indexPath.row]                         // Get tapped ingredient.
                     showIngredient(ingredient)
@@ -448,20 +523,79 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, MGSw
             filteredCells = allCells
             searchBar.text = ""
         } else {
-            for ingredient in allCells {
+            for cell in allCells {
                 if currentIngredient != nil {
-                    if (ingredient[_s_matchName] as! String).rangeOfString(searchText.lowercaseString) != nil {
-                        filteredCells.append(ingredient)
+                    let secondIngredient = cell[_s_secondIngredient] as! PFObject
+                    if (secondIngredient[_s_name] as! String).rangeOfString(searchText.lowercaseString) != nil {
+                        filteredCells.append(cell)
                     }
                 } else {
-                    if (ingredient[_s_name] as! String).rangeOfString(searchText.lowercaseString) != nil {
-                        filteredCells.append(ingredient)
+                    if (cell[_s_name] as! String).rangeOfString(searchText.lowercaseString) != nil {
+                        filteredCells.append(cell)
                     }
                 }
             }
         }
         
         self.tableView.reloadData()
+    }
+    
+    // FILTER FUNCTIONS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // ----------------
+    func filterBtnClicked() {
+        print("filterBtn has been clicked.")
+        if (filterView.hidden) {
+            filterView.hidden = false
+        } else {
+            filterView.hidden = true
+        }
+    }
+    
+    func filterToggleBtnClicked(sender: UIButton) {
+        switch sender.tag {
+        case 1:
+            if filters["kosher"]! {
+                filters["kosher"] = false
+                sender.backgroundColor = NAVI_BUTTON_COLOR
+            } else {
+                filters["kosher"] = true
+                sender.backgroundColor = NAVI_BUTTON_DARK_COLOR
+            }
+            break
+        case 2:
+            if filters["dairy"]! {
+                filters["dairy"] = false
+                sender.backgroundColor = NAVI_BUTTON_COLOR
+            } else {
+                filters["dairy"] = true
+                sender.backgroundColor = NAVI_BUTTON_DARK_COLOR
+            }
+            break
+        case 3:
+            if filters["vegetarian"]! {
+                filters["vegetarian"] = false
+                sender.backgroundColor = NAVI_BUTTON_COLOR
+            } else {
+                filters["vegetarian"] = true
+                sender.backgroundColor = NAVI_BUTTON_DARK_COLOR
+            }
+            break
+        case 4:
+            if filters["nuts"]! {
+                filters["nuts"] = false
+                sender.backgroundColor = NAVI_BUTTON_COLOR
+            } else {
+                filters["nuts"] = true
+                sender.backgroundColor = NAVI_BUTTON_DARK_COLOR
+            }
+            break
+        default:
+            break
+        }
+        
+        if let ingredient = currentIngredient {
+            showIngredient(ingredient)
+        }
     }
     
 }

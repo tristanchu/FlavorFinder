@@ -8,6 +8,8 @@ pod 'FontAwesome.swift'
 pod 'MGSwipeTableCell'
 pod 'DZNEmptyDataSet'
 pod 'DOFavoriteButton'
+pod 'FilterBar', '~>2.0.0'
+pod 'ASHorizontalScrollView', '~>1.1'
 end
 
 target 'FlavorFinderTests' do

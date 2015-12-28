@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>ASHorizontalScrollView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Bolts.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -15,6 +20,11 @@
 			<false/>
 		</dict>
 		<key>DZNEmptyDataSet.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>FilterBar.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -52,17 +62,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>06F3398917C4BBD9EC8A275D0AE9C1D1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>0A129FE0342D989D18E7A0C8EE6C15B0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>16FB872D0D2D4BA0F378AB34D47CF95F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>4E1263BFF45F6446CF3DE29AE234C893</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>6105D7DD0493395CFD7A1A52952C28B6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -92,7 +107,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F908C3DDD7A0D9ACAEE42C02F3739F4B</key>
+		<key>BCC9977AA9316CA3F11E052D6BC5AB9D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D49198C5088AF4F1D5A32E96BAAEA0F7</key>
 		<dict>
 			<key>primary</key>
 			<true/>

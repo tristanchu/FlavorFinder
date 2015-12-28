@@ -11,16 +11,16 @@ import Parse
 
 class PFMatch : PFObject, PFSubclassing {
     
-    @NSManaged var ingredientId: Int
-    @NSManaged var matchId: Int
+    @NSManaged var firstIngredient: PFObject
+    @NSManaged var secondIngredient: PFObject
     @NSManaged var matchName: String
     @NSManaged var upvotes: Int
     @NSManaged var downvotes: Int
     
-    convenience init(ingredientId: Int?, matchId: Int?) {
+    convenience init(firstIngredient: PFObject, secondIngredient: PFObject) {
         self.init()
-        self.ingredientId = ingredientId!
-        self.matchId = matchId!
+        self.firstIngredient = firstIngredient
+        self.secondIngredient = secondIngredient
     }
     
     override class func initialize() {
