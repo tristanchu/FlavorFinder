@@ -30,3 +30,4 @@ We have decided that we want to do an iOS app and use Swift for the components r
 * [**Parse**](https://www.parse.com/?) to host our User data and allow for secure User authentication.
 
 * [**Cocoapods**](https://cocoapods.org/) for package management.
+* [**icons8**](https://icons8.com/) for free nav bar icons.
