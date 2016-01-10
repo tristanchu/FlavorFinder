@@ -93,8 +93,8 @@ class ProfileViewController: UIViewController {
     Shows welcome label with username
     */
     func displayUserWelcomeLabel() {
-        let username = currentUser?.username
-        ProfileWelcomeLabel.text = "Hello \(username!)!"
+        //let username = currentUser?.username
+        //ProfileWelcomeLabel.text = "Hello \(username!)!"
     }
     
     /**

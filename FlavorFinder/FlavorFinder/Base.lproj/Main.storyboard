@@ -6,7 +6,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Login View Controller-->
+        <!--Item-->
         <scene sceneID="4Jp-rt-Y0j">
             <objects>
                 <viewController storyboardIdentifier="LoginViewControllerIdentifier" id="FZQ-A2-GaM" customClass="LoginViewController" customModule="FlavorFinder" sceneMemberID="viewController">
@@ -109,6 +109,7 @@
                             <constraint firstItem="pxX-xv-m3i" firstAttribute="top" secondItem="Zm4-fb-B07" secondAttribute="bottom" constant="30" id="yBJ-0f-ewY"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="MRA-bD-dK5"/>
                     <navigationItem key="navigationItem" id="QXq-QC-lOr"/>
                     <connections>
                         <outlet property="goToTableButton" destination="qSC-C0-kB1" id="Ha1-iO-BxI"/>
@@ -123,7 +124,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Q7-vC-caE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2111" y="470"/>
+            <point key="canvasLocation" x="307" y="1550"/>
         </scene>
         <!--User Settings View Controller-->
         <scene sceneID="DTH-2E-td0">
@@ -190,9 +191,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4n4-5A-RaY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1994" y="1286"/>
+            <point key="canvasLocation" x="2686" y="2809"/>
         </scene>
-        <!--Profile View Controller-->
+        <!--Item-->
         <scene sceneID="PEF-T2-zbh">
             <objects>
                 <viewController storyboardIdentifier="ProfileViewControllerIdentifier" id="leV-JT-XQg" customClass="ProfileViewController" customModule="FlavorFinder" customModuleProvider="target" sceneMemberID="viewController">
@@ -263,6 +264,7 @@
                             <constraint firstItem="n5D-NH-eBG" firstAttribute="centerX" secondItem="2Oo-dL-RlG" secondAttribute="centerX" id="tL6-BL-hrX"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="eS5-kG-05N"/>
                     <connections>
                         <outlet property="ProfileWelcomeLabel" destination="LeR-3W-QO4" id="tIR-Iu-3zj"/>
                         <outlet property="profileFavoritesLabel" destination="2Oo-dL-RlG" id="pXI-PN-39C"/>
@@ -273,7 +275,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z8U-I1-yy5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1271" y="1220"/>
+            <point key="canvasLocation" x="3031" y="1936"/>
         </scene>
         <!--Saved Matches View Controller-->
         <scene sceneID="jPM-Ek-pkk">
@@ -322,7 +324,141 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bWG-VP-BWM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1383" y="1989"/>
+            <point key="canvasLocation" x="3607" y="2765"/>
+        </scene>
+        <!--Favorites Page-->
+        <scene sceneID="e6c-Ir-cP5">
+            <objects>
+                <tabBarController id="dBm-Uc-8CI" customClass="FavoritesPage" customModule="FlavorFinder" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="K4U-ra-5xe"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="iVd-jS-Aok">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="FZQ-A2-GaM" kind="relationship" relationship="viewControllers" id="zCb-0N-hZz"/>
+                        <segue destination="h2p-tb-f5C" kind="relationship" relationship="viewControllers" id="5Lp-kB-tlU"/>
+                        <segue destination="aDy-6t-DKL" kind="relationship" relationship="viewControllers" id="VSP-N6-9Ob"/>
+                        <segue destination="bSA-UW-dX3" kind="relationship" relationship="viewControllers" id="eGn-n6-axZ"/>
+                        <segue destination="0ye-Pg-Qge" kind="relationship" relationship="viewControllers" id="Nnk-7w-lej"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hfi-gV-f5i" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1246" y="467"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="3Tt-7g-WyR">
+            <objects>
+                <viewController id="h2p-tb-f5C" customClass="LandingPageController" customModule="FlavorFinder" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="rpr-KB-nGU"/>
+                        <viewControllerLayoutGuide type="bottom" id="0oP-1x-YR7"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="84R-pJ-Iby">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OvJ-IC-4IV">
+                                <rect key="frame" x="26" y="87" width="240" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Landing Page" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vtc-3R-MZC">
+                                <rect key="frame" x="292" y="221" width="104" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="cnd-Rl-Wb9"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yNg-ga-N8e" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1069" y="1542"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="DeY-qo-0Xs">
+            <objects>
+                <viewController id="0ye-Pg-Qge" customClass="MorePageController" customModule="FlavorFinder" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ZJX-NO-e3g"/>
+                        <viewControllerLayoutGuide type="bottom" id="aR7-Yq-j7H"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2qy-j6-TfG">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="More Page" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m2w-Ao-9PO">
+                                <rect key="frame" x="207" y="268" width="83" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="WfQ-jI-YaE"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0Tn-QK-eIl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2741" y="403"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="Bug-zi-jTx">
+            <objects>
+                <viewController id="bSA-UW-dX3" customClass="ListsPageController" customModule="FlavorFinder" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="964-mO-CvN"/>
+                        <viewControllerLayoutGuide type="bottom" id="KZB-5z-brQ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="nAf-MX-YTm">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Lists Page" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SKf-RN-ylx">
+                                <rect key="frame" x="219" y="225" width="79" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="Lug-t8-7kq"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CSM-cM-kZM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2737" y="1132"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="swP-zV-l0p">
+            <objects>
+                <viewController id="aDy-6t-DKL" customClass="FavoritesPageController" customModule="FlavorFinder" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="HaU-1D-E5a"/>
+                        <viewControllerLayoutGuide type="bottom" id="tcT-vC-tSb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="D7F-xH-ZMh">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Favorites" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ER-L9-51S">
+                                <rect key="frame" x="251" y="219" width="70" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="3oj-NR-o20"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8Ah-GI-Mfd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1877" y="1538"/>
         </scene>
         <!--Register View Controller-->
         <scene sceneID="veb-7d-s5O">
@@ -484,7 +620,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hBF-3m-D8a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2939" y="490"/>
+            <point key="canvasLocation" x="-5" y="2466"/>
         </scene>
         <!--All Ingredients-->
         <scene sceneID="I46-hR-Jw9">
@@ -520,6 +656,7 @@
                             <outlet property="delegate" destination="yDJ-pt-my1" id="2P9-sL-qly"/>
                         </connections>
                     </tableView>
+                    <tabBarItem key="tabBarItem" title="Item" id="54x-RV-by8"/>
                     <navigationItem key="navigationItem" title="All Ingredients" id="eQ5-0u-QHl"/>
                     <connections>
                         <outlet property="matchTableView" destination="yEc-b6-IbE" id="Fh6-1d-Lgu"/>
@@ -527,11 +664,12 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XZF-Bl-251" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="612" y="1206"/>
+            <point key="canvasLocation" x="752" y="2474"/>
         </scene>
         <!--Main Navigation Controller-->
         <scene sceneID="XuT-By-HT0">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jnx-Vf-b0Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oWC-1n-3cO" customClass="MainNavigationController" customModule="FlavorFinder" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="HXZ-hJ-BA0">
@@ -544,34 +682,14 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="9L3-3p-cyH" kind="relationship" relationship="rootViewController" id="UId-6A-Kca"/>
+                        <segue destination="dBm-Uc-8CI" kind="relationship" relationship="rootViewController" id="ESP-nB-3Sa"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Jnx-Vf-b0Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="455" y="475"/>
         </scene>
-        <!--Main Navigation Controller-->
-        <scene sceneID="uU8-YU-WFt">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9L3-3p-cyH" customClass="MainNavigationController" customModule="FlavorFinder" customModuleProvider="target" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationItem key="navigationItem" id="itH-i1-Lzi"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="bmx-1A-EYt">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="FZQ-A2-GaM" kind="relationship" relationship="rootViewController" id="1gm-iF-az1"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="R24-WX-Tl7" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1319" y="494"/>
-        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="yCh-I4-cTX"/>
+        <segue reference="vhT-hz-2ur"/>
     </inferredMetricsTieBreakers>
 </document>
