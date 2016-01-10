@@ -374,7 +374,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Search" image="SearchUnclicked" selectedImage="SearchClicked" id="cnd-Rl-Wb9"/>
+                    <tabBarItem key="tabBarItem" title="Search" image="SearchIcon" selectedImage="SearchClicked" id="cnd-Rl-Wb9"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yNg-ga-N8e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -698,7 +698,7 @@
         <image name="MoreClicked" width="22" height="22"/>
         <image name="MoreUnclicked" width="22" height="22"/>
         <image name="SearchClicked" width="22" height="22"/>
-        <image name="SearchUnclicked" width="22" height="22"/>
+        <image name="SearchIcon" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="yCh-I4-cTX"/>
