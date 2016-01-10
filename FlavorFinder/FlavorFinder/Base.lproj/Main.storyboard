@@ -326,10 +326,10 @@
             </objects>
             <point key="canvasLocation" x="3607" y="2765"/>
         </scene>
-        <!--Favorites Page-->
+        <!--Tab Bar Controller-->
         <scene sceneID="e6c-Ir-cP5">
             <objects>
-                <tabBarController id="dBm-Uc-8CI" customClass="FavoritesPage" customModule="FlavorFinder" sceneMemberID="viewController">
+                <tabBarController id="dBm-Uc-8CI" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="K4U-ra-5xe"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="iVd-jS-Aok">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
@@ -669,7 +669,6 @@
         <!--Main Navigation Controller-->
         <scene sceneID="XuT-By-HT0">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Jnx-Vf-b0Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oWC-1n-3cO" customClass="MainNavigationController" customModule="FlavorFinder" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="HXZ-hJ-BA0">
@@ -685,11 +684,12 @@
                         <segue destination="dBm-Uc-8CI" kind="relationship" relationship="rootViewController" id="ESP-nB-3Sa"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jnx-Vf-b0Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="455" y="475"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="vhT-hz-2ur"/>
+        <segue reference="yCh-I4-cTX"/>
     </inferredMetricsTieBreakers>
 </document>
