@@ -374,7 +374,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Search" id="cnd-Rl-Wb9"/>
+                    <tabBarItem key="tabBarItem" title="Search" image="SearchUnclicked" selectedImage="SearchClicked" id="cnd-Rl-Wb9"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yNg-ga-N8e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -401,10 +401,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="More" id="WfQ-jI-YaE"/>
-                    <connections>
-                        <outlet property="MorePageTabBarItem" destination="WfQ-jI-YaE" id="KNB-I5-YHJ"/>
-                    </connections>
+                    <tabBarItem key="tabBarItem" title="More" image="MoreUnclicked" selectedImage="MoreClicked" id="WfQ-jI-YaE"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Tn-QK-eIl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -431,7 +428,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Lists" id="Lug-t8-7kq"/>
+                    <tabBarItem key="tabBarItem" title="Lists" image="Ingredients" selectedImage="IngredientsFilled" id="Lug-t8-7kq"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CSM-cM-kZM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -458,7 +455,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Favorites" id="3oj-NR-o20"/>
+                    <tabBarItem key="tabBarItem" title="Favorites" image="FavoritesIcon" selectedImage="FavoritesIconFilled" id="3oj-NR-o20"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Ah-GI-Mfd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -693,6 +690,16 @@
             <point key="canvasLocation" x="455" y="475"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="FavoritesIcon" width="22" height="22"/>
+        <image name="FavoritesIconFilled" width="22" height="22"/>
+        <image name="Ingredients" width="22" height="22"/>
+        <image name="IngredientsFilled" width="22" height="22"/>
+        <image name="MoreClicked" width="22" height="22"/>
+        <image name="MoreUnclicked" width="22" height="22"/>
+        <image name="SearchClicked" width="22" height="22"/>
+        <image name="SearchUnclicked" width="22" height="22"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="yCh-I4-cTX"/>
     </inferredMetricsTieBreakers>
