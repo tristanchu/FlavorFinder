@@ -11,11 +11,12 @@ import UIKit
 import Parse
 
 class LandingPageController: UIViewController, UITextFieldDelegate {
-
+    var gotSearch = false
     @IBOutlet weak var LandingContainerView: UIView!
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         LandingContainerView.backgroundColor = MATCH_HIGH_COLOR
+        
     }
 }
