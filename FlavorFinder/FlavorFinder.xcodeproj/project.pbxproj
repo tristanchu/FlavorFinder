@@ -12,6 +12,10 @@
 		60216E641BEC41360029454B /* UserSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60216E631BEC41360029454B /* UserSettingsViewController.swift */; };
 		60216E661BEC4F740029454B /* UiUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60216E651BEC4F740029454B /* UiUtils.swift */; };
 		60322EA31BD9CE150099030B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60322EA21BD9CE150099030B /* LoginViewController.swift */; };
+		609432631C42D9BB00BA0577 /* LandingPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609432621C42D9BB00BA0577 /* LandingPageController.swift */; settings = {ASSET_TAGS = (); }; };
+		609432671C42DCA800BA0577 /* FavoritesPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609432661C42DCA800BA0577 /* FavoritesPageController.swift */; settings = {ASSET_TAGS = (); }; };
+		609432691C42DD6500BA0577 /* ListsPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609432681C42DD6500BA0577 /* ListsPageController.swift */; settings = {ASSET_TAGS = (); }; };
+		6094326B1C42DDB500BA0577 /* MorePageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6094326A1C42DDB500BA0577 /* MorePageController.swift */; settings = {ASSET_TAGS = (); }; };
 		60FEE38F1BE570E100F51BE8 /* KeychainWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 60FEE38E1BE570E100F51BE8 /* KeychainWrapper.m */; };
 		880DA78C1BE1FB03003C67F0 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880DA78B1BE1FB03003C67F0 /* Globals.swift */; };
 		882FFD661BD9A48D00710F35 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 882FFD641BD9A48D00710F35 /* Bolts.framework */; };
@@ -69,6 +73,10 @@
 		60216E631BEC41360029454B /* UserSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSettingsViewController.swift; sourceTree = "<group>"; };
 		60216E651BEC4F740029454B /* UiUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UiUtils.swift; sourceTree = "<group>"; };
 		60322EA21BD9CE150099030B /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		609432621C42D9BB00BA0577 /* LandingPageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandingPageController.swift; sourceTree = "<group>"; };
+		609432661C42DCA800BA0577 /* FavoritesPageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesPageController.swift; sourceTree = "<group>"; };
+		609432681C42DD6500BA0577 /* ListsPageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListsPageController.swift; sourceTree = "<group>"; };
+		6094326A1C42DDB500BA0577 /* MorePageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MorePageController.swift; sourceTree = "<group>"; };
 		60FEE38C1BE570E000F51BE8 /* FlavorFinder-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FlavorFinder-Bridging-Header.h"; sourceTree = "<group>"; };
 		60FEE38D1BE570E100F51BE8 /* KeychainWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainWrapper.h; sourceTree = "<group>"; };
 		60FEE38E1BE570E100F51BE8 /* KeychainWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainWrapper.m; sourceTree = "<group>"; };
@@ -263,6 +271,10 @@
 				8875DE381BE06FB300CD50EA /* MenuTableViewController.swift */,
 				888D1A431BDEF8FE007F09AE /* ProfileViewController.swift */,
 				6001830E1BDC31DE00265B72 /* RegisterViewController.swift */,
+				609432621C42D9BB00BA0577 /* LandingPageController.swift */,
+				609432661C42DCA800BA0577 /* FavoritesPageController.swift */,
+				609432681C42DD6500BA0577 /* ListsPageController.swift */,
+				6094326A1C42DDB500BA0577 /* MorePageController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -447,6 +459,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6094326B1C42DDB500BA0577 /* MorePageController.swift in Sources */,
 				8875DE3B1BE0751B00CD50EA /* MainNavigationController.swift in Sources */,
 				88F413FC1BC74EC8000C0093 /* MatchTableViewController.swift in Sources */,
 				88F0E5011BE54111003CB35B /* Animations.swift in Sources */,
@@ -463,6 +476,8 @@
 				B6098CE41BF7F3B8001EDCE6 /* SavedMatchesViewController.swift in Sources */,
 				880DA78C1BE1FB03003C67F0 /* Globals.swift in Sources */,
 				60322EA31BD9CE150099030B /* LoginViewController.swift in Sources */,
+				609432691C42DD6500BA0577 /* ListsPageController.swift in Sources */,
+				609432631C42D9BB00BA0577 /* LandingPageController.swift in Sources */,
 				8875DE391BE06FB300CD50EA /* MenuTableViewController.swift in Sources */,
 				888D1A441BDEF8FE007F09AE /* ProfileViewController.swift in Sources */,
 				60216E661BEC4F740029454B /* UiUtils.swift in Sources */,
@@ -472,6 +487,7 @@
 				8875DE351BE053ED00CD50EA /* Voting.swift in Sources */,
 				883AC6281BC1A3C0009136E9 /* AppDelegate.swift in Sources */,
 				B65BA8B11BF907750045CB5E /* SavedMatchesCell.swift in Sources */,
+				609432671C42DCA800BA0577 /* FavoritesPageController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
