@@ -352,29 +352,41 @@
         <scene sceneID="3Tt-7g-WyR">
             <objects>
                 <viewController title="Landing Page" id="h2p-tb-f5C" customClass="LandingPageController" customModule="FlavorFinder" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="rpr-KB-nGU"/>
-                        <viewControllerLayoutGuide type="bottom" id="0oP-1x-YR7"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="84R-pJ-Iby" userLabel="Landing Page View">
+                    <containerView key="view" opaque="NO" contentMode="scaleToFill" id="50q-5f-ng5">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M1E-mS-9I5">
-                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
-                            </containerView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                        <connections>
+                            <segue destination="iUO-Lv-biu" kind="embed" identifier="segueLandingEmbedSubview" id="ga8-8a-Gco"/>
+                        </connections>
+                    </containerView>
                     <tabBarItem key="tabBarItem" title="Item" id="cnd-Rl-Wb9"/>
-                    <connections>
-                        <outlet property="LandingContainerView" destination="M1E-mS-9I5" id="1Eo-hv-qQc"/>
-                        <segue destination="Y9k-CM-XAA" kind="custom" identifier="segueLandingToSearchResults" customClass="GetSearchResultsSegue" id="vuV-mZ-ztd"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yNg-ga-N8e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1091" y="1544"/>
+        </scene>
+        <!--Landing Page Container View Controller-->
+        <scene sceneID="BsW-vT-UYW">
+            <objects>
+                <viewController id="iUO-Lv-biu" userLabel="Landing Page Container View Controller" customClass="ContainerViewController" customModule="FlavorFinder" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Ewq-df-ZRf"/>
+                        <viewControllerLayoutGuide type="bottom" id="vU6-OI-y0f"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="d1C-T8-etD">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="600" height="600"/>
+                    <connections>
+                        <segue destination="Y9k-CM-XAA" kind="custom" identifier="segueLandingToSearchResults" customClass="GetSearchResultsSegue" id="6az-ga-q5S"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mnb-aE-QfF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1815" y="1558"/>
         </scene>
         <!--Search Results View Controller-->
         <scene sceneID="0m5-1m-TMy">
@@ -400,7 +412,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YN3-3Y-uml" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1794" y="1530"/>
+            <point key="canvasLocation" x="1998" y="2366"/>
         </scene>
         <!--Item-->
         <scene sceneID="DeY-qo-0Xs">

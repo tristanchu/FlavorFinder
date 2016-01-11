@@ -11,7 +11,6 @@ import UIKit
 class GetSearchResultsSegue : UIStoryboardSegue{
     
     override func perform() {
-        
     }
     
 }
