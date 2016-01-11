@@ -27,16 +27,17 @@ class ContainerViewController: UIViewController {
     
     func segueIdentifierReceivedFromParent(segueIdentifier: String){
         self.segueIdentifier = segueIdentifier
-        self.performSegueWithIdentifier(self.segueIdentifier, sender: nil)
+        print("seguing...?")
+        //self.performSegueWithIdentifier(self.segueIdentifier, sender: nil)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == segueIdentifier {
-            // Avoids creation of a stack of view controllers
-            if lastViewController != nil{
-                lastViewController.view.removeFromSuperview()
-            }
-            // Adds View Controller to Container "first" or "second"
+//            // Avoids creation of a stack of view controllers
+//            if lastViewController != nil{
+//                lastViewController.view.removeFromSuperview()
+//            }
+//            // Adds View Controller to Container "first" or "second"
             vc = segue.destinationViewController
             self.addChildViewController(vc)
             vc.view.frame = CGRect(x: 0,y: 0, width: self.view.frame.width, height: self.view.frame.height)

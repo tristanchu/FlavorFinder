@@ -10,19 +10,30 @@ import Foundation
 import UIKit
 import Parse
 
-class LandingPageController: UIViewController, UITextFieldDelegate {
-    var gotSearch = false
+class LandingPageController: UIViewController {
+    var gotSearch = true
+    var containerView: ContainerViewController?
     let segueToSearchResults = "segueLandingToSearchResults"
+    
     @IBOutlet weak var LandingContainerView: UIView!
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        LandingContainerView.backgroundColor = MATCH_HIGH_COLOR
+        containerView = ContainerViewController()
+        containerView?.setValue(LandingContainerView, forKey: "view")
+        containerView?.view.backgroundColor = MATCH_HIGH_COLOR
         if gotSearch {
             print("got search")
-            self.performSegueWithIdentifier(segueToSearchResults, sender: nil)
+            containerView!.segueIdentifierReceivedFromParent(segueToSearchResults)
         } else {
             print("no search")
         }
     }
+        
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+            if segue.identifier == segueToSearchResults {
+                containerView = segue.destinationViewController as? ContainerViewController
+            }
+    }
+    
 }

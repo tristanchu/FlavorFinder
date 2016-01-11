@@ -275,7 +275,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z8U-I1-yy5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3031" y="1936"/>
+            <point key="canvasLocation" x="3383" y="2076"/>
         </scene>
         <!--Saved Matches View Controller-->
         <scene sceneID="jPM-Ek-pkk">
@@ -361,22 +361,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M1E-mS-9I5">
-                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
-                                <connections>
-                                    <segue destination="Y9k-CM-XAA" kind="custom" identifier="GetSearchResultsSegue" id="9KA-Yc-oNW"/>
-                                </connections>
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                             </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="cnd-Rl-Wb9"/>
                     <connections>
-                        <outlet property="LandingContainerView" destination="M1E-mS-9I5" id="Df2-X2-8YU"/>
+                        <outlet property="LandingContainerView" destination="M1E-mS-9I5" id="1Eo-hv-qQc"/>
+                        <segue destination="Y9k-CM-XAA" kind="custom" identifier="segueLandingToSearchResults" customClass="GetSearchResultsSegue" id="vuV-mZ-ztd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yNg-ga-N8e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1135" y="1520"/>
+            <point key="canvasLocation" x="1091" y="1544"/>
         </scene>
         <!--Search Results View Controller-->
         <scene sceneID="0m5-1m-TMy">
@@ -456,7 +454,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CSM-cM-kZM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2737" y="1132"/>
+            <point key="canvasLocation" x="3253" y="1188"/>
         </scene>
         <!--Item-->
         <scene sceneID="swP-zV-l0p">
