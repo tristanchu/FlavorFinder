@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="oWC-1n-3cO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1509" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="oWC-1n-3cO">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -275,7 +275,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z8U-I1-yy5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3031" y="1936"/>
+            <point key="canvasLocation" x="3383" y="2076"/>
         </scene>
         <!--Saved Matches View Controller-->
         <scene sceneID="jPM-Ek-pkk">
@@ -349,36 +349,77 @@
             </objects>
             <point key="canvasLocation" x="1246" y="467"/>
         </scene>
-        <!--Search Page-->
+        <!--Search/Landing Page-->
         <scene sceneID="3Tt-7g-WyR">
             <objects>
-                <viewController id="h2p-tb-f5C" userLabel="Search Page" customClass="LandingPageController" customModule="FlavorFinder" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="rpr-KB-nGU"/>
-                        <viewControllerLayoutGuide type="bottom" id="0oP-1x-YR7"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="84R-pJ-Iby">
+                <viewController title="Search/Landing Page" id="h2p-tb-f5C" customClass="LandingPageController" customModule="FlavorFinder" sceneMemberID="viewController">
+                    <containerView key="view" opaque="NO" contentMode="scaleToFill" id="50q-5f-ng5">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OvJ-IC-4IV">
-                                <rect key="frame" x="26" y="87" width="240" height="128"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Landing Page" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vtc-3R-MZC">
-                                <rect key="frame" x="292" y="221" width="104" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                        <connections>
+                            <segue destination="iUO-Lv-biu" kind="embed" identifier="segueLandingEmbedSubview" id="ga8-8a-Gco"/>
+                        </connections>
+                    </containerView>
                     <tabBarItem key="tabBarItem" title="Search" image="SearchIcon" selectedImage="SearchClicked" id="cnd-Rl-Wb9"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yNg-ga-N8e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1069" y="1542"/>
+            <point key="canvasLocation" x="1091" y="1544"/>
+        </scene>
+        <!--Landing Page Container View Controller-->
+        <scene sceneID="BsW-vT-UYW">
+            <objects>
+                <viewController id="iUO-Lv-biu" userLabel="Landing Page Container View Controller" customClass="ContainerViewController" customModule="FlavorFinder" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Ewq-df-ZRf"/>
+                        <viewControllerLayoutGuide type="bottom" id="vU6-OI-y0f"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="d1C-T8-etD">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="600" height="600"/>
+                    <connections>
+                        <segue destination="Y9k-CM-XAA" kind="custom" identifier="segueLandingToSearchResults" customClass="GetSearchResultsSegue" customModule="FlavorFinder" id="6az-ga-q5S"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mnb-aE-QfF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1775" y="1566"/>
+        </scene>
+        <!--Search Results View Controller-->
+        <scene sceneID="0m5-1m-TMy">
+            <objects>
+                <viewController id="Y9k-CM-XAA" userLabel="Search Results View Controller" customClass="SearchResultsViewController" customModule="FlavorFinder" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="x14-3j-LRG"/>
+                        <viewControllerLayoutGuide type="bottom" id="5fU-N5-qc0"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="S3W-QO-b3i">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="65o-dk-qLX" userLabel="Search Terms Container View">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="242"/>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6IW-3e-7Ct" userLabel="Search Matches Container View">
+                                <rect key="frame" x="0.0" y="240" width="600" height="548"/>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="600" height="600"/>
+                    <connections>
+                        <outlet property="searchMatchesContainer" destination="6IW-3e-7Ct" id="CZc-6h-EuY"/>
+                        <outlet property="searchTermsContainer" destination="65o-dk-qLX" id="WW6-FE-oAO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YN3-3Y-uml" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1998" y="2366"/>
         </scene>
         <!--More-->
         <scene sceneID="DeY-qo-0Xs">
@@ -432,7 +473,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CSM-cM-kZM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2737" y="1132"/>
+            <point key="canvasLocation" x="3253" y="1188"/>
         </scene>
         <!--Favorites-->
         <scene sceneID="swP-zV-l0p">
@@ -459,7 +500,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Ah-GI-Mfd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1877" y="1538"/>
+            <point key="canvasLocation" x="2553" y="1544"/>
         </scene>
         <!--Register View Controller-->
         <scene sceneID="veb-7d-s5O">
@@ -636,7 +677,7 @@
                                 <rect key="frame" x="0.0" y="86" width="600" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VSI-oZ-nxd" id="emG-AP-STX">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="79.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="79"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ndg-wR-OIq">

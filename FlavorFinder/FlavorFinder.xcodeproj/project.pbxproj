@@ -12,10 +12,10 @@
 		60216E641BEC41360029454B /* UserSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60216E631BEC41360029454B /* UserSettingsViewController.swift */; };
 		60216E661BEC4F740029454B /* UiUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60216E651BEC4F740029454B /* UiUtils.swift */; };
 		60322EA31BD9CE150099030B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60322EA21BD9CE150099030B /* LoginViewController.swift */; };
-		609432631C42D9BB00BA0577 /* LandingPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609432621C42D9BB00BA0577 /* LandingPageController.swift */; settings = {ASSET_TAGS = (); }; };
-		609432671C42DCA800BA0577 /* FavoritesPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609432661C42DCA800BA0577 /* FavoritesPageController.swift */; settings = {ASSET_TAGS = (); }; };
-		609432691C42DD6500BA0577 /* ListsPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609432681C42DD6500BA0577 /* ListsPageController.swift */; settings = {ASSET_TAGS = (); }; };
-		6094326B1C42DDB500BA0577 /* MorePageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6094326A1C42DDB500BA0577 /* MorePageController.swift */; settings = {ASSET_TAGS = (); }; };
+		609432631C42D9BB00BA0577 /* LandingPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609432621C42D9BB00BA0577 /* LandingPageController.swift */; };
+		609432671C42DCA800BA0577 /* FavoritesPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609432661C42DCA800BA0577 /* FavoritesPageController.swift */; };
+		609432691C42DD6500BA0577 /* ListsPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609432681C42DD6500BA0577 /* ListsPageController.swift */; };
+		6094326B1C42DDB500BA0577 /* MorePageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6094326A1C42DDB500BA0577 /* MorePageController.swift */; };
 		60FEE38F1BE570E100F51BE8 /* KeychainWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 60FEE38E1BE570E100F51BE8 /* KeychainWrapper.m */; };
 		880DA78C1BE1FB03003C67F0 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880DA78B1BE1FB03003C67F0 /* Globals.swift */; };
 		882FFD661BD9A48D00710F35 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 882FFD641BD9A48D00710F35 /* Bolts.framework */; };
@@ -52,6 +52,9 @@
 		88F414011BC7513F000C0093 /* PFIngredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F414001BC7513F000C0093 /* PFIngredient.swift */; };
 		88F414021BC7513F000C0093 /* PFIngredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F414001BC7513F000C0093 /* PFIngredient.swift */; };
 		B6098CE41BF7F3B8001EDCE6 /* SavedMatchesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6098CE31BF7F3B8001EDCE6 /* SavedMatchesViewController.swift */; };
+		B61FEBCB1C442E390028F800 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61FEBCA1C442E390028F800 /* ContainerViewController.swift */; };
+		B61FEBCE1C4430D30028F800 /* GetSearchResultsSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61FEBCD1C4430D30028F800 /* GetSearchResultsSegue.swift */; };
+		B61FEBD01C4493B50028F800 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61FEBCF1C4493B50028F800 /* SearchResultsViewController.swift */; };
 		B65BA8B11BF907750045CB5E /* SavedMatchesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65BA8B01BF907750045CB5E /* SavedMatchesCell.swift */; };
 		B6EA63591BEEB4660017C063 /* PFFavorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EA63581BEEB4660017C063 /* PFFavorite.swift */; };
 		B6F3B74F1BE8833E00AF791A /* PFMatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F3B74E1BE8833E00AF791A /* PFMatch.swift */; };
@@ -120,6 +123,9 @@
 		88F413FB1BC74EC8000C0093 /* MatchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchTableViewController.swift; sourceTree = "<group>"; };
 		88F414001BC7513F000C0093 /* PFIngredient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PFIngredient.swift; path = FlavorFinderTests/PFIngredient.swift; sourceTree = SOURCE_ROOT; };
 		B6098CE31BF7F3B8001EDCE6 /* SavedMatchesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedMatchesViewController.swift; sourceTree = "<group>"; };
+		B61FEBCA1C442E390028F800 /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
+		B61FEBCD1C4430D30028F800 /* GetSearchResultsSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetSearchResultsSegue.swift; sourceTree = "<group>"; };
+		B61FEBCF1C4493B50028F800 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
 		B65BA8B01BF907750045CB5E /* SavedMatchesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedMatchesCell.swift; sourceTree = "<group>"; };
 		B6EA63581BEEB4660017C063 /* PFFavorite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PFFavorite.swift; sourceTree = "<group>"; };
 		B6F3B74E1BE8833E00AF791A /* PFMatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PFMatch.swift; sourceTree = "<group>"; };
@@ -213,6 +219,7 @@
 				883AC6271BC1A3C0009136E9 /* AppDelegate.swift */,
 				88F0E5001BE54111003CB35B /* Animations.swift */,
 				880DA78B1BE1FB03003C67F0 /* Globals.swift */,
+				B61FEBCC1C44309F0028F800 /* CustomSegues */,
 				8875DE2F1BE0500100CD50EA /* Models */,
 				8875DE2D1BE04FBC00CD50EA /* Views */,
 				8875DE2E1BE04FDF00CD50EA /* Controllers */,
@@ -272,9 +279,11 @@
 				888D1A431BDEF8FE007F09AE /* ProfileViewController.swift */,
 				6001830E1BDC31DE00265B72 /* RegisterViewController.swift */,
 				609432621C42D9BB00BA0577 /* LandingPageController.swift */,
+				B61FEBCA1C442E390028F800 /* ContainerViewController.swift */,
 				609432661C42DCA800BA0577 /* FavoritesPageController.swift */,
 				609432681C42DD6500BA0577 /* ListsPageController.swift */,
 				6094326A1C42DDB500BA0577 /* MorePageController.swift */,
+				B61FEBCF1C4493B50028F800 /* SearchResultsViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -303,6 +312,14 @@
 				883AC62E1BC1A3C0009136E9 /* Images.xcassets */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		B61FEBCC1C44309F0028F800 /* CustomSegues */ = {
+			isa = PBXGroup;
+			children = (
+				B61FEBCD1C4430D30028F800 /* GetSearchResultsSegue.swift */,
+			);
+			name = CustomSegues;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -462,11 +479,13 @@
 				6094326B1C42DDB500BA0577 /* MorePageController.swift in Sources */,
 				8875DE3B1BE0751B00CD50EA /* MainNavigationController.swift in Sources */,
 				88F413FC1BC74EC8000C0093 /* MatchTableViewController.swift in Sources */,
+				B61FEBCE1C4430D30028F800 /* GetSearchResultsSegue.swift in Sources */,
 				88F0E5011BE54111003CB35B /* Animations.swift in Sources */,
 				88998E211BEC365D00087406 /* PFVote.swift in Sources */,
 				88F0E4FF1BE51E7F003CB35B /* GlobalSearchController.swift in Sources */,
 				8875DE321BE051B100CD50EA /* Database.swift in Sources */,
 				88F413FA1BC74A00000C0093 /* MatchTableViewCell.swift in Sources */,
+				B61FEBD01C4493B50028F800 /* SearchResultsViewController.swift in Sources */,
 				888D1A401BDEF816007F09AE /* Stack.swift in Sources */,
 				88F414011BC7513F000C0093 /* PFIngredient.swift in Sources */,
 				B6F3B74F1BE8833E00AF791A /* PFMatch.swift in Sources */,
@@ -481,6 +500,7 @@
 				8875DE391BE06FB300CD50EA /* MenuTableViewController.swift in Sources */,
 				888D1A441BDEF8FE007F09AE /* ProfileViewController.swift in Sources */,
 				60216E661BEC4F740029454B /* UiUtils.swift in Sources */,
+				B61FEBCB1C442E390028F800 /* ContainerViewController.swift in Sources */,
 				B6EA63591BEEB4660017C063 /* PFFavorite.swift in Sources */,
 				60216E641BEC41360029454B /* UserSettingsViewController.swift in Sources */,
 				8875DE2A1BE041D200CD50EA /* UITextField+LeftMargin.swift in Sources */,
