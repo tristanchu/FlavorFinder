@@ -35,14 +35,10 @@ class ContainerViewController: UIViewController {
     
     func segueIdentifierReceivedFromParent(segueIdentifier: String) {
         self.segueIdentifier = segueIdentifier
-        print("seguing...?")
         self.performSegueWithIdentifier(self.segueIdentifier, sender: self)
-        print("segued!")
-        self.vc.view.backgroundColor = MATCH_GREATEST_COLOR
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        print("got here!")
         if segue.identifier == segueIdentifier {
             // Avoids creation of a stack of view controllers
             if lastViewController != nil {
