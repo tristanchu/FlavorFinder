@@ -11,20 +11,6 @@ import Foundation
 import UIKit
 import Parse
 
-
-
-//
-//- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
-//{
-//    NSLog(@"%s", __PRETTY_FUNCTION__);
-//    
-//    return YES;
-//    }
-
-
-///'NSInternalInconsistencyException', reason: 'Could not create a segue of class '(null)''
-
-
 class LandingPageController: UIViewController {
     var gotSearch = true
     var containerVC: ContainerViewController?
@@ -33,20 +19,18 @@ class LandingPageController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        containerVC?.view.backgroundColor = MATCH_HIGH_COLOR
         if gotSearch {
             print("got search")
-            containerVC!.segueIdentifierReceivedFromParent(segueToSearchResults)
+            containerVC?.segueIdentifierReceivedFromParent(segueToSearchResults)
         } else {
             print("no search")
+            containerVC?.view.backgroundColor = MATCH_HIGH_COLOR
         }
     }
         
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == segueEmbeddedContent {
-            self.containerVC = segue.destinationViewController as? ContainerViewController
-        }
-        if segue.identifier == segueToSearchResults {
+            print("loading content")
             containerVC = segue.destinationViewController as? ContainerViewController
         }
     }
