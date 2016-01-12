@@ -6,7 +6,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Item-->
+        <!--Test-->
         <scene sceneID="4Jp-rt-Y0j">
             <objects>
                 <viewController storyboardIdentifier="LoginViewControllerIdentifier" id="FZQ-A2-GaM" customClass="LoginViewController" customModule="FlavorFinder" sceneMemberID="viewController">
@@ -15,7 +15,7 @@
                         <viewControllerLayoutGuide type="bottom" id="t0R-Kl-bIo"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="mcQ-1v-X3h">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login to Flavor Finder" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Geq-sk-8Eg">
@@ -109,7 +109,7 @@
                             <constraint firstItem="pxX-xv-m3i" firstAttribute="top" secondItem="Zm4-fb-B07" secondAttribute="bottom" constant="30" id="yBJ-0f-ewY"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="MRA-bD-dK5"/>
+                    <tabBarItem key="tabBarItem" title="Test" id="MRA-bD-dK5"/>
                     <navigationItem key="navigationItem" id="QXq-QC-lOr"/>
                     <connections>
                         <outlet property="goToTableButton" destination="qSC-C0-kB1" id="Ha1-iO-BxI"/>
@@ -326,12 +326,13 @@
             </objects>
             <point key="canvasLocation" x="3607" y="2765"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--BottomTabController-->
         <scene sceneID="e6c-Ir-cP5">
             <objects>
-                <tabBarController id="dBm-Uc-8CI" sceneMemberID="viewController">
+                <tabBarController title="BottomTabController" id="dBm-Uc-8CI" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="K4U-ra-5xe"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="iVd-jS-Aok">
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" translucent="NO" id="iVd-jS-Aok">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -348,18 +349,18 @@
             </objects>
             <point key="canvasLocation" x="1246" y="467"/>
         </scene>
-        <!--Landing Page-->
+        <!--Search/Landing Page-->
         <scene sceneID="3Tt-7g-WyR">
             <objects>
-                <viewController title="Landing Page" id="h2p-tb-f5C" customClass="LandingPageController" customModule="FlavorFinder" sceneMemberID="viewController">
+                <viewController title="Search/Landing Page" id="h2p-tb-f5C" customClass="LandingPageController" customModule="FlavorFinder" sceneMemberID="viewController">
                     <containerView key="view" opaque="NO" contentMode="scaleToFill" id="50q-5f-ng5">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                         <connections>
                             <segue destination="iUO-Lv-biu" kind="embed" identifier="segueLandingEmbedSubview" id="ga8-8a-Gco"/>
                         </connections>
                     </containerView>
-                    <tabBarItem key="tabBarItem" title="Item" id="cnd-Rl-Wb9"/>
+                    <tabBarItem key="tabBarItem" title="Search" image="SearchIcon" selectedImage="SearchClicked" id="cnd-Rl-Wb9"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yNg-ga-N8e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -404,7 +405,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="242"/>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6IW-3e-7Ct" userLabel="Search Matches Container View">
-                                <rect key="frame" x="0.0" y="240" width="600" height="360"/>
+                                <rect key="frame" x="0.0" y="240" width="600" height="548"/>
                             </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -420,16 +421,16 @@
             </objects>
             <point key="canvasLocation" x="1998" y="2366"/>
         </scene>
-        <!--Item-->
+        <!--More-->
         <scene sceneID="DeY-qo-0Xs">
             <objects>
-                <viewController id="0ye-Pg-Qge" customClass="MorePageController" customModule="FlavorFinder" sceneMemberID="viewController">
+                <viewController id="0ye-Pg-Qge" userLabel="More" customClass="MorePageController" customModule="FlavorFinder" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ZJX-NO-e3g"/>
                         <viewControllerLayoutGuide type="bottom" id="aR7-Yq-j7H"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="2qy-j6-TfG">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="More Page" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m2w-Ao-9PO">
@@ -441,13 +442,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="WfQ-jI-YaE"/>
+                    <tabBarItem key="tabBarItem" title="More" image="MoreUnclicked" selectedImage="MoreClicked" id="WfQ-jI-YaE"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Tn-QK-eIl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2741" y="403"/>
         </scene>
-        <!--Item-->
+        <!--Lists-->
         <scene sceneID="Bug-zi-jTx">
             <objects>
                 <viewController id="bSA-UW-dX3" customClass="ListsPageController" customModule="FlavorFinder" sceneMemberID="viewController">
@@ -456,7 +457,7 @@
                         <viewControllerLayoutGuide type="bottom" id="KZB-5z-brQ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="nAf-MX-YTm">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Lists Page" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SKf-RN-ylx">
@@ -468,13 +469,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="Lug-t8-7kq"/>
+                    <tabBarItem key="tabBarItem" title="Lists" image="Ingredients" selectedImage="IngredientsFilled" id="Lug-t8-7kq"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CSM-cM-kZM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3253" y="1188"/>
         </scene>
-        <!--Item-->
+        <!--Favorites-->
         <scene sceneID="swP-zV-l0p">
             <objects>
                 <viewController id="aDy-6t-DKL" customClass="FavoritesPageController" customModule="FlavorFinder" sceneMemberID="viewController">
@@ -483,7 +484,7 @@
                         <viewControllerLayoutGuide type="bottom" id="tcT-vC-tSb"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="D7F-xH-ZMh">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Favorites" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ER-L9-51S">
@@ -495,7 +496,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="3oj-NR-o20"/>
+                    <tabBarItem key="tabBarItem" title="Favorites" image="FavoritesIcon" selectedImage="FavoritesIconFilled" id="3oj-NR-o20"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Ah-GI-Mfd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -510,11 +511,11 @@
                         <viewControllerLayoutGuide type="bottom" id="bXV-Gs-7R6"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="nsi-Pa-HHQ">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign Up" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ffs-dJ-FNO">
-                                <rect key="frame" x="219" y="78" width="163" height="82"/>
+                                <rect key="frame" x="219" y="78" width="163" height="33"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="163" id="UhT-7e-2t2"/>
                                 </constraints>
@@ -523,7 +524,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="98s-Lv-fsr">
-                                <rect key="frame" x="219" y="161" width="163" height="45"/>
+                                <rect key="frame" x="219" y="112" width="163" height="45"/>
                                 <color key="backgroundColor" red="0.94963304920000002" green="0.94963304920000002" blue="0.94963304920000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
                                 <accessibility key="accessibilityConfiguration" label="Email"/>
@@ -540,7 +541,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="692-E8-NQh">
-                                <rect key="frame" x="217" y="227" width="165" height="45"/>
+                                <rect key="frame" x="217" y="178" width="165" height="45"/>
                                 <color key="backgroundColor" red="0.94963304920000002" green="0.94963304920000002" blue="0.94963304920000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
                                 <accessibility key="accessibilityConfiguration" label="Username"/>
@@ -557,7 +558,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9en-v4-ss2">
-                                <rect key="frame" x="217" y="289" width="165" height="45"/>
+                                <rect key="frame" x="217" y="240" width="165" height="45"/>
                                 <color key="backgroundColor" red="0.94963304920000002" green="0.94963304920000002" blue="0.94963304920000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
                                 <accessibility key="accessibilityConfiguration" label="Password"/>
@@ -574,7 +575,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By clicking the button below, I certify that I am 13 years of age or older." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="ifX-C3-tVL">
-                                <rect key="frame" x="125" y="448" width="350" height="66"/>
+                                <rect key="frame" x="125" y="399" width="350" height="66"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="66" id="QEx-K9-oKK"/>
                                     <constraint firstAttribute="width" constant="350" id="ggV-Xk-LnH"/>
@@ -584,7 +585,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jkh-Ln-Knn">
-                                <rect key="frame" x="218" y="550" width="163" height="30"/>
+                                <rect key="frame" x="218" y="501" width="163" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="Gvq-US-KkL"/>
                                     <constraint firstAttribute="width" constant="163" id="Na6-Xq-UEI"/>
@@ -595,7 +596,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="awg-Zu-3RJ">
-                                <rect key="frame" x="165" y="509" width="269" height="39"/>
+                                <rect key="frame" x="165" y="460" width="269" height="39"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="39" id="Hw9-C0-HM6"/>
                                     <constraint firstAttribute="width" constant="269" id="qDA-79-olk"/>
@@ -605,7 +606,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Retype Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NPx-aT-ELr">
-                                <rect key="frame" x="218" y="354" width="165" height="45"/>
+                                <rect key="frame" x="218" y="305" width="165" height="45"/>
                                 <color key="backgroundColor" red="0.94963304920000002" green="0.94963304920000002" blue="0.94963304920000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
                                 <accessibility key="accessibilityConfiguration" label="Password Retyped"/>
@@ -668,7 +669,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="MatchTableViewControllerIdentifier" id="yDJ-pt-my1" customClass="MatchTableViewController" customModule="FlavorFinder" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="yEc-b6-IbE">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -730,6 +731,16 @@
             <point key="canvasLocation" x="455" y="475"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="FavoritesIcon" width="22" height="22"/>
+        <image name="FavoritesIconFilled" width="22" height="22"/>
+        <image name="Ingredients" width="22" height="22"/>
+        <image name="IngredientsFilled" width="22" height="22"/>
+        <image name="MoreClicked" width="22" height="22"/>
+        <image name="MoreUnclicked" width="22" height="22"/>
+        <image name="SearchClicked" width="22" height="22"/>
+        <image name="SearchIcon" width="22" height="22"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="yCh-I4-cTX"/>
     </inferredMetricsTieBreakers>
