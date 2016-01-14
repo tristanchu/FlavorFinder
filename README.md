@@ -1,30 +1,39 @@
 # FlavorFinder
-App for matching and finding new flavors. Created for CS 98 Senior Project Implementation at Dartmouth College.
+The app for finding and saving your new favorite flavor combinations. Created for CS 98 Senior Project Implementation at Dartmouth College.
 
 Project by: Courtney Ligh, Jaki Kimball, Tristan Chu, and Jon
 
 ## Pitch
-The Flavor Finder is a flavor lookup mobile app—a creative culinary tool for inspiration, experimentation, and reference with user-generated content. There is currently no easy mobile way to look up what flavors go well together or what flavors go well with the ingredients you currently have (except for wine+cheese pairing apps that don’t cover the scope of flavors we hope to cover). A book called [The Flavor Bible](http://www.amazon.com/The-Flavor-Bible-Creativity-Imaginative/dp/0316118400) exists with a flavor lookup section, but it is bulky and its eBook is not user-friendly; moreover, it is incomplete in certain respects. This app will be perfect for looking up flavors on the go (e.g. supermarket, farmer's market), but also handy in the kitchen
+The Flavor Finder is a flavor pairing lookup mobile app—a creative culinary tool for inspiration, experimentation, and reference with user-generated content. There is currently no easy mobile way to look up what flavors go well together or what flavors go well with the ingredients you currently have (except for wine+cheese pairing apps that don’t cover the scope of flavors we hope to cover). A book called [The Flavor Bible](http://www.amazon.com/The-Flavor-Bible-Creativity-Imaginative/dp/0316118400) exists with a flavor lookup section, but it is bulky and its eBook is not user-friendly; moreover, it is incomplete in certain respects. This app will be perfect for looking up flavors on the go (e.g. supermarket, farmer's market), but also handy in the kitchen
 
-Target users: experienced and experimental cooks (intermediate to advanced skill)
+**Target users:** experienced and experimental cooks (intermediate to advanced skill)
+
 Advanced features beyond basic flavor lookup:
 
-1. advanced searches (e.g. filter out non-vegetarian flavors, search for flavors compatible with two or three user-chosen flavors rather than just one, etc.)
+1. **advanced searches** (e.g. filter out non-vegetarian flavors, search for flavors compatible with two or three user-chosen flavors rather than just one, etc.)
 	
-2. browsing recipes in-app that use selected flavors (pulled from recipe website)
+2. **multi-item searches** (e.g. look up what goes with carrots *and* peas!
+
+3. **favorites** (pin favored ingredients to the top of your search results)
+
+4. **lists** (keep track of ingredient groups through our lists feature)
 
 ## Strategy & Timeline
-Essentially, this fall we are focusing on the core flavor lookup aspects of the app, and in the winter we are focusing on user experience and user-driven features/content.
+This winter term we plan on focusing heavily on UI/UX. 
 
-* *Sept. 28–October 10*: Familiarizing with Swift (do tutorial) & research technical design aspects; scrape eBook (The Flavor Bible) to populate model data set
-* *October 6–October 20*: Create design doc / vision especially figuring out database tech; skeleton iOS app
-* *October 17–November 7*: Small scale beta version with sample data, with very basic search; basic user accounts in app; web app skeleton
-* *November 4–November 25*: Advanced search and/or filtering; final user account tech in place (FB login, saved matches aka favs, user profile); basic web app; ranking
-
-Winter term, we expect to focus more heavily on UX/UI testing/development and also develop community-driven data creation/modification; we may also make adjustments to advanced search during this time based on user testing. Favorites and more user-based features would exist. We would also have integration with a recipe website’s API for pulling recipes related to flavor lookups. Over winter break, we will likely be in contact and do some of the initial planning/research for these additional features, and also start lining up user testers.
+* **Week One** - UI/UX Redesign and Re-Scoping
+* **Week Two** - Refactor and Multi-search
+* **Week Three** - Dev Testing Report
+* **Week Four** - Add in List and Favs
+* **Week Five** - Midterm Demo - have app ready
+* **Week Six** - User Test and Study time
+* **Week Seven** - Incorporate User Study Findings
+* **Week Eight** - App Cleanup
+* **Week Nine** - Final Presentations
+* **Week Ten** - Public Demo
 
 ## Implementation
-We have decided that we want to do an iOS app and use Swift for the components related to that. We will use Github for version control and file sharing among the group. For our initial test data, as a model set, we will use a small portion of The Flavor Bible book. Ideally, we will move into having some sort of community-driven data set, but we chose this resource for initial educational development purposes as it closely models the type of data and relations that we want to capture, convey, and query.
+Flavor Finder is an iOS app built using Swift in Xcode. We use Github for version control and file sharing among the group members. For our initial test data, we will use a small portion of The Flavor Bible book as a model set. Ideally, we will move into having a community-driven data set, but the Flavor Bible works as a strictly educational source as it closely models the type of data and relations that we want to capture, convey, and query.
 
 ## Frameworks Used
 * [**Parse**](https://www.parse.com/?) to host our User data and allow for secure User authentication.
