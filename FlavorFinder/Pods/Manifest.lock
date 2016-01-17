@@ -8,7 +8,6 @@ PODS:
   - MGSwipeTableCell (1.5.1)
   - Parse (1.9.0):
     - Bolts/Tasks (>= 1.3.0)
-  - SQLite.swift (1.0.0.pre)
 
 DEPENDENCIES:
   - ASHorizontalScrollView (~> 1.1)
@@ -18,18 +17,6 @@ DEPENDENCIES:
   - FontAwesome.swift
   - MGSwipeTableCell
   - Parse
-  - SQLite.swift (from `https://github.com/stephencelis/SQLite.swift.git`, branch
-    `swift-2`)
-
-EXTERNAL SOURCES:
-  SQLite.swift:
-    :branch: swift-2
-    :git: https://github.com/stephencelis/SQLite.swift.git
-
-CHECKOUT OPTIONS:
-  SQLite.swift:
-    :commit: 8bd27bcd5d0e6461620e51a651156d57c1c2c6cb
-    :git: https://github.com/stephencelis/SQLite.swift.git
 
 SPEC CHECKSUMS:
   ASHorizontalScrollView: 97f78b44008078b9c3ea1fe3ed7286c39e47d4e8
@@ -40,6 +27,5 @@ SPEC CHECKSUMS:
   FontAwesome.swift: d40ac0a660f079c77945bab632ca20bf46ddc1ac
   MGSwipeTableCell: a51fa670c01f0aa048f12af040acebf315223137
   Parse: 712efbc476d4f47b0f96b70db7e53101575753aa
-  SQLite.swift: 5dfee5c783b93f4c0035c0317a11c3c92cc91910
 
 COCOAPODS: 0.39.0
