@@ -56,6 +56,7 @@
 		B61FEBCE1C4430D30028F800 /* GetSearchResultsSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61FEBCD1C4430D30028F800 /* GetSearchResultsSegue.swift */; };
 		B61FEBD01C4493B50028F800 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61FEBCF1C4493B50028F800 /* SearchResultsViewController.swift */; };
 		B65BA8B11BF907750045CB5E /* SavedMatchesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65BA8B01BF907750045CB5E /* SavedMatchesCell.swift */; };
+		B6B7E0571C4D7BA400ADFC9C /* IngredientList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B7E0561C4D7BA400ADFC9C /* IngredientList.swift */; };
 		B6EA63591BEEB4660017C063 /* PFFavorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EA63581BEEB4660017C063 /* PFFavorite.swift */; };
 		B6F3B74F1BE8833E00AF791A /* PFMatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F3B74E1BE8833E00AF791A /* PFMatch.swift */; };
 /* End PBXBuildFile section */
@@ -127,6 +128,7 @@
 		B61FEBCD1C4430D30028F800 /* GetSearchResultsSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetSearchResultsSegue.swift; sourceTree = "<group>"; };
 		B61FEBCF1C4493B50028F800 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
 		B65BA8B01BF907750045CB5E /* SavedMatchesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedMatchesCell.swift; sourceTree = "<group>"; };
+		B6B7E0561C4D7BA400ADFC9C /* IngredientList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngredientList.swift; sourceTree = "<group>"; };
 		B6EA63581BEEB4660017C063 /* PFFavorite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PFFavorite.swift; sourceTree = "<group>"; };
 		B6F3B74E1BE8833E00AF791A /* PFMatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PFMatch.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -293,6 +295,7 @@
 			children = (
 				8875DE311BE051B100CD50EA /* Database.swift */,
 				8875DE2B1BE04DD900CD50EA /* LoginUtils.swift */,
+				B6B7E0561C4D7BA400ADFC9C /* IngredientList.swift */,
 				88F414001BC7513F000C0093 /* PFIngredient.swift */,
 				B6F3B74E1BE8833E00AF791A /* PFMatch.swift */,
 				88998E201BEC365D00087406 /* PFVote.swift */,
@@ -499,6 +502,7 @@
 				609432631C42D9BB00BA0577 /* LandingPageController.swift in Sources */,
 				8875DE391BE06FB300CD50EA /* MenuTableViewController.swift in Sources */,
 				888D1A441BDEF8FE007F09AE /* ProfileViewController.swift in Sources */,
+				B6B7E0571C4D7BA400ADFC9C /* IngredientList.swift in Sources */,
 				60216E661BEC4F740029454B /* UiUtils.swift in Sources */,
 				B61FEBCB1C442E390028F800 /* ContainerViewController.swift in Sources */,
 				B6EA63591BEEB4660017C063 /* PFFavorite.swift in Sources */,

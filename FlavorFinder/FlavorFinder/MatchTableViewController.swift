@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SQLite
 import Parse
 import FontAwesome_swift
 import MGSwipeTableCell

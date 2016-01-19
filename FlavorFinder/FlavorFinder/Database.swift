@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import SQLite
 import Parse
 
 let _s_objectId = "objectId"
