@@ -19,13 +19,17 @@ class IngredientList : NSObject {
     
     // needs further functionality
     
-    @NSManaged var user: PFUser
-    @NSManaged var name: String
+    var user: PFUser
+    var name: String
 
-    convenience init(user: PFUser, name: String) {
-        self.init()
+    init?(user: PFUser, name: String) {
         self.user = user
         self.name = name
+        super.init()
+        if (self.name == "") {
+            print("no name!!!!!!!!!!!!!")
+            return nil
+        }
     }
     
     func rename(name: String) {

@@ -63,23 +63,25 @@ class FlavorFinderTests: XCTestCase {
 // Lists Feature Unit Test
     func testListsFeature() {
         
-        let newList = IngredientList(user: PFUser(), name: "New List")
+        let user = PFUser()
+        let name = "New List"
+        let newList = IngredientList(user: user, name: name)
 
         // Test that new IngredientList is associated with a PFUser user
-        XCTAssert(nil == newList.getUser() as? PFUser, "no user associated with list")
+        XCTAssertEqual(newList!.getUser(), user, "user not associated with new list")
         
         // Test that new IngredientList is associated with a String name
-        XCTAssert(nil == newList.getName() as? String, "no name associated with list")
+        XCTAssertEqual(newList!.getName(), name, "name not associated with new list")
         
         // Test that IngredientList can be renamed with good input
         let goodName = "Good Name"
-        newList.rename(goodName)
-        XCTAssert(newList.getName() != goodName, "failed to rename list")
+        newList!.rename(goodName)
+        XCTAssertEqual(newList!.getName(), goodName, "failed to rename list")
         
         // Test that IngredientList will not be renamed with empty string // FAILS for now
         let noName = ""
-        newList.rename(noName)
-        XCTAssert(newList.getName().characters.count <= 0, "renamed list to empty string")
+        newList!.rename(noName)
+        XCTAssertGreaterThan(newList!.getName().characters.count, 1, "renamed list to empty string")
         
         // Future tests: name max/min length for naming/renaming (since we'll want to display it), content of list
         
