@@ -29,35 +29,39 @@ class FlavorFinderTests: XCTestCase {
     // Test isInvalidUsername from LoginUtils - for registration
     func testIsInvalidUsername() {
         // Test that good input not seen as invalid:
-        let goodInput = "testUser";
-        XCTAssertFalse(isInvalidUsername(goodInput), "good username input marked invalid.");
+        let goodInput = "testUser"
+        XCTAssertFalse(isInvalidUsername(goodInput), "good username input marked invalid.")
         
         // Test that empty input is invalid:
-        let emptyInput = "";
-        XCTAssert(isInvalidUsername(emptyInput), "empty username input not seen as invalid.");
+        let emptyInput = ""
+        XCTAssert(isInvalidUsername(emptyInput), "empty username input not seen as invalid.")
         
         // Test that long input handled:
-        let longInput = "1234567890123456789012345678901234567890123456789012345678901234567890";
-        XCTAssert(isInvalidUsername(longInput), "long username input not seen as invalid.");
+        let longInput = "1234567890123456789012345678901234567890123456789012345678901234567890"
+        XCTAssert(isInvalidUsername(longInput), "long username input not seen as invalid.")
     }
     
     // Test isInvalidPassword from LoginUtils - for registration
     func testIsInvalidPassword() {
         // Test that good input not seen as invalid:
-        let goodInput = "testPassword";
-        XCTAssertFalse(isInvalidPassword(goodInput), "good pw input marked as invalid");
+        let goodInput = "testPassword"
+        XCTAssertFalse(isInvalidPassword(goodInput), "good pw input marked as invalid")
         
         // Test that empty input is invalid:
         let emptyInput = "";
-        XCTAssert(isInvalidPassword(emptyInput), "empty pw input not marked invalid");
+        XCTAssert(isInvalidPassword(emptyInput), "empty pw input not marked invalid")
         
         // Test that <min input is invalid:
         let belowMinInput = "123";
-        XCTAssert(isInvalidPassword(belowMinInput), "minimum pw input is at 6 char");
+        XCTAssert(isInvalidPassword(belowMinInput), "short pw input not marked invalid")
+        
+        // Test that spaces are invalid:
+        let spacedInput = "test spaces"
+        XCTAssert(isInvalidPassword(spacedInput), "pw input with spaces not marked invalid")
         
         // Test that >max input is invalid:
-        let longInput = "1234567890123456789012345678901234567890123456789012345678901234567890";
-        XCTAssert(isInvalidPassword(longInput), "long pw input not seen as invalid");
+        let longInput = "1234567890123456789012345678901234567890123456789012345678901234567890"
+        XCTAssert(isInvalidPassword(longInput), "long pw input not marked invalid")
     }
 
 // Lists Feature Unit Test

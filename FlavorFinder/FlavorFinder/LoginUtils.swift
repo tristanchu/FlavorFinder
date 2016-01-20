@@ -64,7 +64,7 @@ func removeUserSession() -> Void {
     isInvalidEmail
 
     @param: email - String
-    @return: True if email is not a valid email.
+    @return: True if email address is not in a valid email format.
 */
 func isInvalidEmail(email:String) -> Bool {
     let emailRegex = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
@@ -89,12 +89,14 @@ func isInvalidUsername(username: String) -> Bool {
     isInvalidPassword
 
     @param: password - String
-    @return: True if password = empty, too long, or too short.
+    @return: True if password = empty, too long, too short, or contains spaces.
 */
 func isInvalidPassword(password: String) -> Bool {
     return (password.isEmpty ||
         password.characters.count > PASSWORD_CHAR_MAX ||
-        password.characters.count < PASSWORD_CHAR_MIN)}
+        password.characters.count < PASSWORD_CHAR_MIN) ||
+        password.characters.contains(" ")
+    }
 
 
 // ----------------------------------------------------------------------
@@ -148,7 +150,7 @@ func getPasswordFromKeychain() -> String {
 // ----------------------------------------------------------------------
 
 /**
-setDefaultProfilePicture
+setDefaultProfilePicture --> deprecated, to be removed soon
 
 gets defaultProfilePicture from Parse Config and sets it as the
 profilePicture on the new user.
