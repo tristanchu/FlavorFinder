@@ -29,35 +29,39 @@ class FlavorFinderTests: XCTestCase {
     // Test isInvalidUsername from LoginUtils - for registration
     func testIsInvalidUsername() {
         // Test that good input not seen as invalid:
-        let goodInput = "testUser";
-        XCTAssertFalse(isInvalidUsername(goodInput), "good username input marked invalid.");
+        let goodInput = "testUser"
+        XCTAssertFalse(isInvalidUsername(goodInput), "good username input marked invalid.")
         
         // Test that empty input is invalid:
-        let emptyInput = "";
-        XCTAssert(isInvalidUsername(emptyInput), "empty username input not seen as invalid.");
+        let emptyInput = ""
+        XCTAssert(isInvalidUsername(emptyInput), "empty username input not seen as invalid.")
         
         // Test that long input handled:
-        let longInput = "1234567890123456789012345678901234567890123456789012345678901234567890";
-        XCTAssert(isInvalidUsername(longInput), "long username input not seen as invalid.");
+        let longInput = "1234567890123456789012345678901234567890123456789012345678901234567890"
+        XCTAssert(isInvalidUsername(longInput), "long username input not seen as invalid.")
     }
     
     // Test isInvalidPassword from LoginUtils - for registration
     func testIsInvalidPassword() {
         // Test that good input not seen as invalid:
-        let goodInput = "testPassword";
-        XCTAssertFalse(isInvalidPassword(goodInput), "good pw input marked as invalid");
+        let goodInput = "testPassword"
+        XCTAssertFalse(isInvalidPassword(goodInput), "good pw input marked as invalid")
         
         // Test that empty input is invalid:
         let emptyInput = "";
-        XCTAssert(isInvalidPassword(emptyInput), "empty pw input not marked invalid");
+        XCTAssert(isInvalidPassword(emptyInput), "empty pw input not marked invalid")
         
         // Test that <min input is invalid:
         let belowMinInput = "123";
-        XCTAssert(isInvalidPassword(belowMinInput), "minimum pw input is at 6 char");
+        XCTAssert(isInvalidPassword(belowMinInput), "short pw input not marked invalid")
+        
+        // Test that spaces are invalid:
+        let spacedInput = "test spaces"
+        XCTAssert(isInvalidPassword(spacedInput), "pw input with spaces not marked invalid")
         
         // Test that >max input is invalid:
-        let longInput = "1234567890123456789012345678901234567890123456789012345678901234567890";
-        XCTAssert(isInvalidPassword(longInput), "long pw input not seen as invalid");
+        let longInput = "1234567890123456789012345678901234567890123456789012345678901234567890"
+        XCTAssert(isInvalidPassword(longInput), "long pw input not marked invalid")
     }
 
 // Lists Feature Unit Test
@@ -66,6 +70,9 @@ class FlavorFinderTests: XCTestCase {
         let user = PFUser()
         let name = "New List"
         let newList = IngredientList(user: user, name: name)
+        
+        // Test that new IngredientList was created
+        XCTAssertNotNil(newList, "list creation failed")
 
         // Test that new IngredientList is associated with a PFUser user
         XCTAssertEqual(newList!.getUser(), user, "user not associated with new list")
@@ -73,17 +80,27 @@ class FlavorFinderTests: XCTestCase {
         // Test that new IngredientList is associated with a String name
         XCTAssertEqual(newList!.getName(), name, "name not associated with new list")
         
+        // Rename tests...
         // Test that IngredientList can be renamed with good input
         let goodName = "Good Name"
         newList!.rename(goodName)
         XCTAssertEqual(newList!.getName(), goodName, "failed to rename list")
         
-        // Test that IngredientList will not be renamed with empty string // FAILS for now
+        // Test that IngredientList will not be renamed with empty string
         let noName = ""
         newList!.rename(noName)
         XCTAssertGreaterThan(newList!.getName().characters.count, 1, "renamed list to empty string")
         
-        // Future tests: name max/min length for naming/renaming (since we'll want to display it), content of list
+        // Test that IngredientList will not be renamed with overly long string
+        let longName = "long names are bad for your UI so set some limits!"
+        newList!.rename(longName)
+        XCTAssertLessThan(newList!.getName().characters.count, newList!.NAME_MAX_CHAR, "renamed list to too long string")
+        
+        // Bad initialization tests...
+        XCTAssertNil(IngredientList(user: user, name: noName), "new list created with no name")
+        XCTAssertNil(IngredientList(user: user, name: longName), "new list created with too long name")
+        
+        // Future tests: things related to content of list
         
     }
     
