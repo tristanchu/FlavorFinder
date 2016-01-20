@@ -70,6 +70,9 @@ class FlavorFinderTests: XCTestCase {
         let user = PFUser()
         let name = "New List"
         let newList = IngredientList(user: user, name: name)
+        
+        // Test that new IngredientList was created
+        XCTAssertNotNil(newList, "list creation failed")
 
         // Test that new IngredientList is associated with a PFUser user
         XCTAssertEqual(newList!.getUser(), user, "user not associated with new list")
@@ -77,17 +80,27 @@ class FlavorFinderTests: XCTestCase {
         // Test that new IngredientList is associated with a String name
         XCTAssertEqual(newList!.getName(), name, "name not associated with new list")
         
+        // Rename tests...
         // Test that IngredientList can be renamed with good input
         let goodName = "Good Name"
         newList!.rename(goodName)
         XCTAssertEqual(newList!.getName(), goodName, "failed to rename list")
         
-        // Test that IngredientList will not be renamed with empty string // FAILS for now
+        // Test that IngredientList will not be renamed with empty string
         let noName = ""
         newList!.rename(noName)
         XCTAssertGreaterThan(newList!.getName().characters.count, 1, "renamed list to empty string")
         
-        // Future tests: name max/min length for naming/renaming (since we'll want to display it), content of list
+        // Test that IngredientList will not be renamed with overly long string
+        let longName = "long names are bad for your UI so set some limits!"
+        newList!.rename(longName)
+        XCTAssertLessThan(newList!.getName().characters.count, newList!.NAME_MAX_CHAR, "renamed list to too long string")
+        
+        // Bad initialization tests...
+        XCTAssertNil(IngredientList(user: user, name: noName), "new list created with no name")
+        XCTAssertNil(IngredientList(user: user, name: longName), "new list created with too long name")
+        
+        // Future tests: things related to content of list
         
     }
     
