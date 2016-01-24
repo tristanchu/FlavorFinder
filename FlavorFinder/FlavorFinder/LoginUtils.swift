@@ -44,6 +44,7 @@ func setUserSession(user: PFUser) -> Void {
     currentUser = user
     getUserVotesFromCloud(user)
     getUserFavoritesFromCloud(user)
+    getUserListsFromCloud(user)
 }
 
 /**

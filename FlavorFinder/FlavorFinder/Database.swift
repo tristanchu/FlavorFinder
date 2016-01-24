@@ -36,6 +36,10 @@ let _s_voteType = "voteType"
 let _s_user = "user"
 let _s_userId = "userId"
 
+let _s_List = "List"
+let _s_listId = "listId"
+let _s_ingredients = "ingredients"
+
 
 var _allIngredients = [PFObject]()
 var _allMatches = [PFObject]()
@@ -322,4 +326,59 @@ func getUserFavoritesFromLocal(user: PFUser) -> [PFObject] {
     }
     
     return _favorites
+}
+
+func addIngredientToList(list: PFObject, ingredient: PFObject) {
+    var ingredients = list[_s_ingredients] as! [PFObject]
+    ingredients.append(ingredient)
+    list.saveInBackground()
+}
+
+func removeIngredientFromList(list: PFObject, ingredient: PFObject) {
+    var ingredients = list[_s_ingredients] as! [PFObject]
+    if let i = ingredients.indexOf(ingredient) {
+        ingredients.removeAtIndex(i)
+    }
+    list.saveInBackground()
+}
+
+func createIngredientList(user: PFUser) -> PFList {
+    return PFList(user: user)
+}
+
+func deleteIngredientList(list: PFObject) {
+    list.deleteInBackground()
+}
+
+func getUserListsFromCloud(user: PFUser) {
+    let query = PFQuery(className: _s_List)
+    query.whereKey(_s_user, equalTo: user)
+    query.limit = 1000
+    
+    query.findObjectsInBackgroundWithBlock {
+        (objects: [PFObject]?, error: NSError?) -> Void in
+        if let error = error {
+            print(error)
+        } else {
+            for object in objects! {
+                object.pinInBackground()
+            }
+        }
+    }
+}
+
+func getUserListsFromLocal(user: PFUser) -> [PFObject] {
+    let query = PFQuery(className: _s_List)
+    query.whereKey(_s_user, equalTo: user)
+    query.limit = 1000
+    query.fromLocalDatastore()
+    
+    let _lists: [PFObject]
+    do {
+        _lists = try query.findObjects()
+    } catch {
+        _lists = []
+    }
+    
+    return _lists
 }

@@ -32,6 +32,7 @@
 		882FFD7B1BD9A5B000710F35 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 882FFD7A1BD9A5B000710F35 /* libsqlite3.tbd */; };
 		8839994B1C554ACB003F5CD2 /* HotpotCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8839994A1C554ACB003F5CD2 /* HotpotCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		8839994D1C554B3E003F5CD2 /* RemoveHotpotIngredientButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8839994C1C554B3E003F5CD2 /* RemoveHotpotIngredientButton.swift */; settings = {ASSET_TAGS = (); }; };
+		8839994F1C555A34003F5CD2 /* PFList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8839994E1C555A34003F5CD2 /* PFList.swift */; settings = {ASSET_TAGS = (); }; };
 		883AC6281BC1A3C0009136E9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883AC6271BC1A3C0009136E9 /* AppDelegate.swift */; };
 		883AC62D1BC1A3C0009136E9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 883AC62B1BC1A3C0009136E9 /* Main.storyboard */; };
 		883AC62F1BC1A3C0009136E9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 883AC62E1BC1A3C0009136E9 /* Images.xcassets */; };
@@ -103,6 +104,7 @@
 		882FFD7A1BD9A5B000710F35 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		8839994A1C554ACB003F5CD2 /* HotpotCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HotpotCollectionViewCell.swift; sourceTree = "<group>"; };
 		8839994C1C554B3E003F5CD2 /* RemoveHotpotIngredientButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoveHotpotIngredientButton.swift; sourceTree = "<group>"; };
+		8839994E1C555A34003F5CD2 /* PFList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PFList.swift; sourceTree = "<group>"; };
 		883AC6221BC1A3C0009136E9 /* FlavorFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlavorFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		883AC6261BC1A3C0009136E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		883AC6271BC1A3C0009136E9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -295,10 +297,11 @@
 				8875DE311BE051B100CD50EA /* Database.swift */,
 				8875DE2B1BE04DD900CD50EA /* LoginUtils.swift */,
 				B6B7E0561C4D7BA400ADFC9C /* IngredientList.swift */,
+				B6EA63581BEEB4660017C063 /* PFFavorite.swift */,
 				88F414001BC7513F000C0093 /* PFIngredient.swift */,
+				8839994E1C555A34003F5CD2 /* PFList.swift */,
 				B6F3B74E1BE8833E00AF791A /* PFMatch.swift */,
 				88998E201BEC365D00087406 /* PFVote.swift */,
-				B6EA63581BEEB4660017C063 /* PFFavorite.swift */,
 				8839994C1C554B3E003F5CD2 /* RemoveHotpotIngredientButton.swift */,
 				888D1A3F1BDEF816007F09AE /* Stack.swift */,
 				8875DE291BE041D200CD50EA /* UITextField+LeftMargin.swift */,
@@ -510,6 +513,7 @@
 				88F0E4FF1BE51E7F003CB35B /* GlobalSearchController.swift in Sources */,
 				8875DE321BE051B100CD50EA /* Database.swift in Sources */,
 				8839994D1C554B3E003F5CD2 /* RemoveHotpotIngredientButton.swift in Sources */,
+				8839994F1C555A34003F5CD2 /* PFList.swift in Sources */,
 				8839994B1C554ACB003F5CD2 /* HotpotCollectionViewCell.swift in Sources */,
 				88F413FA1BC74A00000C0093 /* MatchTableViewCell.swift in Sources */,
 				B61FEBD01C4493B50028F800 /* SearchResultsViewController.swift in Sources */,
