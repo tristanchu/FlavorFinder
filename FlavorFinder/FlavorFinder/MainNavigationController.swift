@@ -106,61 +106,10 @@ class MainNavigationController: UINavigationController {
         menuTableView.tableFooterView = UIView.init(frame: CGRectZero)
         menuTableView.tableFooterView!.hidden = true
         menuTableView.backgroundColor = UIColor.clearColor()
+        menuTableView.layer.zPosition = 1
         menuTableView.hidden = true
         self.view.addSubview(menuTableView)
     }
-    
-//    func configure_filterView() {
-//        let kCellHeight:CGFloat = 40.0
-//        
-//        let y_offset = UIApplication.sharedApplication().statusBarFrame.size.height + self.navigationBar.frame.height
-//        filterView.frame = CGRectMake(0, y_offset, self.navigationBar.frame.width, kCellHeight)
-//        filterView.backgroundColor = LIGHTGRAY_COLOR
-//        filterView.hidden = true
-//        
-//        filterView.miniAppearPxOfLastItem = 10
-//        filterView.uniformItemSize = CGSizeMake(80, 30)
-//        //this must be called after changing any size or margin property of this class to get acurrate margin
-//        filterView.setItemsMarginOnce()
-//
-//        let kosherBtn = UIButton()
-//        kosherBtn.setTitle("Kosher", forState: .Normal)
-//        kosherBtn.backgroundColor = NAVI_BUTTON_COLOR
-//        kosherBtn.layer.cornerRadius = 10
-//        kosherBtn.titleLabel?.font = UIFont.fontAwesomeOfSize(15)
-//        kosherBtn.tag = 1
-//        kosherBtn.addTarget(self, action: "filterToggleBtnClicked:", forControlEvents: UIControlEvents.TouchUpInside)
-//        filterView.addItem(kosherBtn)
-//        
-//        let dairyBtn = UIButton()
-//        dairyBtn.setTitle("Dairy", forState: .Normal)
-//        dairyBtn.backgroundColor = NAVI_BUTTON_COLOR
-//        dairyBtn.layer.cornerRadius = 10
-//        dairyBtn.titleLabel?.font = UIFont.fontAwesomeOfSize(15)
-//        dairyBtn.tag = 2
-//        dairyBtn.addTarget(self, action: "filterToggleBtnClicked:", forControlEvents: UIControlEvents.TouchUpInside)
-//        filterView.addItem(dairyBtn)
-//        
-//        let vegeBtn = UIButton()
-//        vegeBtn.setTitle("Vege", forState: .Normal)
-//        vegeBtn.backgroundColor = NAVI_BUTTON_COLOR
-//        vegeBtn.layer.cornerRadius = 10
-//        vegeBtn.titleLabel?.font = UIFont.fontAwesomeOfSize(15)
-//        vegeBtn.tag = 3
-//        vegeBtn.addTarget(self, action: "filterToggleBtnClicked:", forControlEvents: UIControlEvents.TouchUpInside)
-//        filterView.addItem(vegeBtn)
-//        
-//        let nutsBtn = UIButton()
-//        nutsBtn.setTitle("Nuts", forState: .Normal)
-//        nutsBtn.backgroundColor = NAVI_BUTTON_COLOR
-//        nutsBtn.layer.cornerRadius = 10
-//        nutsBtn.titleLabel?.font = UIFont.fontAwesomeOfSize(15)
-//        nutsBtn.tag = 4
-//        nutsBtn.addTarget(self, action: "filterToggleBtnClicked:", forControlEvents: UIControlEvents.TouchUpInside)
-//        filterView.addItem(nutsBtn)
-//        
-//        self.view.addSubview(filterView)
-//    }
     
     func configure_searchBar() {
         globalSearchViewController.navi = self
