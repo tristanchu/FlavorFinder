@@ -28,6 +28,7 @@ let _s_upvotes = "upvotes"
 let _s_downvotes = "downvotes"
 
 let _s_Favorite = "Favorite"
+let _s_ingredient = "ingredient"
 
 let _s_Vote = "Vote"
 let _s_voteType = "voteType"
@@ -252,32 +253,10 @@ func getUserVotesFromCloud(user: PFUser) {
     }
 }
 
-func favoriteMatch(user: PFUser, match: PFObject) {
-    let _favorite = PFFavorite(user: user, match: match)
-    
-    _favorite.pinInBackground()
-    _favorite.saveInBackground()
-}
-
-func unfavoriteMatch(user: PFUser, match: PFObject) {
+func isFavoriteIngredient(user: PFUser, ingredient: PFObject) -> PFObject? {
     let query = PFQuery(className: _s_Favorite)
     query.whereKey(_s_user, equalTo: user)
-    query.whereKey(_s_match, equalTo: match)
-    query.fromLocalDatastore()
-    
-    let _favorite: PFObject?
-    do {
-        _favorite = try query.getFirstObject()
-        _favorite?.deleteInBackground()
-    } catch {
-        _favorite = nil
-    }
-}
-
-func isFavorite(user: PFUser, match: PFObject) -> PFObject? {
-    let query = PFQuery(className: _s_Favorite)
-    query.whereKey(_s_user, equalTo: user)
-    query.whereKey(_s_match, equalTo: match)
+    query.whereKey(_s_ingredient, equalTo: ingredient)
     query.fromLocalDatastore()
     
     let _favorite: PFObject?
@@ -288,6 +267,28 @@ func isFavorite(user: PFUser, match: PFObject) -> PFObject? {
     }
     
     return _favorite
+}
+
+func favoriteIngredient(user: PFUser, ingredient: PFObject) {
+    let _favorite = PFFavorite(user: user, ingredient: ingredient)
+    
+    _favorite.pinInBackground()
+    _favorite.saveInBackground()
+}
+
+func unfavoriteIngredient(user: PFUser, ingredient: PFObject) {
+    let query = PFQuery(className: _s_Favorite)
+    query.whereKey(_s_user, equalTo: user)
+    query.whereKey(_s_ingredient, equalTo: ingredient)
+    query.fromLocalDatastore()
+    
+    let _favorite: PFObject?
+    do {
+        _favorite = try query.getFirstObject()
+        _favorite?.deleteInBackground()
+    } catch {
+        _favorite = nil
+    }
 }
 
 func getUserFavoritesFromCloud(user: PFUser) {

@@ -439,6 +439,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, UICo
     func swipeTableCell(cell: MGSwipeTableCell!, tappedButtonAtIndex index: Int, direction: MGSwipeDirection, fromExpansion: Bool) -> Bool {
         let indexPath = tableView.indexPathForCell(cell)!
         let match = filteredCells[indexPath.row]
+        let ingredient = match[_s_secondIngredient] as! PFObject
         
         switch direction {
         case MGSwipeDirection.RightToLeft:
@@ -506,11 +507,11 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, UICo
             case 2:
                 // Favorite action
                 if let user = currentUser {
-                    if let _ = isFavorite(user, match: match) {
-                        unfavoriteMatch(user, match: match)
+                    if let _ = isFavoriteIngredient(user, ingredient: ingredient) {
+                        unfavoriteIngredient(user, ingredient: ingredient)
                         btn.deselect()
                     } else {
-                        favoriteMatch(user, match: match)
+                        favoriteIngredient(user, ingredient: ingredient)
                         btn.select()
                     }
                     
@@ -521,7 +522,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, UICo
                 }
             case 3:
                 // Add action
-                addToHotpot(match[_s_secondIngredient] as! PFObject)
+                addToHotpot(ingredient)
                 return true
             default:
                 return true
@@ -558,6 +559,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, UICo
         
         let indexPath = tableView.indexPathForCell(cell)!
         let match = filteredCells[indexPath.row]
+        let ingredient = match[_s_secondIngredient] as! PFObject
         
         if currentIngredient != nil {
             swipeSettings.transition = MGSwipeTransition.Drag
@@ -577,7 +579,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, UICo
                 favBtn.backgroundColor = editCellBtnColor
                 
                 if let user = currentUser {
-                    if let _ = isFavorite(user, match: match) {
+                    if let _ = isFavoriteIngredient(user, ingredient: ingredient) {
                         favBtn.selected = true
                     } else {
                         favBtn.selected = false

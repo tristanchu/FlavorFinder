@@ -12,12 +12,12 @@ import Parse
 class PFFavorite : PFObject, PFSubclassing {
     
     @NSManaged var user: PFUser
-    @NSManaged var match: PFObject
+    @NSManaged var ingredient: PFObject
     
-    convenience init(user: PFUser, match: PFObject) {
+    convenience init(user: PFUser, ingredient: PFObject) {
         self.init()
         self.user = user
-        self.match = match
+        self.ingredient = ingredient
     }
     
     override class func initialize() {
