@@ -433,20 +433,41 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="More Page" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m2w-Ao-9PO">
-                                <rect key="frame" x="207" y="268" width="83" height="21"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Td7-i7-Xyp">
+                                <rect key="frame" x="46" y="119" width="508" height="30"/>
+                                <state key="normal" title="Login TestUser"/>
+                                <connections>
+                                    <action selector="loginTestUser:" destination="0ye-Pg-Qge" eventType="touchUpInside" id="djF-2T-gar"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="More Page" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m2w-Ao-9PO">
+                                <rect key="frame" x="188" y="210" width="83" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="83" id="60F-CW-cFn"/>
+                                    <constraint firstAttribute="height" constant="21" id="6dS-hD-5ks"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Td7-i7-Xyp" firstAttribute="top" secondItem="ZJX-NO-e3g" secondAttribute="bottom" constant="55" id="HST-LV-uTm"/>
+                            <constraint firstItem="Td7-i7-Xyp" firstAttribute="centerX" secondItem="2qy-j6-TfG" secondAttribute="centerX" id="JWw-RG-hEO"/>
+                            <constraint firstItem="m2w-Ao-9PO" firstAttribute="leading" secondItem="2qy-j6-TfG" secondAttribute="leading" constant="188" id="UdB-ax-2bo"/>
+                            <constraint firstItem="Td7-i7-Xyp" firstAttribute="leading" secondItem="2qy-j6-TfG" secondAttribute="leadingMargin" constant="26" id="YEt-Dd-zzW"/>
+                            <constraint firstItem="m2w-Ao-9PO" firstAttribute="top" secondItem="Td7-i7-Xyp" secondAttribute="bottom" constant="61" id="vwl-4q-u3k"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="More" image="MoreUnclicked" selectedImage="MoreClicked" id="WfQ-jI-YaE"/>
+                    <connections>
+                        <outlet property="morePageLabel" destination="m2w-Ao-9PO" id="Eup-5U-QcN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Tn-QK-eIl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2741" y="403"/>
+            <point key="canvasLocation" x="2730" y="356"/>
         </scene>
         <!--Lists-->
         <scene sceneID="Bug-zi-jTx">
@@ -497,6 +518,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Favorites" image="FavoritesIcon" selectedImage="FavoritesIconFilled" id="3oj-NR-o20"/>
+                    <connections>
+                        <outlet property="favLabel" destination="5ER-L9-51S" id="sAr-VD-7x2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Ah-GI-Mfd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -677,7 +701,7 @@
                                 <rect key="frame" x="0.0" y="86" width="600" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VSI-oZ-nxd" id="emG-AP-STX">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="79"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="79.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ndg-wR-OIq">
