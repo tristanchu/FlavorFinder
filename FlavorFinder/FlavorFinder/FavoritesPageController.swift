@@ -81,39 +81,15 @@ class FavoritesPageController: UITableViewController {
         favoriteCells.removeAll()
 
         if (currentUser != nil) {
-            // Testing for user:
-            let test4 = PFIngredient(name: currentUser!.username!);
-            favoriteCells.append(test4);
-            
             // Get user favs from parse if logged in and show:
-            let parseFavorites = getFavoritesFromParse(currentUser!);
+            let parseFavorites = getUserFavoritesFromLocal(currentUser!);
             if !parseFavorites.isEmpty {
                 for fav in parseFavorites {
-                    if let ingredientName: String = fav.objectForKey(ingredientColumn) as? String {
-                        let favIngredient = PFIngredient(name: ingredientName);
-                        favoriteCells.append(favIngredient);
-                    }
+                    favoriteCells.append(fav[ingredientColumn] as! PFIngredient)
                 }
             }
         }
-        
     }
-    
-    /* getFavoritesFromParse:
-        gets the favorites from parse for given user
-    */
-    func getFavoritesFromParse(user: PFUser) -> [PFObject] {
-        let query = PFQuery(className: favoriteClassName)
-        query.whereKey(userColumnName, equalTo: (user.objectId)!) // NEED POINTER VALUE?
-        let resultArray: [PFObject]
-        do {
-            resultArray = try query.findObjects()
-        } catch {
-            resultArray = []
-        }
-        return resultArray;
-    }
-    
 
 
 }
