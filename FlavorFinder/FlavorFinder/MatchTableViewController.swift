@@ -80,7 +80,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, UICo
         self.tableView.emptyDataSetSource = self
         self.tableView.emptyDataSetDelegate = self
         self.tableView.tag = 1
-        
+                
         // A little trick for removing the cell separators
         self.tableView.tableFooterView = UIView();
         
@@ -122,6 +122,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, UICo
             return NSAttributedString(string: text, attributes: attributes)
         }
     }
+    
     func configure_searchBarActivateBtn() {
         searchBarActivateBtn.setTitleTextAttributes(attributes, forState: .Normal)
         searchBarActivateBtn.title = String.fontAwesomeIconWithName(.Search)
