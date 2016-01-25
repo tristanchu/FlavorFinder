@@ -13,6 +13,7 @@ class PFList : PFObject, PFSubclassing {
     
     @NSManaged var user: PFUser
     @NSManaged var ingredients: [PFObject]
+    @NSManaged var title: String
     
     convenience init(user: PFUser) {
         self.init()

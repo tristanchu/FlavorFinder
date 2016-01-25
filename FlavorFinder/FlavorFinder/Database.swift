@@ -39,6 +39,7 @@ let _s_userId = "userId"
 let _s_List = "List"
 let _s_listId = "listId"
 let _s_ingredients = "ingredients"
+let _s_title = "title"
 
 
 var _allIngredients = [PFObject]()
