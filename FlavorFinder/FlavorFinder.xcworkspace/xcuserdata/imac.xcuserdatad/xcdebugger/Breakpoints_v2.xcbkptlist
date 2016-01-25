@@ -399,7 +399,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "137"
             endingLineNumber = "137"
-            landmarkName = "_getIngredientForMatch(_:)"
+            landmarkName = "_getMatchesForIngredient(_:filters:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -431,7 +431,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "238"
             endingLineNumber = "238"
-            landmarkName = "getUserVotesFromCloud(_:)"
+            landmarkName = "hasVoted(_:match:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

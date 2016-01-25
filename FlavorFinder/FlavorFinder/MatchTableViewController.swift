@@ -557,11 +557,11 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, UICo
     
     func swipeTableCell(cell: MGSwipeTableCell!, swipeButtonsForDirection direction: MGSwipeDirection, swipeSettings: MGSwipeSettings!, expansionSettings: MGSwipeExpansionSettings!) -> [AnyObject]! {
         
-        let indexPath = tableView.indexPathForCell(cell)!
-        let match = filteredCells[indexPath.row]
-        let ingredient = match[_s_secondIngredient] as! PFObject
-        
         if currentIngredient != nil {
+            let indexPath = tableView.indexPathForCell(cell)!
+            let match = filteredCells[indexPath.row]
+            let ingredient = match[_s_secondIngredient] as! PFObject
+            
             swipeSettings.transition = MGSwipeTransition.Drag
             
             switch direction {
