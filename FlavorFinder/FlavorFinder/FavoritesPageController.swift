@@ -21,6 +21,12 @@ class FavoritesPageController: UITableViewController {
     let favoriteClassName = "Favorite"
     let userColumnName = "user"
 
+    // Visual related:
+    let noUserMsg = "You must be logged in to store favorites."
+    let noFavoritesMsg =
+        "Favorite ingredients in Search!"
+
+    // The table itself:
     @IBOutlet var favoritesTableView: UITableView!
 
 
@@ -35,7 +41,12 @@ class FavoritesPageController: UITableViewController {
         // Connect table view to this controller (done in storyboard too)
         favoritesTableView.dataSource = self
         favoritesTableView.delegate = self
-        favoritesTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: favoriteCellName)
+        favoritesTableView.registerClass(UITableViewCell.self,
+            forCellReuseIdentifier: favoriteCellName)
+
+        // Table view visuals:
+        favoritesTableView.rowHeight = 50.0
+        favoritesTableView.tableFooterView = UIView(frame: CGRectZero) // remove empty cells
     }
 
     /* viewDidAppear:
@@ -44,19 +55,36 @@ class FavoritesPageController: UITableViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
 
+        // populate cell array
+        populateFavoritesTable();
+        favoritesTableView.backgroundColor = UIColor.whiteColor();
+        favoritesTableView.backgroundView = nil;
 
-        // reload table view:
-        populateFavoritesTable()
-        favoritesTableView.reloadData()
+        // if nothing in cell array, display background message:
+        if favoriteCells.isEmpty {
+            // if user not logged in, needs to log in to store favs:
+            if currentUser == nil {
+                favoritesTableView.backgroundView =
+                    emptyBackgroundText(noUserMsg);
+            // if user logged in, tell them how to have favs:
+            } else {
+                favoritesTableView.backgroundView =
+                    emptyBackgroundText(noFavoritesMsg);
+            }
+        }
 
+        // update table view:
+        favoritesTableView.reloadData();
     }
 
     /*  tableView -> int
             returns number of cells to display
     */
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(
+        tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.favoriteCells.count
     }
+
 
     /* tableView -> UITableViewCell
             creates cell for each index in favoriteCells
@@ -103,6 +131,21 @@ class FavoritesPageController: UITableViewController {
                 }
             }
         }
+    }
+
+    /* emptyBackgroundText
+        creates a backgroundView for when there is no data to display.
+        text = text to display.
+    */
+    func emptyBackgroundText(text: String) -> UILabel {
+        let noDataLabel: UILabel = UILabel(frame: CGRectMake(
+            0, 0, favoritesTableView.bounds.size.width,
+            favoritesTableView.bounds.size.height))
+        noDataLabel.text = text
+        noDataLabel.textColor = UIColor(
+            red: 22.0/255.0, green: 106.0/255.0, blue: 176.0/255.0, alpha: 1.0);
+        noDataLabel.textAlignment = NSTextAlignment.Center;
+        return noDataLabel;
     }
 
 
