@@ -40,6 +40,18 @@ class ListsPageController: UITableViewController, DZNEmptyDataSetSource, DZNEmpt
 //        self.tableView.reloadData()
     }
     
+    override func viewDidAppear(animated: Bool) {
+        if let navi = self.tabBarController?.navigationController as? MainNavigationController {
+            self.tabBarController?.navigationItem.setLeftBarButtonItems([], animated: true)
+            self.tabBarController?.navigationItem.setRightBarButtonItems([], animated: true)
+            navi.reset_navigationBar()
+            
+            self.tabBarController?.navigationItem.title = ""
+        }
+        
+        super.viewDidAppear(animated)
+    }
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.ingredientLists.count
     }

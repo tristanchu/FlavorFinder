@@ -82,7 +82,10 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
             self.tabBarController?.navigationItem.setRightBarButtonItems([], animated: true)
             navi.reset_navigationBar()
             navi.goBackBtn.enabled = true
+            
+            self.tabBarController?.navigationItem.title = ""
         }
+        
         
         super.viewDidAppear(animated)
     }

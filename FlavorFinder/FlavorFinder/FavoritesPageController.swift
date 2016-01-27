@@ -55,6 +55,14 @@ class FavoritesPageController: UITableViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
 
+        if let navi = self.tabBarController?.navigationController as? MainNavigationController {
+            self.tabBarController?.navigationItem.setLeftBarButtonItems([], animated: true)
+            self.tabBarController?.navigationItem.setRightBarButtonItems([], animated: true)
+            navi.reset_navigationBar()
+            
+            self.tabBarController?.navigationItem.title = ""
+        }
+
         // populate cell array
         populateFavoritesTable();
         favoritesTableView.backgroundColor = UIColor.whiteColor();

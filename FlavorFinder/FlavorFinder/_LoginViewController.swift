@@ -69,6 +69,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             self.tabBarController?.navigationItem.setLeftBarButtonItems([], animated: true)
             self.tabBarController?.navigationItem.setRightBarButtonItems([], animated: true)
             navi.reset_navigationBar()
+            
+            self.tabBarController?.navigationItem.title = ""
         }
         
         super.viewDidAppear(animated)
