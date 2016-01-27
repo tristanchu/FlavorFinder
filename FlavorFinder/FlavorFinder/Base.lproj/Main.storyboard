@@ -58,7 +58,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="FlavorFinder" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Geq-sk-8Eg">
-                                        <rect key="frame" x="87" y="58" width="146" height="62"/>
+                                        <rect key="frame" x="87" y="31" width="146" height="89"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="62" id="AIU-SW-fqI"/>
                                             <constraint firstAttribute="height" constant="21" id="iLo-MA-BXZ"/>
@@ -127,7 +127,7 @@
                         <outlet property="loginUserTextField" destination="t0d-AJ-TDq" id="Fyq-2e-F1J"/>
                         <outlet property="registerButton" destination="lIq-hj-vHE" id="WGx-lb-MIb"/>
                         <segue destination="yDJ-pt-my1" kind="show" identifier="segueLoginToMatchTable" id="yCh-I4-cTX"/>
-                        <segue destination="JAI-Ms-6hY" kind="show" identifier="segueLoginToRegister" id="Eha-zK-ZsO"/>
+                        <segue destination="JAI-Ms-6hY" kind="push" identifier="segueLoginToRegister" id="Eha-zK-ZsO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Q7-vC-caE" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -559,7 +559,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="98s-Lv-fsr">
-                                        <rect key="frame" x="36" y="126" width="232" height="30"/>
+                                        <rect key="frame" x="36" y="126" width="232" height="45"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="tintColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
                                         <accessibility key="accessibilityConfiguration" label="Email"/>
@@ -568,25 +568,7 @@
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="Hce-cb-Kcf"/>
                                         </constraints>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="12"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
-                                                <color key="value" red="0.34180714600000001" green="0.40016933119999998" blue="0.46281793710000002" alpha="1" colorSpace="calibratedRGB"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="692-E8-NQh">
-                                        <rect key="frame" x="36" y="76" width="232" height="30"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <color key="tintColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
-                                        <accessibility key="accessibilityConfiguration" label="Username"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="iN9-UJ-aUj"/>
-                                            <constraint firstAttribute="height" constant="45" id="pTc-Le-Xdw"/>
-                                        </constraints>
-                                        <color key="textColor" red="0.050136629292409272" green="0.073232323232323204" blue="0.0018698952642296196" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="12"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
@@ -595,7 +577,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9en-v4-ss2">
-                                        <rect key="frame" x="36" y="185" width="232" height="30"/>
+                                        <rect key="frame" x="36" y="185" width="232" height="45"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="tintColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
                                         <accessibility key="accessibilityConfiguration" label="Password"/>
@@ -603,36 +585,8 @@
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="NlP-kZ-7Li"/>
                                             <constraint firstAttribute="height" constant="45" id="SS1-IW-J7D"/>
                                         </constraints>
-                                        <color key="textColor" red="0.4039215686" green="0.58823529409999997" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="12"/>
-                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
-                                                <color key="value" red="0.34180714600000001" green="0.40016933119999998" blue="0.46281793710000002" alpha="1" colorSpace="calibratedRGB"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="awg-Zu-3RJ">
-                                        <rect key="frame" x="45" y="345" width="269" height="39"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="39" id="Hw9-C0-HM6"/>
-                                            <constraint firstAttribute="width" constant="269" id="qDA-79-olk"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Retype Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NPx-aT-ELr">
-                                        <rect key="frame" x="36" y="237" width="232" height="30"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <color key="tintColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
-                                        <accessibility key="accessibilityConfiguration" label="Password Retyped"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="45" id="H8w-MS-Men"/>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="iZ0-BS-2RE"/>
-                                        </constraints>
-                                        <color key="textColor" red="0.4039215686" green="0.58823529409999997" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="12"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
@@ -654,6 +608,52 @@
                                             <action selector="registerSubmitActionBtn:" destination="JAI-Ms-6hY" eventType="touchUpInside" id="xPg-LB-qHI"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="awg-Zu-3RJ">
+                                        <rect key="frame" x="45" y="345" width="269" height="39"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="39" id="Hw9-C0-HM6"/>
+                                            <constraint firstAttribute="width" constant="269" id="qDA-79-olk"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Retype Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NPx-aT-ELr">
+                                        <rect key="frame" x="36" y="237" width="232" height="45"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <accessibility key="accessibilityConfiguration" label="Password Retyped"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="H8w-MS-Men"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="iZ0-BS-2RE"/>
+                                        </constraints>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                                <color key="value" red="0.34180714600000001" green="0.40016933119999998" blue="0.46281793710000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="692-E8-NQh">
+                                        <rect key="frame" x="36" y="73" width="232" height="30"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <accessibility key="accessibilityConfiguration" label="Username"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="iN9-UJ-aUj"/>
+                                            <constraint firstAttribute="height" constant="45" id="pTc-Le-Xdw"/>
+                                        </constraints>
+                                        <color key="textColor" red="0.050136629292409272" green="0.073232323232323204" blue="0.0018698952642296196" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                                <color key="value" red="0.34180714600000001" green="0.40016933119999998" blue="0.46281793710000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </textField>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="0.70000000000000007" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -671,6 +671,7 @@
                             <constraint firstItem="LSS-L1-NTc" firstAttribute="centerX" secondItem="nsi-Pa-HHQ" secondAttribute="centerX" id="oVj-c4-mvp"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="3hR-Wx-zh5"/>
                     <connections>
                         <outlet property="registerEmail" destination="98s-Lv-fsr" id="Hg2-7O-Q9s"/>
                         <outlet property="registerLabel" destination="ffs-dJ-FNO" id="d1D-1N-lkB"/>
@@ -738,7 +739,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="HXZ-hJ-BA0">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.38602592170942618" green="0.82692941900982309" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.73370293388055763" green="0.91818045357323008" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" red="0.97417763157894732" green="1" blue="0.98589277504142836" alpha="1" colorSpace="calibratedRGB"/>
                         </textAttributes>
@@ -764,6 +765,6 @@
         <image name="SearchIcon" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="vhT-hz-2ur"/>
+        <segue reference="yCh-I4-cTX"/>
     </inferredMetricsTieBreakers>
 </document>
