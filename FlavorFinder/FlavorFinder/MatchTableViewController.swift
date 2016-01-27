@@ -82,7 +82,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, UICo
         self.tableView.tag = 1
                 
         // A little trick for removing the cell separators
-        self.tableView.tableFooterView = UIView();
+        self.tableView.tableFooterView = UIView()
         
         if let navi = self.navigationController as? MainNavigationController {
             navi.navigationItem.setLeftBarButtonItems([navi.goBackBtn, self.searchBarActivateBtn], animated: true)

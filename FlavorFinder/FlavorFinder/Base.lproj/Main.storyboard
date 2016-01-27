@@ -6,7 +6,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Test-->
+        <!--Login View Controller-->
         <scene sceneID="4Jp-rt-Y0j">
             <objects>
                 <viewController storyboardIdentifier="LoginViewControllerIdentifier" id="FZQ-A2-GaM" customClass="LoginViewController" customModule="FlavorFinder" sceneMemberID="viewController">
@@ -15,7 +15,7 @@
                         <viewControllerLayoutGuide type="bottom" id="t0R-Kl-bIo"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="mcQ-1v-X3h">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3fS-gk-o4R">
@@ -31,17 +31,8 @@
                                             <action selector="loginActionBtn:" destination="FZQ-A2-GaM" eventType="touchUpInside" id="z9Y-jo-gWa"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lIq-hj-vHE">
-                                        <rect key="frame" x="122" y="288" width="57" height="30"/>
-                                        <state key="normal" title="Register">
-                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="goRegisterActionBtn:" destination="FZQ-A2-GaM" eventType="touchUpInside" id="ARb-nX-w2t"/>
-                                        </connections>
-                                    </button>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zm4-fb-B07">
-                                        <rect key="frame" x="23" y="181" width="255" height="30"/>
+                                        <rect key="frame" x="23" y="181" width="255" height="45"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="tintColor" red="0.94963304920000002" green="0.94963304920000002" blue="0.94963304920000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -75,7 +66,7 @@
                                         </connections>
                                     </button>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="t0d-AJ-TDq">
-                                        <rect key="frame" x="23" y="128" width="255" height="30"/>
+                                        <rect key="frame" x="23" y="128" width="255" height="45"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="tintColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
                                         <constraints>
@@ -91,8 +82,17 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lIq-hj-vHE">
+                                        <rect key="frame" x="122" y="288" width="57" height="30"/>
+                                        <state key="normal" title="Register">
+                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="goRegisterActionBtn:" destination="FZQ-A2-GaM" eventType="touchUpInside" id="ARb-nX-w2t"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qSC-C0-kB1">
-                                        <rect key="frame" x="51" y="326" width="199" height="30"/>
+                                        <rect key="frame" x="51" y="334" width="199" height="30"/>
                                         <state key="normal" title="Go Straight To Table">
                                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -103,9 +103,9 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="0.70000000000000007" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="qSC-C0-kB1" firstAttribute="top" secondItem="lIq-hj-vHE" secondAttribute="bottom" constant="8" id="ADu-ZC-yaO"/>
                                     <constraint firstItem="Geq-sk-8Eg" firstAttribute="top" secondItem="3fS-gk-o4R" secondAttribute="top" constant="58" id="ZQ5-GO-fpx"/>
                                     <constraint firstItem="pxX-xv-m3i" firstAttribute="top" secondItem="Zm4-fb-B07" secondAttribute="bottom" constant="40" id="ZcJ-OK-BX4"/>
+                                    <constraint firstItem="qSC-C0-kB1" firstAttribute="top" secondItem="lIq-hj-vHE" secondAttribute="bottom" constant="16" id="i67-2t-z1H"/>
                                     <constraint firstItem="t0d-AJ-TDq" firstAttribute="top" secondItem="Geq-sk-8Eg" secondAttribute="bottom" constant="14" id="iRX-0q-sif"/>
                                     <constraint firstItem="lIq-hj-vHE" firstAttribute="top" secondItem="pxX-xv-m3i" secondAttribute="bottom" constant="18" id="vCS-IW-xxu"/>
                                     <constraint firstItem="Zm4-fb-B07" firstAttribute="top" secondItem="t0d-AJ-TDq" secondAttribute="bottom" constant="16" id="zqa-md-j93"/>
@@ -117,7 +117,6 @@
                             <constraint firstItem="3fS-gk-o4R" firstAttribute="centerX" secondItem="mcQ-1v-X3h" secondAttribute="centerX" id="p1s-B2-W79"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Test" id="MRA-bD-dK5"/>
                     <navigationItem key="navigationItem" id="QXq-QC-lOr"/>
                     <connections>
                         <outlet property="goToTableButton" destination="qSC-C0-kB1" id="Ha1-iO-BxI"/>
@@ -127,12 +126,12 @@
                         <outlet property="loginUserTextField" destination="t0d-AJ-TDq" id="Fyq-2e-F1J"/>
                         <outlet property="registerButton" destination="lIq-hj-vHE" id="WGx-lb-MIb"/>
                         <segue destination="yDJ-pt-my1" kind="show" identifier="segueLoginToMatchTable" id="yCh-I4-cTX"/>
-                        <segue destination="JAI-Ms-6hY" kind="push" identifier="segueLoginToRegister" id="Eha-zK-ZsO"/>
+                        <segue destination="JAI-Ms-6hY" kind="show" identifier="segueLoginToRegister" id="Eha-zK-ZsO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Q7-vC-caE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="307" y="1550"/>
+            <point key="canvasLocation" x="1119" y="1550"/>
         </scene>
         <!--User Settings View Controller-->
         <scene sceneID="DTH-2E-td0">
@@ -283,7 +282,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z8U-I1-yy5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3383" y="2076"/>
+            <point key="canvasLocation" x="4195" y="2076"/>
         </scene>
         <!--Saved Matches View Controller-->
         <scene sceneID="jPM-Ek-pkk">
@@ -346,7 +345,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="FZQ-A2-GaM" kind="relationship" relationship="viewControllers" id="zCb-0N-hZz"/>
+                        <segue destination="069-0A-krq" kind="relationship" relationship="viewControllers" id="zCb-0N-hZz"/>
                         <segue destination="h2p-tb-f5C" kind="relationship" relationship="viewControllers" id="5Lp-kB-tlU"/>
                         <segue destination="aDy-6t-DKL" kind="relationship" relationship="viewControllers" id="VSP-N6-9Ob"/>
                         <segue destination="bSA-UW-dX3" kind="relationship" relationship="viewControllers" id="eGn-n6-axZ"/>
@@ -372,7 +371,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yNg-ga-N8e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1091" y="1544"/>
+            <point key="canvasLocation" x="1903" y="1544"/>
         </scene>
         <!--Landing Page Container View Controller-->
         <scene sceneID="BsW-vT-UYW">
@@ -395,7 +394,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mnb-aE-QfF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1775" y="1566"/>
+            <point key="canvasLocation" x="2587" y="1566"/>
         </scene>
         <!--Search Results View Controller-->
         <scene sceneID="0m5-1m-TMy">
@@ -441,14 +440,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Td7-i7-Xyp">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Td7-i7-Xyp">
                                 <rect key="frame" x="46" y="119" width="508" height="30"/>
                                 <state key="normal" title="Login TestUser"/>
                                 <connections>
                                     <action selector="loginTestUser:" destination="0ye-Pg-Qge" eventType="touchUpInside" id="djF-2T-gar"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="More Page" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m2w-Ao-9PO">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="More Page" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m2w-Ao-9PO">
                                 <rect key="frame" x="188" y="210" width="83" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="83" id="60F-CW-cFn"/>
@@ -487,7 +486,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="NWg-i8-uKV">
-                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NWg-i8-uKV" id="9gp-0O-fKi">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -500,7 +499,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CSM-cM-kZM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3253" y="1188"/>
+            <point key="canvasLocation" x="4065" y="1188"/>
         </scene>
         <!--Favorites-->
         <scene sceneID="swP-zV-l0p">
@@ -512,7 +511,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="FavoriteTableViewCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="FavoriteTableViewCell" rowHeight="50" id="hOM-h3-clb" customClass="FavoriteTableViewCell" customModule="FlavorFinder" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="92" width="600" height="50"/>
+                                <rect key="frame" x="0.0" y="28" width="600" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hOM-h3-clb" id="haU-Wm-fie">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="49"/>
@@ -532,9 +531,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Ah-GI-Mfd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2553" y="1544"/>
+            <point key="canvasLocation" x="3365" y="1544"/>
         </scene>
-        <!--Register View Controller-->
+        <!--Item-->
         <scene sceneID="veb-7d-s5O">
             <objects>
                 <viewController id="JAI-Ms-6hY" customClass="RegisterViewController" customModule="FlavorFinder" sceneMemberID="viewController">
@@ -543,7 +542,7 @@
                         <viewControllerLayoutGuide type="bottom" id="bXV-Gs-7R6"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="nsi-Pa-HHQ">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LSS-L1-NTc">
@@ -637,7 +636,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="692-E8-NQh">
-                                        <rect key="frame" x="36" y="73" width="232" height="30"/>
+                                        <rect key="frame" x="36" y="73" width="232" height="45"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="tintColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
                                         <accessibility key="accessibilityConfiguration" label="Username"/>
@@ -671,6 +670,7 @@
                             <constraint firstItem="LSS-L1-NTc" firstAttribute="centerX" secondItem="nsi-Pa-HHQ" secondAttribute="centerX" id="oVj-c4-mvp"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="Gdo-Kx-e8b"/>
                     <navigationItem key="navigationItem" id="3hR-Wx-zh5"/>
                     <connections>
                         <outlet property="registerEmail" destination="98s-Lv-fsr" id="Hg2-7O-Q9s"/>
@@ -681,6 +681,7 @@
                         <outlet property="registerSubmitBtn" destination="jkh-Ln-Knn" id="fPS-9J-HUC"/>
                         <outlet property="registerUsername" destination="692-E8-NQh" id="EIP-1c-urz"/>
                         <segue destination="yDJ-pt-my1" kind="show" identifier="segueRegisterToMatchTable" id="vhT-hz-2ur"/>
+                        <segue destination="dBm-Uc-8CI" kind="showDetail" identifier="loginShowTabBar" id="j9n-LJ-Uv6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hBF-3m-D8a" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -692,7 +693,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="MatchTableViewControllerIdentifier" id="yDJ-pt-my1" customClass="MatchTableViewController" customModule="FlavorFinder" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="yEc-b6-IbE">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -753,6 +754,25 @@
             </objects>
             <point key="canvasLocation" x="87" y="427"/>
         </scene>
+        <!--Test-->
+        <scene sceneID="XvY-4w-Gri">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="069-0A-krq" customClass="MainNavigationController" customModule="FlavorFinder" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Test" id="MRA-bD-dK5"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hns-cL-nac">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="FZQ-A2-GaM" kind="relationship" relationship="rootViewController" id="sm3-9l-Z1T"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="txj-Fs-hxA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="307" y="1550"/>
+        </scene>
     </scenes>
     <resources>
         <image name="FavoritesIcon" width="22" height="22"/>
@@ -765,6 +785,7 @@
         <image name="SearchIcon" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="yCh-I4-cTX"/>
+        <segue reference="j9n-LJ-Uv6"/>
+        <segue reference="vhT-hz-2ur"/>
     </inferredMetricsTieBreakers>
 </document>

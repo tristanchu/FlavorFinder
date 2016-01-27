@@ -20,15 +20,24 @@ class ListsPageController: UITableViewController, DZNEmptyDataSetSource, DZNEmpt
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        listsTableView = UITableView()
-        listsTableView.dataSource = self
-        listsTableView.delegate = self
-        listsTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: listCellIdentifier)
-        listsTableView.emptyDataSetSource = self
-        listsTableView.emptyDataSetDelegate = self
+//        listsTableView = UITableView()
+//        listsTableView.dataSource = self
+//        listsTableView.delegate = self
+//        listsTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: listCellIdentifier)
+//        listsTableView.emptyDataSetSource = self
+//        listsTableView.emptyDataSetDelegate = self
+        
+        self.tableView = UITableView()
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
+        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: listCellIdentifier)
+        self.tableView.emptyDataSetSource = self
+        self.tableView.emptyDataSetDelegate = self
+        self.tableView.tableFooterView = UIView()
         
         populateListsTable()
-        listsTableView.reloadData()
+//        listsTableView.reloadData()
+//        self.tableView.reloadData()
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

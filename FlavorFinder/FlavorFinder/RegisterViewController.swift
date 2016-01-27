@@ -28,6 +28,8 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     let USERNAME_IN_USE = "Username already in use."
     let EMAIL_IN_USE = "Email associated with an account."
     
+    var goBackBtn: UIBarButtonItem = UIBarButtonItem()
+    
     // MARK: Properties -----------------------------------------------
     @IBOutlet weak var registerLabel: UILabel!
     @IBOutlet weak var registerMsg: UILabel!
@@ -53,6 +55,8 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        performSegueWithIdentifier("loginShowTabBar", sender: self)
+        
         backgroundColor_normal = registerEmail.backgroundColor!
         registerEmail.delegate = self
         registerUsername.delegate = self
@@ -63,12 +67,28 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         registerPassword.setTextLeftPadding(5)
         registerPasswordRetype.setTextLeftPadding(5)
         
-        if let navi = self.navigationController as? MainNavigationController {
-            navi.navigationItem.setLeftBarButtonItems([navi.goBackBtn], animated: true)
-            navi.navigationItem.setRightBarButtonItems([], animated: true)
+        goBackBtn.setTitleTextAttributes(attributes, forState: .Normal)
+        goBackBtn.title = String.fontAwesomeIconWithName(.ChevronLeft)
+        goBackBtn.tintColor = NAVI_BUTTON_COLOR
+        goBackBtn.target = self
+        goBackBtn.action = "goBackBtnClicked"
+        
+
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        if let navi = self.tabBarController?.navigationController as? MainNavigationController {
+            self.tabBarController?.navigationItem.setLeftBarButtonItems([self.goBackBtn], animated: true)
+            self.tabBarController?.navigationItem.setRightBarButtonItems([], animated: true)
             navi.reset_navigationBar()
             navi.goBackBtn.enabled = true
         }
+        
+        super.viewDidAppear(animated)
+    }
+    
+    func goBackBtnClicked() {
+        self.navigationController?.popViewControllerAnimated(true)
     }
     
     func changeDisabledStatus(submitDisabled: Bool) {
