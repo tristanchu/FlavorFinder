@@ -12,7 +12,18 @@ import Parse
 
 class MorePageController: UIViewController, UITextFieldDelegate {
 
-
+    override func viewDidAppear(animated: Bool) {
+        if let navi = self.tabBarController?.navigationController as? MainNavigationController {
+            self.tabBarController?.navigationItem.setLeftBarButtonItems([], animated: true)
+            self.tabBarController?.navigationItem.setRightBarButtonItems([], animated: true)
+            navi.reset_navigationBar()
+            
+            self.tabBarController?.navigationItem.title = ""
+        }
+        
+        super.viewDidAppear(animated)
+    }
+    
     // FOR TEST PURPOSESONLY!!!
     @IBOutlet weak var morePageLabel: UILabel!
     @IBAction func loginTestUser(sender: AnyObject) {

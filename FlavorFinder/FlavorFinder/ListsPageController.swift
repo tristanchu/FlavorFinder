@@ -20,15 +20,36 @@ class ListsPageController: UITableViewController, DZNEmptyDataSetSource, DZNEmpt
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        listsTableView = UITableView()
-        listsTableView.dataSource = self
-        listsTableView.delegate = self
-        listsTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: listCellIdentifier)
-        listsTableView.emptyDataSetSource = self
-        listsTableView.emptyDataSetDelegate = self
+//        listsTableView = UITableView()
+//        listsTableView.dataSource = self
+//        listsTableView.delegate = self
+//        listsTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: listCellIdentifier)
+//        listsTableView.emptyDataSetSource = self
+//        listsTableView.emptyDataSetDelegate = self
+        
+        self.tableView = UITableView()
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
+        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: listCellIdentifier)
+        self.tableView.emptyDataSetSource = self
+        self.tableView.emptyDataSetDelegate = self
+        self.tableView.tableFooterView = UIView()
         
         populateListsTable()
-        listsTableView.reloadData()
+//        listsTableView.reloadData()
+//        self.tableView.reloadData()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        if let navi = self.tabBarController?.navigationController as? MainNavigationController {
+            self.tabBarController?.navigationItem.setLeftBarButtonItems([], animated: true)
+            self.tabBarController?.navigationItem.setRightBarButtonItems([], animated: true)
+            navi.reset_navigationBar()
+            
+            self.tabBarController?.navigationItem.title = ""
+        }
+        
+        super.viewDidAppear(animated)
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

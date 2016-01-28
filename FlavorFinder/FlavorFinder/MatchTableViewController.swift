@@ -77,33 +77,46 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, UICo
         configure_globalSearchTableView()
         configure_hotpotCollectionView()
         
-        self.tableView.emptyDataSetSource = self
-        self.tableView.emptyDataSetDelegate = self
-        self.tableView.tag = 1
-                
-        // A little trick for removing the cell separators
-        self.tableView.tableFooterView = UIView();
-        
-        if let navi = self.navigationController as? MainNavigationController {
-            navi.navigationItem.setLeftBarButtonItems([navi.goBackBtn, self.searchBarActivateBtn], animated: true)
-            navi.navigationItem.setRightBarButtonItems([navi.goForwardBtn, navi.menuBarBtn, self.filterBtn], animated: true)
-            navi.reset_navigationBar()
-            navi.goBackBtn.enabled = false
-            navi.goForwardBtn.enabled = false
-            
-            
+        if let navi = self.tabBarController?.navigationController as? MainNavigationController {
             notSignedInAlert.addAction(UIAlertAction(title: "Sign In", style: .Default, handler: { (action: UIAlertAction!) in
                 let mainStoryboard = UIStoryboard(name: "Main", bundle:nil)
                 let loginViewControllerObject = mainStoryboard.instantiateViewControllerWithIdentifier(LoginViewControllerIdentifier) as? LoginViewController
                 navi.pushViewController(loginViewControllerObject!, animated: true)
             }))
-            
+        
             notSignedInAlert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: { (action: UIAlertAction!) in
                 self.notSignedInAlert.dismissViewControllerAnimated(true, completion: nil)
             }))
         }
         
+        self.tableView.emptyDataSetSource = self
+        self.tableView.emptyDataSetDelegate = self
+        self.tableView.tag = 1
+                
+        // A little trick for removing the cell separators
+        self.tableView.tableFooterView = UIView()
+        
         showAllIngredients()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        if let navi = self.tabBarController?.navigationController as? MainNavigationController {
+            self.tabBarController?.navigationItem.setLeftBarButtonItems([navi.goBackBtn, self.searchBarActivateBtn], animated: true)
+            self.tabBarController?.navigationItem.setRightBarButtonItems([navi.goForwardBtn, navi.menuBarBtn, self.filterBtn], animated: true)
+            navi.reset_navigationBar()
+            navi.goBackBtn.enabled = false
+            navi.goForwardBtn.enabled = false
+        }
+        
+        if !hotpot.isEmpty {
+            self.tableView.frame.offsetInPlace(dx: 0, dy: kCellHeight)
+        }
+        
+        super.viewDidAppear(animated)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        animateTableViewCellsToLeft(self.tableView)
     }
     
     func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
@@ -148,6 +161,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, UICo
         let attributes = [NSFontAttributeName: UIFont.fontAwesomeOfSize(20)] as Dictionary!
         UIBarButtonItem.appearance().setTitleTextAttributes(attributes, forState: UIControlState.Normal)
         cancelButton.setTitle(String.fontAwesomeIconWithName(.ChevronLeft), forState: UIControlState.Normal)
+        cancelButton.tintColor = NAVI_COLOR
     }
     
     func configure_filterBtn() {
@@ -236,15 +250,15 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, UICo
         globalSearchTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "globalSearchResultsCell")
         globalSearchTableView.tableFooterView = UIView();
         globalSearchTableView.layer.zPosition = 1
-        globalSearchTableView.backgroundColor = UIColor.clearColor()
         let blurEffect = UIBlurEffect(style: .Light)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        globalSearchTableView.backgroundView = blurEffectView
+        globalSearchTableView.insertSubview(blurEffectView, atIndex: 0)
+//        globalSearchTableView.backgroundView = blurEffectView
         //if you want translucent vibrant table view separator lines
         //        globalSearchTableView.separatorEffect = UIVibrancyEffect(forBlurEffect: blurEffect)
-        if let navi = self.navigationController as? MainNavigationController {
+        if let navi = self.tabBarController?.navigationController as? MainNavigationController {
             let y_offset = UIApplication.sharedApplication().statusBarFrame.size.height + navi.navigationBar.frame.height
-            globalSearchTableView.frame = CGRectMake(0, y_offset, navi.navigationBar.frame.width, 0)
+            globalSearchTableView.frame = CGRectMake(40, y_offset, navi.navigationBar.frame.width - 80, 0)
             navi.view.addSubview(globalSearchTableView)
         }
     }
@@ -363,10 +377,6 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, UICo
     
     // TABLE FUNCTIONS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // ---------------
-    override func viewWillAppear(animated: Bool) {
-        animateTableViewCellsToLeft(self.tableView)
-    }
-    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // Return the number of sections.
         return 1
@@ -418,6 +428,8 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, UICo
         case 2:
             let cellIdentifier = "globalSearchResultsCell"
             let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as UITableViewCell
+            
+            cell.backgroundColor = UIColor.clearColor()
             
             let ingredient = globalSearchResults[indexPath.row]
             cell.textLabel?.text = ingredient[_s_name] as? String
@@ -533,26 +545,13 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, UICo
     
     func addToHotpot(ingredient: PFObject) {
         if !hotpot.contains(ingredient) {
-            //            let hotpotCurrFrame = hotpotCollectionView!.frame
-            //            let hotpotCurrHeight = hotpotCurrFrame.height
             if hotpot.isEmpty {
-                //                hotpotCollectionView!.frame = CGRectMake(hotpotCurrFrame.origin.x, hotpotCurrFrame.origin.y, hotpotCurrFrame.width, kCellHeight)
                 hotpotCollectionView?.hidden = false
                 self.tableView.frame.offsetInPlace(dx: 0, dy: kCellHeight)
             }
+            
             hotpot.append(ingredient)
             hotpotCollectionView?.reloadData()
-            
-            //            if let navi = self.navigationController as? MainNavigationController {
-            //                let hotpotNewHeight = hotpotCollectionView!.collectionViewLayout.collectionViewContentSize().height
-            //                hotpotCollectionView!.frame = CGRectMake(hotpotCurrFrame.origin.x, hotpotCurrFrame.origin.y, navi.navigationBar.frame.width, hotpotNewHeight)
-            //                hotpotCollectionView?.reloadData()
-            //
-            //                let dy = hotpotNewHeight - hotpotCurrHeight
-            //                self.tableView.frame.offsetInPlace(dx: 0, dy: dy)
-            //                return dy
-            //                self.tableView.frame.offsetInPlace(dx: 0, dy: 50)
-            //            }
         }
     }
     
@@ -672,11 +671,11 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, UICo
     }
     
     func showSearchBar() {
-        self.navigationController?.navigationItem.titleView = searchBar
+        self.tabBarController?.navigationItem.titleView = searchBar
         searchBar.alpha = 0
         self.searchBar.hidden = false
-        if let navi = self.navigationController as? MainNavigationController {
-            navi.navigationItem.setLeftBarButtonItems([navi.goBackBtn], animated: true)
+        if let navi = self.tabBarController?.navigationController as? MainNavigationController {
+            self.tabBarController?.navigationItem.setLeftBarButtonItems([navi.goBackBtn], animated: true)
         }
         
         UIView.animateWithDuration(0.5, animations: {
@@ -685,14 +684,14 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, UICo
                 self.searchBar.becomeFirstResponder()
         })
         globalSearchTableView.hidden = false
-        if let navi = self.navigationController as? MainNavigationController {
+        if let navi = self.tabBarController?.navigationController as? MainNavigationController {
             let y_offset = UIApplication.sharedApplication().statusBarFrame.size.height + navi.navigationBar.frame.height
             globalSearchTableView.frame = CGRectMake(0, y_offset, navi.navigationBar.frame.width, 0)
         }
     }
     
     func hideSearchBar() {
-        if let navi = self.navigationController as? MainNavigationController {
+        if let navi = self.tabBarController?.navigationController as? MainNavigationController {
             var newTitle = ""
             if let curr = currentIngredient {
                 newTitle = curr[_s_name] as! String
@@ -703,12 +702,12 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, UICo
             self.searchBar.alpha = 1
             UIView.animateWithDuration(0.3, animations: {
                 self.searchBar.alpha = 0
-                navi.navigationItem.title = newTitle
+                self.tabBarController?.navigationItem.title = newTitle
                 
-                navi.navigationItem.setLeftBarButtonItems([navi.goBackBtn, self.searchBarActivateBtn], animated: true)
+                self.tabBarController?.navigationItem.setLeftBarButtonItems([navi.goBackBtn, self.searchBarActivateBtn], animated: true)
                 
                 }, completion: { finished in
-                    navi.navigationItem.titleView = nil
+                    self.tabBarController?.navigationItem.titleView = nil
             })
         }
         globalSearchTableView.hidden = true
