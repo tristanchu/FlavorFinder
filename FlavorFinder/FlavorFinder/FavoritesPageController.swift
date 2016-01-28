@@ -55,11 +55,14 @@ class FavoritesPageController: UITableViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
 
-        if let navi = self.tabBarController?.navigationController as? MainNavigationController {
-            self.tabBarController?.navigationItem.setLeftBarButtonItems([], animated: true)
-            self.tabBarController?.navigationItem.setRightBarButtonItems([], animated: true)
+        // Get navigation bar on top:
+        if let navi = self.tabBarController?.navigationController as?
+                MainNavigationController {
+            self.tabBarController?.navigationItem.setLeftBarButtonItems(
+                    [], animated: true)
+            self.tabBarController?.navigationItem.setRightBarButtonItems(
+                    [], animated: true)
             navi.reset_navigationBar()
-            
             self.tabBarController?.navigationItem.title = ""
         }
 
@@ -73,11 +76,11 @@ class FavoritesPageController: UITableViewController {
             // if user not logged in, needs to log in to store favs:
             if currentUser == nil {
                 favoritesTableView.backgroundView =
-                    emptyBackgroundText(noUserMsg);
+                    emptyBackgroundTextFavorites(noUserMsg);
             // if user logged in, tell them how to have favs:
             } else {
                 favoritesTableView.backgroundView =
-                    emptyBackgroundText(noFavoritesMsg);
+                    emptyBackgroundTextFavorites(noFavoritesMsg);
             }
         }
 
@@ -97,8 +100,12 @@ class FavoritesPageController: UITableViewController {
     /* tableView -> UITableViewCell
             creates cell for each index in favoriteCells
     */
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(favoriteCellName, forIndexPath: indexPath)
+    override func tableView(tableView: UITableView,
+        cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        // set cell identifier:
+        let cell = tableView.dequeueReusableCellWithIdentifier(
+            favoriteCellName, forIndexPath: indexPath)
+        // set cell label:
         cell.textLabel?.text = favoriteCells[indexPath.item].name
         return cell
     }
@@ -109,11 +116,20 @@ class FavoritesPageController: UITableViewController {
                 commitEditingStyle editingStyle: UITableViewCellEditingStyle,
                 forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
+
             // Tell parse to remove favorite from local db:
-            unfavoriteIngredient(currentUser!, ingredient: self.favoriteCells[indexPath.row])
+            unfavoriteIngredient(currentUser!,
+                ingredient: self.favoriteCells[indexPath.row])
+
             // remove from display table:
             self.favoriteCells.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+            
+            // Show empty message if needed:
+            if self.favoriteCells.count == 0 {
+                favoritesTableView.backgroundView =
+                    emptyBackgroundTextFavorites(noFavoritesMsg);
+            }
         }
     }
 
@@ -123,14 +139,11 @@ class FavoritesPageController: UITableViewController {
     /* populateFavoritesTable:
         clears current favorites array; gets user favorites from parse
         if user is logged in.
-    
-        TODO: Make a cache of user favs that we update when they log in,
-            favorite, or delete something to limit parse calls.
     */
     func populateFavoritesTable(){
         favoriteCells.removeAll()
 
-        if (currentUser != nil) {
+        if ((currentUser) != nil) {
             // Get user favs from parse if logged in and show:
             let parseFavorites = getUserFavoritesFromLocal(currentUser!);
             if !parseFavorites.isEmpty {
@@ -145,7 +158,7 @@ class FavoritesPageController: UITableViewController {
         creates a backgroundView for when there is no data to display.
         text = text to display.
     */
-    func emptyBackgroundText(text: String) -> UILabel {
+    func emptyBackgroundTextFavorites(text: String) -> UILabel {
         let noDataLabel: UILabel = UILabel(frame: CGRectMake(
             0, 0, favoritesTableView.bounds.size.width,
             favoritesTableView.bounds.size.height))
