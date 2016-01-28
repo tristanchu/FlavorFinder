@@ -68,17 +68,16 @@ class ListsPageController: UITableViewController {
         listsTableView.backgroundColor = UIColor.whiteColor();
         listsTableView.backgroundView = nil;
         
-        // Display empty message if not data:
-        if ingredientLists.isEmpty {
-            if currentUser == nil {
-                listsTableView.backgroundView = emptyBackgroundListText(noUserMsg);
-            } else {
-                listsTableView.backgroundView = emptyBackgroundListText(noListsMsg);
-            }
+        // Do not display lists if no user:
+        if currentUser == nil {
+            listsTableView.backgroundView = emptyBackgroundListText(noUserMsg);
+
+        // Yes user - no data - only have add new list button:
+        } else if ingredientLists.isEmpty {
+            listsTableView.backgroundView = emptyBackgroundListText(noListsMsg);
         }
 
         // Update table view:
-        print(ingredientLists.count);
         listsTableView.reloadData()
     }
 
@@ -124,7 +123,6 @@ class ListsPageController: UITableViewController {
     text = text to display.
     */
     func emptyBackgroundListText(text: String) -> UILabel {
-        print(" In here!!")
         let noDataLabel: UILabel = UILabel(frame: CGRectMake(
             0, 0, listsTableView.bounds.size.width,
             listsTableView.bounds.size.height))
