@@ -9,6 +9,8 @@
 import Foundation
 import Parse
 
+let QUERY_LIMIT = 1000
+
 let _s_objectId = "objectId"
 
 let _s_Ingredient = "Ingredient"
@@ -41,21 +43,19 @@ let _s_listId = "listId"
 let _s_ingredients = "ingredients"
 let _s_title = "title"
 
-
 var _allIngredients = [PFObject]()
 var _allMatches = [PFObject]()
 
 let ingredientPinDate = "ingredientPinDate"
 let matchPinDate = "matchPinDate"
 
-
 // Reads all Ingredient objects from parse database into _allIngredients.
 func _readIngredients() {
     
     for iteration in [0, 1, 2] {
         let query = PFQuery(className: _s_Ingredient)
-        query.limit = 1000
-        query.skip = 1000 * iteration
+        query.limit = QUERY_LIMIT
+        query.skip = QUERY_LIMIT * iteration
 //        query.orderByAscending(_s_name)
         query.findObjectsInBackgroundWithBlock {
             (objects: [PFObject]?, error: NSError?) -> Void in
@@ -110,19 +110,19 @@ func _getMatchesForIngredient(Ingredient: PFObject, filters: [String: Bool]) -> 
     query.whereKey(_s_firstIngredient, equalTo: Ingredient)
     query.orderByDescending(_s_matchLevel)
     query.addAscendingOrder(_s_matchName)
-    query.limit = 1000
+    query.limit = QUERY_LIMIT
     
     let getIngredients = PFQuery (className: _s_Ingredient)
-    if filters["kosher"]! {
+    if filters[F_KOSHER]! {
         getIngredients.whereKey(_s_kosher, equalTo: true)
     }
-    if filters["dairy"]! {
+    if filters[F_DAIRY]! {
         getIngredients.whereKey(_s_dairy, equalTo: true)
     }
-    if filters["nuts"]! {
+    if filters[F_NUTS]! {
         getIngredients.whereKey(_s_nuts, equalTo: true)
     }
-    if filters["vegetarian"]! {
+    if filters[F_VEG]! {
         getIngredients.whereKey(_s_vegetarian, equalTo: true)
     }
     
@@ -244,7 +244,7 @@ func hasVoted(user: PFUser, match: PFObject) -> PFObject? {
 func getUserVotesFromCloud(user: PFUser) {
     let query = PFQuery(className: _s_Vote)
     query.whereKey(_s_user, equalTo: user)
-    query.limit = 1000
+    query.limit = QUERY_LIMIT
     
     query.findObjectsInBackgroundWithBlock {
         (objects: [PFObject]?, error: NSError?) -> Void in
@@ -299,7 +299,7 @@ func unfavoriteIngredient(user: PFUser, ingredient: PFObject) {
 func getUserFavoritesFromCloud(user: PFUser) {
     let query = PFQuery(className: _s_Favorite)
     query.whereKey(_s_user, equalTo: user)
-    query.limit = 1000
+    query.limit = QUERY_LIMIT
     
     query.findObjectsInBackgroundWithBlock {
         (objects: [PFObject]?, error: NSError?) -> Void in
@@ -316,7 +316,7 @@ func getUserFavoritesFromCloud(user: PFUser) {
 func getUserFavoritesFromLocal(user: PFUser) -> [PFObject] {
     let query = PFQuery(className: _s_Favorite)
     query.whereKey(_s_user, equalTo: user)
-    query.limit = 1000
+    query.limit = QUERY_LIMIT
     query.fromLocalDatastore()
     
     let _favorites: [PFObject]
@@ -354,7 +354,7 @@ func deleteIngredientList(list: PFObject) {
 func getUserListsFromCloud(user: PFUser) {
     let query = PFQuery(className: _s_List)
     query.whereKey(_s_user, equalTo: user)
-    query.limit = 1000
+    query.limit = QUERY_LIMIT
     
     query.findObjectsInBackgroundWithBlock {
         (objects: [PFObject]?, error: NSError?) -> Void in
@@ -371,7 +371,7 @@ func getUserListsFromCloud(user: PFUser) {
 func getUserListsFromLocal(user: PFUser) -> [PFObject] {
     let query = PFQuery(className: _s_List)
     query.whereKey(_s_user, equalTo: user)
-    query.limit = 1000
+    query.limit = QUERY_LIMIT
     query.fromLocalDatastore()
     
     let _lists: [PFObject]

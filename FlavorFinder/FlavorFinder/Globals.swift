@@ -45,3 +45,9 @@ let NAVI_LIGHT_COLOR = UIColor(red: 151/255.0, green: 224/255.0, blue: 252/255.0
 let HOTPOT_COLLECTION_COLOR = UIColor(red: 121/255.0, green: 217/255.0, blue: 255/255.0, alpha: CGFloat(0.3))
 
 let attributes = [NSFontAttributeName: UIFont.fontAwesomeOfSize(20)] as Dictionary!
+
+// Filters:
+let F_KOSHER = "kosher"
+let F_DAIRY = "no dairy"
+let F_VEG = "vegetarian"
+let F_NUTS = "no nuts"

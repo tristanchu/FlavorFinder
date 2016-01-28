@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="oWC-1n-3cO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1509" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="oWC-1n-3cO">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -194,7 +194,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4n4-5A-RaY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2686" y="2809"/>
+            <point key="canvasLocation" x="3470" y="3213"/>
         </scene>
         <!--Item-->
         <scene sceneID="PEF-T2-zbh">
@@ -327,7 +327,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bWG-VP-BWM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3607" y="2765"/>
+            <point key="canvasLocation" x="4127" y="3197"/>
         </scene>
         <!--BottomTabController-->
         <scene sceneID="e6c-Ir-cP5">
@@ -386,12 +386,13 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="600"/>
                     <connections>
-                        <segue destination="Y9k-CM-XAA" kind="custom" identifier="segueLandingToSearchResults" customClass="GetSearchResultsSegue" customModule="FlavorFinder" id="6az-ga-q5S"/>
+                        <segue destination="Y9k-CM-XAA" kind="custom" identifier="segueLandingToSearchResults" customClass="EmptySegue" customModule="FlavorFinder" id="6az-ga-q5S"/>
+                        <segue destination="Inn-Ru-xLf" kind="custom" identifier="segueLandingToNewSearch" customClass="EmptySegue" customModule="FlavorFinder" id="JUX-bo-RaE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mnb-aE-QfF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2587" y="1566"/>
+            <point key="canvasLocation" x="2619" y="1544"/>
         </scene>
         <!--Search Results View Controller-->
         <scene sceneID="0m5-1m-TMy">
@@ -424,6 +425,43 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YN3-3Y-uml" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1998" y="2366"/>
+        </scene>
+        <!--New Search View Controller-->
+        <scene sceneID="KnO-6k-ilk">
+            <objects>
+                <viewController id="Inn-Ru-xLf" userLabel="New Search View Controller" customClass="NewSearchViewController" customModule="FlavorFinder" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jCg-b3-4H7"/>
+                        <viewControllerLayoutGuide type="bottom" id="vwG-gM-CBD"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="YI0-HO-dgz">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="New Search -- Tristan's branch to be incorporated here" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qSy-cA-kgt">
+                                <rect key="frame" x="246" y="60" width="170" height="225"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hIe-K6-8fu">
+                                <rect key="frame" x="143" y="309" width="376" height="240"/>
+                                <connections>
+                                    <segue destination="wNk-xB-g6C" kind="embed" identifier="segueLoginEmbedSubview" id="w9Y-38-Udg"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="qSy-cA-kgt" firstAttribute="top" secondItem="jCg-b3-4H7" secondAttribute="bottom" constant="60" id="2FZ-Vy-3ic"/>
+                            <constraint firstItem="vwG-gM-CBD" firstAttribute="top" secondItem="qSy-cA-kgt" secondAttribute="bottom" constant="315" id="fm5-a4-p9J"/>
+                            <constraint firstItem="qSy-cA-kgt" firstAttribute="leading" secondItem="YI0-HO-dgz" secondAttribute="leading" constant="246" id="gfN-L0-k4t"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="M3T-y0-slv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2835" y="2379"/>
         </scene>
         <!--More-->
         <scene sceneID="DeY-qo-0Xs">
@@ -769,6 +807,91 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="txj-Fs-hxA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="307" y="1550"/>
+        </scene>
+        <!--Container View Controller-->
+        <scene sceneID="65o-9U-mGp">
+            <objects>
+                <viewController id="wNk-xB-g6C" customClass="ContainerViewController" customModule="FlavorFinder" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hlX-Xv-nsN">
+                        <rect key="frame" x="0.0" y="0.0" width="376" height="240"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <connections>
+                        <segue destination="PFz-CQ-J0I" kind="custom" identifier="goToLogin" customClass="EmptySegue" customModule="FlavorFinder" id="hLW-pm-bIO"/>
+                        <segue destination="BtG-Bo-wjf" kind="custom" identifier="goToRegister" customClass="EmptySegue" customModule="FlavorFinder" id="T7H-np-LFS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zFI-sU-G1t" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2835" y="3017"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="VVL-fI-3Ta">
+            <objects>
+                <viewController id="BtG-Bo-wjf" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="W8R-uK-94I"/>
+                        <viewControllerLayoutGuide type="bottom" id="Mif-us-NBW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="yOz-4f-g7j">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="register -- Tristan's changes go here" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X1a-Km-yDh">
+                                <rect key="frame" x="123" y="132" width="337" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="337" id="eRR-ln-4CU"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="X1a-Km-yDh" firstAttribute="leading" secondItem="yOz-4f-g7j" secondAttribute="leading" constant="123" id="7yt-sy-FRe"/>
+                            <constraint firstItem="X1a-Km-yDh" firstAttribute="top" secondItem="W8R-uK-94I" secondAttribute="bottom" constant="132" id="99N-L1-YzV"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NU5-o7-uDT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2835" y="3913"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="T5o-sB-eQg">
+            <objects>
+                <viewController id="PFz-CQ-J0I" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3Qu-xz-gL9"/>
+                        <viewControllerLayoutGuide type="bottom" id="WTn-Lx-YtN"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="UIn-gU-pqY">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="login -- Tristan's changes to be here" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UwS-2L-2db">
+                                <rect key="frame" x="141" y="109" width="397" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="397" id="ivw-SB-vjD"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="WTn-Lx-YtN" firstAttribute="top" secondItem="UwS-2L-2db" secondAttribute="bottom" constant="363" id="j0G-ho-sRZ"/>
+                            <constraint firstItem="UwS-2L-2db" firstAttribute="top" secondItem="3Qu-xz-gL9" secondAttribute="bottom" constant="109" id="lkZ-1r-xHj"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="UwS-2L-2db" secondAttribute="trailing" constant="42" id="wcD-5n-cg0"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ebM-Wd-pOn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2126" y="3577"/>
         </scene>
     </scenes>
     <resources>

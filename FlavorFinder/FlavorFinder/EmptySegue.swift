@@ -1,5 +1,5 @@
 //
-//  GetSearchResultsSegue.swift
+//  EmptySegue.swift
 //  FlavorFinder
 //
 //  Created by Jaki Kimball on 1/11/16.
@@ -9,10 +9,9 @@
 import Foundation
 import UIKit
 
-class GetSearchResultsSegue : UIStoryboardSegue {
+class EmptySegue : UIStoryboardSegue {
     
     override func perform() {
-        print("getting results")
     }
     
 }
