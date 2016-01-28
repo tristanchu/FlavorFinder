@@ -19,6 +19,7 @@ class ListsPageController: UITableViewController {
     let listClassName = "List"
     let ingredientsColumnName = "ingredients"
     let userColumnName = "user"
+    let ListTitleColumnName = "title"
 
     // Visual related:
     let noUserMsg = "You must be logged in to have lists."
@@ -94,14 +95,39 @@ class ListsPageController: UITableViewController {
     */
     override func tableView(tableView: UITableView,
         cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+
         // set cell identifier:
         let cell = tableView.dequeueReusableCellWithIdentifier(
             listCellIdentifier, forIndexPath: indexPath)
+
         // Set cell label:
-        cell.textLabel?.text = ingredientLists[indexPath.row][_s_title] as? String
+        cell.textLabel?.text = ingredientLists[indexPath.row].objectForKey(
+            ListTitleColumnName) as? String
         return cell
     }
 
+    /* tableView; Delete a cell:
+    */
+    override func tableView(tableView: UITableView,
+        commitEditingStyle editingStyle: UITableViewCellEditingStyle,
+        forRowAtIndexPath indexPath: NSIndexPath) {
+            if editingStyle == UITableViewCellEditingStyle.Delete {
+
+                // Tell parse to remove list from local db:
+                deleteIngredientList(self.ingredientLists[indexPath.row])
+
+                // remove from display table:
+                self.ingredientLists.removeAtIndex(indexPath.row)
+                tableView.deleteRowsAtIndexPaths([indexPath],
+                    withRowAnimation: UITableViewRowAnimation.Automatic)
+
+                // Show empty message if needed:
+                if self.ingredientLists.isEmpty {
+                    listsTableView.backgroundView =
+                        emptyBackgroundListText(noListsMsg);
+                }
+            }
+    }
 
     // MARK: Functions -------------------------------------------------
 

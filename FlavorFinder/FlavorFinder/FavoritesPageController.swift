@@ -116,8 +116,11 @@ class FavoritesPageController: UITableViewController {
                 commitEditingStyle editingStyle: UITableViewCellEditingStyle,
                 forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
+
             // Tell parse to remove favorite from local db:
-            unfavoriteIngredient(currentUser!, ingredient: self.favoriteCells[indexPath.row])
+            unfavoriteIngredient(currentUser!,
+                ingredient: self.favoriteCells[indexPath.row])
+
             // remove from display table:
             self.favoriteCells.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
