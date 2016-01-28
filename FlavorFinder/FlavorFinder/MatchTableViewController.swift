@@ -15,8 +15,67 @@ import DOFavoriteButton
 import Darwin
 import ASHorizontalScrollView
 
+let MATCH_CELL_IMAGE_SIZE = CGSizeMake(30, 30)
+let MATCH_CELL_IMAGE_COLOR = UIColor.blackColor()
 
 class MatchTableViewController: UITableViewController, UISearchBarDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, MGSwipeTableCellDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+    
+    // CONSTANTS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // -------
+    // numbers
+    let K_CELL_HEIGHT : CGFloat = 40.0
+    // color
+    let EDIT_CELL_BTN_COLOR = UIColor(red: 249/255.0, green: 69/255.0, blue: 255/255.0, alpha: CGFloat(0.3))
+    let DOWNVOTE_CELL_BTN_COLOR = UIColor(red: 255/255.0, green: 109/255.0, blue: 69/255.0, alpha: CGFloat(0.3))
+    let UPVOTE_CELL_BTN_COLOR = UIColor(red: 61/255.0, green: 235/255.0, blue: 64/255.0, alpha: CGFloat(0.3))
+    let ADD_CELL_BTN_COLOR = UIColor(red: 161/255.0, green: 218/255.0, blue: 237/255.0, alpha: CGFloat(0.3))
+    // images
+    let UPVOTE_EMPTY_IMAGE = UIImage.fontAwesomeIconWithName( // not in use?
+        .ThumbsOUp,
+        textColor: MATCH_CELL_IMAGE_COLOR,
+        size: MATCH_CELL_IMAGE_SIZE
+    )
+    let UPVOTE_IMAGE = UIImage.fontAwesomeIconWithName(
+        .ThumbsUp,
+        textColor: MATCH_CELL_IMAGE_COLOR,
+        size: MATCH_CELL_IMAGE_SIZE
+    )
+    let DOWNVOTE_EMPTY_IMAGE = UIImage.fontAwesomeIconWithName( // not in use?
+        .ThumbsODown,
+        textColor: MATCH_CELL_IMAGE_COLOR,
+        size: MATCH_CELL_IMAGE_SIZE
+    )
+    let DOWNVOTE_IMAGE = UIImage.fontAwesomeIconWithName(
+        .ThumbsDown,
+        textColor: MATCH_CELL_IMAGE_COLOR,
+        size: MATCH_CELL_IMAGE_SIZE
+    )
+    let EDIT_IMAGE = UIImage.fontAwesomeIconWithName( // not in use?
+        .Pencil,
+        textColor: MATCH_CELL_IMAGE_COLOR,
+        size: MATCH_CELL_IMAGE_SIZE
+    )
+    let FAVORITE_EMPTY_IMAGE = UIImage.fontAwesomeIconWithName( // not in use?
+        .HeartO,
+        textColor: MATCH_CELL_IMAGE_COLOR,
+        size: MATCH_CELL_IMAGE_SIZE
+    )
+    let FAVORITE_IMAGE = UIImage.fontAwesomeIconWithName(
+        .Heart,
+        textColor: MATCH_CELL_IMAGE_COLOR,
+        size: MATCH_CELL_IMAGE_SIZE
+    )
+    let ADD_EMPTY_IMAGE = UIImage.fontAwesomeIconWithName( // not in use?
+        .HeartO,
+        textColor: MATCH_CELL_IMAGE_COLOR,
+        size: MATCH_CELL_IMAGE_SIZE
+    )
+    let ADD_IMAGE = UIImage.fontAwesomeIconWithName(
+        .Plus,
+        textColor: MATCH_CELL_IMAGE_COLOR,
+        size: MATCH_CELL_IMAGE_SIZE
+    )
+    
     // GLOBALS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // -------
     var allCells = [PFObject]()         // Array of all cells that CAN be displayed.
@@ -28,21 +87,6 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, UICo
     let notSignedInAlert = UIAlertController(title: "Not Signed In", message: "You need to sign in to do this!", preferredStyle: UIAlertControllerStyle.Alert)
     
     @IBOutlet var matchTableView: UITableView!
-    
-    let editCellBtnColor = UIColor(red: 249/255.0, green: 69/255.0, blue: 255/255.0, alpha: CGFloat(0.3))
-    let downvoteCellBtnColor = UIColor(red: 255/255.0, green: 109/255.0, blue: 69/255.0, alpha: CGFloat(0.3))
-    let upvoteCellBtnColor = UIColor(red: 61/255.0, green: 235/255.0, blue: 64/255.0, alpha: CGFloat(0.3))
-    let addCellBtnColor = UIColor(red: 161/255.0, green: 218/255.0, blue: 237/255.0, alpha: CGFloat(0.3))
-    
-    let upvoteEmptyImage = UIImage.fontAwesomeIconWithName(.ThumbsOUp, textColor: UIColor.blackColor(), size: CGSizeMake(30, 30))
-    let upvoteImage = UIImage.fontAwesomeIconWithName(.ThumbsUp, textColor: UIColor.blackColor(), size: CGSizeMake(30, 30))
-    let downvoteEmptyImage = UIImage.fontAwesomeIconWithName(.ThumbsODown, textColor: UIColor.blackColor(), size: CGSizeMake(30, 30))
-    let downvoteImage = UIImage.fontAwesomeIconWithName(.ThumbsDown, textColor: UIColor.blackColor(), size: CGSizeMake(30, 30))
-    let editImage = UIImage.fontAwesomeIconWithName(.Pencil, textColor: UIColor.blackColor(), size: CGSizeMake(30, 30))
-    let favoriteEmptyImage = UIImage.fontAwesomeIconWithName(.HeartO, textColor: UIColor.blackColor(), size: CGSizeMake(30, 30))
-    let favoriteImage = UIImage.fontAwesomeIconWithName(.Heart, textColor: UIColor.blackColor(), size: CGSizeMake(30, 30))
-    let addEmptyImage = UIImage.fontAwesomeIconWithName(.HeartO, textColor: UIColor.blackColor(), size: CGSizeMake(30, 30))
-    let addImage = UIImage.fontAwesomeIconWithName(.Plus, textColor: UIColor.blackColor(), size: CGSizeMake(30, 30))
     
     var filterBtn: UIBarButtonItem = UIBarButtonItem()
     var filterView: ASHorizontalScrollView = ASHorizontalScrollView()
@@ -61,9 +105,6 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, UICo
         "dairy": false,
         "vegetarian": false,
         "nuts": false]
-    
-    let kCellHeight:CGFloat = 40.0
-    
     
     // SETUP FUNCTIONS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // ---------------
@@ -109,7 +150,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, UICo
         }
         
         if !hotpot.isEmpty {
-            self.tableView.frame.offsetInPlace(dx: 0, dy: kCellHeight)
+            self.tableView.frame.offsetInPlace(dx: 0, dy: K_CELL_HEIGHT)
         }
         
         super.viewDidAppear(animated)
@@ -175,7 +216,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, UICo
     func configure_filterView() {
         if let navi = self.navigationController as? MainNavigationController {
             let y_offset = UIApplication.sharedApplication().statusBarFrame.size.height + navi.navigationBar.frame.height
-            filterView.frame = CGRectMake(0, y_offset, navi.navigationBar.frame.width, kCellHeight)
+            filterView.frame = CGRectMake(0, y_offset, navi.navigationBar.frame.width, K_CELL_HEIGHT)
             filterView.backgroundColor = NAVI_COLOR
             filterView.hidden = true
             
@@ -230,8 +271,8 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, UICo
             
             navi.view.addSubview(filterView)
             //            self.view.addSubview(filterView)
-            //            let sbar = UISearchBar(frame: CGRectMake(0, y_offset+kCellHeight, navi.navigationBar.frame.width, kCellHeight))
-            filterSearchBar.frame = CGRectMake(0, y_offset+kCellHeight, navi.navigationBar.frame.width, kCellHeight)
+            //            let sbar = UISearchBar(frame: CGRectMake(0, y_offset+K_CELL_HEIGHT, navi.navigationBar.frame.width, K_CELL_HEIGHT))
+            filterSearchBar.frame = CGRectMake(0, y_offset+K_CELL_HEIGHT, navi.navigationBar.frame.width, K_CELL_HEIGHT)
             filterSearchBar.layer.borderColor = NAVI_COLOR.CGColor
             filterSearchBar.layer.borderWidth = 1
             filterSearchBar.barTintColor = NAVI_COLOR
@@ -269,9 +310,9 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, UICo
             
             let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
             layout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
-            layout.itemSize = CGSize(width: 100, height: kCellHeight)
+            layout.itemSize = CGSize(width: 100, height: K_CELL_HEIGHT)
             layout.scrollDirection = UICollectionViewScrollDirection.Horizontal
-            let frame: CGRect = CGRectMake(0, y_offset, navi.navigationBar.frame.width, kCellHeight)
+            let frame: CGRect = CGRectMake(0, y_offset, navi.navigationBar.frame.width, K_CELL_HEIGHT)
             
             hotpotCollectionView = UICollectionView(frame: frame, collectionViewLayout: layout)
             //            if let hotpotCollectionView = hotpotCollectionView {
@@ -363,7 +404,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, UICo
         
         if hotpot.isEmpty {
             hotpotCollectionView?.hidden = true
-            self.tableView.frame.offsetInPlace(dx: 0, dy: -kCellHeight)
+            self.tableView.frame.offsetInPlace(dx: 0, dy: -K_CELL_HEIGHT)
         }
     }
     
@@ -547,7 +588,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, UICo
         if !hotpot.contains(ingredient) {
             if hotpot.isEmpty {
                 hotpotCollectionView?.hidden = false
-                self.tableView.frame.offsetInPlace(dx: 0, dy: kCellHeight)
+                self.tableView.frame.offsetInPlace(dx: 0, dy: K_CELL_HEIGHT)
             }
             
             hotpot.append(ingredient)
@@ -568,15 +609,15 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, UICo
             case MGSwipeDirection.RightToLeft:
                 return []
             case MGSwipeDirection.LeftToRight:
-                let addBtn = DOFavoriteButton(frame: CGRectMake(0, 0, 50, 50), image: addImage)
+                let addBtn = DOFavoriteButton(frame: CGRectMake(0, 0, 50, 50), image: ADD_IMAGE)
                 addBtn.imageColorOff = UIColor.grayColor()
                 addBtn.imageColorOn = UIColor.redColor()
-                addBtn.backgroundColor = addCellBtnColor
+                addBtn.backgroundColor = ADD_CELL_BTN_COLOR
                 
-                let favBtn = DOFavoriteButton(frame: CGRectMake(0, 0, 50, 50), image: favoriteImage)
+                let favBtn = DOFavoriteButton(frame: CGRectMake(0, 0, 50, 50), image: FAVORITE_IMAGE)
                 favBtn.imageColorOff = UIColor.grayColor()
                 favBtn.imageColorOn = UIColor.redColor()
-                favBtn.backgroundColor = editCellBtnColor
+                favBtn.backgroundColor = EDIT_CELL_BTN_COLOR
                 
                 if let user = currentUser {
                     if let _ = isFavoriteIngredient(user, ingredient: ingredient) {
@@ -588,15 +629,15 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, UICo
                     favBtn.selected = false
                 }
                 
-                let upvoteBtn = DOFavoriteButton(frame: CGRectMake(0, 0, 50, 50), image: upvoteImage)
+                let upvoteBtn = DOFavoriteButton(frame: CGRectMake(0, 0, 50, 50), image: UPVOTE_IMAGE)
                 upvoteBtn.imageColorOff = UIColor.grayColor()
                 upvoteBtn.imageColorOn = UIColor.blackColor()
-                upvoteBtn.backgroundColor = upvoteCellBtnColor
+                upvoteBtn.backgroundColor = UPVOTE_CELL_BTN_COLOR
                 
-                let downvoteBtn = DOFavoriteButton(frame: CGRectMake(0, 0, 50, 50), image: downvoteImage)
+                let downvoteBtn = DOFavoriteButton(frame: CGRectMake(0, 0, 50, 50), image: DOWNVOTE_IMAGE)
                 downvoteBtn.imageColorOff = UIColor.grayColor()
                 downvoteBtn.imageColorOn = UIColor.blackColor()
-                downvoteBtn.backgroundColor = downvoteCellBtnColor
+                downvoteBtn.backgroundColor = DOWNVOTE_CELL_BTN_COLOR
                 
                 if let user = currentUser {
                     if let vote = hasVoted(user, match: match) {
@@ -743,11 +784,11 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, UICo
             let y_offset = UIApplication.sharedApplication().statusBarFrame.size.height + navi.navigationBar.frame.height
             if globalSearchResults.count > 5 {
                 UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0, options: [], animations: {
-                    self.globalSearchTableView.frame = CGRectMake(0, y_offset, navi.navigationBar.frame.width, 5*self.kCellHeight)
+                    self.globalSearchTableView.frame = CGRectMake(0, y_offset, navi.navigationBar.frame.width, 5*self.K_CELL_HEIGHT)
                     }, completion: nil)
             } else {
                 UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0, options: [], animations: {
-                    self.globalSearchTableView.frame = CGRectMake(0, y_offset, navi.navigationBar.frame.width, CGFloat(self.globalSearchResults.count)*self.kCellHeight)
+                    self.globalSearchTableView.frame = CGRectMake(0, y_offset, navi.navigationBar.frame.width, CGFloat(self.globalSearchResults.count)*self.K_CELL_HEIGHT)
                     }, completion: nil)
             }
         }
@@ -786,13 +827,13 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, UICo
         if (filterView.hidden) {
             filterView.hidden = false
             filterSearchBar.hidden = false
-            self.tableView.frame.offsetInPlace(dx: 0, dy: kCellHeight*2)
-            hotpotCollectionView!.frame.offsetInPlace(dx: 0, dy: kCellHeight*2)
+            self.tableView.frame.offsetInPlace(dx: 0, dy: K_CELL_HEIGHT*2)
+            hotpotCollectionView!.frame.offsetInPlace(dx: 0, dy: K_CELL_HEIGHT*2)
         } else {
             filterView.hidden = true
             filterSearchBar.hidden = true
-            self.tableView.frame.offsetInPlace(dx: 0, dy: -kCellHeight*2)
-            hotpotCollectionView!.frame.offsetInPlace(dx: 0, dy: -kCellHeight*2)
+            self.tableView.frame.offsetInPlace(dx: 0, dy: -K_CELL_HEIGHT*2)
+            hotpotCollectionView!.frame.offsetInPlace(dx: 0, dy: -K_CELL_HEIGHT*2)
         }
     }
     
