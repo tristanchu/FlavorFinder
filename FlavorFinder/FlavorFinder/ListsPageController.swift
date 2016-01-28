@@ -13,7 +13,7 @@ class ListsPageController: UITableViewController {
 
     // MARK: Properties:
     let listCellIdentifier = "listCellIdentifier"
-    var ingredientLists = [PFObject]()
+    var userLists = [PFObject]()
 
     // Parse related:
     let listClassName = "List"
@@ -27,6 +27,9 @@ class ListsPageController: UITableViewController {
 
     // Table itself:
     @IBOutlet var listsTableView: UITableView!
+    
+    // Seques:
+    let segueToListDetail = "segueToListDetail"
 
 
 
@@ -74,7 +77,7 @@ class ListsPageController: UITableViewController {
             listsTableView.backgroundView = emptyBackgroundListText(noUserMsg);
 
         // Yes user - no data - only have add new list button:
-        } else if ingredientLists.isEmpty {
+        } else if userLists.isEmpty {
             listsTableView.backgroundView = emptyBackgroundListText(noListsMsg);
         }
 
@@ -87,7 +90,7 @@ class ListsPageController: UITableViewController {
     */
     override func tableView(
         tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.ingredientLists.count
+        return self.userLists.count
     }
 
     /* tableView -> UITableViewCell
@@ -101,7 +104,7 @@ class ListsPageController: UITableViewController {
             listCellIdentifier, forIndexPath: indexPath)
 
         // Set cell label:
-        cell.textLabel?.text = ingredientLists[indexPath.row].objectForKey(
+        cell.textLabel?.text = userLists[indexPath.row].objectForKey(
             ListTitleColumnName) as? String
         return cell
     }
@@ -114,33 +117,55 @@ class ListsPageController: UITableViewController {
             if editingStyle == UITableViewCellEditingStyle.Delete {
 
                 // Tell parse to remove list from local db:
-                deleteIngredientList(self.ingredientLists[indexPath.row])
+                deleteIngredientList(self.userLists[indexPath.row])
 
                 // remove from display table:
-                self.ingredientLists.removeAtIndex(indexPath.row)
+                self.userLists.removeAtIndex(indexPath.row)
                 tableView.deleteRowsAtIndexPaths([indexPath],
                     withRowAnimation: UITableViewRowAnimation.Automatic)
 
                 // Show empty message if needed:
-                if self.ingredientLists.isEmpty {
+                if self.userLists.isEmpty {
                     listsTableView.backgroundView =
                         emptyBackgroundListText(noListsMsg);
                 }
             }
     }
+    
+    /* tableView - on click:
+    */
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        // Start segue with index of cell clicked
+        self.performSegueWithIdentifier(segueToListDetail, sender: self)
+        
+    }
+    
+    /* prepareForSegue:
+        Creates segue with information
+    */
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == segueToListDetail {
+            if let destination = segue.destinationViewController as? ListDetailController {
+                if let pathIndex = listsTableView.indexPathForSelectedRow?.row {
+                    destination.userList = userLists[pathIndex] as PFObject!
+                }
+            }
+        }
+    }
 
     // MARK: Functions -------------------------------------------------
 
     /* populateListsTable:
-    clears current ingredientLists array; gets user lists from parse local db
+    clears current userLists array; gets user lists from parse local db
     if user is logged in.
     */
     func populateListsTable() {
-        ingredientLists.removeAll()
+        userLists.removeAll()
         
         // Get user's lists from Parse local db if user logged in:
         if let user = currentUser {
-            ingredientLists = getUserListsFromLocal(user)
+            userLists = getUserListsFromLocal(user)
         }
     }
 

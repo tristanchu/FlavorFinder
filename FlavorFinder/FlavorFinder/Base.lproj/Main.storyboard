@@ -482,13 +482,16 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="listCellIdentifier" id="NWg-i8-uKV">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="listCellIdentifier" id="NWg-i8-uKV">
                                 <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NWg-i8-uKV" id="9gp-0O-fKi">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="567" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="l1k-d4-lI8" kind="show" identifier="segueToListDetail" id="Tyd-n0-XqT"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                     </tableView>
@@ -500,6 +503,34 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CSM-cM-kZM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4065" y="1188"/>
+        </scene>
+        <!--List Detail Controller-->
+        <scene sceneID="0sG-Wd-wDq">
+            <objects>
+                <viewController id="l1k-d4-lI8" customClass="ListDetailController" customModule="FlavorFinder" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="ekE-Ny-TUh">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ListDetailIdentifier" id="uNf-WQ-OPY">
+                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uNf-WQ-OPY" id="WRA-re-vUc">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="U6m-Lg-jiu"/>
+                    <connections>
+                        <outlet property="listDetailTableView" destination="ekE-Ny-TUh" id="1kL-D6-UHj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NVA-dD-J91" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4799" y="1167"/>
         </scene>
         <!--Favorites-->
         <scene sceneID="swP-zV-l0p">
@@ -786,6 +817,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="j9n-LJ-Uv6"/>
-        <segue reference="yCh-I4-cTX"/>
+        <segue reference="vhT-hz-2ur"/>
     </inferredMetricsTieBreakers>
 </document>

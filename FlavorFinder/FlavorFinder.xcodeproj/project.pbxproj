@@ -12,6 +12,7 @@
 		60216E641BEC41360029454B /* _UserSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60216E631BEC41360029454B /* _UserSettingsViewController.swift */; };
 		60216E661BEC4F740029454B /* UiUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60216E651BEC4F740029454B /* UiUtils.swift */; };
 		60322EA31BD9CE150099030B /* _LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60322EA21BD9CE150099030B /* _LoginViewController.swift */; };
+		603ACE191C59AEE600ADE8E2 /* ListDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 603ACE181C59AEE600ADE8E2 /* ListDetailController.swift */; settings = {ASSET_TAGS = (); }; };
 		609432631C42D9BB00BA0577 /* LandingPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609432621C42D9BB00BA0577 /* LandingPageController.swift */; };
 		609432671C42DCA800BA0577 /* FavoritesPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609432661C42DCA800BA0577 /* FavoritesPageController.swift */; };
 		609432691C42DD6500BA0577 /* ListsPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609432681C42DD6500BA0577 /* ListsPageController.swift */; };
@@ -80,6 +81,7 @@
 		60216E631BEC41360029454B /* _UserSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _UserSettingsViewController.swift; sourceTree = "<group>"; };
 		60216E651BEC4F740029454B /* UiUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UiUtils.swift; sourceTree = "<group>"; };
 		60322EA21BD9CE150099030B /* _LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _LoginViewController.swift; sourceTree = "<group>"; };
+		603ACE181C59AEE600ADE8E2 /* ListDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListDetailController.swift; sourceTree = "<group>"; };
 		609432621C42D9BB00BA0577 /* LandingPageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandingPageController.swift; sourceTree = "<group>"; };
 		609432661C42DCA800BA0577 /* FavoritesPageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesPageController.swift; sourceTree = "<group>"; };
 		609432681C42DD6500BA0577 /* ListsPageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListsPageController.swift; sourceTree = "<group>"; };
@@ -331,6 +333,7 @@
 		B6A49C4E1C4F45B000586B15 /* Pages */ = {
 			isa = PBXGroup;
 			children = (
+				603ACE181C59AEE600ADE8E2 /* ListDetailController.swift */,
 				609432621C42D9BB00BA0577 /* LandingPageController.swift */,
 				609432661C42DCA800BA0577 /* FavoritesPageController.swift */,
 				609432681C42DD6500BA0577 /* ListsPageController.swift */,
@@ -532,6 +535,7 @@
 				888D1A441BDEF8FE007F09AE /* _ProfileViewController.swift in Sources */,
 				B6B7E0571C4D7BA400ADFC9C /* IngredientList.swift in Sources */,
 				60216E661BEC4F740029454B /* UiUtils.swift in Sources */,
+				603ACE191C59AEE600ADE8E2 /* ListDetailController.swift in Sources */,
 				B61FEBCB1C442E390028F800 /* ContainerViewController.swift in Sources */,
 				B6EA63591BEEB4660017C063 /* PFFavorite.swift in Sources */,
 				60216E641BEC41360029454B /* _UserSettingsViewController.swift in Sources */,
