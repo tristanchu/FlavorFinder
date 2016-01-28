@@ -101,10 +101,10 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, UICo
     
     let hotpotCollectionViewCellIdentifier = "hotpotCell"
     
-    var filters: [String: Bool] = ["kosher": false,
-        "dairy": false,
-        "vegetarian": false,
-        "nuts": false]
+    var filters: [String: Bool] = [F_KOSHER: false,
+        F_DAIRY: false,
+        F_VEG: false,
+        F_NUTS: false]
     
     // SETUP FUNCTIONS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // ---------------
@@ -226,7 +226,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, UICo
             filterView.setItemsMarginOnce()
             
             let kosherBtn = UIButton()
-            kosherBtn.setTitle("Kosher", forState: .Normal)
+            kosherBtn.setTitle(F_KOSHER.capitalizedString, forState: .Normal)
             kosherBtn.layer.cornerRadius = 10
             kosherBtn.layer.borderWidth = 1
             kosherBtn.layer.borderColor = NAVI_BUTTON_COLOR.CGColor
@@ -237,7 +237,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, UICo
             filterView.addItem(kosherBtn)
             
             let dairyBtn = UIButton()
-            dairyBtn.setTitle("Dairy", forState: .Normal)
+            dairyBtn.setTitle(F_DAIRY.capitalizedString, forState: .Normal)
             dairyBtn.layer.cornerRadius = 10
             dairyBtn.layer.borderWidth = 1
             dairyBtn.layer.borderColor = NAVI_BUTTON_COLOR.CGColor
@@ -248,7 +248,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, UICo
             filterView.addItem(dairyBtn)
             
             let vegeBtn = UIButton()
-            vegeBtn.setTitle("Vege", forState: .Normal)
+            vegeBtn.setTitle(F_VEG.capitalizedString, forState: .Normal)
             vegeBtn.layer.cornerRadius = 10
             vegeBtn.layer.borderWidth = 1
             vegeBtn.layer.borderColor = NAVI_BUTTON_COLOR.CGColor
@@ -259,7 +259,7 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, UICo
             filterView.addItem(vegeBtn)
             
             let nutsBtn = UIButton()
-            nutsBtn.setTitle("Nuts", forState: .Normal)
+            nutsBtn.setTitle(F_NUTS.capitalizedString, forState: .Normal)
             nutsBtn.layer.cornerRadius = 10
             nutsBtn.layer.borderWidth = 1
             nutsBtn.layer.borderColor = NAVI_BUTTON_COLOR.CGColor
@@ -840,42 +840,42 @@ class MatchTableViewController: UITableViewController, UISearchBarDelegate, UICo
     func filterToggleBtnClicked(sender: UIButton) {
         switch sender.tag {
         case 1:
-            if filters["kosher"]! {
-                filters["kosher"] = false
+            if filters[F_KOSHER]! {
+                filters[F_KOSHER] = false
                 sender.layer.borderColor = NAVI_BUTTON_COLOR.CGColor
                 sender.backgroundColor = UIColor.clearColor()
             } else {
-                filters["kosher"] = true
+                filters[F_KOSHER] = true
                 sender.backgroundColor = NAVI_BUTTON_COLOR
             }
             break
         case 2:
-            if filters["dairy"]! {
-                filters["dairy"] = false
+            if filters[F_DAIRY]! {
+                filters[F_DAIRY] = false
                 sender.layer.borderColor = NAVI_BUTTON_COLOR.CGColor
                 sender.backgroundColor = UIColor.clearColor()
             } else {
-                filters["dairy"] = true
+                filters[F_DAIRY] = true
                 sender.backgroundColor = NAVI_BUTTON_COLOR
             }
             break
         case 3:
-            if filters["vegetarian"]! {
-                filters["vegetarian"] = false
+            if filters[F_VEG]! {
+                filters[F_VEG] = false
                 sender.layer.borderColor = NAVI_BUTTON_COLOR.CGColor
                 sender.backgroundColor = UIColor.clearColor()
             } else {
-                filters["vegetarian"] = true
+                filters[F_VEG] = true
                 sender.backgroundColor = NAVI_BUTTON_COLOR
             }
             break
         case 4:
-            if filters["nuts"]! {
-                filters["nuts"] = false
+            if filters[F_NUTS]! {
+                filters[F_NUTS] = false
                 sender.layer.borderColor = NAVI_BUTTON_COLOR.CGColor
                 sender.backgroundColor = UIColor.clearColor()
             } else {
-                filters["nuts"] = true
+                filters[F_NUTS] = true
                 sender.backgroundColor = NAVI_BUTTON_COLOR
             }
             break
