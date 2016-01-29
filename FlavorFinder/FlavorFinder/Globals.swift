@@ -28,6 +28,7 @@ let CELLIDENTIFIER_MENU = "menuCell"
 
 // Colors:
 let LIGHTGRAY_COLOR = UIColor(red: 230/255.0, green: 230/255.0, blue: 230/255.0, alpha: CGFloat(1))
+let MATCH_CELL_IMAGE_COLOR = UIColor.blackColor()
 
 //let NAVI_BUTTON_COLOR = UIColor(red: 165/255.0, green: 242/255.0, blue: 216/255.0, alpha: CGFloat(1))
 let NAVI_BUTTON_COLOR = UIColor(red: 131/255.0, green: 222/255.0, blue: 252/255.0, alpha: CGFloat(1))
@@ -51,3 +52,6 @@ let F_KOSHER = "kosher"
 let F_DAIRY = "no dairy"
 let F_VEG = "vegetarian"
 let F_NUTS = "no nuts"
+
+// Sizes:
+let MATCH_CELL_IMAGE_SIZE = CGSizeMake(30, 30)
