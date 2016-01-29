@@ -27,6 +27,9 @@ class ListsPageController: UITableViewController {
 
     // Table itself:
     @IBOutlet var listsTableView: UITableView!
+    
+    // Segues:
+    let segueToListDetail = "segueToListTable"
 
 
 
@@ -104,6 +107,11 @@ class ListsPageController: UITableViewController {
         cell.textLabel?.text = ingredientLists[indexPath.row].objectForKey(
             ListTitleColumnName) as? String
         return cell
+    }
+    
+    override func tableView(tableView: UITableView,
+        didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.performSegueWithIdentifier(segueToListDetail, sender: self)
     }
 
     /* tableView; Delete a cell:
