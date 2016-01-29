@@ -15,6 +15,7 @@
 		609432671C42DCA800BA0577 /* FavoritesPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609432661C42DCA800BA0577 /* FavoritesPageController.swift */; };
 		609432691C42DD6500BA0577 /* ListsPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609432681C42DD6500BA0577 /* ListsPageController.swift */; };
 		6094326B1C42DDB500BA0577 /* MorePageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6094326A1C42DDB500BA0577 /* MorePageController.swift */; };
+		60B3F16D1C5AE41D0018AA29 /* ListDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B3F16C1C5AE41D0018AA29 /* ListDetailController.swift */; settings = {ASSET_TAGS = (); }; };
 		60FEE38F1BE570E100F51BE8 /* KeychainWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 60FEE38E1BE570E100F51BE8 /* KeychainWrapper.m */; };
 		880DA78C1BE1FB03003C67F0 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880DA78B1BE1FB03003C67F0 /* Globals.swift */; };
 		882FFD661BD9A48D00710F35 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 882FFD641BD9A48D00710F35 /* Bolts.framework */; };
@@ -84,6 +85,7 @@
 		609432661C42DCA800BA0577 /* FavoritesPageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesPageController.swift; sourceTree = "<group>"; };
 		609432681C42DD6500BA0577 /* ListsPageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListsPageController.swift; sourceTree = "<group>"; };
 		6094326A1C42DDB500BA0577 /* MorePageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MorePageController.swift; sourceTree = "<group>"; };
+		60B3F16C1C5AE41D0018AA29 /* ListDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListDetailController.swift; sourceTree = "<group>"; };
 		60FEE38C1BE570E000F51BE8 /* FlavorFinder-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FlavorFinder-Bridging-Header.h"; sourceTree = "<group>"; };
 		60FEE38D1BE570E100F51BE8 /* KeychainWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainWrapper.h; sourceTree = "<group>"; };
 		60FEE38E1BE570E100F51BE8 /* KeychainWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainWrapper.m; sourceTree = "<group>"; };
@@ -333,6 +335,7 @@
 		B6A49C4E1C4F45B000586B15 /* Pages */ = {
 			isa = PBXGroup;
 			children = (
+				60B3F16C1C5AE41D0018AA29 /* ListDetailController.swift */,
 				B6739A171C5997760004F982 /* LandingPageController.swift */,
 				609432661C42DCA800BA0577 /* FavoritesPageController.swift */,
 				609432681C42DD6500BA0577 /* ListsPageController.swift */,
@@ -539,6 +542,7 @@
 				60216E661BEC4F740029454B /* UiUtils.swift in Sources */,
 				B6EA63591BEEB4660017C063 /* PFFavorite.swift in Sources */,
 				60216E641BEC41360029454B /* _UserSettingsViewController.swift in Sources */,
+				60B3F16D1C5AE41D0018AA29 /* ListDetailController.swift in Sources */,
 				8875DE2A1BE041D200CD50EA /* UITextField+LeftMargin.swift in Sources */,
 				8875DE351BE053ED00CD50EA /* Voting.swift in Sources */,
 				883AC6281BC1A3C0009136E9 /* AppDelegate.swift in Sources */,
