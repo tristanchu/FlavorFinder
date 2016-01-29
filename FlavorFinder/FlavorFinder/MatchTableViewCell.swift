@@ -11,8 +11,8 @@ import MGSwipeTableCell
 
 class MatchTableViewCell: MGSwipeTableCell {
     // MARK: Properties
-    @IBOutlet weak var nameLabel: UILabel!
-    
+    @IBOutlet weak var nameLabel: UILabel! // original version of cell
+    @IBOutlet weak var label: UILabel! // contained version of cell
     
     override func awakeFromNib() {
         super.awakeFromNib()

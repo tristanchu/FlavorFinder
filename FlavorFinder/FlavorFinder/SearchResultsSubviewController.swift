@@ -52,7 +52,7 @@ class SearchResultsSubviewController : UITableViewController, UISearchBarDelegat
 
     // CLASS VARIABLES
     var allCells = [PFObject]()         // Array of all cells that CAN be displayed.
-    var filteredCells = [PFObject]()    // Array of all cells that ARE displayed (filtered version of 'allCells').
+    var displayedCells = [PFObject]()    // Array of all cells that ARE displayed (filtered version of 'allCells').
     var currentIngredient : PFObject?   // Stores the ingredient being viewed (nil for all ingredients).
     
     var searchBarActivateBtn: UIBarButtonItem = UIBarButtonItem()
@@ -302,7 +302,7 @@ class SearchResultsSubviewController : UITableViewController, UISearchBarDelegat
     
         func showAllIngredients() {
             allCells = _allIngredients
-            filteredCells = _allIngredients
+            displayedCells = _allIngredients
             currentIngredient = nil
             
             self.navigationController?.navigationItem.title = TITLE_ALL_INGREDIENTS
@@ -321,8 +321,9 @@ class SearchResultsSubviewController : UITableViewController, UISearchBarDelegat
                 allCells.append(match)
             }
             
+            // Reset displayed cells
             //addToHotpot(ingredient)
-            filteredCells = allCells                        // Reset 'filteredCells' with new matches.
+            displayedCells = allCells
             animateTableViewCellsToLeft(self.tableView)     // Show the new ingredients on our table with animation.
         }
         
@@ -347,7 +348,7 @@ class SearchResultsSubviewController : UITableViewController, UISearchBarDelegat
             
             let name : NSString = ingredient[_s_name] as! NSString
             let size : CGSize = name.sizeWithAttributes([NSFontAttributeName: UIFont.fontAwesomeOfSize(25)])
-            //        cell.nameLabel = UILabel()
+            //        cell.label = UILabel()
             cell.nameLabel.frame = CGRectMake(3, -3, size.width, size.height)
             cell.nameLabel.text = ingredient[_s_name] as? String
             cell.nameLabel.font = UIFont.fontAwesomeOfSize(25)
@@ -399,11 +400,11 @@ class SearchResultsSubviewController : UITableViewController, UISearchBarDelegat
         override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             switch tableView.tag {
             case 1:
-                return filteredCells.count
+                return displayedCells.count
             case 2:
                 return globalSearchResults.count
             default:
-                return filteredCells.count
+                return displayedCells.count
             }
         }
         
@@ -414,12 +415,12 @@ class SearchResultsSubviewController : UITableViewController, UISearchBarDelegat
                 let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! MatchTableViewCell
                 cell.delegate = self
                 
-                let match = filteredCells[indexPath.row]                    // Fetches the appropriate match to display.
+                let match = displayedCells[indexPath.row]
                 
                 if currentIngredient != nil {
-                    //            cell.nameLabel.text = match[_s_matchName] as? String    // Set's the cell label to the ingredient's name.
+                    //            cell.label.text = match[_s_matchName] as? String    // Set's the cell label to the ingredient's name.
                     let matchObj = match[_s_secondIngredient] as! PFObject    // Set's the cell label to the ingredient's name.
-                    cell.nameLabel.text = matchObj[_s_name] as? String
+                    cell.label.text = matchObj[_s_name] as? String
                     
                     switch match[_s_matchLevel] as! Int {
                     case 1:
@@ -434,7 +435,7 @@ class SearchResultsSubviewController : UITableViewController, UISearchBarDelegat
                         cell.backgroundColor = MATCH_LOW_COLOR
                     }
                 } else {
-//                    cell.nameLabel.text = match[_s_name] as? String
+                    cell.label.text = match[_s_name] as? String
                     cell.backgroundColor = MATCH_LOW_COLOR
                 }
                 
@@ -465,7 +466,7 @@ class SearchResultsSubviewController : UITableViewController, UISearchBarDelegat
         
         func swipeTableCell(cell: MGSwipeTableCell!, tappedButtonAtIndex index: Int, direction: MGSwipeDirection, fromExpansion: Bool) -> Bool {
             let indexPath = tableView.indexPathForCell(cell)!
-            let match = filteredCells[indexPath.row]
+            let match = displayedCells[indexPath.row]
             let ingredient = match[_s_secondIngredient] as! PFObject
             
             switch direction {
@@ -574,7 +575,7 @@ class SearchResultsSubviewController : UITableViewController, UISearchBarDelegat
             
             if currentIngredient != nil {
                 let indexPath = tableView.indexPathForCell(cell)!
-                let match = filteredCells[indexPath.row]
+                let match = displayedCells[indexPath.row]
                 let ingredient = match[_s_secondIngredient] as! PFObject
                 
                 swipeSettings.transition = MGSwipeTransition.Drag
@@ -649,12 +650,12 @@ class SearchResultsSubviewController : UITableViewController, UISearchBarDelegat
                         
                         tableView.contentOffset = CGPointMake(0, 0 - tableView.contentInset.top); // Reset scroll position.
                         if currentIngredient != nil {
-                            let match = filteredCells[indexPath.row]                              // Get tapped match.
+                            let match = displayedCells[indexPath.row]                              // Get tapped match.
                             //                    let ingredient = _getIngredientForMatch(match)
                             let ingredient = match[_s_secondIngredient] as! PFObject
                             showIngredient(ingredient)
                         } else {
-                            let ingredient = filteredCells[indexPath.row]                         // Get tapped ingredient.
+                            let ingredient = displayedCells[indexPath.row]                         // Get tapped ingredient.
                             showIngredient(ingredient)
                         }
                         // DEBUGGED OUT
@@ -772,21 +773,21 @@ class SearchResultsSubviewController : UITableViewController, UISearchBarDelegat
         }
         
         func filterResults(searchText: String) {
-            filteredCells.removeAll()
+            displayedCells.removeAll()
             
             if searchText.isEmpty {
-                filteredCells = allCells
+                displayedCells = allCells
                 searchBar.text = ""
             } else {
                 for cell in allCells {
                     if currentIngredient != nil {
                         let secondIngredient = cell[_s_secondIngredient] as! PFObject
                         if (secondIngredient[_s_name] as! String).rangeOfString(searchText.lowercaseString) != nil {
-                            filteredCells.append(cell)
+                            displayedCells.append(cell)
                         }
                     } else {
                         if (cell[_s_name] as! String).rangeOfString(searchText.lowercaseString) != nil {
-                            filteredCells.append(cell)
+                            displayedCells.append(cell)
                         }
                     }
                 }
