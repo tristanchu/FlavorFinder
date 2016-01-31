@@ -15,9 +15,6 @@ import DOFavoriteButton
 import Darwin
 import ASHorizontalScrollView
 
-let MATCH_CELL_IMAGE_SIZE = CGSizeMake(30, 30)
-let MATCH_CELL_IMAGE_COLOR = UIColor.blackColor()
-
 class MatchTableViewController: UITableViewController, UISearchBarDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, MGSwipeTableCellDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     
     // CONSTANTS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
