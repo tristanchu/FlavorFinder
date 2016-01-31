@@ -21,22 +21,22 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
     let K_CELL_HEIGHT : CGFloat = 40.0
     let CELL_BTN_FRAME = CGRectMake(0, 0, 50, 50)
     // color
-    let EDIT_CELL_BTN_COLOR = UIColor(red: 249/255.0, green: 69/255.0, blue: 255/255.0, alpha: CGFloat(0.3))
+    let FAV_CELL_BTN_COLOR = UIColor(red: 249/255.0, green: 69/255.0, blue: 255/255.0, alpha: CGFloat(0.3))
     let DOWNVOTE_CELL_BTN_COLOR = UIColor(red: 255/255.0, green: 109/255.0, blue: 69/255.0, alpha: CGFloat(0.3))
     let UPVOTE_CELL_BTN_COLOR = UIColor(red: 61/255.0, green: 235/255.0, blue: 64/255.0, alpha: CGFloat(0.3))
     let ADD_CELL_BTN_COLOR = UIColor(red: 161/255.0, green: 218/255.0, blue: 237/255.0, alpha: CGFloat(0.3))
     // cell images
     let UPVOTE_IMAGE = UIImage.fontAwesomeIconWithName(
-        .ThumbsUp,
+        .ArrowUp,
         textColor: MATCH_CELL_IMAGE_COLOR,
         size: MATCH_CELL_IMAGE_SIZE
     )
     let DOWNVOTE_IMAGE = UIImage.fontAwesomeIconWithName(
-        .ThumbsDown,
+        .ArrowDown,
         textColor: MATCH_CELL_IMAGE_COLOR,
         size: MATCH_CELL_IMAGE_SIZE
     )
-    let FAVORITE_IMAGE = UIImage.fontAwesomeIconWithName(
+    let FAV_IMAGE = UIImage.fontAwesomeIconWithName(
         .Heart,
         textColor: MATCH_CELL_IMAGE_COLOR,
         size: MATCH_CELL_IMAGE_SIZE
@@ -50,14 +50,16 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
     let CELL_IDENTIFIER = "globalSearchResultsCell"
     // colors
     let CELL_BTN_OFF_COLOR = UIColor.grayColor()
-    let CELL_BTN_ON_COLOR = UIColor.redColor()
+    let CELL_BTN_ON_COLOR = UIColor.blackColor()
+    // fonts
+    let ICON_FONT = UIFont.fontAwesomeOfSize(100)
 
     // CLASS VARIABLES
     var allCells = [PFObject]()         // Array of all cells that CAN be displayed
     var displayedCells = [PFObject]()   // Array of all cells that ARE displayed (filtered)
     var currentIngredient : PFObject?   // Stores the ingredient being viewed
     
-    let notSignedInAlert = UIAlertController(title: "Not Signed In", message: "You need to sign in to do this!", preferredStyle: UIAlertControllerStyle.Alert)
+//    let notSignedInAlert = UIAlertController(title: "Not Signed In", message: "You need to sign in to do this!", preferredStyle: UIAlertControllerStyle.Alert)
     
     @IBOutlet var matchTableView: UITableView!
         
@@ -88,10 +90,10 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
     }
         
     func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
-        let text = String.fontAwesomeIconWithName(.FrownO)
-        let attributes = [NSFontAttributeName: UIFont.fontAwesomeOfSize(100)] as Dictionary!
+        let icon = String.fontAwesomeIconWithName(.FrownO)
+        let attributes = [NSFontAttributeName: ICON_FONT] as Dictionary!
         
-        return NSAttributedString(string: text, attributes: attributes)
+        return NSAttributedString(string: icon, attributes: attributes)
     }
         
     func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
@@ -156,49 +158,26 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
     }
         
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        switch tableView.tag {
-        case 1:
-            let cellIdentifier = CELLIDENTIFIER_MATCH
-            let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! MatchTableViewCell
-            cell.delegate = self
+        let cellIdentifier = CELLIDENTIFIER_MATCH
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! MatchTableViewCell
+        cell.delegate = self
                 
-            let match = displayedCells[indexPath.row]
+        let match = displayedCells[indexPath.row]
                 
-            if currentIngredient != nil {
-                let matchObj = match[_s_secondIngredient] as! PFObject    // Set's the cell label to the ingredient's name.
-                cell.label.text = matchObj[_s_name] as? String
-                    
-                switch match[_s_matchLevel] as! Int {
-                case 1:
-                    cell.backgroundColor = MATCH_LOW_COLOR              // match: low
-                case 2:
-                    cell.backgroundColor = MATCH_MEDIUM_COLOR           // match: medium                   
-                case 3:
-                    cell.backgroundColor = MATCH_HIGH_COLOR             // match: high
-                case 4:
-                    cell.backgroundColor = MATCH_GREATEST_COLOR         // match: greatest
-                default:
-                    cell.backgroundColor = MATCH_LOW_COLOR
-                }
-            } else {
-                cell.label.text = match[_s_name] as? String
-                cell.backgroundColor = MATCH_LOW_COLOR
+        if currentIngredient != nil {
+            let matchObj = match[_s_secondIngredient] as! PFObject
+            cell.label.text = matchObj[_s_name] as? String
+            
+            let matchLevel = match[_s_matchLevel] as! Int
+            if matchLevel < MATCH_COLORS.count && matchLevel >= 0 {
+                cell.backgroundColor = MATCH_COLORS[matchLevel]
             }
-                
-            return cell
-        case 2:
-            let cell = tableView.dequeueReusableCellWithIdentifier(CELL_IDENTIFIER, forIndexPath: indexPath) as UITableViewCell
-                
-            cell.backgroundColor = UIColor.clearColor()
-                
-            let ingredient = globalSearchResults[indexPath.row]
-            cell.textLabel?.text = ingredient[_s_name] as? String
-            cell.textLabel!.font = UIFont.fontAwesomeOfSize(15)
-                
-            return cell
-        default:
-            return UITableViewCell()
+        } else {
+            cell.label.text = match[_s_name] as? String
+            cell.backgroundColor = MATCH_COLORS[0]
         }
+        
+        return cell
     }
         
     func swipeTableCell(cell: MGSwipeTableCell!, canSwipe direction: MGSwipeDirection) -> Bool {
@@ -245,7 +224,7 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
                     }
                     return false
                 } else {
-                    self.presentViewController(self.notSignedInAlert, animated: true, completion: nil)
+//                    self.presentViewController(self.notSignedInAlert, animated: true, completion: nil)
                     return true
                 }
             case 1:
@@ -273,7 +252,7 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
                     
                     return false
                 } else {
-                    self.presentViewController(self.notSignedInAlert, animated: true, completion: nil)
+//                    self.presentViewController(self.notSignedInAlert, animated: true, completion: nil)
                     return true
                 }
             case 2:
@@ -289,7 +268,7 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
                         
                     return false
                 } else {
-                    self.presentViewController(self.notSignedInAlert, animated: true, completion: nil)
+//                    self.presentViewController(self.notSignedInAlert, animated: true, completion: nil)
                     return true
                 }
             case 3:
@@ -301,6 +280,14 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
                 return true
             }
         }
+    }
+    
+    func makeCellButton(image: UIImage, backgroundColor: UIColor) -> DOFavoriteButton {
+        let button = DOFavoriteButton(frame: CELL_BTN_FRAME, image: image)
+        button.imageColorOff = CELL_BTN_OFF_COLOR
+        button.imageColorOn = CELL_BTN_ON_COLOR
+        button.backgroundColor = backgroundColor
+        return button
     }
     
     func swipeTableCell(cell: MGSwipeTableCell!, swipeButtonsForDirection direction: MGSwipeDirection, swipeSettings: MGSwipeSettings!, expansionSettings: MGSwipeExpansionSettings!) -> [AnyObject]! {
@@ -316,16 +303,11 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         
         swipeSettings.transition = MGSwipeTransition.Drag
 
-        let addBtn = DOFavoriteButton(frame: CELL_BTN_FRAME, image: ADD_IMAGE)
-        addBtn.imageColorOff = CELL_BTN_OFF_COLOR
-        addBtn.imageColorOn = CELL_BTN_ON_COLOR
-        addBtn.backgroundColor = ADD_CELL_BTN_COLOR
-                
-        let favBtn = DOFavoriteButton(frame: CELL_BTN_FRAME, image: FAVORITE_IMAGE)
-        favBtn.imageColorOff = CELL_BTN_OFF_COLOR
-        favBtn.imageColorOn = CELL_BTN_ON_COLOR
-        favBtn.backgroundColor = EDIT_CELL_BTN_COLOR
-                
+        let addBtn = makeCellButton(ADD_IMAGE, backgroundColor: ADD_CELL_BTN_COLOR)
+        let favBtn = makeCellButton(FAV_IMAGE, backgroundColor: FAV_CELL_BTN_COLOR)
+        let upvoteBtn = makeCellButton(UPVOTE_IMAGE, backgroundColor: UPVOTE_CELL_BTN_COLOR)
+        let downvoteBtn = makeCellButton(DOWNVOTE_IMAGE, backgroundColor: DOWNVOTE_CELL_BTN_COLOR)
+        
         if let user = currentUser {
             if let _ = isFavoriteIngredient(user, ingredient: ingredient) {
                 favBtn.selected = true
@@ -333,18 +315,8 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
                 favBtn.selected = false
             }
         } else {
-                favBtn.selected = false
+            favBtn.selected = false
         }
-                    
-        let upvoteBtn = DOFavoriteButton(frame: CELL_BTN_FRAME, image: UPVOTE_IMAGE)
-        upvoteBtn.imageColorOff = CELL_BTN_OFF_COLOR
-        upvoteBtn.imageColorOn = UIColor.blackColor()
-        upvoteBtn.backgroundColor = UPVOTE_CELL_BTN_COLOR
-                
-        let downvoteBtn = DOFavoriteButton(frame: CELL_BTN_FRAME, image: DOWNVOTE_IMAGE)
-        downvoteBtn.imageColorOff = CELL_BTN_OFF_COLOR
-        downvoteBtn.imageColorOn = UIColor.blackColor()
-        downvoteBtn.backgroundColor = DOWNVOTE_CELL_BTN_COLOR
                     
         if let user = currentUser {
             if let vote = hasVoted(user, match: match) {
@@ -373,11 +345,9 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
             if let navi = self.navigationController as? MainNavigationController {
                 if (navi.dropdownIsDown) {
                 } else {
-                    
                     tableView.contentOffset = CGPointMake(0, 0 - tableView.contentInset.top); // Reset scroll position.
                     if currentIngredient != nil {
                         let match = displayedCells[indexPath.row]                              // Get tapped match.
-                            //                    let ingredient = _getIngredientForMatch(match)
                         let ingredient = match[_s_secondIngredient] as! PFObject
                             showIngredient(ingredient)
                     } else {

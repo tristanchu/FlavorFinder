@@ -38,6 +38,13 @@ let MATCH_LOW_COLOR = UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0,
 let MATCH_MEDIUM_COLOR = UIColor(red: 255/255.0, green: 237/255.0, blue: 105/255.0, alpha: CGFloat(0.3))
 let MATCH_HIGH_COLOR = UIColor(red: 105/255.0, green: 230/255.0, blue: 255/255.0, alpha: CGFloat(0.3))
 let MATCH_GREATEST_COLOR = UIColor(red: 105/255.0, green: 255/255.0, blue: 150/255.0, alpha: CGFloat(0.3))
+let MATCH_COLORS = [ // indices correspond to int match strength values
+    MATCH_LOW_COLOR, // 0 index value ("no match" color/default color)
+    MATCH_LOW_COLOR,
+    MATCH_MEDIUM_COLOR,
+    MATCH_HIGH_COLOR,
+    MATCH_GREATEST_COLOR
+]
 
 //let NAVI_COLOR = UIColor(red: 121/255.0, green: 217/255.0, blue: 255/255.0, alpha: CGFloat(1))
 let NAVI_COLOR = UIColor(red: 205/255.0, green: 239/255.0, blue: 250/255.0, alpha: CGFloat(1))
