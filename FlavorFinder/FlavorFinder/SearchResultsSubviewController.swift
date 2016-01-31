@@ -88,7 +88,8 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
     override func viewWillAppear(animated: Bool) {
         animateTableViewCellsToLeft(self.tableView)
     }
-        
+    
+    // EMPTY DATA SET DISPLAY
     func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
         let icon = String.fontAwesomeIconWithName(.FrownO)
         let attributes = [NSFontAttributeName: ICON_FONT] as Dictionary!
@@ -308,30 +309,32 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         let upvoteBtn = makeCellButton(UPVOTE_IMAGE, backgroundColor: UPVOTE_CELL_BTN_COLOR)
         let downvoteBtn = makeCellButton(DOWNVOTE_IMAGE, backgroundColor: DOWNVOTE_CELL_BTN_COLOR)
         
+        // if we're logged in, display user-ingredient history
         if let user = currentUser {
+            
+            // display whether or not user has favorited ingredient
             if let _ = isFavoriteIngredient(user, ingredient: ingredient) {
                 favBtn.selected = true
             } else {
                 favBtn.selected = false
             }
-        } else {
-            favBtn.selected = false
-        }
-                    
-        if let user = currentUser {
+            
+            // display whether or not user has voted on match
             if let vote = hasVoted(user, match: match) {
                 if vote[_s_voteType] as! String == _s_upvotes {
                     upvoteBtn.selected = true
-                    downvoteBtn.selected = false
                 } else if vote[_s_voteType] as! String == _s_downvotes {
                     upvoteBtn.selected = false
-                    downvoteBtn.selected = true
                 }
+                downvoteBtn.selected = !upvoteBtn.selected // can only vote one direction
             } else {
                 upvoteBtn.selected = false
                 downvoteBtn.selected = false
             }
-        } else {
+            
+            
+        } else { // not logged in
+            favBtn.selected = false
             upvoteBtn.selected = false
             downvoteBtn.selected = false
         }

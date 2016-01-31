@@ -406,17 +406,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CqB-g8-4PC">
-                                <rect key="frame" x="0.0" y="47" width="600" height="471"/>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CqB-g8-4PC">
+                                <rect key="frame" x="0.0" y="204" width="600" height="314"/>
                                 <connections>
                                     <segue destination="m7J-D3-eHA" kind="embed" identifier="goToSearchResults" id="okc-Lk-399"/>
                                 </connections>
                             </containerView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.4039215686" green="0.58823529409999997" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="CqB-g8-4PC" secondAttribute="trailing" id="FIM-bl-Pg7"/>
+                            <constraint firstItem="5fU-N5-qc0" firstAttribute="top" secondItem="CqB-g8-4PC" secondAttribute="bottom" constant="82" id="SVI-5P-0rP"/>
+                            <constraint firstItem="CqB-g8-4PC" firstAttribute="top" secondItem="x14-3j-LRG" secondAttribute="bottom" constant="204" id="Wqo-8u-Nvz"/>
+                            <constraint firstItem="CqB-g8-4PC" firstAttribute="leading" secondItem="S3W-QO-b3i" secondAttribute="leading" id="yGa-T5-Ooc"/>
+                        </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="600"/>
+                    <connections>
+                        <outlet property="searchResultsContainer" destination="CqB-g8-4PC" id="Sq5-Nw-Uxt"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YN3-3Y-uml" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -954,7 +963,7 @@
             <objects>
                 <viewController id="m7J-D3-eHA" userLabel="Search Results Subview Controller" customClass="SearchResultsSubviewController" customModule="FlavorFinder" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="DLA-eN-E9Q">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="471"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="314"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>

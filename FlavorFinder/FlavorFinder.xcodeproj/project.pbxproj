@@ -62,6 +62,7 @@
 		B6739A161C59973A0004F982 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6739A151C59973A0004F982 /* ContainerViewController.swift */; };
 		B6739A181C5997760004F982 /* LandingPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6739A171C5997760004F982 /* LandingPageController.swift */; };
 		B6739A1C1C5999D20004F982 /* NewSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6739A1B1C5999D20004F982 /* NewSearchViewController.swift */; };
+		B685D2B31C5DE775001C37FF /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B685D2B21C5DE775001C37FF /* SearchResultsViewController.swift */; };
 		B6B7E0571C4D7BA400ADFC9C /* IngredientList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B7E0561C4D7BA400ADFC9C /* IngredientList.swift */; };
 		B6EA63591BEEB4660017C063 /* PFFavorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EA63581BEEB4660017C063 /* PFFavorite.swift */; };
 		B6F3B74F1BE8833E00AF791A /* PFMatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F3B74E1BE8833E00AF791A /* PFMatch.swift */; };
@@ -140,6 +141,7 @@
 		B6739A151C59973A0004F982 /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		B6739A171C5997760004F982 /* LandingPageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandingPageController.swift; sourceTree = "<group>"; };
 		B6739A1B1C5999D20004F982 /* NewSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewSearchViewController.swift; sourceTree = "<group>"; };
+		B685D2B21C5DE775001C37FF /* SearchResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
 		B6B7E0561C4D7BA400ADFC9C /* IngredientList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngredientList.swift; sourceTree = "<group>"; };
 		B6EA63581BEEB4660017C063 /* PFFavorite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PFFavorite.swift; sourceTree = "<group>"; };
 		B6F3B74E1BE8833E00AF791A /* PFMatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PFMatch.swift; sourceTree = "<group>"; };
@@ -286,11 +288,10 @@
 			children = (
 				B6A49C4E1C4F45B000586B15 /* Pages */,
 				B6A49C4F1C4F45E600586B15 /* Deprecated */,
-				B61AD2C41C5BFB9C00081BF4 /* SearchResultsSubviewController.swift */,
+				B685D2B11C5DE6E6001C37FF /* SearchResultsVC */,
 				88F0E4FE1BE51E7F003CB35B /* GlobalSearchController.swift */,
 				8875DE3A1BE0751B00CD50EA /* MainNavigationController.swift */,
-				B6739A131C59971B0004F982 /* ContainerParentViewController.swift */,
-				B6739A151C59973A0004F982 /* ContainerViewController.swift */,
+				B685D2B41C5DE8D2001C37FF /* ContainerSystem */,
 				88F413FB1BC74EC8000C0093 /* MatchTableViewController.swift */,
 				8875DE381BE06FB300CD50EA /* MenuTableViewController.swift */,
 				B6739A1B1C5999D20004F982 /* NewSearchViewController.swift */,
@@ -333,6 +334,24 @@
 				B61FEBCD1C4430D30028F800 /* EmptySegue.swift */,
 			);
 			name = CustomSegues;
+			sourceTree = "<group>";
+		};
+		B685D2B11C5DE6E6001C37FF /* SearchResultsVC */ = {
+			isa = PBXGroup;
+			children = (
+				B61AD2C41C5BFB9C00081BF4 /* SearchResultsSubviewController.swift */,
+				B685D2B21C5DE775001C37FF /* SearchResultsViewController.swift */,
+			);
+			name = SearchResultsVC;
+			sourceTree = "<group>";
+		};
+		B685D2B41C5DE8D2001C37FF /* ContainerSystem */ = {
+			isa = PBXGroup;
+			children = (
+				B6739A131C59971B0004F982 /* ContainerParentViewController.swift */,
+				B6739A151C59973A0004F982 /* ContainerViewController.swift */,
+			);
+			name = ContainerSystem;
 			sourceTree = "<group>";
 		};
 		B6A49C4E1C4F45B000586B15 /* Pages */ = {
@@ -522,6 +541,7 @@
 				88F0E4FF1BE51E7F003CB35B /* GlobalSearchController.swift in Sources */,
 				B6739A161C59973A0004F982 /* ContainerViewController.swift in Sources */,
 				8875DE321BE051B100CD50EA /* Database.swift in Sources */,
+				B685D2B31C5DE775001C37FF /* SearchResultsViewController.swift in Sources */,
 				8839994D1C554B3E003F5CD2 /* RemoveHotpotIngredientButton.swift in Sources */,
 				8839994F1C555A34003F5CD2 /* PFList.swift in Sources */,
 				8839994B1C554ACB003F5CD2 /* HotpotCollectionViewCell.swift in Sources */,
