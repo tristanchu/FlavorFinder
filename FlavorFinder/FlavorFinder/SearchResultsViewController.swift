@@ -28,6 +28,11 @@ class SearchResultsViewController : UIViewController {
     // containers of subviews
     @IBOutlet weak var searchResultsContainer: UIView!
     
+    @IBOutlet weak var filterBarContainer: UIView!
+    
+    @IBOutlet weak var hotpotContainer: UIView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // insert initial search logic here...

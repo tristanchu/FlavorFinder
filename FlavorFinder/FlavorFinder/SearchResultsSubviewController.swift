@@ -12,8 +12,6 @@ import Parse
 import MGSwipeTableCell
 import DZNEmptyDataSet
 import DOFavoriteButton
-import Darwin
-import ASHorizontalScrollView
 
 class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     // CONSTANTS

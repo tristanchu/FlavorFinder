@@ -66,6 +66,8 @@
 		B6B7E0571C4D7BA400ADFC9C /* IngredientList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B7E0561C4D7BA400ADFC9C /* IngredientList.swift */; };
 		B6EA63591BEEB4660017C063 /* PFFavorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EA63581BEEB4660017C063 /* PFFavorite.swift */; };
 		B6F3B74F1BE8833E00AF791A /* PFMatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F3B74E1BE8833E00AF791A /* PFMatch.swift */; };
+		B6F55CA51C5E87B400854B07 /* HotpotSubviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F55CA41C5E87B400854B07 /* HotpotSubviewController.swift */; };
+		B6F55CA71C5E88D300854B07 /* FilterBarSubviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F55CA61C5E88D300854B07 /* FilterBarSubviewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -145,6 +147,8 @@
 		B6B7E0561C4D7BA400ADFC9C /* IngredientList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngredientList.swift; sourceTree = "<group>"; };
 		B6EA63581BEEB4660017C063 /* PFFavorite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PFFavorite.swift; sourceTree = "<group>"; };
 		B6F3B74E1BE8833E00AF791A /* PFMatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PFMatch.swift; sourceTree = "<group>"; };
+		B6F55CA41C5E87B400854B07 /* HotpotSubviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HotpotSubviewController.swift; sourceTree = "<group>"; };
+		B6F55CA61C5E88D300854B07 /* FilterBarSubviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterBarSubviewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -340,6 +344,8 @@
 			isa = PBXGroup;
 			children = (
 				B61AD2C41C5BFB9C00081BF4 /* SearchResultsSubviewController.swift */,
+				B6F55CA61C5E88D300854B07 /* FilterBarSubviewController.swift */,
+				B6F55CA41C5E87B400854B07 /* HotpotSubviewController.swift */,
 				B685D2B21C5DE775001C37FF /* SearchResultsViewController.swift */,
 			);
 			name = SearchResultsVC;
@@ -536,6 +542,7 @@
 				8875DE3B1BE0751B00CD50EA /* MainNavigationController.swift in Sources */,
 				88F413FC1BC74EC8000C0093 /* MatchTableViewController.swift in Sources */,
 				B61FEBCE1C4430D30028F800 /* EmptySegue.swift in Sources */,
+				B6F55CA51C5E87B400854B07 /* HotpotSubviewController.swift in Sources */,
 				88F0E5011BE54111003CB35B /* Animations.swift in Sources */,
 				88998E211BEC365D00087406 /* PFVote.swift in Sources */,
 				88F0E4FF1BE51E7F003CB35B /* GlobalSearchController.swift in Sources */,
@@ -563,6 +570,7 @@
 				8875DE391BE06FB300CD50EA /* MenuTableViewController.swift in Sources */,
 				888D1A441BDEF8FE007F09AE /* _ProfileViewController.swift in Sources */,
 				B6B7E0571C4D7BA400ADFC9C /* IngredientList.swift in Sources */,
+				B6F55CA71C5E88D300854B07 /* FilterBarSubviewController.swift in Sources */,
 				60216E661BEC4F740029454B /* UiUtils.swift in Sources */,
 				B6EA63591BEEB4660017C063 /* PFFavorite.swift in Sources */,
 				60216E641BEC41360029454B /* _UserSettingsViewController.swift in Sources */,
@@ -709,6 +717,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = FlavorFinder/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.teamfive.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -728,6 +737,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = FlavorFinder/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.teamfive.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
