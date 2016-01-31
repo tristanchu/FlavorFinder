@@ -15,15 +15,11 @@ import DOFavoriteButton
 import Darwin
 import ASHorizontalScrollView
 
-//                 filterGlobalSearchResults(searchText)
-// clickthru still happening
-// next steps: separate out top navbar from tableview
-
-
 class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     // CONSTANTS
     // numbers
     let K_CELL_HEIGHT : CGFloat = 40.0
+    let CELL_BTN_FRAME = CGRectMake(0, 0, 50, 50)
     // color
     let EDIT_CELL_BTN_COLOR = UIColor(red: 249/255.0, green: 69/255.0, blue: 255/255.0, alpha: CGFloat(0.3))
     let DOWNVOTE_CELL_BTN_COLOR = UIColor(red: 255/255.0, green: 109/255.0, blue: 69/255.0, alpha: CGFloat(0.3))
@@ -50,21 +46,22 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         textColor: MATCH_CELL_IMAGE_COLOR,
         size: MATCH_CELL_IMAGE_SIZE
     )
-    // strings --> "add it yourself" can be added when feature exists
-    let SEARCH_GENERIC_ERROR_TEXT = "There was an error with the search."
-    let INGREDIENT_NOT_FOUND_TEXT = "The ingredient you were looking for could not be found!"
-    let NO_MATCHES_TEXT = "No matches for this ingredient yet!"
+    // strings
+    let CELL_IDENTIFIER = "globalSearchResultsCell"
+    // colors
+    let CELL_BTN_OFF_COLOR = UIColor.grayColor()
+    let CELL_BTN_ON_COLOR = UIColor.redColor()
 
     // CLASS VARIABLES
-    var allCells = [PFObject]()         // Array of all cells that CAN be displayed.
-    var displayedCells = [PFObject]()    // Array of all cells that ARE displayed (filtered version of 'allCells').
-    var currentIngredient : PFObject?   // Stores the ingredient being viewed (nil for all ingredients).
+    var allCells = [PFObject]()         // Array of all cells that CAN be displayed
+    var displayedCells = [PFObject]()   // Array of all cells that ARE displayed (filtered)
+    var currentIngredient : PFObject?   // Stores the ingredient being viewed
     
     let notSignedInAlert = UIAlertController(title: "Not Signed In", message: "You need to sign in to do this!", preferredStyle: UIAlertControllerStyle.Alert)
     
     @IBOutlet var matchTableView: UITableView!
         
-    let globalSearchTableView = UITableView()
+    let searchResultsTableView = UITableView()
     var globalSearchResults = [PFObject]()
     
     let filters: [String: Bool] = [F_KOSHER: false,
@@ -75,7 +72,7 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
     // SETUP FUNCTIONS
     override func viewDidLoad() {
         super.viewDidLoad()
-        configure_globalSearchTableView()
+        configure_searchResultsTableView()
         self.tableView.emptyDataSetSource = self
         self.tableView.emptyDataSetDelegate = self
         self.tableView.tag = 1
@@ -107,17 +104,17 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         return NSAttributedString(string: text, attributes: attributes)
     }
     
-    func configure_globalSearchTableView() {
-        globalSearchTableView.hidden = true
-        globalSearchTableView.tag = 2
-        globalSearchTableView.delegate = self
-        globalSearchTableView.dataSource = self
-        globalSearchTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "globalSearchResultsCell")
-        globalSearchTableView.layer.zPosition = 1
-        let blurEffect = UIBlurEffect(style: .Light) //?
+    func configure_searchResultsTableView() {
+        searchResultsTableView.hidden = true
+        searchResultsTableView.tag = 2
+        searchResultsTableView.delegate = self
+        searchResultsTableView.dataSource = self
+        searchResultsTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: CELL_IDENTIFIER)
+        searchResultsTableView.layer.zPosition = 1
+        let blurEffect = UIBlurEffect(style: .Light)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        globalSearchTableView.insertSubview(blurEffectView, atIndex: 0)
-        globalSearchTableView.backgroundView = blurEffectView
+        searchResultsTableView.insertSubview(blurEffectView, atIndex: 0)
+        searchResultsTableView.backgroundView = blurEffectView
     }
     
     func showAllIngredients() {
@@ -155,14 +152,7 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
     }
         
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch tableView.tag {
-        case 1:
-            return displayedCells.count
-        case 2:
-            return globalSearchResults.count
-        default:
-            return displayedCells.count
-        }
+        return displayedCells.count
     }
         
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -197,8 +187,7 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
                 
             return cell
         case 2:
-            let cellIdentifier = "globalSearchResultsCell"
-            let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as UITableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier(CELL_IDENTIFIER, forIndexPath: indexPath) as UITableViewCell
                 
             cell.backgroundColor = UIColor.clearColor()
                 
@@ -315,72 +304,68 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
     }
     
     func swipeTableCell(cell: MGSwipeTableCell!, swipeButtonsForDirection direction: MGSwipeDirection, swipeSettings: MGSwipeSettings!, expansionSettings: MGSwipeExpansionSettings!) -> [AnyObject]! {
-            
-        if currentIngredient != nil {
-            let indexPath = tableView.indexPathForCell(cell)!
-            let match = displayedCells[indexPath.row]
-            let ingredient = match[_s_secondIngredient] as! PFObject
-            
-            swipeSettings.transition = MGSwipeTransition.Drag
-            
-            switch direction {
-                case MGSwipeDirection.RightToLeft:
-                    return []
-                case MGSwipeDirection.LeftToRight:
-                    let addBtn = DOFavoriteButton(frame: CGRectMake(0, 0, 50, 50), image: ADD_IMAGE)
-                    addBtn.imageColorOff = UIColor.grayColor()
-                    addBtn.imageColorOn = UIColor.redColor()
-                    addBtn.backgroundColor = ADD_CELL_BTN_COLOR
+        
+        // check that search is underway and that we swiped right, otherwise ignore
+        if currentIngredient == nil || direction != MGSwipeDirection.LeftToRight {
+            return []
+        }
+        
+        let indexPath = tableView.indexPathForCell(cell)!
+        let match = displayedCells[indexPath.row]
+        let ingredient = match[_s_secondIngredient] as! PFObject
+        
+        swipeSettings.transition = MGSwipeTransition.Drag
+
+        let addBtn = DOFavoriteButton(frame: CELL_BTN_FRAME, image: ADD_IMAGE)
+        addBtn.imageColorOff = CELL_BTN_OFF_COLOR
+        addBtn.imageColorOn = CELL_BTN_ON_COLOR
+        addBtn.backgroundColor = ADD_CELL_BTN_COLOR
+                
+        let favBtn = DOFavoriteButton(frame: CELL_BTN_FRAME, image: FAVORITE_IMAGE)
+        favBtn.imageColorOff = CELL_BTN_OFF_COLOR
+        favBtn.imageColorOn = CELL_BTN_ON_COLOR
+        favBtn.backgroundColor = EDIT_CELL_BTN_COLOR
+                
+        if let user = currentUser {
+            if let _ = isFavoriteIngredient(user, ingredient: ingredient) {
+                favBtn.selected = true
+            } else {
+                favBtn.selected = false
+            }
+        } else {
+                favBtn.selected = false
+        }
                     
-                    let favBtn = DOFavoriteButton(frame: CGRectMake(0, 0, 50, 50), image: FAVORITE_IMAGE)
-                    favBtn.imageColorOff = UIColor.grayColor()
-                    favBtn.imageColorOn = UIColor.redColor()
-                    favBtn.backgroundColor = EDIT_CELL_BTN_COLOR
+        let upvoteBtn = DOFavoriteButton(frame: CELL_BTN_FRAME, image: UPVOTE_IMAGE)
+        upvoteBtn.imageColorOff = CELL_BTN_OFF_COLOR
+        upvoteBtn.imageColorOn = UIColor.blackColor()
+        upvoteBtn.backgroundColor = UPVOTE_CELL_BTN_COLOR
+                
+        let downvoteBtn = DOFavoriteButton(frame: CELL_BTN_FRAME, image: DOWNVOTE_IMAGE)
+        downvoteBtn.imageColorOff = CELL_BTN_OFF_COLOR
+        downvoteBtn.imageColorOn = UIColor.blackColor()
+        downvoteBtn.backgroundColor = DOWNVOTE_CELL_BTN_COLOR
                     
-                    if let user = currentUser {
-                        if let _ = isFavoriteIngredient(user, ingredient: ingredient) {
-                            favBtn.selected = true
-                        } else {
-                            favBtn.selected = false
-                        }
-                    } else {
-                        favBtn.selected = false
-                    }
-                    
-                    let upvoteBtn = DOFavoriteButton(frame: CGRectMake(0, 0, 50, 50), image: UPVOTE_IMAGE)
-                    upvoteBtn.imageColorOff = UIColor.grayColor()
-                    upvoteBtn.imageColorOn = UIColor.blackColor()
-                    upvoteBtn.backgroundColor = UPVOTE_CELL_BTN_COLOR
-                    
-                    let downvoteBtn = DOFavoriteButton(frame: CGRectMake(0, 0, 50, 50), image: DOWNVOTE_IMAGE)
-                    downvoteBtn.imageColorOff = UIColor.grayColor()
-                    downvoteBtn.imageColorOn = UIColor.blackColor()
-                    downvoteBtn.backgroundColor = DOWNVOTE_CELL_BTN_COLOR
-                    
-                    if let user = currentUser {
-                        if let vote = hasVoted(user, match: match) {
-                            if vote[_s_voteType] as! String == _s_upvotes {
-                                upvoteBtn.selected = true
-                                downvoteBtn.selected = false
-                            } else if vote[_s_voteType] as! String == _s_downvotes {
-                                upvoteBtn.selected = false
-                                downvoteBtn.selected = true
-                            }
-                        } else {
-                            upvoteBtn.selected = false
-                            downvoteBtn.selected = false
-                        }
-                    } else {
-                        upvoteBtn.selected = false
-                        downvoteBtn.selected = false
-                    }
-                    
-                    return [upvoteBtn, downvoteBtn, favBtn, addBtn]
+        if let user = currentUser {
+            if let vote = hasVoted(user, match: match) {
+                if vote[_s_voteType] as! String == _s_upvotes {
+                    upvoteBtn.selected = true
+                    downvoteBtn.selected = false
+                } else if vote[_s_voteType] as! String == _s_downvotes {
+                    upvoteBtn.selected = false
+                    downvoteBtn.selected = true
                 }
             } else {
-                return []
+                upvoteBtn.selected = false
+                downvoteBtn.selected = false
             }
+        } else {
+            upvoteBtn.selected = false
+            downvoteBtn.selected = false
         }
+        
+        return [upvoteBtn, downvoteBtn, favBtn, addBtn]
+    }
         
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         switch tableView.tag {
@@ -408,7 +393,7 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
             break;
         }
             
-        }
+    }
 
     
     func filterGlobalSearchResults(searchText: String) {
@@ -423,7 +408,7 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
                 }
             }
         }
-        globalSearchTableView.reloadData()
+        searchResultsTableView.reloadData()
     }
         
     func filterResults(searchText: String) {

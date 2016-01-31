@@ -55,3 +55,9 @@ let F_NUTS = "no nuts"
 
 // Sizes:
 let MATCH_CELL_IMAGE_SIZE = CGSizeMake(30, 30)
+
+// Displayed error messages:
+// --> "add it yourself" can be added when feature exists
+let SEARCH_GENERIC_ERROR_TEXT = "There was an error with the search."
+let INGREDIENT_NOT_FOUND_TEXT = "The ingredient you were looking for could not be found!"
+let NO_MATCHES_TEXT = "No matches for this ingredient yet!"
