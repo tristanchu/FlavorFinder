@@ -23,7 +23,7 @@ class ListDetailController: UITableViewController {
     
     // Visual related:
     let noIngredients = "You have nothing in this list!"
-    var listTitle = "hello"
+    var listTitle = ""
     
     // Table itself:
     @IBOutlet var ingredientListsTableView: UITableView!
@@ -31,6 +31,7 @@ class ListDetailController: UITableViewController {
     // Navigation:
     var backBtn: UIBarButtonItem = UIBarButtonItem()
     let backBtnAction = "backBtnClicked:"
+    let backBtnString = String.fontAwesomeIconWithName(.ChevronLeft) + " Lists"
 
     // MARK: Override methods: ----------------------------------------------
     /* viewDidLoad:
@@ -68,11 +69,14 @@ class ListDetailController: UITableViewController {
                     [], animated: true)
                 navi.reset_navigationBar()
                 self.backBtn.enabled = true
-                self.tabBarController?.navigationItem.title = listTitle
+
+                // TESTING:
+                print( "Looking at: " + listTitle)
         }
         
-        // Populate and display table:
-        populateListDetailTable()
+        // NOTE: no population because data passed in during segue.
+
+        // display table:
         ingredientListsTableView.backgroundColor = UIColor.whiteColor();
         ingredientListsTableView.backgroundView = nil;
         
@@ -107,25 +111,13 @@ class ListDetailController: UITableViewController {
     
     
     // MARK: Functions -------------------------------------------------
-    
-    /* populateListsTable:
-    clears current userLists array; gets user lists from parse local db
-    if user is logged in.
-    */
-    func populateListDetailTable() {
-        ingredientList.removeAll()
-
-        // Get user's lists from Parse local db if user logged in:
-        let test = PFIngredient(className: "testing thing")
-        ingredientList.append(test)
-    }
 
     /* setUpBackButton
         sets up the back button for navigation
     */
     func setUpBackButton() {
         backBtn.setTitleTextAttributes(attributes, forState: .Normal)
-        backBtn.title = String.fontAwesomeIconWithName(.ChevronLeft)
+        backBtn.title = self.backBtnString
         backBtn.tintColor = NAVI_BUTTON_COLOR
         backBtn.target = self
         backBtn.action = "backBtnClicked"  // refers to: backBtnClicked()
