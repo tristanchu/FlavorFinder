@@ -193,16 +193,22 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         let indexPath = tableView.indexPathForCell(cell)!
         let match = displayedCells[indexPath.row]
         let ingredient = match[_s_secondIngredient] as! PFObject
+        
+        if cell.leftButtons == nil || cell.leftButtons.count == 0 {
+            print("ERROR: No buttons in search results cell button array.")
+            return true
+        }
             
         switch direction {
         case MGSwipeDirection.RightToLeft:
             return true
         case MGSwipeDirection.LeftToRight:
-            let btn = cell.leftButtons[index] as! DOFavoriteButton
-                
+            let selBtn = cell.leftButtons[index] as! DOFavoriteButton
+            let upvoteBtn = cell.leftButtons[0] as! DOFavoriteButton
+            let downvoteBtn = cell.leftButtons[1] as! DOFavoriteButton
+            
             switch index {
-            case 0:
-                // Upvote action
+            case 0: // Upvote action
                 if let user = currentUser {
                     if let vote = hasVoted(user, match: match) {
                         let voteType = vote[_s_voteType] as! String
@@ -210,26 +216,23 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
                         if voteType == _s_upvotes {
                             // Already upvoted
                             unvoteMatch(user, match: match, voteType: _s_upvotes)
-                            btn.deselect()
-                        } else if voteType == _s_downvotes {
-                            // Already downvoted
+                            selBtn.deselect()
+                        } else if voteType == _s_downvotes {    // Already downvoted
                             unvoteMatch(user, match: match, voteType: _s_downvotes)
                             upvoteMatch(user, match: match)
-                            (cell.rightButtons[1] as! DOFavoriteButton).deselect()
-                            btn.select()
+                            downvoteBtn.deselect()
+                            selBtn.select()
                         }
-                    } else {
-                        // Neither voted
+                    } else { // First-time vote
                         upvoteMatch(user, match: match)
-                        btn.select()
+                        selBtn.select()
                     }
                     return false
                 } else {
 //                    self.presentViewController(self.notSignedInAlert, animated: true, completion: nil)
                     return true
                 }
-            case 1:
-                // Downvote action
+            case 1: // Downvote action
                 if let user = currentUser {
                     if let vote = hasVoted(user, match: match) {
                         let voteType = vote[_s_voteType] as! String
@@ -237,18 +240,18 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
                         if voteType == _s_downvotes {
                             // Already downvoted
                             unvoteMatch(user, match: match, voteType: _s_downvotes)
-                            btn.deselect()
+                            selBtn.deselect()
                         } else if voteType == _s_upvotes {
                             // Already upvoted
                             unvoteMatch(user, match: match, voteType: _s_upvotes)
                             downvoteMatch(user, match: match)
-                            (cell.rightButtons[0] as! DOFavoriteButton).deselect()
-                            btn.select()
+                            
+                            upvoteBtn.deselect()
+                            selBtn.select()
                         }
-                    } else {
-                        // Neither voted
+                    } else { // First-time vote
                         downvoteMatch(user, match: match)
-                        btn.select()
+                        selBtn.select()
                     }
                     
                     return false
@@ -256,15 +259,14 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
 //                    self.presentViewController(self.notSignedInAlert, animated: true, completion: nil)
                     return true
                 }
-            case 2:
-                // Favorite action
+            case 2: // Favorite action
                 if let user = currentUser {
                     if let _ = isFavoriteIngredient(user, ingredient: ingredient) {
                         unfavoriteIngredient(user, ingredient: ingredient)
-                        btn.deselect()
+                        selBtn.deselect()
                     } else {
                         favoriteIngredient(user, ingredient: ingredient)
-                        btn.select()
+                        selBtn.select()
                     }
                         
                     return false
@@ -272,8 +274,7 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
 //                    self.presentViewController(self.notSignedInAlert, animated: true, completion: nil)
                     return true
                 }
-            case 3:
-                // Add action
+            case 3: // Add-to-hotpot action
                 print("DEBUG: Add to hotpot!")
                 //addToHotpot(ingredient)
                 return true
@@ -367,7 +368,6 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         }
             
     }
-
     
     func filterGlobalSearchResults(searchText: String) {
         globalSearchResults.removeAll()
