@@ -17,8 +17,8 @@ class SearchResultsViewController : UIViewController {
     
     // segues corresponding to embedded subviews
     let segueEmbedSearchResults = "goToSearchResults"
-    let segueEmbedFilterBar = "goToFilterBar" // segue not yet in existence
-    let segueEmbedHotpot = "goToHotpot" // segue not yet in existence
+    let segueEmbedFilterBar = "goToFilterBar"
+    let segueEmbedHotpot = "goToHotpot"
     
     // variables to hold the subview controllers (SVCs)
     var searchResultsSVC : UIViewController?
@@ -27,11 +27,8 @@ class SearchResultsViewController : UIViewController {
     
     // containers of subviews
     @IBOutlet weak var searchResultsContainer: UIView!
-    
     @IBOutlet weak var filterBarContainer: UIView!
-    
     @IBOutlet weak var hotpotContainer: UIView!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
