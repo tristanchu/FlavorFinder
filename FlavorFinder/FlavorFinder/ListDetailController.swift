@@ -31,7 +31,7 @@ class ListDetailController: UITableViewController {
     // Navigation:
     var backBtn: UIBarButtonItem = UIBarButtonItem()
     let backBtnAction = "backBtnClicked:"
-    let backBtnString = String.fontAwesomeIconWithName(.ChevronLeft) + " Lists"
+    let backBtnString = String.fontAwesomeIconWithName(.ChevronLeft) + " All Lists"
 
     // MARK: Override methods: ----------------------------------------------
     /* viewDidLoad:
