@@ -406,24 +406,47 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CqB-g8-4PC">
-                                <rect key="frame" x="0.0" y="204" width="600" height="314"/>
-                                <connections>
-                                    <segue destination="m7J-D3-eHA" kind="embed" identifier="goToSearchResults" id="okc-Lk-399"/>
-                                </connections>
-                            </containerView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="3iT-Te-5xR">
+                                <rect key="frame" x="1" y="93" width="600" height="351"/>
+                                <subviews>
+                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4tn-1A-t8U" userLabel="Filter Bar Container View">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="58"/>
+                                        <connections>
+                                            <segue destination="xpV-8M-bW3" kind="embed" identifier="goToFilterBar" id="6TU-wH-Xey"/>
+                                        </connections>
+                                    </containerView>
+                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uJK-a9-1m0" userLabel="Hotpot Container View">
+                                        <rect key="frame" x="0.0" y="58" width="600" height="52"/>
+                                        <connections>
+                                            <segue destination="OnA-jk-5Hp" kind="embed" identifier="goToHotpot" id="Pnt-Hs-OYJ"/>
+                                        </connections>
+                                    </containerView>
+                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CqB-g8-4PC">
+                                        <rect key="frame" x="0.0" y="110" width="600" height="241"/>
+                                        <connections>
+                                            <segue destination="m7J-D3-eHA" kind="embed" identifier="goToSearchResults" id="okc-Lk-399"/>
+                                        </connections>
+                                    </containerView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="uJK-a9-1m0" firstAttribute="top" secondItem="3iT-Te-5xR" secondAttribute="top" constant="58" id="6pO-8V-aqi"/>
+                                    <constraint firstItem="CqB-g8-4PC" firstAttribute="top" secondItem="3iT-Te-5xR" secondAttribute="top" constant="110" id="v47-Vu-Fsh"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.4039215686" green="0.58823529409999997" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="CqB-g8-4PC" secondAttribute="trailing" id="FIM-bl-Pg7"/>
-                            <constraint firstItem="5fU-N5-qc0" firstAttribute="top" secondItem="CqB-g8-4PC" secondAttribute="bottom" constant="82" id="SVI-5P-0rP"/>
-                            <constraint firstItem="CqB-g8-4PC" firstAttribute="top" secondItem="x14-3j-LRG" secondAttribute="bottom" constant="204" id="Wqo-8u-Nvz"/>
-                            <constraint firstItem="CqB-g8-4PC" firstAttribute="leading" secondItem="S3W-QO-b3i" secondAttribute="leading" id="yGa-T5-Ooc"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="3iT-Te-5xR" secondAttribute="trailing" constant="-21" id="C8n-P4-Vrn"/>
+                            <constraint firstItem="5fU-N5-qc0" firstAttribute="top" secondItem="3iT-Te-5xR" secondAttribute="bottom" constant="156" id="Ija-ws-4Jv"/>
+                            <constraint firstItem="3iT-Te-5xR" firstAttribute="top" secondItem="x14-3j-LRG" secondAttribute="bottom" constant="93" id="Mod-Y4-V5b"/>
+                            <constraint firstItem="3iT-Te-5xR" firstAttribute="leading" secondItem="S3W-QO-b3i" secondAttribute="leadingMargin" constant="-19" id="eQC-Ts-9Y0"/>
                         </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="600"/>
                     <connections>
+                        <outlet property="filterBarContainer" destination="4tn-1A-t8U" id="gKE-le-RWh"/>
+                        <outlet property="hotpotContainer" destination="uJK-a9-1m0" id="iRs-v1-JGM"/>
                         <outlet property="searchResultsContainer" destination="CqB-g8-4PC" id="Sq5-Nw-Uxt"/>
                     </connections>
                 </viewController>
@@ -960,7 +983,7 @@
             <objects>
                 <viewController id="m7J-D3-eHA" userLabel="Search Results Subview Controller" customClass="SearchResultsSubviewController" customModule="FlavorFinder" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="DLA-eN-E9Q">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="314"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="241"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -992,6 +1015,51 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D6H-7K-czm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1237" y="3292.5"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="pmv-an-YpN">
+            <objects>
+                <viewController id="LlV-Vu-CaH" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="IJU-wN-NOq"/>
+                        <viewControllerLayoutGuide type="bottom" id="fGu-ad-85M"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ZkN-1C-nCY">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="huV-Gb-z8M" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+        <!--Filter Bar Subview Controller-->
+        <scene sceneID="eJp-Fc-cA4">
+            <objects>
+                <viewController id="xpV-8M-bW3" userLabel="Filter Bar Subview Controller" customClass="FilterBarSubviewController" customModule="FlavorFinder" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xtQ-Se-m8P">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="58"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zw3-Ac-OBT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1853" y="3070"/>
+        </scene>
+        <!--Hotpot Subview Controller-->
+        <scene sceneID="XHb-dj-9Lf">
+            <objects>
+                <viewController id="OnA-jk-5Hp" userLabel="Hotpot Subview Controller" customClass="HotpotSubviewController" customModule="FlavorFinder" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="MSg-u7-gfc">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="51"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DvX-8H-u1Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2292" y="2922.5"/>
         </scene>
     </scenes>
     <resources>
