@@ -109,6 +109,9 @@ class ListsPageController: UITableViewController {
         return cell
     }
     
+    /* tableView -> Perform segue on select
+        - segues to detail of row when selected
+    */
     override func tableView(tableView: UITableView,
         didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.performSegueWithIdentifier(segueToListDetail, sender: self)
@@ -135,6 +138,30 @@ class ListsPageController: UITableViewController {
                         emptyBackgroundListText(noListsMsg);
                 }
             }
+    }
+    
+    /* prepareForSegue
+        - sends info to details page
+    */
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+
+        if (segue.identifier == segueToListDetail ) {
+            if let detailsPage = segue.destinationViewController as? ListDetailController {
+                if let idx = listsTableView.indexPathForSelectedRow?.row {
+                    // Make the title the name of list:
+                    detailsPage.listTitle = (userLists[idx].objectForKey(
+                        ListTitleColumnName) as? String)!
+
+                    // TESTING:
+                    let test1 = PFIngredient(name: "Cinnamon")
+                    let test2 = PFIngredient(name: "Garlic")
+                    let testIngredients = [test1, test2]
+                    // Make the table list the ingredients:
+                    // TODO - need to be able to make this first.
+                    detailsPage.ingredientList = testIngredients
+                }
+            }
+        }
     }
 
     // MARK: Functions -------------------------------------------------

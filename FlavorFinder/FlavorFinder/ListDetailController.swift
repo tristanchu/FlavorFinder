@@ -23,10 +23,16 @@ class ListDetailController: UITableViewController {
     
     // Visual related:
     let noIngredients = "You have nothing in this list!"
+    var listTitle = ""
     
     // Table itself:
     @IBOutlet var ingredientListsTableView: UITableView!
     
+    // Navigation:
+    var backBtn: UIBarButtonItem = UIBarButtonItem()
+    let backBtnAction = "backBtnClicked:"
+    let backBtnString = String.fontAwesomeIconWithName(.ChevronLeft) + " Lists"
+
     // MARK: Override methods: ----------------------------------------------
     /* viewDidLoad:
         Additional setup after loading the view (upon open)
@@ -43,8 +49,11 @@ class ListDetailController: UITableViewController {
         // Table view visuals:
         ingredientListsTableView.tableFooterView = UIView(frame: CGRectZero)  // remove empty cells
         ingredientListsTableView.rowHeight = 80.0
+
+        // Navigation Visuals:
+        setUpBackButton()
     }
-    
+
     /* viewDidAppear:
         Setup when user goes into page.
     */
@@ -55,15 +64,19 @@ class ListDetailController: UITableViewController {
         if let navi = self.tabBarController?.navigationController
             as? MainNavigationController {
                 self.tabBarController?.navigationItem.setLeftBarButtonItems(
-                    [], animated: true)
+                    [self.backBtn], animated: true)
                 self.tabBarController?.navigationItem.setRightBarButtonItems(
                     [], animated: true)
                 navi.reset_navigationBar()
-                self.tabBarController?.navigationItem.title = ""
+                self.backBtn.enabled = true
+
+                // TESTING:
+                print( "Looking at: " + listTitle)
         }
         
-        // Populate and display table:
-        populateListDetailTable()
+        // NOTE: no population because data passed in during segue.
+
+        // display table:
         ingredientListsTableView.backgroundColor = UIColor.whiteColor();
         ingredientListsTableView.backgroundView = nil;
         
@@ -98,16 +111,22 @@ class ListDetailController: UITableViewController {
     
     
     // MARK: Functions -------------------------------------------------
-    
-    /* populateListsTable:
-    clears current userLists array; gets user lists from parse local db
-    if user is logged in.
+
+    /* setUpBackButton
+        sets up the back button for navigation
     */
-    func populateListDetailTable() {
-        ingredientList.removeAll()
-        
-        // Get user's lists from Parse local db if user logged in:
-        let test = PFIngredient(className: "testing thing")
-        ingredientList.append(test)
+    func setUpBackButton() {
+        backBtn.setTitleTextAttributes(attributes, forState: .Normal)
+        backBtn.title = self.backBtnString
+        backBtn.tintColor = NAVI_BUTTON_COLOR
+        backBtn.target = self
+        backBtn.action = "backBtnClicked"  // refers to: backBtnClicked()
+    }
+    
+    /* backBtnClicked
+        - action for back button
+    */
+    func backBtnClicked() {
+        self.navigationController?.popViewControllerAnimated(true)
     }
 }
