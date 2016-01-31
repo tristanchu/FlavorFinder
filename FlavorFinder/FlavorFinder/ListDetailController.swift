@@ -23,10 +23,15 @@ class ListDetailController: UITableViewController {
     
     // Visual related:
     let noIngredients = "You have nothing in this list!"
+    var listTitle = "hello"
     
     // Table itself:
     @IBOutlet var ingredientListsTableView: UITableView!
     
+    // Navigation:
+    var backBtn: UIBarButtonItem = UIBarButtonItem()
+    let backBtnAction = "backBtnClicked:"
+
     // MARK: Override methods: ----------------------------------------------
     /* viewDidLoad:
         Additional setup after loading the view (upon open)
@@ -43,8 +48,11 @@ class ListDetailController: UITableViewController {
         // Table view visuals:
         ingredientListsTableView.tableFooterView = UIView(frame: CGRectZero)  // remove empty cells
         ingredientListsTableView.rowHeight = 80.0
+
+        // Navigation Visuals:
+        setUpBackButton()
     }
-    
+
     /* viewDidAppear:
         Setup when user goes into page.
     */
@@ -55,11 +63,12 @@ class ListDetailController: UITableViewController {
         if let navi = self.tabBarController?.navigationController
             as? MainNavigationController {
                 self.tabBarController?.navigationItem.setLeftBarButtonItems(
-                    [], animated: true)
+                    [self.backBtn], animated: true)
                 self.tabBarController?.navigationItem.setRightBarButtonItems(
                     [], animated: true)
                 navi.reset_navigationBar()
-                self.tabBarController?.navigationItem.title = ""
+                self.backBtn.enabled = true
+                self.tabBarController?.navigationItem.title = listTitle
         }
         
         // Populate and display table:
@@ -105,9 +114,27 @@ class ListDetailController: UITableViewController {
     */
     func populateListDetailTable() {
         ingredientList.removeAll()
-        
+
         // Get user's lists from Parse local db if user logged in:
         let test = PFIngredient(className: "testing thing")
         ingredientList.append(test)
+    }
+
+    /* setUpBackButton
+        sets up the back button for navigation
+    */
+    func setUpBackButton() {
+        backBtn.setTitleTextAttributes(attributes, forState: .Normal)
+        backBtn.title = String.fontAwesomeIconWithName(.ChevronLeft)
+        backBtn.tintColor = NAVI_BUTTON_COLOR
+        backBtn.target = self
+        backBtn.action = "backBtnClicked"  // refers to: backBtnClicked()
+    }
+    
+    /* backBtnClicked
+        - action for back button
+    */
+    func backBtnClicked() {
+        self.navigationController?.popViewControllerAnimated(true)
     }
 }

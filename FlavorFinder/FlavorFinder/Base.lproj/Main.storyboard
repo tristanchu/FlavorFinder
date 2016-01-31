@@ -344,7 +344,7 @@
                         <segue destination="069-0A-krq" kind="relationship" relationship="viewControllers" id="zCb-0N-hZz"/>
                         <segue destination="h2p-tb-f5C" kind="relationship" relationship="viewControllers" id="5Lp-kB-tlU"/>
                         <segue destination="aDy-6t-DKL" kind="relationship" relationship="viewControllers" id="VSP-N6-9Ob"/>
-                        <segue destination="bSA-UW-dX3" kind="relationship" relationship="viewControllers" id="eGn-n6-axZ"/>
+                        <segue destination="5es-bE-obA" kind="relationship" relationship="viewControllers" id="eGn-n6-axZ"/>
                         <segue destination="0ye-Pg-Qge" kind="relationship" relationship="viewControllers" id="Nnk-7w-lej"/>
                         <segue destination="yDJ-pt-my1" kind="relationship" relationship="viewControllers" id="fVy-Lu-5lf"/>
                     </connections>
@@ -511,7 +511,7 @@
             </objects>
             <point key="canvasLocation" x="2730" y="356"/>
         </scene>
-        <!--Lists-->
+        <!--Lists Page Controller-->
         <scene sceneID="Bug-zi-jTx">
             <objects>
                 <viewController id="bSA-UW-dX3" customClass="ListsPageController" customModule="FlavorFinder" sceneMemberID="viewController">
@@ -521,33 +521,33 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="listCellIdentifier" id="NWg-i8-uKV">
-                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NWg-i8-uKV" id="9gp-0O-fKi">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="DaX-IM-LAe" kind="showDetail" identifier="segueToListTable" id="wGB-1y-1MF"/>
+                                    <segue destination="LlI-Ba-Zai" kind="show" identifier="segueToListTable" id="KRj-45-P1j"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Lists" image="Ingredients" selectedImage="IngredientsFilled" id="Lug-t8-7kq"/>
+                    <navigationItem key="navigationItem" id="uvp-CM-fya"/>
                     <connections>
                         <outlet property="listsTableView" destination="XXy-rm-k7A" id="XRY-2i-E2j"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CSM-cM-kZM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4065" y="1188"/>
+            <point key="canvasLocation" x="4877" y="1188"/>
         </scene>
         <!--List Detail Controller-->
         <scene sceneID="ueL-wy-vzF">
             <objects>
                 <viewController modalTransitionStyle="flipHorizontal" modalPresentationStyle="currentContext" id="LlI-Ba-Zai" customClass="ListDetailController" customModule="FlavorFinder" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="aSb-oz-NbM">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -568,7 +568,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4ft-5g-u3O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5635" y="1187"/>
+            <point key="canvasLocation" x="5677" y="1173"/>
         </scene>
         <!--Favorites-->
         <scene sceneID="swP-zV-l0p">
@@ -931,27 +931,24 @@
             </objects>
             <point key="canvasLocation" x="2126" y="3577"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="UDl-BT-FLt">
+        <!--Lists-->
+        <scene sceneID="f5y-5I-m5K">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="DaX-IM-LAe" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5es-bE-obA" customClass="MainNavigationController" customModule="FlavorFinder" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Lists" image="Ingredients" selectedImage="IngredientsFilled" id="Lug-t8-7kq"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ziq-r5-TW4">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="LQM-0K-jgH">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
-                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="yCd-D1-Nv7">
-                        <rect key="frame" x="0.0" y="556" width="600" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </toolbar>
                     <connections>
-                        <segue destination="LlI-Ba-Zai" kind="relationship" relationship="rootViewController" id="DpY-b7-3c5"/>
+                        <segue destination="bSA-UW-dX3" kind="relationship" relationship="rootViewController" id="hqp-hq-SJA"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="asP-Zb-kb9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gSS-mV-g7R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4823" y="1187"/>
+            <point key="canvasLocation" x="4065" y="1188"/>
         </scene>
     </scenes>
     <resources>

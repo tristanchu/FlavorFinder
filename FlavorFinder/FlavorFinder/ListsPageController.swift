@@ -136,6 +136,16 @@ class ListsPageController: UITableViewController {
                 }
             }
     }
+    
+    /* prepareForSegue
+        - sends info to details page
+    */
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+
+        if (segue.identifier == segueToListDetail ) {
+            print("moving")
+        }
+    }
 
     // MARK: Functions -------------------------------------------------
 
