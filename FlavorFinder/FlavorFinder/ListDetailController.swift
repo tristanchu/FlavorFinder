@@ -22,8 +22,8 @@ class ListDetailController: UITableViewController {
     let ListTitleColumnName = "title"
     
     // Visual related:
-    let noIngredients = "You have nothing in this list!"
     var listTitle = ""
+    var noIngredients = " has no ingredients!"
     
     // Table itself:
     @IBOutlet var ingredientListsTableView: UITableView!
@@ -69,17 +69,20 @@ class ListDetailController: UITableViewController {
                     [], animated: true)
                 navi.reset_navigationBar()
                 self.backBtn.enabled = true
-
-                // TESTING:
-                print( "Looking at: " + listTitle)
         }
         
         // NOTE: no population because data passed in during segue.
 
-        // display table:
+        // reset background:
         ingredientListsTableView.backgroundColor = UIColor.whiteColor();
         ingredientListsTableView.backgroundView = nil;
         
+        // If no data, display message:
+        if ingredientList.isEmpty {
+            ingredientListsTableView.backgroundView = createBackgroundWithText(
+                self.listTitle + self.noIngredients)
+        }
+
         // Update table view:
         ingredientListsTableView.reloadData()
     }
@@ -129,4 +132,20 @@ class ListDetailController: UITableViewController {
     func backBtnClicked() {
         self.navigationController?.popViewControllerAnimated(true)
     }
+
+    /* createBackgroundWithText
+    creates a backgroundView for when there is no data to display.
+    text = text to display.
+    */
+    func createBackgroundWithText(text: String) -> UILabel {
+        let noDataLabel: UILabel = UILabel(frame: CGRectMake(
+            0, 0, ingredientListsTableView.bounds.size.width,
+            ingredientListsTableView.bounds.size.height))
+        noDataLabel.text = text
+        noDataLabel.textColor = UIColor(
+            red: 22.0/255.0, green: 106.0/255.0, blue: 176.0/255.0, alpha: 1.0);
+        noDataLabel.textAlignment = NSTextAlignment.Center;
+        return noDataLabel;
+    }
+
 }
