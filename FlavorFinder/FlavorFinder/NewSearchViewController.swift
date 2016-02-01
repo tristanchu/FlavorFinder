@@ -49,7 +49,11 @@ class NewSearchViewController : ContainerParentViewController {
             // Rounded edges for container:
             containerVC?.view.layer.cornerRadius = 20
             containerVC?.view.clipsToBounds = true
-            goToLogin()
+            
+            // Shows login first
+//            goToLogin()
+            // TESTING:
+            goToRegister()
         }
     }
 
