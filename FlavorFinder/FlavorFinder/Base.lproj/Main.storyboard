@@ -975,10 +975,10 @@
             </objects>
             <point key="canvasLocation" x="2835" y="3913"/>
         </scene>
-        <!--View Controller-->
+        <!--Login View Page-->
         <scene sceneID="T5o-sB-eQg">
             <objects>
-                <viewController id="PFz-CQ-J0I" sceneMemberID="viewController">
+                <viewController id="PFz-CQ-J0I" customClass="LoginViewPage" customModule="FlavorFinder" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="3Qu-xz-gL9"/>
                         <viewControllerLayoutGuide type="bottom" id="WTn-Lx-YtN"/>
