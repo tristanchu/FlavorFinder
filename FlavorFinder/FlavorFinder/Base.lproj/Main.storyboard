@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="oWC-1n-3cO">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -467,8 +466,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lnu-aU-Idl">
-                                <rect key="frame" x="20" y="30" width="560" height="210"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lnu-aU-Idl">
+                                <rect key="frame" x="20" y="30" width="560" height="229"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Flavor Finder" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Ob-z9-dlN">
                                         <rect key="frame" x="84" y="0.0" width="392" height="20"/>
@@ -480,14 +479,14 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FFIcon" translatesAutoresizingMaskIntoConstraints="NO" id="D36-Am-aeg">
-                                        <rect key="frame" x="220" y="23" width="120" height="131"/>
+                                        <rect key="frame" x="220" y="32.5" width="120" height="120"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="120" id="hhl-zn-6R8"/>
-                                            <constraint firstAttribute="height" constant="100" id="qo0-t5-cEj"/>
+                                            <constraint firstAttribute="height" constant="120" id="qo0-t5-cEj"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter a search to begin:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="ype-6a-YWK">
-                                        <rect key="frame" x="56" y="147" width="448" height="20"/>
+                                        <rect key="frame" x="28" y="155.5" width="504" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="lwa-sv-QBU"/>
                                         </constraints>
@@ -495,8 +494,8 @@
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="LPe-X5-35t">
-                                        <rect key="frame" x="56" y="170" width="448" height="40"/>
+                                    <searchBar contentMode="redraw" text="" placeholder="What ingredient would you like to look up?" translatesAutoresizingMaskIntoConstraints="NO" id="LPe-X5-35t">
+                                        <rect key="frame" x="14" y="189" width="532" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="hs9-Da-RRs"/>
                                         </constraints>
@@ -506,9 +505,8 @@
                                 <constraints>
                                     <constraint firstItem="D36-Am-aeg" firstAttribute="centerX" secondItem="lnu-aU-Idl" secondAttribute="centerX" id="7FY-0l-eHg"/>
                                     <constraint firstItem="5Ob-z9-dlN" firstAttribute="width" secondItem="lnu-aU-Idl" secondAttribute="width" multiplier="0.7" id="IBp-KQ-0DG"/>
-                                    <constraint firstItem="LPe-X5-35t" firstAttribute="width" secondItem="lnu-aU-Idl" secondAttribute="width" multiplier="0.8" id="eik-TQ-oCn"/>
-                                    <constraint firstItem="ype-6a-YWK" firstAttribute="width" secondItem="lnu-aU-Idl" secondAttribute="width" multiplier="0.8" id="jkZ-u1-zDc"/>
-                                    <constraint firstItem="ype-6a-YWK" firstAttribute="top" relation="greaterThanOrEqual" secondItem="D36-Am-aeg" secondAttribute="bottom" constant="-15" id="txL-QU-WQE"/>
+                                    <constraint firstItem="LPe-X5-35t" firstAttribute="width" secondItem="lnu-aU-Idl" secondAttribute="width" multiplier="0.95" id="eik-TQ-oCn"/>
+                                    <constraint firstItem="ype-6a-YWK" firstAttribute="width" secondItem="lnu-aU-Idl" secondAttribute="width" multiplier="0.9" id="jkZ-u1-zDc"/>
                                 </constraints>
                             </stackView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hIe-K6-8fu">
@@ -522,7 +520,6 @@
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="hIe-K6-8fu" secondAttribute="trailing" constant="10" id="AA9-PW-6mJ"/>
                             <constraint firstItem="lnu-aU-Idl" firstAttribute="top" secondItem="jCg-b3-4H7" secondAttribute="bottom" constant="30" id="BqZ-PK-L7q"/>
-                            <constraint firstItem="lnu-aU-Idl" firstAttribute="height" secondItem="YI0-HO-dgz" secondAttribute="height" multiplier="0.35" id="CEY-hM-m1N"/>
                             <constraint firstItem="hIe-K6-8fu" firstAttribute="height" secondItem="YI0-HO-dgz" secondAttribute="height" multiplier="0.45" id="CKZ-O5-L5j"/>
                             <constraint firstAttribute="bottomMargin" secondItem="hIe-K6-8fu" secondAttribute="bottom" constant="10" id="JPj-6P-S9v"/>
                             <constraint firstAttribute="trailingMargin" secondItem="lnu-aU-Idl" secondAttribute="trailing" id="nYm-wo-cEC"/>
@@ -530,11 +527,15 @@
                             <constraint firstItem="hIe-K6-8fu" firstAttribute="leading" secondItem="YI0-HO-dgz" secondAttribute="leadingMargin" constant="10" id="uua-YD-fMO"/>
                         </constraints>
                     </view>
-                    <toolbarItems>
-                        <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="gj0-LB-Em0"/>
-                        <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="qFD-AG-7h1"/>
-                    </toolbarItems>
+                    <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="appIconView" destination="D36-Am-aeg" id="xBD-hK-Hvb"/>
+                        <outlet property="appName" destination="5Ob-z9-dlN" id="JCL-93-AAo"/>
+                        <outlet property="newSearchBar" destination="LPe-X5-35t" id="eWE-vL-lVT"/>
+                        <outlet property="newSearchSearchBar" destination="LPe-X5-35t" id="GDX-jP-PLM"/>
+                        <outlet property="searchPrompt" destination="ype-6a-YWK" id="cQB-aU-uqp"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M3T-y0-slv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -974,10 +975,10 @@
             </objects>
             <point key="canvasLocation" x="2835" y="3913"/>
         </scene>
-        <!--View Controller-->
+        <!--Login View Page-->
         <scene sceneID="T5o-sB-eQg">
             <objects>
-                <viewController id="PFz-CQ-J0I" sceneMemberID="viewController">
+                <viewController id="PFz-CQ-J0I" customClass="LoginViewPage" customModule="FlavorFinder" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="3Qu-xz-gL9"/>
                         <viewControllerLayoutGuide type="bottom" id="WTn-Lx-YtN"/>
@@ -985,24 +986,11 @@
                     <view key="view" contentMode="scaleToFill" id="UIn-gU-pqY">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="login -- Tristan's changes to be here" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UwS-2L-2db">
-                                <rect key="frame" x="141" y="109" width="397" height="128"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="397" id="ivw-SB-vjD"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="WTn-Lx-YtN" firstAttribute="top" secondItem="UwS-2L-2db" secondAttribute="bottom" constant="363" id="j0G-ho-sRZ"/>
-                            <constraint firstItem="UwS-2L-2db" firstAttribute="top" secondItem="3Qu-xz-gL9" secondAttribute="bottom" constant="109" id="lkZ-1r-xHj"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="UwS-2L-2db" secondAttribute="trailing" constant="42" id="wcD-5n-cg0"/>
-                        </constraints>
+                        <color key="backgroundColor" red="0.87724311799999999" green="0.93664976320000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
+                    <keyCommands>
+                        <keyCommand input="c"/>
+                    </keyCommands>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ebM-Wd-pOn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1086,6 +1074,10 @@
         <scene sceneID="eJp-Fc-cA4">
             <objects>
                 <viewController id="xpV-8M-bW3" userLabel="Filter Bar Subview Controller" customClass="FilterBarSubviewController" customModule="FlavorFinder" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="XzL-3G-OdR"/>
+                        <viewControllerLayoutGuide type="bottom" id="ESf-fa-pI8"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="xtQ-Se-m8P">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="58"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1100,8 +1092,12 @@
         <scene sceneID="XHb-dj-9Lf">
             <objects>
                 <viewController id="OnA-jk-5Hp" userLabel="Hotpot Subview Controller" customClass="HotpotSubviewController" customModule="FlavorFinder" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="joS-5I-kZ4"/>
+                        <viewControllerLayoutGuide type="bottom" id="OvI-hM-hWM"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="MSg-u7-gfc">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="51"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="52"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -1124,6 +1120,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="j9n-LJ-Uv6"/>
-        <segue reference="yCh-I4-cTX"/>
+        <segue reference="vhT-hz-2ur"/>
     </inferredMetricsTieBreakers>
 </document>

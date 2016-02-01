@@ -12,6 +12,7 @@
 		60216E641BEC41360029454B /* _UserSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60216E631BEC41360029454B /* _UserSettingsViewController.swift */; };
 		60216E661BEC4F740029454B /* UiUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60216E651BEC4F740029454B /* UiUtils.swift */; };
 		60322EA31BD9CE150099030B /* _LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60322EA21BD9CE150099030B /* _LoginViewController.swift */; };
+		6062FDC11C5F3386009B2EEB /* LoginViewPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6062FDC01C5F3386009B2EEB /* LoginViewPage.swift */; settings = {ASSET_TAGS = (); }; };
 		609432671C42DCA800BA0577 /* FavoritesPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609432661C42DCA800BA0577 /* FavoritesPageController.swift */; };
 		609432691C42DD6500BA0577 /* ListsPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609432681C42DD6500BA0577 /* ListsPageController.swift */; };
 		6094326B1C42DDB500BA0577 /* MorePageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6094326A1C42DDB500BA0577 /* MorePageController.swift */; };
@@ -86,6 +87,7 @@
 		60216E631BEC41360029454B /* _UserSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _UserSettingsViewController.swift; sourceTree = "<group>"; };
 		60216E651BEC4F740029454B /* UiUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UiUtils.swift; sourceTree = "<group>"; };
 		60322EA21BD9CE150099030B /* _LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _LoginViewController.swift; sourceTree = "<group>"; };
+		6062FDC01C5F3386009B2EEB /* LoginViewPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewPage.swift; sourceTree = "<group>"; };
 		609432661C42DCA800BA0577 /* FavoritesPageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesPageController.swift; sourceTree = "<group>"; };
 		609432681C42DD6500BA0577 /* ListsPageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListsPageController.swift; sourceTree = "<group>"; };
 		6094326A1C42DDB500BA0577 /* MorePageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MorePageController.swift; sourceTree = "<group>"; };
@@ -363,6 +365,7 @@
 		B6A49C4E1C4F45B000586B15 /* Pages */ = {
 			isa = PBXGroup;
 			children = (
+				6062FDC01C5F3386009B2EEB /* LoginViewPage.swift */,
 				60B3F16C1C5AE41D0018AA29 /* ListDetailController.swift */,
 				B6739A171C5997760004F982 /* LandingPageController.swift */,
 				609432661C42DCA800BA0577 /* FavoritesPageController.swift */,
@@ -561,6 +564,7 @@
 				60FEE38F1BE570E100F51BE8 /* KeychainWrapper.m in Sources */,
 				8875DE2C1BE04DD900CD50EA /* LoginUtils.swift in Sources */,
 				B6098CE41BF7F3B8001EDCE6 /* _SavedMatchesViewController.swift in Sources */,
+				6062FDC11C5F3386009B2EEB /* LoginViewPage.swift in Sources */,
 				880DA78C1BE1FB03003C67F0 /* Globals.swift in Sources */,
 				60322EA31BD9CE150099030B /* _LoginViewController.swift in Sources */,
 				B6739A1C1C5999D20004F982 /* NewSearchViewController.swift in Sources */,
