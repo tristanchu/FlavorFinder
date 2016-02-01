@@ -15,11 +15,11 @@ import UIKit
 import Parse
 
 class LandingPageController: ContainerParentViewController {
-    var gotSearch = true
+    var gotSearch = false
     let segueLandingEmbedded = "segueLandingEmbedSubview"
     let segueToSearchResults = "segueLandingToSearchResults"
     let segueToNewSearch = "segueLandingToNewSearch"
-    
+
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         // load the appropriate subviews (new search or search results)
@@ -31,22 +31,22 @@ class LandingPageController: ContainerParentViewController {
             goToNewSearch()
         }
     }
-    
+
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if self.segueEmbeddedContent == nil {
             self.setValue(segueLandingEmbedded, forKey: "segueEmbeddedContent")
         }
         super.prepareForSegue(segue, sender: sender)
     }
-    
+
     func goToNewSearch() {
         containerVC?.segueIdentifierReceivedFromParent(segueToNewSearch)
     }
-    
+
     func goToSearchResults() {
         containerVC?.segueIdentifierReceivedFromParent(segueToSearchResults)
         /// need to handle search terms >> self.terms becomes child's segue's sender.terms?
         /// newsearch child can pass along terms from the search bar, which triggers this perhaps...
     }
-    
+
 }
