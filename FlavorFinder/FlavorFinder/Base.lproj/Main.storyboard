@@ -5,6 +5,11 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="FontAwesome.otf">
+            <string>FontAwesome</string>
+        </mutableArray>
+    </customFonts>
     <scenes>
         <!--Login View Controller-->
         <scene sceneID="4Jp-rt-Y0j">
@@ -953,7 +958,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="r7b-bU-Spd">
-                                <rect key="frame" x="30" y="30" width="540" height="266.5"/>
+                                <rect key="frame" x="30" y="34" width="540" height="266.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign Up" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="40P-NH-G2D">
                                         <rect key="frame" x="135" y="0.0" width="270" height="25"/>
@@ -1008,6 +1013,9 @@
                                         <state key="normal" title="Create Account">
                                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="createAccountAction:" destination="BtG-Bo-wjf" eventType="touchUpInside" id="8H0-sj-ihQ"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -1020,12 +1028,15 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aeM-a4-rYd">
-                                <rect key="frame" x="20" y="10" width="130" height="29"/>
+                                <rect key="frame" x="20" y="5" width="130" height="26"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="130" id="c0B-ax-swX"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <state key="normal" title="&lt; Back to Login"/>
+                                <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="14"/>
+                                <state key="normal" title="Back to Login"/>
+                                <connections>
+                                    <action selector="backToLoginAction:" destination="BtG-Bo-wjf" eventType="touchUpInside" id="aRX-A1-dcb"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.87724311799999999" green="0.93664976320000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -1033,12 +1044,22 @@
                             <constraint firstAttribute="trailingMargin" secondItem="r7b-bU-Spd" secondAttribute="trailing" constant="10" id="08w-RY-gcV"/>
                             <constraint firstItem="aeM-a4-rYd" firstAttribute="leading" secondItem="yOz-4f-g7j" secondAttribute="leadingMargin" id="7qd-Mn-rHN"/>
                             <constraint firstItem="r7b-bU-Spd" firstAttribute="leading" secondItem="yOz-4f-g7j" secondAttribute="leadingMargin" constant="10" id="Ak7-gU-e8Y"/>
-                            <constraint firstItem="aeM-a4-rYd" firstAttribute="top" secondItem="W8R-uK-94I" secondAttribute="bottom" constant="10" id="D9u-wz-wVw"/>
-                            <constraint firstItem="r7b-bU-Spd" firstAttribute="top" secondItem="W8R-uK-94I" secondAttribute="bottom" constant="30" id="avO-Ym-vrD"/>
+                            <constraint firstItem="aeM-a4-rYd" firstAttribute="top" secondItem="W8R-uK-94I" secondAttribute="bottom" constant="5" id="D9u-wz-wVw"/>
+                            <constraint firstItem="r7b-bU-Spd" firstAttribute="top" secondItem="W8R-uK-94I" secondAttribute="bottom" constant="34" id="avO-Ym-vrD"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="backToLoginButton" destination="aeM-a4-rYd" id="Obc-e0-S1i"/>
+                        <outlet property="createAccountButton" destination="2FA-e0-oxW" id="U7F-A0-4l4"/>
+                        <outlet property="emailSignUpField" destination="La9-5i-mqZ" id="UFT-cg-ytc"/>
+                        <outlet property="pwSignUpField" destination="9wg-ge-abF" id="DWf-Vd-NTb"/>
+                        <outlet property="retypePwSignUpField" destination="XCh-zd-wuJ" id="cfR-8A-KBn"/>
+                        <outlet property="signUpPromptLabel" destination="40P-NH-G2D" id="JcL-19-XOo"/>
+                        <outlet property="usernameSignUpField" destination="M8e-bd-zuC" id="wPN-bb-bao"/>
+                        <outlet property="warningTextLabel" destination="rNT-x5-eXT" id="Sk1-hx-rJi"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NU5-o7-uDT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
