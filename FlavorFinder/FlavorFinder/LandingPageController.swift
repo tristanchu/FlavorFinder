@@ -15,7 +15,7 @@ import UIKit
 import Parse
 
 class LandingPageController: ContainerParentViewController {
-    var gotSearch = false
+    var gotSearch = true
     let segueLandingEmbedded = "segueLandingEmbedSubview"
     let segueToSearchResults = "segueLandingToSearchResults"
     let segueToNewSearch = "segueLandingToNewSearch"

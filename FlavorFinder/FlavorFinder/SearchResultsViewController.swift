@@ -23,7 +23,7 @@ class SearchResultsViewController : UIViewController {
     // variables to hold the subview controllers (SVCs)
     var searchResultsSVC : UIViewController?
     var filterBarSVC : UIViewController?
-    var hotpotSVC : UIViewController?
+    var hotpotSVC : HotpotSubviewController?
     
     // containers of subviews
     @IBOutlet weak var searchResultsContainer: UIView!
@@ -46,7 +46,7 @@ class SearchResultsViewController : UIViewController {
             filterBarSVC = vc
             break
         case segueEmbedHotpot:
-            hotpotSVC = vc
+            hotpotSVC = vc as? HotpotSubviewController
             break
         default:
             break
