@@ -1021,6 +1021,9 @@
                                                 <state key="normal" title="Login">
                                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="loginButtonAction:" destination="PFz-CQ-J0I" eventType="touchUpInside" id="g57-xg-yUD"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IzI-aG-uaH">
                                                 <rect key="frame" x="241" y="0.0" width="191" height="40"/>
@@ -1028,6 +1031,9 @@
                                                 <state key="normal" title="Sign up">
                                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="signUpButtonAction:" destination="PFz-CQ-J0I" eventType="touchUpInside" id="bDw-Ny-FEp"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -1052,6 +1058,13 @@
                         <keyCommand input="c"/>
                     </keyCommands>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="loginButton" destination="fRe-el-3Al" id="PQC-97-CUN"/>
+                        <outlet property="loginPromptLabel" destination="fEV-Ao-SnA" id="l1r-RC-7Hg"/>
+                        <outlet property="passwordField" destination="8Wj-Vk-Nx6" id="d7f-wP-w15"/>
+                        <outlet property="sigupUpButton" destination="IzI-aG-uaH" id="Ygb-as-CN0"/>
+                        <outlet property="usernameField" destination="dbC-l6-6qC" id="Lwi-PF-nLr"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ebM-Wd-pOn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
