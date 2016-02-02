@@ -14,6 +14,8 @@ import DZNEmptyDataSet
 import DOFavoriteButton
 
 class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+    
+    // MARK: Properties:
     // CONSTANTS
     // numbers
     let K_CELL_HEIGHT : CGFloat = 40.0
@@ -61,7 +63,8 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         F_DAIRY: false,
         F_VEG: false,
         F_NUTS: false]
-    
+ 
+    // MARK: Actions
     // SETUP FUNCTIONS
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -17,14 +17,14 @@ import Parse
 class LandingPageController: ContainerParentViewController {
 
     // MARK: Properties:
-    // Vars:
-    var gotSearch = true
 
     // Segues:
     let segueLandingEmbedded = "segueLandingEmbedSubview"
     let segueToSearchResults = "segueLandingToSearchResults"
     let segueToNewSearch = "segueLandingToNewSearch"
 
+    // MARK: Actions
+    
     /* viewDidAppear
         runs when user goes to view:
     */
@@ -32,14 +32,17 @@ class LandingPageController: ContainerParentViewController {
         super.viewDidAppear(animated)
         // load the appropriate subviews (new search or search results)
         if (currentSearch.count != 0) {
-            print("DEBUG: got search");
-            goToSearchResults();
+            goToSearchResults()
         } else {
-            print("DEBUG: new search");
-            goToNewSearch();
+            goToNewSearch()
         }
     }
 
+    /* prepareForSegue
+        - prepares for segue
+        - sets value for variable inherited from ContainerParentController s.t.
+        embedded content via ContainerViewController can be tracked
+    */
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if self.segueEmbeddedContent == nil {
             self.setValue(segueLandingEmbedded, forKey: "segueEmbeddedContent")
@@ -47,14 +50,20 @@ class LandingPageController: ContainerParentViewController {
         super.prepareForSegue(segue, sender: sender)
     }
 
+    /* goToNewSearch
+        - loads new search view for landing page
+        - should be called when there is no search in progress
+    */
     func goToNewSearch() {
         containerVC?.segueIdentifierReceivedFromParent(segueToNewSearch)
     }
-
+    
+    /* goToSearchResults
+        - loads search results view for landing page
+        - should be called when user initiates a search
+    */
     func goToSearchResults() {
         containerVC?.segueIdentifierReceivedFromParent(segueToSearchResults)
-        /// need to handle search terms >> self.terms becomes child's segue's sender.terms?
-        /// newsearch child can pass along terms from the search bar, which triggers this perhaps...
     }
 
 }
