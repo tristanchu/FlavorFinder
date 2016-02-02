@@ -13,16 +13,21 @@ import Foundation
 import UIKit
 import Parse
 
-class NewSearchViewController : ContainerParentViewController {
+class NewSearchViewController : ContainerParentViewController,
+        UISearchBarDelegate, UITableViewDelegate {
     
     // MARK: Properties:
+    var activeSearch : Bool = false
+    var allIngredients = [PFObject]() // set on load
+    var filteredResults : [PFObject] = []
 
     // Identifiers from storyboard: (note, constraints on there)
     @IBOutlet weak var appName: UILabel!
     @IBOutlet weak var appIconView: UIImageView!
     @IBOutlet weak var searchPrompt: UILabel!
     @IBOutlet weak var newSearchBar: UISearchBar!
-    @IBOutlet weak var newSearchSearchBar: UISearchBar!
+    @IBOutlet weak var searchResultTableView: UITableView!
+//    @IBOutlet weak var newSearchSearchBar: UISearchBar!
 
 
     // Segues:
@@ -33,12 +38,34 @@ class NewSearchViewController : ContainerParentViewController {
     // Testing:
     var debugLoggedIn = false
 
+    // MARK: Override Functions:
+
+    /* viewDidLoad
+        - called when app first loaded
+    */
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // get _allIngredients - loaded by _readIngredients by appDelegate
+        allIngredients = _allIngredients
+
+        // set up delegates:
+        newSearchBar.delegate = self
+        searchResultTableView.delegate = self
+//        searchResultTableView.dataSource = self
+    }
+
+    /* viewDidAppear
+        - called when user goes; to view
+    */
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
 
         // Rounded edges for search bar:
         self.newSearchBar.layer.cornerRadius = 15
         self.newSearchBar.clipsToBounds = true
+
+        // Hide search bar results on load:
+        searchResultTableView.hidden = true
 
         // Hide/Show login container based on if user is logged in:
         if currentUser != nil {

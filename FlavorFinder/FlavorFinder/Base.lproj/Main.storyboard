@@ -472,7 +472,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="18" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lnu-aU-Idl">
-                                <rect key="frame" x="20" y="26" width="560" height="220"/>
+                                <rect key="frame" x="20" y="26" width="560" height="219.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Flavor Finder" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Ob-z9-dlN">
                                         <rect key="frame" x="84" y="0.0" width="392" height="20"/>
@@ -484,7 +484,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FFIcon" translatesAutoresizingMaskIntoConstraints="NO" id="D36-Am-aeg">
-                                        <rect key="frame" x="220" y="30" width="120" height="120"/>
+                                        <rect key="frame" x="220" y="29" width="120" height="120"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="120" id="hhl-zn-6R8"/>
                                             <constraint firstAttribute="height" constant="120" id="qo0-t5-cEj"/>
@@ -520,13 +520,24 @@
                                     <segue destination="wNk-xB-g6C" kind="embed" identifier="segueLoginEmbedSubview" id="w9Y-38-Udg"/>
                                 </connections>
                             </containerView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Rq3-XE-44K">
+                                <rect key="frame" x="48" y="245.5" width="504" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="QL8-tQ-29c"/>
+                                </constraints>
+                                <color key="sectionIndexBackgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.46432637710000002" green="0.83866794580000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="Rq3-XE-44K" firstAttribute="centerX" secondItem="YI0-HO-dgz" secondAttribute="centerX" id="5ug-pR-A1h"/>
+                            <constraint firstItem="Rq3-XE-44K" firstAttribute="top" secondItem="lnu-aU-Idl" secondAttribute="bottom" id="A0g-DL-Jdg"/>
                             <constraint firstAttribute="trailingMargin" secondItem="hIe-K6-8fu" secondAttribute="trailing" constant="10" id="AA9-PW-6mJ"/>
                             <constraint firstItem="lnu-aU-Idl" firstAttribute="top" secondItem="jCg-b3-4H7" secondAttribute="bottom" constant="26" id="BqZ-PK-L7q"/>
                             <constraint firstItem="hIe-K6-8fu" firstAttribute="height" secondItem="YI0-HO-dgz" secondAttribute="height" multiplier="0.48" id="CKZ-O5-L5j"/>
                             <constraint firstAttribute="bottomMargin" secondItem="hIe-K6-8fu" secondAttribute="bottom" constant="10" id="JPj-6P-S9v"/>
+                            <constraint firstItem="Rq3-XE-44K" firstAttribute="width" secondItem="lnu-aU-Idl" secondAttribute="width" multiplier="0.9" id="V8l-J5-xXg"/>
                             <constraint firstAttribute="trailingMargin" secondItem="lnu-aU-Idl" secondAttribute="trailing" id="nYm-wo-cEC"/>
                             <constraint firstItem="lnu-aU-Idl" firstAttribute="leading" secondItem="YI0-HO-dgz" secondAttribute="leadingMargin" id="o28-tu-EsA"/>
                             <constraint firstItem="hIe-K6-8fu" firstAttribute="leading" secondItem="YI0-HO-dgz" secondAttribute="leadingMargin" constant="10" id="uua-YD-fMO"/>
@@ -538,8 +549,8 @@
                         <outlet property="appIconView" destination="D36-Am-aeg" id="xBD-hK-Hvb"/>
                         <outlet property="appName" destination="5Ob-z9-dlN" id="JCL-93-AAo"/>
                         <outlet property="newSearchBar" destination="LPe-X5-35t" id="eWE-vL-lVT"/>
-                        <outlet property="newSearchSearchBar" destination="LPe-X5-35t" id="GDX-jP-PLM"/>
                         <outlet property="searchPrompt" destination="ype-6a-YWK" id="cQB-aU-uqp"/>
+                        <outlet property="searchResultTableView" destination="Rq3-XE-44K" id="bjw-oV-czx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M3T-y0-slv" userLabel="First Responder" sceneMemberID="firstResponder"/>
