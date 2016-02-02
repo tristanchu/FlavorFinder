@@ -54,12 +54,6 @@ class HotpotSubviewController : UICollectionViewController, UICollectionViewDele
         collectionView?.backgroundColor = HOTPOT_COLOR
         
         collectionView?.reloadData()
-        
-        
-        // debug: adding ingredients
-//        addHotpotIngredient(PFIngredient(name: "cinnamon"))
-//        addHotpotIngredient(PFIngredient(name: "chocolate"))
-//        addHotpotIngredient(PFIngredient(name: "milk"))
 
     }
     
@@ -71,14 +65,19 @@ class HotpotSubviewController : UICollectionViewController, UICollectionViewDele
     }
     
     func removeHotpotIngredientClicked(sender: RemoveHotpotIngredientButton) {
-        currentSearch.removeAtIndex(currentSearch.indexOf(sender.ingredient as! PFIngredient)!)
-        
-        if currentSearch.isEmpty {
-            //// tell your parent!
-            print("DEBUG: hotpot empty / new search time!")
-        } else {
-            collectionView?.reloadData()
+        if currentSearch.count == 0 {
+            print("ERROR: Tried to remove hotpot ingredient when search is empty.")
+            return
         }
+        
+        currentSearch.removeAtIndex(currentSearch.indexOf(sender.ingredient as! PFIngredient)!)
+
+        // Let parent know that hotpot ingredient was removed
+        if let parent = parentViewController as! SearchResultsViewController? {
+            parent.hotpotIngredientWasRemoved()
+        }
+        
+        collectionView?.reloadData()
     }
     
     // COLLECTION FUNCTIONS

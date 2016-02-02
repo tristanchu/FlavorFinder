@@ -51,16 +51,10 @@ class ContainerViewController: UIViewController {
             // For switching between views:
             if segue.identifier == segueToRegister {
                 let register = segue.destinationViewController as! RegisterView
-                register.parent = self
                 register.buttonSegue = segueToLogin
             } else if segue.identifier == segueToLogin {
                 let login = segue.destinationViewController as! LoginViewPage
-                login.parent = self
                 login.buttonSegue = segueToRegister
-            } else if segue.identifier == segueToNewSearch {
-                let newSearch = segue.destinationViewController as! NewSearchViewController
-                newSearch.parent = self
-                newSearch.buttonSegue = segueToSearchResults
             }
         }
     }
