@@ -10,9 +10,9 @@
 		56D23A31BA541208CC4BAC9D /* Pods_FlavorFinder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F0701BEA3C57EBBE60538B5 /* Pods_FlavorFinder.framework */; };
 		6001830F1BDC31DE00265B72 /* _RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6001830E1BDC31DE00265B72 /* _RegisterViewController.swift */; };
 		60216E661BEC4F740029454B /* UiUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60216E651BEC4F740029454B /* UiUtils.swift */; };
-		602B7CBF1C5FC4D80068D847 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602B7CBE1C5FC4D80068D847 /* RegisterView.swift */; settings = {ASSET_TAGS = (); }; };
+		602B7CBF1C5FC4D80068D847 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602B7CBE1C5FC4D80068D847 /* RegisterView.swift */; };
 		60322EA31BD9CE150099030B /* _LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60322EA21BD9CE150099030B /* _LoginViewController.swift */; };
-		6062FDC11C5F3386009B2EEB /* LoginViewPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6062FDC01C5F3386009B2EEB /* LoginViewPage.swift */; settings = {ASSET_TAGS = (); }; };
+		6062FDC11C5F3386009B2EEB /* LoginViewPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6062FDC01C5F3386009B2EEB /* LoginViewPage.swift */; };
 		609432671C42DCA800BA0577 /* FavoritesPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609432661C42DCA800BA0577 /* FavoritesPageController.swift */; };
 		609432691C42DD6500BA0577 /* ListsPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609432681C42DD6500BA0577 /* ListsPageController.swift */; };
 		6094326B1C42DDB500BA0577 /* MorePageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6094326A1C42DDB500BA0577 /* MorePageController.swift */; };
@@ -345,10 +345,10 @@
 		B685D2B11C5DE6E6001C37FF /* SearchResultsVC */ = {
 			isa = PBXGroup;
 			children = (
-				B61AD2C41C5BFB9C00081BF4 /* SearchResultsSubviewController.swift */,
+				B685D2B21C5DE775001C37FF /* SearchResultsViewController.swift */,
 				B6F55CA61C5E88D300854B07 /* FilterBarSubviewController.swift */,
 				B6F55CA41C5E87B400854B07 /* HotpotSubviewController.swift */,
-				B685D2B21C5DE775001C37FF /* SearchResultsViewController.swift */,
+				B61AD2C41C5BFB9C00081BF4 /* SearchResultsSubviewController.swift */,
 			);
 			name = SearchResultsVC;
 			sourceTree = "<group>";

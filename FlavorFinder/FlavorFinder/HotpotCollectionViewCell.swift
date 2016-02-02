@@ -10,10 +10,8 @@ import UIKit
 
 class HotpotCollectionViewCell: UICollectionViewCell {
     
-    //    @IBOutlet weak var nameLabel: UILabel!
     var nameLabel: UILabel = UILabel()
-    // MARK: Properties
-    //    @IBOutlet weak var nameLabel: UILabel!
+    
     var removeBtn: RemoveHotpotIngredientButton = RemoveHotpotIngredientButton()
     
     override func awakeFromNib() {
