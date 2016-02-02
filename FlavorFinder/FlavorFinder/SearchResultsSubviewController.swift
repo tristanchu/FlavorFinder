@@ -53,16 +53,9 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
     let ICON_FONT = UIFont.fontAwesomeOfSize(100)
 
     // CLASS VARIABLES
-    var allCells = [PFObject]()         // Array of all cells that CAN be displayed
-    var displayedCells = [PFObject]()   // Array of all cells that ARE displayed (filtered)
-    var currentIngredient : PFObject?   // Stores the ingredient being viewed
+    var matches = [PFObject]()   // Array of all cells that ARE displayed
     
 //    let notSignedInAlert = UIAlertController(title: "Not Signed In", message: "You need to sign in to do this!", preferredStyle: UIAlertControllerStyle.Alert)
-    
-    @IBOutlet var matchTableView: UITableView!
-        
-    let searchResultsTableView = UITableView()
-    var globalSearchResults = [PFObject]()
     
     let filters: [String: Bool] = [F_KOSHER: false,
         F_DAIRY: false,
@@ -72,15 +65,8 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
     // SETUP FUNCTIONS
     override func viewDidLoad() {
         super.viewDidLoad()
-        configure_searchResultsTableView()
-        self.tableView.emptyDataSetSource = self
-        self.tableView.emptyDataSetDelegate = self
-        self.tableView.tag = 1
-            
-        // Remove the cell separators
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
-        
-        showAllIngredients()
+        self.configureTableView()
+        displaySearchResults()
     }
         
     override func viewWillAppear(animated: Bool) {
@@ -97,7 +83,7 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         
     func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
         var text = SEARCH_GENERIC_ERROR_TEXT
-        if let _ = currentIngredient {
+        if currentSearch.count == 0 { // should not happen with
             text = NO_MATCHES_TEXT
         } else {
             text = INGREDIENT_NOT_FOUND_TEXT
@@ -105,41 +91,28 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         return NSAttributedString(string: text, attributes: attributes)
     }
     
-    func configure_searchResultsTableView() {
-        searchResultsTableView.hidden = true
-        searchResultsTableView.tag = 2
-        searchResultsTableView.delegate = self
-        searchResultsTableView.dataSource = self
-        searchResultsTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: CELL_IDENTIFIER)
-        searchResultsTableView.layer.zPosition = 1
+    func configureTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: CELL_IDENTIFIER)
+        tableView.layer.zPosition = 1
         let blurEffect = UIBlurEffect(style: .Light)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        searchResultsTableView.insertSubview(blurEffectView, atIndex: 0)
-        searchResultsTableView.backgroundView = blurEffectView
+        tableView.insertSubview(blurEffectView, atIndex: 0)
+        tableView.backgroundView = blurEffectView
+        
+        // Remove the cell separators
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        
+        tableView.emptyDataSetSource = self
+        tableView.emptyDataSetDelegate = self
     }
     
-    func showAllIngredients() {
-        allCells = _allIngredients
-        displayedCells = _allIngredients
-        currentIngredient = nil
-        
-        animateTableViewCellsToLeft(self.tableView)
-    }
-        
-    func showIngredient(ingredient: PFObject) {
-        currentIngredient = ingredient
-        self.navigationController?.navigationItem.title = ingredient[_s_name] as? String   // Set navigation title to ingredient's name.
-            
-        allCells.removeAll()
-        let matches = _getMatchesForIngredient(ingredient, filters: filters)
-            
-        for match in matches {
-            allCells.append(match)
-        }
-            
-        // Reset displayed cells
-        displayedCells = allCells
-        animateTableViewCellsToLeft(self.tableView)
+    func displaySearchResults() {
+        let ingredient = currentSearch[0] /// until we get multisearch
+        matches = _getMatchesForIngredient(ingredient, filters: filters)
+        animateTableViewCellsToLeft(tableView)
+        tableView.reloadData()
     }
         
     override func didReceiveMemoryWarning() {
@@ -153,27 +126,23 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
     }
         
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return displayedCells.count
+        return matches.count
     }
         
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellIdentifier = CELLIDENTIFIER_MATCH
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! MatchTableViewCell
         cell.delegate = self
-                
-        let match = displayedCells[indexPath.row]
-                
-        if currentIngredient != nil {
-            let matchObj = match[_s_secondIngredient] as! PFObject
-            cell.label.text = matchObj[_s_name] as? String
+        
+        if matches.count > 0 {
+            let match = matches[indexPath.row][_s_secondIngredient] as! PFObject
             
-            let matchLevel = match[_s_matchLevel] as! Int
+            let matchLevel = matches[indexPath.row][_s_matchLevel] as! Int
+            
+            cell.label.text = match[_s_name] as? String
             if matchLevel < MATCH_COLORS.count && matchLevel >= 0 {
                 cell.backgroundColor = MATCH_COLORS[matchLevel]
             }
-        } else {
-            cell.label.text = match[_s_name] as? String
-            cell.backgroundColor = MATCH_COLORS[0]
         }
         
         return cell
@@ -184,12 +153,11 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
     }
         
     func swipeTableCell(cell: MGSwipeTableCell!, didChangeSwipeState state: MGSwipeState, gestureIsActive: Bool) {
-            
     }
         
     func swipeTableCell(cell: MGSwipeTableCell!, tappedButtonAtIndex index: Int, direction: MGSwipeDirection, fromExpansion: Bool) -> Bool {
         let indexPath = tableView.indexPathForCell(cell)!
-        let match = displayedCells[indexPath.row]
+        let match = matches[indexPath.row]
         let ingredient = match[_s_secondIngredient] as? PFObject
         
         if cell.leftButtons == nil || cell.leftButtons.count == 0 {
@@ -299,12 +267,12 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
     func swipeTableCell(cell: MGSwipeTableCell!, swipeButtonsForDirection direction: MGSwipeDirection, swipeSettings: MGSwipeSettings!, expansionSettings: MGSwipeExpansionSettings!) -> [AnyObject]! {
         
         // check that search is underway and that we swiped right, otherwise ignore
-        if currentIngredient == nil || direction != MGSwipeDirection.LeftToRight {
+        if currentSearch.count < 0 || direction != MGSwipeDirection.LeftToRight {
             return []
         }
         
         let indexPath = tableView.indexPathForCell(cell)!
-        let match = displayedCells[indexPath.row]
+        let match = matches[indexPath.row]
         let ingredient = match[_s_secondIngredient] as! PFObject
         
         swipeSettings.transition = MGSwipeTransition.Drag
@@ -348,66 +316,44 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
     }
         
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        switch tableView.tag {
-        case 1:
-            if let navi = self.navigationController as? MainNavigationController {
-                if (navi.dropdownIsDown) {
-                } else {
-                    tableView.contentOffset = CGPointMake(0, 0 - tableView.contentInset.top); // Reset scroll position.
-                    if currentIngredient != nil {
-                        let match = displayedCells[indexPath.row]                              // Get tapped match.
-                        let ingredient = match[_s_secondIngredient] as! PFObject
-                            showIngredient(ingredient)
-                    } else {
-                        let ingredient = displayedCells[indexPath.row]                         // Get tapped ingredient.
-                            showIngredient(ingredient)
-                    }
-                }
-            }
-        case 2:
-            let ingredient = globalSearchResults[indexPath.row]
-            showIngredient(ingredient)
-        default:
-            break;
-        }
             
     }
-    
-    func filterGlobalSearchResults(searchText: String) {
-        globalSearchResults.removeAll()
-        
-        if searchText.isEmpty {
-            globalSearchResults = []
-        } else {
-            for ingredient in _allIngredients {
-                if (ingredient[_s_name] as! String).rangeOfString(searchText.lowercaseString) != nil {
-                    globalSearchResults.append(ingredient)
-                }
-            }
-        }
-        searchResultsTableView.reloadData()
-    }
-        
-    func filterResults(searchText: String) {
-        displayedCells.removeAll()
-        
-        if searchText.isEmpty {
-            displayedCells = allCells
-        } else {
-            for cell in allCells {
-                if currentIngredient != nil {
-                    let secondIngredient = cell[_s_secondIngredient] as! PFObject
-                    if (secondIngredient[_s_name] as! String).rangeOfString(searchText.lowercaseString) != nil {
-                        displayedCells.append(cell)
-                    }
-                } else {
-                    if (cell[_s_name] as! String).rangeOfString(searchText.lowercaseString) != nil {
-                        displayedCells.append(cell)
-                    }
-                }
-            }
-        }
-        
-        self.tableView.reloadData()
-    }
+//    
+//    func filterGlobalSearchResults(searchText: String) {
+//        globalSearchResults.removeAll()
+//        
+//        if searchText.isEmpty {
+//            globalSearchResults = []
+//        } else {
+//            for ingredient in _allIngredients {
+//                if (ingredient[_s_name] as! String).rangeOfString(searchText.lowercaseString) != nil {
+//                    globalSearchResults.append(ingredient)
+//                }
+//            }
+//        }
+//        searchResultsTableView.reloadData()
+//    }
+//        
+//    func filterResults(searchText: String) {
+//        displayedCells.removeAll()
+//        
+//        if searchText.isEmpty {
+//            displayedCells = allCells
+//        } else {
+//            for cell in allCells {
+//                if currentIngredient != nil {
+//                    let secondIngredient = cell[_s_secondIngredient] as! PFObject
+//                    if (secondIngredient[_s_name] as! String).rangeOfString(searchText.lowercaseString) != nil {
+//                        displayedCells.append(cell)
+//                    }
+//                } else {
+//                    if (cell[_s_name] as! String).rangeOfString(searchText.lowercaseString) != nil {
+//                        displayedCells.append(cell)
+//                    }
+//                }
+//            }
+//        }
+//        
+//        self.tableView.reloadData()
+//    }
 }

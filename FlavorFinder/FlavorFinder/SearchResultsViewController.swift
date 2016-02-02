@@ -20,7 +20,7 @@ class SearchResultsViewController : UIViewController {
     let segueEmbedHotpot = "goToHotpot"
     
     // variables to hold the subview controllers (SVCs)
-    var searchResultsSVC : UIViewController?
+    var searchResultsSVC : SearchResultsSubviewController?
     var filterBarSVC : UIViewController?
     var hotpotSVC : HotpotSubviewController?
     
@@ -29,12 +29,13 @@ class SearchResultsViewController : UIViewController {
     @IBOutlet weak var filterBarContainer: UIView!
     @IBOutlet weak var hotpotContainer: UIView!
     
+    // FUNCTIONS
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // keep track of the embedded subview controllers
         let vc = segue.destinationViewController
         switch segue.identifier! {
         case segueEmbedSearchResults:
-            searchResultsSVC = vc
+            searchResultsSVC = vc as? SearchResultsSubviewController
             break
         case segueEmbedFilterBar:
             filterBarSVC = vc
