@@ -51,9 +51,7 @@ class NewSearchViewController : ContainerParentViewController {
             containerVC?.view.clipsToBounds = true
             
             // Shows login first
-//            goToLogin()
-            // TESTING:
-            goToRegister()
+            goToLogin()
         }
     }
 
