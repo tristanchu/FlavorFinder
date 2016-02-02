@@ -20,7 +20,7 @@ import ASHorizontalScrollView
 class HotpotSubviewController : UICollectionViewController, UICollectionViewDelegateFlowLayout {
     // class constants
     let CELL_IDENTIFIER = "hotpotCell"
-    let CELL_HEIGHT : CGFloat = 40
+    let CELL_HEIGHT : CGFloat = 20
     let EDGE_INSET = 10
     let ITEM_WIDTH : CGFloat = 100
     let FRAME_WIDTH : CGFloat = 200 // debug: arbitrary for now
@@ -48,6 +48,7 @@ class HotpotSubviewController : UICollectionViewController, UICollectionViewDele
         // set layout attributes
         layout.itemSize = CGSize(width: ITEM_WIDTH, height: CELL_HEIGHT)
         layout.scrollDirection = UICollectionViewScrollDirection.Horizontal
+        layout.prepareLayout()
         
         // set collection view attributes
         collectionView?.setCollectionViewLayout(layout, animated: true)
