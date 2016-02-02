@@ -29,8 +29,8 @@ func getMatchingIngredients(ingredient: PFIngredient) -> [(ingredient: PFIngredi
     for match in matches {
         let otherIngredient =
             (match[_s_secondIngredient] as! PFIngredient == ingredient)
-                ? match[_s_secondIngredient] as! PFIngredient
-                : match[_s_firstIngredient] as! PFIngredient
+                ? match[_s_firstIngredient] as! PFIngredient
+                : match[_s_secondIngredient] as! PFIngredient
         let matchRank = match[_s_matchLevel] as! Int
         results.append((ingredient: otherIngredient, rank: matchRank))
     }
@@ -103,10 +103,8 @@ func getMultiSearch(currSearch: [PFIngredient]) -> [(ingredient: PFIngredient, r
     newResults = getMatchingIngredients(currSearch[0])
     
     // go through rest of ingredients:
-    var i: Int = 1
-    while i < currSearch.count {
+    for i in 1..<currSearch.count {
         newResults = addToSearch(newResults, newIngredient: currSearch[i])
-        i += 1
     }
     // return ending results
     return newResults
@@ -150,8 +148,8 @@ looks for if a contains b (or b is found in a)
 -- returns b2 rank if yes, -1 if not
 */
 func findMatchRank(a: [(ingredient: PFIngredient, rank: Int)], b: (ingredient: PFIngredient, rank: Int)) -> Int {
-    let (b1, b2) = b
-    for (a1, _) in a { if a1 == b1 { return b2 }}
+    let (b1, _) = b
+    for (a1, a2) in a { if a1 == b1 { return a2 }}
     return -1
 }
 
