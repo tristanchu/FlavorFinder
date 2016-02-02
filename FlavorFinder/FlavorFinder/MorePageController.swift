@@ -27,20 +27,41 @@ class MorePageController: UIViewController, UITextFieldDelegate {
     // FOR TEST PURPOSESONLY!!!
     @IBOutlet weak var morePageLabel: UILabel!
     @IBAction func loginTestUser(sender: AnyObject) {
-        let username = "testUser";
-        let password = "testUser";
-        // Authenticate user with Parse
-        PFUser.logInWithUsernameInBackground(
-            username, password: password) {
-                (user: PFUser?, error: NSError?) -> Void in
+        
+        print("all ingredients: 20 \((_allIngredients[25] as! PFIngredient).name) \((_allIngredients[26] as! PFIngredient).name) \((_allIngredients[27] as! PFIngredient).name) \((_allIngredients[28] as! PFIngredient).name) \((_allIngredients[29] as! PFIngredient).name)  24 \((_allIngredients[30] as! PFIngredient).name)")
+        
+        let testIngredient = _allIngredients[21] as! PFIngredient
+        
+        let matches = getMatchingIngredients(testIngredient)
+        
+        print("Testing: \(testIngredient.name)")
+        
+        if matches.count != 0 {
+            print("have matches \(matches.count)")
+            print("second one is \(matches[1].ingredient.name)")
+            
 
-                if user != nil {
-                    // User exists - set user session & go to Match Table
-                    setUserSession(user!)
-
-                    // Show on more page:
-                    self.morePageLabel.text = currentUser?.username;
-                }
+            
+            // test addToSearch:
+//            let newMatches = addToSearch(matches, newIngredient: matches[1].ingredient)
+//            if newMatches.count != 0 {
+//                print("addToSearch: have matches \(newMatches.count)")
+//                print("first one is \(newMatches[0].ingredient.name)")
+//            } else {
+//                print("No Common Matches for new matches")
+//            }
+            
+            // test getMultiSearch
+            let searchQ = [testIngredient, matches[1].ingredient]
+            let multisearch = getMultiSearch(searchQ)
+            if multisearch.count != 0 {
+                print("multisearch: matches: \(multisearch.count)")
+                print("first is: \(multisearch[0].ingredient.name)")
+            } else {
+                print("NO MULTISEARCH")
+            }
+        } else {
+            print("IS EMPTY")
         }
     }
 
