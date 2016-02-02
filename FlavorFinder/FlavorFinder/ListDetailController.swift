@@ -48,7 +48,7 @@ class ListDetailController: UITableViewController {
         
         // Table view visuals:
         ingredientListsTableView.tableFooterView = UIView(frame: CGRectZero)  // remove empty cells
-        ingredientListsTableView.rowHeight = 80.0
+        ingredientListsTableView.rowHeight = UNIFORM_ROW_HEIGHT
 
         // Navigation Visuals:
         setUpBackButton()
