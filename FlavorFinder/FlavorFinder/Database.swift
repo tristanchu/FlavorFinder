@@ -46,8 +46,6 @@ let _s_title = "title"
 var _allIngredients = [PFObject]()
 var _allMatches = [PFObject]()
 
-var currentSearch : [PFIngredient] = []
-
 let ingredientPinDate = "ingredientPinDate"
 let matchPinDate = "matchPinDate"
 

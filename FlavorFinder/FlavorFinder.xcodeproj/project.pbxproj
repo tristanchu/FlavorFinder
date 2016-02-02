@@ -17,6 +17,7 @@
 		609432691C42DD6500BA0577 /* ListsPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609432681C42DD6500BA0577 /* ListsPageController.swift */; };
 		6094326B1C42DDB500BA0577 /* MorePageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6094326A1C42DDB500BA0577 /* MorePageController.swift */; };
 		60B3F16D1C5AE41D0018AA29 /* ListDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B3F16C1C5AE41D0018AA29 /* ListDetailController.swift */; };
+		60DFE76E1C6148D400A6EF85 /* SearchUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DFE76D1C6148D400A6EF85 /* SearchUtils.swift */; settings = {ASSET_TAGS = (); }; };
 		60FEE38F1BE570E100F51BE8 /* KeychainWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 60FEE38E1BE570E100F51BE8 /* KeychainWrapper.m */; };
 		880DA78C1BE1FB03003C67F0 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880DA78B1BE1FB03003C67F0 /* Globals.swift */; };
 		882FFD661BD9A48D00710F35 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 882FFD641BD9A48D00710F35 /* Bolts.framework */; };
@@ -92,6 +93,7 @@
 		609432681C42DD6500BA0577 /* ListsPageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListsPageController.swift; sourceTree = "<group>"; };
 		6094326A1C42DDB500BA0577 /* MorePageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MorePageController.swift; sourceTree = "<group>"; };
 		60B3F16C1C5AE41D0018AA29 /* ListDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListDetailController.swift; sourceTree = "<group>"; };
+		60DFE76D1C6148D400A6EF85 /* SearchUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchUtils.swift; sourceTree = "<group>"; };
 		60FEE38C1BE570E000F51BE8 /* FlavorFinder-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FlavorFinder-Bridging-Header.h"; sourceTree = "<group>"; };
 		60FEE38D1BE570E100F51BE8 /* KeychainWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainWrapper.h; sourceTree = "<group>"; };
 		60FEE38E1BE570E100F51BE8 /* KeychainWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainWrapper.m; sourceTree = "<group>"; };
@@ -308,6 +310,7 @@
 		8875DE2F1BE0500100CD50EA /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				60DFE76D1C6148D400A6EF85 /* SearchUtils.swift */,
 				8875DE311BE051B100CD50EA /* Database.swift */,
 				8875DE2B1BE04DD900CD50EA /* LoginUtils.swift */,
 				B6B7E0561C4D7BA400ADFC9C /* IngredientList.swift */,
@@ -564,6 +567,7 @@
 				60FEE38F1BE570E100F51BE8 /* KeychainWrapper.m in Sources */,
 				8875DE2C1BE04DD900CD50EA /* LoginUtils.swift in Sources */,
 				B6098CE41BF7F3B8001EDCE6 /* _SavedMatchesViewController.swift in Sources */,
+				60DFE76E1C6148D400A6EF85 /* SearchUtils.swift in Sources */,
 				6062FDC11C5F3386009B2EEB /* LoginViewPage.swift in Sources */,
 				880DA78C1BE1FB03003C67F0 /* Globals.swift in Sources */,
 				60322EA31BD9CE150099030B /* _LoginViewController.swift in Sources */,
