@@ -172,3 +172,13 @@ func setDefaultProfilePicture(user: PFUser!){
         }
     }
 }
+
+/**
+requestPasswordReset
+
+Parse sends a password reset email allowing the user to reset their
+password
+*/
+func requestPasswordReset() {
+    PFUser.requestPasswordResetForEmailInBackground((currentUser?.email)!)
+}

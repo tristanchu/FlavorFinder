@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		56D23A31BA541208CC4BAC9D /* Pods_FlavorFinder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F0701BEA3C57EBBE60538B5 /* Pods_FlavorFinder.framework */; };
 		6001830F1BDC31DE00265B72 /* _RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6001830E1BDC31DE00265B72 /* _RegisterViewController.swift */; };
-		60216E641BEC41360029454B /* _UserSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60216E631BEC41360029454B /* _UserSettingsViewController.swift */; };
 		60216E661BEC4F740029454B /* UiUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60216E651BEC4F740029454B /* UiUtils.swift */; };
 		602B7CBF1C5FC4D80068D847 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602B7CBE1C5FC4D80068D847 /* RegisterView.swift */; settings = {ASSET_TAGS = (); }; };
 		60322EA31BD9CE150099030B /* _LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60322EA21BD9CE150099030B /* _LoginViewController.swift */; };
@@ -85,7 +84,6 @@
 /* Begin PBXFileReference section */
 		2C3E9A246B0E3665372C6048 /* Pods-FlavorFinder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlavorFinder.release.xcconfig"; path = "Pods/Target Support Files/Pods-FlavorFinder/Pods-FlavorFinder.release.xcconfig"; sourceTree = "<group>"; };
 		6001830E1BDC31DE00265B72 /* _RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _RegisterViewController.swift; sourceTree = "<group>"; };
-		60216E631BEC41360029454B /* _UserSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _UserSettingsViewController.swift; sourceTree = "<group>"; };
 		60216E651BEC4F740029454B /* UiUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UiUtils.swift; sourceTree = "<group>"; };
 		602B7CBE1C5FC4D80068D847 /* RegisterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		60322EA21BD9CE150099030B /* _LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _LoginViewController.swift; sourceTree = "<group>"; };
@@ -382,7 +380,6 @@
 			isa = PBXGroup;
 			children = (
 				6001830E1BDC31DE00265B72 /* _RegisterViewController.swift */,
-				60216E631BEC41360029454B /* _UserSettingsViewController.swift */,
 				B6098CE31BF7F3B8001EDCE6 /* _SavedMatchesViewController.swift */,
 				60322EA21BD9CE150099030B /* _LoginViewController.swift */,
 				888D1A431BDEF8FE007F09AE /* _ProfileViewController.swift */,
@@ -581,7 +578,6 @@
 				B6F55CA71C5E88D300854B07 /* FilterBarSubviewController.swift in Sources */,
 				60216E661BEC4F740029454B /* UiUtils.swift in Sources */,
 				B6EA63591BEEB4660017C063 /* PFFavorite.swift in Sources */,
-				60216E641BEC41360029454B /* _UserSettingsViewController.swift in Sources */,
 				60B3F16D1C5AE41D0018AA29 /* ListDetailController.swift in Sources */,
 				8875DE2A1BE041D200CD50EA /* UITextField+LeftMargin.swift in Sources */,
 				8875DE351BE053ED00CD50EA /* Voting.swift in Sources */,
