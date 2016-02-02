@@ -19,13 +19,16 @@ class RegisterView : UIViewController, UITextFieldDelegate {
     let EMAIL_INVALID = "That doesn't look like an email!"
     let USERNAME_INVALID = "Usernames must be between \(USERNAME_CHAR_MIN) and \(USERNAME_CHAR_MAX) characters."
     let PASSWORD_INVALID = "Passwords must be between \(PASSWORD_CHAR_MIN) and \(PASSWORD_CHAR_MAX) characters."
-    let PW_MISMATCH = "Passwords don't match."
+    let PW_MISMATCH = "Passwords don't match!"
     let MULTIPLE_INVALID = "Please fix errors and resubmit."
 
+    let OK_TEXT = "Ok"
+    
     // request error messages
-    let GENERIC_ERROR = "Oops! An error occurred."
-    let USERNAME_IN_USE = "Username already in use."
-    let EMAIL_IN_USE = "Email associated with an account."
+    let REQUEST_ERROR_TITLE = "Uhoh!"
+    let GENERIC_ERROR = "Oops! An error occurred on the server. Please try again."
+    let USERNAME_IN_USE = "That username is already in use. Please pick a new one!"
+    let EMAIL_IN_USE = "Email already associated with an account!"
 
     // MARK: Properties -----------------------------------
 
@@ -117,41 +120,28 @@ class RegisterView : UIViewController, UITextFieldDelegate {
         checks if entered fields are valid input
     */
     func fieldsAreValid(email: String, username: String, password: String, pwRetyped: String) -> Bool {
-        var isValid = true
-        if isInvalidEmail(email) {
-            print( EMAIL_INVALID)
-            isValid = false
-        }
+
         if isInvalidUsername(username) {
-            if (isValid) {
-                print(USERNAME_INVALID)
-                isValid = false
-            } else {
-                print(MULTIPLE_INVALID)
-            }
+            alertUserBadInput(USERNAME_INVALID)
+            return false
         }
         if isInvalidPassword(password) {
-            if (isValid) {
-                print( PASSWORD_INVALID)
-                isValid = false
-            } else {
-                print(MULTIPLE_INVALID)
-            }
+            alertUserBadInput(PASSWORD_INVALID)
+            return false
         }
         if pwRetyped.isEmpty {
-            print(MULTIPLE_INVALID)
-            isValid = false
-            return isValid
+            alertUserBadInput(PW_MISMATCH)
+            return false
         }
         if password != pwRetyped {
-            if (isValid) {
-                print(PW_MISMATCH)
-                isValid = false
-            } else {
-                print(MULTIPLE_INVALID)
-            }
+            alertUserBadInput(PW_MISMATCH)
+            return false
         }
-        return isValid
+        if isInvalidEmail(email) {
+            alertUserBadInput( EMAIL_INVALID)
+            return false
+        }
+        return true
     }
 
     /* registerSuccess
@@ -169,16 +159,35 @@ class RegisterView : UIViewController, UITextFieldDelegate {
     func handleError(error: NSError?) {
         if let error = error {
             print("\(error)")
+            // error - username already in use:
             if error.code == 202 {
-                print(USERNAME_IN_USE)
+                alertUserRegisterError(USERNAME_IN_USE)
+            // error - email already in use
             } else if error.code == 203 {
-                print(EMAIL_IN_USE)
+                alertUserRegisterError(EMAIL_IN_USE)
+            // error - generic error
             } else {
-                print(GENERIC_ERROR)
+                alertUserRegisterError(GENERIC_ERROR)
             }
         } else {
             print("nil error")
         }
     }
     
+    /* alertUserBadInput
+        creates popup alert for when user submits bad input
+        - helper function to make above code cleaner:
+    */
+    func alertUserBadInput(title: String) {
+        alertPopup(title, msg: self.MULTIPLE_INVALID,
+            actionTitle: self.OK_TEXT, currController: self)
+    }
+    
+    /* alertUserRegisterError
+        - helper function to create alert when parse rejects registration
+    */
+    func alertUserRegisterError(msg: String){
+        alertPopup(self.REQUEST_ERROR_TITLE , msg: msg,
+            actionTitle: self.OK_TEXT, currController: self)
+    }
 }

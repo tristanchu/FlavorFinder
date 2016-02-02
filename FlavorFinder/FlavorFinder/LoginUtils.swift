@@ -10,10 +10,10 @@ import UIKit
 import Parse
 
 // Input validation values:
-var USERNAME_CHAR_MAX = 50
+var USERNAME_CHAR_MAX = 25
 var USERNAME_CHAR_MIN = 1
 var PASSWORD_CHAR_MIN = 6
-var PASSWORD_CHAR_MAX = 50
+var PASSWORD_CHAR_MAX = 25
 
 // Colors:
 var backgroundColor_normal: UIColor!
