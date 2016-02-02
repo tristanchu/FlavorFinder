@@ -25,7 +25,6 @@ class NewSearchViewController : ContainerParentViewController,
     let CELL_IDENTIFIER = "newSearchResultCell"
 
     // Navigation properties (passed in through segue):
-    var parent : ContainerViewController!
     var buttonSegue : String!
 
     // Identifiers from storyboard: (note, constraints on there)
@@ -39,9 +38,6 @@ class NewSearchViewController : ContainerParentViewController,
     let segueLoginEmbedded = "segueLoginEmbedSubview"
     let segueToLogin = "goToLogin"
     let segueToRegister = "goToRegister"
-
-    // Testing:
-    var debugLoggedIn = false
 
     // MARK: Override Functions -----------------------------------------
 
@@ -187,9 +183,14 @@ class NewSearchViewController : ContainerParentViewController,
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         // make selected row the current search:
         currentSearch = [filteredResults[indexPath.row]]
-//        // for debug:
-//        print("current search now: \(currentSearch[0].name)")
-        parent.segueIdentifierReceivedFromParent(buttonSegue)
+        
+        if let parent = parentViewController as? ContainerViewController {
+            if let page = parent.parentViewController as? LandingPageController {
+                page.goToSearchResults()
+            }
+        } else {
+            print("ERROR: Landing page hierarchy broken for New Search VC.")
+        }
     }
 
 }

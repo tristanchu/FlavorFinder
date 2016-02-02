@@ -15,7 +15,6 @@ import Parse
 class LoginViewPage : UIViewController, UITextFieldDelegate {
 
     // Navigation in containers (set during segue)
-    var parent : ContainerViewController!
     var buttonSegue : String!
 
     // MARK: Properties
@@ -47,7 +46,9 @@ class LoginViewPage : UIViewController, UITextFieldDelegate {
 
     // Sign up button:
     @IBAction func signUpButtonAction(sender: UIButton) {
-        parent.segueIdentifierReceivedFromParent(buttonSegue)
+        if let parent = parentViewController as? ContainerViewController {
+            parent.segueIdentifierReceivedFromParent(buttonSegue)
+        }
     }
 
 // OVERRIDE FUNCTIONS ---------------------------------------------
@@ -107,7 +108,7 @@ class LoginViewPage : UIViewController, UITextFieldDelegate {
                         // User exists - set user session & go to Match Table
                         setUserSession(user!)
                         // hide container:
-                        self.parent.view.hidden = true
+                        self.parentViewController?.view.hidden = true
 
                     } else {
                         // Alert Username and Password pair does not exist.

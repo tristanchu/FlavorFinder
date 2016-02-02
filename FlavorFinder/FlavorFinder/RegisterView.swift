@@ -15,7 +15,6 @@ import Parse
 class RegisterView : UIViewController, UITextFieldDelegate {
     
     // Navigation in containers (set during segue)
-    var parent : ContainerViewController!
     var buttonSegue : String!
     
     // MARK: messages ------------------------------------
@@ -65,7 +64,9 @@ class RegisterView : UIViewController, UITextFieldDelegate {
     }
 
     @IBAction func backToLoginAction(sender: AnyObject) {
-        parent.segueIdentifierReceivedFromParent(buttonSegue)
+        if let parent = parentViewController as? ContainerViewController {
+            parent.segueIdentifierReceivedFromParent(buttonSegue)
+        }
     }
 
     // MARK: Override Functions --------------------------

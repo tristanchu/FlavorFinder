@@ -31,6 +31,7 @@ class HotpotSubviewController : UICollectionViewController, UICollectionViewDele
     let CELL_LABEL_COLOR = UIColor.whiteColor()
     let REMOVE_BTN_FONT = UIFont.fontAwesomeOfSize(20)
     let CELL_BKGD_COLOR = NAVI_LIGHT_COLOR
+    let REMOVE_BTN_TEXT = String.fontAwesomeIconWithName(.Remove)
     
     // class variables
     var layout = UICollectionViewFlowLayout()
@@ -54,12 +55,6 @@ class HotpotSubviewController : UICollectionViewController, UICollectionViewDele
         collectionView?.backgroundColor = HOTPOT_COLOR
         
         collectionView?.reloadData()
-        
-        
-        // debug: adding ingredients
-//        addHotpotIngredient(PFIngredient(name: "cinnamon"))
-//        addHotpotIngredient(PFIngredient(name: "chocolate"))
-//        addHotpotIngredient(PFIngredient(name: "milk"))
 
     }
     
@@ -71,14 +66,19 @@ class HotpotSubviewController : UICollectionViewController, UICollectionViewDele
     }
     
     func removeHotpotIngredientClicked(sender: RemoveHotpotIngredientButton) {
-        currentSearch.removeAtIndex(currentSearch.indexOf(sender.ingredient as! PFIngredient)!)
-        
-        if currentSearch.isEmpty {
-            //// tell your parent!
-            print("DEBUG: hotpot empty / new search time!")
-        } else {
-            collectionView?.reloadData()
+        if currentSearch.count == 0 {
+            print("ERROR: Tried to remove hotpot ingredient when search is empty.")
+            return
         }
+        
+        currentSearch.removeAtIndex(currentSearch.indexOf(sender.ingredient as! PFIngredient)!)
+
+        // Let parent know that hotpot ingredient was removed
+        if let parent = parentViewController as! SearchResultsViewController? {
+            parent.hotpotIngredientWasRemoved()
+        }
+        
+        collectionView?.reloadData()
     }
     
     // COLLECTION FUNCTIONS
@@ -104,7 +104,7 @@ class HotpotSubviewController : UICollectionViewController, UICollectionViewDele
         
         cell.removeBtn.frame = CGRectMake(cell.frame.width - 25, 0, 20, 20)
         cell.removeBtn.titleLabel?.font = REMOVE_BTN_FONT
-        cell.removeBtn.setTitle(String.fontAwesomeIconWithName(.Remove), forState: .Normal)
+        cell.removeBtn.setTitle(REMOVE_BTN_TEXT, forState: .Normal)
         cell.removeBtn.tintColor = NAVI_BUTTON_COLOR
         cell.removeBtn.addTarget(self, action: Selector("removeHotpotIngredientClicked:"), forControlEvents: UIControlEvents.TouchUpInside)
         cell.removeBtn.ingredient = ingredient
