@@ -106,6 +106,9 @@ class ListsPageController: UITableViewController {
         // Set cell label:
         cell.textLabel?.text = userLists[indexPath.row].objectForKey(
             ListTitleColumnName) as? String
+
+        // Give cell a chevron:
+        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         return cell
     }
     
