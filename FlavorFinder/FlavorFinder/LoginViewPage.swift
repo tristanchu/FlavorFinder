@@ -14,6 +14,10 @@ import Parse
 
 class LoginViewPage : UIViewController, UITextFieldDelegate {
 
+    // Navigation in containers (set during segue)
+    var parent : ContainerViewController!
+    var buttonSegue : String!
+
     // MARK: Properties
     @IBOutlet weak var loginPromptLabel: UILabel!
     var isValid: Bool = true
@@ -43,7 +47,7 @@ class LoginViewPage : UIViewController, UITextFieldDelegate {
 
     // Sign up button:
     @IBAction func signUpButtonAction(sender: UIButton) {
-        print("pressed sign up")
+        parent.segueIdentifierReceivedFromParent(buttonSegue)
     }
 
 // OVERRIDE FUNCTIONS ---------------------------------------------

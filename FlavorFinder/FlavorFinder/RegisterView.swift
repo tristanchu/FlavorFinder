@@ -14,6 +14,10 @@ import Parse
 
 class RegisterView : UIViewController, UITextFieldDelegate {
     
+    // Navigation in containers (set during segue)
+    var parent : ContainerViewController!
+    var buttonSegue : String!
+    
     // MARK: messages ------------------------------------
     // validation error messages
     let EMAIL_INVALID = "That doesn't look like an email!"
@@ -61,7 +65,7 @@ class RegisterView : UIViewController, UITextFieldDelegate {
     }
 
     @IBAction func backToLoginAction(sender: AnyObject) {
-        print("clicked back to login")
+        parent.segueIdentifierReceivedFromParent(buttonSegue)
     }
 
     // MARK: Override Functions --------------------------
