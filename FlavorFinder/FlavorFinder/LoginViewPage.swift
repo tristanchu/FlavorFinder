@@ -106,6 +106,8 @@ class LoginViewPage : UIViewController, UITextFieldDelegate {
                     if user != nil {
                         // User exists - set user session & go to Match Table
                         setUserSession(user!)
+                        // hide container:
+                        self.parent.view.hidden = true
 
                     } else {
                         // Alert Username and Password pair does not exist.
