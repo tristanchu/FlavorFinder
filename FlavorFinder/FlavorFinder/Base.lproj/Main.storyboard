@@ -211,7 +211,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="3iT-Te-5xR">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="3iT-Te-5xR">
                                 <rect key="frame" x="0.0" y="0.0" width="610" height="606"/>
                                 <subviews>
                                     <containerView opaque="NO" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="4tn-1A-t8U" userLabel="Filter Bar Container View">
@@ -226,7 +226,7 @@
                                             <segue destination="OnA-jk-5Hp" kind="embed" identifier="goToHotpot" id="Pnt-Hs-OYJ"/>
                                         </connections>
                                     </containerView>
-                                    <containerView opaque="NO" contentMode="scaleAspectFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CqB-g8-4PC">
+                                    <containerView opaque="NO" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="CqB-g8-4PC">
                                         <rect key="frame" x="0.0" y="114" width="610" height="492"/>
                                         <connections>
                                             <segue destination="m7J-D3-eHA" kind="embed" identifier="goToSearchResults" id="okc-Lk-399"/>

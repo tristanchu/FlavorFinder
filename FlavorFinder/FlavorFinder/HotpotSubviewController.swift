@@ -33,7 +33,6 @@ class HotpotSubviewController : UICollectionViewController, UICollectionViewDele
     let CELL_BKGD_COLOR = NAVI_LIGHT_COLOR
     
     // class variables
-    var hotpot : [PFObject] = [] // debug: will be the search terms shared with other files
     var layout = UICollectionViewFlowLayout()
 
     // SETUP FUNCTIONS
@@ -58,28 +57,28 @@ class HotpotSubviewController : UICollectionViewController, UICollectionViewDele
         
         
         // debug: adding ingredients
-        addHotpotIngredient(PFIngredient(name: "cinnamon"))
-        addHotpotIngredient(PFIngredient(name: "chocolate"))
-        addHotpotIngredient(PFIngredient(name: "milk"))
+//        addHotpotIngredient(PFIngredient(name: "cinnamon"))
+//        addHotpotIngredient(PFIngredient(name: "chocolate"))
+//        addHotpotIngredient(PFIngredient(name: "milk"))
 
     }
     
     // CUSTOM FUNCTIONS
     
     func addHotpotIngredient(ingredient: PFIngredient) {
-        hotpot.append(ingredient)
+        currentSearch.append(ingredient)
         collectionView?.reloadData()
     }
     
     func removeHotpotIngredientClicked(sender: RemoveHotpotIngredientButton) {
-        hotpot.removeAtIndex(hotpot.indexOf(sender.ingredient!)!)
+        currentSearch.removeAtIndex(currentSearch.indexOf(sender.ingredient as! PFIngredient)!)
         
-        if hotpot.isEmpty {
+        if currentSearch.isEmpty {
             //// tell your parent!
             print("DEBUG: hotpot empty / new search time!")
+        } else {
+            collectionView?.reloadData()
         }
-        
-        collectionView?.reloadData()
     }
     
     // COLLECTION FUNCTIONS
@@ -88,12 +87,12 @@ class HotpotSubviewController : UICollectionViewController, UICollectionViewDele
     }
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return hotpot.count
+        return currentSearch.count
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(CELL_IDENTIFIER, forIndexPath: indexPath) as! HotpotCollectionViewCell
-        let ingredient = hotpot[indexPath.row]
+        let ingredient = currentSearch[indexPath.row]
         
         let name : NSString = ingredient[_s_name] as! NSString
         let size : CGSize = name.sizeWithAttributes([NSFontAttributeName: UIFont.fontAwesomeOfSize(25)])
@@ -118,7 +117,7 @@ class HotpotSubviewController : UICollectionViewController, UICollectionViewDele
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        let ingredient : PFObject = hotpot[indexPath.row]
+        let ingredient : PFObject = currentSearch[indexPath.row]
         let name : NSString = ingredient[_s_name] as! NSString
         var size : CGSize = name.sizeWithAttributes([NSFontAttributeName: UIFont.fontAwesomeOfSize(20)])
         size.width += 25
