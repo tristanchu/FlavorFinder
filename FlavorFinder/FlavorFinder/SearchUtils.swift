@@ -43,15 +43,17 @@ func getMatchingIngredients(ingredient: PFIngredient) -> [(ingredient: PFIngredi
     returns [PFObject] - match objects
 */
 func getMatchObjectsForIngredient(ingredient: PFIngredient) -> [PFObject] {
-    let query = PFQuery(className: _s_Match)
     // TODO: look into how matches are stored.
-    query.whereKey(_s_firstIngredient, equalTo: ingredient)
-    query.orderByDescending(_s_matchLevel)
-    query.limit = QUERY_LIMIT
+    let queryOne = PFQuery(className: _s_Match)
+    queryOne.whereKey(_s_firstIngredient, equalTo: ingredient)
+    let queryTwo = PFQuery(className: _s_Match)
+    queryTwo.whereKey(_s_secondIngredient, equalTo: ingredient)
     
-    let _matches: [PFObject]
+    // Get matches:
+    var _matches: [PFObject]
+    let query = PFQuery.orQueryWithSubqueries([queryOne, queryTwo])
     do {
-        _matches = try query.findObjects()
+       _matches = try query.findObjects()
     } catch {
         _matches = []
     }
@@ -105,6 +107,7 @@ func getMultiSearch(currSearch: [PFIngredient]) -> [(ingredient: PFIngredient, r
     // go through rest of ingredients:
     for i in 1..<currSearch.count {
         newResults = addToSearch(newResults, newIngredient: currSearch[i])
+        print("IN HERE")
     }
     // return ending results
     return newResults
