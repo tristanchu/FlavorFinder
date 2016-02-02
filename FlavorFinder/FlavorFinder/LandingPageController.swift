@@ -15,11 +15,19 @@ import UIKit
 import Parse
 
 class LandingPageController: ContainerParentViewController {
-    var gotSearch = true
+
+    // MARK: Properties:
+    // Vars:
+    var gotSearch = false
+
+    // Segues:
     let segueLandingEmbedded = "segueLandingEmbedSubview"
     let segueToSearchResults = "segueLandingToSearchResults"
     let segueToNewSearch = "segueLandingToNewSearch"
 
+    /* viewDidAppear
+        runs when user goes to view:
+    */
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         // load the appropriate subviews (new search or search results)

@@ -47,7 +47,7 @@ class ListsPageController: UITableViewController {
 
         // Table view visuals:
         listsTableView.tableFooterView = UIView(frame: CGRectZero)  // remove empty cells
-        listsTableView.rowHeight = 80.0
+        listsTableView.rowHeight = UNIFORM_ROW_HEIGHT
     }
 
     /* viewDidAppear:
@@ -106,6 +106,9 @@ class ListsPageController: UITableViewController {
         // Set cell label:
         cell.textLabel?.text = userLists[indexPath.row].objectForKey(
             ListTitleColumnName) as? String
+
+        // Give cell a chevron:
+        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         return cell
     }
     

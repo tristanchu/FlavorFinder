@@ -18,6 +18,11 @@ import UIKit
 
 class ContainerViewController: UIViewController {
     
+
+    // Segues:
+    let segueToLogin = "goToLogin"
+    let segueToRegister = "goToRegister"
+
     var vc : UIViewController!
     var segueIdentifier : String!
     var lastViewController: UIViewController!
@@ -41,6 +46,17 @@ class ContainerViewController: UIViewController {
             self.view.addSubview(vc.view)
             vc.didMoveToParentViewController(self)
             lastViewController = vc
+
+            // For switching between views:
+            if segue.identifier == segueToRegister {
+                let register = segue.destinationViewController as! RegisterView
+                register.parent = self
+                register.buttonSegue = segueToLogin
+            } else if segue.identifier == segueToLogin {
+                let login = segue.destinationViewController as! LoginViewPage
+                login.parent = self
+                login.buttonSegue = segueToRegister
+            }
         }
     }
 }
