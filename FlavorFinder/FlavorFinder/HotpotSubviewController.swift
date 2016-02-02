@@ -5,6 +5,8 @@
 //  Created by Jaki Kimball on 1/31/16.
 //  Copyright © 2016 TeamFive. All rights reserved.
 //
+//  Hotpot, a.k.a. where search terms are displayed and can be interacted with.
+//
 
 import Foundation
 import UIKit
@@ -31,21 +33,55 @@ class HotpotSubviewController : UICollectionViewController, UICollectionViewDele
     let CELL_BKGD_COLOR = NAVI_LIGHT_COLOR
     
     // class variables
-    var hotpot = [PFIngredient(name: "Cinnamon"), PFIngredient(name: "Garlic")]
+    var hotpot : [PFObject] = [] // debug: will be the search terms shared with other files
     var layout = UICollectionViewFlowLayout()
 
     // SETUP FUNCTIONS
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        layout.itemSize = CGSize(width: ITEM_WIDTH, height: CELL_HEIGHT)
-//        layout.scrollDirection = UICollectionViewScrollDirection.Horizontal
-        //collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
-        collectionView!.backgroundColor = HOTPOT_COLOR
-        collectionView!.reloadData()
+        
+        if collectionView == nil {
+            print("ERROR: Hotpot collection view is nil!")
+        }
+        
+        // set layout attributes
+        layout.itemSize = CGSize(width: ITEM_WIDTH, height: CELL_HEIGHT)
+        layout.scrollDirection = UICollectionViewScrollDirection.Horizontal
+        
+        // set collection view attributes
+        collectionView?.setCollectionViewLayout(layout, animated: true)
+        collectionView?.backgroundColor = HOTPOT_COLOR
+        
+        collectionView?.reloadData()
+        
+        
+        // debug: adding ingredients
+        addHotpotIngredient(PFIngredient(name: "cinnamon"))
+        addHotpotIngredient(PFIngredient(name: "chocolate"))
+        addHotpotIngredient(PFIngredient(name: "milk"))
+
     }
     
-    // COLLECTION
+    // CUSTOM FUNCTIONS
+    
+    func addHotpotIngredient(ingredient: PFIngredient) {
+        hotpot.append(ingredient)
+        collectionView?.reloadData()
+    }
+    
+    func removeHotpotIngredientClicked(sender: RemoveHotpotIngredientButton) {
+        hotpot.removeAtIndex(hotpot.indexOf(sender.ingredient!)!)
+        
+        if hotpot.isEmpty {
+            //// tell your parent!
+            print("DEBUG: hotpot empty / new search time!")
+        }
+        
+        collectionView?.reloadData()
+    }
+    
+    // COLLECTION FUNCTIONS
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -78,16 +114,6 @@ class HotpotSubviewController : UICollectionViewController, UICollectionViewDele
         cell.layer.cornerRadius = 5
         
         return cell
-    }
-    
-    func removeHotpotIngredientClicked(sender: RemoveHotpotIngredientButton) {
-//        hotpot.removeAtIndex(hotpot.indexOf(sender.ingredient!)!)
-//        hotpotView?.reloadData()
-        
-        if hotpot.isEmpty {
-            //// tell your parent!
-            print("DEBUG: hotpot empty / new search time!")
-        }
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {

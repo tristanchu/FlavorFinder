@@ -18,7 +18,7 @@ class LandingPageController: ContainerParentViewController {
 
     // MARK: Properties:
     // Vars:
-    var gotSearch = false
+    var gotSearch = true
 
     // Segues:
     let segueLandingEmbedded = "segueLandingEmbedSubview"
