@@ -31,6 +31,7 @@ class HotpotSubviewController : UICollectionViewController, UICollectionViewDele
     let CELL_LABEL_COLOR = UIColor.whiteColor()
     let REMOVE_BTN_FONT = UIFont.fontAwesomeOfSize(20)
     let CELL_BKGD_COLOR = NAVI_LIGHT_COLOR
+    let REMOVE_BTN_TEXT = String.fontAwesomeIconWithName(.Remove)
     
     // class variables
     var layout = UICollectionViewFlowLayout()
@@ -103,7 +104,7 @@ class HotpotSubviewController : UICollectionViewController, UICollectionViewDele
         
         cell.removeBtn.frame = CGRectMake(cell.frame.width - 25, 0, 20, 20)
         cell.removeBtn.titleLabel?.font = REMOVE_BTN_FONT
-        cell.removeBtn.setTitle(String.fontAwesomeIconWithName(.Remove), forState: .Normal)
+        cell.removeBtn.setTitle(REMOVE_BTN_TEXT, forState: .Normal)
         cell.removeBtn.tintColor = NAVI_BUTTON_COLOR
         cell.removeBtn.addTarget(self, action: Selector("removeHotpotIngredientClicked:"), forControlEvents: UIControlEvents.TouchUpInside)
         cell.removeBtn.ingredient = ingredient

@@ -47,6 +47,10 @@ class SearchResultsViewController : UIViewController {
         }
     }
     
+    func newSearchTermWasAdded() {
+        hotpotSVC?.collectionView?.reloadData()
+    }
+    
     func hotpotIngredientWasRemoved() {
         if currentSearch.count == 0 {
             if let parent = parentViewController as? ContainerViewController {

@@ -190,7 +190,7 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
     func swipeTableCell(cell: MGSwipeTableCell!, tappedButtonAtIndex index: Int, direction: MGSwipeDirection, fromExpansion: Bool) -> Bool {
         let indexPath = tableView.indexPathForCell(cell)!
         let match = displayedCells[indexPath.row]
-        let ingredient = match[_s_secondIngredient] as! PFObject
+        let ingredient = match[_s_secondIngredient] as? PFObject
         
         if cell.leftButtons == nil || cell.leftButtons.count == 0 {
             print("ERROR: No buttons in search results cell button array.")
@@ -259,11 +259,11 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
                 }
             case 2: // Favorite action
                 if let user = currentUser {
-                    if let _ = isFavoriteIngredient(user, ingredient: ingredient) {
-                        unfavoriteIngredient(user, ingredient: ingredient)
+                    if let _ = isFavoriteIngredient(user, ingredient: ingredient!) {
+                        unfavoriteIngredient(user, ingredient: ingredient!)
                         selBtn.deselect()
                     } else {
-                        favoriteIngredient(user, ingredient: ingredient)
+                        favoriteIngredient(user, ingredient: ingredient!)
                         selBtn.select()
                     }
                         
@@ -273,8 +273,14 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
                     return true
                 }
             case 3: // Add-to-hotpot action
-                print("DEBUG: Add to hotpot!")
-                //addToHotpot(ingredient)
+                if let selection = ingredient as? PFIngredient {
+                    currentSearch.append(selection)
+                    if let parent = parentViewController as? SearchResultsViewController {
+                        parent.newSearchTermWasAdded()
+                    }
+                } else {
+                    print("ERROR: Add to hotpot failed.")
+                }
                 return true
             default:
                 return true
