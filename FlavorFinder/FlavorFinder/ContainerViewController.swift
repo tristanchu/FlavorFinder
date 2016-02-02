@@ -19,9 +19,11 @@ import UIKit
 class ContainerViewController: UIViewController {
     
 
-    // Segues:
+    // Segues: -- TODO: make globals:
     let segueToLogin = "goToLogin"
     let segueToRegister = "goToRegister"
+    let segueToSearchResults = "segueLandingToSearchResults"
+    let segueToNewSearch = "segueLandingToNewSearch"
 
     var vc : UIViewController!
     var segueIdentifier : String!
@@ -56,6 +58,10 @@ class ContainerViewController: UIViewController {
                 let login = segue.destinationViewController as! LoginViewPage
                 login.parent = self
                 login.buttonSegue = segueToRegister
+            } else if segue.identifier == segueToNewSearch {
+                let newSearch = segue.destinationViewController as! NewSearchViewController
+                newSearch.parent = self
+                newSearch.buttonSegue = segueToSearchResults
             }
         }
     }

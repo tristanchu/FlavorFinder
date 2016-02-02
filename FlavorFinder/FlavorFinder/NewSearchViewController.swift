@@ -24,6 +24,10 @@ class NewSearchViewController : ContainerParentViewController,
     var filteredResults : [PFIngredient] = []
     let CELL_IDENTIFIER = "newSearchResultCell"
 
+    // Navigation properties (passed in through segue):
+    var parent : ContainerViewController!
+    var buttonSegue : String!
+
     // Identifiers from storyboard: (note, constraints on there)
     @IBOutlet weak var appName: UILabel!
     @IBOutlet weak var appIconView: UIImageView!
@@ -171,7 +175,21 @@ class NewSearchViewController : ContainerParentViewController,
             CELL_IDENTIFIER, forIndexPath: indexPath)
         // set cell label:
         cell.textLabel?.text = filteredResults[indexPath.item].name
+        // Give cell a chevron:
+        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         return cell;
+    }
+
+    /* tableView -> happens on selection of row
+        - sets selected row to current search
+        - goes to search result view
+    */
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        // make selected row the current search:
+        currentSearch = [filteredResults[indexPath.row]]
+//        // for debug:
+//        print("current search now: \(currentSearch[0].name)")
+        parent.segueIdentifierReceivedFromParent(buttonSegue)
     }
 
 }
