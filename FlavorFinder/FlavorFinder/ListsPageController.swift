@@ -47,7 +47,7 @@ class ListsPageController: UITableViewController {
 
         // Table view visuals:
         listsTableView.tableFooterView = UIView(frame: CGRectZero)  // remove empty cells
-        listsTableView.rowHeight = 80.0
+        listsTableView.rowHeight = UNIFORM_ROW_HEIGHT
     }
 
     /* viewDidAppear:

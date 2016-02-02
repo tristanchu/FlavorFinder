@@ -45,7 +45,7 @@ class FavoritesPageController: UITableViewController {
             forCellReuseIdentifier: favoriteCellName)
 
         // Table view visuals:
-        favoritesTableView.rowHeight = 50.0
+        favoritesTableView.rowHeight = UNIFORM_ROW_HEIGHT
         favoritesTableView.tableFooterView = UIView(frame: CGRectZero) // remove empty cells
     }
 
