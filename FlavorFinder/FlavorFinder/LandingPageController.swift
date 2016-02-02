@@ -31,12 +31,12 @@ class LandingPageController: ContainerParentViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         // load the appropriate subviews (new search or search results)
-        if gotSearch {
-            print("DEBUG: got search")
-            goToSearchResults()
+        if (currentSearch.count != 0) {
+            print("DEBUG: got search");
+            goToSearchResults();
         } else {
-            print("DEBUG: new search")
-            goToNewSearch()
+            print("DEBUG: new search");
+            goToNewSearch();
         }
     }
 
