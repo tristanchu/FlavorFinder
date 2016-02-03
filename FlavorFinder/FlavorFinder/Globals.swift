@@ -63,6 +63,7 @@ let F_NUTS = "no nuts"
 // Sizes:
 let MATCH_CELL_IMAGE_SIZE = CGSizeMake(30, 30)
 let UNIFORM_ROW_HEIGHT: CGFloat = 68.0  // for favs, lists, list details
+let K_CELL_HEIGHT : CGFloat = 40.0
 
 // Displayed error messages:
 // --> "add it yourself" can be added when feature exists

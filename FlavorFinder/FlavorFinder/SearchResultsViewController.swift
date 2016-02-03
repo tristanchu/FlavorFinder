@@ -30,6 +30,8 @@ class SearchResultsViewController : UIViewController {
     var filterBarSVC : UIViewController?
     var hotpotSVC : HotpotSubviewController?
     
+    var filters: [String: Bool]?
+    
     // containers of subviews
     @IBOutlet weak var searchResultsContainer: UIView!
     @IBOutlet weak var filterBarContainer: UIView!
@@ -94,6 +96,13 @@ class SearchResultsViewController : UIViewController {
             msg: self.NEED_LOGIN_MSG as String,
             actionTitle: OK_TEXT,
             currController: self)
+    }
+
+    /* goToNewSearch
+        - coordinates view response after child says filter buttons were toggled
+    */
+    func filterButtonWasToggled(filters: [String: Bool]) {
+        self.filters = filters
     }
     
 }
