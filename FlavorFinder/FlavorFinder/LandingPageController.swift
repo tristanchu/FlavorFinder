@@ -51,6 +51,9 @@ class LandingPageController: ContainerParentViewController {
     */
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        
+        self.tabBarController?.navigationItem.title = ""
+        
         // load the appropriate subviews (new search or search results)
         if !(currentSearch.isEmpty) {
             goToSearchResults()
