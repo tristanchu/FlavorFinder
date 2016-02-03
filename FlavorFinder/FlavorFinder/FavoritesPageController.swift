@@ -47,6 +47,7 @@ class FavoritesPageController: UITableViewController {
         // Table view visuals:
         favoritesTableView.rowHeight = UNIFORM_ROW_HEIGHT
         favoritesTableView.tableFooterView = UIView(frame: CGRectZero) // remove empty cells
+        favoritesTableView.separatorStyle = UITableViewCellSeparatorStyle.None
     }
 
     /* viewDidAppear:
