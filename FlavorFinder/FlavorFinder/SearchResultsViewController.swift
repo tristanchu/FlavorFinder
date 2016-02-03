@@ -26,6 +26,8 @@ class SearchResultsViewController : UIViewController {
     var filterBarSVC : UIViewController?
     var hotpotSVC : HotpotSubviewController?
     
+    var filters: [String: Bool]?
+    
     // containers of subviews
     @IBOutlet weak var searchResultsContainer: UIView!
     @IBOutlet weak var filterBarContainer: UIView!
@@ -78,6 +80,10 @@ class SearchResultsViewController : UIViewController {
         } else {
             searchResultsSVC?.getNewSearchResults()
         }
+    }
+    
+    func filterButtonWasToggled(filters: [String: Bool]) {
+        self.filters = filters
     }
     
 }
