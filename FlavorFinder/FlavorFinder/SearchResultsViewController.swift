@@ -60,6 +60,7 @@ class SearchResultsViewController : UIViewController {
     */
     func newSearchTermWasAdded() {
         hotpotSVC?.collectionView?.reloadData()
+        searchResultsSVC?.getSearchResults()
     }
     
     /* goToNewSearch
@@ -74,6 +75,8 @@ class SearchResultsViewController : UIViewController {
             } else {
                 print("ERROR: Landing page hierarchy broken for Search Results VC.")
             }
+        } else {
+            searchResultsSVC?.getNewSearchResults()
         }
     }
     

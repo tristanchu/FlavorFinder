@@ -55,7 +55,7 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
     let ICON_FONT = UIFont.fontAwesomeOfSize(100)
 
     // CLASS VARIABLES
-    var matches = [PFObject]()   // Array of all cells that ARE displayed
+    var matches = [(ingredient: PFIngredient, rank: Int)]() // data for the table
     
 //    let notSignedInAlert = UIAlertController(title: "Not Signed In", message: "You need to sign in to do this!", preferredStyle: UIAlertControllerStyle.Alert)
     
@@ -69,7 +69,7 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureTableView()
-        displaySearchResults()
+        getSearchResults()
     }
         
     override func viewWillAppear(animated: Bool) {
@@ -111,13 +111,21 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         tableView.emptyDataSetDelegate = self
     }
     
-    func displaySearchResults() {
-        let ingredient = currentSearch[0] /// until we get multisearch
-        matches = _getMatchesForIngredient(ingredient, filters: filters)
+    func getNewSearchResults() {
+        matches = getMultiSearch(currentSearch)
         animateTableViewCellsToLeft(tableView)
         tableView.reloadData()
     }
-        
+    
+    func getSearchResults() {
+        if matches.isEmpty {
+            getNewSearchResults()
+        } else {
+            matches = addToSearch(matches, newIngredient: currentSearch.last!)
+            tableView.reloadData()
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -138,13 +146,13 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         cell.delegate = self
         
         if matches.count > 0 {
-            let match = matches[indexPath.row][_s_secondIngredient] as! PFObject
-            
-            let matchLevel = matches[indexPath.row][_s_matchLevel] as! Int
-            
+            let match = matches[indexPath.row].ingredient
+            let matchLevel = matches[indexPath.row].rank
             cell.label.text = match[_s_name] as? String
             if matchLevel < MATCH_COLORS.count && matchLevel >= 0 {
                 cell.backgroundColor = MATCH_COLORS[matchLevel]
+            } else {
+                cell.backgroundColor = MATCH_COLORS[0] // default
             }
         }
         
@@ -160,8 +168,10 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         
     func swipeTableCell(cell: MGSwipeTableCell!, tappedButtonAtIndex index: Int, direction: MGSwipeDirection, fromExpansion: Bool) -> Bool {
         let indexPath = tableView.indexPathForCell(cell)!
-        let match = matches[indexPath.row]
-        let ingredient = match[_s_secondIngredient] as? PFObject
+        let ingredient = matches[indexPath.row].ingredient
+        //  re: voting -- got to get matches and decide what to do with multi-search
+        //  disabling until we figure that out!
+        // DEBUG: disabled voting feature for now
         
         if cell.leftButtons == nil || cell.leftButtons.count == 0 {
             print("ERROR: No buttons in search results cell button array.")
@@ -178,77 +188,76 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
             
             switch index {
             case 0: // Upvote action
-                if let user = currentUser {
-                    if let vote = hasVoted(user, match: match) {
-                        let voteType = vote[_s_voteType] as! String
-                            
-                        if voteType == _s_upvotes {
-                            // Already upvoted
-                            unvoteMatch(user, match: match, voteType: _s_upvotes)
-                            selBtn.deselect()
-                        } else if voteType == _s_downvotes {    // Already downvoted
-                            unvoteMatch(user, match: match, voteType: _s_downvotes)
-                            upvoteMatch(user, match: match)
-                            downvoteBtn.deselect()
-                            selBtn.select()
-                        }
-                    } else { // First-time vote
-                        upvoteMatch(user, match: match)
-                        selBtn.select()
-                    }
-                    return false
-                } else {
-//                    self.presentViewController(self.notSignedInAlert, animated: true, completion: nil)
-                    return true
-                }
+                break // DEBUG: disabling voting
+//                if let user = currentUser {
+//                    if let vote = hasVoted(user, match: match) {
+//                        let voteType = vote[_s_voteType] as! String
+//                            
+//                        if voteType == _s_upvotes {
+//                            // Already upvoted
+//                            unvoteMatch(user, match: match, voteType: _s_upvotes)
+//                            selBtn.deselect()
+//                        } else if voteType == _s_downvotes {    // Already downvoted
+//                            unvoteMatch(user, match: match, voteType: _s_downvotes)
+//                            upvoteMatch(user, match: match)
+//                            downvoteBtn.deselect()
+//                            selBtn.select()
+//                        }
+//                    } else { // First-time vote
+//                        upvoteMatch(user, match: match)
+//                        selBtn.select()
+//                    }
+//                    return false
+//                } else {
+////                    self.presentViewController(self.notSignedInAlert, animated: true, completion: nil)
+//                    return true
+//                }
             case 1: // Downvote action
-                if let user = currentUser {
-                    if let vote = hasVoted(user, match: match) {
-                        let voteType = vote[_s_voteType] as! String
-                            
-                        if voteType == _s_downvotes {
-                            // Already downvoted
-                            unvoteMatch(user, match: match, voteType: _s_downvotes)
-                            selBtn.deselect()
-                        } else if voteType == _s_upvotes {
-                            // Already upvoted
-                            unvoteMatch(user, match: match, voteType: _s_upvotes)
-                            downvoteMatch(user, match: match)
-                            
-                            upvoteBtn.deselect()
-                            selBtn.select()
-                        }
-                    } else { // First-time vote
-                        downvoteMatch(user, match: match)
-                        selBtn.select()
-                    }
-                    
-                    return false
-                } else {
-//                    self.presentViewController(self.notSignedInAlert, animated: true, completion: nil)
-                    return true
-                }
+                break // DEBUG: disabling voting
+//                if let user = currentUser {
+//                    if let vote = hasVoted(user, match: match) {
+//                        let voteType = vote[_s_voteType] as! String
+//                            
+//                        if voteType == _s_downvotes {
+//                            // Already downvoted
+//                            unvoteMatch(user, match: match, voteType: _s_downvotes)
+//                            selBtn.deselect()
+//                        } else if voteType == _s_upvotes {
+//                            // Already upvoted
+//                            unvoteMatch(user, match: match, voteType: _s_upvotes)
+//                            downvoteMatch(user, match: match)
+//                            
+//                            upvoteBtn.deselect()
+//                            selBtn.select()
+//                        }
+//                    } else { // First-time vote
+//                        downvoteMatch(user, match: match)
+//                        selBtn.select()
+//                    }
+//                    
+//                    return false
+//                } else {
+////                    self.presentViewController(self.notSignedInAlert, animated: true, completion: nil)
+//                    return true
+//                }
             case 2: // Favorite action
                 if let user = currentUser {
-                    if let _ = isFavoriteIngredient(user, ingredient: ingredient!) {
-                        unfavoriteIngredient(user, ingredient: ingredient!)
+                    if let _ = isFavoriteIngredient(user, ingredient: ingredient) {
+                        unfavoriteIngredient(user, ingredient: ingredient)
                         selBtn.deselect()
                     } else {
-                        favoriteIngredient(user, ingredient: ingredient!)
+                        favoriteIngredient(user, ingredient: ingredient)
                         selBtn.select()
                     }
-                        
                     return false
                 } else {
 //                    self.presentViewController(self.notSignedInAlert, animated: true, completion: nil)
                     return true
                 }
             case 3: // Add-to-hotpot action
-                if let selection = ingredient as? PFIngredient {
-                    currentSearch.append(selection)
-                    if let parent = parentViewController as? SearchResultsViewController {
-                        parent.newSearchTermWasAdded()
-                    }
+                currentSearch.append(ingredient)
+                if let parent = parentViewController as? SearchResultsViewController {
+                    parent.newSearchTermWasAdded()
                 } else {
                     print("ERROR: Add to hotpot failed.")
                 }
@@ -257,6 +266,7 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
                 return true
             }
         }
+        return true
     }
     
     func makeCellButton(image: UIImage, backgroundColor: UIColor) -> DOFavoriteButton {
@@ -275,8 +285,7 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         }
         
         let indexPath = tableView.indexPathForCell(cell)!
-        let match = matches[indexPath.row]
-        let ingredient = match[_s_secondIngredient] as! PFObject
+        let ingredient = matches[indexPath.row].ingredient
         
         swipeSettings.transition = MGSwipeTransition.Drag
 
@@ -296,13 +305,14 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
             }
             
             // display whether or not user has voted on match
-            if let vote = hasVoted(user, match: match) {
-                if vote[_s_voteType] as! String == _s_upvotes {
-                    upvoteBtn.selected = true
-                } else if vote[_s_voteType] as! String == _s_downvotes {
-                    upvoteBtn.selected = false
-                }
-                downvoteBtn.selected = !upvoteBtn.selected // can only vote one direction
+            if false { // DEBUG: voting disabled
+//            if let vote = hasVoted(user, match: match) {
+//                if vote[_s_voteType] as! String == _s_upvotes {
+//                    upvoteBtn.selected = true
+//                } else if vote[_s_voteType] as! String == _s_downvotes {
+//                    upvoteBtn.selected = false
+//                }
+//                downvoteBtn.selected = !upvoteBtn.selected // can only vote one direction
             } else {
                 upvoteBtn.selected = false
                 downvoteBtn.selected = false
