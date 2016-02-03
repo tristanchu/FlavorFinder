@@ -85,9 +85,9 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
     func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
         var text = SEARCH_GENERIC_ERROR_TEXT
         if currentSearch.isEmpty {
-            text = NO_MATCHES_TEXT
+            text = SEARCH_GENERIC_ERROR_TEXT
         } else {
-            text = INGREDIENT_NOT_FOUND_TEXT
+            text = MATCHES_NOT_FOUND_TEXT
         }
         return NSAttributedString(string: text, attributes: attributes)
     }
@@ -173,6 +173,8 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
             }
             if matchLevel < MATCH_COLORS.count && matchLevel >= 0 {
                 cell.backgroundColor = MATCH_COLORS[matchLevel]
+            } else if matchLevel >= MATCH_COLORS.count {
+                cell.backgroundColor = MATCH_COLORS.last
             } else {
                 cell.backgroundColor = MATCH_COLORS[0] // default
             }
