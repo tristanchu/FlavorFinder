@@ -52,6 +52,7 @@ func getMatchObjectsForIngredient(ingredient: PFIngredient) -> [PFObject] {
     // Get matches:
     var _matches: [PFObject]
     let query = PFQuery.orQueryWithSubqueries([queryOne, queryTwo])
+    query.limit = QUERY_LIMIT
     do {
        _matches = try query.findObjects()
     } catch {
@@ -99,7 +100,7 @@ func getMultiSearch(currSearch: [PFIngredient]) -> [(ingredient: PFIngredient, r
     // Create new results list to populate:
     var newResults : [(ingredient: PFIngredient, rank: Int)] = []
     // if currSearch is empty (it shouldn't be) return empty
-    if currSearch.count == 0 { return newResults }
+    if currSearch.isEmpty { return newResults }
     
     // get search results for first ingredient:
     newResults = getMatchingIngredients(currSearch[0])

@@ -14,6 +14,8 @@ import DZNEmptyDataSet
 import DOFavoriteButton
 
 class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+    
+    // MARK: Properties:
     // CONSTANTS
     // numbers
     let K_CELL_HEIGHT : CGFloat = 40.0
@@ -53,34 +55,21 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
     let ICON_FONT = UIFont.fontAwesomeOfSize(100)
 
     // CLASS VARIABLES
-    var allCells = [PFObject]()         // Array of all cells that CAN be displayed
-    var displayedCells = [PFObject]()   // Array of all cells that ARE displayed (filtered)
-    var currentIngredient : PFObject?   // Stores the ingredient being viewed
+    var matches = [(ingredient: PFIngredient, rank: Int)]() // data for the table
     
 //    let notSignedInAlert = UIAlertController(title: "Not Signed In", message: "You need to sign in to do this!", preferredStyle: UIAlertControllerStyle.Alert)
-    
-    @IBOutlet var matchTableView: UITableView!
-        
-    let searchResultsTableView = UITableView()
-    var globalSearchResults = [PFObject]()
     
     let filters: [String: Bool] = [F_KOSHER: false,
         F_DAIRY: false,
         F_VEG: false,
         F_NUTS: false]
-    
+ 
+    // MARK: Actions
     // SETUP FUNCTIONS
     override func viewDidLoad() {
         super.viewDidLoad()
-        configure_searchResultsTableView()
-        self.tableView.emptyDataSetSource = self
-        self.tableView.emptyDataSetDelegate = self
-        self.tableView.tag = 1
-            
-        // Remove the cell separators
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
-        
-        showAllIngredients()
+        self.configureTableView()
+        getSearchResults()
     }
         
     override func viewWillAppear(animated: Bool) {
@@ -97,7 +86,7 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         
     func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
         var text = SEARCH_GENERIC_ERROR_TEXT
-        if let _ = currentIngredient {
+        if currentSearch.isEmpty {
             text = NO_MATCHES_TEXT
         } else {
             text = INGREDIENT_NOT_FOUND_TEXT
@@ -105,43 +94,51 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         return NSAttributedString(string: text, attributes: attributes)
     }
     
-    func configure_searchResultsTableView() {
-        searchResultsTableView.hidden = true
-        searchResultsTableView.tag = 2
-        searchResultsTableView.delegate = self
-        searchResultsTableView.dataSource = self
-        searchResultsTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: CELL_IDENTIFIER)
-        searchResultsTableView.layer.zPosition = 1
+    func configureTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: CELL_IDENTIFIER)
+        tableView.layer.zPosition = 1
         let blurEffect = UIBlurEffect(style: .Light)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        searchResultsTableView.insertSubview(blurEffectView, atIndex: 0)
-        searchResultsTableView.backgroundView = blurEffectView
+        tableView.insertSubview(blurEffectView, atIndex: 0)
+        tableView.backgroundView = blurEffectView
+        
+        // Remove the cell separators
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        
+        tableView.emptyDataSetSource = self
+        tableView.emptyDataSetDelegate = self
     }
     
-    func showAllIngredients() {
-        allCells = _allIngredients
-        displayedCells = _allIngredients
-        currentIngredient = nil
-        
-        animateTableViewCellsToLeft(self.tableView)
+    func getNewSearchResults() {
+        matches = getMultiSearch(currentSearch)
+        animateTableViewCellsToLeft(tableView)
+        while !(isMatchDataLoaded()) {}
+        tableView.reloadData()
     }
-        
-    func showIngredient(ingredient: PFObject) {
-        currentIngredient = ingredient
-        self.navigationController?.navigationItem.title = ingredient[_s_name] as? String   // Set navigation title to ingredient's name.
-            
-        allCells.removeAll()
-        let matches = _getMatchesForIngredient(ingredient, filters: filters)
-            
-        for match in matches {
-            allCells.append(match)
+    
+    func isMatchDataLoaded() -> Bool {
+        for i in 0..<matches.count {
+            if !(matches[i].ingredient.isDataAvailable()) {
+                print("ERROR: Failed to fetch all data for match.")
+                matches.removeAtIndex(i)
+                return false
+            }
         }
-            
-        // Reset displayed cells
-        displayedCells = allCells
-        animateTableViewCellsToLeft(self.tableView)
+        return true
     }
-        
+    
+    func getSearchResults() {
+        if matches.isEmpty {
+            getNewSearchResults()
+        } else {
+            matches = addToSearch(matches, newIngredient: currentSearch.last!)
+            while !(isMatchDataLoaded()) {}
+            tableView.reloadData()
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -153,27 +150,32 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
     }
         
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return displayedCells.count
+        return matches.count
     }
         
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellIdentifier = CELLIDENTIFIER_MATCH
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! MatchTableViewCell
         cell.delegate = self
-                
-        let match = displayedCells[indexPath.row]
-                
-        if currentIngredient != nil {
-            let matchObj = match[_s_secondIngredient] as! PFObject
-            cell.label.text = matchObj[_s_name] as? String
+        
+        if !(matches.isEmpty) {
+            let match = matches[indexPath.row].ingredient
+            let matchLevel = matches[indexPath.row].rank
             
-            let matchLevel = match[_s_matchLevel] as! Int
+            
+            if match.isDataAvailable() {
+                cell.label.text = match[_s_name] as? String
+            } else {
+                print("ERROR: Failed to fetch all data for match.")
+                matches.removeAtIndex(indexPath.row)
+                tableView.reloadData()
+                return cell
+            }
             if matchLevel < MATCH_COLORS.count && matchLevel >= 0 {
                 cell.backgroundColor = MATCH_COLORS[matchLevel]
+            } else {
+                cell.backgroundColor = MATCH_COLORS[0] // default
             }
-        } else {
-            cell.label.text = match[_s_name] as? String
-            cell.backgroundColor = MATCH_COLORS[0]
         }
         
         return cell
@@ -184,15 +186,16 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
     }
         
     func swipeTableCell(cell: MGSwipeTableCell!, didChangeSwipeState state: MGSwipeState, gestureIsActive: Bool) {
-            
     }
         
     func swipeTableCell(cell: MGSwipeTableCell!, tappedButtonAtIndex index: Int, direction: MGSwipeDirection, fromExpansion: Bool) -> Bool {
         let indexPath = tableView.indexPathForCell(cell)!
-        let match = displayedCells[indexPath.row]
-        let ingredient = match[_s_secondIngredient] as? PFObject
+        let ingredient = matches[indexPath.row].ingredient
+        //  re: voting -- got to get matches and decide what to do with multi-search
+        //  disabling until we figure that out!
+        // DEBUG: disabled voting feature for now
         
-        if cell.leftButtons == nil || cell.leftButtons.count == 0 {
+        if cell.leftButtons == nil || cell.leftButtons.isEmpty {
             print("ERROR: No buttons in search results cell button array.")
             return true
         }
@@ -207,77 +210,76 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
             
             switch index {
             case 0: // Upvote action
-                if let user = currentUser {
-                    if let vote = hasVoted(user, match: match) {
-                        let voteType = vote[_s_voteType] as! String
-                            
-                        if voteType == _s_upvotes {
-                            // Already upvoted
-                            unvoteMatch(user, match: match, voteType: _s_upvotes)
-                            selBtn.deselect()
-                        } else if voteType == _s_downvotes {    // Already downvoted
-                            unvoteMatch(user, match: match, voteType: _s_downvotes)
-                            upvoteMatch(user, match: match)
-                            downvoteBtn.deselect()
-                            selBtn.select()
-                        }
-                    } else { // First-time vote
-                        upvoteMatch(user, match: match)
-                        selBtn.select()
-                    }
-                    return false
-                } else {
-//                    self.presentViewController(self.notSignedInAlert, animated: true, completion: nil)
-                    return true
-                }
+                break // DEBUG: disabling voting
+//                if let user = currentUser {
+//                    if let vote = hasVoted(user, match: match) {
+//                        let voteType = vote[_s_voteType] as! String
+//                            
+//                        if voteType == _s_upvotes {
+//                            // Already upvoted
+//                            unvoteMatch(user, match: match, voteType: _s_upvotes)
+//                            selBtn.deselect()
+//                        } else if voteType == _s_downvotes {    // Already downvoted
+//                            unvoteMatch(user, match: match, voteType: _s_downvotes)
+//                            upvoteMatch(user, match: match)
+//                            downvoteBtn.deselect()
+//                            selBtn.select()
+//                        }
+//                    } else { // First-time vote
+//                        upvoteMatch(user, match: match)
+//                        selBtn.select()
+//                    }
+//                    return false
+//                } else {
+////                    self.presentViewController(self.notSignedInAlert, animated: true, completion: nil)
+//                    return true
+//                }
             case 1: // Downvote action
-                if let user = currentUser {
-                    if let vote = hasVoted(user, match: match) {
-                        let voteType = vote[_s_voteType] as! String
-                            
-                        if voteType == _s_downvotes {
-                            // Already downvoted
-                            unvoteMatch(user, match: match, voteType: _s_downvotes)
-                            selBtn.deselect()
-                        } else if voteType == _s_upvotes {
-                            // Already upvoted
-                            unvoteMatch(user, match: match, voteType: _s_upvotes)
-                            downvoteMatch(user, match: match)
-                            
-                            upvoteBtn.deselect()
-                            selBtn.select()
-                        }
-                    } else { // First-time vote
-                        downvoteMatch(user, match: match)
-                        selBtn.select()
-                    }
-                    
-                    return false
-                } else {
-//                    self.presentViewController(self.notSignedInAlert, animated: true, completion: nil)
-                    return true
-                }
+                break // DEBUG: disabling voting
+//                if let user = currentUser {
+//                    if let vote = hasVoted(user, match: match) {
+//                        let voteType = vote[_s_voteType] as! String
+//                            
+//                        if voteType == _s_downvotes {
+//                            // Already downvoted
+//                            unvoteMatch(user, match: match, voteType: _s_downvotes)
+//                            selBtn.deselect()
+//                        } else if voteType == _s_upvotes {
+//                            // Already upvoted
+//                            unvoteMatch(user, match: match, voteType: _s_upvotes)
+//                            downvoteMatch(user, match: match)
+//                            
+//                            upvoteBtn.deselect()
+//                            selBtn.select()
+//                        }
+//                    } else { // First-time vote
+//                        downvoteMatch(user, match: match)
+//                        selBtn.select()
+//                    }
+//                    
+//                    return false
+//                } else {
+////                    self.presentViewController(self.notSignedInAlert, animated: true, completion: nil)
+//                    return true
+//                }
             case 2: // Favorite action
                 if let user = currentUser {
-                    if let _ = isFavoriteIngredient(user, ingredient: ingredient!) {
-                        unfavoriteIngredient(user, ingredient: ingredient!)
+                    if let _ = isFavoriteIngredient(user, ingredient: ingredient) {
+                        unfavoriteIngredient(user, ingredient: ingredient)
                         selBtn.deselect()
                     } else {
-                        favoriteIngredient(user, ingredient: ingredient!)
+                        favoriteIngredient(user, ingredient: ingredient)
                         selBtn.select()
                     }
-                        
                     return false
                 } else {
 //                    self.presentViewController(self.notSignedInAlert, animated: true, completion: nil)
                     return true
                 }
             case 3: // Add-to-hotpot action
-                if let selection = ingredient as? PFIngredient {
-                    currentSearch.append(selection)
-                    if let parent = parentViewController as? SearchResultsViewController {
-                        parent.newSearchTermWasAdded()
-                    }
+                currentSearch.append(ingredient)
+                if let parent = parentViewController as? SearchResultsViewController {
+                    parent.newSearchTermWasAdded()
                 } else {
                     print("ERROR: Add to hotpot failed.")
                 }
@@ -286,6 +288,7 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
                 return true
             }
         }
+        return true
     }
     
     func makeCellButton(image: UIImage, backgroundColor: UIColor) -> DOFavoriteButton {
@@ -299,13 +302,12 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
     func swipeTableCell(cell: MGSwipeTableCell!, swipeButtonsForDirection direction: MGSwipeDirection, swipeSettings: MGSwipeSettings!, expansionSettings: MGSwipeExpansionSettings!) -> [AnyObject]! {
         
         // check that search is underway and that we swiped right, otherwise ignore
-        if currentIngredient == nil || direction != MGSwipeDirection.LeftToRight {
+        if currentSearch.count < 0 || direction != MGSwipeDirection.LeftToRight {
             return []
         }
         
         let indexPath = tableView.indexPathForCell(cell)!
-        let match = displayedCells[indexPath.row]
-        let ingredient = match[_s_secondIngredient] as! PFObject
+        let ingredient = matches[indexPath.row].ingredient
         
         swipeSettings.transition = MGSwipeTransition.Drag
 
@@ -325,13 +327,14 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
             }
             
             // display whether or not user has voted on match
-            if let vote = hasVoted(user, match: match) {
-                if vote[_s_voteType] as! String == _s_upvotes {
-                    upvoteBtn.selected = true
-                } else if vote[_s_voteType] as! String == _s_downvotes {
-                    upvoteBtn.selected = false
-                }
-                downvoteBtn.selected = !upvoteBtn.selected // can only vote one direction
+            if false { // DEBUG: voting disabled
+//            if let vote = hasVoted(user, match: match) {
+//                if vote[_s_voteType] as! String == _s_upvotes {
+//                    upvoteBtn.selected = true
+//                } else if vote[_s_voteType] as! String == _s_downvotes {
+//                    upvoteBtn.selected = false
+//                }
+//                downvoteBtn.selected = !upvoteBtn.selected // can only vote one direction
             } else {
                 upvoteBtn.selected = false
                 downvoteBtn.selected = false
@@ -348,66 +351,44 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
     }
         
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        switch tableView.tag {
-        case 1:
-            if let navi = self.navigationController as? MainNavigationController {
-                if (navi.dropdownIsDown) {
-                } else {
-                    tableView.contentOffset = CGPointMake(0, 0 - tableView.contentInset.top); // Reset scroll position.
-                    if currentIngredient != nil {
-                        let match = displayedCells[indexPath.row]                              // Get tapped match.
-                        let ingredient = match[_s_secondIngredient] as! PFObject
-                            showIngredient(ingredient)
-                    } else {
-                        let ingredient = displayedCells[indexPath.row]                         // Get tapped ingredient.
-                            showIngredient(ingredient)
-                    }
-                }
-            }
-        case 2:
-            let ingredient = globalSearchResults[indexPath.row]
-            showIngredient(ingredient)
-        default:
-            break;
-        }
             
     }
-    
-    func filterGlobalSearchResults(searchText: String) {
-        globalSearchResults.removeAll()
-        
-        if searchText.isEmpty {
-            globalSearchResults = []
-        } else {
-            for ingredient in _allIngredients {
-                if (ingredient[_s_name] as! String).rangeOfString(searchText.lowercaseString) != nil {
-                    globalSearchResults.append(ingredient)
-                }
-            }
-        }
-        searchResultsTableView.reloadData()
-    }
-        
-    func filterResults(searchText: String) {
-        displayedCells.removeAll()
-        
-        if searchText.isEmpty {
-            displayedCells = allCells
-        } else {
-            for cell in allCells {
-                if currentIngredient != nil {
-                    let secondIngredient = cell[_s_secondIngredient] as! PFObject
-                    if (secondIngredient[_s_name] as! String).rangeOfString(searchText.lowercaseString) != nil {
-                        displayedCells.append(cell)
-                    }
-                } else {
-                    if (cell[_s_name] as! String).rangeOfString(searchText.lowercaseString) != nil {
-                        displayedCells.append(cell)
-                    }
-                }
-            }
-        }
-        
-        self.tableView.reloadData()
-    }
+//    
+//    func filterGlobalSearchResults(searchText: String) {
+//        globalSearchResults.removeAll()
+//        
+//        if searchText.isEmpty {
+//            globalSearchResults = []
+//        } else {
+//            for ingredient in _allIngredients {
+//                if (ingredient[_s_name] as! String).rangeOfString(searchText.lowercaseString) != nil {
+//                    globalSearchResults.append(ingredient)
+//                }
+//            }
+//        }
+//        searchResultsTableView.reloadData()
+//    }
+//        
+//    func filterResults(searchText: String) {
+//        displayedCells.removeAll()
+//        
+//        if searchText.isEmpty {
+//            displayedCells = allCells
+//        } else {
+//            for cell in allCells {
+//                if currentIngredient != nil {
+//                    let secondIngredient = cell[_s_secondIngredient] as! PFObject
+//                    if (secondIngredient[_s_name] as! String).rangeOfString(searchText.lowercaseString) != nil {
+//                        displayedCells.append(cell)
+//                    }
+//                } else {
+//                    if (cell[_s_name] as! String).rangeOfString(searchText.lowercaseString) != nil {
+//                        displayedCells.append(cell)
+//                    }
+//                }
+//            }
+//        }
+//        
+//        self.tableView.reloadData()
+//    }
 }

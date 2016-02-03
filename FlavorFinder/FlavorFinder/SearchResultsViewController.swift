@@ -14,13 +14,15 @@ import UIKit
 
 class SearchResultsViewController : UIViewController {
     
+    // MARK: Properties
+    
     // segues corresponding to embedded subviews
     let segueEmbedSearchResults = "goToSearchResults"
     let segueEmbedFilterBar = "goToFilterBar"
     let segueEmbedHotpot = "goToHotpot"
     
     // variables to hold the subview controllers (SVCs)
-    var searchResultsSVC : UIViewController?
+    var searchResultsSVC : SearchResultsSubviewController?
     var filterBarSVC : UIViewController?
     var hotpotSVC : HotpotSubviewController?
     
@@ -29,12 +31,18 @@ class SearchResultsViewController : UIViewController {
     @IBOutlet weak var filterBarContainer: UIView!
     @IBOutlet weak var hotpotContainer: UIView!
     
+    // MARK: Actions
+    
+    /* prepareForSegue
+        - prepares for segue
+        - sets variables to keep track of embedded SVCs
+    */
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // keep track of the embedded subview controllers
         let vc = segue.destinationViewController
         switch segue.identifier! {
         case segueEmbedSearchResults:
-            searchResultsSVC = vc
+            searchResultsSVC = vc as? SearchResultsSubviewController
             break
         case segueEmbedFilterBar:
             filterBarSVC = vc
@@ -47,12 +55,19 @@ class SearchResultsViewController : UIViewController {
         }
     }
     
+    /* newSearchTermWasAddded
+        - refreshes hotpot to reflect changes to search query
+    */
     func newSearchTermWasAdded() {
         hotpotSVC?.collectionView?.reloadData()
+        searchResultsSVC?.getSearchResults()
     }
     
+    /* goToNewSearch
+        - checks if hotpot is empty and if so, tells page to load new search view
+    */
     func hotpotIngredientWasRemoved() {
-        if currentSearch.count == 0 {
+        if currentSearch.isEmpty {
             if let parent = parentViewController as? ContainerViewController {
                 if let page = parent.parentViewController as? LandingPageController {
                     page.goToNewSearch()
@@ -60,6 +75,8 @@ class SearchResultsViewController : UIViewController {
             } else {
                 print("ERROR: Landing page hierarchy broken for Search Results VC.")
             }
+        } else {
+            searchResultsSVC?.getNewSearchResults()
         }
     }
     

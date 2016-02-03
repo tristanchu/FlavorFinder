@@ -138,11 +138,11 @@ class NewSearchViewController : ContainerParentViewController,
             let range = tmp[_s_name].rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
             return range.location != NSNotFound
         })
-        if(filteredResults.count == 0){
-            activeSearch = false;
+        if filteredResults.isEmpty {
+            activeSearch = false
             searchResultTableView.hidden = true
         } else {
-            activeSearch = true;
+            activeSearch = true
             searchResultTableView.hidden = false
         }
         self.searchResultTableView.reloadData()

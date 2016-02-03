@@ -48,6 +48,7 @@ class FavoritesPageController: UITableViewController {
         // Table view visuals:
         favoritesTableView.rowHeight = UNIFORM_ROW_HEIGHT
         favoritesTableView.tableFooterView = UIView(frame: CGRectZero) // remove empty cells
+        favoritesTableView.separatorStyle = UITableViewCellSeparatorStyle.None
     }
 
     /* viewDidAppear:
@@ -127,7 +128,7 @@ class FavoritesPageController: UITableViewController {
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
             
             // Show empty message if needed:
-            if self.favoriteCells.count == 0 {
+            if self.favoriteCells.isEmpty {
                 favoritesTableView.backgroundView =
                     emptyBackgroundTextFavorites(noFavoritesMsg);
             }
