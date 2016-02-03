@@ -29,9 +29,7 @@ class SearchResultsViewController : UIViewController {
     var searchResultsSVC : SearchResultsSubviewController?
     var filterBarSVC : UIViewController?
     var hotpotSVC : HotpotSubviewController?
-    
-    var filters: [String: Bool]?
-    
+        
     // containers of subviews
     @IBOutlet weak var searchResultsContainer: UIView!
     @IBOutlet weak var filterBarContainer: UIView!
@@ -102,7 +100,11 @@ class SearchResultsViewController : UIViewController {
         - coordinates view response after child says filter buttons were toggled
     */
     func filterButtonWasToggled(filters: [String: Bool]) {
-        self.filters = filters
+        searchResultsSVC?.filters = filters
+    }
+    
+    func filterSearchTextDidChange(searchText: String) {
+        searchResultsSVC?.filterResults(searchText)
     }
     
 }

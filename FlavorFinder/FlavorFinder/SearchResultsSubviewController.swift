@@ -56,8 +56,9 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
 
     // CLASS VARIABLES
     var matches = [(ingredient: PFIngredient, rank: Int)]() // data for the table
+    var allMatches = [(ingredient: PFIngredient, rank: Int)]()
     
-    let filters: [String: Bool] = [F_KOSHER: false,
+    var filters: [String: Bool] = [F_KOSHER: false,
         F_DAIRY: false,
         F_VEG: false,
         F_NUTS: false]
@@ -110,18 +111,19 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
     }
     
     func getNewSearchResults() {
-        matches = getMultiSearch(currentSearch)
+        allMatches = getMultiSearch(currentSearch)
         while !(isMatchDataLoaded()) {}
-        matches = sortByRank(matches)
+        allMatches = sortByRank(allMatches)
+        matches = allMatches
         animateTableViewCellsToLeft(tableView)
         tableView.reloadData()
     }
     
     func isMatchDataLoaded() -> Bool {
-        for i in 0..<matches.count {
-            if !(matches[i].ingredient.isDataAvailable()) {
+        for i in 0..<allMatches.count {
+            if !(allMatches[i].ingredient.isDataAvailable()) {
                 print("ERROR: Failed to fetch all data for match.")
-                matches.removeAtIndex(i)
+                allMatches.removeAtIndex(i)
                 return false
             }
         }
@@ -129,12 +131,13 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
     }
     
     func getSearchResults() {
-        if matches.isEmpty {
+        if allMatches.isEmpty {
             getNewSearchResults()
         } else {
-            matches = addToSearch(matches, newIngredient: currentSearch.last!)
+            allMatches = addToSearch(allMatches, newIngredient: currentSearch.last!)
             while !(isMatchDataLoaded()) {}
-            matches = sortByRank(matches)
+            allMatches = sortByRank(allMatches)
+            matches = allMatches
             tableView.reloadData()
         }
     }
@@ -357,7 +360,7 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
             
     }
-//    
+    
 //    func filterGlobalSearchResults(searchText: String) {
 //        globalSearchResults.removeAll()
 //        
@@ -372,27 +375,20 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
 //        }
 //        searchResultsTableView.reloadData()
 //    }
-//        
-//    func filterResults(searchText: String) {
-//        displayedCells.removeAll()
-//        
-//        if searchText.isEmpty {
-//            displayedCells = allCells
-//        } else {
-//            for cell in allCells {
-//                if currentIngredient != nil {
-//                    let secondIngredient = cell[_s_secondIngredient] as! PFObject
-//                    if (secondIngredient[_s_name] as! String).rangeOfString(searchText.lowercaseString) != nil {
-//                        displayedCells.append(cell)
-//                    }
-//                } else {
-//                    if (cell[_s_name] as! String).rangeOfString(searchText.lowercaseString) != nil {
-//                        displayedCells.append(cell)
-//                    }
-//                }
-//            }
-//        }
-//        
-//        self.tableView.reloadData()
-//    }
+        
+    func filterResults(searchText: String) {
+        matches.removeAll()
+        
+        if searchText.isEmpty {
+            matches = allMatches
+        } else {
+            for match in allMatches {
+                if (match.ingredient[_s_name] as! String).rangeOfString(searchText.lowercaseString) != nil {
+                    matches.append(match)
+                }
+            }
+        }
+        
+        self.tableView.reloadData()
+    }
 }

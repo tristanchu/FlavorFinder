@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="oWC-1n-3cO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1509" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="oWC-1n-3cO">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
@@ -210,22 +210,22 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="3iT-Te-5xR">
-                                <rect key="frame" x="0.0" y="60" width="600" height="540"/>
+                                <rect key="frame" x="0.0" y="54" width="600" height="546"/>
                                 <subviews>
                                     <containerView opaque="NO" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="4tn-1A-t8U" userLabel="Filter Bar Container View">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="65"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="76"/>
                                         <connections>
                                             <segue destination="xpV-8M-bW3" kind="embed" identifier="goToFilterBar" id="6TU-wH-Xey"/>
                                         </connections>
                                     </containerView>
                                     <containerView opaque="NO" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="uJK-a9-1m0" userLabel="Hotpot Container View">
-                                        <rect key="frame" x="0.0" y="65" width="600" height="27"/>
+                                        <rect key="frame" x="0.0" y="76" width="600" height="27"/>
                                         <connections>
                                             <segue destination="OnA-jk-5Hp" kind="embed" identifier="goToHotpot" id="Pnt-Hs-OYJ"/>
                                         </connections>
                                     </containerView>
                                     <containerView opaque="NO" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="CqB-g8-4PC">
-                                        <rect key="frame" x="0.0" y="92" width="600" height="448"/>
+                                        <rect key="frame" x="0.0" y="103" width="600" height="443"/>
                                         <connections>
                                             <segue destination="m7J-D3-eHA" kind="embed" identifier="goToSearchResults" id="okc-Lk-399"/>
                                         </connections>
@@ -233,7 +233,7 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="4tn-1A-t8U" firstAttribute="centerX" secondItem="3iT-Te-5xR" secondAttribute="centerX" id="3oU-Lk-jc8"/>
-                                    <constraint firstItem="4tn-1A-t8U" firstAttribute="height" secondItem="3iT-Te-5xR" secondAttribute="height" multiplier="0.12" id="HFP-N6-3XZ"/>
+                                    <constraint firstItem="4tn-1A-t8U" firstAttribute="height" secondItem="3iT-Te-5xR" secondAttribute="height" multiplier="0.14" id="HFP-N6-3XZ"/>
                                     <constraint firstItem="uJK-a9-1m0" firstAttribute="height" secondItem="3iT-Te-5xR" secondAttribute="height" multiplier="0.05" id="Vky-N5-C4v"/>
                                 </constraints>
                             </stackView>
@@ -243,7 +243,7 @@
                             <constraint firstItem="3iT-Te-5xR" firstAttribute="centerX" secondItem="S3W-QO-b3i" secondAttribute="centerX" id="DUb-Pk-0jc"/>
                             <constraint firstItem="5fU-N5-qc0" firstAttribute="top" secondItem="3iT-Te-5xR" secondAttribute="bottom" id="fSZ-uy-IiJ"/>
                             <constraint firstItem="3iT-Te-5xR" firstAttribute="width" secondItem="S3W-QO-b3i" secondAttribute="width" id="hY1-hb-PDY"/>
-                            <constraint firstItem="3iT-Te-5xR" firstAttribute="height" secondItem="S3W-QO-b3i" secondAttribute="height" multiplier="0.9" id="oLZ-zt-uph"/>
+                            <constraint firstItem="3iT-Te-5xR" firstAttribute="height" secondItem="S3W-QO-b3i" secondAttribute="height" multiplier="0.91" id="oLZ-zt-uph"/>
                         </constraints>
                     </view>
                     <connections>
@@ -329,7 +329,7 @@
                                         <rect key="frame" x="0.0" y="28" width="504" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dae-TM-rqk" id="GGP-G0-0l0">
-                                            <rect key="frame" x="0.0" y="0.0" width="504" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="504" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -425,7 +425,7 @@
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NWg-i8-uKV" id="9gp-0O-fKi">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
@@ -456,7 +456,7 @@
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NZv-Py-NfV" id="bed-HF-mux">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -484,7 +484,7 @@
                                 <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hOM-h3-clb" id="haU-Wm-fie">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -670,7 +670,7 @@
                                 <rect key="frame" x="0.0" y="86" width="600" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VSI-oZ-nxd" id="emG-AP-STX">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="79.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="79"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ndg-wR-OIq">
@@ -1003,7 +1003,7 @@
             <objects>
                 <viewController id="m7J-D3-eHA" userLabel="Search Results Subview Controller" customClass="SearchResultsSubviewController" customModule="FlavorFinder" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="DLA-eN-E9Q">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="448"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="443"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -1011,7 +1011,7 @@
                                 <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Gkg-pY-SVs" id="OAA-3p-knm">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E6C-9l-aN2" userLabel="Name Label">
@@ -1042,7 +1042,7 @@
                         <viewControllerLayoutGuide type="bottom" id="ESf-fa-pI8"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="xtQ-Se-m8P">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="65"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="76"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>

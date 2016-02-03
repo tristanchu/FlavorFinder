@@ -10,10 +10,10 @@ import Foundation
 import UIKit
 import ASHorizontalScrollView
 
-class FilterBarSubviewController : UIViewController {
+class FilterBarSubviewController : UIViewController, UISearchBarDelegate {
     
     var filterView: ASHorizontalScrollView = ASHorizontalScrollView()
-
+    var filterSearchBar = UISearchBar()
     var filters: [String: Bool] = [F_KOSHER: false,
         F_DAIRY: false,
         F_VEG: false,
@@ -76,16 +76,14 @@ class FilterBarSubviewController : UIViewController {
         filterView.addItem(nutsBtn)
         
         self.view.addSubview(filterView)
-        //            self.view.addSubview(filterView)
-        //            let sbar = UISearchBar(frame: CGRectMake(0, y_offset+K_CELL_HEIGHT, navi.navigationBar.frame.width, K_CELL_HEIGHT))
-//        filterSearchBar.frame = CGRectMake(0, y_offset+K_CELL_HEIGHT, navi.navigationBar.frame.width, K_CELL_HEIGHT)
-//        filterSearchBar.layer.borderColor = NAVI_COLOR.CGColor
-//        filterSearchBar.layer.borderWidth = 1
-//        filterSearchBar.barTintColor = NAVI_COLOR
-//        filterSearchBar.hidden = true
-//        filterSearchBar.delegate = self
-//        filterSearchBar.tag = 2
-//        navi.view.addSubview(filterSearchBar)
+        
+        filterSearchBar.frame = CGRectMake(0, K_CELL_HEIGHT, screenSize.width, K_CELL_HEIGHT)
+        filterSearchBar.layer.borderColor = NAVI_COLOR.CGColor
+        filterSearchBar.layer.borderWidth = 1
+        filterSearchBar.barTintColor = NAVI_COLOR
+        filterSearchBar.delegate = self
+        filterSearchBar.tag = 2
+        self.view.addSubview(filterSearchBar)
     }
     
     
@@ -140,4 +138,12 @@ class FilterBarSubviewController : UIViewController {
             parent.filterButtonWasToggled(filters)
         }
     }
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        // Let parent know that filter search text was changed.
+        if let parent = parentViewController as! SearchResultsViewController? {
+            parent.filterSearchTextDidChange(searchText)
+        }
+    }
+    
 }
