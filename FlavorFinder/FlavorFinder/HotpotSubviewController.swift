@@ -32,9 +32,6 @@ class HotpotSubviewController : UICollectionViewController, UICollectionViewDele
     let REMOVE_BTN_FONT = UIFont.fontAwesomeOfSize(20)
     let CELL_BKGD_COLOR = NAVI_LIGHT_COLOR
     let REMOVE_BTN_TEXT = String.fontAwesomeIconWithName(.Remove)
-    
-    // class variables
-    var layout = UICollectionViewFlowLayout()
 
     // SETUP FUNCTIONS
     
@@ -44,16 +41,8 @@ class HotpotSubviewController : UICollectionViewController, UICollectionViewDele
         if collectionView == nil {
             print("ERROR: Hotpot collection view is nil!")
         }
-        
-        // set layout attributes
-        layout.itemSize = CGSize(width: ITEM_WIDTH, height: CELL_HEIGHT)
-        layout.scrollDirection = UICollectionViewScrollDirection.Horizontal
-        layout.prepareLayout()
-        
-        // set collection view attributes
-        collectionView?.setCollectionViewLayout(layout, animated: true)
+
         collectionView?.backgroundColor = HOTPOT_COLOR
-        
         collectionView?.reloadData()
 
     }
@@ -83,16 +72,16 @@ class HotpotSubviewController : UICollectionViewController, UICollectionViewDele
     
     // COLLECTION FUNCTIONS
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return 1
+        return currentSearch.count
     }
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return currentSearch.count
+        return 1
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(CELL_IDENTIFIER, forIndexPath: indexPath) as! HotpotCollectionViewCell
-        let ingredient = currentSearch[indexPath.row]
+        let ingredient = currentSearch[indexPath.section]
         
         let name : NSString = ingredient[_s_name] as! NSString
         let size : CGSize = name.sizeWithAttributes([NSFontAttributeName: UIFont.fontAwesomeOfSize(25)])
@@ -117,7 +106,7 @@ class HotpotSubviewController : UICollectionViewController, UICollectionViewDele
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        let ingredient : PFObject = currentSearch[indexPath.row]
+        let ingredient : PFObject = currentSearch[indexPath.section]
         let name : NSString = ingredient[_s_name] as! NSString
         var size : CGSize = name.sizeWithAttributes([NSFontAttributeName: UIFont.fontAwesomeOfSize(20)])
         size.width += 25

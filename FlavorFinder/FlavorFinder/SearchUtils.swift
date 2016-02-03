@@ -104,7 +104,6 @@ func getMultiSearch(currSearch: [PFIngredient]) -> [(ingredient: PFIngredient, r
     // go through rest of ingredients:
     for i in 1..<currSearch.count {
         newResults = addToSearch(newResults, newIngredient: currSearch[i])
-        print("IN HERE")
     }
     // return ending results
     return newResults
