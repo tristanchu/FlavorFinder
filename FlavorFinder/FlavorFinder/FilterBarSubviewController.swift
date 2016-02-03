@@ -81,7 +81,6 @@ class FilterBarSubviewController : UIViewController, UISearchBarDelegate {
         filterSearchBar.layer.borderColor = NAVI_COLOR.CGColor
         filterSearchBar.layer.borderWidth = 1
         filterSearchBar.barTintColor = NAVI_COLOR
-        filterSearchBar.hidden = true
         filterSearchBar.delegate = self
         filterSearchBar.tag = 2
         self.view.addSubview(filterSearchBar)
@@ -141,7 +140,10 @@ class FilterBarSubviewController : UIViewController, UISearchBarDelegate {
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        
+        // Let parent know that filter search text was changed.
+        if let parent = parentViewController as! SearchResultsViewController? {
+            parent.filterSearchTextDidChange(searchText)
+        }
     }
     
 }
