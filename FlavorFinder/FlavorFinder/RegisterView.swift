@@ -24,8 +24,6 @@ class RegisterView : UIViewController, UITextFieldDelegate {
     let PASSWORD_INVALID = "Passwords must be between \(PASSWORD_CHAR_MIN) and \(PASSWORD_CHAR_MAX) characters."
     let PW_MISMATCH = "Passwords don't match!"
     let MULTIPLE_INVALID = "Please fix errors and resubmit."
-
-    let OK_TEXT = "Ok"
     
     // request error messages
     let REQUEST_ERROR_TITLE = "Uhoh!"
@@ -185,7 +183,7 @@ class RegisterView : UIViewController, UITextFieldDelegate {
     */
     func alertUserBadInput(title: String) {
         alertPopup(title, msg: self.MULTIPLE_INVALID,
-            actionTitle: self.OK_TEXT, currController: self)
+            actionTitle: OK_TEXT, currController: self)
     }
     
     /* alertUserRegisterError
@@ -193,6 +191,6 @@ class RegisterView : UIViewController, UITextFieldDelegate {
     */
     func alertUserRegisterError(msg: String){
         alertPopup(self.REQUEST_ERROR_TITLE , msg: msg,
-            actionTitle: self.OK_TEXT, currController: self)
+            actionTitle: OK_TEXT, currController: self)
     }
 }
