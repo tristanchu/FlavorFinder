@@ -113,8 +113,9 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
     
     func getNewSearchResults() {
         matches = getMultiSearch(currentSearch)
-        animateTableViewCellsToLeft(tableView)
         while !(isMatchDataLoaded()) {}
+        matches = sortByRank(matches)
+        animateTableViewCellsToLeft(tableView)
         tableView.reloadData()
     }
     
@@ -135,6 +136,7 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         } else {
             matches = addToSearch(matches, newIngredient: currentSearch.last!)
             while !(isMatchDataLoaded()) {}
+            matches = sortByRank(matches)
             tableView.reloadData()
         }
     }
