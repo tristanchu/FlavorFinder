@@ -43,16 +43,12 @@ func getMatchingIngredients(ingredient: PFIngredient) -> [(ingredient: PFIngredi
     returns [PFObject] - match objects
 */
 func getMatchObjectsForIngredient(ingredient: PFIngredient) -> [PFObject] {
-    // TODO: look into how matches are stored.
-    let queryOne = PFQuery(className: _s_Match)
-    queryOne.whereKey(_s_firstIngredient, equalTo: ingredient)
-    let queryTwo = PFQuery(className: _s_Match)
-    queryTwo.whereKey(_s_secondIngredient, equalTo: ingredient)
-    
-    // Get matches:
-    var _matches: [PFObject]
-    let query = PFQuery.orQueryWithSubqueries([queryOne, queryTwo])
+    let query = PFQuery(className: _s_Match)
+    query.whereKey(_s_firstIngredient, equalTo: ingredient)
+    query.includeKey(_s_name)
     query.limit = QUERY_LIMIT
+    
+    var _matches: [PFObject]
     do {
        _matches = try query.findObjects()
     } catch {
