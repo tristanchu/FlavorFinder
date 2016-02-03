@@ -24,6 +24,7 @@ class ListsPageController: UITableViewController {
     // Visual related:
     let noUserMsg = "You must be logged in to have lists."
     let noListsMsg = "No Lists Yet!"
+    let listsTitle = "Lists"
 
     // Table itself:
     @IBOutlet var listsTableView: UITableView!
@@ -64,7 +65,7 @@ class ListsPageController: UITableViewController {
             self.tabBarController?.navigationItem.setRightBarButtonItems(
                 [], animated: true)
             navi.reset_navigationBar()
-            self.tabBarController?.navigationItem.title = ""
+            self.tabBarController?.navigationItem.title = listsTitle
         }
 
         // Populate and display table:

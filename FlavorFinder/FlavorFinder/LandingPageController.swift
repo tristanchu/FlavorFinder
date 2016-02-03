@@ -19,12 +19,31 @@ class LandingPageController: ContainerParentViewController {
     // MARK: Properties:
     // Vars:
     var gotSearch = true
+    
+    // visual:
+    let searchTitle = "Search"
 
     // Segues:
     let segueLandingEmbedded = "segueLandingEmbedSubview"
     let segueToSearchResults = "segueLandingToSearchResults"
     let segueToNewSearch = "segueLandingToNewSearch"
 
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // Get navigation bar on top:
+        if let navi = self.tabBarController?.navigationController
+            as? MainNavigationController {
+                self.tabBarController?.navigationItem.setLeftBarButtonItems(
+                    [], animated: true)
+                self.tabBarController?.navigationItem.setRightBarButtonItems(
+                    [], animated: true)
+                navi.reset_navigationBar()
+                self.tabBarController?.navigationItem.title = searchTitle
+        }
+    }
+    
     /* viewDidAppear
         runs when user goes to view:
     */
