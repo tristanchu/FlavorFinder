@@ -146,12 +146,10 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="069-0A-krq" kind="relationship" relationship="viewControllers" id="zCb-0N-hZz"/>
                         <segue destination="h2p-tb-f5C" kind="relationship" relationship="viewControllers" id="5Lp-kB-tlU"/>
                         <segue destination="aDy-6t-DKL" kind="relationship" relationship="viewControllers" id="VSP-N6-9Ob"/>
                         <segue destination="5es-bE-obA" kind="relationship" relationship="viewControllers" id="eGn-n6-axZ"/>
                         <segue destination="0ye-Pg-Qge" kind="relationship" relationship="viewControllers" id="Nnk-7w-lej"/>
-                        <segue destination="yDJ-pt-my1" kind="relationship" relationship="viewControllers" id="fVy-Lu-5lf"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hfi-gV-f5i" userLabel="First Responder" sceneMemberID="firstResponder"/>
