@@ -57,8 +57,6 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
     // CLASS VARIABLES
     var matches = [(ingredient: PFIngredient, rank: Int)]() // data for the table
     
-//    let notSignedInAlert = UIAlertController(title: "Not Signed In", message: "You need to sign in to do this!", preferredStyle: UIAlertControllerStyle.Alert)
-    
     let filters: [String: Bool] = [F_KOSHER: false,
         F_DAIRY: false,
         F_VEG: false,
@@ -275,8 +273,10 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
                     }
                     return false
                 } else {
-//                    self.presentViewController(self.notSignedInAlert, animated: true, completion: nil)
+                    if let parent = parentViewController as? SearchResultsViewController {
+                        parent.mustBeSignedIn()
                     return true
+                    }
                 }
             case 3: // Add-to-hotpot action
                 currentSearch.append(ingredient)

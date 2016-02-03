@@ -16,6 +16,10 @@ class SearchResultsViewController : UIViewController {
     
     // MARK: Properties
     
+    // strings for display
+    let NEED_LOGIN_TITLE = "Not Signed In"
+    let NEED_LOGIN_MSG = "You need to sign in to do this!"
+    
     // segues corresponding to embedded subviews
     let segueEmbedSearchResults = "goToSearchResults"
     let segueEmbedFilterBar = "goToFilterBar"
@@ -78,6 +82,18 @@ class SearchResultsViewController : UIViewController {
         } else {
             searchResultsSVC?.getNewSearchResults()
         }
+    }
+    
+    /* goToNewSearch
+        - subview controllers call this to indicate user attempted action
+        that required login but was not logged in
+        - creates sign-in alert (may at later date delegate alert to something else)
+    */
+    func mustBeSignedIn() {
+        alertPopup(self.NEED_LOGIN_TITLE,
+            msg: self.NEED_LOGIN_MSG as String,
+            actionTitle: OK_TEXT,
+            currController: self)
     }
     
 }
