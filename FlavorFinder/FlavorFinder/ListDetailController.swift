@@ -68,6 +68,7 @@ class ListDetailController: UITableViewController {
                 self.tabBarController?.navigationItem.setRightBarButtonItems(
                     [], animated: true)
                 navi.reset_navigationBar()
+                self.tabBarController?.navigationItem.title = "\(self.listTitle)"
                 self.backBtn.enabled = true
         }
         

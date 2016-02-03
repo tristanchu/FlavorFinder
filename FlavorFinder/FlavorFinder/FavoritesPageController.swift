@@ -25,6 +25,7 @@ class FavoritesPageController: UITableViewController {
     let noUserMsg = "You must be logged in to store favorites."
     let noFavoritesMsg =
         "Favorite ingredients in Search!"
+    let favoritesTitle = "Favorites"
 
     // The table itself:
     @IBOutlet var favoritesTableView: UITableView!
@@ -63,7 +64,7 @@ class FavoritesPageController: UITableViewController {
             self.tabBarController?.navigationItem.setRightBarButtonItems(
                     [], animated: true)
             navi.reset_navigationBar()
-            self.tabBarController?.navigationItem.title = ""
+            self.tabBarController?.navigationItem.title = favoritesTitle
         }
 
         // populate cell array
