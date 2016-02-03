@@ -32,7 +32,6 @@ class LoginViewPage : UIViewController, UITextFieldDelegate {
     // Pop up text:
     let INCORRECT_U_OR_P_TITLE = "Incorrect Username or Password"
     let INCORRECT_U_OR_P_MSG = "Username and Password do not match."
-    let OK_TEXT = "Ok"
 
     let INVALID_TITLE = "Invalid Username or Password"
     let INVALID_MSG = "You must enter a valid username and password."
@@ -114,7 +113,7 @@ class LoginViewPage : UIViewController, UITextFieldDelegate {
                         // Alert Username and Password pair does not exist.
                         alertPopup(self.INCORRECT_U_OR_P_TITLE,
                             msg: self.INCORRECT_U_OR_P_MSG as String,
-                            actionTitle: self.OK_TEXT,
+                            actionTitle: OK_TEXT,
                             currController: self)
                     }
             }
@@ -122,7 +121,7 @@ class LoginViewPage : UIViewController, UITextFieldDelegate {
             // Alert missing username or password fields:
             alertPopup(self.INVALID_TITLE,
                 msg: self.INVALID_MSG as String,
-                actionTitle: self.OK_TEXT,
+                actionTitle: OK_TEXT,
                 currController: self)
         }
     }
