@@ -66,7 +66,7 @@ class HotpotSubviewController : UICollectionViewController, UICollectionViewDele
     }
     
     func removeHotpotIngredientClicked(sender: RemoveHotpotIngredientButton) {
-        if currentSearch.count == 0 {
+        if currentSearch.isEmpty {
             print("ERROR: Tried to remove hotpot ingredient when search is empty.")
             return
         }

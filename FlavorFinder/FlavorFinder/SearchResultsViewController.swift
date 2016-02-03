@@ -67,7 +67,7 @@ class SearchResultsViewController : UIViewController {
         - checks if hotpot is empty and if so, tells page to load new search view
     */
     func hotpotIngredientWasRemoved() {
-        if currentSearch.count == 0 {
+        if currentSearch.isEmpty {
             if let parent = parentViewController as? ContainerViewController {
                 if let page = parent.parentViewController as? LandingPageController {
                     page.goToNewSearch()

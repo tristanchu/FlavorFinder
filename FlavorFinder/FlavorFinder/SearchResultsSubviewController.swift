@@ -86,7 +86,7 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         
     func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
         var text = SEARCH_GENERIC_ERROR_TEXT
-        if currentSearch.count == 0 { // should not happen with
+        if currentSearch.isEmpty {
             text = NO_MATCHES_TEXT
         } else {
             text = INGREDIENT_NOT_FOUND_TEXT
@@ -114,7 +114,19 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
     func getNewSearchResults() {
         matches = getMultiSearch(currentSearch)
         animateTableViewCellsToLeft(tableView)
+        while !(isMatchDataLoaded()) {}
         tableView.reloadData()
+    }
+    
+    func isMatchDataLoaded() -> Bool {
+        for i in 0..<matches.count {
+            if !(matches[i].ingredient.isDataAvailable()) {
+                print("ERROR: Failed to fetch all data for match.")
+                matches.removeAtIndex(i)
+                return false
+            }
+        }
+        return true
     }
     
     func getSearchResults() {
@@ -122,6 +134,7 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
             getNewSearchResults()
         } else {
             matches = addToSearch(matches, newIngredient: currentSearch.last!)
+            while !(isMatchDataLoaded()) {}
             tableView.reloadData()
         }
     }
@@ -145,10 +158,19 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! MatchTableViewCell
         cell.delegate = self
         
-        if matches.count > 0 {
+        if !(matches.isEmpty) {
             let match = matches[indexPath.row].ingredient
             let matchLevel = matches[indexPath.row].rank
-            cell.label.text = match[_s_name] as? String
+            
+            
+            if match.isDataAvailable() {
+                cell.label.text = match[_s_name] as? String
+            } else {
+                print("ERROR: Failed to fetch all data for match.")
+                matches.removeAtIndex(indexPath.row)
+                tableView.reloadData()
+                return cell
+            }
             if matchLevel < MATCH_COLORS.count && matchLevel >= 0 {
                 cell.backgroundColor = MATCH_COLORS[matchLevel]
             } else {
@@ -173,7 +195,7 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         //  disabling until we figure that out!
         // DEBUG: disabled voting feature for now
         
-        if cell.leftButtons == nil || cell.leftButtons.count == 0 {
+        if cell.leftButtons == nil || cell.leftButtons.isEmpty {
             print("ERROR: No buttons in search results cell button array.")
             return true
         }
