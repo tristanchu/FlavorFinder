@@ -6,6 +6,8 @@
 //  Copyright © 2015 TeamFive. All rights reserved.
 //
 
+// see https://medium.com/hacking-and-gonzo/how-reddit-ranking-algorithms-work-ef111e33d0d9#.gct33voi1
+
 import Foundation
 
 func _confidence(ups: Int, downs: Int) -> Double {
@@ -15,7 +17,7 @@ func _confidence(ups: Int, downs: Int) -> Double {
         return 0
     }
     
-    let z = 1.0
+    let z = 1.0 // statistical confidence level: 1.0 = 85%, 1.6 = 95%
     let phat = Double(ups) / n;
     
     let comp1 = phat*(1-phat)

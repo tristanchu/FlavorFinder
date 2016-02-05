@@ -57,6 +57,7 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
     // CLASS VARIABLES
     var matches = [(ingredient: PFIngredient, rank: Int)]() // data for the table
     var allMatches = [(ingredient: PFIngredient, rank: Int)]()
+    var maxMatchRank : Double = -1 // used to determine match color level
     
     var filters: [String: Bool] = [F_KOSHER: false,
         F_DAIRY: false,
