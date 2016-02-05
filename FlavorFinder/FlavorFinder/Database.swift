@@ -344,13 +344,14 @@ func removeIngredientFromList(list: PFObject, ingredient: PFObject) {
 }
 
 func createIngredientList(user: PFUser, title: String,
-                          ingredients: [PFIngredient]) {
+                          ingredients: [PFIngredient]) -> PFList {
     let _userList = PFList(user: user)
         _userList.title = title
         _userList.ingredients = ingredients
 
     _userList.pinInBackground()
     _userList.saveInBackground()
+    return _userList
 }
 
 func deleteIngredientList(list: PFObject) {

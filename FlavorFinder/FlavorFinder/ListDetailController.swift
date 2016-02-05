@@ -112,28 +112,7 @@ class ListDetailController: UITableViewController {
             return cell
     }
     
-    
-    
-    
     // MARK: Functions -------------------------------------------------
-
-    /* setUpBackButton
-        sets up the back button for navigation
-    */
-    func setUpBackButton() {
-        backBtn.setTitleTextAttributes(attributes, forState: .Normal)
-        backBtn.title = self.backBtnString
-        backBtn.tintColor = NAVI_BUTTON_COLOR
-        backBtn.target = self
-        backBtn.action = "backBtnClicked"  // refers to: backBtnClicked()
-    }
-    
-    /* backBtnClicked
-        - action for back button
-    */
-    func backBtnClicked() {
-        self.navigationController?.popViewControllerAnimated(true)
-    }
 
     /* createBackgroundWithText
     creates a backgroundView for when there is no data to display.
@@ -148,6 +127,26 @@ class ListDetailController: UITableViewController {
             red: 22.0/255.0, green: 106.0/255.0, blue: 176.0/255.0, alpha: 1.0);
         noDataLabel.textAlignment = NSTextAlignment.Center;
         return noDataLabel;
+    }
+
+    // MARK: Back Button Functions -------------------------------------
+
+    /* setUpBackButton
+    sets up the back button for navigation
+    */
+    func setUpBackButton() {
+        backBtn.setTitleTextAttributes(attributes, forState: .Normal)
+        backBtn.title = self.backBtnString
+        backBtn.tintColor = NAVI_BUTTON_COLOR
+        backBtn.target = self
+        backBtn.action = "backBtnClicked"  // refers to: backBtnClicked()
+    }
+    
+    /* backBtnClicked
+    - action for back button
+    */
+    func backBtnClicked() {
+        self.navigationController?.popViewControllerAnimated(true)
     }
 
 }

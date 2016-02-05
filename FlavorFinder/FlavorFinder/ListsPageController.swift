@@ -25,13 +25,18 @@ class ListsPageController: UITableViewController {
     let noUserMsg = "You must be logged in to have lists."
     let noListsMsg = "No Lists Yet!"
     let listsTitle = "Lists"
+    let newListTitle = "Untitled"
 
     // Table itself:
     @IBOutlet var listsTableView: UITableView!
-    
+
+    // Nav bar:
+    var newListBtn: UIBarButtonItem = UIBarButtonItem()
+    let newListBtnAction = "newListBtnClicked"
+    let newListBtnString = String.fontAwesomeIconWithName(.Plus) + " New List"
+
     // Segues:
     let segueToListDetail = "segueToListTable"
-
 
 
     // MARK: Override methods: ----------------------------------------------
@@ -49,6 +54,9 @@ class ListsPageController: UITableViewController {
         // Table view visuals:
         listsTableView.tableFooterView = UIView(frame: CGRectZero)  // remove empty cells
         listsTableView.rowHeight = UNIFORM_ROW_HEIGHT
+
+        // Navigation Visuals:
+        setUpNewListButton()
     }
 
     /* viewDidAppear:
@@ -63,9 +71,16 @@ class ListsPageController: UITableViewController {
             self.tabBarController?.navigationItem.setLeftBarButtonItems(
                 [], animated: true)
             self.tabBarController?.navigationItem.setRightBarButtonItems(
-                [], animated: true)
-            navi.reset_navigationBar()
-            self.tabBarController?.navigationItem.title = listsTitle
+                [self.newListBtn], animated: true)
+            navi.reset_navigationBar();
+            self.tabBarController?.navigationItem.title = listsTitle;
+            
+            // enable new list button if user logged in:
+            if currentUser != nil {
+                self.newListBtn.enabled = true
+            } else {
+                self.newListBtn.enabled = false
+            }
         }
 
         // Populate and display table:
@@ -202,6 +217,30 @@ class ListsPageController: UITableViewController {
             red: 22.0/255.0, green: 106.0/255.0, blue: 176.0/255.0, alpha: 1.0);
         noDataLabel.textAlignment = NSTextAlignment.Center;
         return noDataLabel;
+    }
+
+    // MARK: Add New List Button Functions ----------------------------
+
+    /* setUpNewListButton
+        sets up the new list button for navigation
+    */
+    func setUpNewListButton() {
+        newListBtn.setTitleTextAttributes(attributes, forState: .Normal)
+        newListBtn.title = self.newListBtnString
+        newListBtn.tintColor = NAVI_BUTTON_COLOR
+        newListBtn.target = self
+        newListBtn.action = "newListBtnClicked"  // refers to newListBtnClicked()
+    }
+
+    /* newListBtnClicked
+        - action for the new list button
+    */
+    func newListBtnClicked() {
+        let newList = createIngredientList(
+            currentUser!, title: newListTitle, ingredients: []) as PFObject
+        // Update table view:
+        self.userLists.append(newList)
+        tableView.reloadData()
     }
     
 }
