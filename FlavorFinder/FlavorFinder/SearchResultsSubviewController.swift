@@ -58,9 +58,6 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
     var matches = [(ingredient: PFIngredient, rank: Double)]() // data for the table
     var allMatches = [(ingredient: PFIngredient, rank: Double)]()
     
-    var maxMatchRank : Double = -1 // used to determine match color level...
-    var matchAvg : Double = 0
-    
     var filters: [String: Bool] = [F_KOSHER: false,
         F_DAIRY: false,
         F_VEG: false,
@@ -117,15 +114,6 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         allMatches = getMultiSearch(currentSearch)
         while !(isMatchDataLoaded()) {}
         allMatches = sortByRank(allMatches)
-        matchAvg = 0
-        maxMatchRank = -1
-        for match in allMatches {
-            matchAvg += match.rank
-            if match.rank > maxMatchRank {
-                maxMatchRank = match.rank
-            }
-        }
-        matchAvg /= Double(allMatches.count)
         matches = allMatches
         animateTableViewCellsToLeft(tableView)
         tableView.reloadData()
@@ -176,6 +164,8 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
             let match = matches[indexPath.row].ingredient
             let matchRank = matches[indexPath.row].rank // not in use for now
             let matchesPerLevel = Int(matches.count / MATCH_COLORS.count)
+            
+            // for now, doing a simple match coloration based on equal proportions at each level
             let matchLevel = Int((matches.count - indexPath.row)/matchesPerLevel)
 
             if match.isDataAvailable() {
