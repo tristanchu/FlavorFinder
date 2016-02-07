@@ -45,6 +45,7 @@ let MATCH_COLORS = [ // indices correspond to int match strength values
     MATCH_HIGH_COLOR,
     MATCH_GREATEST_COLOR
 ]
+let FAV_PINNED_COLOR = UIColor(red: 249/255.0, green: 200/255.0, blue: 255/255.0, alpha: CGFloat(1))
 
 //let NAVI_COLOR = UIColor(red: 121/255.0, green: 217/255.0, blue: 255/255.0, alpha: CGFloat(1))
 let NAVI_COLOR = UIColor(red: 205/255.0, green: 239/255.0, blue: 250/255.0, alpha: CGFloat(1))

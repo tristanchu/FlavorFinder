@@ -125,7 +125,6 @@ func sortByRank(results: [(ingredient: PFIngredient, rank: Double)]) -> [(ingred
     return results.sort {$0.1 == $1.1 ? $0.1 > $1.1 : $0.1 > $1.1 }
 }
 
-
 /* containsIngredient
 - helper function to see if results contain an ingredient
 (for multi-search)
