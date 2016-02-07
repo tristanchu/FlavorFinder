@@ -55,9 +55,11 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
     let ICON_FONT = UIFont.fontAwesomeOfSize(100)
 
     // CLASS VARIABLES
-    var matches = [(ingredient: PFIngredient, rank: Int)]() // data for the table
-    var allMatches = [(ingredient: PFIngredient, rank: Int)]()
-    var maxMatchRank : Double = -1 // used to determine match color level
+    var matches = [(ingredient: PFIngredient, rank: Double)]() // data for the table
+    var allMatches = [(ingredient: PFIngredient, rank: Double)]()
+    
+    var maxMatchRank : Double = -1 // used to determine match color level...
+    var matchAvg : Double = 0
     
     var filters: [String: Bool] = [F_KOSHER: false,
         F_DAIRY: false,
@@ -115,6 +117,15 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         allMatches = getMultiSearch(currentSearch)
         while !(isMatchDataLoaded()) {}
         allMatches = sortByRank(allMatches)
+        matchAvg = 0
+        maxMatchRank = -1
+        for match in allMatches {
+            matchAvg += match.rank
+            if match.rank > maxMatchRank {
+                maxMatchRank = match.rank
+            }
+        }
+        matchAvg /= Double(allMatches.count)
         matches = allMatches
         animateTableViewCellsToLeft(tableView)
         tableView.reloadData()
@@ -137,7 +148,6 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         } else {
             allMatches = addToSearch(allMatches, newIngredient: currentSearch.last!)
             while !(isMatchDataLoaded()) {}
-            allMatches = sortByRank(allMatches)
             matches = allMatches
             tableView.reloadData()
         }
@@ -164,9 +174,10 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         
         if !(matches.isEmpty) {
             let match = matches[indexPath.row].ingredient
-            let matchLevel = matches[indexPath.row].rank
-            
-            
+            let matchRank = matches[indexPath.row].rank // not in use for now
+            let matchesPerLevel = Int(matches.count / MATCH_COLORS.count)
+            let matchLevel = Int((matches.count - indexPath.row)/matchesPerLevel)
+
             if match.isDataAvailable() {
                 cell.label.text = match[_s_name] as? String
             } else {
