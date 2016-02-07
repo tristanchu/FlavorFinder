@@ -14,6 +14,7 @@ class ListDetailController: UITableViewController {
     // MARK: Properties:
     let listDetailCell = "listDetailCellIdentifier"
     var ingredientList = [PFIngredient]()
+    var userList: PFObject!  // reference to list for editing
     
     // Parse related:
     let listClassName = "List"
@@ -32,6 +33,13 @@ class ListDetailController: UITableViewController {
     var backBtn: UIBarButtonItem = UIBarButtonItem()
     let backBtnAction = "backBtnClicked:"
     let backBtnString = String.fontAwesomeIconWithName(.ChevronLeft) + " All Lists"
+    
+    var editBtn: UIBarButtonItem = UIBarButtonItem()
+    let editBtnAction = "editBtnClicked:"
+    let editBtnString = "Edit"
+    
+    // Segues:
+    let segueToEditPage = "segueToEditListPage"
 
     // MARK: Override methods: ----------------------------------------------
     /* viewDidLoad:
@@ -53,6 +61,7 @@ class ListDetailController: UITableViewController {
 
         // Navigation Visuals:
         setUpBackButton()
+        setUpEditButton()
     }
 
     /* viewDidAppear:
@@ -67,10 +76,11 @@ class ListDetailController: UITableViewController {
                 self.tabBarController?.navigationItem.setLeftBarButtonItems(
                     [self.backBtn], animated: true)
                 self.tabBarController?.navigationItem.setRightBarButtonItems(
-                    [], animated: true)
+                    [self.editBtn], animated: true)
                 navi.reset_navigationBar()
                 self.tabBarController?.navigationItem.title = "\(self.listTitle)"
                 self.backBtn.enabled = true
+                self.editBtn.enabled = true
         }
         
         // NOTE: no population because data passed in during segue.
@@ -112,6 +122,18 @@ class ListDetailController: UITableViewController {
             return cell
     }
     
+    /* prepareForSegue
+        - sends info to edit page
+    */
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == segueToEditPage ) {
+            if let editPage = segue.destinationViewController as? EditListPage {
+                editPage.userListObject = self.userList
+            }
+        }
+    }
+    
+    
     // MARK: Functions -------------------------------------------------
 
     /* createBackgroundWithText
@@ -132,7 +154,7 @@ class ListDetailController: UITableViewController {
     // MARK: Back Button Functions -------------------------------------
 
     /* setUpBackButton
-    sets up the back button for navigation
+        sets up the back button visuals for navigation
     */
     func setUpBackButton() {
         backBtn.setTitleTextAttributes(attributes, forState: .Normal)
@@ -143,10 +165,31 @@ class ListDetailController: UITableViewController {
     }
     
     /* backBtnClicked
-    - action for back button
+        - action for back button
     */
     func backBtnClicked() {
         self.navigationController?.popViewControllerAnimated(true)
+    }
+    
+    // MARK: Edit Button Functions -------------------------------------
+    
+    /* setUpEditButton
+        sets up the edit button visuals  for navigation
+    */
+    func setUpEditButton() {
+        editBtn.setTitleTextAttributes(attributes, forState: .Normal)
+        editBtn.title = self.editBtnString
+        editBtn.tintColor = NAVI_BUTTON_COLOR
+        editBtn.target = self
+        editBtn.action = "editBtnClicked"   // refers to editBtnClicked()
+    }
+    
+    /* editBtnClicked
+        - action for edit button
+    */
+    func editBtnClicked() {
+        self.performSegueWithIdentifier(segueToEditPage, sender: self)
+
     }
 
 }
