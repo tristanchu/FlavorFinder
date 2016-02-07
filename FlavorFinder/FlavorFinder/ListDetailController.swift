@@ -36,6 +36,9 @@ class ListDetailController: UITableViewController {
     var editBtn: UIBarButtonItem = UIBarButtonItem()
     let editBtnAction = "editBtnClicked:"
     let editBtnString = "Edit"
+    
+    // Segues:
+    let segueToEditPage = "segueToEditListPage"
 
     // MARK: Override methods: ----------------------------------------------
     /* viewDidLoad:
@@ -173,6 +176,8 @@ class ListDetailController: UITableViewController {
     */
     func editBtnClicked() {
         print("CLICKED EDIT BUTTON!")
+        self.performSegueWithIdentifier(segueToEditPage, sender: self)
+
     }
 
 }

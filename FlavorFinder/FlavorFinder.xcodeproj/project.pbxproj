@@ -12,6 +12,7 @@
 		60216E661BEC4F740029454B /* UiUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60216E651BEC4F740029454B /* UiUtils.swift */; };
 		602B7CBF1C5FC4D80068D847 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602B7CBE1C5FC4D80068D847 /* RegisterView.swift */; };
 		60322EA31BD9CE150099030B /* _LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60322EA21BD9CE150099030B /* _LoginViewController.swift */; };
+		603E4D841C67C28B00F3D554 /* EditListPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 603E4D831C67C28B00F3D554 /* EditListPage.swift */; settings = {ASSET_TAGS = (); }; };
 		6062FDC11C5F3386009B2EEB /* LoginViewPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6062FDC01C5F3386009B2EEB /* LoginViewPage.swift */; };
 		609432671C42DCA800BA0577 /* FavoritesPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609432661C42DCA800BA0577 /* FavoritesPageController.swift */; };
 		609432691C42DD6500BA0577 /* ListsPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609432681C42DD6500BA0577 /* ListsPageController.swift */; };
@@ -88,6 +89,7 @@
 		60216E651BEC4F740029454B /* UiUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UiUtils.swift; sourceTree = "<group>"; };
 		602B7CBE1C5FC4D80068D847 /* RegisterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		60322EA21BD9CE150099030B /* _LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _LoginViewController.swift; sourceTree = "<group>"; };
+		603E4D831C67C28B00F3D554 /* EditListPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditListPage.swift; sourceTree = "<group>"; };
 		6062FDC01C5F3386009B2EEB /* LoginViewPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewPage.swift; sourceTree = "<group>"; };
 		609432661C42DCA800BA0577 /* FavoritesPageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesPageController.swift; sourceTree = "<group>"; };
 		609432681C42DD6500BA0577 /* ListsPageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListsPageController.swift; sourceTree = "<group>"; };
@@ -368,6 +370,7 @@
 		B6A49C4E1C4F45B000586B15 /* Pages */ = {
 			isa = PBXGroup;
 			children = (
+				603E4D831C67C28B00F3D554 /* EditListPage.swift */,
 				602B7CBE1C5FC4D80068D847 /* RegisterView.swift */,
 				6062FDC01C5F3386009B2EEB /* LoginViewPage.swift */,
 				60B3F16C1C5AE41D0018AA29 /* ListDetailController.swift */,
@@ -587,6 +590,7 @@
 				8875DE351BE053ED00CD50EA /* Voting.swift in Sources */,
 				883AC6281BC1A3C0009136E9 /* AppDelegate.swift in Sources */,
 				B65BA8B11BF907750045CB5E /* SavedMatchesCell.swift in Sources */,
+				603E4D841C67C28B00F3D554 /* EditListPage.swift in Sources */,
 				609432671C42DCA800BA0577 /* FavoritesPageController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

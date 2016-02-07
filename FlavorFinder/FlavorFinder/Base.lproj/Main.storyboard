@@ -465,11 +465,38 @@
                     <navigationItem key="navigationItem" id="KiZ-cf-kMn"/>
                     <connections>
                         <outlet property="ingredientListsTableView" destination="aSb-oz-NbM" id="tyl-O6-MHs"/>
+                        <segue destination="9m4-nl-IR4" kind="show" identifier="segueToEditListPage" id="0I0-X1-4GV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4ft-5g-u3O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5677" y="1173"/>
+        </scene>
+        <!--Edit List Page-->
+        <scene sceneID="Zfv-dS-aqq">
+            <objects>
+                <viewController id="9m4-nl-IR4" customClass="EditListPage" customModule="FlavorFinder" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bJE-pU-1DB"/>
+                        <viewControllerLayoutGuide type="bottom" id="rDe-yX-Nj2"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="VdV-X2-kho">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Rename page" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fDg-KT-Law">
+                                <rect key="frame" x="208" y="178" width="105" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pu8-JM-735" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6477" y="1173"/>
         </scene>
         <!--Favorites-->
         <scene sceneID="swP-zV-l0p">
