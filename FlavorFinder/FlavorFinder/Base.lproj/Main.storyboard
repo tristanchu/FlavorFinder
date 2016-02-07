@@ -475,6 +475,7 @@
         <!--Edit List Page-->
         <scene sceneID="Zfv-dS-aqq">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pu8-JM-735" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="9m4-nl-IR4" customClass="EditListPage" customModule="FlavorFinder" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bJE-pU-1DB"/>
@@ -484,17 +485,87 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Rename page" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fDg-KT-Law">
-                                <rect key="frame" x="208" y="178" width="105" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="8uN-zZ-bpZ">
+                                <rect key="frame" x="30" y="88" width="540" height="178"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="17G-SR-7b0">
+                                        <rect key="frame" x="54" y="0.0" width="432" height="55"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="List name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Sl-9f-LEI">
+                                                <rect key="frame" x="176" y="0.0" width="81" height="24"/>
+                                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZgP-P7-KPe">
+                                                <rect key="frame" x="200" y="32" width="33" height="24"/>
+                                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="17"/>
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Ive-fG-XBn">
+                                        <rect key="frame" x="54" y="75" width="432" height="103"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rename list:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="abp-jS-cY7">
+                                                <rect key="frame" x="168" y="0.0" width="97" height="24"/>
+                                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="type new name here" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="B2v-yj-H7K">
+                                                <rect key="frame" x="0.0" y="32" width="432" height="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                            </textField>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="SSZ-EJ-ps6">
+                                                <rect key="frame" x="153" y="70" width="127" height="33"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xcC-VR-cGh">
+                                                        <rect key="frame" x="0.0" y="0.0" width="49" height="33"/>
+                                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
+                                                        <state key="normal" title="Submit"/>
+                                                        <connections>
+                                                            <action selector="submitAction:" destination="9m4-nl-IR4" eventType="touchUpInside" id="oEJ-mH-wm0"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Nh-hS-X2e">
+                                                        <rect key="frame" x="79" y="0.0" width="48" height="33"/>
+                                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
+                                                        <state key="normal" title="Cancel"/>
+                                                        <connections>
+                                                            <action selector="cancelAction:" destination="9m4-nl-IR4" eventType="touchUpInside" id="B5k-je-9kb"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="B2v-yj-H7K" firstAttribute="width" secondItem="Ive-fG-XBn" secondAttribute="width" id="QPh-jU-Te8"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="Ive-fG-XBn" firstAttribute="width" secondItem="8uN-zZ-bpZ" secondAttribute="width" multiplier="0.8" id="fbg-Ad-P1i"/>
+                                    <constraint firstItem="17G-SR-7b0" firstAttribute="width" secondItem="8uN-zZ-bpZ" secondAttribute="width" multiplier="0.8" id="vSG-ax-UQh"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="8uN-zZ-bpZ" firstAttribute="leading" secondItem="VdV-X2-kho" secondAttribute="leadingMargin" constant="10" id="7YS-AR-miC"/>
+                            <constraint firstItem="8uN-zZ-bpZ" firstAttribute="top" secondItem="bJE-pU-1DB" secondAttribute="bottom" constant="24" id="Dek-lT-SF6"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="8uN-zZ-bpZ" secondAttribute="trailing" constant="10" id="XXB-le-ZdA"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="listNamePromptLabel" destination="5Sl-9f-LEI" id="6Gx-dp-PGY"/>
+                        <outlet property="listTitleLabel" destination="ZgP-P7-KPe" id="Pps-Pn-84e"/>
+                        <outlet property="newNamePromptLabel" destination="abp-jS-cY7" id="pj1-VO-nQe"/>
+                        <outlet property="newNameTextField" destination="B2v-yj-H7K" id="st4-xZ-GMG"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pu8-JM-735" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6477" y="1173"/>
         </scene>

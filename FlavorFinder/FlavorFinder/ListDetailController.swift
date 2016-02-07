@@ -175,7 +175,6 @@ class ListDetailController: UITableViewController {
         - action for edit button
     */
     func editBtnClicked() {
-        print("CLICKED EDIT BUTTON!")
         self.performSegueWithIdentifier(segueToEditPage, sender: self)
 
     }

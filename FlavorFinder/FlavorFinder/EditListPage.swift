@@ -19,11 +19,26 @@ class EditListPage: UIViewController {
     let pageTitle = "Edit List"
     var listTitle = ""
     
-    
     // Navigation:
     var backBtn: UIBarButtonItem = UIBarButtonItem()
     let backBtnAction = "backBtnClicked:"
     let backBtnString = String.fontAwesomeIconWithName(.ChevronLeft) + " Back"
+    
+    // MARK: connections:
+    @IBOutlet weak var listNamePromptLabel: UILabel!
+    @IBOutlet weak var listTitleLabel: UILabel!
+    @IBOutlet weak var newNamePromptLabel: UILabel!
+    
+    @IBOutlet weak var newNameTextField: UITextField!
+    
+    @IBAction func submitAction(sender: AnyObject) {
+        print("Pressed submit")
+    }
+    
+    @IBAction func cancelAction(sender: AnyObject) {
+        print("Pressed cancel")
+    }
+    
     
     // MARK: Override methods: ----------------------------------------------
     
@@ -52,7 +67,7 @@ class EditListPage: UIViewController {
                 self.tabBarController?.navigationItem.setRightBarButtonItems(
                     [], animated: true)
                 navi.reset_navigationBar()
-                self.tabBarController?.navigationItem.title = "\(self.listTitle)"
+                self.tabBarController?.navigationItem.title = "\(self.pageTitle)"
                 self.backBtn.enabled = true
         }
     }
