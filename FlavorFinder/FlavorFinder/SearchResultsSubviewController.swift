@@ -163,7 +163,10 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         if !(matches.isEmpty) {
             let match = matches[indexPath.row].ingredient
             let matchRank = matches[indexPath.row].rank // not in use for now
-            let matchesPerLevel = Int(matches.count / MATCH_COLORS.count)
+            var matchesPerLevel = Int(matches.count / MATCH_COLORS.count)
+            if matchesPerLevel == 0 {
+                matchesPerLevel = 1
+            }
             
             // for now, doing a simple match coloration based on equal proportions at each level
             let matchLevel = Int((matches.count - indexPath.row)/matchesPerLevel)
