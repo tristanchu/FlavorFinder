@@ -14,6 +14,7 @@ class ListDetailController: UITableViewController {
     // MARK: Properties:
     let listDetailCell = "listDetailCellIdentifier"
     var ingredientList = [PFIngredient]()
+    var userList: PFObject!  // reference to list for editing
     
     // Parse related:
     let listClassName = "List"
@@ -120,6 +121,18 @@ class ListDetailController: UITableViewController {
             cell.textLabel?.text = ingredientList[indexPath.row].name
             return cell
     }
+    
+    /* prepareForSegue
+        - sends info to edit page
+    */
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == segueToEditPage ) {
+            if let editPage = segue.destinationViewController as? EditListPage {
+                editPage.userListObject = self.userList
+            }
+        }
+    }
+    
     
     // MARK: Functions -------------------------------------------------
 

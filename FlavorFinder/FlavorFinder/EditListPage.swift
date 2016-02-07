@@ -13,7 +13,7 @@ class EditListPage: UIViewController {
     
     // MARK: Properties:
     var ingredientList = [PFIngredient]()
-    var userListObject: PFList!
+    var userListObject: PFObject!
     
     // Visual related:
     let pageTitle = "Edit List"
@@ -70,6 +70,9 @@ class EditListPage: UIViewController {
                 self.tabBarController?.navigationItem.title = "\(self.pageTitle)"
                 self.backBtn.enabled = true
         }
+        
+        // TESTING
+        print(self.userListObject.objectForKey("title"))
     }
     
     // MARK: Back Button Functions -----------------------------------------

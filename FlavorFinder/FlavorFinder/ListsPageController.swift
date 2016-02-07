@@ -170,6 +170,8 @@ class ListsPageController: UITableViewController {
                     // Make the title the name of list:
                     detailsPage.listTitle = (userLists[idx].objectForKey(
                         ListTitleColumnName) as? String)!
+                    // give the actual list reference:
+                    detailsPage.userList = (userLists[idx])
 
                     // TESTING:
                     // test empty list with "new List"

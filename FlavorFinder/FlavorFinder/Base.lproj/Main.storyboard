@@ -475,7 +475,6 @@
         <!--Edit List Page-->
         <scene sceneID="Zfv-dS-aqq">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pu8-JM-735" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="9m4-nl-IR4" customClass="EditListPage" customModule="FlavorFinder" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bJE-pU-1DB"/>
@@ -566,6 +565,7 @@
                         <outlet property="newNameTextField" destination="B2v-yj-H7K" id="st4-xZ-GMG"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pu8-JM-735" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6477" y="1173"/>
         </scene>
