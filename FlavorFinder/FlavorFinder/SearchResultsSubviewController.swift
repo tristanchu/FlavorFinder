@@ -20,11 +20,6 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
     // numbers
     let K_CELL_HEIGHT : CGFloat = 40.0
     let CELL_BTN_FRAME = CGRectMake(0, 0, 50, 50)
-    // color
-    let FAV_CELL_BTN_COLOR = UIColor(red: 249/255.0, green: 69/255.0, blue: 255/255.0, alpha: CGFloat(0.3))
-    let DOWNVOTE_CELL_BTN_COLOR = UIColor(red: 255/255.0, green: 109/255.0, blue: 69/255.0, alpha: CGFloat(0.3))
-    let UPVOTE_CELL_BTN_COLOR = UIColor(red: 61/255.0, green: 235/255.0, blue: 64/255.0, alpha: CGFloat(0.3))
-    let ADD_CELL_BTN_COLOR = UIColor(red: 161/255.0, green: 218/255.0, blue: 237/255.0, alpha: CGFloat(0.3))
     // cell images
     let UPVOTE_IMAGE = UIImage.fontAwesomeIconWithName(
         .ArrowUp,
