@@ -13,11 +13,11 @@ class EditListPage: UIViewController {
     
     // MARK: Properties:
     var ingredientList = [PFIngredient]()
-    var userListObject: PFObject!
+    var listObject: PFObject!
+    var listTitle = ""
     
     // Visual related:
     let pageTitle = "Edit List"
-    var listTitle = ""
     
     // Navigation:
     var backBtn: UIBarButtonItem = UIBarButtonItem()
@@ -49,6 +49,9 @@ class EditListPage: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Set title label to list title:
+        listTitleLabel.text = listTitle
+
         // Navigation buttons:
         setUpBackButton()
     }
@@ -70,9 +73,6 @@ class EditListPage: UIViewController {
                 self.tabBarController?.navigationItem.title = "\(self.pageTitle)"
                 self.backBtn.enabled = true
         }
-        
-        // TESTING
-        print(self.userListObject.objectForKey("title"))
     }
     
     // MARK: Back Button Functions -----------------------------------------
