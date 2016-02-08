@@ -69,6 +69,9 @@ class ListDetailController: UITableViewController {
     */
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+
+        // Update title in case changed::
+        listTitle = userList.objectForKey(ListTitleColumnName) as! String
         
         // Get navigation bar on top:
         if let navi = self.tabBarController?.navigationController
@@ -128,7 +131,8 @@ class ListDetailController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == segueToEditPage ) {
             if let editPage = segue.destinationViewController as? EditListPage {
-                editPage.userListObject = self.userList
+                editPage.listObject = self.userList
+                editPage.listTitle = self.userList.objectForKey(ListTitleColumnName) as! String
             }
         }
     }

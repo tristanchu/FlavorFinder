@@ -9,15 +9,21 @@
 import UIKit
 import Parse
 
-class EditListPage: UIViewController {
+class EditListPage: UIViewController, UITextFieldDelegate {
     
     // MARK: Properties:
     var ingredientList = [PFIngredient]()
-    var userListObject: PFObject!
+    var listObject: PFObject!
+    var listTitle = ""
     
+    // Parse related:
+    let listClassName = "List"
+    let ingredientsColumnName = "ingredients"
+    let userColumnName = "user"
+    let ListTitleColumnName = "title"
+
     // Visual related:
     let pageTitle = "Edit List"
-    var listTitle = ""
     
     // Navigation:
     var backBtn: UIBarButtonItem = UIBarButtonItem()
@@ -32,11 +38,15 @@ class EditListPage: UIViewController {
     @IBOutlet weak var newNameTextField: UITextField!
     
     @IBAction func submitAction(sender: AnyObject) {
-        print("Pressed submit")
+        if newNameTextField.text != nil {
+            listObject.setObject(newNameTextField.text!, forKey: ListTitleColumnName)
+            listTitleLabel.text = newNameTextField.text
+            listObject.saveInBackground()
+        }
     }
     
     @IBAction func cancelAction(sender: AnyObject) {
-        print("Pressed cancel")
+        newNameTextField.text = ""
     }
     
     
@@ -49,6 +59,13 @@ class EditListPage: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Set title label to list title:
+        listTitleLabel.text = listTitle
+
+        // set up text field 
+        newNameTextField.delegate = self
+        newNameTextField.setTextLeftPadding(5)
+
         // Navigation buttons:
         setUpBackButton()
     }
@@ -70,9 +87,6 @@ class EditListPage: UIViewController {
                 self.tabBarController?.navigationItem.title = "\(self.pageTitle)"
                 self.backBtn.enabled = true
         }
-        
-        // TESTING
-        print(self.userListObject.objectForKey("title"))
     }
     
     // MARK: Back Button Functions -----------------------------------------
