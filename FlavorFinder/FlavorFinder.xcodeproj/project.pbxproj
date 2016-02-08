@@ -301,6 +301,7 @@
 				B6A49C4E1C4F45B000586B15 /* Pages */,
 				B6A49C4F1C4F45E600586B15 /* Deprecated */,
 				B685D2B11C5DE6E6001C37FF /* SearchResultsVC */,
+				B6260A911C69321200BC0717 /* ListSubpages */,
 				88F0E4FE1BE51E7F003CB35B /* GlobalSearchController.swift */,
 				8875DE3A1BE0751B00CD50EA /* MainNavigationController.swift */,
 				B6E0C4EA1C6926E2008B7E2A /* AddFavoriteViewController.swift */,
@@ -350,6 +351,15 @@
 			name = CustomSegues;
 			sourceTree = "<group>";
 		};
+		B6260A911C69321200BC0717 /* ListSubpages */ = {
+			isa = PBXGroup;
+			children = (
+				60B3F16C1C5AE41D0018AA29 /* ListDetailController.swift */,
+				603E4D831C67C28B00F3D554 /* EditListPage.swift */,
+			);
+			name = ListSubpages;
+			sourceTree = "<group>";
+		};
 		B685D2B11C5DE6E6001C37FF /* SearchResultsVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -373,10 +383,8 @@
 		B6A49C4E1C4F45B000586B15 /* Pages */ = {
 			isa = PBXGroup;
 			children = (
-				603E4D831C67C28B00F3D554 /* EditListPage.swift */,
 				602B7CBE1C5FC4D80068D847 /* RegisterView.swift */,
 				6062FDC01C5F3386009B2EEB /* LoginViewPage.swift */,
-				60B3F16C1C5AE41D0018AA29 /* ListDetailController.swift */,
 				B6739A171C5997760004F982 /* LandingPageController.swift */,
 				609432661C42DCA800BA0577 /* FavoritesPageController.swift */,
 				609432681C42DD6500BA0577 /* ListsPageController.swift */,

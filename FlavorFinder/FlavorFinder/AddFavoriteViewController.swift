@@ -16,8 +16,6 @@ import UIKit
 
 class AddFavoriteViewController: UIViewController {
     
-    @IBOutlet weak var searchBar: UISearchBar!
-    
     /* viewDidLoad:
     */
     override func viewDidLoad() {
@@ -33,7 +31,7 @@ class AddFavoriteViewController: UIViewController {
         // Get navigation bar on top:
         if let navi = self.tabBarController?.navigationController
             as? MainNavigationController {
-                print("got it")
+                print("got it") // we are not getting it
                 for btn in (navi.tabBarController?.navigationItem.leftBarButtonItems)! {
                     btn.tintColor = NAVI_BUTTON_COLOR
                 }
