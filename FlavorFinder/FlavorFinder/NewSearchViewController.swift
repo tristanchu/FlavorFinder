@@ -20,7 +20,7 @@ class NewSearchViewController : ContainerParentViewController,
 
     // Search result properties:
     var activeSearch : Bool = false
-    var allIngredients = [PFIngredient]() // set on load
+    var allIngredients : [PFIngredient]? // set on load
     var filteredResults : [PFIngredient] = []
     let CELL_IDENTIFIER = "newSearchResultCell"
 
@@ -48,9 +48,6 @@ class NewSearchViewController : ContainerParentViewController,
         super.viewDidLoad()
 
         setUpLoginContainerUI()
-
-        // get _allIngredients - loaded by _readIngredients by appDelegate
-        allIngredients = _allIngredients as! [PFIngredient]
 
         // set up delegates:
         newSearchBar.delegate = self
@@ -133,19 +130,21 @@ class NewSearchViewController : ContainerParentViewController,
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
 
         // fills filteredResults based on text entered
-        filteredResults = allIngredients.filter({ (ingredient) -> Bool in
-            let tmp: PFObject = ingredient
-            let range = tmp[_s_name].rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
-            return range.location != NSNotFound
-        })
-        if filteredResults.isEmpty {
-            activeSearch = false
-            searchResultTableView.hidden = true
-        } else {
-            activeSearch = true
-            searchResultTableView.hidden = false
+        if let allIngredients = _allIngredients as? [PFIngredient] {
+            filteredResults = allIngredients.filter({ (ingredient) -> Bool in
+                let tmp: PFObject = ingredient
+                let range = tmp[_s_name].rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
+                return range.location != NSNotFound
+            })
+            if filteredResults.isEmpty {
+                activeSearch = false
+                searchResultTableView.hidden = true
+            } else {
+                activeSearch = true
+                searchResultTableView.hidden = false
+            }
+            self.searchResultTableView.reloadData()
         }
-        self.searchResultTableView.reloadData()
     }
 
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {

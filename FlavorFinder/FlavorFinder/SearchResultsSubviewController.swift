@@ -197,7 +197,15 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
             let matchLevel = Int((matches.count - indexPath.row)/matchesPerLevel)
 
             if match.isDataAvailable() {
-                cell.label.text = match[_s_name] as? String
+                let name = match[_s_name] as? String
+                var upvotes = match[_s_upvotes] as? Int
+                var downvotes = match[_s_downvotes] as? Int
+                upvotes = upvotes == nil ? 0 : upvotes
+                downvotes = downvotes == nil ? 0 : downvotes
+                
+                cell.label.text = name
+                cell.upvoteLabel.text = "test"//String(upvotes)
+                cell.downvoteLabel.text = String(downvotes)
             } else {
                 print("ERROR: Failed to fetch all data for match.")
                 matches.removeAtIndex(indexPath.row)
