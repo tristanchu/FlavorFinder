@@ -14,16 +14,16 @@ import Parse
 
 // MARK: Properties: -----------------------------------------------
 var currentSearch : [PFIngredient] = []
-var currentResults : [(ingredient: PFIngredient, rank: Int)] = []
+var currentResults : [(ingredient: PFIngredient, rank: Double)] = []
 
 // Parse DB Functions: -----------------------------------------------
 
 /* getMatchingIngredients
     Queries Parse db for match objects for given ingredient then
-    returns [(PFIngredient, int)] of the matching ingredients
+    returns [(PFIngredient, Double)] of the matching ingredients
 */
-func getMatchingIngredients(ingredient: PFIngredient) -> [(ingredient: PFIngredient, rank: Int)] {
-    var results: [(ingredient: PFIngredient, rank: Int)] = []
+func getMatchingIngredients(ingredient: PFIngredient) -> [(ingredient: PFIngredient, rank: Double)] {
+    var results: [(ingredient: PFIngredient, rank: Double)] = []
     let matches: [PFObject] = getMatchObjectsForIngredient(ingredient)
     // TODO: change to mapping:
     for match in matches {
@@ -32,7 +32,13 @@ func getMatchingIngredients(ingredient: PFIngredient) -> [(ingredient: PFIngredi
                 ? match[_s_firstIngredient] as! PFIngredient
                 : match[_s_secondIngredient] as! PFIngredient
         let matchRank = match[_s_matchLevel] as! Int
-        results.append((ingredient: otherIngredient, rank: matchRank))
+        let upvotes = match[_s_upvotes] as! Int
+        let downvotes = match[_s_downvotes] as! Int
+        // TODO: transition off of matchLevel, or find better conversion to votes (magic # now)
+        let ups = matchRank * 30 + upvotes // magic number 30!!
+        let downs = downvotes
+        let confidenceRank = confidence(ups, downs: downs)
+        results.append((ingredient: otherIngredient, rank: confidenceRank))
     }
 
     return results
@@ -67,9 +73,9 @@ func getMatchObjectsForIngredient(ingredient: PFIngredient) -> [PFObject] {
     filters current results -> keeps what also matches with new ingredient
     returns new results
 */
-func addToSearch(currentResults: [(ingredient: PFIngredient, rank: Int)], newIngredient: PFIngredient) -> [(ingredient: PFIngredient, rank: Int)] {
+func addToSearch(currentResults: [(ingredient: PFIngredient, rank: Double)], newIngredient: PFIngredient) -> [(ingredient: PFIngredient, rank: Double)] {
     // Create new results list to populate
-    var newResults : [(ingredient: PFIngredient, rank: Int)] = []
+    var newResults : [(ingredient: PFIngredient, rank: Double)] = []
     
     // get new ingredient matches:
     let newIngredientMatches = getMatchingIngredients(newIngredient);
@@ -89,12 +95,12 @@ func addToSearch(currentResults: [(ingredient: PFIngredient, rank: Int)], newIng
 }
 
 /* getMultiSearch
-    creates results [(ingredient: PFIngredient, rank: Int)] based on the
+    creates results [(ingredient: PFIngredient, rank: Double)] based on the
         currentSearch [PFIngredient]
 */
-func getMultiSearch(currSearch: [PFIngredient]) -> [(ingredient: PFIngredient, rank: Int)] {
+func getMultiSearch(currSearch: [PFIngredient]) -> [(ingredient: PFIngredient, rank: Double)] {
     // Create new results list to populate:
-    var newResults : [(ingredient: PFIngredient, rank: Int)] = []
+    var newResults : [(ingredient: PFIngredient, rank: Double)] = []
     // if currSearch is empty (it shouldn't be) return empty
     if currSearch.isEmpty { return newResults }
     
@@ -115,16 +121,15 @@ func getMultiSearch(currSearch: [PFIngredient]) -> [(ingredient: PFIngredient, r
 
 /* sortByRank -- sorts results by rank
 */
-func sortByRank(results: [(ingredient: PFIngredient, rank: Int)]) -> [(ingredient: PFIngredient, rank: Int)] {
+func sortByRank(results: [(ingredient: PFIngredient, rank: Double)]) -> [(ingredient: PFIngredient, rank: Double)] {
     return results.sort {$0.1 == $1.1 ? $0.1 > $1.1 : $0.1 > $1.1 }
 }
-
 
 /* containsIngredient
 - helper function to see if results contain an ingredient
 (for multi-search)
 */
-func containsIngredient(a: [(ingredient: PFIngredient, rank:Int)], b: PFIngredient) -> Bool {
+func containsIngredient(a: [(ingredient: PFIngredient, rank: Double)], b: PFIngredient) -> Bool {
     // return true if ingredient found in the first part of the tuple
     for (a1, _) in a { if a1 == b { return true}}
     return false
@@ -134,7 +139,7 @@ func containsIngredient(a: [(ingredient: PFIngredient, rank:Int)], b: PFIngredie
 - helper function to see if results match by ingredient (ignoring rank)
 returns if a contains b (or b is found in a)
 */
-func containsMatch(a: [(ingredient: PFIngredient, rank: Int)], b: (ingredient: PFIngredient, rank: Int)) -> Bool {
+func containsMatch(a: [(ingredient: PFIngredient, rank: Double)], b: (ingredient: PFIngredient, rank: Double)) -> Bool {
     let (b1, _) = b
     for (a1, _) in a { if a1 == b1 {return true}}
     return false
@@ -146,7 +151,7 @@ list of them.
 looks for if a contains b (or b is found in a)
 -- returns b2 rank if yes, -1 if not
 */
-func findMatchRank(a: [(ingredient: PFIngredient, rank: Int)], b: (ingredient: PFIngredient, rank: Int)) -> Int {
+func findMatchRank(a: [(ingredient: PFIngredient, rank: Double)], b: (ingredient: PFIngredient, rank: Double)) -> Double {
     let (b1, _) = b
     for (a1, a2) in a { if a1 == b1 { return a2 }}
     return -1

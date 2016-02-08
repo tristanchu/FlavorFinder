@@ -14,6 +14,7 @@ class ListDetailController: UITableViewController {
     // MARK: Properties:
     let listDetailCell = "listDetailCellIdentifier"
     var ingredientList = [PFIngredient]()
+    var userList: PFObject!  // reference to list for editing
     
     // Parse related:
     let listClassName = "List"
@@ -32,6 +33,13 @@ class ListDetailController: UITableViewController {
     var backBtn: UIBarButtonItem = UIBarButtonItem()
     let backBtnAction = "backBtnClicked:"
     let backBtnString = String.fontAwesomeIconWithName(.ChevronLeft) + " All Lists"
+    
+    var editBtn: UIBarButtonItem = UIBarButtonItem()
+    let editBtnAction = "editBtnClicked:"
+    let editBtnString = "Edit"
+    
+    // Segues:
+    let segueToEditPage = "segueToEditListPage"
 
     // MARK: Override methods: ----------------------------------------------
     /* viewDidLoad:
@@ -53,6 +61,7 @@ class ListDetailController: UITableViewController {
 
         // Navigation Visuals:
         setUpBackButton()
+        setUpEditButton()
     }
 
     /* viewDidAppear:
@@ -60,6 +69,9 @@ class ListDetailController: UITableViewController {
     */
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+
+        // Update title in case changed::
+        listTitle = userList.objectForKey(ListTitleColumnName) as! String
         
         // Get navigation bar on top:
         if let navi = self.tabBarController?.navigationController
@@ -67,10 +79,11 @@ class ListDetailController: UITableViewController {
                 self.tabBarController?.navigationItem.setLeftBarButtonItems(
                     [self.backBtn], animated: true)
                 self.tabBarController?.navigationItem.setRightBarButtonItems(
-                    [], animated: true)
+                    [self.editBtn], animated: true)
                 navi.reset_navigationBar()
                 self.tabBarController?.navigationItem.title = "\(self.listTitle)"
                 self.backBtn.enabled = true
+                self.editBtn.enabled = true
         }
         
         // NOTE: no population because data passed in during segue.
@@ -112,13 +125,40 @@ class ListDetailController: UITableViewController {
             return cell
     }
     
-    
+    /* prepareForSegue
+        - sends info to edit page
+    */
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == segueToEditPage ) {
+            if let editPage = segue.destinationViewController as? EditListPage {
+                editPage.listObject = self.userList
+                editPage.listTitle = self.userList.objectForKey(ListTitleColumnName) as! String
+            }
+        }
+    }
     
     
     // MARK: Functions -------------------------------------------------
 
+    /* createBackgroundWithText
+    creates a backgroundView for when there is no data to display.
+    text = text to display.
+    */
+    func createBackgroundWithText(text: String) -> UILabel {
+        let noDataLabel: UILabel = UILabel(frame: CGRectMake(
+            0, 0, ingredientListsTableView.bounds.size.width,
+            ingredientListsTableView.bounds.size.height))
+        noDataLabel.text = text
+        noDataLabel.textColor = UIColor(
+            red: 22.0/255.0, green: 106.0/255.0, blue: 176.0/255.0, alpha: 1.0);
+        noDataLabel.textAlignment = NSTextAlignment.Center;
+        return noDataLabel;
+    }
+
+    // MARK: Back Button Functions -------------------------------------
+
     /* setUpBackButton
-        sets up the back button for navigation
+        sets up the back button visuals for navigation
     */
     func setUpBackButton() {
         backBtn.setTitleTextAttributes(attributes, forState: .Normal)
@@ -134,20 +174,26 @@ class ListDetailController: UITableViewController {
     func backBtnClicked() {
         self.navigationController?.popViewControllerAnimated(true)
     }
-
-    /* createBackgroundWithText
-    creates a backgroundView for when there is no data to display.
-    text = text to display.
+    
+    // MARK: Edit Button Functions -------------------------------------
+    
+    /* setUpEditButton
+        sets up the edit button visuals  for navigation
     */
-    func createBackgroundWithText(text: String) -> UILabel {
-        let noDataLabel: UILabel = UILabel(frame: CGRectMake(
-            0, 0, ingredientListsTableView.bounds.size.width,
-            ingredientListsTableView.bounds.size.height))
-        noDataLabel.text = text
-        noDataLabel.textColor = UIColor(
-            red: 22.0/255.0, green: 106.0/255.0, blue: 176.0/255.0, alpha: 1.0);
-        noDataLabel.textAlignment = NSTextAlignment.Center;
-        return noDataLabel;
+    func setUpEditButton() {
+        editBtn.setTitleTextAttributes(attributes, forState: .Normal)
+        editBtn.title = self.editBtnString
+        editBtn.tintColor = NAVI_BUTTON_COLOR
+        editBtn.target = self
+        editBtn.action = "editBtnClicked"   // refers to editBtnClicked()
+    }
+    
+    /* editBtnClicked
+        - action for edit button
+    */
+    func editBtnClicked() {
+        self.performSegueWithIdentifier(segueToEditPage, sender: self)
+
     }
 
 }

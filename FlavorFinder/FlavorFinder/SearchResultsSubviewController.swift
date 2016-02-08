@@ -20,11 +20,6 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
     // numbers
     let K_CELL_HEIGHT : CGFloat = 40.0
     let CELL_BTN_FRAME = CGRectMake(0, 0, 50, 50)
-    // color
-    let FAV_CELL_BTN_COLOR = UIColor(red: 249/255.0, green: 69/255.0, blue: 255/255.0, alpha: CGFloat(0.3))
-    let DOWNVOTE_CELL_BTN_COLOR = UIColor(red: 255/255.0, green: 109/255.0, blue: 69/255.0, alpha: CGFloat(0.3))
-    let UPVOTE_CELL_BTN_COLOR = UIColor(red: 61/255.0, green: 235/255.0, blue: 64/255.0, alpha: CGFloat(0.3))
-    let ADD_CELL_BTN_COLOR = UIColor(red: 161/255.0, green: 218/255.0, blue: 237/255.0, alpha: CGFloat(0.3))
     // cell images
     let UPVOTE_IMAGE = UIImage.fontAwesomeIconWithName(
         .ArrowUp,
@@ -55,8 +50,8 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
     let ICON_FONT = UIFont.fontAwesomeOfSize(100)
 
     // CLASS VARIABLES
-    var matches = [(ingredient: PFIngredient, rank: Int)]() // data for the table
-    var allMatches = [(ingredient: PFIngredient, rank: Int)]()
+    var matches = [(ingredient: PFIngredient, rank: Double)]() // data for the table
+    var allMatches = [(ingredient: PFIngredient, rank: Double)]()
     
     var filters: [String: Bool] = [F_KOSHER: false,
         F_DAIRY: false,
@@ -70,9 +65,22 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         self.configureTableView()
         getSearchResults()
     }
+    
+    func configureTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: CELL_IDENTIFIER)
+        tableView.layer.zPosition = 1
+        let blurEffect = UIBlurEffect(style: .Light)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        tableView.insertSubview(blurEffectView, atIndex: 0)
+        tableView.backgroundView = blurEffectView
         
-    override func viewWillAppear(animated: Bool) {
-        animateTableViewCellsToLeft(self.tableView)
+        // Remove the cell separators
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        
+        tableView.emptyDataSetSource = self
+        tableView.emptyDataSetDelegate = self
     }
     
     // EMPTY DATA SET DISPLAY
@@ -93,32 +101,23 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         return NSAttributedString(string: text, attributes: attributes)
     }
     
-    func configureTableView() {
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: CELL_IDENTIFIER)
-        tableView.layer.zPosition = 1
-        let blurEffect = UIBlurEffect(style: .Light)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        tableView.insertSubview(blurEffectView, atIndex: 0)
-        tableView.backgroundView = blurEffectView
-        
-        // Remove the cell separators
-        tableView.separatorStyle = UITableViewCellSeparatorStyle.None
-        
-        tableView.emptyDataSetSource = self
-        tableView.emptyDataSetDelegate = self
-    }
+  // SEARCH RESULTS
     
     func getNewSearchResults() {
         allMatches = getMultiSearch(currentSearch)
         while !(isMatchDataLoaded()) {}
         allMatches = sortByRank(allMatches)
+        pinFavorites()
         matches = allMatches
         animateTableViewCellsToLeft(tableView)
         tableView.reloadData()
     }
     
+    /* isMatchDataLoaded
+        - returns true if gets through allMatches with isDataAvailable for each ingredient
+        - returns false if isDataAvailable call fails for any ingredient, first removing
+            that ingredient from allMatches
+    */
     func isMatchDataLoaded() -> Bool {
         for i in 0..<allMatches.count {
             if !(allMatches[i].ingredient.isDataAvailable()) {
@@ -130,15 +129,40 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         return true
     }
     
+    /* getSearchResults
+        - runs new search if allMatches is empty
+        - adds to existing search if allMatches contains matches
+    */
     func getSearchResults() {
         if allMatches.isEmpty {
             getNewSearchResults()
         } else {
             allMatches = addToSearch(allMatches, newIngredient: currentSearch.last!)
             while !(isMatchDataLoaded()) {}
-            allMatches = sortByRank(allMatches)
+            pinFavorites()
             matches = allMatches
             tableView.reloadData()
+        }
+    }
+    
+    /* pinFavorites
+        - pins favorites to top of search results, in rank order with respect
+            to each other assuming the results have already been sorted by rank
+        - does nothing if currentUser == nil
+    */
+    func pinFavorites() {
+        if (currentUser != nil) {
+            var matchesWithPins = [(ingredient: PFIngredient, rank: Double)]()
+            var insertFavIndex = 0
+            for match in allMatches {
+                if let _ = isFavoriteIngredient(currentUser!, ingredient: match.ingredient) {
+                    matchesWithPins.insert(match, atIndex: insertFavIndex)
+                    insertFavIndex++
+                } else {
+                    matchesWithPins.append(match)
+                }
+            }
+            allMatches = matchesWithPins
         }
     }
     
@@ -163,9 +187,15 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         
         if !(matches.isEmpty) {
             let match = matches[indexPath.row].ingredient
-            let matchLevel = matches[indexPath.row].rank
+            let matchRank = matches[indexPath.row].rank // not in use for now
+            var matchesPerLevel = Int(matches.count / MATCH_COLORS.count)
+            if matchesPerLevel == 0 { // no dividing by zero, please
+                matchesPerLevel = 1
+            }
             
-            
+            // for now, doing a simple match coloration based on equal proportions at each level
+            let matchLevel = Int((matches.count - indexPath.row)/matchesPerLevel)
+
             if match.isDataAvailable() {
                 let name = match[_s_name] as? String
                 var upvotes = match[_s_upvotes] as? Int
@@ -182,7 +212,9 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
                 tableView.reloadData()
                 return cell
             }
-            if matchLevel < MATCH_COLORS.count && matchLevel >= 0 {
+            if currentUser != nil && isFavoriteIngredient(currentUser!, ingredient: match) != nil {
+                cell.backgroundColor = FAV_PINNED_COLOR
+            } else if matchLevel < MATCH_COLORS.count && matchLevel >= 0 {
                 cell.backgroundColor = MATCH_COLORS[matchLevel]
             } else if matchLevel >= MATCH_COLORS.count {
                 cell.backgroundColor = MATCH_COLORS.last

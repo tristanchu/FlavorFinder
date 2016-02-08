@@ -45,6 +45,7 @@ let MATCH_COLORS = [ // indices correspond to int match strength values
     MATCH_HIGH_COLOR,
     MATCH_GREATEST_COLOR
 ]
+let FAV_PINNED_COLOR = UIColor(red: 249/255.0, green: 200/255.0, blue: 255/255.0, alpha: CGFloat(1))
 
 //let NAVI_COLOR = UIColor(red: 121/255.0, green: 217/255.0, blue: 255/255.0, alpha: CGFloat(1))
 let NAVI_COLOR = UIColor(red: 205/255.0, green: 239/255.0, blue: 250/255.0, alpha: CGFloat(1))
@@ -52,6 +53,12 @@ let NAVI_LIGHT_COLOR = UIColor(red: 151/255.0, green: 224/255.0, blue: 252/255.0
 
 let HOTPOT_COLLECTION_COLOR = UIColor(red: 121/255.0, green: 217/255.0, blue: 255/255.0, alpha: CGFloat(0.3))
 
+let FAV_CELL_BTN_COLOR = UIColor(red: 249/255.0, green: 181/255.0, blue: 255/255.0, alpha: CGFloat(1))
+let DOWNVOTE_CELL_BTN_COLOR = UIColor(red: 252/255.0, green: 200/255.0, blue: 183/255.0, alpha: CGFloat(1))
+let UPVOTE_CELL_BTN_COLOR = UIColor(red: 185/255.0, green: 250/255.0, blue: 177/255.0, alpha: CGFloat(1))
+let ADD_CELL_BTN_COLOR = UIColor(red: 218/255.0, green: 239/255.0, blue: 247/255.0, alpha: CGFloat(1))
+
+// Fonts:
 let attributes = [NSFontAttributeName: UIFont.fontAwesomeOfSize(20)] as Dictionary!
 
 // Filters:
