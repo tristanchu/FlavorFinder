@@ -595,7 +595,7 @@
                     <tabBarItem key="tabBarItem" title="Favorites" image="FavoritesIcon" selectedImage="FavoritesIconFilled" id="3oj-NR-o20"/>
                     <connections>
                         <outlet property="favoritesTableView" destination="1oC-cD-Bh0" id="i9T-r6-REI"/>
-                        <segue destination="0sn-ZM-jHG" kind="show" identifier="segueFavsToAddFav" id="PFV-5G-jNq"/>
+                        <segue destination="0sn-ZM-jHG" kind="show" identifier="segueFavsToAddFav" id="zVv-yo-KTx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Ah-GI-Mfd" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -605,7 +605,7 @@
         <!--Add Favorite View Controller-->
         <scene sceneID="Sp9-Ds-DRB">
             <objects>
-                <viewController id="0sn-ZM-jHG" userLabel="Add Favorite View Controller" customClass="AddFavoriteViewController" customModule="FlavorFinder" sceneMemberID="viewController">
+                <viewController title="Add Favorite" id="0sn-ZM-jHG" userLabel="Add Favorite View Controller" customClass="AddFavoriteViewController" customModule="FlavorFinder" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uGW-1N-BUw"/>
                         <viewControllerLayoutGuide type="bottom" id="uPH-iR-ISB"/>
@@ -614,20 +614,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NLW-H4-L1A">
-                                <rect key="frame" x="-13" y="267" width="600" height="44"/>
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search for an ingredient" translatesAutoresizingMaskIntoConstraints="NO" id="NLW-H4-L1A">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
-                                    <outlet property="delegate" destination="0sn-ZM-jHG" id="t9z-5o-qoF"/>
+                                    <outlet property="delegate" destination="N7o-Yh-la7" id="SSr-PQ-NRw"/>
                                 </connections>
                             </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="NLW-H4-L1A" secondAttribute="trailing" id="UzU-ng-UUl"/>
+                            <constraint firstItem="NLW-H4-L1A" firstAttribute="top" secondItem="N7o-Yh-la7" secondAttribute="top" id="miL-qW-VLD"/>
+                            <constraint firstItem="NLW-H4-L1A" firstAttribute="leading" secondItem="N7o-Yh-la7" secondAttribute="leading" id="s6g-X9-WaX"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="searchBar" destination="NLW-H4-L1A" id="d5b-ay-JoN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zI4-bE-rKz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4121" y="1943"/>
+            <point key="canvasLocation" x="4215" y="1937"/>
         </scene>
         <!--Item-->
         <scene sceneID="veb-7d-s5O">

@@ -16,20 +16,27 @@ import UIKit
 
 class AddFavoriteViewController: UIViewController {
     
+    @IBOutlet weak var searchBar: UISearchBar!
+    
+    /* viewDidLoad:
+    */
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
     /* viewDidAppear:
     Setup when user goes into page.
     */
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        print("got it!")
         
         // Get navigation bar on top:
         if let navi = self.tabBarController?.navigationController
             as? MainNavigationController {
+                print("got it")
                 for btn in (navi.tabBarController?.navigationItem.leftBarButtonItems)! {
                     btn.tintColor = NAVI_BUTTON_COLOR
                 }
-                self.tabBarController?.navigationItem.title = "Add A Favorite"
                 navi.reset_navigationBar()
         }
     }
