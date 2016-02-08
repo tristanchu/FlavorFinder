@@ -158,18 +158,47 @@ func _getEquivalentMatch(match: PFObject) -> PFObject? {
     query.whereKey(_s_firstIngredient, equalTo: match[_s_secondIngredient] as! PFObject)
     query.whereKey(_s_secondIngredient, equalTo: match[_s_firstIngredient] as! PFObject)
     
-    var _match: PFObject? = nil
+    var match: PFObject? = nil
     
     query.getFirstObjectInBackgroundWithBlock {
-        (match: PFObject?, error: NSError?) -> Void in
-        if error == nil && match != nil {
-            _match = match!
+        (_match: PFObject?, error: NSError?) -> Void in
+        if error == nil && _match != nil {
+            match = _match!
         } else {
             print(error)
         }
     }
     
-    return _match
+    return match
+}
+
+func getMatchForTwoIngredients(firstIngredient: PFObject, secondIngredient: PFObject) -> PFObject? {
+    let query = PFQuery(className: _s_Match)
+    query.whereKey(_s_firstIngredient, equalTo: firstIngredient)
+    query.whereKey(_s_secondIngredient, equalTo: secondIngredient)
+    
+    var match: PFObject? = nil
+    
+    query.getFirstObjectInBackgroundWithBlock {
+        (_match: PFObject?, error: NSError?) -> Void in
+        if error == nil && _match != nil {
+            match = _match!
+        } else {
+            print(error)
+        }
+    }
+    
+    return match
+}
+
+func upvoteHotpot(user: PFUser, hotpot: [PFObject], match: PFObject) {
+    let secondIngredient = match[_s_secondIngredient] as! PFObject
+    
+    for ingredient in hotpot {
+        if let match = getMatchForTwoIngredients(ingredient, secondIngredient: secondIngredient) {
+            upvoteMatch(user, match: match)
+        }
+    }
 }
 
 func upvoteMatch(user: PFUser, match: PFObject) {
