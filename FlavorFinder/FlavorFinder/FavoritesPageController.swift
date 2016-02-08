@@ -26,11 +26,16 @@ class FavoritesPageController: UITableViewController {
     let noFavoritesMsg =
         "Favorite ingredients in Search!"
     let favoritesTitle = "Favorites"
+    let EMPTY_SET_TEXT_COLOR = UIColor(
+        red: 22.0/255.0, green: 106.0/255.0, blue: 176.0/255.0, alpha: 1.0)
     
     // Nav bar related:
     var addBtn: UIBarButtonItem = UIBarButtonItem()
     let addBtnAction : Selector = "addBtnClicked"
     let addBtnString = String.fontAwesomeIconWithName(.Plus) + "Add"
+    
+    // Segues:
+    let segueToAddFav = "segueFavsToAddFav"
     
     // The table itself:
     @IBOutlet var favoritesTableView: UITableView!
@@ -54,7 +59,8 @@ class FavoritesPageController: UITableViewController {
         favoritesTableView.rowHeight = UNIFORM_ROW_HEIGHT
         favoritesTableView.tableFooterView = UIView(frame: CGRectZero) // remove empty cells
         favoritesTableView.separatorStyle = UITableViewCellSeparatorStyle.None
-        
+        favoritesTableView.backgroundColor = UIColor.whiteColor()
+        favoritesTableView.backgroundView = nil
         
         // Navigation visuals:
         setUpAddButton()
@@ -84,8 +90,6 @@ class FavoritesPageController: UITableViewController {
 
         // populate cell array
         populateFavoritesTable()
-        favoritesTableView.backgroundColor = UIColor.whiteColor()
-        favoritesTableView.backgroundView = nil
 
         // if nothing in cell array, display background message:
         if favoriteCells.isEmpty {
@@ -179,10 +183,9 @@ class FavoritesPageController: UITableViewController {
             0, 0, favoritesTableView.bounds.size.width,
             favoritesTableView.bounds.size.height))
         noDataLabel.text = text
-        noDataLabel.textColor = UIColor(
-            red: 22.0/255.0, green: 106.0/255.0, blue: 176.0/255.0, alpha: 1.0);
-        noDataLabel.textAlignment = NSTextAlignment.Center;
-        return noDataLabel;
+        noDataLabel.textColor = EMPTY_SET_TEXT_COLOR
+        noDataLabel.textAlignment = NSTextAlignment.Center
+        return noDataLabel
     }
     
     /* setUpAddButton
@@ -200,8 +203,7 @@ class FavoritesPageController: UITableViewController {
         - action for add button
     */
     func addBtnClicked() {
-        //
-        print("btn clicked")
+        self.performSegueWithIdentifier(segueToAddFav, sender: self)
     }
 
 
