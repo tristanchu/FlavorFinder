@@ -69,6 +69,9 @@ class ListDetailController: UITableViewController {
     */
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+
+        // Update title in case changed::
+        listTitle = userList.objectForKey(ListTitleColumnName) as! String
         
         // Get navigation bar on top:
         if let navi = self.tabBarController?.navigationController
