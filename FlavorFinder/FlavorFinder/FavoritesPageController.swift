@@ -26,7 +26,12 @@ class FavoritesPageController: UITableViewController {
     let noFavoritesMsg =
         "Favorite ingredients in Search!"
     let favoritesTitle = "Favorites"
-
+    
+    // Nav bar related:
+    var addBtn: UIBarButtonItem = UIBarButtonItem()
+    let addBtnAction : Selector = "addBtnClicked"
+    let addBtnString = String.fontAwesomeIconWithName(.Plus) + "Add"
+    
     // The table itself:
     @IBOutlet var favoritesTableView: UITableView!
 
@@ -49,6 +54,10 @@ class FavoritesPageController: UITableViewController {
         favoritesTableView.rowHeight = UNIFORM_ROW_HEIGHT
         favoritesTableView.tableFooterView = UIView(frame: CGRectZero) // remove empty cells
         favoritesTableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        
+        
+        // Navigation visuals:
+        setUpAddButton()
     }
 
     /* viewDidAppear:
@@ -58,31 +67,36 @@ class FavoritesPageController: UITableViewController {
         super.viewDidAppear(animated)
 
         // Get navigation bar on top:
+        var rightBtns : [UIBarButtonItem] = []
+        if currentUser != nil {
+            rightBtns.append(self.addBtn)
+            self.addBtn.enabled = true
+        }
         if let navi = self.tabBarController?.navigationController as?
                 MainNavigationController {
             self.tabBarController?.navigationItem.setLeftBarButtonItems(
                     [], animated: true)
             self.tabBarController?.navigationItem.setRightBarButtonItems(
-                    [], animated: true)
+                rightBtns, animated: true)
             navi.reset_navigationBar()
             self.tabBarController?.navigationItem.title = favoritesTitle
         }
 
         // populate cell array
-        populateFavoritesTable();
-        favoritesTableView.backgroundColor = UIColor.whiteColor();
-        favoritesTableView.backgroundView = nil;
+        populateFavoritesTable()
+        favoritesTableView.backgroundColor = UIColor.whiteColor()
+        favoritesTableView.backgroundView = nil
 
         // if nothing in cell array, display background message:
         if favoriteCells.isEmpty {
             // if user not logged in, needs to log in to store favs:
             if currentUser == nil {
                 favoritesTableView.backgroundView =
-                    emptyBackgroundTextFavorites(noUserMsg);
+                    emptyBackgroundTextFavorites(noUserMsg)
             // if user logged in, tell them how to have favs:
             } else {
                 favoritesTableView.backgroundView =
-                    emptyBackgroundTextFavorites(noFavoritesMsg);
+                    emptyBackgroundTextFavorites(noFavoritesMsg)
             }
         }
 
@@ -169,6 +183,25 @@ class FavoritesPageController: UITableViewController {
             red: 22.0/255.0, green: 106.0/255.0, blue: 176.0/255.0, alpha: 1.0);
         noDataLabel.textAlignment = NSTextAlignment.Center;
         return noDataLabel;
+    }
+    
+    /* setUpAddButton
+        - sets up the add button visuals for navigation
+    */
+    func setUpAddButton() {
+        addBtn.setTitleTextAttributes(attributes, forState: .Normal)
+        addBtn.title = self.addBtnString
+        addBtn.tintColor = NAVI_BUTTON_COLOR
+        addBtn.target = self
+        addBtn.action = self.addBtnAction
+    }
+    
+    /* editBtnClicked
+        - action for add button
+    */
+    func addBtnClicked() {
+        //
+        print("btn clicked")
     }
 
 
