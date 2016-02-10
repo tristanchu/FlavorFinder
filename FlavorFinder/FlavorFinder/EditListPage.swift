@@ -31,6 +31,7 @@ class EditListPage: UIViewController, UITextFieldDelegate,
 
     // Visual related:
     let pageTitle = "Edit List"
+    let alreadyContains = " is already in your list"
 
     // Navigation:
     var backBtn: UIBarButtonItem = UIBarButtonItem()
@@ -186,7 +187,15 @@ class EditListPage: UIViewController, UITextFieldDelegate,
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         // make selected row the current search:
         let selected : PFIngredient = filteredResults[indexPath.row]
-        print("selected \(selected.name)")
+        var userList = listObject.objectForKey(ingredientsColumnName) as! [PFIngredient]
+        if userList.contains(selected) {
+            addIngredientPromptLabel.text = "\(selected.name)\(alreadyContains)"
+        } else {
+            userList.append(selected)
+            listObject.setObject(userList, forKey: ingredientsColumnName)
+            listObject.saveInBackground()
+            addIngredientPromptLabel.text = "Added \(selected.name)"
+        }
     }
 
 
