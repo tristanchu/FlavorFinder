@@ -73,6 +73,9 @@ class ListDetailController: UITableViewController {
         // Update title in case changed::
         listTitle = userList.objectForKey(ListTitleColumnName) as! String
         
+        // Update ingredients list in case changed:
+        ingredientList = userList.objectForKey(ingredientsColumnName) as! [PFIngredient]
+
         // Get navigation bar on top:
         if let navi = self.tabBarController?.navigationController
             as? MainNavigationController {
