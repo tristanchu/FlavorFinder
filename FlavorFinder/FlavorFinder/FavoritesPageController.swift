@@ -26,10 +26,16 @@ class FavoritesPageController: UITableViewController {
     let noFavoritesMsg =
         "Favorite ingredients in Search!"
     let favoritesTitle = "Favorites"
-
-    // The table itself:
-    @IBOutlet var favoritesTableView: UITableView!
-
+    let EMPTY_SET_TEXT_COLOR = UIColor(
+        red: 22.0/255.0, green: 106.0/255.0, blue: 176.0/255.0, alpha: 1.0)
+    
+    // Nav bar related:
+    var addBtn: UIBarButtonItem = UIBarButtonItem()
+    let addBtnAction : Selector = "addBtnClicked"
+    let addBtnString = String.fontAwesomeIconWithName(.Plus) + "Add"
+    
+    // Segues:
+    let segueToAddFav = "segueFavsToAddFav"
 
     // MARK: Override methods: ----------------------------------------------
     /* viewDidLoad:
@@ -40,15 +46,20 @@ class FavoritesPageController: UITableViewController {
         // Do any additional setup after loading the view, typically from a nib.
 
         // Connect table view to this controller (done in storyboard too)
-        favoritesTableView.dataSource = self
-        favoritesTableView.delegate = self
-        favoritesTableView.registerClass(UITableViewCell.self,
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
+        self.tableView.registerClass(UITableViewCell.self,
             forCellReuseIdentifier: favoriteCellName)
 
         // Table view visuals:
-        favoritesTableView.rowHeight = UNIFORM_ROW_HEIGHT
-        favoritesTableView.tableFooterView = UIView(frame: CGRectZero) // remove empty cells
-        favoritesTableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        self.tableView.rowHeight = UNIFORM_ROW_HEIGHT
+        self.tableView.tableFooterView = UIView(frame: CGRectZero) // remove empty cells
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        self.tableView.backgroundColor = UIColor.whiteColor()
+        self.tableView.backgroundView = nil
+        
+        // Navigation visuals:
+        setUpAddButton()
     }
 
     /* viewDidAppear:
@@ -58,36 +69,41 @@ class FavoritesPageController: UITableViewController {
         super.viewDidAppear(animated)
 
         // Get navigation bar on top:
+        var rightBtns : [UIBarButtonItem] = []
+        if currentUser != nil {
+            rightBtns.append(self.addBtn)
+            self.addBtn.enabled = true
+            self.tableView.backgroundColor = UIColor.whiteColor()
+            self.tableView.backgroundView = nil
+        }
         if let navi = self.tabBarController?.navigationController as?
                 MainNavigationController {
             self.tabBarController?.navigationItem.setLeftBarButtonItems(
                     [], animated: true)
             self.tabBarController?.navigationItem.setRightBarButtonItems(
-                    [], animated: true)
+                rightBtns, animated: true)
             navi.reset_navigationBar()
             self.tabBarController?.navigationItem.title = favoritesTitle
         }
 
         // populate cell array
-        populateFavoritesTable();
-        favoritesTableView.backgroundColor = UIColor.whiteColor();
-        favoritesTableView.backgroundView = nil;
+        populateFavoritesTable()
 
         // if nothing in cell array, display background message:
         if favoriteCells.isEmpty {
             // if user not logged in, needs to log in to store favs:
             if currentUser == nil {
-                favoritesTableView.backgroundView =
-                    emptyBackgroundTextFavorites(noUserMsg);
+                self.tableView.backgroundView =
+                    emptyBackgroundTextFavorites(noUserMsg)
             // if user logged in, tell them how to have favs:
             } else {
-                favoritesTableView.backgroundView =
-                    emptyBackgroundTextFavorites(noFavoritesMsg);
+                self.tableView.backgroundView =
+                    emptyBackgroundTextFavorites(noFavoritesMsg)
             }
         }
 
         // update table view:
-        favoritesTableView.reloadData();
+        self.tableView.reloadData();
     }
 
     /*  tableView -> int
@@ -129,7 +145,7 @@ class FavoritesPageController: UITableViewController {
             
             // Show empty message if needed:
             if self.favoriteCells.isEmpty {
-                favoritesTableView.backgroundView =
+                self.tableView.backgroundView =
                     emptyBackgroundTextFavorites(noFavoritesMsg);
             }
         }
@@ -162,13 +178,31 @@ class FavoritesPageController: UITableViewController {
     */
     func emptyBackgroundTextFavorites(text: String) -> UILabel {
         let noDataLabel: UILabel = UILabel(frame: CGRectMake(
-            0, 0, favoritesTableView.bounds.size.width,
-            favoritesTableView.bounds.size.height))
+            0, 0, self.tableView.bounds.size.width,
+            self.tableView.bounds.size.height))
         noDataLabel.text = text
-        noDataLabel.textColor = UIColor(
-            red: 22.0/255.0, green: 106.0/255.0, blue: 176.0/255.0, alpha: 1.0);
-        noDataLabel.textAlignment = NSTextAlignment.Center;
-        return noDataLabel;
+        noDataLabel.textColor = EMPTY_SET_TEXT_COLOR
+        noDataLabel.textAlignment = NSTextAlignment.Center
+        return noDataLabel
+    }
+    
+    /* setUpAddButton
+        - sets up the add button visuals for navigation
+    */
+    func setUpAddButton() {
+        addBtn.setTitleTextAttributes(attributes, forState: .Normal)
+        addBtn.title = self.addBtnString
+        addBtn.tintColor = NAVI_BUTTON_COLOR
+        addBtn.target = self
+        addBtn.action = self.addBtnAction
+    }
+    
+    /* editBtnClicked
+        - action for add button
+    */
+    func addBtnClicked() {
+        print("clicked add btn for fav page!")
+        //self.performSegueWithIdentifier(segueToAddFav, sender: self)
     }
 
 
