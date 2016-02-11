@@ -369,6 +369,7 @@ func removeIngredientFromList(list: PFObject, ingredient: PFObject) {
     if let i = ingredients.indexOf(ingredient) {
         ingredients.removeAtIndex(i)
     }
+    list.setObject(ingredients, forKey: _s_ingredients)
     list.saveInBackground()
 }
 
