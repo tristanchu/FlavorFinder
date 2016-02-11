@@ -36,10 +36,6 @@ class FavoritesPageController: UITableViewController {
     
     // Segues:
     let segueToAddFav = "segueFavsToAddFav"
-    
-    // The table itself:
-    @IBOutlet var favoritesTableView: UITableView!
-
 
     // MARK: Override methods: ----------------------------------------------
     /* viewDidLoad:
@@ -50,17 +46,17 @@ class FavoritesPageController: UITableViewController {
         // Do any additional setup after loading the view, typically from a nib.
 
         // Connect table view to this controller (done in storyboard too)
-        favoritesTableView.dataSource = self
-        favoritesTableView.delegate = self
-        favoritesTableView.registerClass(UITableViewCell.self,
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
+        self.tableView.registerClass(UITableViewCell.self,
             forCellReuseIdentifier: favoriteCellName)
 
         // Table view visuals:
-        favoritesTableView.rowHeight = UNIFORM_ROW_HEIGHT
-        favoritesTableView.tableFooterView = UIView(frame: CGRectZero) // remove empty cells
-        favoritesTableView.separatorStyle = UITableViewCellSeparatorStyle.None
-        favoritesTableView.backgroundColor = UIColor.whiteColor()
-        favoritesTableView.backgroundView = nil
+        self.tableView.rowHeight = UNIFORM_ROW_HEIGHT
+        self.tableView.tableFooterView = UIView(frame: CGRectZero) // remove empty cells
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        self.tableView.backgroundColor = UIColor.whiteColor()
+        self.tableView.backgroundView = nil
         
         // Navigation visuals:
         setUpAddButton()
@@ -77,6 +73,8 @@ class FavoritesPageController: UITableViewController {
         if currentUser != nil {
             rightBtns.append(self.addBtn)
             self.addBtn.enabled = true
+            self.tableView.backgroundColor = UIColor.whiteColor()
+            self.tableView.backgroundView = nil
         }
         if let navi = self.tabBarController?.navigationController as?
                 MainNavigationController {
@@ -95,17 +93,17 @@ class FavoritesPageController: UITableViewController {
         if favoriteCells.isEmpty {
             // if user not logged in, needs to log in to store favs:
             if currentUser == nil {
-                favoritesTableView.backgroundView =
+                self.tableView.backgroundView =
                     emptyBackgroundTextFavorites(noUserMsg)
             // if user logged in, tell them how to have favs:
             } else {
-                favoritesTableView.backgroundView =
+                self.tableView.backgroundView =
                     emptyBackgroundTextFavorites(noFavoritesMsg)
             }
         }
 
         // update table view:
-        favoritesTableView.reloadData();
+        self.tableView.reloadData();
     }
 
     /*  tableView -> int
@@ -147,7 +145,7 @@ class FavoritesPageController: UITableViewController {
             
             // Show empty message if needed:
             if self.favoriteCells.isEmpty {
-                favoritesTableView.backgroundView =
+                self.tableView.backgroundView =
                     emptyBackgroundTextFavorites(noFavoritesMsg);
             }
         }
@@ -180,8 +178,8 @@ class FavoritesPageController: UITableViewController {
     */
     func emptyBackgroundTextFavorites(text: String) -> UILabel {
         let noDataLabel: UILabel = UILabel(frame: CGRectMake(
-            0, 0, favoritesTableView.bounds.size.width,
-            favoritesTableView.bounds.size.height))
+            0, 0, self.tableView.bounds.size.width,
+            self.tableView.bounds.size.height))
         noDataLabel.text = text
         noDataLabel.textColor = EMPTY_SET_TEXT_COLOR
         noDataLabel.textAlignment = NSTextAlignment.Center
@@ -203,7 +201,8 @@ class FavoritesPageController: UITableViewController {
         - action for add button
     */
     func addBtnClicked() {
-        self.performSegueWithIdentifier(segueToAddFav, sender: self)
+        print("clicked add btn for fav page!")
+        //self.performSegueWithIdentifier(segueToAddFav, sender: self)
     }
 
 

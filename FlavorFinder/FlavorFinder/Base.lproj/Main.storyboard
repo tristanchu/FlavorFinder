@@ -147,7 +147,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="h2p-tb-f5C" kind="relationship" relationship="viewControllers" id="5Lp-kB-tlU"/>
-                        <segue destination="aDy-6t-DKL" kind="relationship" relationship="viewControllers" id="VSP-N6-9Ob"/>
+                        <segue destination="dI6-1g-aMh" kind="relationship" relationship="viewControllers" id="xUD-Ag-jPG"/>
                         <segue destination="5es-bE-obA" kind="relationship" relationship="viewControllers" id="eGn-n6-axZ"/>
                         <segue destination="0ye-Pg-Qge" kind="relationship" relationship="viewControllers" id="Nnk-7w-lej"/>
                     </connections>
@@ -171,7 +171,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yNg-ga-N8e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1903" y="1544"/>
+            <point key="canvasLocation" x="399" y="1256"/>
         </scene>
         <!--Landing Page Container View Controller-->
         <scene sceneID="BsW-vT-UYW">
@@ -195,7 +195,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mnb-aE-QfF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2619" y="1544"/>
+            <point key="canvasLocation" x="1247" y="1572"/>
         </scene>
         <!--Search Results View Controller-->
         <scene sceneID="0m5-1m-TMy">
@@ -254,7 +254,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YN3-3Y-uml" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1998" y="2366"/>
+            <point key="canvasLocation" x="926" y="2334"/>
         </scene>
         <!--New Search View Controller-->
         <scene sceneID="KnO-6k-ilk">
@@ -362,7 +362,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M3T-y0-slv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2835" y="2379"/>
+            <point key="canvasLocation" x="1675" y="2347"/>
         </scene>
         <!--More-->
         <scene sceneID="DeY-qo-0Xs">
@@ -376,14 +376,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Td7-i7-Xyp">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Td7-i7-Xyp">
                                 <rect key="frame" x="46" y="119" width="508" height="30"/>
                                 <state key="normal" title="Login TestUser"/>
                                 <connections>
                                     <action selector="loginTestUser:" destination="0ye-Pg-Qge" eventType="touchUpInside" id="djF-2T-gar"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="More Page" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m2w-Ao-9PO">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="More Page" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m2w-Ao-9PO">
                                 <rect key="frame" x="188" y="210" width="83" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="83" id="60F-CW-cFn"/>
@@ -569,16 +569,16 @@
             </objects>
             <point key="canvasLocation" x="6477" y="1173"/>
         </scene>
-        <!--Root View Controller-->
+        <!--Favorites View Controller-->
         <scene sceneID="dPA-aL-FmF">
             <objects>
-                <tableViewController id="JqL-hj-n4j" sceneMemberID="viewController">
+                <tableViewController id="JqL-hj-n4j" userLabel="Favorites View Controller" customClass="FavoritesPageController" customModule="FlavorFinder" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Lrq-LP-0ed">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="7BG-aP-npN">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="FavoriteTableViewCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="FavoriteTableViewCell" id="7BG-aP-npN" customClass="FavoriteTableViewCell" customModule="FlavorFinder">
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7BG-aP-npN" id="wZ7-Qf-YOX">
@@ -596,12 +596,13 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="02E-xa-D2D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4431" y="1823"/>
+            <point key="canvasLocation" x="2967" y="2215"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Favorites-->
         <scene sceneID="Gf8-Yf-cOs">
             <objects>
-                <navigationController id="dI6-1g-aMh" sceneMemberID="viewController">
+                <navigationController id="dI6-1g-aMh" userLabel="Favorites" customClass="MainNavigationController" customModule="FlavorFinder" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Favorites" image="FavoritesIcon" selectedImage="FavoritesIconFilled" id="rtF-Lk-OVQ" userLabel="Favorites"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="qhI-Mh-ASP">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -612,58 +613,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t6u-KM-rTs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3615" y="1819"/>
-        </scene>
-        <!--Favorites-->
-        <scene sceneID="swP-zV-l0p">
-            <objects>
-                <viewController id="aDy-6t-DKL" customClass="MainNavigationController" customModule="FlavorFinder" sceneMemberID="viewController">
-                    <navigationBar key="view" contentMode="scaleToFill" id="6Wg-9O-Ihc">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                        <items>
-                            <navigationItem title="Title" id="Kd3-Hr-QzX"/>
-                        </items>
-                    </navigationBar>
-                    <tabBarItem key="tabBarItem" title="Favorites" image="FavoritesIcon" selectedImage="FavoritesIconFilled" id="3oj-NR-o20"/>
-                    <connections>
-                        <segue destination="WxL-eQ-tDM" kind="show" id="G9p-as-zTP"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8Ah-GI-Mfd" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3349" y="3360"/>
-        </scene>
-        <!--Favorites Page Controller-->
-        <scene sceneID="QGM-jA-Hum">
-            <objects>
-                <tableViewController id="WxL-eQ-tDM" customClass="FavoritesPageController" customModule="FlavorFinder" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="XTi-3z-PLa" userLabel="Favroite Table View">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="FavoriteTableViewCell" selectionStyle="default" indentationWidth="10" id="FJF-eW-GhS" customClass="FavoriteTableViewCell" customModule="FlavorFinder">
-                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FJF-eW-GhS" id="kd8-mt-J6Y">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="WxL-eQ-tDM" id="mw6-O1-Q0r"/>
-                            <outlet property="delegate" destination="WxL-eQ-tDM" id="854-PA-RzQ"/>
-                        </connections>
-                    </tableView>
-                    <connections>
-                        <segue destination="0sn-ZM-jHG" kind="show" id="AOv-00-t9P"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="e3d-pc-34K" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3775" y="2471"/>
+            <point key="canvasLocation" x="2111" y="1507"/>
         </scene>
         <!--Add Favorite View Controller-->
         <scene sceneID="Sp9-Ds-DRB">
@@ -674,7 +624,7 @@
                         <viewControllerLayoutGuide type="bottom" id="uPH-iR-ISB"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="N7o-Yh-la7">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search for an ingredient" translatesAutoresizingMaskIntoConstraints="NO" id="NLW-H4-L1A">
