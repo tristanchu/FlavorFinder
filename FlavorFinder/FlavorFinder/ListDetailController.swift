@@ -73,6 +73,9 @@ class ListDetailController: UITableViewController {
         // Update title in case changed::
         listTitle = userList.objectForKey(ListTitleColumnName) as! String
         
+        // Update ingredients list in case changed:
+        ingredientList = userList.objectForKey(ingredientsColumnName) as! [PFIngredient]
+
         // Get navigation bar on top:
         if let navi = self.tabBarController?.navigationController
             as? MainNavigationController {
@@ -125,6 +128,28 @@ class ListDetailController: UITableViewController {
             return cell
     }
     
+    /* tableView; Delete a cell:
+    */
+    override func tableView(tableView: UITableView,
+        commitEditingStyle editingStyle: UITableViewCellEditingStyle,
+        forRowAtIndexPath indexPath: NSIndexPath) {
+            if editingStyle == UITableViewCellEditingStyle.Delete {
+
+                // Tell parse to remove ingredient in list from local db:
+                removeIngredientFromList(userList, ingredient: self.ingredientList[indexPath.row])
+
+                // remove from display table:
+                self.ingredientList.removeAtIndex(indexPath.row)
+                tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+
+                // Show empty message if needed:
+                if self.ingredientList.isEmpty {
+                    ingredientListsTableView.backgroundView = createBackgroundWithText(
+                        self.listTitle + self.noIngredients)
+                }
+            }
+    }
+
     /* prepareForSegue
         - sends info to edit page
     */
