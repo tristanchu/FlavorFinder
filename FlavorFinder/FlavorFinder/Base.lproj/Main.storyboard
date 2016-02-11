@@ -649,6 +649,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Root View Controller" id="iHv-WU-3vn"/>
+                    <connections>
+                        <segue destination="0sn-ZM-jHG" kind="show" identifier="segueFavsToAddFav" id="ETA-JE-aaG"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="02E-xa-D2D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -680,7 +683,7 @@
                         <viewControllerLayoutGuide type="bottom" id="uPH-iR-ISB"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="N7o-Yh-la7">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search for an ingredient" translatesAutoresizingMaskIntoConstraints="NO" id="NLW-H4-L1A">
@@ -698,13 +701,10 @@
                             <constraint firstItem="NLW-H4-L1A" firstAttribute="leading" secondItem="N7o-Yh-la7" secondAttribute="leading" id="s6g-X9-WaX"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="searchBar" destination="NLW-H4-L1A" id="d5b-ay-JoN"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zI4-bE-rKz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4531" y="2397"/>
+            <point key="canvasLocation" x="3779" y="2215"/>
         </scene>
         <!--Item-->
         <scene sceneID="veb-7d-s5O">

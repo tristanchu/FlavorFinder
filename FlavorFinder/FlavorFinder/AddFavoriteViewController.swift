@@ -27,16 +27,6 @@ class AddFavoriteViewController: UIViewController {
     */
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
-        // Get navigation bar on top:
-        if let navi = self.tabBarController?.navigationController
-            as? MainNavigationController {
-                print("got it") // we are not getting it
-                for btn in (navi.tabBarController?.navigationItem.leftBarButtonItems)! {
-                    btn.tintColor = NAVI_BUTTON_COLOR
-                }
-                navi.reset_navigationBar()
-        }
     }
     
 }
