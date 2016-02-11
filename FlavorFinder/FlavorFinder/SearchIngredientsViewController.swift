@@ -5,6 +5,9 @@
 //  Created by Jaki Kimball on 2/10/16.
 //  Copyright © 2016 TeamFive. All rights reserved.
 //
+//  Most of this was intiially written by Courtney for the EditListPage class.
+//  Tweaked for reuse by Jaki so that it could be shared by the AddToFavViewController class.
+//
 
 import Foundation
 import UIKit
@@ -16,12 +19,18 @@ class SearchIngredientsViewController: UIViewController, UISearchBarDelegate, UI
 
     var ingredientSearchBar : UISearchBar?
     var searchTable : UITableView?
+    var navTitle : String?
     
     var activeSearch : Bool = false
     
     var allIngredients : [PFIngredient]?
     var filteredResults : [PFIngredient] = []
     let CELL_IDENTIFIER = "searchResultCell"
+    
+    // Navigation:
+    var backBtn: UIBarButtonItem = UIBarButtonItem()
+    let backBtnAction = "backBtnClicked:"
+    let backBtnString = String.fontAwesomeIconWithName(.ChevronLeft) + " Back"
     
 // MARK: Override methods: ----------------------------------------------
     
@@ -35,6 +44,9 @@ class SearchIngredientsViewController: UIViewController, UISearchBarDelegate, UI
         ingredientSearchBar?.delegate = self
         searchTable?.delegate = self
         searchTable?.dataSource = self
+        
+        // Navigation buttons:
+        setUpBackButton()
     }
     
     /* viewDidAppear:
@@ -45,6 +57,20 @@ class SearchIngredientsViewController: UIViewController, UISearchBarDelegate, UI
         
         // Hide search bar results on load:
         searchTable?.hidden = true
+        
+        // Get navigation bar on top:
+        if let navi = self.tabBarController?.navigationController
+            as? MainNavigationController {
+                self.tabBarController?.navigationItem.setLeftBarButtonItems(
+                    [self.backBtn], animated: true)
+                self.tabBarController?.navigationItem.setRightBarButtonItems(
+                    [], animated: true)
+                navi.reset_navigationBar()
+                if let _ = self.navTitle {
+                    self.tabBarController?.navigationItem.title = "\(self.navTitle!)"
+                }
+                self.backBtn.enabled = true
+        }
     }
     
 // MARK: UITableViewDataSource protocol functions ----------------------
@@ -134,7 +160,25 @@ class SearchIngredientsViewController: UIViewController, UISearchBarDelegate, UI
     - do whatever you need to do with the selected ingredient from search
     */
     func gotSelectedIngredient(selected: PFIngredient) {}
-
-
+    
+// MARK: Back Button Functions ------------------------------------------
+    
+    /* setUpBackButton
+    sets up the back button visuals for navigation
+    */
+    func setUpBackButton() {
+        backBtn.setTitleTextAttributes(attributes, forState: .Normal)
+        backBtn.title = self.backBtnString
+        backBtn.tintColor = NAVI_BUTTON_COLOR
+        backBtn.target = self
+        backBtn.action = "backBtnClicked"  // refers to: backBtnClicked()
+    }
+    
+    /* backBtnClicked
+    - action for back button: pop VC
+    */
+    func backBtnClicked() {
+        self.navigationController?.popViewControllerAnimated(true)
+    }
 
 }

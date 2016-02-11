@@ -26,11 +26,6 @@ class EditListPage: SearchIngredientsViewController, UITextFieldDelegate {
     let pageTitle = "Edit List"
     let alreadyContains = " is already in your list"
 
-    // Navigation:
-    var backBtn: UIBarButtonItem = UIBarButtonItem()
-    let backBtnAction = "backBtnClicked:"
-    let backBtnString = String.fontAwesomeIconWithName(.ChevronLeft) + " Back"
-
     // MARK: connections:
     @IBOutlet weak var listNamePromptLabel: UILabel!
     @IBOutlet weak var listTitleLabel: UILabel!
@@ -43,7 +38,7 @@ class EditListPage: SearchIngredientsViewController, UITextFieldDelegate {
     @IBOutlet weak var searchTableView: UITableView!
 
     @IBAction func submitAction(sender: AnyObject) {
-        if newNameTextField.text != nil {
+        if newNameTextField.text != nil && newNameTextField.text != "" {
             listObject.setObject(newNameTextField.text!, forKey: ListTitleColumnName)
             listTitleLabel.text = newNameTextField.text
             listObject.saveInBackground()
@@ -60,9 +55,10 @@ class EditListPage: SearchIngredientsViewController, UITextFieldDelegate {
     Additional setup after loading the view (upon open)
     */
     override func viewDidLoad() {
-        // Connect outlets to parent class variables
+        // Assign values to parent class variables
         ingredientSearchBar = addIngredientSearchBar
         searchTable = searchTableView
+        navTitle = pageTitle
         
         // Call super
         super.viewDidLoad()
@@ -73,28 +69,6 @@ class EditListPage: SearchIngredientsViewController, UITextFieldDelegate {
         // set up text field
         newNameTextField.delegate = self
         newNameTextField.setTextLeftPadding(5)
-
-        // Navigation buttons:
-        setUpBackButton()
-    }
-
-    /* viewDidAppear:
-    Setup when user goes into page.
-    */
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-
-        // Get navigation bar on top:
-        if let navi = self.tabBarController?.navigationController
-            as? MainNavigationController {
-                self.tabBarController?.navigationItem.setLeftBarButtonItems(
-                    [self.backBtn], animated: true)
-                self.tabBarController?.navigationItem.setRightBarButtonItems(
-                    [], animated: true)
-                navi.reset_navigationBar()
-                self.tabBarController?.navigationItem.title = "\(self.pageTitle)"
-                self.backBtn.enabled = true
-        }
     }
     
     // MARK: Overriding parent class functions
@@ -115,27 +89,5 @@ class EditListPage: SearchIngredientsViewController, UITextFieldDelegate {
             }
         }
     }
-
-    // MARK: Back Button Functions -----------------------------------------
-
-
-    /* setUpBackButton
-    sets up the back button visuals for navigation
-    */
-    func setUpBackButton() {
-        backBtn.setTitleTextAttributes(attributes, forState: .Normal)
-        backBtn.title = self.backBtnString
-        backBtn.tintColor = NAVI_BUTTON_COLOR
-        backBtn.target = self
-        backBtn.action = "backBtnClicked"  // refers to: backBtnClicked()
-    }
-
-    /* backBtnClicked
-    - action for back button
-    */
-    func backBtnClicked() {
-        self.navigationController?.popViewControllerAnimated(true)
-    }
-
     
 }
