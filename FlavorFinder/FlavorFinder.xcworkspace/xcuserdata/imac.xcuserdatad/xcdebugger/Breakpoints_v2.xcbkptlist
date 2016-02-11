@@ -431,7 +431,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "239"
             endingLineNumber = "239"
-            landmarkName = "hasVoted(_:match:)"
+            landmarkName = "_unvoteMatch(_:match:voteType:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -463,7 +463,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "334"
             endingLineNumber = "334"
-            landmarkName = "addIngredientToList(_:ingredient:)"
+            landmarkName = "getUserFavoritesFromCloud(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -593,6 +593,22 @@
             endingLineNumber = "134"
             landmarkName = "searchBar(_:textDidChange:)"
             landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FlavorFinder/Database.swift"
+            timestampString = "476849809.853148"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "289"
+            endingLineNumber = "289"
+            landmarkName = "getHotpotVoteType(_:hotpot:match:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

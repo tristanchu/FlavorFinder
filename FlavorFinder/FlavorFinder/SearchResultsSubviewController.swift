@@ -255,58 +255,56 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
             
             switch index {
             case 0: // Upvote action
-                break // DEBUG: disabling voting
-//                if let user = currentUser {
-//                    if let vote = hasVoted(user, match: match) {
-//                        let voteType = vote[_s_voteType] as! String
-//                            
-//                        if voteType == _s_upvotes {
-//                            // Already upvoted
-//                            unvoteMatch(user, match: match, voteType: _s_upvotes)
-//                            selBtn.deselect()
-//                        } else if voteType == _s_downvotes {    // Already downvoted
-//                            unvoteMatch(user, match: match, voteType: _s_downvotes)
-//                            upvoteMatch(user, match: match)
-//                            downvoteBtn.deselect()
-//                            selBtn.select()
-//                        }
-//                    } else { // First-time vote
-//                        upvoteMatch(user, match: match)
-//                        selBtn.select()
-//                    }
-//                    return false
-//                } else {
-////                    self.presentViewController(self.notSignedInAlert, animated: true, completion: nil)
-//                    return true
-//                }
+                if let user = currentUser {
+                    if let vote = hasVoted(user, match: match) {
+                        let voteType = vote[_s_voteType] as! String
+                            
+                        if voteType == _s_upvotes {
+                            // Already upvoted
+                            unvoteMatch(user, match: match, voteType: _s_upvotes)
+                            selBtn.deselect()
+                        } else if voteType == _s_downvotes {    // Already downvoted
+                            unvoteMatch(user, match: match, voteType: _s_downvotes)
+                            upvoteMatch(user, match: match)
+                            downvoteBtn.deselect()
+                            selBtn.select()
+                        }
+                    } else { // First-time vote
+                        upvoteMatch(user, match: match)
+                        selBtn.select()
+                    }
+                    return false
+                } else {
+//                    self.presentViewController(self.notSignedInAlert, animated: true, completion: nil)
+                    return true
+                }
             case 1: // Downvote action
-                break // DEBUG: disabling voting
-//                if let user = currentUser {
-//                    if let vote = hasVoted(user, match: match) {
-//                        let voteType = vote[_s_voteType] as! String
-//                            
-//                        if voteType == _s_downvotes {
-//                            // Already downvoted
-//                            unvoteMatch(user, match: match, voteType: _s_downvotes)
-//                            selBtn.deselect()
-//                        } else if voteType == _s_upvotes {
-//                            // Already upvoted
-//                            unvoteMatch(user, match: match, voteType: _s_upvotes)
-//                            downvoteMatch(user, match: match)
-//                            
-//                            upvoteBtn.deselect()
-//                            selBtn.select()
-//                        }
-//                    } else { // First-time vote
-//                        downvoteMatch(user, match: match)
-//                        selBtn.select()
-//                    }
-//                    
-//                    return false
-//                } else {
-////                    self.presentViewController(self.notSignedInAlert, animated: true, completion: nil)
-//                    return true
-//                }
+                if let user = currentUser {
+                    if let vote = hasVoted(user, match: match) {
+                        let voteType = vote[_s_voteType] as! String
+                            
+                        if voteType == _s_downvotes {
+                            // Already downvoted
+                            unvoteMatch(user, match: match, voteType: _s_downvotes)
+                            selBtn.deselect()
+                        } else if voteType == _s_upvotes {
+                            // Already upvoted
+                            unvoteMatch(user, match: match, voteType: _s_upvotes)
+                            downvoteMatch(user, match: match)
+                            
+                            upvoteBtn.deselect()
+                            selBtn.select()
+                        }
+                    } else { // First-time vote
+                        downvoteMatch(user, match: match)
+                        selBtn.select()
+                    }
+                    
+                    return false
+                } else {
+//                    self.presentViewController(self.notSignedInAlert, animated: true, completion: nil)
+                    return true
+                }
             case 2: // Favorite action
                 if let user = currentUser {
                     if let _ = isFavoriteIngredient(user, ingredient: ingredient) {
