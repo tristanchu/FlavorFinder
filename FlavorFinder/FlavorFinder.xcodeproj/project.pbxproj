@@ -67,6 +67,7 @@
 		B6739A181C5997760004F982 /* LandingPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6739A171C5997760004F982 /* LandingPageController.swift */; };
 		B6739A1C1C5999D20004F982 /* NewSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6739A1B1C5999D20004F982 /* NewSearchViewController.swift */; };
 		B685D2B31C5DE775001C37FF /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B685D2B21C5DE775001C37FF /* SearchResultsViewController.swift */; };
+		B6A779081C6C248F0005B44C /* SearchIngredientsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A779071C6C248F0005B44C /* SearchIngredientsViewController.swift */; };
 		B6B7E0571C4D7BA400ADFC9C /* IngredientList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B7E0561C4D7BA400ADFC9C /* IngredientList.swift */; };
 		B6E0C4EB1C6926E2008B7E2A /* AddFavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E0C4EA1C6926E2008B7E2A /* AddFavoriteViewController.swift */; };
 		B6EA63591BEEB4660017C063 /* PFFavorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EA63581BEEB4660017C063 /* PFFavorite.swift */; };
@@ -153,6 +154,7 @@
 		B6739A171C5997760004F982 /* LandingPageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandingPageController.swift; sourceTree = "<group>"; };
 		B6739A1B1C5999D20004F982 /* NewSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewSearchViewController.swift; sourceTree = "<group>"; };
 		B685D2B21C5DE775001C37FF /* SearchResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
+		B6A779071C6C248F0005B44C /* SearchIngredientsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchIngredientsViewController.swift; sourceTree = "<group>"; };
 		B6B7E0561C4D7BA400ADFC9C /* IngredientList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngredientList.swift; sourceTree = "<group>"; };
 		B6E0C4EA1C6926E2008B7E2A /* AddFavoriteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFavoriteViewController.swift; sourceTree = "<group>"; };
 		B6EA63581BEEB4660017C063 /* PFFavorite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PFFavorite.swift; sourceTree = "<group>"; };
@@ -305,9 +307,9 @@
 				B685D2B11C5DE6E6001C37FF /* SearchResultsVC */,
 				B6260A911C69321200BC0717 /* ListSubpages */,
 				88F0E4FE1BE51E7F003CB35B /* GlobalSearchController.swift */,
+				B6A779091C6C249D0005B44C /* Prototype VC Classes */,
 				8875DE3A1BE0751B00CD50EA /* MainNavigationController.swift */,
 				B6E0C4EA1C6926E2008B7E2A /* AddFavoriteViewController.swift */,
-				B685D2B41C5DE8D2001C37FF /* ContainerSystem */,
 				8875DE381BE06FB300CD50EA /* MenuTableViewController.swift */,
 				B6739A1B1C5999D20004F982 /* NewSearchViewController.swift */,
 			);
@@ -405,6 +407,15 @@
 				888D1A431BDEF8FE007F09AE /* _ProfileViewController.swift */,
 			);
 			name = Deprecated;
+			sourceTree = "<group>";
+		};
+		B6A779091C6C249D0005B44C /* Prototype VC Classes */ = {
+			isa = PBXGroup;
+			children = (
+				B685D2B41C5DE8D2001C37FF /* ContainerSystem */,
+				B6A779071C6C248F0005B44C /* SearchIngredientsViewController.swift */,
+			);
+			name = "Prototype VC Classes";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -593,6 +604,7 @@
 				609432691C42DD6500BA0577 /* ListsPageController.swift in Sources */,
 				B61AD2C51C5BFB9C00081BF4 /* SearchResultsSubviewController.swift in Sources */,
 				B6739A181C5997760004F982 /* LandingPageController.swift in Sources */,
+				B6A779081C6C248F0005B44C /* SearchIngredientsViewController.swift in Sources */,
 				8875DE391BE06FB300CD50EA /* MenuTableViewController.swift in Sources */,
 				888D1A441BDEF8FE007F09AE /* _ProfileViewController.swift in Sources */,
 				B6B7E0571C4D7BA400ADFC9C /* IngredientList.swift in Sources */,

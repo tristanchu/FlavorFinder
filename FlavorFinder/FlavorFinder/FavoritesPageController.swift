@@ -201,8 +201,7 @@ class FavoritesPageController: UITableViewController {
         - action for add button
     */
     func addBtnClicked() {
-        print("clicked add btn for fav page!")
-        //self.performSegueWithIdentifier(segueToAddFav, sender: self)
+        self.performSegueWithIdentifier(segueToAddFav, sender: self)
     }
 
 
