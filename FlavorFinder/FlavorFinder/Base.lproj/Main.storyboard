@@ -149,8 +149,8 @@
                         <segue destination="h2p-tb-f5C" kind="relationship" relationship="viewControllers" id="5Lp-kB-tlU"/>
                         <segue destination="dI6-1g-aMh" kind="relationship" relationship="viewControllers" id="xUD-Ag-jPG"/>
                         <segue destination="5es-bE-obA" kind="relationship" relationship="viewControllers" id="eGn-n6-axZ"/>
-                        <segue destination="0ye-Pg-Qge" kind="relationship" relationship="viewControllers" id="Nnk-7w-lej"/>
                         <segue destination="sBa-Qh-DWZ" kind="relationship" relationship="viewControllers" id="kgK-qj-sFr"/>
+                        <segue destination="0ye-Pg-Qge" kind="relationship" relationship="viewControllers" id="Nnk-7w-lej"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hfi-gV-f5i" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1182,7 +1182,7 @@
             </objects>
             <point key="canvasLocation" x="2126" y="3577"/>
         </scene>
-        <!--Item-->
+        <!--Settings-->
         <scene sceneID="yia-nh-jLn">
             <objects>
                 <viewController id="sBa-Qh-DWZ" customClass="SettingsPage" customModule="FlavorFinder" customModuleProvider="target" sceneMemberID="viewController">
@@ -1237,7 +1237,7 @@
                             <constraint firstItem="CMe-VZ-6Ga" firstAttribute="centerX" secondItem="cE8-rs-reN" secondAttribute="centerX" id="voa-JQ-hvo"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="r8i-Hc-nGx"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="Settings" selectedImage="SettingsFilled" id="r8i-Hc-nGx"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PHc-yQ-SNP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1370,6 +1370,8 @@
         <image name="MoreUnclicked" width="22" height="22"/>
         <image name="SearchClicked" width="22" height="22"/>
         <image name="SearchIcon" width="22" height="22"/>
+        <image name="Settings" width="22" height="22"/>
+        <image name="SettingsFilled" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="yCh-I4-cTX"/>
