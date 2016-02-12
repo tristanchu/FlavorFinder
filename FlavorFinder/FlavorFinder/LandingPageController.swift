@@ -34,16 +34,6 @@ class LandingPageController: ContainerParentViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Get navigation bar on top:
-        if let navi = self.tabBarController?.navigationController
-            as? MainNavigationController {
-                navi.navigationItem.setLeftBarButtonItems(
-                    [], animated: true)
-                navi.navigationItem.setRightBarButtonItems(
-                    [], animated: true)
-                navi.reset_navigationBar()
-                navi.navigationItem.title = searchTitle
-        }
     }
     
     /* viewDidAppear
@@ -51,6 +41,17 @@ class LandingPageController: ContainerParentViewController {
     */
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        
+        // Get navigation bar on top:
+        if let navi = self.tabBarController?.navigationController
+            as? MainNavigationController {
+                self.tabBarController?.navigationItem.setLeftBarButtonItems(
+                    [], animated: true)
+                self.tabBarController?.navigationItem.setRightBarButtonItems(
+                    [], animated: true)
+                navi.reset_navigationBar()
+                self.tabBarController?.navigationItem.title = searchTitle
+        }
         
         self.tabBarController?.navigationItem.title = ""
         
