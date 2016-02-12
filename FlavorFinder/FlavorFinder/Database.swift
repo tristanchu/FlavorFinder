@@ -28,6 +28,7 @@ let _s_secondIngredient = "secondIngredient"
 let _s_matchLevel = "level"
 let _s_upvotes = "upvotes"
 let _s_downvotes = "downvotes"
+let _s_novote = "novote"
 
 let _s_Favorite = "Favorite"
 let _s_ingredient = "ingredient"
@@ -177,25 +178,21 @@ func getMatchForTwoIngredients(firstIngredient: PFObject, secondIngredient: PFOb
     query.whereKey(_s_firstIngredient, equalTo: firstIngredient)
     query.whereKey(_s_secondIngredient, equalTo: secondIngredient)
     
-    var match: PFObject? = nil
-    
-    query.getFirstObjectInBackgroundWithBlock {
-        (_match: PFObject?, error: NSError?) -> Void in
-        if error == nil && _match != nil {
-            match = _match!
-        } else {
-            print(error)
-        }
+    let match: PFObject?
+    do {
+        match = try query.getFirstObject()
+    } catch {
+        match = nil
     }
     
     return match
 }
 
-func upvoteHotpot(user: PFUser, hotpot: [PFObject], match: PFObject) {
-    let secondIngredient = match[_s_secondIngredient] as! PFObject
-    
+
+
+func upvoteHotpot(user: PFUser, hotpot: [PFObject], matchIngredient: PFIngredient) {
     for ingredient in hotpot {
-        if let match = getMatchForTwoIngredients(ingredient, secondIngredient: secondIngredient) {
+        if let match = getMatchForTwoIngredients(ingredient, secondIngredient: matchIngredient) {
             upvoteMatch(user, match: match)
         }
     }
@@ -206,6 +203,15 @@ func upvoteMatch(user: PFUser, match: PFObject) {
     
     if let match2 = _getEquivalentMatch(match) {
         _voteMatch(user, match: match2, voteType: _s_upvotes)
+    }
+}
+
+
+func downvoteHotpot(user: PFUser, hotpot: [PFObject], matchIngredient: PFIngredient) {
+    for ingredient in hotpot {
+        if let match = getMatchForTwoIngredients(ingredient, secondIngredient: matchIngredient) {
+            downvoteMatch(user, match: match)
+        }
     }
 }
 
@@ -225,6 +231,16 @@ func _voteMatch(user: PFUser, match: PFObject, voteType: String) {
     let _vote = PFVote(user: user, match: match, voteType: voteType)
     _vote.pinInBackground()
     _vote.saveInBackground()
+}
+
+
+
+func unvoteHotpot(user: PFUser, hotpot: [PFObject], matchIngredient: PFIngredient, voteType: String) {
+    for ingredient in hotpot {
+        if let match = getMatchForTwoIngredients(ingredient, secondIngredient: matchIngredient) {
+            unvoteMatch(user, match: match, voteType: voteType)
+        }
+    }
 }
 
 func unvoteMatch(user: PFUser, match: PFObject, voteType: String) {
@@ -254,6 +270,42 @@ func _unvoteMatch(user: PFUser, match: PFObject, voteType: String) {
     }
 }
 
+
+
+func getHotpotVoteType(user: PFUser, hotpot: [PFObject], matchIngredient: PFIngredient) -> String {
+    var hotpotVoteType = ""
+    
+    for ingredient in hotpot {
+        if let match = getMatchForTwoIngredients(ingredient, secondIngredient: matchIngredient) {
+            if let vote = hasVoted(user, match: match) {
+                let voteType = vote[_s_voteType] as! String
+                
+                if voteType == _s_upvotes {
+                    if hotpotVoteType == "" || hotpotVoteType == _s_upvotes {
+                        hotpotVoteType = _s_upvotes
+                    } else {
+                        return _s_novote
+                    }
+                } else if voteType == _s_downvotes {
+                    if hotpotVoteType == "" || hotpotVoteType == _s_downvotes {
+                        hotpotVoteType = _s_downvotes
+                    } else {
+                        return _s_novote
+                    }
+                }
+            } else {
+                if hotpotVoteType == "" || hotpotVoteType == _s_novote {
+                    hotpotVoteType = _s_novote
+                } else {
+                    return _s_novote
+                }
+            }
+        }
+    }
+
+    return hotpotVoteType
+}
+
 func hasVoted(user: PFUser, match: PFObject) -> PFObject? {
     let query = PFQuery(className: _s_Vote)
     query.whereKey(_s_user, equalTo: user)
@@ -269,6 +321,8 @@ func hasVoted(user: PFUser, match: PFObject) -> PFObject? {
     
     return _vote
 }
+
+
 
 func getUserVotesFromCloud(user: PFUser) {
     let query = PFQuery(className: _s_Vote)

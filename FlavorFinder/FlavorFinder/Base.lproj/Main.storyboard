@@ -1086,7 +1086,7 @@
                                     <constraint firstItem="40P-NH-G2D" firstAttribute="centerX" secondItem="r7b-bU-Spd" secondAttribute="centerX" id="uN0-uu-Pf2"/>
                                 </constraints>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aeM-a4-rYd">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aeM-a4-rYd">
                                 <rect key="frame" x="20" y="5" width="130" height="26"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="130" id="c0B-ax-swX"/>
