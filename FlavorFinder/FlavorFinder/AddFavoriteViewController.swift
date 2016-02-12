@@ -25,7 +25,7 @@ class AddFavoriteViewController: SearchIngredientsViewController {
     
     @IBOutlet weak var addIngredientSearchBar: UISearchBar!
     
-    let searchTableView = UITableView() // just for dev, not permanently!
+    @IBOutlet weak var searchTableView: UITableView!
     
     // MARK: Override methods: ----------------------------------------------
     
