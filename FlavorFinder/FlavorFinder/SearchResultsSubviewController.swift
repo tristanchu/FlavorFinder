@@ -235,10 +235,7 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         
     func swipeTableCell(cell: MGSwipeTableCell!, tappedButtonAtIndex index: Int, direction: MGSwipeDirection, fromExpansion: Bool) -> Bool {
         let indexPath = tableView.indexPathForCell(cell)!
-        let ingredient = matches[indexPath.row].ingredient
-        //  re: voting -- got to get matches and decide what to do with multi-search
-        //  disabling until we figure that out!
-        // DEBUG: disabled voting feature for now
+        let matchIngredient = matches[indexPath.row].ingredient
         
         if cell.leftButtons == nil || cell.leftButtons.isEmpty {
             print("ERROR: No buttons in search results cell button array.")
@@ -256,22 +253,19 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
             switch index {
             case 0: // Upvote action
                 if let user = currentUser {
-                    if let vote = hasVoted(user, match: match) {
-                        let voteType = vote[_s_voteType] as! String
-                            
-                        if voteType == _s_upvotes {
-                            // Already upvoted
-                            unvoteMatch(user, match: match, voteType: _s_upvotes)
-                            selBtn.deselect()
-                        } else if voteType == _s_downvotes {    // Already downvoted
-                            unvoteMatch(user, match: match, voteType: _s_downvotes)
-                            upvoteMatch(user, match: match)
-                            downvoteBtn.deselect()
-                            selBtn.select()
-                        }
-                    } else { // First-time vote
-                        upvoteMatch(user, match: match)
+                    let voteType = getHotpotVoteType(user, hotpot: currentSearch, matchIngredient: matchIngredient)
+                    if voteType == _s_upvotes {
+                        // Already upvoted
+                        selBtn.deselect()
+                        unvoteHotpot(user, hotpot: currentSearch, matchIngredient: matchIngredient, voteType: _s_upvotes)
+                    } else if voteType == _s_downvotes {    // Already downvoted
+                        downvoteBtn.deselect()
                         selBtn.select()
+                        unvoteHotpot(user, hotpot: currentSearch, matchIngredient: matchIngredient, voteType: _s_downvotes)
+                        upvoteHotpot(user, hotpot: currentSearch, matchIngredient: matchIngredient)
+                    } else { // First-time vote
+                        selBtn.select()
+                        upvoteHotpot(user, hotpot: currentSearch, matchIngredient: matchIngredient)
                     }
                     return false
                 } else {
@@ -280,26 +274,21 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
                 }
             case 1: // Downvote action
                 if let user = currentUser {
-                    if let vote = hasVoted(user, match: match) {
-                        let voteType = vote[_s_voteType] as! String
-                            
-                        if voteType == _s_downvotes {
-                            // Already downvoted
-                            unvoteMatch(user, match: match, voteType: _s_downvotes)
-                            selBtn.deselect()
-                        } else if voteType == _s_upvotes {
-                            // Already upvoted
-                            unvoteMatch(user, match: match, voteType: _s_upvotes)
-                            downvoteMatch(user, match: match)
-                            
-                            upvoteBtn.deselect()
-                            selBtn.select()
-                        }
-                    } else { // First-time vote
-                        downvoteMatch(user, match: match)
+                    let voteType = getHotpotVoteType(user, hotpot: currentSearch, matchIngredient: matchIngredient)
+                    if voteType == _s_downvotes {
+                        // Already downvoted
+                        selBtn.deselect()
+                        unvoteHotpot(user, hotpot: currentSearch, matchIngredient: matchIngredient, voteType: _s_downvotes)
+                    } else if voteType == _s_upvotes {
+                        // Already upvoted
+                        upvoteBtn.deselect()
                         selBtn.select()
+                        unvoteHotpot(user, hotpot: currentSearch, matchIngredient: matchIngredient, voteType: _s_upvotes)
+                        downvoteHotpot(user, hotpot: currentSearch, matchIngredient: matchIngredient)
+                    } else { // First-time vote
+                        selBtn.select()
+                        downvoteHotpot(user, hotpot: currentSearch, matchIngredient: matchIngredient)
                     }
-                    
                     return false
                 } else {
 //                    self.presentViewController(self.notSignedInAlert, animated: true, completion: nil)
@@ -307,11 +296,11 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
                 }
             case 2: // Favorite action
                 if let user = currentUser {
-                    if let _ = isFavoriteIngredient(user, ingredient: ingredient) {
-                        unfavoriteIngredient(user, ingredient: ingredient)
+                    if let _ = isFavoriteIngredient(user, ingredient: matchIngredient) {
+                        unfavoriteIngredient(user, ingredient: matchIngredient)
                         selBtn.deselect()
                     } else {
-                        favoriteIngredient(user, ingredient: ingredient)
+                        favoriteIngredient(user, ingredient: matchIngredient)
                         selBtn.select()
                     }
                     return false
@@ -322,7 +311,7 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
                     }
                 }
             case 3: // Add-to-hotpot action
-                currentSearch.append(ingredient)
+                currentSearch.append(matchIngredient)
                 if let parent = parentViewController as? SearchResultsViewController {
                     parent.newSearchTermWasAdded()
                 } else {
@@ -352,7 +341,7 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         }
         
         let indexPath = tableView.indexPathForCell(cell)!
-        let ingredient = matches[indexPath.row].ingredient
+        let matchIngredient = matches[indexPath.row].ingredient
         
         swipeSettings.transition = MGSwipeTransition.Drag
 
@@ -365,26 +354,24 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         if let user = currentUser {
             
             // display whether or not user has favorited ingredient
-            if let _ = isFavoriteIngredient(user, ingredient: ingredient) {
+            if let _ = isFavoriteIngredient(user, ingredient: matchIngredient) {
                 favBtn.selected = true
             } else {
                 favBtn.selected = false
             }
             
             // display whether or not user has voted on match
-            if false { // DEBUG: voting disabled
-//            if let vote = hasVoted(user, match: match) {
-//                if vote[_s_voteType] as! String == _s_upvotes {
-//                    upvoteBtn.selected = true
-//                } else if vote[_s_voteType] as! String == _s_downvotes {
-//                    upvoteBtn.selected = false
-//                }
-//                downvoteBtn.selected = !upvoteBtn.selected // can only vote one direction
+            let voteType = getHotpotVoteType(user, hotpot: currentSearch, matchIngredient: matchIngredient)
+            if voteType == _s_upvotes {
+                upvoteBtn.selected = true
+                downvoteBtn.selected = false
+            } else if voteType == _s_downvotes {
+                upvoteBtn.selected = false
+                downvoteBtn.selected = true
             } else {
                 upvoteBtn.selected = false
                 downvoteBtn.selected = false
             }
-            
             
         } else { // not logged in
             favBtn.selected = false

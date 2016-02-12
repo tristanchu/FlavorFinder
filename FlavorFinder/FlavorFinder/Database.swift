@@ -178,15 +178,11 @@ func getMatchForTwoIngredients(firstIngredient: PFObject, secondIngredient: PFOb
     query.whereKey(_s_firstIngredient, equalTo: firstIngredient)
     query.whereKey(_s_secondIngredient, equalTo: secondIngredient)
     
-    var match: PFObject? = nil
-    
-    query.getFirstObjectInBackgroundWithBlock {
-        (_match: PFObject?, error: NSError?) -> Void in
-        if error == nil && _match != nil {
-            match = _match!
-        } else {
-            print(error)
-        }
+    let match: PFObject?
+    do {
+        match = try query.getFirstObject()
+    } catch {
+        match = nil
     }
     
     return match
@@ -194,11 +190,9 @@ func getMatchForTwoIngredients(firstIngredient: PFObject, secondIngredient: PFOb
 
 
 
-func upvoteHotpot(user: PFUser, hotpot: [PFObject], match: PFObject) {
-    let secondIngredient = match[_s_secondIngredient] as! PFObject
-    
+func upvoteHotpot(user: PFUser, hotpot: [PFObject], matchIngredient: PFIngredient) {
     for ingredient in hotpot {
-        if let match = getMatchForTwoIngredients(ingredient, secondIngredient: secondIngredient) {
+        if let match = getMatchForTwoIngredients(ingredient, secondIngredient: matchIngredient) {
             upvoteMatch(user, match: match)
         }
     }
@@ -209,6 +203,15 @@ func upvoteMatch(user: PFUser, match: PFObject) {
     
     if let match2 = _getEquivalentMatch(match) {
         _voteMatch(user, match: match2, voteType: _s_upvotes)
+    }
+}
+
+
+func downvoteHotpot(user: PFUser, hotpot: [PFObject], matchIngredient: PFIngredient) {
+    for ingredient in hotpot {
+        if let match = getMatchForTwoIngredients(ingredient, secondIngredient: matchIngredient) {
+            downvoteMatch(user, match: match)
+        }
     }
 }
 
@@ -232,11 +235,9 @@ func _voteMatch(user: PFUser, match: PFObject, voteType: String) {
 
 
 
-func unvoteHotpot(user: PFUser, hotpot: [PFObject], match: PFObject, voteType: String) {
-    let secondIngredient = match[_s_secondIngredient] as! PFObject
-    
+func unvoteHotpot(user: PFUser, hotpot: [PFObject], matchIngredient: PFIngredient, voteType: String) {
     for ingredient in hotpot {
-        if let match = getMatchForTwoIngredients(ingredient, secondIngredient: secondIngredient) {
+        if let match = getMatchForTwoIngredients(ingredient, secondIngredient: matchIngredient) {
             unvoteMatch(user, match: match, voteType: voteType)
         }
     }
@@ -271,12 +272,11 @@ func _unvoteMatch(user: PFUser, match: PFObject, voteType: String) {
 
 
 
-func getHotpotVoteType(user: PFUser, hotpot: [PFObject], match: PFObject) -> String {
-    let secondIngredient = match[_s_secondIngredient] as! PFObject
+func getHotpotVoteType(user: PFUser, hotpot: [PFObject], matchIngredient: PFIngredient) -> String {
     var hotpotVoteType = ""
     
     for ingredient in hotpot {
-        if let match = getMatchForTwoIngredients(ingredient, secondIngredient: secondIngredient) {
+        if let match = getMatchForTwoIngredients(ingredient, secondIngredient: matchIngredient) {
             if let vote = hasVoted(user, match: match) {
                 let voteType = vote[_s_voteType] as! String
                 
