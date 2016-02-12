@@ -1205,9 +1205,12 @@
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
                                 <inset key="contentEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
-                                <state key="normal" title="Reset Password Request">
+                                <state key="normal" title="Request Password Reset">
                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="resetPasswordBtn:" destination="sBa-Qh-DWZ" eventType="touchUpInside" id="Jju-cD-J34"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A reset password link has been sent to your email." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TSr-eK-5tj">
                                 <rect key="frame" x="130" y="215.5" width="341" height="20.5"/>
@@ -1223,7 +1226,16 @@
                                 <state key="normal" title="Logout">
                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="logoutBtn:" destination="sBa-Qh-DWZ" eventType="touchUpInside" id="Rt8-U2-vab"/>
+                                </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You must be logged in to have settings." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vfH-by-FNi">
+                                <rect key="frame" x="147.5" y="264" width="305.5" height="23.5"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -1231,13 +1243,22 @@
                             <constraint firstItem="kxN-pl-ce4" firstAttribute="centerX" secondItem="cE8-rs-reN" secondAttribute="centerX" id="H5B-PY-yvj"/>
                             <constraint firstItem="oOy-vH-GSs" firstAttribute="centerX" secondItem="cE8-rs-reN" secondAttribute="centerX" id="N5a-F9-mOh"/>
                             <constraint firstItem="TSr-eK-5tj" firstAttribute="top" secondItem="kxN-pl-ce4" secondAttribute="bottom" constant="10" id="WKZ-to-NSW"/>
+                            <constraint firstItem="vfH-by-FNi" firstAttribute="centerY" secondItem="cE8-rs-reN" secondAttribute="centerY" id="Zgb-hO-QOJ"/>
                             <constraint firstItem="TSr-eK-5tj" firstAttribute="centerX" secondItem="cE8-rs-reN" secondAttribute="centerX" id="aSF-0g-g7y"/>
                             <constraint firstItem="oOy-vH-GSs" firstAttribute="top" secondItem="TSr-eK-5tj" secondAttribute="bottom" constant="40" id="hZa-K7-MzC"/>
+                            <constraint firstItem="vfH-by-FNi" firstAttribute="centerX" secondItem="cE8-rs-reN" secondAttribute="centerX" id="nKf-Sj-aFP"/>
                             <constraint firstItem="CMe-VZ-6Ga" firstAttribute="top" secondItem="jkl-GR-9wx" secondAttribute="bottom" constant="40" id="rwz-C0-jqJ"/>
                             <constraint firstItem="CMe-VZ-6Ga" firstAttribute="centerX" secondItem="cE8-rs-reN" secondAttribute="centerX" id="voa-JQ-hvo"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Settings" image="Settings" selectedImage="SettingsFilled" id="r8i-Hc-nGx"/>
+                    <connections>
+                        <outlet property="logoutButton" destination="oOy-vH-GSs" id="kUf-hr-kxG"/>
+                        <outlet property="notLoggedInLabel" destination="vfH-by-FNi" id="ZZL-NI-k59"/>
+                        <outlet property="pagePromptLabel" destination="CMe-VZ-6Ga" id="TB6-Ti-Fjt"/>
+                        <outlet property="passwordSentLabel" destination="TSr-eK-5tj" id="J3W-Vo-jG7"/>
+                        <outlet property="resetPasswordButton" destination="kxN-pl-ce4" id="ITW-sm-mQh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PHc-yQ-SNP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
