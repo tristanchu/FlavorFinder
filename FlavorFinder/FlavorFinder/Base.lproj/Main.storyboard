@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1605" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="oWC-1n-3cO">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
@@ -688,7 +689,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="7uM-oO-dwb">
-                                <rect key="frame" x="84" y="242" width="432" height="68"/>
+                                <rect key="frame" x="84" y="116" width="432" height="68"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add ingredient to favorites :" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nVU-5z-2CI" userLabel="Add Ingredient Prompt">
                                         <rect key="frame" x="0.0" y="0.0" width="432" height="24"/>
@@ -709,7 +710,7 @@
                                 </constraints>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vNy-hK-7TV" userLabel="Search Table View">
-                                <rect key="frame" x="84" y="310" width="432" height="81"/>
+                                <rect key="frame" x="84" y="184" width="432" height="317"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchResultCell" id="4Oe-XE-5fu">
@@ -725,12 +726,12 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="7uM-oO-dwb" firstAttribute="centerY" secondItem="N7o-Yh-la7" secondAttribute="centerY" id="8G1-NF-TRR"/>
+                            <constraint firstItem="7uM-oO-dwb" firstAttribute="centerY" secondItem="N7o-Yh-la7" secondAttribute="top" constant="150" id="8G1-NF-TRR"/>
                             <constraint firstItem="7uM-oO-dwb" firstAttribute="centerX" secondItem="N7o-Yh-la7" secondAttribute="centerX" id="GqF-3N-UDR"/>
                             <constraint firstItem="vNy-hK-7TV" firstAttribute="top" secondItem="7uM-oO-dwb" secondAttribute="bottom" id="Nb0-Cp-BkZ"/>
-                            <constraint firstItem="uPH-iR-ISB" firstAttribute="top" secondItem="vNy-hK-7TV" secondAttribute="bottom" constant="160" id="m4P-g6-2aQ"/>
+                            <constraint firstItem="uPH-iR-ISB" firstAttribute="top" secondItem="vNy-hK-7TV" secondAttribute="bottom" constant="50" id="m4P-g6-2aQ"/>
                             <constraint firstItem="7uM-oO-dwb" firstAttribute="leading" secondItem="vNy-hK-7TV" secondAttribute="leading" id="vYW-dm-3Gz"/>
-                            <constraint firstItem="7uM-oO-dwb" firstAttribute="trailing" secondItem="vNy-hK-7TV" secondAttribute="trailing" id="zY9-4q-QZh"/>
+                            <constraint firstItem="vNy-hK-7TV" firstAttribute="trailing" secondItem="7uM-oO-dwb" secondAttribute="trailing" id="zY9-4q-QZh"/>
                         </constraints>
                     </view>
                     <connections>
