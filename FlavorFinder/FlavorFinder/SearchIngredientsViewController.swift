@@ -45,6 +45,9 @@ class SearchIngredientsViewController: UIViewController, UISearchBarDelegate, UI
         searchTable?.delegate = self
         searchTable?.dataSource = self
         
+        // set up table view details:
+        searchTable?.separatorStyle = UITableViewCellSeparatorStyle.None
+        
         // Navigation buttons:
         setUpBackButton()
     }
