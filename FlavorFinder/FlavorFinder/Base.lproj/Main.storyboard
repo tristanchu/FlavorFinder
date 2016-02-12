@@ -149,7 +149,7 @@
                         <segue destination="h2p-tb-f5C" kind="relationship" relationship="viewControllers" id="5Lp-kB-tlU"/>
                         <segue destination="dI6-1g-aMh" kind="relationship" relationship="viewControllers" id="xUD-Ag-jPG"/>
                         <segue destination="5es-bE-obA" kind="relationship" relationship="viewControllers" id="eGn-n6-axZ"/>
-                        <segue destination="sBa-Qh-DWZ" kind="relationship" relationship="viewControllers" id="kgK-qj-sFr"/>
+                        <segue destination="6Fm-Ef-a8U" kind="relationship" relationship="viewControllers" id="kgK-qj-sFr"/>
                         <segue destination="0ye-Pg-Qge" kind="relationship" relationship="viewControllers" id="Nnk-7w-lej"/>
                     </connections>
                 </tabBarController>
@@ -1201,7 +1201,7 @@
             </objects>
             <point key="canvasLocation" x="2126" y="3577"/>
         </scene>
-        <!--Settings-->
+        <!--Settings Page-->
         <scene sceneID="yia-nh-jLn">
             <objects>
                 <viewController id="sBa-Qh-DWZ" customClass="SettingsPage" customModule="FlavorFinder" customModuleProvider="target" sceneMemberID="viewController">
@@ -1270,7 +1270,7 @@
                             <constraint firstItem="CMe-VZ-6Ga" firstAttribute="centerX" secondItem="cE8-rs-reN" secondAttribute="centerX" id="voa-JQ-hvo"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Settings" image="Settings" selectedImage="SettingsFilled" id="r8i-Hc-nGx"/>
+                    <navigationItem key="navigationItem" id="xgi-cB-9RK"/>
                     <connections>
                         <outlet property="logoutButton" destination="oOy-vH-GSs" id="kUf-hr-kxG"/>
                         <outlet property="notLoggedInLabel" destination="vfH-by-FNi" id="ZZL-NI-k59"/>
@@ -1281,7 +1281,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PHc-yQ-SNP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3556" y="359"/>
+            <point key="canvasLocation" x="4368" y="359"/>
         </scene>
         <!--Lists-->
         <scene sceneID="f5y-5I-m5K">
@@ -1398,6 +1398,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DvX-8H-u1Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2292" y="2922"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="rUB-fP-Pdd">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6Fm-Ef-a8U" customClass="MainNavigationController" customModule="FlavorFinder" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Settings" image="Settings" selectedImage="SettingsFilled" id="r8i-Hc-nGx"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Lhr-2i-mjd">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="sBa-Qh-DWZ" kind="relationship" relationship="rootViewController" id="nmk-dQ-Iy4"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wlm-Wn-8RA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3556" y="359"/>
         </scene>
     </scenes>
     <resources>

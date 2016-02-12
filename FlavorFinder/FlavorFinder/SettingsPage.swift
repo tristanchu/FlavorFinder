@@ -18,6 +18,7 @@ class SettingsPage : UIViewController {
     @IBOutlet weak var pagePromptLabel: UILabel!
     @IBOutlet weak var passwordSentLabel: UILabel!
     @IBOutlet weak var notLoggedInLabel: UILabel!
+    let pageTitle = "Settings"
 
     // Buttons:
     @IBOutlet weak var resetPasswordButton: UIButton!
@@ -55,6 +56,17 @@ class SettingsPage : UIViewController {
     Setup when user goes into page.
     */
     override func viewDidAppear(animated: Bool) {
+        // Get navigation bar on top:
+        if let navi = self.tabBarController?.navigationController
+            as? MainNavigationController {
+                self.tabBarController?.navigationItem.setLeftBarButtonItems(
+                    [], animated: true)
+                self.tabBarController?.navigationItem.setRightBarButtonItems(
+                    [], animated: true)
+                navi.reset_navigationBar()
+                
+                self.tabBarController?.navigationItem.title = pageTitle
+        }
         super.viewDidAppear(animated)
 
         if currentUser != nil {
