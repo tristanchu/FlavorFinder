@@ -686,21 +686,40 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search for an ingredient" translatesAutoresizingMaskIntoConstraints="NO" id="NLW-H4-L1A">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="N7o-Yh-la7" id="SSr-PQ-NRw"/>
-                                </connections>
-                            </searchBar>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="7uM-oO-dwb">
+                                <rect key="frame" x="84" y="242" width="432" height="68"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add ingredient to favorites :" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nVU-5z-2CI" userLabel="Add Ingredient Prompt">
+                                        <rect key="frame" x="0.0" y="0.0" width="432" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="ocd-zL-ldi"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="KBX-4D-3gW">
+                                        <rect key="frame" x="0.0" y="24" width="432" height="44"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </searchBar>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="432" id="sA2-bd-qIz"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="NLW-H4-L1A" secondAttribute="trailing" id="UzU-ng-UUl"/>
-                            <constraint firstItem="NLW-H4-L1A" firstAttribute="top" secondItem="N7o-Yh-la7" secondAttribute="top" id="miL-qW-VLD"/>
-                            <constraint firstItem="NLW-H4-L1A" firstAttribute="leading" secondItem="N7o-Yh-la7" secondAttribute="leading" id="s6g-X9-WaX"/>
+                            <constraint firstItem="7uM-oO-dwb" firstAttribute="centerY" secondItem="N7o-Yh-la7" secondAttribute="centerY" id="IHa-cK-gcG"/>
+                            <constraint firstItem="7uM-oO-dwb" firstAttribute="centerX" secondItem="N7o-Yh-la7" secondAttribute="centerX" id="dl3-qQ-xFZ"/>
+                            <constraint firstItem="7uM-oO-dwb" firstAttribute="centerX" secondItem="N7o-Yh-la7" secondAttribute="centerX" id="jYl-jk-U4r"/>
+                            <constraint firstItem="7uM-oO-dwb" firstAttribute="centerY" secondItem="N7o-Yh-la7" secondAttribute="centerY" id="o5P-wi-Wr6"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="addIngredientSearchBar" destination="KBX-4D-3gW" id="Rry-4i-DWd"/>
+                        <outlet property="promptLabel" destination="nVU-5z-2CI" id="yBc-KP-x1Q"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zI4-bE-rKz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
