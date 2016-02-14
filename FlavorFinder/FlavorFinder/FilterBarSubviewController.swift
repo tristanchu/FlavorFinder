@@ -12,6 +12,8 @@ import ASHorizontalScrollView
 
 class FilterBarSubviewController : UIViewController, UISearchBarDelegate {
     
+    let placeholderText = "Filter results by name..."
+    
     var filterView: ASHorizontalScrollView = ASHorizontalScrollView()
     var filterSearchBar = UISearchBar()
     var filters: [String: Bool] = [F_KOSHER: false,
@@ -83,6 +85,7 @@ class FilterBarSubviewController : UIViewController, UISearchBarDelegate {
         filterSearchBar.barTintColor = NAVI_COLOR
         filterSearchBar.delegate = self
         filterSearchBar.tag = 2
+        filterSearchBar.placeholder = placeholderText
         self.view.addSubview(filterSearchBar)
     }
     
