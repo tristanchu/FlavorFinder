@@ -490,11 +490,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FlavorFinder/SearchResultsSubviewController.swift"
-            timestampString = "476394683.540715"
+            timestampString = "477166132.759432"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "171"
-            endingLineNumber = "171"
+            startingLineNumber = "188"
+            endingLineNumber = "188"
             landmarkName = "didReceiveMemoryWarning()"
             landmarkType = "5">
          </BreakpointContent>
@@ -618,11 +618,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FlavorFinder/SearchResultsSubviewController.swift"
-            timestampString = "476998526.158497"
+            timestampString = "477166132.759432"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "254"
-            endingLineNumber = "254"
+            startingLineNumber = "271"
+            endingLineNumber = "271"
             landmarkName = "swipeTableCell(_:tappedButtonAtIndex:direction:fromExpansion:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -634,11 +634,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FlavorFinder/SearchResultsSubviewController.swift"
-            timestampString = "476998529.166464"
+            timestampString = "477166132.759432"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "255"
-            endingLineNumber = "255"
+            startingLineNumber = "272"
+            endingLineNumber = "272"
             landmarkName = "swipeTableCell(_:tappedButtonAtIndex:direction:fromExpansion:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -682,11 +682,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FlavorFinder/SearchResultsSubviewController.swift"
-            timestampString = "476999378.574572"
+            timestampString = "477166132.759432"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "277"
-            endingLineNumber = "277"
+            startingLineNumber = "294"
+            endingLineNumber = "294"
             landmarkName = "swipeTableCell(_:tappedButtonAtIndex:direction:fromExpansion:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -698,11 +698,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FlavorFinder/SearchResultsSubviewController.swift"
-            timestampString = "477001834.605011"
+            timestampString = "477166132.759432"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "364"
-            endingLineNumber = "364"
+            startingLineNumber = "381"
+            endingLineNumber = "381"
             landmarkName = "swipeTableCell(_:swipeButtonsForDirection:swipeSettings:expansionSettings:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -714,11 +714,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FlavorFinder/SearchResultsSubviewController.swift"
-            timestampString = "477002112.766819"
+            timestampString = "477166132.759432"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "286"
-            endingLineNumber = "286"
+            startingLineNumber = "303"
+            endingLineNumber = "303"
             landmarkName = "swipeTableCell(_:tappedButtonAtIndex:direction:fromExpansion:)"
             landmarkType = "5">
          </BreakpointContent>

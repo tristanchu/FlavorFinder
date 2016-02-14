@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1605" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="oWC-1n-3cO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="oWC-1n-3cO">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -147,7 +147,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="h2p-tb-f5C" kind="relationship" relationship="viewControllers" id="5Lp-kB-tlU"/>
+                        <segue destination="XNa-ih-GXk" kind="relationship" relationship="viewControllers" id="5Lp-kB-tlU"/>
                         <segue destination="dI6-1g-aMh" kind="relationship" relationship="viewControllers" id="xUD-Ag-jPG"/>
                         <segue destination="5es-bE-obA" kind="relationship" relationship="viewControllers" id="eGn-n6-axZ"/>
                         <segue destination="6Fm-Ef-a8U" kind="relationship" relationship="viewControllers" id="kgK-qj-sFr"/>
@@ -169,11 +169,11 @@
                             <segue destination="iUO-Lv-biu" kind="embed" identifier="segueLandingEmbedSubview" id="ga8-8a-Gco"/>
                         </connections>
                     </containerView>
-                    <tabBarItem key="tabBarItem" title="Search" image="SearchIcon" selectedImage="SearchClicked" id="cnd-Rl-Wb9"/>
+                    <navigationItem key="navigationItem" id="8c8-39-ire"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yNg-ga-N8e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="399" y="1256"/>
+            <point key="canvasLocation" x="1211" y="1256"/>
         </scene>
         <!--Landing Page Container View Controller-->
         <scene sceneID="BsW-vT-UYW">
@@ -197,7 +197,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mnb-aE-QfF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1247" y="1572"/>
+            <point key="canvasLocation" x="2059" y="1572"/>
         </scene>
         <!--Search Results View Controller-->
         <scene sceneID="0m5-1m-TMy">
@@ -443,7 +443,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CSM-cM-kZM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4877" y="1188"/>
+            <point key="canvasLocation" x="5689" y="1188"/>
         </scene>
         <!--List Detail Controller-->
         <scene sceneID="ueL-wy-vzF">
@@ -472,7 +472,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4ft-5g-u3O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5677" y="1173"/>
+            <point key="canvasLocation" x="6489" y="1173"/>
         </scene>
         <!--Edit List Page-->
         <scene sceneID="Zfv-dS-aqq">
@@ -625,7 +625,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pu8-JM-735" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6477" y="1173"/>
+            <point key="canvasLocation" x="7289" y="1173"/>
         </scene>
         <!--Favorites View Controller-->
         <scene sceneID="dPA-aL-FmF">
@@ -674,7 +674,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t6u-KM-rTs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2111" y="1507"/>
+            <point key="canvasLocation" x="2923" y="1507"/>
         </scene>
         <!--Add Favorite View Controller-->
         <scene sceneID="Sp9-Ds-DRB">
@@ -1086,7 +1086,7 @@
                                     <constraint firstItem="40P-NH-G2D" firstAttribute="centerX" secondItem="r7b-bU-Spd" secondAttribute="centerX" id="uN0-uu-Pf2"/>
                                 </constraints>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aeM-a4-rYd">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aeM-a4-rYd">
                                 <rect key="frame" x="20" y="5" width="130" height="26"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="130" id="c0B-ax-swX"/>
@@ -1267,8 +1267,8 @@
                                     <action selector="logoutBtn:" destination="sBa-Qh-DWZ" eventType="touchUpInside" id="Rt8-U2-vab"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You must be logged in to have settings." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vfH-by-FNi">
-                                <rect key="frame" x="147.5" y="264" width="305.5" height="23.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="You must be logged in to have settings." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vfH-by-FNi">
+                                <rect key="frame" x="148" y="264" width="306" height="24"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -1318,7 +1318,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gSS-mV-g7R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4065" y="1188"/>
+            <point key="canvasLocation" x="4877" y="1188"/>
         </scene>
         <!--Search Results Subview Controller-->
         <scene sceneID="w1x-Sw-7v2">
@@ -1435,6 +1435,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wlm-Wn-8RA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3556" y="359"/>
+        </scene>
+        <!--Search-->
+        <scene sceneID="joz-Uh-KPh">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="XNa-ih-GXk" customClass="MainNavigationController" customModule="FlavorFinder" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Search" image="SearchIcon" selectedImage="SearchClicked" id="cnd-Rl-Wb9"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cKH-n6-fdY">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="h2p-tb-f5C" kind="relationship" relationship="rootViewController" id="cnf-yY-XwD"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3ad-P7-PNE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="357" y="1246"/>
         </scene>
     </scenes>
     <resources>
