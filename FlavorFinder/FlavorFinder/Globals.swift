@@ -59,7 +59,7 @@ let UPVOTE_CELL_BTN_COLOR = UIColor(red: 185/255.0, green: 250/255.0, blue: 177/
 let ADD_CELL_BTN_COLOR = UIColor(red: 218/255.0, green: 239/255.0, blue: 247/255.0, alpha: CGFloat(1))
 
 // Fonts:
-let attributes = [NSFontAttributeName: UIFont.fontAwesomeOfSize(20)] as Dictionary!
+let attributes = [NSFontAttributeName: UIFont.fontAwesomeOfSize(15)] as Dictionary!
 
 // Filters:
 let F_KOSHER = "kosher"
