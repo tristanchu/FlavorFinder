@@ -43,12 +43,9 @@ class LandingPageController: ContainerParentViewController {
         super.viewDidAppear(animated)
         
         // Get navigation bar on top:
-        if let navi = self.tabBarController?.navigationController
-            as? MainNavigationController {
-                self.tabBarController?.navigationItem.setLeftBarButtonItems(
-                    [], animated: true)
-                self.tabBarController?.navigationItem.setRightBarButtonItems(
-                    [], animated: true)
+        if let navi = self.tabBarController?.navigationController as? MainNavigationController {
+                self.tabBarController?.navigationItem.setLeftBarButtonItems([], animated: true)
+                self.tabBarController?.navigationItem.setRightBarButtonItems([], animated: true)
                 navi.reset_navigationBar()
                 self.tabBarController?.navigationItem.title = searchTitle
         }

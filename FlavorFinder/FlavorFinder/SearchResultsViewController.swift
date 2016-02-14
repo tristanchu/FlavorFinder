@@ -84,6 +84,29 @@ class SearchResultsViewController : UIViewController {
         }
     }
     
+    /* clearSearch
+        - executed when clearSearchButton is clicked
+        - clears hotpot ingredients and goes back to landing page
+    */
+    func clearSearch() {
+        currentSearch.removeAll()
+        
+        if let parent = parentViewController as? ContainerViewController {
+            if let page = parent.parentViewController as? LandingPageController {
+                
+                if let navi = self.tabBarController?.navigationController as? MainNavigationController {
+                    self.tabBarController?.navigationItem.setLeftBarButtonItems([], animated: true)
+                    self.tabBarController?.navigationItem.setRightBarButtonItems([], animated: true)
+                    navi.reset_navigationBar()
+                    self.tabBarController?.navigationItem.title = ""
+                }
+                page.goToNewSearch()
+            }
+        } else {
+            print("ERROR: Landing page hierarchy broken for Search Results VC.")
+        }
+    }
+    
     /* goToNewSearch
         - subview controllers call this to indicate user attempted action
         that required login but was not logged in
