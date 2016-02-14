@@ -40,6 +40,7 @@ class SettingsPage : UIViewController {
             resetPasswordButton.hidden = true
             notLoggedInLabel.hidden = false
             passwordSentLabel.hidden = true
+            pagePromptLabel.hidden = true
         }
     }
 
@@ -74,11 +75,13 @@ class SettingsPage : UIViewController {
             resetPasswordButton.hidden = false
             notLoggedInLabel.hidden = true
             passwordSentLabel.hidden = true
+            pagePromptLabel.hidden = false
         } else {
            logoutButton.hidden = true
             resetPasswordButton.hidden = true
             notLoggedInLabel.hidden = false
             passwordSentLabel.hidden = true
+            pagePromptLabel.hidden = true
         }
     }
 
