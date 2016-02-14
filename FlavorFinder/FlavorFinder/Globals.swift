@@ -30,8 +30,7 @@ let CELLIDENTIFIER_MENU = "menuCell"
 let LIGHTGRAY_COLOR = UIColor(red: 230/255.0, green: 230/255.0, blue: 230/255.0, alpha: CGFloat(1))
 let MATCH_CELL_IMAGE_COLOR = UIColor.blackColor()
 
-//let NAVI_BUTTON_COLOR = UIColor(red: 165/255.0, green: 242/255.0, blue: 216/255.0, alpha: CGFloat(1))
-let NAVI_BUTTON_COLOR = UIColor(red: 131/255.0, green: 222/255.0, blue: 252/255.0, alpha: CGFloat(1))
+let NAVI_BUTTON_COLOR = UIColor(red: 51/255.0, green: 202/255.0, blue: 252/255.0, alpha: CGFloat(1))
 let NAVI_BUTTON_DARK_COLOR = UIColor(red: 135/255.0, green: 212/255.0, blue: 186/255.0, alpha: CGFloat(1))
 
 let MATCH_LOW_COLOR = UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: CGFloat(0.3))
