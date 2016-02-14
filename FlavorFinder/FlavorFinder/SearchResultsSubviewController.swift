@@ -59,7 +59,7 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         F_NUTS: false]
  
     let clearSearchBtn = UIBarButtonItem()
-
+    let addToListBtn = UIBarButtonItem()
     
     // MARK: Actions
     // SETUP FUNCTIONS
@@ -73,6 +73,12 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         clearSearchBtn.target = self
         clearSearchBtn.action = "clearSearchBtnClicked"
         
+        addToListBtn.setTitleTextAttributes(attributes, forState: .Normal)
+        addToListBtn.title = String.fontAwesomeIconWithName(.Plus) + " Add to List"
+        addToListBtn.tintColor = NAVI_BUTTON_COLOR
+        addToListBtn.target = self
+        addToListBtn.action = "addToListBtnClicked"
+        
         getSearchResults()
     }
     
@@ -82,7 +88,7 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         // Setup navigation bar
         if let navi = self.tabBarController?.navigationController as? MainNavigationController {
             self.tabBarController?.navigationItem.setLeftBarButtonItems([self.clearSearchBtn], animated: true)
-            self.tabBarController?.navigationItem.setRightBarButtonItems([], animated: true)
+            self.tabBarController?.navigationItem.setRightBarButtonItems([self.addToListBtn], animated: true)
             navi.reset_navigationBar()
             self.tabBarController?.navigationItem.title = "Search"
         }
@@ -129,6 +135,10 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         if let parent = parentViewController as! SearchResultsViewController? {
             parent.clearSearch()
         }
+    }
+    
+    func addToListBtnClicked() {
+        
     }
     
   // SEARCH RESULTS
