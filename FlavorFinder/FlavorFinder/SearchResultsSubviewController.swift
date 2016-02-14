@@ -58,29 +58,34 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         F_VEG: false,
         F_NUTS: false]
  
+    let clearSearchBtn = UIBarButtonItem()
+
+    
     // MARK: Actions
     // SETUP FUNCTIONS
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureTableView()
+        
+        clearSearchBtn.setTitleTextAttributes(attributes, forState: .Normal)
+        clearSearchBtn.title = String.fontAwesomeIconWithName(.ChevronLeft) + " New Search"
+        clearSearchBtn.tintColor = NAVI_BUTTON_COLOR
+        clearSearchBtn.target = self
+        clearSearchBtn.action = "clearSearchBtnClicked"
+        
         getSearchResults()
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-//        // Get navigation bar on top:
-//        if let navi = self.tabBarController?.navigationController
-//            as? MainNavigationController {
-//                self.tabBarController?.navigationItem.setLeftBarButtonItems(
-//                    [], animated: true)
-//                self.tabBarController?.navigationItem.setRightBarButtonItems(
-//                    [], animated: true)
-//                navi.reset_navigationBar()
-//                self.tabBarController?.navigationItem.title = searchTitle
-//        }
-        
-        self.tabBarController?.navigationItem.title = "Search"
+        // Setup navigation bar
+        if let navi = self.tabBarController?.navigationController as? MainNavigationController {
+            self.tabBarController?.navigationItem.setLeftBarButtonItems([self.clearSearchBtn], animated: true)
+            self.tabBarController?.navigationItem.setRightBarButtonItems([], animated: true)
+            navi.reset_navigationBar()
+            self.tabBarController?.navigationItem.title = "Search"
+        }
     }
     
     func configureTableView() {
@@ -116,6 +121,14 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
             text = MATCHES_NOT_FOUND_TEXT
         }
         return NSAttributedString(string: text, attributes: attributes)
+    }
+    
+    
+    func clearSearchBtnClicked() {
+        // Let parent know that search has been cleared
+        if let parent = parentViewController as! SearchResultsViewController? {
+            parent.clearSearch()
+        }
     }
     
   // SEARCH RESULTS
