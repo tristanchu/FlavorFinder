@@ -66,6 +66,23 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         getSearchResults()
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+//        // Get navigation bar on top:
+//        if let navi = self.tabBarController?.navigationController
+//            as? MainNavigationController {
+//                self.tabBarController?.navigationItem.setLeftBarButtonItems(
+//                    [], animated: true)
+//                self.tabBarController?.navigationItem.setRightBarButtonItems(
+//                    [], animated: true)
+//                navi.reset_navigationBar()
+//                self.tabBarController?.navigationItem.title = searchTitle
+//        }
+        
+        self.tabBarController?.navigationItem.title = "Search"
+    }
+    
     func configureTableView() {
         tableView.delegate = self
         tableView.dataSource = self
