@@ -92,6 +92,13 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
             navi.reset_navigationBar()
             self.tabBarController?.navigationItem.title = "Search"
         }
+        
+        // disable/enable add to list button if user:
+        if currentUser != nil {
+            self.addToListBtn.enabled = true
+        } else {
+            self.addToListBtn.enabled = false
+        }
     }
     
     func configureTableView() {
@@ -137,7 +144,7 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         }
         return NSAttributedString(string: text, attributes: attributes)
     }
-    
+
     /* clearSearchBtnClicked:
     - lets parent know that the user has cleared the search
     */
@@ -147,7 +154,11 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         }
     }
     
+    /* addToListBtnClicked
+        - presents modal view to then select a list
+    */
     func addToListBtnClicked() {
+        print("add to list button clicked")
         
     }
     
