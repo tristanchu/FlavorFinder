@@ -32,7 +32,7 @@ class FavoritesPageController: UITableViewController {
     // Nav bar related:
     var addBtn: UIBarButtonItem = UIBarButtonItem()
     let addBtnAction : Selector = "addBtnClicked"
-    let addBtnString = String.fontAwesomeIconWithName(.Plus) + "Add"
+    let addBtnString = String.fontAwesomeIconWithName(.Plus) + " Add"
     
     // Segues:
     let segueToAddFav = "segueFavsToAddFav"
