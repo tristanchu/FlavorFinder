@@ -204,7 +204,6 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         
         if !(matches.isEmpty) {
             let match = matches[indexPath.row].ingredient
-            let matchRank = matches[indexPath.row].rank // not in use for now
             var matchesPerLevel = Int(matches.count / MATCH_COLORS.count)
             if matchesPerLevel == 0 { // no dividing by zero, please
                 matchesPerLevel = 1
@@ -399,24 +398,7 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         return [upvoteBtn, downvoteBtn, favBtn, addBtn]
     }
         
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-            
-    }
-    
-//    func filterGlobalSearchResults(searchText: String) {
-//        globalSearchResults.removeAll()
-//        
-//        if searchText.isEmpty {
-//            globalSearchResults = []
-//        } else {
-//            for ingredient in _allIngredients {
-//                if (ingredient[_s_name] as! String).rangeOfString(searchText.lowercaseString) != nil {
-//                    globalSearchResults.append(ingredient)
-//                }
-//            }
-//        }
-//        searchResultsTableView.reloadData()
-//    }
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {}
         
     func filterResults(searchText: String) {
         matches.removeAll()
