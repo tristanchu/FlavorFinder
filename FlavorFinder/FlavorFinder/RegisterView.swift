@@ -58,6 +58,7 @@ class RegisterView : UIViewController, UITextFieldDelegate {
                 username: usernameSignUpField.text!,
                 password: pwSignUpField.text!,
                 pwRetyped: retypePwSignUpField.text!)
+            // request new user calls on success
         }
     }
 
@@ -104,7 +105,6 @@ class RegisterView : UIViewController, UITextFieldDelegate {
             newUser.username = username
             newUser.email = email
             newUser.password = password
-            setDefaultProfilePicture(newUser)
             newUser.signUpInBackgroundWithBlock { (succeeded, error) -> Void in
                 if error == nil {
                     if succeeded {
@@ -152,8 +152,8 @@ class RegisterView : UIViewController, UITextFieldDelegate {
     */
     func registerSuccess(user: PFUser) {
         setUserSession(user)
-        let username = user.username
-        print("Successfully added new user \(username!)")
+        // hide container on success:
+        self.parentViewController?.view.hidden = true
     }
 
     /* handleError
