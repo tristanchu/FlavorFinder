@@ -426,11 +426,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FlavorFinder/Database.swift"
-            timestampString = "476998797.382366"
+            timestampString = "477256581.506214"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "240"
-            endingLineNumber = "240"
+            startingLineNumber = "251"
+            endingLineNumber = "251"
             landmarkName = "unvoteHotpot(_:hotpot:matchIngredient:voteType:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -458,11 +458,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FlavorFinder/Database.swift"
-            timestampString = "476998797.382366"
+            timestampString = "477256581.506214"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "334"
-            endingLineNumber = "334"
+            startingLineNumber = "345"
+            endingLineNumber = "345"
             landmarkName = "getUserVotesFromCloud(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -474,11 +474,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FlavorFinder/SearchResultsViewController.swift"
-            timestampString = "477168283.958214"
+            timestampString = "477257615.55305"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "126"
-            endingLineNumber = "126"
+            startingLineNumber = "130"
+            endingLineNumber = "130"
             landmarkName = "filterButtonWasToggled(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -495,8 +495,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "211"
             endingLineNumber = "211"
-            landmarkName = "didReceiveMemoryWarning()"
-            landmarkType = "5">
+            landmarkName = "SearchResultsSubviewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -602,11 +602,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FlavorFinder/Database.swift"
-            timestampString = "476998797.382366"
+            timestampString = "477256581.506214"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "289"
-            endingLineNumber = "289"
+            startingLineNumber = "300"
+            endingLineNumber = "300"
             landmarkName = "getHotpotVoteType(_:hotpot:matchIngredient:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -623,7 +623,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "294"
             endingLineNumber = "294"
-            landmarkName = "swipeTableCell(_:tappedButtonAtIndex:direction:fromExpansion:)"
+            landmarkName = "swipeTableCell(_:canSwipe:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -639,8 +639,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "295"
             endingLineNumber = "295"
-            landmarkName = "swipeTableCell(_:tappedButtonAtIndex:direction:fromExpansion:)"
-            landmarkType = "5">
+            landmarkName = "SearchResultsSubviewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -650,11 +650,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FlavorFinder/Database.swift"
-            timestampString = "476998797.382366"
+            timestampString = "477256581.506214"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "278"
-            endingLineNumber = "278"
+            startingLineNumber = "289"
+            endingLineNumber = "289"
             landmarkName = "getHotpotVoteType(_:hotpot:matchIngredient:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -666,11 +666,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FlavorFinder/Database.swift"
-            timestampString = "476998842.935415"
+            timestampString = "477256581.506214"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "279"
-            endingLineNumber = "279"
+            startingLineNumber = "290"
+            endingLineNumber = "290"
             landmarkName = "getHotpotVoteType(_:hotpot:matchIngredient:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -703,7 +703,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "404"
             endingLineNumber = "404"
-            landmarkName = "swipeTableCell(_:swipeButtonsForDirection:swipeSettings:expansionSettings:)"
+            landmarkName = "makeCellButton(_:backgroundColor:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
