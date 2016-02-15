@@ -229,7 +229,10 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return matches.count
     }
-        
+    
+    /* tableView:
+    - formats appearance and assigns properties for a given cell
+    */
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellIdentifier = CELLIDENTIFIER_MATCH
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! MatchTableViewCell
@@ -352,11 +355,17 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
                     if let _ = isFavoriteIngredient(user, ingredient: matchIngredient) {
                         unfavoriteIngredient(user, ingredient: matchIngredient)
                         selBtn.deselect()
+//                        getNewSearchResults()   // unpin fav
+                        // note: unfavoriteIngredient is a slow-enough operation that
+                        // cell would still look like "fav" if you simply reload table data,
+                        // but getNewSearchResults (which pins) works but is too slow for
+                        // effective feedback
+                        cell.backgroundColor = MATCH_COLORS[0] // default color, instead of fav color
                     } else {
                         favoriteIngredient(user, ingredient: matchIngredient)
                         selBtn.select()
+                        tableView.reloadData()  // changes cell appearance to "fav cell" look
                     }
-                    tableView.reloadData()
                     return false
                 } else {
                     if let parent = parentViewController as? SearchResultsViewController {
