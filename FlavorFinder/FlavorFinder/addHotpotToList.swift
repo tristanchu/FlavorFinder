@@ -21,8 +21,13 @@ class AddHotpotToListController: UITableViewController {
     let userColumnName = "user"
     let ListTitleColumnName = "title"
 
+    // Table itself:
     @IBOutlet var addToListTableView: UITableView!
 
+    // Navigation:
+    var backBtn: UIBarButtonItem = UIBarButtonItem()
+    let backBtnAction = "backBtnClicked:"
+    let backBtnString = String.fontAwesomeIconWithName(.ChevronLeft) + " Cancel"
 
     // MARK: Override methods: ----------------------------------------------
     /* viewDidLoad:
@@ -37,8 +42,11 @@ class AddHotpotToListController: UITableViewController {
 
         // Table view visuals:
         // remove empty cells
-        //        addToListTableView.tableFooterView = UIView(frame: CGRectZero)
+        addToListTableView.tableFooterView = UIView(frame: CGRectZero)
         addToListTableView.rowHeight = UNIFORM_ROW_HEIGHT
+
+        // Set up back button
+        setUpBackButton()
     }
 
     /* viewDidAppear:
@@ -50,12 +58,13 @@ class AddHotpotToListController: UITableViewController {
         // Get navigation bar on top:
         if let navi = self.tabBarController?.navigationController
             as? MainNavigationController {
+                navi.reset_navigationBar();
                 self.tabBarController?.navigationItem.setLeftBarButtonItems(
-                    [], animated: true)
+                    [self.backBtn], animated: true)
                 self.tabBarController?.navigationItem.setRightBarButtonItems(
                     [], animated: true)
-                navi.reset_navigationBar();
                 self.tabBarController?.navigationItem.title = "Choose a list";
+                self.backBtn.enabled = true
         }
 
         // Populate and display table:
@@ -92,12 +101,23 @@ class AddHotpotToListController: UITableViewController {
             return cell
     }
 
-    /* tableView -> Perform segue on select
-    - segues to detail of row when selected
+    /* tableView -> Add current search to selected list
     */
     override func tableView(tableView: UITableView,
         didSelectRowAtIndexPath indexPath: NSIndexPath) {
-            print("Clicked on cell")
+            let listObject = userLists[indexPath.row]
+            var list = listObject.objectForKey(ingredientsColumnName) as! [PFIngredient]
+            // add each ingredient in current search:
+            for ingredient in currentSearch{
+                if !list.contains(ingredient) {
+                    list.append(ingredient)
+                }
+            }
+            // update with new ingredient list:
+            listObject.setObject(list, forKey: ingredientsColumnName)
+            listObject.saveInBackground()
+        // go back to search page:
+        self.navigationController?.popViewControllerAnimated(true)
     }
 
     // MARK: Functions -------------------------------------------------
@@ -113,6 +133,26 @@ class AddHotpotToListController: UITableViewController {
         if let user = currentUser {
             userLists = getUserListsFromLocal(user)
         }
+    }
+
+    // MARK: Back Button Functions -------------------------------------
+
+    /* setUpBackButton
+    sets up the back button visuals for navigation
+    */
+    func setUpBackButton() {
+        backBtn.setTitleTextAttributes(attributes, forState: .Normal)
+        backBtn.title = self.backBtnString
+        backBtn.tintColor = NAVI_BUTTON_COLOR
+        backBtn.target = self
+        backBtn.action = "backBtnClicked"  // refers to: backBtnClicked()
+    }
+
+    /* backBtnClicked
+    - action for back button
+    */
+    func backBtnClicked() {
+        self.navigationController?.popViewControllerAnimated(true)
     }
 
 }
