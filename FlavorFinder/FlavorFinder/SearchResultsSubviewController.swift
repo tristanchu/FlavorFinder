@@ -58,6 +58,10 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         F_VEG: false,
         F_NUTS: false]
  
+    // Segues:
+    let segueToAddHotpotToList = "segueToAddHotpotToList"
+
+    // Buttons:
     let clearSearchBtn = UIBarButtonItem()
     let addToListBtn = UIBarButtonItem()
     
@@ -159,7 +163,7 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
     */
     func addToListBtnClicked() {
         print("add to list button clicked")
-        
+        self.performSegueWithIdentifier(segueToAddHotpotToList, sender: self)
     }
     
   // SEARCH RESULTS
