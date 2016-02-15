@@ -12,8 +12,7 @@ import Parse
 
 class SettingsPage : UIViewController {
     
-  
-    // MARK: Properties:
+    // MARK: Properties: --------------------------------------------------
     // Labels:
     @IBOutlet weak var pagePromptLabel: UILabel!
     @IBOutlet weak var passwordSentLabel: UILabel!
@@ -23,6 +22,9 @@ class SettingsPage : UIViewController {
     // Text:
     let pageTitle = "Settings"
     let loggedOutText = "You must be logged in to have settings."
+    
+    // Placement:
+    let loggedOutPlacementHeightMultiplier : CGFloat = 0.25
 
     // Buttons:
     @IBOutlet weak var resetPasswordButton: UIButton!
@@ -69,7 +71,7 @@ class SettingsPage : UIViewController {
         }
         loggedOutMessage = emptyBackgroundText(loggedOutText, view: self.view)
         // move message up to make room
-        loggedOutMessage?.frame.size.height = self.view.frame.size.height * 0.25
+        loggedOutMessage?.frame.size.height = self.view.frame.size.height * loggedOutPlacementHeightMultiplier
         self.view.addSubview(loggedOutMessage!)
 
         if currentUser != nil {
@@ -79,8 +81,9 @@ class SettingsPage : UIViewController {
         }
     }
     
-    // MARK: Other functions
+    // MARK: Other functions -------------------------------------------------
     /* displayLoggedIn
+    - hides or unhides subviews for the logged-in display
     */
     func displayLoggedIn() {
         // Logged-in UI
@@ -94,6 +97,7 @@ class SettingsPage : UIViewController {
     }
     
     /* displayLoggedOut
+    - hides or unhides subviews for the logged-out display
     */
     func displayLoggedOut() {
         // Logged-in UI
