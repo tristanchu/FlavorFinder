@@ -74,6 +74,7 @@ class SearchResultsViewController : UIViewController {
         if currentSearch.isEmpty {
             if let parent = parentViewController as? ContainerViewController {
                 if let page = parent.parentViewController as? LandingPageController {
+                    resetNavBar()
                     page.goToNewSearch()
                 }
             } else {
@@ -93,17 +94,24 @@ class SearchResultsViewController : UIViewController {
         
         if let parent = parentViewController as? ContainerViewController {
             if let page = parent.parentViewController as? LandingPageController {
-                
-                if let navi = self.tabBarController?.navigationController as? MainNavigationController {
-                    self.tabBarController?.navigationItem.setLeftBarButtonItems([], animated: true)
-                    self.tabBarController?.navigationItem.setRightBarButtonItems([], animated: true)
-                    navi.reset_navigationBar()
-                    self.tabBarController?.navigationItem.title = ""
-                }
+                resetNavBar()
                 page.goToNewSearch()
             }
         } else {
             print("ERROR: Landing page hierarchy broken for Search Results VC.")
+        }
+    }
+    
+    /* clearSearch
+    - executed in hotpotIngredientWasRemoved() and clearSearch()
+    - resets navbar to have no title nor buttons
+    */
+    func resetNavBar() {
+        if let navi = self.tabBarController?.navigationController as? MainNavigationController {
+            self.tabBarController?.navigationItem.setLeftBarButtonItems([], animated: true)
+            self.tabBarController?.navigationItem.setRightBarButtonItems([], animated: true)
+            navi.reset_navigationBar()
+            self.tabBarController?.navigationItem.title = ""
         }
     }
     

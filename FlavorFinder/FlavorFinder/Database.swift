@@ -188,6 +188,17 @@ func getMatchForTwoIngredients(firstIngredient: PFObject, secondIngredient: PFOb
     return match
 }
 
+func addIngredient() {
+    
+}
+
+func addMatch() {
+    
+}
+
+
+
+
 
 
 func upvoteHotpot(user: PFUser, hotpot: [PFObject], matchIngredient: PFIngredient) {
