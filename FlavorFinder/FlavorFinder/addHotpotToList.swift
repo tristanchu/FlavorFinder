@@ -13,6 +13,7 @@ class AddHotpotToListController: UITableViewController {
 
     // MARK: Properties:
     let listCellIdentifier = "listAddCellIdentifier"
+    let createListCellIdentitfier = "createListCellIdentifier"
     var userLists = [PFObject]()
 
     // Parse related:
@@ -23,6 +24,11 @@ class AddHotpotToListController: UITableViewController {
 
     // Table itself:
     @IBOutlet var addToListTableView: UITableView!
+    
+    // Strings:
+    let newListCellTitle = "Create new list with ingredients"
+    let pageTitle = "Add To List"
+    let newListTitle = "New Untitled List"
 
     // Navigation:
     var backBtn: UIBarButtonItem = UIBarButtonItem()
@@ -39,6 +45,7 @@ class AddHotpotToListController: UITableViewController {
         // Connect table view to  this controller:
         addToListTableView.delegate = self
         addToListTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: listCellIdentifier)
+        addToListTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: createListCellIdentitfier)
 
         // Table view visuals:
         // remove empty cells
@@ -63,7 +70,7 @@ class AddHotpotToListController: UITableViewController {
                     [self.backBtn], animated: true)
                 self.tabBarController?.navigationItem.setRightBarButtonItems(
                     [], animated: true)
-                self.tabBarController?.navigationItem.title = "Choose a list";
+                self.tabBarController?.navigationItem.title = pageTitle;
                 self.backBtn.enabled = true
         }
 
@@ -87,35 +94,57 @@ class AddHotpotToListController: UITableViewController {
     */
     override func tableView(tableView: UITableView,
         cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+            // create new at first cell:
 
-            // set cell identifier:
-            let cell = tableView.dequeueReusableCellWithIdentifier(
-                listCellIdentifier, forIndexPath: indexPath)
+            if (indexPath.row == 0){
+                // set cell identifier:
+                let cell = tableView.dequeueReusableCellWithIdentifier(createListCellIdentitfier, forIndexPath: indexPath)
+                // set Cell label:
+                cell.textLabel?.text = newListCellTitle
+                // Give cell a chevron:
+                cell.accessoryType =
+                    UITableViewCellAccessoryType.DisclosureIndicator
+                return cell
 
-            // Set cell label:
-            cell.textLabel?.text = userLists[indexPath.row].objectForKey(
-                ListTitleColumnName) as? String
+            // User lists at other cells:
+            } else {
+                // set cell identifier:
+                let cell = tableView.dequeueReusableCellWithIdentifier(
+                    listCellIdentifier, forIndexPath: indexPath)
 
-            // Give cell a chevron:
-            cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
-            return cell
+                // Set cell label:
+                cell.textLabel?.text = userLists[indexPath.row - 1].objectForKey(
+                    ListTitleColumnName) as? String
+                return cell
+            }
     }
 
     /* tableView -> Add current search to selected list
+        - adds either to existing list or creates new list with current search:
     */
     override func tableView(tableView: UITableView,
         didSelectRowAtIndexPath indexPath: NSIndexPath) {
-            let listObject = userLists[indexPath.row]
-            var list = listObject.objectForKey(ingredientsColumnName) as! [PFIngredient]
-            // add each ingredient in current search:
-            for ingredient in currentSearch{
-                if !list.contains(ingredient) {
-                    list.append(ingredient)
+            // Create new list:
+            if (indexPath.row == 0){
+                var list = [PFIngredient]()
+                for ingredient in currentSearch{ list.append(ingredient) }
+                createIngredientList(currentUser!,
+                    title: newListTitle, ingredients: list)
+
+            // Picked an existing list:
+            } else {
+                let listObject = userLists[indexPath.row - 1]
+                var list = listObject.objectForKey(ingredientsColumnName) as! [PFIngredient]
+                // add each ingredient in current search:
+                for ingredient in currentSearch{
+                    if !list.contains(ingredient) {
+                        list.append(ingredient)
+                    }
                 }
+                // update with new ingredient list:
+                listObject.setObject(list, forKey: ingredientsColumnName)
+                listObject.saveInBackground()
             }
-            // update with new ingredient list:
-            listObject.setObject(list, forKey: ingredientsColumnName)
-            listObject.saveInBackground()
         // go back to search page:
         self.navigationController?.popViewControllerAnimated(true)
     }
