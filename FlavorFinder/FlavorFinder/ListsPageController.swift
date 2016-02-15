@@ -90,11 +90,11 @@ class ListsPageController: UITableViewController {
         
         // Do not display lists if no user:
         if currentUser == nil {
-            listsTableView.backgroundView = emptyBackgroundListText(noUserMsg);
+            listsTableView.backgroundView = emptyBackgroundText(noUserMsg, view: listsTableView as UIView);
 
         // Yes user - no data; display message:
         } else if userLists.isEmpty {
-            listsTableView.backgroundView = emptyBackgroundListText(noListsMsg);
+            listsTableView.backgroundView = emptyBackgroundText(noListsMsg, view: listsTableView as UIView);
         }
 
         // Update table view:
@@ -154,7 +154,7 @@ class ListsPageController: UITableViewController {
                 // Show empty message if needed:
                 if self.userLists.isEmpty {
                     listsTableView.backgroundView =
-                        emptyBackgroundListText(noListsMsg);
+                        emptyBackgroundText(noListsMsg, view: listsTableView);
                 }
             }
     }
@@ -204,21 +204,6 @@ class ListsPageController: UITableViewController {
         if let user = currentUser {
             userLists = getUserListsFromLocal(user)
         }
-    }
-
-    /* emptyBackgroundListText
-        creates a backgroundView for when there is no data to display.
-    text = text to display.
-    */
-    func emptyBackgroundListText(text: String) -> UILabel {
-        let noDataLabel: UILabel = UILabel(frame: CGRectMake(
-            0, 0, listsTableView.bounds.size.width,
-            listsTableView.bounds.size.height))
-        noDataLabel.text = text
-        noDataLabel.textColor = UIColor(
-            red: 22.0/255.0, green: 106.0/255.0, blue: 176.0/255.0, alpha: 1.0);
-        noDataLabel.textAlignment = NSTextAlignment.Center;
-        return noDataLabel;
     }
 
     // MARK: Add New List Button Functions ----------------------------

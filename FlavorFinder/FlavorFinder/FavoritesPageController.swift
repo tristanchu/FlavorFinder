@@ -26,8 +26,6 @@ class FavoritesPageController: UITableViewController {
     let noFavoritesMsg =
         "Favorite ingredients in Search!"
     let favoritesTitle = "Favorites"
-    let EMPTY_SET_TEXT_COLOR = UIColor(
-        red: 22.0/255.0, green: 106.0/255.0, blue: 176.0/255.0, alpha: 1.0)
     
     // Nav bar related:
     var addBtn: UIBarButtonItem = UIBarButtonItem()
@@ -94,11 +92,11 @@ class FavoritesPageController: UITableViewController {
             // if user not logged in, needs to log in to store favs:
             if currentUser == nil {
                 self.tableView.backgroundView =
-                    emptyBackgroundTextFavorites(noUserMsg)
+                    emptyBackgroundText(noUserMsg, view: self.tableView as UIView)
             // if user logged in, tell them how to have favs:
             } else {
                 self.tableView.backgroundView =
-                    emptyBackgroundTextFavorites(noFavoritesMsg)
+                    emptyBackgroundText(noFavoritesMsg, view: self.tableView as UIView)
             }
         }
 
@@ -146,7 +144,7 @@ class FavoritesPageController: UITableViewController {
             // Show empty message if needed:
             if self.favoriteCells.isEmpty {
                 self.tableView.backgroundView =
-                    emptyBackgroundTextFavorites(noFavoritesMsg);
+                    emptyBackgroundText(noFavoritesMsg, view: self.tableView);
             }
         }
     }
@@ -170,20 +168,6 @@ class FavoritesPageController: UITableViewController {
                 }
             }
         }
-    }
-
-    /* emptyBackgroundText
-        creates a backgroundView for when there is no data to display.
-        text = text to display.
-    */
-    func emptyBackgroundTextFavorites(text: String) -> UILabel {
-        let noDataLabel: UILabel = UILabel(frame: CGRectMake(
-            0, 0, self.tableView.bounds.size.width,
-            self.tableView.bounds.size.height))
-        noDataLabel.text = text
-        noDataLabel.textColor = EMPTY_SET_TEXT_COLOR
-        noDataLabel.textAlignment = NSTextAlignment.Center
-        return noDataLabel
     }
     
     /* setUpAddButton

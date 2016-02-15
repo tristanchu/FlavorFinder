@@ -97,8 +97,8 @@ class ListDetailController: UITableViewController {
         
         // If no data, display message:
         if ingredientList.isEmpty {
-            ingredientListsTableView.backgroundView = createBackgroundWithText(
-                self.listTitle + self.noIngredients)
+            ingredientListsTableView.backgroundView = emptyBackgroundText(
+                self.listTitle + self.noIngredients, view: ingredientListsTableView as UIView)
         }
 
         // Update table view:
@@ -144,8 +144,8 @@ class ListDetailController: UITableViewController {
 
                 // Show empty message if needed:
                 if self.ingredientList.isEmpty {
-                    ingredientListsTableView.backgroundView = createBackgroundWithText(
-                        self.listTitle + self.noIngredients)
+                    ingredientListsTableView.backgroundView = emptyBackgroundText(
+                        self.listTitle + self.noIngredients, view: ingredientListsTableView as UIView)
                 }
             }
     }

@@ -17,8 +17,10 @@ class SettingsPage : UIViewController {
     // Labels:
     @IBOutlet weak var pagePromptLabel: UILabel!
     @IBOutlet weak var passwordSentLabel: UILabel!
-    @IBOutlet weak var notLoggedInLabel: UILabel!
+    
+    // Text:
     let pageTitle = "Settings"
+    let loggedOutText = "You must be logged in to have settings."
 
     // Buttons:
     @IBOutlet weak var resetPasswordButton: UIButton!
@@ -38,7 +40,6 @@ class SettingsPage : UIViewController {
             // Change view to no user view:
             logoutButton.hidden = true
             resetPasswordButton.hidden = true
-            notLoggedInLabel.hidden = false
             passwordSentLabel.hidden = true
             pagePromptLabel.hidden = true
         }
@@ -73,15 +74,14 @@ class SettingsPage : UIViewController {
         if currentUser != nil {
             logoutButton.hidden = false
             resetPasswordButton.hidden = false
-            notLoggedInLabel.hidden = true
             passwordSentLabel.hidden = true
             pagePromptLabel.hidden = false
         } else {
-           logoutButton.hidden = true
+            logoutButton.hidden = true
             resetPasswordButton.hidden = true
-            notLoggedInLabel.hidden = false
             passwordSentLabel.hidden = true
             pagePromptLabel.hidden = true
+            self.view.addSubview(emptyBackgroundText(loggedOutText, view: self.view))
         }
     }
 
