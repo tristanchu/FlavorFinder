@@ -95,7 +95,6 @@ class MainNavigationController: UINavigationController {
 //    }
     
     func configure_menuTableView() {
-        menuTableViewController.navi = self
         menuTableView = menuTableViewController.tableView
         let y_offset = UIApplication.sharedApplication().statusBarFrame.size.height + self.navigationBar.frame.height
         menuTableView.frame = CGRectMake(0, y_offset, self.view.frame.width, 200);

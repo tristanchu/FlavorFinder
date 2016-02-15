@@ -64,6 +64,7 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
     // Buttons:
     let clearSearchBtn = UIBarButtonItem()
     let addToListBtn = UIBarButtonItem()
+    let optionsBtn = UIBarButtonItem()
     
     // MARK: Actions
     // SETUP FUNCTIONS
@@ -82,6 +83,12 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         addToListBtn.tintColor = NAVI_BUTTON_COLOR
         addToListBtn.target = self
         addToListBtn.action = "addToListBtnClicked"
+        
+        optionsBtn.setTitleTextAttributes(attributes, forState: .Normal)
+        optionsBtn.title = String.fontAwesomeIconWithName(.Bars)
+        optionsBtn.tintColor = NAVI_BUTTON_COLOR
+        optionsBtn.target = self
+        optionsBtn.action = "addToListBtnClicked"
         
         getSearchResults()
     }
