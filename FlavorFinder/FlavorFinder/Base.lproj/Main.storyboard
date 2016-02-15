@@ -1218,12 +1218,6 @@
                                     <action selector="logoutBtn:" destination="sBa-Qh-DWZ" eventType="touchUpInside" id="Rt8-U2-vab"/>
                                 </connections>
                             </button>
-                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fn3-NR-QeB">
-                                <rect key="frame" x="180" y="301" width="240" height="128"/>
-                                <connections>
-                                    <segue destination="k7p-ZO-EFR" kind="embed" id="sqy-ua-tM7"/>
-                                </connections>
-                            </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -1408,7 +1402,7 @@
             <objects>
                 <viewController id="k7p-ZO-EFR" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TTg-7G-qt1">
-                        <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
