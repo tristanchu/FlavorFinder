@@ -17,6 +17,7 @@ class SettingsPage : UIViewController {
     // Labels:
     @IBOutlet weak var pagePromptLabel: UILabel!
     @IBOutlet weak var passwordSentLabel: UILabel!
+    @IBOutlet weak var containerView: UIView!
     var loggedOutMessage : UILabel?
     
     // Text:
@@ -67,6 +68,8 @@ class SettingsPage : UIViewController {
             loggedOutMessage?.removeFromSuperview()
         }
         loggedOutMessage = emptyBackgroundText(loggedOutText, view: self.view)
+        // move message up to make room
+        loggedOutMessage?.frame.size.height = self.view.frame.size.height * 0.25
         self.view.addSubview(loggedOutMessage!)
 
         if currentUser != nil {
@@ -88,7 +91,6 @@ class SettingsPage : UIViewController {
         
         // Logged-out UI
         self.loggedOutMessage?.hidden = true
-        print(self.loggedOutMessage?.hidden)
     }
     
     /* displayLoggedOut
