@@ -101,12 +101,23 @@ class AddHotpotToListController: UITableViewController {
             return cell
     }
 
-    /* tableView -> Perform segue on select
-    - segues to detail of row when selected
+    /* tableView -> Add current search to selected list
     */
     override func tableView(tableView: UITableView,
         didSelectRowAtIndexPath indexPath: NSIndexPath) {
-            print("Clicked on cell")
+            let listObject = userLists[indexPath.row]
+            var list = listObject.objectForKey(ingredientsColumnName) as! [PFIngredient]
+            // add each ingredient in current search:
+            for ingredient in currentSearch{
+                if !list.contains(ingredient) {
+                    list.append(ingredient)
+                }
+            }
+            // update with new ingredient list:
+            listObject.setObject(list, forKey: ingredientsColumnName)
+            listObject.saveInBackground()
+        // go back to search page:
+        self.navigationController?.popViewControllerAnimated(true)
     }
 
     // MARK: Functions -------------------------------------------------
