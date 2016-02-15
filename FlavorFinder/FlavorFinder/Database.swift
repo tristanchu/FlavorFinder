@@ -188,14 +188,25 @@ func getMatchForTwoIngredients(firstIngredient: PFObject, secondIngredient: PFOb
     return match
 }
 
-func addIngredient() {
-    
+func addIngredient(name: String) {
+    let ingredient = PFIngredient(name: name)
+    ingredient.pinInBackground()
+    ingredient.saveInBackground()
 }
 
-func addMatch() {
+func addMatch(user: PFUser, firstIngredient: PFIngredient, secondIngredient: PFIngredient) {
+    let firstMatch = PFMatch(firstIngredient: firstIngredient, secondIngredient: secondIngredient)
+    firstMatch.upvotes = 1
+    firstMatch.pinInBackground()
+    firstMatch.saveInBackground()
+    _voteMatch(user, match: firstMatch, voteType: _s_upvotes)
     
+    let secondMatch = PFMatch(firstIngredient: secondIngredient, secondIngredient: firstIngredient)
+    secondMatch.upvotes = 1
+    secondMatch.pinInBackground()
+    secondMatch.saveInBackground()
+    _voteMatch(user, match: secondMatch, voteType: _s_upvotes)
 }
-
 
 
 
