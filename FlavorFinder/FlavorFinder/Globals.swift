@@ -57,6 +57,10 @@ let DOWNVOTE_CELL_BTN_COLOR = UIColor(red: 252/255.0, green: 200/255.0, blue: 18
 let UPVOTE_CELL_BTN_COLOR = UIColor(red: 185/255.0, green: 250/255.0, blue: 177/255.0, alpha: CGFloat(1))
 let ADD_CELL_BTN_COLOR = UIColor(red: 218/255.0, green: 239/255.0, blue: 247/255.0, alpha: CGFloat(1))
 
+let EMPTY_SET_TEXT_COLOR = UIColor(
+    red: 22.0/255.0, green: 106.0/255.0, blue: 176.0/255.0, alpha: 1.0)
+
+
 // Fonts:
 let attributes = [NSFontAttributeName: UIFont.fontAwesomeOfSize(15)] as Dictionary!
 

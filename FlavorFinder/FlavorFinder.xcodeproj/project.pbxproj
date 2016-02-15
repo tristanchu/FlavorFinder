@@ -13,7 +13,7 @@
 		602B7CBF1C5FC4D80068D847 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602B7CBE1C5FC4D80068D847 /* RegisterView.swift */; };
 		60322EA31BD9CE150099030B /* _LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60322EA21BD9CE150099030B /* _LoginViewController.swift */; };
 		603E4D841C67C28B00F3D554 /* EditListPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 603E4D831C67C28B00F3D554 /* EditListPage.swift */; };
-		6056F0B81C6C26D0002B0D29 /* SettingsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6056F0B71C6C26D0002B0D29 /* SettingsPage.swift */; settings = {ASSET_TAGS = (); }; };
+		6056F0B81C6C26D0002B0D29 /* SettingsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6056F0B71C6C26D0002B0D29 /* SettingsPage.swift */; };
 		6062FDC11C5F3386009B2EEB /* LoginViewPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6062FDC01C5F3386009B2EEB /* LoginViewPage.swift */; };
 		609432671C42DCA800BA0577 /* FavoritesPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609432661C42DCA800BA0577 /* FavoritesPageController.swift */; };
 		609432691C42DD6500BA0577 /* ListsPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609432681C42DD6500BA0577 /* ListsPageController.swift */; };
@@ -61,6 +61,7 @@
 		B6098CE41BF7F3B8001EDCE6 /* _SavedMatchesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6098CE31BF7F3B8001EDCE6 /* _SavedMatchesViewController.swift */; };
 		B61AD2C51C5BFB9C00081BF4 /* SearchResultsSubviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61AD2C41C5BFB9C00081BF4 /* SearchResultsSubviewController.swift */; };
 		B61FEBCE1C4430D30028F800 /* EmptySegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61FEBCD1C4430D30028F800 /* EmptySegue.swift */; };
+		B63F60211C725C0C0057D726 /* TextUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63F60201C725C0C0057D726 /* TextUtils.swift */; };
 		B65BA8B11BF907750045CB5E /* SavedMatchesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65BA8B01BF907750045CB5E /* SavedMatchesCell.swift */; };
 		B6739A141C59971B0004F982 /* ContainerParentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6739A131C59971B0004F982 /* ContainerParentViewController.swift */; };
 		B6739A161C59973A0004F982 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6739A151C59973A0004F982 /* ContainerViewController.swift */; };
@@ -148,6 +149,7 @@
 		B6098CE31BF7F3B8001EDCE6 /* _SavedMatchesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _SavedMatchesViewController.swift; sourceTree = "<group>"; };
 		B61AD2C41C5BFB9C00081BF4 /* SearchResultsSubviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsSubviewController.swift; sourceTree = "<group>"; };
 		B61FEBCD1C4430D30028F800 /* EmptySegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptySegue.swift; sourceTree = "<group>"; };
+		B63F60201C725C0C0057D726 /* TextUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextUtils.swift; sourceTree = "<group>"; };
 		B65BA8B01BF907750045CB5E /* SavedMatchesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedMatchesCell.swift; sourceTree = "<group>"; };
 		B6739A131C59971B0004F982 /* ContainerParentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerParentViewController.swift; sourceTree = "<group>"; };
 		B6739A151C59973A0004F982 /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
@@ -332,6 +334,7 @@
 				888D1A3F1BDEF816007F09AE /* Stack.swift */,
 				8875DE291BE041D200CD50EA /* UITextField+LeftMargin.swift */,
 				8875DE341BE053ED00CD50EA /* Voting.swift */,
+				B63F60201C725C0C0057D726 /* TextUtils.swift */,
 				60216E651BEC4F740029454B /* UiUtils.swift */,
 			);
 			name = Models;
@@ -613,6 +616,7 @@
 				60216E661BEC4F740029454B /* UiUtils.swift in Sources */,
 				B6EA63591BEEB4660017C063 /* PFFavorite.swift in Sources */,
 				60B3F16D1C5AE41D0018AA29 /* ListDetailController.swift in Sources */,
+				B63F60211C725C0C0057D726 /* TextUtils.swift in Sources */,
 				8875DE2A1BE041D200CD50EA /* UITextField+LeftMargin.swift in Sources */,
 				8875DE351BE053ED00CD50EA /* Voting.swift in Sources */,
 				883AC6281BC1A3C0009136E9 /* AppDelegate.swift in Sources */,

@@ -17,8 +17,11 @@ class SettingsPage : UIViewController {
     // Labels:
     @IBOutlet weak var pagePromptLabel: UILabel!
     @IBOutlet weak var passwordSentLabel: UILabel!
-    @IBOutlet weak var notLoggedInLabel: UILabel!
+    var loggedOutMessage : UILabel?
+    
+    // Text:
     let pageTitle = "Settings"
+    let loggedOutText = "You must be logged in to have settings."
 
     // Buttons:
     @IBOutlet weak var resetPasswordButton: UIButton!
@@ -35,23 +38,11 @@ class SettingsPage : UIViewController {
         if currentUser != nil {
             PFUser.logOutInBackground()
             currentUser = nil
-            // Change view to no user view:
-            logoutButton.hidden = true
-            resetPasswordButton.hidden = true
-            notLoggedInLabel.hidden = false
-            passwordSentLabel.hidden = true
-            pagePromptLabel.hidden = true
+            displayLoggedOut()
         }
     }
 
-
     // MARK: Override methods: ----------------------------------------------
-    /* viewDidLoad:
-    Additional setup after loading the view (upon open)
-    */
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
 
     /* viewDidAppear:
     Setup when user goes into page.
@@ -68,21 +59,49 @@ class SettingsPage : UIViewController {
                 
                 self.tabBarController?.navigationItem.title = pageTitle
         }
+        
         super.viewDidAppear(animated)
+        
+        if let _ = loggedOutMessage { // avoid stacking labels
+            loggedOutMessage?.hidden = true
+            loggedOutMessage?.removeFromSuperview()
+        }
+        loggedOutMessage = emptyBackgroundText(loggedOutText, view: self.view)
+        self.view.addSubview(loggedOutMessage!)
 
         if currentUser != nil {
-            logoutButton.hidden = false
-            resetPasswordButton.hidden = false
-            notLoggedInLabel.hidden = true
-            passwordSentLabel.hidden = true
-            pagePromptLabel.hidden = false
+            displayLoggedIn()
         } else {
-           logoutButton.hidden = true
-            resetPasswordButton.hidden = true
-            notLoggedInLabel.hidden = false
-            passwordSentLabel.hidden = true
-            pagePromptLabel.hidden = true
+            displayLoggedOut()
         }
+    }
+    
+    // MARK: Other functions
+    /* displayLoggedIn
+    */
+    func displayLoggedIn() {
+        // Logged-in UI
+        logoutButton.hidden = false
+        resetPasswordButton.hidden = false
+        passwordSentLabel.hidden = true
+        pagePromptLabel.hidden = false
+        
+        // Logged-out UI
+        self.loggedOutMessage?.hidden = true
+        print(self.loggedOutMessage?.hidden)
+    }
+    
+    /* displayLoggedOut
+    */
+    func displayLoggedOut() {
+        // Logged-in UI
+        logoutButton.hidden = true
+        resetPasswordButton.hidden = true
+        passwordSentLabel.hidden = true
+        pagePromptLabel.hidden = true
+        
+        // Logged-out UI
+        self.loggedOutMessage?.hidden = false
     }
 
 }
