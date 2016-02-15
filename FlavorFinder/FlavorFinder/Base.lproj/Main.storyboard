@@ -255,7 +255,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YN3-3Y-uml" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="926" y="2334"/>
+            <point key="canvasLocation" x="1610" y="2374"/>
         </scene>
         <!--New Search View Controller-->
         <scene sceneID="KnO-6k-ilk">
@@ -363,7 +363,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M3T-y0-slv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1675" y="2347"/>
+            <point key="canvasLocation" x="2267" y="2379"/>
         </scene>
         <!--Lists Page Controller-->
         <scene sceneID="Bug-zi-jTx">
