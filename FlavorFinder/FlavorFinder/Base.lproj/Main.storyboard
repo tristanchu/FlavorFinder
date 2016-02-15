@@ -198,6 +198,34 @@
             </objects>
             <point key="canvasLocation" x="2059" y="1572"/>
         </scene>
+        <!--Add Hotpot To List Controller-->
+        <scene sceneID="B4f-vT-SQt">
+            <objects>
+                <tableViewController id="knR-MX-BG5" customClass="AddHotpotToListController" customModule="FlavorFinder" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="nai-Ng-kVm">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="VlS-kk-OO7">
+                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VlS-kk-OO7" id="ao2-cC-jxz">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="knR-MX-BG5" id="eeE-jh-0ur"/>
+                            <outlet property="delegate" destination="knR-MX-BG5" id="xnV-Ed-Cmm"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bSU-47-ShQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="926" y="2386"/>
+        </scene>
         <!--Search Results View Controller-->
         <scene sceneID="0m5-1m-TMy">
             <objects>
@@ -255,7 +283,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YN3-3Y-uml" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="926" y="2334"/>
+            <point key="canvasLocation" x="1610" y="2374"/>
         </scene>
         <!--New Search View Controller-->
         <scene sceneID="KnO-6k-ilk">
@@ -363,7 +391,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M3T-y0-slv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1675" y="2347"/>
+            <point key="canvasLocation" x="2267" y="2379"/>
         </scene>
         <!--Lists Page Controller-->
         <scene sceneID="Bug-zi-jTx">
