@@ -112,13 +112,22 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
     }
     
     // EMPTY DATA SET DISPLAY
+    
+    /* titleForEmptyDataSet:
+    - implementing DZNEmptyDataSetSource / DZNEmptyDataSetDelegate
+    - table displays this large title text (for us, an icon) when no results
+    */
     func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
         let icon = String.fontAwesomeIconWithName(.FrownO)
         let attributes = [NSFontAttributeName: ICON_FONT] as Dictionary!
         
         return NSAttributedString(string: icon, attributes: attributes)
     }
-        
+    
+    /* descriptionForEmptyDataSet:
+    - implementing DZNEmptyDataSetSource / DZNEmptyDataSetDelegate
+    - table displays this text description when no results
+    */
     func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
         var text = SEARCH_GENERIC_ERROR_TEXT
         if currentSearch.isEmpty {
@@ -129,9 +138,10 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         return NSAttributedString(string: text, attributes: attributes)
     }
     
-    
+    /* clearSearchBtnClicked:
+    - lets parent know that the user has cleared the search
+    */
     func clearSearchBtnClicked() {
-        // Let parent know that search has been cleared
         if let parent = parentViewController as! SearchResultsViewController? {
             parent.clearSearch()
         }
@@ -269,8 +279,7 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         return true
     }
         
-    func swipeTableCell(cell: MGSwipeTableCell!, didChangeSwipeState state: MGSwipeState, gestureIsActive: Bool) {
-    }
+    func swipeTableCell(cell: MGSwipeTableCell!, didChangeSwipeState state: MGSwipeState, gestureIsActive: Bool) {}
         
     func swipeTableCell(cell: MGSwipeTableCell!, tappedButtonAtIndex index: Int, direction: MGSwipeDirection, fromExpansion: Bool) -> Bool {
         let indexPath = tableView.indexPathForCell(cell)!
@@ -286,6 +295,7 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
             return true
         case MGSwipeDirection.LeftToRight:
             let selBtn = cell.leftButtons[index] as! DOFavoriteButton
+            // get upvote/downvote btns since btns reflect most recent vote & you can change vote
             let upvoteBtn = cell.leftButtons[0] as! DOFavoriteButton
             let downvoteBtn = cell.leftButtons[1] as! DOFavoriteButton
             
@@ -308,7 +318,9 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
                     }
                     return false
                 } else {
-//                    self.presentViewController(self.notSignedInAlert, animated: true, completion: nil)
+                    if let parent = parentViewController as? SearchResultsViewController {
+                        parent.mustBeSignedIn()
+                    }
                     return true
                 }
             case 1: // Downvote action
@@ -330,7 +342,9 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
                     }
                     return false
                 } else {
-//                    self.presentViewController(self.notSignedInAlert, animated: true, completion: nil)
+                    if let parent = parentViewController as? SearchResultsViewController {
+                        parent.mustBeSignedIn()
+                    }
                     return true
                 }
             case 2: // Favorite action
@@ -342,12 +356,13 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
                         favoriteIngredient(user, ingredient: matchIngredient)
                         selBtn.select()
                     }
+                    tableView.reloadData()
                     return false
                 } else {
                     if let parent = parentViewController as? SearchResultsViewController {
                         parent.mustBeSignedIn()
-                    return true
                     }
+                    return true
                 }
             case 3: // Add-to-hotpot action
                 currentSearch.append(matchIngredient)
@@ -361,7 +376,6 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
                 return true
             }
         }
-        return true
     }
     
     func makeCellButton(image: UIImage, backgroundColor: UIColor) -> DOFavoriteButton {
