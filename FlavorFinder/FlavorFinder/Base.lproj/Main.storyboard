@@ -203,7 +203,7 @@
             <objects>
                 <tableViewController id="knR-MX-BG5" customClass="AddHotpotToListController" customModule="FlavorFinder" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="nai-Ng-kVm">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="443"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -221,10 +221,13 @@
                             <outlet property="delegate" destination="knR-MX-BG5" id="xnV-Ed-Cmm"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="addToListTableView" destination="nai-Ng-kVm" id="QU5-LI-18k"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bSU-47-ShQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="926" y="2386"/>
+            <point key="canvasLocation" x="1246" y="4026"/>
         </scene>
         <!--Search Results View Controller-->
         <scene sceneID="0m5-1m-TMy">
@@ -1343,6 +1346,9 @@
                             </tableViewCell>
                         </prototypes>
                     </tableView>
+                    <connections>
+                        <segue destination="knR-MX-BG5" kind="show" identifier="segueToAddHotpotToList" id="g0D-n5-ZRN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D6H-7K-czm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

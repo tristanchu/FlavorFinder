@@ -24,6 +24,7 @@ class AddHotpotToListController: UITableViewController {
     @IBOutlet var addToListTableView: UITableView!
 
 
+
     // MARK: Override methods: ----------------------------------------------
     /* viewDidLoad:
     Additional setup after loading the view (upon open)
