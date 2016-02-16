@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Parse
 
-class SettingsPage : UIViewController {
+class SettingsPage : ContainerParentViewController {
     
     // MARK: Properties: --------------------------------------------------
     // Labels:
@@ -25,6 +25,10 @@ class SettingsPage : UIViewController {
     
     // Placement:
     let loggedOutPlacementHeightMultiplier : CGFloat = 0.25
+    
+    // Segues:
+    let segueToLogin = "goToLogin"
+    let segueToRegister = "goToRegister"
 
     // Buttons:
     @IBOutlet weak var resetPasswordButton: UIButton!
@@ -46,6 +50,14 @@ class SettingsPage : UIViewController {
     }
 
     // MARK: Override methods: ----------------------------------------------
+    
+    /* viewDidLoad:
+    Setup when view is loaded into memory
+    */
+    override func viewDidLoad() {
+        segueEmbeddedContent = "embedSettingsToLogin"
+        super.viewDidLoad()
+    }
 
     /* viewDidAppear:
     Setup when user goes into page.
@@ -73,6 +85,8 @@ class SettingsPage : UIViewController {
         // move message up to make room
         loggedOutMessage?.frame.size.height = self.view.frame.size.height * loggedOutPlacementHeightMultiplier
         self.view.addSubview(loggedOutMessage!)
+        
+        setUpLoginContainerUI()
 
         if currentUser != nil {
             displayLoggedIn()
@@ -93,7 +107,8 @@ class SettingsPage : UIViewController {
         pagePromptLabel.hidden = false
         
         // Logged-out UI
-        self.loggedOutMessage?.hidden = true
+        loggedOutMessage?.hidden = true
+        containerVC?.view.hidden = true // embedded login module
     }
     
     /* displayLoggedOut
@@ -107,7 +122,26 @@ class SettingsPage : UIViewController {
         pagePromptLabel.hidden = true
         
         // Logged-out UI
-        self.loggedOutMessage?.hidden = false
+        loggedOutMessage?.hidden = false
+        containerVC?.view.hidden = false // embedded login module
+        goToLogin()
+    }
+    
+    func goToLogin() {
+        containerVC?.segueIdentifierReceivedFromParent(segueToLogin)
+    }
+    
+    func goToRegister() {
+        containerVC?.segueIdentifierReceivedFromParent(segueToRegister)
+    }
+    
+    /* setUpLoginContainerUI
+    - login / register container UI
+    */
+    func setUpLoginContainerUI() {
+        // Rounded edges for container:
+        containerVC?.view.layer.cornerRadius = 20
+        containerVC?.view.clipsToBounds = true
     }
 
 }

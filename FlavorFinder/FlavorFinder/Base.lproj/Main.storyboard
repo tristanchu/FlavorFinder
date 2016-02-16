@@ -942,8 +942,9 @@
                         <viewControllerLayoutGuide type="bottom" id="eKW-5o-wKA"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="hlX-Xv-nsN">
-                        <rect key="frame" x="0.0" y="0.0" width="540" height="276"/>
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
                         <segue destination="PFz-CQ-J0I" kind="custom" identifier="goToLogin" customClass="EmptySegue" customModule="FlavorFinder" id="hLW-pm-bIO"/>
@@ -1221,7 +1222,7 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xlw-fM-hrP">
                                 <rect key="frame" x="150" y="326" width="300" height="200"/>
                                 <connections>
-                                    <segue destination="hTE-4z-eGh" kind="embed" id="o6u-hC-UXf"/>
+                                    <segue destination="wNk-xB-g6C" kind="embed" identifier="embedSettingsToLogin" id="eUS-5B-FIU"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -1408,20 +1409,6 @@
             </objects>
             <point key="canvasLocation" x="357" y="1246"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="cP7-2T-vnv">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="zx8-Hd-Lwf" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="hTE-4z-eGh" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="C93-AP-kBq">
-                        <rect key="frame" x="0.0" y="0.0" width="300" height="200"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.4039215686" green="0.58823529409999997" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
-                    </view>
-                </viewController>
-            </objects>
-            <point key="canvasLocation" x="5295" y="445"/>
-        </scene>
     </scenes>
     <resources>
         <image name="FFIcon" width="120" height="120"/>
@@ -1435,6 +1422,7 @@
         <image name="SettingsFilled" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="eUS-5B-FIU"/>
         <segue reference="yCh-I4-cTX"/>
     </inferredMetricsTieBreakers>
 </document>
