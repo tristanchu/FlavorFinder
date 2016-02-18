@@ -79,7 +79,7 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         clearSearchBtn.action = "clearSearchBtnClicked"
         
         addToListBtn.setTitleTextAttributes(attributes, forState: .Normal)
-        addToListBtn.title = String.fontAwesomeIconWithName(.Plus) + " Add to List"
+        addToListBtn.title = String.fontAwesomeIconWithName(.Plus) + " Save Search to List"
         addToListBtn.tintColor = NAVI_BUTTON_COLOR
         addToListBtn.target = self
         addToListBtn.action = "addToListBtnClicked"
