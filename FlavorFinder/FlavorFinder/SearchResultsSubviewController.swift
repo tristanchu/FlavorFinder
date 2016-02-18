@@ -37,7 +37,7 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         size: MATCH_CELL_IMAGE_SIZE
     )
     let ADD_IMAGE = UIImage.fontAwesomeIconWithName(
-        .SearchPlus,
+        .Plus,
         textColor: MATCH_CELL_IMAGE_COLOR,
         size: MATCH_CELL_IMAGE_SIZE
     )
