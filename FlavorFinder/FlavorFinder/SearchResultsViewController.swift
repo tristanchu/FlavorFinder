@@ -35,8 +35,65 @@ class SearchResultsViewController : UIViewController {
     @IBOutlet weak var filterBarContainer: UIView!
     @IBOutlet weak var hotpotContainer: UIView!
     
+    // Segues:
+    let segueToAddHotpotToList = "segueToAddHotpotToList"
+    
+    // Buttons:
+    let clearSearchBtn = UIBarButtonItem()
+    let addToListBtn = UIBarButtonItem()
+    let optionsBtn = UIBarButtonItem()
+    
+    // Button Text:
+    let clearSearchText = String.fontAwesomeIconWithName(.ChevronLeft) + " New Search"
+    let addToListText = String.fontAwesomeIconWithName(.Plus) + " Save Search to List"
+    let optionsText = String.fontAwesomeIconWithName(.Bars)
+    
+    // Button Actions:
+    let clearSearchSelector : Selector = "clearSearch"
+    let addToListSelector : Selector = "addToListBtnClicked"
+    let optionsSelector : Selector = "addToListBtnClicked"
+    
     // MARK: Actions
     
+    // SETUP FUNCTIONS
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configureUIBarButtons()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // Setup navigation bar
+        if let navi = self.tabBarController?.navigationController as? MainNavigationController {
+            self.tabBarController?.navigationItem.setLeftBarButtonItems([self.clearSearchBtn], animated: true)
+            self.tabBarController?.navigationItem.setRightBarButtonItems([self.addToListBtn], animated: true)
+            navi.reset_navigationBar()
+            self.tabBarController?.navigationItem.title = "Search"
+        }
+        
+        // disable/enable add to list button if user:
+        if currentUser != nil {
+            self.addToListBtn.enabled = true
+        } else {
+            self.addToListBtn.enabled = false
+        }
+    }
+    
+    func configureUIBarButtons() {
+        configureUIBarButtonItem(clearSearchBtn, title: clearSearchText, action: clearSearchSelector)
+        configureUIBarButtonItem(clearSearchBtn, title: addToListText, action: addToListSelector)
+        configureUIBarButtonItem(clearSearchBtn, title: clearSearchText, action: clearSearchSelector)
+    }
+    
+    func configureUIBarButtonItem(button: UIBarButtonItem, title: String, action: Selector) {
+        button.setTitleTextAttributes(attributes, forState: .Normal)
+        button.title = title
+        button.tintColor = NAVI_BUTTON_COLOR
+        button.target = self
+        button.action = action
+    }
+        
     /* prepareForSegue
         - prepares for segue
         - sets variables to keep track of embedded SVCs
@@ -67,7 +124,7 @@ class SearchResultsViewController : UIViewController {
         searchResultsSVC?.getSearchResults()
     }
     
-    /* goToNewSearch
+    /* hotpotIngredientWasRemoved
         - checks if hotpot is empty and if so, tells page to load new search view
     */
     func hotpotIngredientWasRemoved() {
@@ -102,7 +159,7 @@ class SearchResultsViewController : UIViewController {
         }
     }
     
-    /* clearSearch
+    /* resetNavBar
     - executed in hotpotIngredientWasRemoved() and clearSearch()
     - resets navbar to have no title nor buttons
     */
@@ -115,7 +172,7 @@ class SearchResultsViewController : UIViewController {
         }
     }
     
-    /* goToNewSearch
+    /* mustBeSignedIn
         - subview controllers call this to indicate user attempted action
         that required login but was not logged in
         - creates sign-in alert (may at later date delegate alert to something else)
@@ -127,7 +184,7 @@ class SearchResultsViewController : UIViewController {
             currController: self)
     }
 
-    /* goToNewSearch
+    /* filterButtonWasToggled
         - coordinates view response after child says filter buttons were toggled
     */
     func filterButtonWasToggled(filters: [String: Bool]) {
@@ -136,6 +193,13 @@ class SearchResultsViewController : UIViewController {
     
     func filterSearchTextDidChange(searchText: String) {
         searchResultsSVC?.filterResults(searchText)
+    }
+    
+    /* addToListBtnClicked
+    - presents modal view to then select a list
+    */
+    func addToListBtnClicked() {
+        self.performSegueWithIdentifier(segueToAddHotpotToList, sender: self)
     }
     
 }
