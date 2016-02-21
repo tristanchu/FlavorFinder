@@ -20,7 +20,7 @@ class LoginModuleParentViewController : ContainerParentViewController {
     let segueToLogin = "goToLogin"
     let segueToRegister = "goToRegister"
     
-    // MARK: Login module nav functions ------------------------------------
+    // MARK: Login module nav functions -----------------------------------
 
     func goToLogin() {
         containerVC?.segueIdentifierReceivedFromParent(segueToLogin)
@@ -30,7 +30,7 @@ class LoginModuleParentViewController : ContainerParentViewController {
         containerVC?.segueIdentifierReceivedFromParent(segueToRegister)
     }
     
-    // MARK: Login module UI functions -------------------------------------
+    // MARK: Login module UI functions ------------------------------------
 
     /* setUpLoginContainerUI
     - login / register container UI
@@ -39,6 +39,16 @@ class LoginModuleParentViewController : ContainerParentViewController {
         // Rounded edges for container:
         containerVC?.view.layer.cornerRadius = 20
         containerVC?.view.clipsToBounds = true
+    }
+    
+    // MARK: Login response functions -------------------------------------
+    
+    /* loginSucceeded
+    - response to successful login
+    - hides contained view
+    */
+    func loginSucceeded() {
+        containerVC?.view.hidden = true
     }
 
 }

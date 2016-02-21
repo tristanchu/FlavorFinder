@@ -105,6 +105,14 @@ class SettingsPage : LoginModuleParentViewController {
         super.prepareForSegue(segue, sender: sender)
     }
     
+    /* loginSucceeded:
+    - handle successful login via module
+    */
+    override func loginSucceeded() {
+        super.loginSucceeded() // hides module
+        displayLoggedIn()
+    }
+    
     // MARK: Other functions -------------------------------------------------
     
     /* displayLoggedIn

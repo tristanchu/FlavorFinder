@@ -152,8 +152,9 @@ class RegisterView : UIViewController, UITextFieldDelegate {
     */
     func registerSuccess(user: PFUser) {
         setUserSession(user)
-        // hide container on success:
-        self.parentViewController?.view.hidden = true
+        if let parentVC = self.parentViewController?.parentViewController as! LoginModuleParentViewController? {
+            parentVC.loginSucceeded()
+        }
     }
 
     /* handleError
