@@ -413,9 +413,14 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         
         return [upvoteBtn, downvoteBtn, favBtn, addBtn]
     }
-        
+    
+    /* tableView - cell selected override method
+    - handles cell selection (via tap)
+    - programmatically triggers swipe to reveal cell buttons
+    */
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as? MGSwipeTableCell
+        cell?.showSwipe(MGSwipeDirection.LeftToRight, animated: true) // cell buttons appear as if swiped
     }
         
     func filterResults(searchText: String) {
