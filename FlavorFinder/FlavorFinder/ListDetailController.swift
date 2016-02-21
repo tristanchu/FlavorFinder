@@ -42,6 +42,7 @@ class ListDetailController: UITableViewController {
     
     // Segues:
     let segueToEditPage = "segueToEditListPage"
+    let segueToAddToListPage = "segueToAddToListPage"
 
     // MARK: Override methods: ----------------------------------------------
     /* viewDidLoad:
@@ -142,6 +143,15 @@ class ListDetailController: UITableViewController {
                 return cell
             }
             
+    }
+    
+    /* tableView -> Does something on selection of row
+    */
+    override func tableView(tableView: UITableView,
+        didSelectRowAtIndexPath indexPath: NSIndexPath) {
+            if (indexPath.row == 0){
+                self.performSegueWithIdentifier(segueToAddToListPage, sender: self)
+            }
     }
 
     /* tableView - choose which rows are editable (delete shows)
