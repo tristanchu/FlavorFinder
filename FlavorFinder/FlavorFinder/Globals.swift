@@ -26,49 +26,37 @@ let TITLE_ALL_INGREDIENTS = "All Ingredients"
 let CELLIDENTIFIER_MATCH = "MatchTableViewCell"
 let CELLIDENTIFIER_MENU = "menuCell"
 
-// Colors:
-let LIGHTGRAY_COLOR = UIColor(red: 230/255.0, green: 230/255.0, blue: 230/255.0, alpha: CGFloat(1))
-let MATCH_CELL_IMAGE_COLOR = UIColor.blackColor()
-
-let NAVI_BUTTON_COLOR = UIColor(red: 51/255.0, green: 202/255.0, blue: 252/255.0, alpha: CGFloat(1))
-let NAVI_BUTTON_DARK_COLOR = UIColor(red: 135/255.0, green: 212/255.0, blue: 186/255.0, alpha: CGFloat(1))
-
-let MATCH_LOW_COLOR = UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: CGFloat(0.3))
-let MATCH_MEDIUM_COLOR = UIColor(red: 255/255.0, green: 237/255.0, blue: 105/255.0, alpha: CGFloat(0.3))
-let MATCH_HIGH_COLOR = UIColor(red: 105/255.0, green: 230/255.0, blue: 255/255.0, alpha: CGFloat(0.3))
-let MATCH_GREATEST_COLOR = UIColor(red: 105/255.0, green: 255/255.0, blue: 150/255.0, alpha: CGFloat(0.3))
-let MATCH_COLORS = [ // indices correspond to int match strength values
-    MATCH_LOW_COLOR, // 0 index value ("no match" color/default color)
-    MATCH_LOW_COLOR,
-    MATCH_MEDIUM_COLOR,
-    MATCH_HIGH_COLOR,
-    MATCH_GREATEST_COLOR
-]
-let FAV_PINNED_COLOR = UIColor(red: 249/255.0, green: 200/255.0, blue: 255/255.0, alpha: CGFloat(1))
-
-//let NAVI_COLOR = UIColor(red: 121/255.0, green: 217/255.0, blue: 255/255.0, alpha: CGFloat(1))
-let NAVI_COLOR = UIColor(red: 205/255.0, green: 239/255.0, blue: 250/255.0, alpha: CGFloat(1))
-let NAVI_LIGHT_COLOR = UIColor(red: 151/255.0, green: 224/255.0, blue: 252/255.0, alpha: CGFloat(1))
-
-let HOTPOT_COLLECTION_COLOR = UIColor(red: 121/255.0, green: 217/255.0, blue: 255/255.0, alpha: CGFloat(0.3))
-
-let FAV_CELL_BTN_COLOR = UIColor(red: 249/255.0, green: 181/255.0, blue: 255/255.0, alpha: CGFloat(1))
-let DOWNVOTE_CELL_BTN_COLOR = UIColor(red: 252/255.0, green: 200/255.0, blue: 183/255.0, alpha: CGFloat(1))
-let UPVOTE_CELL_BTN_COLOR = UIColor(red: 185/255.0, green: 250/255.0, blue: 177/255.0, alpha: CGFloat(1))
-let ADD_CELL_BTN_COLOR = UIColor(red: 218/255.0, green: 239/255.0, blue: 247/255.0, alpha: CGFloat(1))
-
-let EMPTY_SET_TEXT_COLOR = UIColor(
-    red: 22.0/255.0, green: 106.0/255.0, blue: 176.0/255.0, alpha: 1.0)
-
-
-// Fonts:
-let attributes = [NSFontAttributeName: UIFont.fontAwesomeOfSize(15)] as Dictionary!
-
 // Filters:
 let F_KOSHER = "kosher"
 let F_DAIRY = "no dairy"
 let F_VEG = "vegetarian"
 let F_NUTS = "no nuts"
+
+// Colors:
+let LIGHTGRAY_COLOR = UIColor(red: 230/255.0, green: 230/255.0, blue: 230/255.0, alpha: CGFloat(1))
+
+let MATCH_CELL_IMAGE_COLOR = UIColor.blackColor()
+
+let NAVI_COLOR = UIColor(red: 205/255.0, green: 239/255.0, blue: 250/255.0, alpha: CGFloat(1))
+let NAVI_LIGHT_COLOR = UIColor(red: 151/255.0, green: 224/255.0, blue: 252/255.0, alpha: CGFloat(1))
+let NAVI_BUTTON_COLOR = UIColor(red: 51/255.0, green: 202/255.0, blue: 252/255.0, alpha: CGFloat(1))
+let NAVI_BUTTON_DARK_COLOR = UIColor(red: 135/255.0, green: 212/255.0, blue: 186/255.0, alpha: CGFloat(1))
+
+let SEARCH_RESULTS_CELL_COLOR = UIColor.whiteColor()
+let FAV_CELL_BTN_COLOR = UIColor(red: 249/255.0, green: 181/255.0, blue: 255/255.0, alpha: CGFloat(1))
+let DOWNVOTE_CELL_BTN_COLOR = UIColor(red: 252/255.0, green: 200/255.0, blue: 183/255.0, alpha: CGFloat(1))
+let UPVOTE_CELL_BTN_COLOR = UIColor(red: 185/255.0, green: 250/255.0, blue: 177/255.0, alpha: CGFloat(1))
+let ADD_CELL_BTN_COLOR = UIColor(red: 218/255.0, green: 239/255.0, blue: 247/255.0, alpha: CGFloat(1))
+let CELL_BTN_OFF_COLOR = UIColor.grayColor()
+let CELL_BTN_ON_COLOR = UIColor.blackColor()
+
+let HOTPOT_COLLECTION_COLOR = UIColor(red: 121/255.0, green: 217/255.0, blue: 255/255.0, alpha: CGFloat(0.3))
+
+let EMPTY_SET_TEXT_COLOR = UIColor(red: 22.0/255.0, green: 106.0/255.0, blue: 176.0/255.0, alpha: 1.0)
+
+
+// Fonts:
+let attributes = [NSFontAttributeName: UIFont.fontAwesomeOfSize(15)] as Dictionary!
 
 // Sizes:
 let MATCH_CELL_IMAGE_SIZE = CGSizeMake(30, 30)

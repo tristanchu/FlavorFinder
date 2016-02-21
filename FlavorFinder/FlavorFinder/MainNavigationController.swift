@@ -6,12 +6,12 @@
 //  Copyright © 2015 TeamFive. All rights reserved.
 //
 
+// At some point, we should revisit this code because much of it is deprecated
+
 import UIKit
 import Parse
 import FontAwesome_swift
 import FilterBar
-//import ASHorizontalScrollView
-
 
 class MainNavigationController: UINavigationController {
     var history = Stack<AnyObject?>()  // Used for going backward.
@@ -23,14 +23,10 @@ class MainNavigationController: UINavigationController {
     var searchBarActivateBtn: UIBarButtonItem = UIBarButtonItem()
     lazy var searchBar = UISearchBar(frame: CGRectMake(0, 0, 0, 0))
     var searchTableView: UITableView = UITableView()
-    var globalSearchViewController: GlobalSearchController = GlobalSearchController()
     
     var menuBarBtn: UIBarButtonItem = UIBarButtonItem()
     var menuTableView: UITableView = UITableView()
     var menuTableViewController: MenuTableViewController = MenuTableViewController()
-    
-//    var filterBtn: UIBarButtonItem = UIBarButtonItem()
-//    var filterView: ASHorizontalScrollView = ASHorizontalScrollView()
     
     var dropdownIsDown = false
 
@@ -43,10 +39,7 @@ class MainNavigationController: UINavigationController {
         configure_goBackBtn()
         configure_goForwardBtn()
         configure_menuBarBtn()
-//        configure_searchBar()
         configure_searchBarActivateBtn()
-//        configure_filterBtn()
-//        configure_filterView()
         configure_menuTableView()
     }
     
@@ -86,16 +79,7 @@ class MainNavigationController: UINavigationController {
         menuBarBtn.action = "menuBtnClicked"
     }
     
-//    func configure_filterBtn() {
-//        filterBtn.setTitleTextAttributes(attributes, forState: .Normal)
-//        filterBtn.title = String.fontAwesomeIconWithName(.Filter)
-//        filterBtn.tintColor = NAVI_BUTTON_COLOR
-//        filterBtn.target = self
-//        filterBtn.action = "filterBtnClicked"
-//    }
-    
     func configure_menuTableView() {
-        menuTableViewController.navi = self
         menuTableView = menuTableViewController.tableView
         let y_offset = UIApplication.sharedApplication().statusBarFrame.size.height + self.navigationBar.frame.height
         menuTableView.frame = CGRectMake(0, y_offset, self.view.frame.width, 200);
@@ -112,8 +96,6 @@ class MainNavigationController: UINavigationController {
     }
     
     func configure_searchBar() {
-        globalSearchViewController.navi = self
-        searchBar.delegate = globalSearchViewController
         searchBar.hidden = true
         searchBar.setShowsCancelButton(true, animated: false)
         let cancelButton = searchBar.valueForKey("cancelButton") as! UIButton
@@ -124,9 +106,6 @@ class MainNavigationController: UINavigationController {
         let y_offset = UIApplication.sharedApplication().statusBarFrame.size.height + self.navigationBar.frame.height
         let screenSize: CGRect = UIScreen.mainScreen().bounds
         searchTableView.frame = CGRect(x: 0, y: y_offset, width: screenSize.width, height: screenSize.height*0.5)
-//        searchTableView.sizeToFit()
-        searchTableView.delegate = globalSearchViewController
-        searchTableView.dataSource = globalSearchViewController
         searchTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: CELLIDENTIFIER_MATCH)
         searchTableView.tableFooterView = UIView.init(frame: CGRectZero)
         searchTableView.tableFooterView!.hidden = true
@@ -139,79 +118,6 @@ class MainNavigationController: UINavigationController {
     func reset_navigationBar() {
         self.navigationItem.title = ""
         self.dismissMenuTableView()
-    }
-    
-    func getVisibleViewControllerIdentifier() -> String {
-        switch self.visibleViewController {
-        case is MatchTableViewController:
-            return MatchTableViewControllerIdentifier
-        case is ProfileViewController:
-            return ProfileViewControllerIdentifier
-        default:
-            return ""
-        }
-    }
-    
-    // HISTORY/FUTURE FUNCTIONS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    // ------------------------
-    func goBackBtnClicked() {
-        if self.visibleViewController is RegisterViewController {
-            let transition: CATransition = CATransition()
-            // transition.duration = 0.25
-            // transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-            transition.type = kCATransitionPush; //kCATransitionMoveIn; //, kCATransitionPush, kCATransitionReveal, kCATransitionFade
-            transition.subtype = kCATransitionFromLeft; //kCATransitionFromLeft, kCATransitionFromRight, kCATransitionFromTop, kCATransitionFromBottom
-            self.view.layer.addAnimation(transition, forKey: "kCATransition")
-            
-            let loginViewControllerObject = mainStoryboard.instantiateViewControllerWithIdentifier(LoginViewControllerIdentifier) as? LoginViewController
-            self.pushViewController(loginViewControllerObject!, animated: true)
-        } else if let matchTableViewControllerObject = self.visibleViewController as? MatchTableViewController {
-            if let curr = matchTableViewControllerObject.currentIngredient {
-                goForwardBtn.enabled = true
-                future.push(curr)
-
-                if let pastObject = history.pop() {
-                    if let pastIngredient = pastObject as? PFObject {
-                        matchTableViewControllerObject.showIngredient(pastIngredient)
-                    }
-                } else {
-                    goBackBtn.enabled = false
-                    matchTableViewControllerObject.showAllIngredients()
-                }
-            }
-        }
-    }
-    
-    func goForwardBtnClicked() {
-        if let matchTableViewControllerObject = self.visibleViewController as? MatchTableViewController {
-            if let futureObject = future.pop() {
-                if let curr = matchTableViewControllerObject.currentIngredient {
-                    history.push(curr)
-                }
-                
-                goBackBtn.enabled = true
-                if (future.isEmpty()) {
-                    goForwardBtn.enabled = false
-                }
-                
-                if let _ = futureObject as? String {
-                    
-                } else if let futureIngredient = futureObject as? PFObject {
-                    matchTableViewControllerObject.showIngredient(futureIngredient)
-                }
-            }
-        }
-    }
-    
-    func pushToHistory() {
-        if let matchTableViewControllerObject = self.visibleViewController as? MatchTableViewController {
-            future.removeAll()
-            if let curr = matchTableViewControllerObject.currentIngredient {
-                history.push(curr)
-            }
-            goBackBtn.enabled = true
-            goForwardBtn.enabled = false
-        }
     }
     
     // MENU FUNCTIONS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -261,24 +167,8 @@ class MainNavigationController: UINavigationController {
         })
     }
     
-//    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-//        hideSearchBar()
-//        if let matchTableViewControllerObject = self.visibleViewController as? MatchTableViewController {
-//            matchTableViewControllerObject.filterResults("")
-//        }
-//    }
-//    
     func hideSearchBar() {
-        var newTitle = ""
-        
-        // Special title conditions.
-        if let matchTableViewControllerObject = self.visibleViewController as? MatchTableViewController {
-            if let curr = matchTableViewControllerObject.currentIngredient {
-                newTitle = curr[_s_name] as! String
-            } else {
-                newTitle = TITLE_ALL_INGREDIENTS
-            }
-        }
+        let newTitle = ""
         
         self.searchBar.alpha = 1
         searchTableView.alpha = 1
@@ -293,32 +183,5 @@ class MainNavigationController: UINavigationController {
             self.navigationItem.titleView = nil
         })
     }
-    
-//    // FILTER FUNCTIONS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-//    // ----------------
-//    
-//    func filterBtnClicked() {
-//        print("filterBtn has been clicked.")
-//        if (filterView.hidden) {
-//            filterView.hidden = false
-//        } else {
-//            filterView.hidden = true
-//        }
-//    }
-//    
-//    func filterToggleBtnClicked(sender: UIButton) {
-//        switch sender.tag {
-//        case 1:
-//            break
-//        case 2:
-//            break
-//        case 3:
-//            break
-//        case 4:
-//            break
-//        default:
-//            break
-//        }
-//    }
     
 }

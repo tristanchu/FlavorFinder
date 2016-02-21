@@ -37,15 +37,13 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         size: MATCH_CELL_IMAGE_SIZE
     )
     let ADD_IMAGE = UIImage.fontAwesomeIconWithName(
-        .SearchPlus,
+        .Plus,
         textColor: MATCH_CELL_IMAGE_COLOR,
         size: MATCH_CELL_IMAGE_SIZE
     )
     // strings
     let CELL_IDENTIFIER = "globalSearchResultsCell"
-    // colors
-    let CELL_BTN_OFF_COLOR = UIColor.grayColor()
-    let CELL_BTN_ON_COLOR = UIColor.blackColor()
+    
     // fonts
     let ICON_FONT = UIFont.fontAwesomeOfSize(100)
 
@@ -57,43 +55,18 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         F_DAIRY: false,
         F_VEG: false,
         F_NUTS: false]
- 
-    let clearSearchBtn = UIBarButtonItem()
-    let addToListBtn = UIBarButtonItem()
     
     // MARK: Actions
     // SETUP FUNCTIONS
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.configureTableView()
-        
-        clearSearchBtn.setTitleTextAttributes(attributes, forState: .Normal)
-        clearSearchBtn.title = String.fontAwesomeIconWithName(.ChevronLeft) + " New Search"
-        clearSearchBtn.tintColor = NAVI_BUTTON_COLOR
-        clearSearchBtn.target = self
-        clearSearchBtn.action = "clearSearchBtnClicked"
-        
-        addToListBtn.setTitleTextAttributes(attributes, forState: .Normal)
-        addToListBtn.title = String.fontAwesomeIconWithName(.Plus) + " Add to List"
-        addToListBtn.tintColor = NAVI_BUTTON_COLOR
-        addToListBtn.target = self
-        addToListBtn.action = "addToListBtnClicked"
-        
+        configureTableView()
         getSearchResults()
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        // Setup navigation bar
-        if let navi = self.tabBarController?.navigationController as? MainNavigationController {
-            self.tabBarController?.navigationItem.setLeftBarButtonItems([self.clearSearchBtn], animated: true)
-            self.tabBarController?.navigationItem.setRightBarButtonItems([self.addToListBtn], animated: true)
-            navi.reset_navigationBar()
-            self.tabBarController?.navigationItem.title = "Search"
-        }
-    }
-    
+    /* configureTableView
+    - configures the visuals for the search results table
+    */
     func configureTableView() {
         tableView.delegate = self
         tableView.dataSource = self
@@ -137,7 +110,7 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         }
         return NSAttributedString(string: text, attributes: attributes)
     }
-    
+
     /* clearSearchBtnClicked:
     - lets parent know that the user has cleared the search
     */
@@ -145,10 +118,6 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         if let parent = parentViewController as! SearchResultsViewController? {
             parent.clearSearch()
         }
-    }
-    
-    func addToListBtnClicked() {
-        
     }
     
   // SEARCH RESULTS
@@ -239,14 +208,8 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         cell.delegate = self
         
         if !(matches.isEmpty) {
-            let match = matches[indexPath.row].ingredient
-            var matchesPerLevel = Int(matches.count / MATCH_COLORS.count)
-            if matchesPerLevel == 0 { // no dividing by zero, please
-                matchesPerLevel = 1
-            }
             
-            // for now, doing a simple match coloration based on equal proportions at each level
-            let matchLevel = Int((matches.count - indexPath.row)/matchesPerLevel)
+            let match = matches[indexPath.row].ingredient
 
             if match.isDataAvailable() {
                 let name = match[_s_name] as? String
@@ -264,14 +227,9 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
                 tableView.reloadData()
                 return cell
             }
-            if currentUser != nil && isFavoriteIngredient(currentUser!, ingredient: match) != nil {
-                cell.backgroundColor = FAV_PINNED_COLOR
-            } else if matchLevel < MATCH_COLORS.count && matchLevel >= 0 {
-                cell.backgroundColor = MATCH_COLORS[matchLevel]
-            } else if matchLevel >= MATCH_COLORS.count {
-                cell.backgroundColor = MATCH_COLORS.last
-            } else {
-                cell.backgroundColor = MATCH_COLORS[0] // default
+            
+            if currentUser != nil {
+                cell.backgroundColor = SEARCH_RESULTS_CELL_COLOR
             }
         }
         
@@ -281,10 +239,17 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
     func swipeTableCell(cell: MGSwipeTableCell!, canSwipe direction: MGSwipeDirection) -> Bool {
         return true
     }
-        
+    
     func swipeTableCell(cell: MGSwipeTableCell!, didChangeSwipeState state: MGSwipeState, gestureIsActive: Bool) {}
         
     func swipeTableCell(cell: MGSwipeTableCell!, tappedButtonAtIndex index: Int, direction: MGSwipeDirection, fromExpansion: Bool) -> Bool {
+        
+        // Exit gracefully if this swipe isn't what we want
+        
+        if direction == MGSwipeDirection.RightToLeft {
+            return true
+        }
+        
         let indexPath = tableView.indexPathForCell(cell)!
         let matchIngredient = matches[indexPath.row].ingredient
         
@@ -292,98 +257,87 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
             print("ERROR: No buttons in search results cell button array.")
             return true
         }
-            
-        switch direction {
-        case MGSwipeDirection.RightToLeft:
-            return true
-        case MGSwipeDirection.LeftToRight:
-            let selBtn = cell.leftButtons[index] as! DOFavoriteButton
-            // get upvote/downvote btns since btns reflect most recent vote & you can change vote
-            let upvoteBtn = cell.leftButtons[0] as! DOFavoriteButton
-            let downvoteBtn = cell.leftButtons[1] as! DOFavoriteButton
-            
-            switch index {
-            case 0: // Upvote action
-                if let user = currentUser {
-                    let voteType = getHotpotVoteType(user, hotpot: currentSearch, matchIngredient: matchIngredient)
-                    if voteType == _s_upvotes {
-                        // Already upvoted
-                        selBtn.deselect()
-                        unvoteHotpot(user, hotpot: currentSearch, matchIngredient: matchIngredient, voteType: _s_upvotes)
-                    } else if voteType == _s_downvotes {    // Already downvoted
-                        downvoteBtn.deselect()
-                        selBtn.select()
-                        unvoteHotpot(user, hotpot: currentSearch, matchIngredient: matchIngredient, voteType: _s_downvotes)
-                        upvoteHotpot(user, hotpot: currentSearch, matchIngredient: matchIngredient)
-                    } else { // First-time vote
-                        selBtn.select()
-                        upvoteHotpot(user, hotpot: currentSearch, matchIngredient: matchIngredient)
-                    }
-                    return false
-                } else {
-                    if let parent = parentViewController as? SearchResultsViewController {
-                        parent.mustBeSignedIn()
-                    }
-                    return true
+        
+        // Respond to cell button interactions
+        
+        let selBtn = cell.leftButtons[index] as! DOFavoriteButton
+        // get upvote/downvote btns since btns reflect most recent vote & you can change vote
+        let upvoteBtn = cell.leftButtons[0] as! DOFavoriteButton
+        let downvoteBtn = cell.leftButtons[1] as! DOFavoriteButton
+        
+        switch index {
+        case 0: // Upvote action
+            if let user = currentUser { // in which case, buttons reflect whether voted (faster than re-searching)
+                if selBtn.selected { // already upvoted, so you're canceling your vote
+                    selBtn.deselect()
+                    unvoteHotpot(user, hotpot: currentSearch, matchIngredient: matchIngredient, voteType: _s_upvotes)
+                } else if downvoteBtn.selected { // already downvoted, so change vote
+                    downvoteBtn.deselect()
+                    selBtn.select()
+                    unvoteHotpot(user, hotpot: currentSearch, matchIngredient: matchIngredient, voteType: _s_downvotes)
+                    upvoteHotpot(user, hotpot: currentSearch, matchIngredient: matchIngredient)
+                } else { // first-time vote
+                    selBtn.select()
+                    upvoteHotpot(user, hotpot: currentSearch, matchIngredient: matchIngredient)
                 }
-            case 1: // Downvote action
-                if let user = currentUser {
-                    let voteType = getHotpotVoteType(user, hotpot: currentSearch, matchIngredient: matchIngredient)
-                    if voteType == _s_downvotes {
-                        // Already downvoted
-                        selBtn.deselect()
-                        unvoteHotpot(user, hotpot: currentSearch, matchIngredient: matchIngredient, voteType: _s_downvotes)
-                    } else if voteType == _s_upvotes {
-                        // Already upvoted
-                        upvoteBtn.deselect()
-                        selBtn.select()
-                        unvoteHotpot(user, hotpot: currentSearch, matchIngredient: matchIngredient, voteType: _s_upvotes)
-                        downvoteHotpot(user, hotpot: currentSearch, matchIngredient: matchIngredient)
-                    } else { // First-time vote
-                        selBtn.select()
-                        downvoteHotpot(user, hotpot: currentSearch, matchIngredient: matchIngredient)
-                    }
-                    return false
-                } else {
-                    if let parent = parentViewController as? SearchResultsViewController {
-                        parent.mustBeSignedIn()
-                    }
-                    return true
-                }
-            case 2: // Favorite action
-                if let user = currentUser {
-                    if let _ = isFavoriteIngredient(user, ingredient: matchIngredient) {
-                        unfavoriteIngredient(user, ingredient: matchIngredient)
-                        selBtn.deselect()
-//                        getNewSearchResults()   // unpin fav
-                        // note: unfavoriteIngredient is a slow-enough operation that
-                        // cell would still look like "fav" if you simply reload table data,
-                        // but getNewSearchResults (which pins) works but is too slow for
-                        // effective feedback
-                        cell.backgroundColor = MATCH_COLORS[0] // default color, instead of fav color
-                    } else {
-                        favoriteIngredient(user, ingredient: matchIngredient)
-                        selBtn.select()
-                        tableView.reloadData()  // changes cell appearance to "fav cell" look
-                    }
-                    return false
-                } else {
-                    if let parent = parentViewController as? SearchResultsViewController {
-                        parent.mustBeSignedIn()
-                    }
-                    return true
-                }
-            case 3: // Add-to-hotpot action
-                currentSearch.append(matchIngredient)
+                return false
+            } else {
                 if let parent = parentViewController as? SearchResultsViewController {
-                    parent.newSearchTermWasAdded()
-                } else {
-                    print("ERROR: Add to hotpot failed.")
+                    parent.mustBeSignedIn()
                 }
-                return true
-            default:
                 return true
             }
+        case 1: // Downvote action
+            if let user = currentUser {
+                if selBtn.selected { // already downvoted, so cancel vote
+                    selBtn.deselect()
+                    unvoteHotpot(user, hotpot: currentSearch, matchIngredient: matchIngredient, voteType: _s_downvotes)
+                } else if upvoteBtn.selected { // already upvoted, so change vote
+                    upvoteBtn.deselect()
+                    selBtn.select()
+                    unvoteHotpot(user, hotpot: currentSearch, matchIngredient: matchIngredient, voteType: _s_upvotes)
+                    downvoteHotpot(user, hotpot: currentSearch, matchIngredient: matchIngredient)
+                } else { // first-time vote
+                    selBtn.select()
+                    downvoteHotpot(user, hotpot: currentSearch, matchIngredient: matchIngredient)
+                }
+                return false
+            } else {
+                if let parent = parentViewController as? SearchResultsViewController {
+                    parent.mustBeSignedIn()
+                }
+                return true
+            }
+        case 2: // Favorite action
+            if let user = currentUser {
+                if let _ = isFavoriteIngredient(user, ingredient: matchIngredient) {
+                    unfavoriteIngredient(user, ingredient: matchIngredient)
+                    selBtn.deselect()
+                    
+                    // need fav indicators!
+                    
+                } else {
+                    favoriteIngredient(user, ingredient: matchIngredient)
+                    selBtn.select()
+                    tableView.reloadData()  // changes cell appearance to "fav cell" look
+                }
+                return false
+            } else {
+                if let parent = parentViewController as? SearchResultsViewController {
+                    parent.mustBeSignedIn()
+                }
+                return true
+            }
+        case 3: // Add-to-hotpot action
+            currentSearch.append(matchIngredient)
+            if let parent = parentViewController as? SearchResultsViewController {
+                parent.newSearchTermWasAdded()
+            } else {
+                print("ERROR: Add to hotpot failed.")
+            }
+            return true
+        default:
+            return true
         }
     }
     
@@ -443,8 +397,15 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         
         return [upvoteBtn, downvoteBtn, favBtn, addBtn]
     }
-        
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {}
+    
+    /* tableView - cell selected override method
+    - handles cell selection (via tap)
+    - programmatically triggers swipe to reveal cell buttons
+    */
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as? MGSwipeTableCell
+        cell?.showSwipe(MGSwipeDirection.LeftToRight, animated: true) // cell buttons appear as if swiped
+    }
         
     func filterResults(searchText: String) {
         matches.removeAll()
