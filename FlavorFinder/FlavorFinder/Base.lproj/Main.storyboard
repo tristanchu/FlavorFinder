@@ -80,12 +80,12 @@
             <objects>
                 <tableViewController id="knR-MX-BG5" customClass="AddHotpotToListController" customModule="FlavorFinder" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="nai-Ng-kVm">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="443"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="VlS-kk-OO7">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="listCellIdentifier" id="VlS-kk-OO7">
                                 <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VlS-kk-OO7" id="ao2-cC-jxz">
@@ -105,7 +105,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bSU-47-ShQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1246" y="4026"/>
+            <point key="canvasLocation" x="802" y="2379"/>
         </scene>
         <!--Search Results View Controller-->
         <scene sceneID="0m5-1m-TMy">
@@ -160,6 +160,7 @@
                         <outlet property="filterBarContainer" destination="4tn-1A-t8U" id="gKE-le-RWh"/>
                         <outlet property="hotpotContainer" destination="uJK-a9-1m0" id="iRs-v1-JGM"/>
                         <outlet property="searchResultsContainer" destination="CqB-g8-4PC" id="Sq5-Nw-Uxt"/>
+                        <segue destination="knR-MX-BG5" kind="show" identifier="segueToAddHotpotToList" id="MM1-x1-6JB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YN3-3Y-uml" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -211,7 +212,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="hs9-Da-RRs"/>
                                         </constraints>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" returnKeyType="search"/>
                                     </searchBar>
                                 </subviews>
                                 <constraints>
@@ -435,7 +436,7 @@
                                     </label>
                                     <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="e8j-M3-G8i">
                                         <rect key="frame" x="54" y="22" width="432" height="44"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" returnKeyType="search"/>
                                     </searchBar>
                                 </subviews>
                                 <color key="backgroundColor" red="0.46432637710000002" green="0.83866794580000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -562,7 +563,7 @@
                                     </label>
                                     <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="KBX-4D-3gW">
                                         <rect key="frame" x="0.0" y="24" width="432" height="44"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" returnKeyType="search"/>
                                     </searchBar>
                                 </subviews>
                                 <constraints>
@@ -674,7 +675,7 @@
                                             <constraint firstAttribute="height" constant="30" id="M8L-gt-dKq"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" returnKeyType="done"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9wg-ge-abF">
                                         <rect key="frame" x="54" y="72" width="432" height="30"/>
@@ -682,7 +683,7 @@
                                             <constraint firstAttribute="height" constant="30" id="cfG-7f-Q6J"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" secureTextEntry="YES"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" returnKeyType="done" secureTextEntry="YES"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Re-type password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XCh-zd-wuJ">
                                         <rect key="frame" x="54" y="112" width="432" height="30"/>
@@ -690,7 +691,7 @@
                                             <constraint firstAttribute="height" constant="30" id="ddH-fK-KQB"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" secureTextEntry="YES"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" returnKeyType="done" secureTextEntry="YES"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="La9-5i-mqZ">
                                         <rect key="frame" x="54" y="152" width="432" height="30"/>
@@ -698,7 +699,7 @@
                                             <constraint firstAttribute="height" constant="30" id="XSi-sy-43p"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="done"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By clicking the button below, I certify that I am 13 years of age or older." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rNT-x5-eXT">
                                         <rect key="frame" x="38" y="192" width="464" height="17"/>
@@ -795,7 +796,7 @@
                                             <constraint firstAttribute="height" constant="40" id="lVR-ws-4Jw"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" returnKeyType="done"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8Wj-Vk-Nx6">
                                         <rect key="frame" x="54" y="131" width="432" height="40"/>
@@ -803,7 +804,7 @@
                                             <constraint firstAttribute="height" constant="40" id="sDy-sr-7aW"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" secureTextEntry="YES"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" returnKeyType="done" secureTextEntry="YES"/>
                                     </textField>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="ZHg-6x-4CX">
                                         <rect key="frame" x="54" y="201" width="432" height="40"/>
@@ -999,9 +1000,6 @@
                             </tableViewCell>
                         </prototypes>
                     </tableView>
-                    <connections>
-                        <segue destination="knR-MX-BG5" kind="show" identifier="segueToAddHotpotToList" id="g0D-n5-ZRN"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D6H-7K-czm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -41,17 +41,14 @@ class SearchResultsViewController : UIViewController {
     // Buttons:
     let clearSearchBtn = UIBarButtonItem()
     let addToListBtn = UIBarButtonItem()
-    let optionsBtn = UIBarButtonItem()
     
     // Button Text:
     let clearSearchText = String.fontAwesomeIconWithName(.ChevronLeft) + " New Search"
     let addToListText = String.fontAwesomeIconWithName(.Plus) + " Save Search to List"
-    let optionsText = String.fontAwesomeIconWithName(.Bars)
     
     // Button Actions:
     let clearSearchSelector : Selector = "clearSearch"
     let addToListSelector : Selector = "addToListBtnClicked"
-    let optionsSelector : Selector = "addToListBtnClicked"
     
     // MARK: Actions
     
@@ -66,8 +63,8 @@ class SearchResultsViewController : UIViewController {
         
         // Setup navigation bar
         if let navi = self.tabBarController?.navigationController as? MainNavigationController {
-            self.tabBarController?.navigationItem.setLeftBarButtonItems([self.clearSearchBtn], animated: true)
-            self.tabBarController?.navigationItem.setRightBarButtonItems([self.addToListBtn], animated: true)
+            self.tabBarController?.navigationItem.setLeftBarButtonItems([clearSearchBtn], animated: true)
+            self.tabBarController?.navigationItem.setRightBarButtonItems([addToListBtn], animated: true)
             navi.reset_navigationBar()
             self.tabBarController?.navigationItem.title = "Search"
         }
@@ -80,12 +77,17 @@ class SearchResultsViewController : UIViewController {
         }
     }
     
+    /* configureUIBarButtons
+    - generates the UIBarButtonItem objects for the top nav bar
+    */
     func configureUIBarButtons() {
         configureUIBarButtonItem(clearSearchBtn, title: clearSearchText, action: clearSearchSelector)
-        configureUIBarButtonItem(clearSearchBtn, title: addToListText, action: addToListSelector)
-        configureUIBarButtonItem(clearSearchBtn, title: clearSearchText, action: clearSearchSelector)
+        configureUIBarButtonItem(addToListBtn, title: addToListText, action: addToListSelector)
     }
     
+    /* configureUIBarButtonItem
+    - sets attributes on a UIBarButtonItem to the preferred configuration
+    */
     func configureUIBarButtonItem(button: UIBarButtonItem, title: String, action: Selector) {
         button.setTitleTextAttributes(attributes, forState: .Normal)
         button.title = title
@@ -93,7 +95,9 @@ class SearchResultsViewController : UIViewController {
         button.target = self
         button.action = action
     }
-        
+    
+    // SUBVIEW MANAGEMENT FUNCTIONS
+
     /* prepareForSegue
         - prepares for segue
         - sets variables to keep track of embedded SVCs
@@ -116,6 +120,8 @@ class SearchResultsViewController : UIViewController {
         }
     }
     
+    // SUBVIEW RESPONSE FUNCTIONS
+
     /* newSearchTermWasAddded
         - refreshes hotpot to reflect changes to search query
     */
