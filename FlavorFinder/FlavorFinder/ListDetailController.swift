@@ -26,7 +26,7 @@ class ListDetailController: UITableViewController {
     // Visual related:
     var listTitle = ""
     var noIngredients = " has no ingredients!"
-    let addToListText = "Add new ingredient"
+    let addToListText = String.fontAwesomeIconWithName(.Plus) + " Add New Ingredient"
     
     // Table itself:
     @IBOutlet var ingredientListsTableView: UITableView!
@@ -126,9 +126,11 @@ class ListDetailController: UITableViewController {
                 let cell = tableView.dequeueReusableCellWithIdentifier(addToListCellIdentifier, forIndexPath: indexPath)
                 // set Cell label:
                 cell.textLabel?.text = addToListText
+                cell.textLabel?.font = UIFont.fontAwesomeOfSize(16)
                 // Give cell a chevron:
                 cell.accessoryType =
                     UITableViewCellAccessoryType.DisclosureIndicator
+                cell.setEditing(false, animated: false)
                 return cell
             } else {
                 // set cell identifier:
@@ -141,15 +143,22 @@ class ListDetailController: UITableViewController {
             }
             
     }
-    
+
+    /* tableView - choose which rows are editable (delete shows)
+                - makes it so the first row is not.g
+    */
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        // Return false if you do not want the specified item to be editable.
+        return (indexPath.row != 0)
+    }
+
     /* tableView; Delete a cell:
     */
     override func tableView(tableView: UITableView,
         commitEditingStyle editingStyle: UITableViewCellEditingStyle,
         forRowAtIndexPath indexPath: NSIndexPath) {
-            if editingStyle == UITableViewCellEditingStyle.Delete {
-
-                if (indexPath.row != 0){
+            if (indexPath.row != 0){
+                if editingStyle == UITableViewCellEditingStyle.Delete {
                     // Tell parse to remove ingredient in list from local db:
                     removeIngredientFromList(userList, ingredient: self.ingredientList[indexPath.row - 1])
                     
@@ -160,11 +169,12 @@ class ListDetailController: UITableViewController {
                     // Show empty message if needed:
                     if self.ingredientList.isEmpty {
                         ingredientListsTableView.backgroundView = emptyBackgroundText(
-                            self.listTitle + self.noIngredients, view: ingredientListsTableView as UIView)
+                        self.listTitle + self.noIngredients, view: ingredientListsTableView as UIView)
                     }
                 }
             }
     }
+
 
     /* prepareForSegue
         - sends info to edit page
@@ -177,8 +187,8 @@ class ListDetailController: UITableViewController {
             }
         }
     }
-    
-    
+
+
     // MARK: Functions -------------------------------------------------
 
     /* createBackgroundWithText
