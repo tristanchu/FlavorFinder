@@ -636,7 +636,7 @@
                         <viewControllerLayoutGuide type="bottom" id="eKW-5o-wKA"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="hlX-Xv-nsN">
-                        <rect key="frame" x="0.0" y="0.0" width="540" height="276"/>
+                        <rect key="frame" x="0.0" y="0.0" width="540" height="270"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -914,7 +914,7 @@
                                 </connections>
                             </button>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xlw-fM-hrP">
-                                <rect key="frame" x="150" y="326" width="300" height="200"/>
+                                <rect key="frame" x="30" y="183" width="540" height="270"/>
                                 <connections>
                                     <segue destination="wNk-xB-g6C" kind="embed" identifier="embedSettingsToLogin" id="eUS-5B-FIU"/>
                                 </connections>
@@ -922,17 +922,17 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="xlw-fM-hrP" firstAttribute="leading" secondItem="cE8-rs-reN" secondAttribute="leading" constant="150" id="At8-qu-WtW"/>
+                            <constraint firstItem="xlw-fM-hrP" firstAttribute="leading" secondItem="cE8-rs-reN" secondAttribute="leadingMargin" constant="10" id="AKL-jX-lDz"/>
                             <constraint firstItem="TSr-eK-5tj" firstAttribute="top" secondItem="kxN-pl-ce4" secondAttribute="bottom" constant="10" id="E0p-PV-4Sl"/>
                             <constraint firstItem="kxN-pl-ce4" firstAttribute="centerX" secondItem="TSr-eK-5tj" secondAttribute="centerX" id="E5p-bf-4eY"/>
-                            <constraint firstItem="oOy-vH-GSs" firstAttribute="centerX" secondItem="TSr-eK-5tj" secondAttribute="centerX" id="Fy9-WR-HRV"/>
+                            <constraint firstItem="oOy-vH-GSs" firstAttribute="centerX" secondItem="cE8-rs-reN" secondAttribute="centerX" id="FUp-uz-epM"/>
                             <constraint firstItem="CMe-VZ-6Ga" firstAttribute="top" secondItem="jkl-GR-9wx" secondAttribute="bottom" constant="40" id="RHT-uf-CND"/>
                             <constraint firstItem="kxN-pl-ce4" firstAttribute="top" secondItem="CMe-VZ-6Ga" secondAttribute="bottom" constant="40" id="TLa-s3-H3M"/>
-                            <constraint firstItem="xlw-fM-hrP" firstAttribute="top" secondItem="oOy-vH-GSs" secondAttribute="bottom" constant="18" id="VWh-WO-MfJ"/>
-                            <constraint firstItem="oOy-vH-GSs" firstAttribute="centerX" secondItem="xlw-fM-hrP" secondAttribute="centerX" id="Wfp-dM-2LC"/>
-                            <constraint firstItem="7OD-bm-eJJ" firstAttribute="top" secondItem="xlw-fM-hrP" secondAttribute="bottom" constant="25" id="jhQ-LM-tcK"/>
+                            <constraint firstItem="xlw-fM-hrP" firstAttribute="centerX" secondItem="cE8-rs-reN" secondAttribute="centerX" id="UKQ-DH-2C8"/>
                             <constraint firstItem="kxN-pl-ce4" firstAttribute="centerX" secondItem="CMe-VZ-6Ga" secondAttribute="centerX" id="m38-iz-tKp"/>
+                            <constraint firstItem="xlw-fM-hrP" firstAttribute="centerY" secondItem="cE8-rs-reN" secondAttribute="centerY" multiplier="1.15" constant="1" id="qYS-zJ-lOc"/>
                             <constraint firstItem="oOy-vH-GSs" firstAttribute="top" secondItem="TSr-eK-5tj" secondAttribute="bottom" constant="40" id="wIy-Qp-P8Z"/>
+                            <constraint firstItem="xlw-fM-hrP" firstAttribute="height" secondItem="cE8-rs-reN" secondAttribute="height" multiplier="0.49" id="wnU-UQ-KFD"/>
                             <constraint firstItem="CMe-VZ-6Ga" firstAttribute="centerX" secondItem="cE8-rs-reN" secondAttribute="centerX" id="xBn-xS-lwe"/>
                         </constraints>
                     </view>
@@ -1116,6 +1116,6 @@
         <image name="SettingsFilled" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="w9Y-38-Udg"/>
+        <segue reference="eUS-5B-FIU"/>
     </inferredMetricsTieBreakers>
 </document>

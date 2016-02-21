@@ -27,7 +27,7 @@ class SettingsPage : LoginModuleParentViewController {
     let loggedOutText = "You must be logged in to have settings."
     
     // Placement:
-    let loggedOutPlacementHeightMultiplier : CGFloat = 0.25
+    let loggedOutPlacementHeightMultiplier : CGFloat = 0.5
 
     // Buttons:
     @IBOutlet weak var resetPasswordButton: UIButton!
