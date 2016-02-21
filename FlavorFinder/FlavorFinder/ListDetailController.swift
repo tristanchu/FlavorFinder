@@ -13,6 +13,7 @@ class ListDetailController: UITableViewController {
     
     // MARK: Properties:
     let listDetailCell = "listDetailCellIdentifier"
+    let addToListCellIdentifier = "addToListCellIdentifier"
     var ingredientList = [PFIngredient]()
     var userList: PFObject!  // reference to list for editing
     
@@ -25,6 +26,7 @@ class ListDetailController: UITableViewController {
     // Visual related:
     var listTitle = ""
     var noIngredients = " has no ingredients!"
+    let addToListText = String.fontAwesomeIconWithName(.Plus) + " Add New Ingredient"
     
     // Table itself:
     @IBOutlet var ingredientListsTableView: UITableView!
@@ -53,6 +55,7 @@ class ListDetailController: UITableViewController {
         ingredientListsTableView.delegate = self
         ingredientListsTableView.registerClass(UITableViewCell.self,
             forCellReuseIdentifier: listDetailCell)
+        ingredientListsTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: addToListCellIdentifier)
         
         // Table view visuals:
         ingredientListsTableView.tableFooterView = UIView(frame: CGRectZero)  // remove empty cells
@@ -109,7 +112,7 @@ class ListDetailController: UITableViewController {
     */
     override func tableView(
         tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return self.ingredientList.count
+            return self.ingredientList.count + 1 // add 1 for add to list
     }
     
     /* tableView -> UITableViewCell
@@ -118,36 +121,60 @@ class ListDetailController: UITableViewController {
     override func tableView(tableView: UITableView,
         cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
             
-            // set cell identifier:
-            let cell = tableView.dequeueReusableCellWithIdentifier(
-                listDetailCell, forIndexPath: indexPath)
+            if (indexPath.row == 0){
+                // set cell identifier:
+                let cell = tableView.dequeueReusableCellWithIdentifier(addToListCellIdentifier, forIndexPath: indexPath)
+                // set Cell label:
+                cell.textLabel?.text = addToListText
+                cell.textLabel?.font = UIFont.fontAwesomeOfSize(16)
+                // Give cell a chevron:
+                cell.accessoryType =
+                    UITableViewCellAccessoryType.DisclosureIndicator
+                cell.setEditing(false, animated: false)
+                return cell
+            } else {
+                // set cell identifier:
+                let cell = tableView.dequeueReusableCellWithIdentifier(
+                    listDetailCell, forIndexPath: indexPath)
+                
+                // Set cell label:
+                cell.textLabel?.text = ingredientList[indexPath.row - 1].name
+                return cell
+            }
             
-            // Set cell label:
-            cell.textLabel?.text = ingredientList[indexPath.row].name
-            return cell
     }
-    
+
+    /* tableView - choose which rows are editable (delete shows)
+                - makes it so the first row is not.g
+    */
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        // Return false if you do not want the specified item to be editable.
+        return (indexPath.row != 0)
+    }
+
     /* tableView; Delete a cell:
     */
     override func tableView(tableView: UITableView,
         commitEditingStyle editingStyle: UITableViewCellEditingStyle,
         forRowAtIndexPath indexPath: NSIndexPath) {
-            if editingStyle == UITableViewCellEditingStyle.Delete {
-
-                // Tell parse to remove ingredient in list from local db:
-                removeIngredientFromList(userList, ingredient: self.ingredientList[indexPath.row])
-
-                // remove from display table:
-                self.ingredientList.removeAtIndex(indexPath.row)
-                tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
-
-                // Show empty message if needed:
-                if self.ingredientList.isEmpty {
-                    ingredientListsTableView.backgroundView = emptyBackgroundText(
+            if (indexPath.row != 0){
+                if editingStyle == UITableViewCellEditingStyle.Delete {
+                    // Tell parse to remove ingredient in list from local db:
+                    removeIngredientFromList(userList, ingredient: self.ingredientList[indexPath.row - 1])
+                    
+                    // remove from display table:
+                    self.ingredientList.removeAtIndex(indexPath.row - 1)
+                    tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+                    
+                    // Show empty message if needed:
+                    if self.ingredientList.isEmpty {
+                        ingredientListsTableView.backgroundView = emptyBackgroundText(
                         self.listTitle + self.noIngredients, view: ingredientListsTableView as UIView)
+                    }
                 }
             }
     }
+
 
     /* prepareForSegue
         - sends info to edit page
@@ -160,8 +187,8 @@ class ListDetailController: UITableViewController {
             }
         }
     }
-    
-    
+
+
     // MARK: Functions -------------------------------------------------
 
     /* createBackgroundWithText
