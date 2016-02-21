@@ -10,18 +10,24 @@ import Foundation
 import UIKit
 import Parse
 
-class SettingsPage : UIViewController {
+class SettingsPage : LoginModuleParentViewController {
     
-  
-    // MARK: Properties:
+    // MARK: Properties: --------------------------------------------------
     // Labels:
     @IBOutlet weak var pagePromptLabel: UILabel!
     @IBOutlet weak var passwordSentLabel: UILabel!
+    @IBOutlet weak var containerView: UIView!
     var loggedOutMessage : UILabel?
+    
+    // Segues:
+    let segueLoginEmbedded = "embedSettingsToLogin"
     
     // Text:
     let pageTitle = "Settings"
     let loggedOutText = "You must be logged in to have settings."
+    
+    // Placement:
+    let loggedOutPlacementHeightMultiplier : CGFloat = 0.5
 
     // Buttons:
     @IBOutlet weak var resetPasswordButton: UIButton!
@@ -43,9 +49,16 @@ class SettingsPage : UIViewController {
     }
 
     // MARK: Override methods: ----------------------------------------------
+    
+    /* viewDidLoad:
+    - Setup when view is loaded into memory
+    */
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
 
     /* viewDidAppear:
-    Setup when user goes into page.
+    - Setup when user goes into page.
     */
     override func viewDidAppear(animated: Bool) {
         // Get navigation bar on top:
@@ -67,7 +80,11 @@ class SettingsPage : UIViewController {
             loggedOutMessage?.removeFromSuperview()
         }
         loggedOutMessage = emptyBackgroundText(loggedOutText, view: self.view)
+        // move message up to make room
+        loggedOutMessage?.frame.size.height = self.view.frame.size.height * loggedOutPlacementHeightMultiplier
         self.view.addSubview(loggedOutMessage!)
+        
+        setUpLoginContainerUI()
 
         if currentUser != nil {
             displayLoggedIn()
@@ -76,8 +93,30 @@ class SettingsPage : UIViewController {
         }
     }
     
-    // MARK: Other functions
+    /* prepareForSegue:
+    - setup before seguing
+    - prior to container's embed segue, will set up parent class variable to have
+    access to contained VC
+    */
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if self.segueEmbeddedContent == nil {
+            self.setValue(segueLoginEmbedded, forKey: "segueEmbeddedContent")
+        }
+        super.prepareForSegue(segue, sender: sender)
+    }
+    
+    /* loginSucceeded:
+    - handle successful login via module
+    */
+    override func loginSucceeded() {
+        super.loginSucceeded() // hides module
+        displayLoggedIn()
+    }
+    
+    // MARK: Other functions -------------------------------------------------
+    
     /* displayLoggedIn
+    - hides or unhides subviews for the logged-in display
     */
     func displayLoggedIn() {
         // Logged-in UI
@@ -87,11 +126,12 @@ class SettingsPage : UIViewController {
         pagePromptLabel.hidden = false
         
         // Logged-out UI
-        self.loggedOutMessage?.hidden = true
-        print(self.loggedOutMessage?.hidden)
+        loggedOutMessage?.hidden = true
+        containerVC?.view.hidden = true // embedded login module
     }
     
     /* displayLoggedOut
+    - hides or unhides subviews for the logged-out display
     */
     func displayLoggedOut() {
         // Logged-in UI
@@ -101,7 +141,10 @@ class SettingsPage : UIViewController {
         pagePromptLabel.hidden = true
         
         // Logged-out UI
-        self.loggedOutMessage?.hidden = false
+        loggedOutMessage?.hidden = false
+        containerVC?.view.hidden = false // embedded login module
+        goToLogin()
     }
+    
 
 }

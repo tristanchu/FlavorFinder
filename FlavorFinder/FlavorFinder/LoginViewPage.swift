@@ -104,11 +104,12 @@ class LoginViewPage : UIViewController, UITextFieldDelegate {
                     (user: PFUser?, error: NSError?) -> Void in
 
                     if user != nil {
-                        // User exists - set user session & go to Match Table
+                        // User exists - set user session
                         setUserSession(user!)
-                        // hide container:
-                        self.parentViewController?.view.hidden = true
-
+                        if let parentVC = self.parentViewController?.parentViewController as! LoginModuleParentViewController? {
+                            parentVC.loginSucceeded()
+                        }
+                        
                     } else {
                         // Alert Username and Password pair does not exist.
                         alertPopup(self.INCORRECT_U_OR_P_TITLE,

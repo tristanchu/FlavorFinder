@@ -636,8 +636,9 @@
                         <viewControllerLayoutGuide type="bottom" id="eKW-5o-wKA"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="hlX-Xv-nsN">
-                        <rect key="frame" x="0.0" y="0.0" width="540" height="276"/>
+                        <rect key="frame" x="0.0" y="0.0" width="540" height="270"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
                         <segue destination="PFz-CQ-J0I" kind="custom" identifier="goToLogin" customClass="EmptySegue" customModule="FlavorFinder" id="hLW-pm-bIO"/>
@@ -876,6 +877,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xlw-fM-hrP">
+                                <rect key="frame" x="30" y="183" width="540" height="270"/>
+                                <connections>
+                                    <segue destination="wNk-xB-g6C" kind="embed" identifier="embedSettingsToLogin" id="eUS-5B-FIU"/>
+                                </connections>
+                            </containerView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings Page" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CMe-VZ-6Ga">
                                 <rect key="frame" x="231" y="104" width="139" height="31"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="22"/>
@@ -900,8 +907,8 @@
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oOy-vH-GSs">
-                                <rect key="frame" x="271" y="276" width="59" height="31"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oOy-vH-GSs">
+                                <rect key="frame" x="271" y="277" width="59" height="31"/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
                                 <inset key="contentEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
@@ -915,18 +922,23 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="kxN-pl-ce4" firstAttribute="top" secondItem="CMe-VZ-6Ga" secondAttribute="bottom" constant="40" id="7TA-hw-OA0"/>
-                            <constraint firstItem="kxN-pl-ce4" firstAttribute="centerX" secondItem="cE8-rs-reN" secondAttribute="centerX" id="H5B-PY-yvj"/>
-                            <constraint firstItem="oOy-vH-GSs" firstAttribute="centerX" secondItem="cE8-rs-reN" secondAttribute="centerX" id="N5a-F9-mOh"/>
-                            <constraint firstItem="TSr-eK-5tj" firstAttribute="top" secondItem="kxN-pl-ce4" secondAttribute="bottom" constant="10" id="WKZ-to-NSW"/>
-                            <constraint firstItem="TSr-eK-5tj" firstAttribute="centerX" secondItem="cE8-rs-reN" secondAttribute="centerX" id="aSF-0g-g7y"/>
-                            <constraint firstItem="oOy-vH-GSs" firstAttribute="top" secondItem="TSr-eK-5tj" secondAttribute="bottom" constant="40" id="hZa-K7-MzC"/>
-                            <constraint firstItem="CMe-VZ-6Ga" firstAttribute="top" secondItem="jkl-GR-9wx" secondAttribute="bottom" constant="40" id="rwz-C0-jqJ"/>
-                            <constraint firstItem="CMe-VZ-6Ga" firstAttribute="centerX" secondItem="cE8-rs-reN" secondAttribute="centerX" id="voa-JQ-hvo"/>
+                            <constraint firstItem="xlw-fM-hrP" firstAttribute="leading" secondItem="cE8-rs-reN" secondAttribute="leadingMargin" constant="10" id="AKL-jX-lDz"/>
+                            <constraint firstItem="TSr-eK-5tj" firstAttribute="top" secondItem="kxN-pl-ce4" secondAttribute="bottom" constant="10" id="E0p-PV-4Sl"/>
+                            <constraint firstItem="kxN-pl-ce4" firstAttribute="centerX" secondItem="TSr-eK-5tj" secondAttribute="centerX" id="E5p-bf-4eY"/>
+                            <constraint firstItem="oOy-vH-GSs" firstAttribute="centerX" secondItem="cE8-rs-reN" secondAttribute="centerX" id="FUp-uz-epM"/>
+                            <constraint firstItem="CMe-VZ-6Ga" firstAttribute="top" secondItem="jkl-GR-9wx" secondAttribute="bottom" constant="40" id="RHT-uf-CND"/>
+                            <constraint firstItem="kxN-pl-ce4" firstAttribute="top" secondItem="CMe-VZ-6Ga" secondAttribute="bottom" constant="40" id="TLa-s3-H3M"/>
+                            <constraint firstItem="xlw-fM-hrP" firstAttribute="centerX" secondItem="cE8-rs-reN" secondAttribute="centerX" id="UKQ-DH-2C8"/>
+                            <constraint firstItem="kxN-pl-ce4" firstAttribute="centerX" secondItem="CMe-VZ-6Ga" secondAttribute="centerX" id="m38-iz-tKp"/>
+                            <constraint firstItem="xlw-fM-hrP" firstAttribute="centerY" secondItem="cE8-rs-reN" secondAttribute="centerY" multiplier="1.15" constant="1" id="qYS-zJ-lOc"/>
+                            <constraint firstItem="oOy-vH-GSs" firstAttribute="top" secondItem="TSr-eK-5tj" secondAttribute="bottom" constant="40" id="wIy-Qp-P8Z"/>
+                            <constraint firstItem="xlw-fM-hrP" firstAttribute="height" secondItem="cE8-rs-reN" secondAttribute="height" multiplier="0.49" id="wnU-UQ-KFD"/>
+                            <constraint firstItem="CMe-VZ-6Ga" firstAttribute="centerX" secondItem="cE8-rs-reN" secondAttribute="centerX" id="xBn-xS-lwe"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="xgi-cB-9RK"/>
                     <connections>
+                        <outlet property="containerView" destination="xlw-fM-hrP" id="Ajo-qO-uCK"/>
                         <outlet property="logoutButton" destination="oOy-vH-GSs" id="kUf-hr-kxG"/>
                         <outlet property="pagePromptLabel" destination="CMe-VZ-6Ga" id="TB6-Ti-Fjt"/>
                         <outlet property="passwordSentLabel" destination="TSr-eK-5tj" id="J3W-Vo-jG7"/>
@@ -1103,4 +1115,7 @@
         <image name="Settings" width="22" height="22"/>
         <image name="SettingsFilled" width="22" height="22"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="eUS-5B-FIU"/>
+    </inferredMetricsTieBreakers>
 </document>
