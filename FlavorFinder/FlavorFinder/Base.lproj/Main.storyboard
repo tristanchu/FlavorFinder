@@ -636,7 +636,7 @@
                         <viewControllerLayoutGuide type="bottom" id="eKW-5o-wKA"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="hlX-Xv-nsN">
-                        <rect key="frame" x="0.0" y="0.0" width="540" height="276"/>
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -1116,6 +1116,6 @@
         <image name="SettingsFilled" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="w9Y-38-Udg"/>
+        <segue reference="eUS-5B-FIU"/>
     </inferredMetricsTieBreakers>
 </document>

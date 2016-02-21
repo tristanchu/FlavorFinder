@@ -29,6 +29,7 @@ class SettingsPage : ContainerParentViewController {
     // Segues:
     let segueToLogin = "goToLogin"
     let segueToRegister = "goToRegister"
+    let segueLoginEmbedded = "embedSettingsToLogin"
 
     // Buttons:
     @IBOutlet weak var resetPasswordButton: UIButton!
@@ -52,15 +53,14 @@ class SettingsPage : ContainerParentViewController {
     // MARK: Override methods: ----------------------------------------------
     
     /* viewDidLoad:
-    Setup when view is loaded into memory
+    - Setup when view is loaded into memory
     */
     override func viewDidLoad() {
-        segueEmbeddedContent = "embedSettingsToLogin"
         super.viewDidLoad()
     }
 
     /* viewDidAppear:
-    Setup when user goes into page.
+    - Setup when user goes into page.
     */
     override func viewDidAppear(animated: Bool) {
         // Get navigation bar on top:
@@ -87,12 +87,25 @@ class SettingsPage : ContainerParentViewController {
         self.view.addSubview(loggedOutMessage!)
         
         setUpLoginContainerUI()
+        print(containerVC)
 
         if currentUser != nil {
             displayLoggedIn()
         } else {
             displayLoggedOut()
         }
+    }
+    
+    /* prepareForSegue:
+    - setup before seguing
+    - prior to container's embed segue, will set up parent class variable to have
+        access to contained VC
+    */
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if self.segueEmbeddedContent == nil {
+            self.setValue(segueLoginEmbedded, forKey: "segueEmbeddedContent")
+        }
+        super.prepareForSegue(segue, sender: sender)
     }
     
     // MARK: Other functions -------------------------------------------------
@@ -129,6 +142,7 @@ class SettingsPage : ContainerParentViewController {
     
     func goToLogin() {
         containerVC?.segueIdentifierReceivedFromParent(segueToLogin)
+        print("attempted to go to login")
     }
     
     func goToRegister() {
