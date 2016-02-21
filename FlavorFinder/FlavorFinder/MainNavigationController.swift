@@ -120,20 +120,6 @@ class MainNavigationController: UINavigationController {
         self.dismissMenuTableView()
     }
     
-    // HISTORY/FUTURE FUNCTIONS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    // ------------------------
-    func goBackBtnClicked() {
-        if self.visibleViewController is RegisterViewController {
-            let transition: CATransition = CATransition()
-            transition.type = kCATransitionPush
-            transition.subtype = kCATransitionFromLeft
-            self.view.layer.addAnimation(transition, forKey: "kCATransition")
-            
-            let loginViewControllerObject = mainStoryboard.instantiateViewControllerWithIdentifier(LoginViewControllerIdentifier) as? LoginViewController
-            self.pushViewController(loginViewControllerObject!, animated: true)
-        }
-    }
-    
     // MENU FUNCTIONS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // --------------
     func menuBtnClicked() {
