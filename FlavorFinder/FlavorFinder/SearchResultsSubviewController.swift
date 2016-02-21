@@ -43,9 +43,7 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
     )
     // strings
     let CELL_IDENTIFIER = "globalSearchResultsCell"
-    // colors
-    let CELL_BTN_OFF_COLOR = UIColor.grayColor()
-    let CELL_BTN_ON_COLOR = UIColor.blackColor()
+    
     // fonts
     let ICON_FONT = UIFont.fontAwesomeOfSize(100)
 
@@ -210,14 +208,8 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         cell.delegate = self
         
         if !(matches.isEmpty) {
-            let match = matches[indexPath.row].ingredient
-            var matchesPerLevel = Int(matches.count / MATCH_COLORS.count)
-            if matchesPerLevel == 0 { // no dividing by zero, please
-                matchesPerLevel = 1
-            }
             
-            // for now, doing a simple match coloration based on equal proportions at each level
-            let matchLevel = Int((matches.count - indexPath.row)/matchesPerLevel)
+            let match = matches[indexPath.row].ingredient
 
             if match.isDataAvailable() {
                 let name = match[_s_name] as? String
@@ -235,14 +227,9 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
                 tableView.reloadData()
                 return cell
             }
-            if currentUser != nil && isFavoriteIngredient(currentUser!, ingredient: match) != nil {
-                cell.backgroundColor = FAV_PINNED_COLOR
-            } else if matchLevel < MATCH_COLORS.count && matchLevel >= 0 {
-                cell.backgroundColor = MATCH_COLORS[matchLevel]
-            } else if matchLevel >= MATCH_COLORS.count {
-                cell.backgroundColor = MATCH_COLORS.last
-            } else {
-                cell.backgroundColor = MATCH_COLORS[0] // default
+            
+            if currentUser != nil {
+                cell.backgroundColor = SEARCH_RESULTS_CELL_COLOR
             }
         }
         
@@ -326,12 +313,9 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
                 if let _ = isFavoriteIngredient(user, ingredient: matchIngredient) {
                     unfavoriteIngredient(user, ingredient: matchIngredient)
                     selBtn.deselect()
-                    // getNewSearchResults()   // unpin fav
-                    // note: unfavoriteIngredient is a slow-enough operation that
-                    // cell would still look like "fav" if you simply reload table data,
-                    // but getNewSearchResults (which pins) works but is too slow for
-                    // effective feedback
-                    cell.backgroundColor = MATCH_COLORS[0] // default color, instead of fav color
+                    
+                    // need fav indicators!
+                    
                 } else {
                     favoriteIngredient(user, ingredient: matchIngredient)
                     selBtn.select()
