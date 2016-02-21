@@ -13,7 +13,7 @@ import Foundation
 import UIKit
 import Parse
 
-class NewSearchViewController : ContainerParentViewController,
+class NewSearchViewController : LoginModuleParentViewController,
         UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource {
     
     // MARK: Properties -----------------------------------------
@@ -26,18 +26,14 @@ class NewSearchViewController : ContainerParentViewController,
 
     // Navigation properties (passed in through segue):
     var buttonSegue : String!
-
+    let segueLoginEmbedded = "segueLoginEmbedSubview"
+    
     // Identifiers from storyboard: (note, constraints on there)
     @IBOutlet weak var appName: UILabel!
     @IBOutlet weak var appIconView: UIImageView!
     @IBOutlet weak var searchPrompt: UILabel!
     @IBOutlet weak var newSearchBar: UISearchBar!
     @IBOutlet weak var searchResultTableView: UITableView!
-
-    // Segues:
-    let segueLoginEmbedded = "segueLoginEmbedSubview"
-    let segueToLogin = "goToLogin"
-    let segueToRegister = "goToRegister"
 
     // MARK: Override Functions -----------------------------------------
 
@@ -78,30 +74,17 @@ class NewSearchViewController : ContainerParentViewController,
             goToLogin()
         }
     }
-
+    
+    /* prepareForSegue:
+    - setup before seguing
+    - prior to container's embed segue, will set up parent class variable to have
+    access to contained VC
+    */
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if self.segueEmbeddedContent == nil {
             self.setValue(segueLoginEmbedded, forKey: "segueEmbeddedContent")
         }
         super.prepareForSegue(segue, sender: sender)
-    }
-    
-    // MARK: Container Nav Functions -----------------------------------------
-    func goToLogin() {
-        containerVC?.segueIdentifierReceivedFromParent(segueToLogin)
-    }
-    
-    func goToRegister() {
-        containerVC?.segueIdentifierReceivedFromParent(segueToRegister)
-    }
-    
-    /* setUpLoginContainerUI
-        - login / register container UI
-    */
-    func setUpLoginContainerUI() {
-        // Rounded edges for container:
-        containerVC?.view.layer.cornerRadius = 20
-        containerVC?.view.clipsToBounds = true
     }
     
     // MARK: UITableViewDataSource protocol functions ------------------------

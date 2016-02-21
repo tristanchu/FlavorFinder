@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Parse
 
-class SettingsPage : ContainerParentViewController {
+class SettingsPage : LoginModuleParentViewController {
     
     // MARK: Properties: --------------------------------------------------
     // Labels:
@@ -19,17 +19,15 @@ class SettingsPage : ContainerParentViewController {
     @IBOutlet weak var containerView: UIView!
     var loggedOutMessage : UILabel?
     
+    // Segues:
+    let segueLoginEmbedded = "embedSettingsToLogin"
+    
     // Text:
     let pageTitle = "Settings"
     let loggedOutText = "You must be logged in to have settings."
     
     // Placement:
     let loggedOutPlacementHeightMultiplier : CGFloat = 0.25
-    
-    // Segues:
-    let segueToLogin = "goToLogin"
-    let segueToRegister = "goToRegister"
-    let segueLoginEmbedded = "embedSettingsToLogin"
 
     // Buttons:
     @IBOutlet weak var resetPasswordButton: UIButton!
@@ -87,7 +85,6 @@ class SettingsPage : ContainerParentViewController {
         self.view.addSubview(loggedOutMessage!)
         
         setUpLoginContainerUI()
-        print(containerVC)
 
         if currentUser != nil {
             displayLoggedIn()
@@ -99,7 +96,7 @@ class SettingsPage : ContainerParentViewController {
     /* prepareForSegue:
     - setup before seguing
     - prior to container's embed segue, will set up parent class variable to have
-        access to contained VC
+    access to contained VC
     */
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if self.segueEmbeddedContent == nil {
@@ -109,6 +106,7 @@ class SettingsPage : ContainerParentViewController {
     }
     
     // MARK: Other functions -------------------------------------------------
+    
     /* displayLoggedIn
     - hides or unhides subviews for the logged-in display
     */
@@ -140,22 +138,5 @@ class SettingsPage : ContainerParentViewController {
         goToLogin()
     }
     
-    func goToLogin() {
-        containerVC?.segueIdentifierReceivedFromParent(segueToLogin)
-        print("attempted to go to login")
-    }
-    
-    func goToRegister() {
-        containerVC?.segueIdentifierReceivedFromParent(segueToRegister)
-    }
-    
-    /* setUpLoginContainerUI
-    - login / register container UI
-    */
-    func setUpLoginContainerUI() {
-        // Rounded edges for container:
-        containerVC?.view.layer.cornerRadius = 20
-        containerVC?.view.clipsToBounds = true
-    }
 
 }

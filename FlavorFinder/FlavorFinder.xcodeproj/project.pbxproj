@@ -56,6 +56,7 @@
 		B61AD2C51C5BFB9C00081BF4 /* SearchResultsSubviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61AD2C41C5BFB9C00081BF4 /* SearchResultsSubviewController.swift */; };
 		B61FEBCE1C4430D30028F800 /* EmptySegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61FEBCD1C4430D30028F800 /* EmptySegue.swift */; };
 		B63F60211C725C0C0057D726 /* TextUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63F60201C725C0C0057D726 /* TextUtils.swift */; };
+		B64E25F01C7A3355003D53BD /* LoginModuleParentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64E25EF1C7A3355003D53BD /* LoginModuleParentViewController.swift */; };
 		B65BA8B11BF907750045CB5E /* SavedMatchesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65BA8B01BF907750045CB5E /* SavedMatchesCell.swift */; };
 		B6739A141C59971B0004F982 /* ContainerParentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6739A131C59971B0004F982 /* ContainerParentViewController.swift */; };
 		B6739A161C59973A0004F982 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6739A151C59973A0004F982 /* ContainerViewController.swift */; };
@@ -138,6 +139,7 @@
 		B61AD2C41C5BFB9C00081BF4 /* SearchResultsSubviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsSubviewController.swift; sourceTree = "<group>"; };
 		B61FEBCD1C4430D30028F800 /* EmptySegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptySegue.swift; sourceTree = "<group>"; };
 		B63F60201C725C0C0057D726 /* TextUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextUtils.swift; sourceTree = "<group>"; };
+		B64E25EF1C7A3355003D53BD /* LoginModuleParentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginModuleParentViewController.swift; sourceTree = "<group>"; };
 		B65BA8B01BF907750045CB5E /* SavedMatchesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedMatchesCell.swift; sourceTree = "<group>"; };
 		B6739A131C59971B0004F982 /* ContainerParentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerParentViewController.swift; sourceTree = "<group>"; };
 		B6739A151C59973A0004F982 /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
@@ -399,6 +401,7 @@
 			children = (
 				B685D2B41C5DE8D2001C37FF /* ContainerSystem */,
 				B6A779071C6C248F0005B44C /* SearchIngredientsViewController.swift */,
+				B64E25EF1C7A3355003D53BD /* LoginModuleParentViewController.swift */,
 			);
 			name = "Prototype VC Classes";
 			sourceTree = "<group>";
@@ -581,6 +584,7 @@
 				6062FDC11C5F3386009B2EEB /* LoginViewPage.swift in Sources */,
 				880DA78C1BE1FB03003C67F0 /* Globals.swift in Sources */,
 				B6739A1C1C5999D20004F982 /* NewSearchViewController.swift in Sources */,
+				B64E25F01C7A3355003D53BD /* LoginModuleParentViewController.swift in Sources */,
 				609432691C42DD6500BA0577 /* ListsPageController.swift in Sources */,
 				B61AD2C51C5BFB9C00081BF4 /* SearchResultsSubviewController.swift in Sources */,
 				B6739A181C5997760004F982 /* LandingPageController.swift in Sources */,
