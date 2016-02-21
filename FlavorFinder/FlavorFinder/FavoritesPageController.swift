@@ -24,7 +24,7 @@ class FavoritesPageController: UITableViewController {
     // Visual related:
     let noUserMsg = "You must be logged in to store favorites."
     let noFavoritesMsg =
-        "Favorite ingredients in Search!"
+        "No Favorites Yet!"
     let favoritesTitle = "Favorites"
     
     // Nav bar related:
@@ -67,21 +67,20 @@ class FavoritesPageController: UITableViewController {
         super.viewDidAppear(animated)
 
         // Get navigation bar on top:
-        var rightBtns : [UIBarButtonItem] = []
-        if currentUser != nil {
-            rightBtns.append(self.addBtn)
-            self.addBtn.enabled = true
-            self.tableView.backgroundColor = UIColor.whiteColor()
-            self.tableView.backgroundView = nil
-        }
         if let navi = self.tabBarController?.navigationController as?
                 MainNavigationController {
             self.tabBarController?.navigationItem.setLeftBarButtonItems(
                     [], animated: true)
             self.tabBarController?.navigationItem.setRightBarButtonItems(
-                rightBtns, animated: true)
+                [addBtn], animated: true)
             navi.reset_navigationBar()
             self.tabBarController?.navigationItem.title = favoritesTitle
+        }
+        
+        if currentUser != nil {
+            self.addBtn.enabled = true
+        } else {
+            self.addBtn.enabled = false
         }
 
         // populate cell array
@@ -98,6 +97,8 @@ class FavoritesPageController: UITableViewController {
                 self.tableView.backgroundView =
                     emptyBackgroundText(noFavoritesMsg, view: self.tableView as UIView)
             }
+        } else {
+            self.tableView.backgroundView = nil
         }
 
         // update table view:

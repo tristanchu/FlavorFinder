@@ -223,6 +223,7 @@ class ListsPageController: UITableViewController {
         - action for the new list button
     */
     func newListBtnClicked() {
+        tableView.backgroundView = nil
         let newList = createIngredientList(
             currentUser!, title: newListTitle, ingredients: []) as PFObject
         // Update table view:
