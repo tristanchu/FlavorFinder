@@ -86,7 +86,7 @@ class AddHotpotToListController: UITableViewController {
     */
     override func tableView(
         tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return self.userLists.count
+            return self.userLists.count + 1 // add 1 for the create new list row
     }
 
     /* tableView -> UITableViewCell
