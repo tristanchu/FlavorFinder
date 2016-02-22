@@ -22,7 +22,7 @@ class AddToListPage: SearchIngredientsViewController, UITextFieldDelegate {
     
     
     // Visual:
-    let pageTitle = "Add Ingredient To List"
+    let pageTitle = "Add Ingredient To "
     
     // MARK: Override methods: ------------
     /* viewDidLoad:
@@ -50,11 +50,9 @@ class AddToListPage: SearchIngredientsViewController, UITextFieldDelegate {
                 self.tabBarController?.navigationItem.setRightBarButtonItems(
                     [], animated: true)
                 navi.reset_navigationBar()
-                self.tabBarController?.navigationItem.title = pageTitle
+                self.tabBarController?.navigationItem.title = "\(pageTitle)\(listTitle)"
                 self.cancelBtn.enabled = true
-                print("here")
         }
-        print("hello")
         
     }
     
