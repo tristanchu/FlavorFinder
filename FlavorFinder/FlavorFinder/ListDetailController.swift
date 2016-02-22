@@ -14,6 +14,7 @@ class ListDetailController: UITableViewController {
     // MARK: Properties:
     let listDetailCell = "listDetailCellIdentifier"
     let addToListCellIdentifier = "addToListCellIdentifier"
+    let listToSearchCellIdentifier = "listToSearchCellIdentifier"
     var ingredientList = [PFIngredient]()
     var userList: PFObject!  // reference to list for editing
     
@@ -27,6 +28,7 @@ class ListDetailController: UITableViewController {
     var listTitle = ""
     var noIngredients = " has no ingredients!"
     let addToListText = String.fontAwesomeIconWithName(.Plus) + " Add New Ingredient"
+    let listToSearchText = String.fontAwesomeIconWithName(.Search) + " Start Search With List"
     
     // Table itself:
     @IBOutlet var ingredientListsTableView: UITableView!
@@ -43,6 +45,7 @@ class ListDetailController: UITableViewController {
     // Segues:
     let segueToEditPage = "segueToEditListPage"
     let segueToAddToListPage = "segueToAddToListPage"
+    let segueToSearch = "segueToSearch"
 
     // MARK: Override methods: ----------------------------------------------
     /* viewDidLoad:
@@ -57,6 +60,7 @@ class ListDetailController: UITableViewController {
         ingredientListsTableView.registerClass(UITableViewCell.self,
             forCellReuseIdentifier: listDetailCell)
         ingredientListsTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: addToListCellIdentifier)
+        ingredientListsTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: listToSearchCellIdentifier)
         
         // Table view visuals:
         ingredientListsTableView.tableFooterView = UIView(frame: CGRectZero)  // remove empty cells
@@ -113,7 +117,11 @@ class ListDetailController: UITableViewController {
     */
     override func tableView(
         tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return self.ingredientList.count + 1 // add 1 for add to list
+            if (ingredientList.count == 0){
+                return self.ingredientList.count + 1 // add 1 for add to list
+            } else {
+                return self.ingredientList.count + 2 // add to list + make search
+            }
     }
     
     /* tableView -> UITableViewCell
@@ -121,28 +129,49 @@ class ListDetailController: UITableViewController {
     */
     override func tableView(tableView: UITableView,
         cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-            
+            // Add To List Cell:
             if (indexPath.row == 0){
                 // set cell identifier:
-                let cell = tableView.dequeueReusableCellWithIdentifier(addToListCellIdentifier, forIndexPath: indexPath)
+                let cell = tableView.dequeueReusableCellWithIdentifier(
+                    addToListCellIdentifier, forIndexPath: indexPath)
                 // set Cell label:
                 cell.textLabel?.text = addToListText
                 cell.textLabel?.font = UIFont.fontAwesomeOfSize(16)
+                cell.textLabel?.textColor = UIColor.grayColor()
                 // Give cell a chevron:
                 cell.accessoryType =
                     UITableViewCellAccessoryType.DisclosureIndicator
+                // No delete option:
                 cell.setEditing(false, animated: false)
                 return cell
+                
+            // if last cell - have add to list cell:
+            } else if (!ingredientList.isEmpty &&  indexPath.row == ingredientList.count + 1) {
+                
+                let cell = tableView.dequeueReusableCellWithIdentifier(
+                    listToSearchCellIdentifier, forIndexPath: indexPath)
+                // set Cell label:
+                cell.textLabel?.text = listToSearchText
+                cell.textLabel?.font = UIFont.fontAwesomeOfSize(16)
+                cell.textLabel?.textColor = UIColor.grayColor()
+                // Give cell a chevron:
+                cell.accessoryType =
+                    UITableViewCellAccessoryType.DisclosureIndicator
+                // No delete option:
+                cell.setEditing(false, animated: false)
+                
+                return cell
+
+            // regular ingredient cell:
             } else {
                 // set cell identifier:
                 let cell = tableView.dequeueReusableCellWithIdentifier(
                     listDetailCell, forIndexPath: indexPath)
-                
+                    
                 // Set cell label:
                 cell.textLabel?.text = ingredientList[indexPath.row - 1].name
                 return cell
             }
-            
     }
     
     /* tableView -> Does something on selection of row
@@ -151,6 +180,9 @@ class ListDetailController: UITableViewController {
         didSelectRowAtIndexPath indexPath: NSIndexPath) {
             if (indexPath.row == 0){
                 self.performSegueWithIdentifier(segueToAddToListPage, sender: self)
+            } else if (indexPath.row == ingredientList.count + 1){
+                currentSearch = ingredientList
+                print(ingredientList)
             }
     }
 
@@ -159,7 +191,7 @@ class ListDetailController: UITableViewController {
     */
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
-        return (indexPath.row != 0)
+        return (indexPath.row != 0 && indexPath.row != ingredientList.count + 1)
     }
 
     /* tableView; Delete a cell:
