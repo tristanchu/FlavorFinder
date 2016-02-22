@@ -49,8 +49,8 @@ class AddToListPage: SearchIngredientsViewController, UITextFieldDelegate {
         ingredientSearchBar = addIngredientSearchBar
         searchTable = addIngredientTableView
         
-        // make addIngredientPrompt empty until view appears:
-        addIngredientPromptLabel.text = ""
+        // set ingredient prompt to the use list name:
+        addIngredientPromptLabel.text = "\(addIngredientPrompt)\(listTitle)"
         
         super.viewDidLoad()
         
@@ -63,9 +63,6 @@ class AddToListPage: SearchIngredientsViewController, UITextFieldDelegate {
     */
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
-        // set ingredient prompt to the use list name:
-        addIngredientPromptLabel.text = "\(addIngredientPrompt)\(listTitle)"
         
         // Get navigation bar on top:
         if let navi = self.tabBarController?.navigationController
@@ -109,15 +106,14 @@ class AddToListPage: SearchIngredientsViewController, UITextFieldDelegate {
     */
     override func gotSelectedIngredient(selected: PFIngredient) {
         var userList = listObject.objectForKey(ingredientsColumnName) as! [PFIngredient]
-        if userList.contains(selected) && selected.isDataAvailable() {
-            addIngredientPromptLabel.text = "\(selected.name)\(alreadyContains)"
-        } else {
+        if !(userList.contains(selected) && selected.isDataAvailable()) {
+            // add ingredient to list:
             userList.append(selected)
             listObject.setObject(userList, forKey: ingredientsColumnName)
             listObject.saveInBackground()
-            if selected.isDataAvailable() {
-                addIngredientPromptLabel.text = "Added \(selected.name)"
-            }
+            
+            // return to list page
+            self.navigationController?.popViewControllerAnimated(true)
         }
     }
     
