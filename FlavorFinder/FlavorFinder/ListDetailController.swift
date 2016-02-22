@@ -45,6 +45,7 @@ class ListDetailController: UITableViewController {
     // Segues:
     let segueToEditPage = "segueToEditListPage"
     let segueToAddToListPage = "segueToAddToListPage"
+    let segueToSearch = "segueToSearch"
 
     // MARK: Override methods: ----------------------------------------------
     /* viewDidLoad:
