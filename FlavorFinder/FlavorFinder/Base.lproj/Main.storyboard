@@ -339,7 +339,7 @@
         <!--Add To List Page-->
         <scene sceneID="WPn-tc-eMc">
             <objects>
-                <viewController id="Ags-kE-Wz0" customClass="AddToListPage" customModule="F" sceneMemberID="viewController">
+                <viewController id="Ags-kE-Wz0" customClass="AddToListPage" customModule="FlavorFinder" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="swY-8a-cbh"/>
                         <viewControllerLayoutGuide type="bottom" id="VTP-tE-95d"/>
@@ -347,12 +347,24 @@
                     <view key="view" contentMode="scaleToFill" id="4iI-hA-DIB" customClass="ADdToListPage" customModule="FlavorFinder">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Add Ingredient to List" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w2W-CP-O6U">
+                                <rect key="frame" x="157" y="132" width="164" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="w2W-CP-O6U" firstAttribute="centerX" secondItem="4iI-hA-DIB" secondAttribute="centerX" id="SNQ-6c-vZD"/>
+                            <constraint firstItem="w2W-CP-O6U" firstAttribute="centerY" secondItem="4iI-hA-DIB" secondAttribute="centerY" id="hD6-8T-0fa"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gsB-rw-wFt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6491" y="1886"/>
+            <point key="canvasLocation" x="6489" y="1862"/>
         </scene>
         <!--Edit List Page-->
         <scene sceneID="Zfv-dS-aqq">

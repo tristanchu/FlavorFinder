@@ -187,13 +187,18 @@ class ListDetailController: UITableViewController {
 
 
     /* prepareForSegue
-        - sends info to edit page
+        - sends info to Edit page and Add to list page
     */
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == segueToEditPage ) {
             if let editPage = segue.destinationViewController as? EditListPage {
                 editPage.listObject = self.userList
                 editPage.listTitle = self.userList.objectForKey(ListTitleColumnName) as! String
+            }
+        } else if (segue.identifier == segueToAddToListPage) {
+            if let addToListPage = segue.destinationViewController as? AddToListPage {
+                addToListPage.listObject = self.userList
+                addToListPage.listTitle = self.userList.objectForKey(ListTitleColumnName) as! String
             }
         }
     }
