@@ -23,7 +23,7 @@ class EditListPage: SearchIngredientsViewController, UITextFieldDelegate {
     let ListTitleColumnName = "title"
 
     // Visual related:
-    let pageTitle = "Edit List"
+    let pageTitle = "Rename List"
     let alreadyContains = " is already in your list"
 
     // MARK: connections:
