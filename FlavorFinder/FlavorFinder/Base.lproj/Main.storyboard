@@ -344,23 +344,62 @@
                         <viewControllerLayoutGuide type="top" id="swY-8a-cbh"/>
                         <viewControllerLayoutGuide type="bottom" id="VTP-tE-95d"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="4iI-hA-DIB" customClass="ADdToListPage" customModule="FlavorFinder">
+                    <view key="view" contentMode="scaleToFill" id="4iI-hA-DIB">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Add Ingredient to List" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w2W-CP-O6U">
-                                <rect key="frame" x="157" y="132" width="164" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="EiV-os-9xK">
+                                <rect key="frame" x="60" y="124" width="480" height="89"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Ingredient Prompt" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fam-N9-5Cs">
+                                        <rect key="frame" x="0.0" y="0.0" width="480" height="25"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="18"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <searchBar contentMode="redraw" placeholder="type an ingredient to add" translatesAutoresizingMaskIntoConstraints="NO" id="Tur-BP-tOK">
+                                        <rect key="frame" x="0.0" y="45" width="480" height="44"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </searchBar>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="fam-N9-5Cs" firstAttribute="centerX" secondItem="EiV-os-9xK" secondAttribute="centerX" id="PPY-LZ-UeN"/>
+                                    <constraint firstItem="Tur-BP-tOK" firstAttribute="centerX" secondItem="EiV-os-9xK" secondAttribute="centerX" id="xGD-Ld-MBj"/>
+                                </constraints>
+                            </stackView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="BN0-oZ-Fph">
+                                <rect key="frame" x="60" y="213" width="480" height="240"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="240" id="lT3-Ju-kEG"/>
+                                </constraints>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchResultCell" id="4nb-OB-9c3">
+                                        <rect key="frame" x="0.0" y="28" width="480" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4nb-OB-9c3" id="vtd-h6-jQc">
+                                            <rect key="frame" x="0.0" y="0.0" width="480" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="w2W-CP-O6U" firstAttribute="centerX" secondItem="4iI-hA-DIB" secondAttribute="centerX" id="SNQ-6c-vZD"/>
-                            <constraint firstItem="w2W-CP-O6U" firstAttribute="centerY" secondItem="4iI-hA-DIB" secondAttribute="centerY" id="hD6-8T-0fa"/>
+                            <constraint firstItem="BN0-oZ-Fph" firstAttribute="top" secondItem="EiV-os-9xK" secondAttribute="bottom" id="4rS-Oh-Nfg"/>
+                            <constraint firstItem="EiV-os-9xK" firstAttribute="top" secondItem="swY-8a-cbh" secondAttribute="bottom" constant="60" id="Bfc-gb-ccp"/>
+                            <constraint firstItem="BN0-oZ-Fph" firstAttribute="width" secondItem="EiV-os-9xK" secondAttribute="width" id="PDX-gI-YaE"/>
+                            <constraint firstItem="EiV-os-9xK" firstAttribute="width" secondItem="4iI-hA-DIB" secondAttribute="width" multiplier="0.8" id="XE5-dX-cXR"/>
+                            <constraint firstItem="EiV-os-9xK" firstAttribute="centerX" secondItem="4iI-hA-DIB" secondAttribute="centerX" id="aSJ-rP-jF5"/>
+                            <constraint firstItem="BN0-oZ-Fph" firstAttribute="centerX" secondItem="4iI-hA-DIB" secondAttribute="centerX" id="cNN-ri-4AM"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="addIngredientPromptLabel" destination="fam-N9-5Cs" id="51F-1U-51g"/>
+                        <outlet property="addIngredientSearchBar" destination="Tur-BP-tOK" id="8ec-aM-BEM"/>
+                        <outlet property="addIngredientTableView" destination="BN0-oZ-Fph" id="gPu-tf-LpI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gsB-rw-wFt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -453,66 +492,19 @@
                                     <constraint firstItem="17G-SR-7b0" firstAttribute="width" secondItem="8uN-zZ-bpZ" secondAttribute="width" multiplier="0.8" id="vSG-ax-UQh"/>
                                 </constraints>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="8UQ-X3-ke0">
-                                <rect key="frame" x="30" y="205" width="540" height="66"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add ingredient to list :" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gnn-uV-R7I">
-                                        <rect key="frame" x="54" y="0.0" width="432" height="22"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="22" id="YSz-Yv-n4m"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
-                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="e8j-M3-G8i">
-                                        <rect key="frame" x="54" y="22" width="432" height="44"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" returnKeyType="search"/>
-                                    </searchBar>
-                                </subviews>
-                                <color key="backgroundColor" red="0.46432637710000002" green="0.83866794580000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstItem="e8j-M3-G8i" firstAttribute="width" secondItem="8UQ-X3-ke0" secondAttribute="width" multiplier="0.8" id="40n-vJ-u9v"/>
-                                    <constraint firstItem="Gnn-uV-R7I" firstAttribute="width" secondItem="8UQ-X3-ke0" secondAttribute="width" multiplier="0.8" id="izr-B3-TVd"/>
-                                </constraints>
-                            </stackView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dCe-Xk-lEw">
-                                <rect key="frame" x="84" y="271" width="432" height="230"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchResultCell" id="Lrj-Rp-rIZ">
-                                        <rect key="frame" x="0.0" y="28" width="432" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Lrj-Rp-rIZ" id="hma-e5-qCY">
-                                            <rect key="frame" x="0.0" y="0.0" width="432" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="8uN-zZ-bpZ" firstAttribute="leading" secondItem="VdV-X2-kho" secondAttribute="leadingMargin" constant="10" id="7YS-AR-miC"/>
                             <constraint firstItem="8uN-zZ-bpZ" firstAttribute="top" secondItem="bJE-pU-1DB" secondAttribute="bottom" constant="24" id="Dek-lT-SF6"/>
-                            <constraint firstItem="dCe-Xk-lEw" firstAttribute="centerX" secondItem="VdV-X2-kho" secondAttribute="centerX" id="TZH-vO-kHv"/>
                             <constraint firstAttribute="trailingMargin" secondItem="8uN-zZ-bpZ" secondAttribute="trailing" constant="10" id="XXB-le-ZdA"/>
-                            <constraint firstItem="dCe-Xk-lEw" firstAttribute="top" secondItem="8UQ-X3-ke0" secondAttribute="bottom" id="eH6-fs-mOo"/>
-                            <constraint firstItem="8UQ-X3-ke0" firstAttribute="leading" secondItem="VdV-X2-kho" secondAttribute="leadingMargin" constant="10" id="pyl-wO-myx"/>
-                            <constraint firstItem="dCe-Xk-lEw" firstAttribute="width" secondItem="8UQ-X3-ke0" secondAttribute="width" multiplier="0.8" id="qoo-rb-R9r"/>
-                            <constraint firstItem="rDe-yX-Nj2" firstAttribute="top" secondItem="8UQ-X3-ke0" secondAttribute="bottom" constant="280" id="uTY-s6-la4"/>
-                            <constraint firstItem="rDe-yX-Nj2" firstAttribute="top" secondItem="dCe-Xk-lEw" secondAttribute="bottom" constant="50" id="udS-eT-aLC"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="8UQ-X3-ke0" secondAttribute="trailing" constant="10" id="zsG-t4-bry"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="addIngredientPromptLabel" destination="Gnn-uV-R7I" id="a5p-0g-R43"/>
-                        <outlet property="addIngredientSearchBar" destination="e8j-M3-G8i" id="f0Q-CT-Hq4"/>
                         <outlet property="listNamePromptLabel" destination="5Sl-9f-LEI" id="6Gx-dp-PGY"/>
                         <outlet property="listTitleLabel" destination="ZgP-P7-KPe" id="Pps-Pn-84e"/>
                         <outlet property="newNamePromptLabel" destination="abp-jS-cY7" id="pj1-VO-nQe"/>
                         <outlet property="newNameTextField" destination="B2v-yj-H7K" id="st4-xZ-GMG"/>
-                        <outlet property="searchTableView" destination="dCe-Xk-lEw" id="FAG-RH-Hyv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pu8-JM-735" userLabel="First Responder" sceneMemberID="firstResponder"/>

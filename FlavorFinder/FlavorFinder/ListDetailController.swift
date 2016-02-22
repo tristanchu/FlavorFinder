@@ -38,7 +38,7 @@ class ListDetailController: UITableViewController {
     
     var editBtn: UIBarButtonItem = UIBarButtonItem()
     let editBtnAction = "editBtnClicked:"
-    let editBtnString = "Edit"
+    let editBtnString = "Rename List"
     
     // Segues:
     let segueToEditPage = "segueToEditListPage"
