@@ -178,12 +178,12 @@ class ListDetailController: UITableViewController {
     */
     override func tableView(tableView: UITableView,
         didSelectRowAtIndexPath indexPath: NSIndexPath) {
-            if (indexPath.row == 0){
-                self.performSegueWithIdentifier(segueToAddToListPage, sender: self)
-            } else if (indexPath.row == ingredientList.count + 1){
-                currentSearch = ingredientList
-                print(ingredientList)
-            }
+        if (indexPath.row == 0){
+            self.performSegueWithIdentifier(segueToAddToListPage, sender: self)
+        } else if (indexPath.row == ingredientList.count + 1) { // start search
+            currentSearch = ingredientList
+            self.tabBarController?.setValue(0, forKey: "selectedIndex") // switch tabs
+        }
     }
 
     /* tableView - choose which rows are editable (delete shows)
