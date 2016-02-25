@@ -284,11 +284,11 @@
                         <viewControllerLayoutGuide type="bottom" id="PDc-gD-pTn"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="76n-jF-qtj">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="HcQ-jw-MAg">
-                                <rect key="frame" x="30" y="100" width="540" height="125.5"/>
+                                <rect key="frame" x="30" y="160" width="540" height="125.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create a New List" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4w5-XU-6rQ">
                                         <rect key="frame" x="182" y="0.0" width="176.5" height="21"/>
@@ -318,10 +318,16 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L2W-qe-GeR">
                                                 <rect key="frame" x="0.0" y="0.0" width="208" height="30"/>
                                                 <state key="normal" title="Create List"/>
+                                                <connections>
+                                                    <action selector="createListBtnAction:" destination="ovF-7k-eYv" eventType="touchUpInside" id="mfD-a6-C9S"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ywa-mG-Ofa">
                                                 <rect key="frame" x="224" y="0.0" width="208" height="30"/>
                                                 <state key="normal" title="Cancel"/>
+                                                <connections>
+                                                    <action selector="cancelBtnAction:" destination="ovF-7k-eYv" eventType="touchUpInside" id="I2Y-T4-323"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -337,13 +343,19 @@
                             <constraint firstItem="HcQ-jw-MAg" firstAttribute="centerX" secondItem="76n-jF-qtj" secondAttribute="centerX" id="LuE-b7-5hY"/>
                             <constraint firstAttribute="trailingMargin" secondItem="HcQ-jw-MAg" secondAttribute="trailing" constant="10" id="Znm-Yk-Aei"/>
                             <constraint firstItem="HcQ-jw-MAg" firstAttribute="leading" secondItem="76n-jF-qtj" secondAttribute="leadingMargin" constant="10" id="eCS-Lf-0IZ"/>
-                            <constraint firstItem="HcQ-jw-MAg" firstAttribute="top" secondItem="76n-jF-qtj" secondAttribute="topMargin" constant="100" id="jWd-Tc-IZ3"/>
+                            <constraint firstItem="HcQ-jw-MAg" firstAttribute="top" secondItem="76n-jF-qtj" secondAttribute="topMargin" constant="160" id="jWd-Tc-IZ3"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="cancelBtn" destination="ywa-mG-Ofa" id="g9A-Kw-cCm"/>
+                        <outlet property="createListBtn" destination="L2W-qe-GeR" id="syR-w2-3z0"/>
+                        <outlet property="createListPromptLabel" destination="4w5-XU-6rQ" id="ddo-bM-3OC"/>
+                        <outlet property="nameListTextField" destination="qcu-NG-fr6" id="Yjg-6m-cBR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kaW-mP-5GS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3687" y="-422"/>
+            <point key="canvasLocation" x="4391" y="-406"/>
         </scene>
         <!--Lists Page Controller-->
         <scene sceneID="Bug-zi-jTx">
@@ -370,6 +382,7 @@
                     <navigationItem key="navigationItem" id="uvp-CM-fya"/>
                     <connections>
                         <outlet property="listsTableView" destination="XXy-rm-k7A" id="XRY-2i-E2j"/>
+                        <segue destination="ovF-7k-eYv" kind="show" identifier="segueToCreateListPage" id="noi-FU-gVs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CSM-cM-kZM" userLabel="First Responder" sceneMemberID="firstResponder"/>
