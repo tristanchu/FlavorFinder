@@ -219,8 +219,8 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
                 downvotes = downvotes == nil ? 0 : downvotes
                 
                 cell.label.text = name
-                cell.upvoteLabel.text = "test"//String(upvotes)
-                cell.downvoteLabel.text = String(downvotes)
+//                cell.upvoteLabel.text = String(upvotes!)
+//                cell.downvoteLabel.text = String(downvotes!)
             } else {
                 print("ERROR: Failed to fetch all data for match.")
                 matches.removeAtIndex(indexPath.row)
