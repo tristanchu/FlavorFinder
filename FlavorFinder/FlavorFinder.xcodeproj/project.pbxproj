@@ -15,6 +15,7 @@
 		6062FDC11C5F3386009B2EEB /* LoginViewPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6062FDC01C5F3386009B2EEB /* LoginViewPage.swift */; };
 		609432671C42DCA800BA0577 /* FavoritesPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609432661C42DCA800BA0577 /* FavoritesPageController.swift */; };
 		609432691C42DD6500BA0577 /* ListsPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609432681C42DD6500BA0577 /* ListsPageController.swift */; };
+		609E66611C7E89B000DE2A28 /* CreateNewList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609E66601C7E89B000DE2A28 /* CreateNewList.swift */; settings = {ASSET_TAGS = (); }; };
 		60AD7BDF1C7A47470002A7DF /* AddToListPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60AD7BDE1C7A47470002A7DF /* AddToListPage.swift */; settings = {ASSET_TAGS = (); }; };
 		60B3F16D1C5AE41D0018AA29 /* ListDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B3F16C1C5AE41D0018AA29 /* ListDetailController.swift */; };
 		60D22BA41C723B9B00A72FB2 /* addHotpotToList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D22BA31C723B9B00A72FB2 /* addHotpotToList.swift */; };
@@ -92,6 +93,7 @@
 		6062FDC01C5F3386009B2EEB /* LoginViewPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewPage.swift; sourceTree = "<group>"; };
 		609432661C42DCA800BA0577 /* FavoritesPageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesPageController.swift; sourceTree = "<group>"; };
 		609432681C42DD6500BA0577 /* ListsPageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListsPageController.swift; sourceTree = "<group>"; };
+		609E66601C7E89B000DE2A28 /* CreateNewList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateNewList.swift; sourceTree = "<group>"; };
 		60AD7BDE1C7A47470002A7DF /* AddToListPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddToListPage.swift; sourceTree = "<group>"; };
 		60B3F16C1C5AE41D0018AA29 /* ListDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListDetailController.swift; sourceTree = "<group>"; };
 		60D22BA31C723B9B00A72FB2 /* addHotpotToList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = addHotpotToList.swift; sourceTree = "<group>"; };
@@ -351,6 +353,7 @@
 		B6260A911C69321200BC0717 /* ListSubpages */ = {
 			isa = PBXGroup;
 			children = (
+				609E66601C7E89B000DE2A28 /* CreateNewList.swift */,
 				60AD7BDE1C7A47470002A7DF /* AddToListPage.swift */,
 				60D22BA31C723B9B00A72FB2 /* addHotpotToList.swift */,
 				60B3F16C1C5AE41D0018AA29 /* ListDetailController.swift */,
@@ -565,6 +568,7 @@
 			files = (
 				8875DE3B1BE0751B00CD50EA /* MainNavigationController.swift in Sources */,
 				B61FEBCE1C4430D30028F800 /* EmptySegue.swift in Sources */,
+				609E66611C7E89B000DE2A28 /* CreateNewList.swift in Sources */,
 				B6F55CA51C5E87B400854B07 /* HotpotSubviewController.swift in Sources */,
 				88F0E5011BE54111003CB35B /* Animations.swift in Sources */,
 				88998E211BEC365D00087406 /* PFVote.swift in Sources */,
