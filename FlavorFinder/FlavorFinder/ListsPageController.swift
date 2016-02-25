@@ -25,7 +25,6 @@ class ListsPageController: UITableViewController {
     let noUserMsg = "You must be logged in to have lists."
     let noListsMsg = "No Lists Yet!"
     let listsTitle = "Lists"
-    let newListTitle = "Untitled"
 
     // Table itself:
     @IBOutlet var listsTableView: UITableView!
@@ -37,6 +36,7 @@ class ListsPageController: UITableViewController {
 
     // Segues:
     let segueToListDetail = "segueToListTable"
+    let segueToCreateListPage = "segueToCreateListPage"
 
 
     // MARK: Override methods: ----------------------------------------------
@@ -188,6 +188,10 @@ class ListsPageController: UITableViewController {
                     detailsPage.ingredientList = testIngredients as! [PFIngredient]
                 }
             }
+        } else if (segue.identifier == segueToCreateListPage) {
+            if let newListPage = segue.destinationViewController as? CreateNewList {
+                newListPage.userLists = self.userLists
+            }
         }
     }
 
@@ -223,12 +227,7 @@ class ListsPageController: UITableViewController {
         - action for the new list button
     */
     func newListBtnClicked() {
-        tableView.backgroundView = nil
-        let newList = createIngredientList(
-            currentUser!, title: newListTitle, ingredients: []) as PFObject
-        // Update table view:
-        self.userLists.append(newList)
-        tableView.reloadData()
+        self.performSegueWithIdentifier(segueToCreateListPage, sender: self)
     }
     
 }
