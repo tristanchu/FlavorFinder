@@ -218,9 +218,27 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
                 upvotes = upvotes == nil ? 0 : upvotes
                 downvotes = downvotes == nil ? 0 : downvotes
                 
+                cell.icons.removeAll()
+                let isNuts = match[_s_nuts] as! Bool
+                let isDairy = match[_s_dairy] as! Bool
+                let isVege = match[_s_vegetarian] as! Bool
+
+                if isVege {
+                    let imageVegan = UIImage(named: "Vegan")!
+                    cell.icons.append(imageVegan)
+                }
+                if isNuts {
+                    let imageNuts = UIImage(named: "Nuts")!
+                    cell.icons.append(imageNuts)
+                }
+                if isDairy {
+                    let imageDairy = UIImage(named: "Dairy")!
+                    cell.icons.append(imageDairy)
+                }
+                
                 cell.label.text = name
-                cell.upvoteLabel.text = "test"//String(upvotes)
-                cell.downvoteLabel.text = String(downvotes)
+//                cell.upvoteLabel.text = String(upvotes!)
+//                cell.downvoteLabel.text = String(downvotes!)
             } else {
                 print("ERROR: Failed to fetch all data for match.")
                 matches.removeAtIndex(indexPath.row)

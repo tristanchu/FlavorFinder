@@ -298,8 +298,8 @@
 		8875DE2E1BE04FDF00CD50EA /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				B6A49C4E1C4F45B000586B15 /* Pages */,
 				B6A49C4F1C4F45E600586B15 /* Deprecated */,
+				B6A49C4E1C4F45B000586B15 /* Pages */,
 				B685D2B11C5DE6E6001C37FF /* SearchResultsVC */,
 				B6260A911C69321200BC0717 /* ListSubpages */,
 				B6A779091C6C249D0005B44C /* Prototype VC Classes */,
