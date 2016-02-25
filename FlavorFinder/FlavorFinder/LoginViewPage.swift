@@ -108,8 +108,7 @@ class LoginViewPage : UIViewController, UITextFieldDelegate {
                         setUserSession(user!)
                         if let parentVC = self.parentViewController?.parentViewController as! LoginModuleParentViewController? {
                             parentVC.loginSucceeded()
-                        }
-                        
+                        }                        
                     } else {
                         // Alert Username and Password pair does not exist.
                         alertPopup(self.INCORRECT_U_OR_P_TITLE,
