@@ -172,20 +172,6 @@ class ListsPageController: UITableViewController {
                         ListTitleColumnName) as? String)!
                     // give the actual list reference:
                     detailsPage.userList = (userLists[idx])
-
-                    // TESTING:
-                    // test empty list with "new List"
-                    var testIngredients = []
-                    // test non-empty list with List1:
-                    if detailsPage.listTitle == "List1" {
-                        let test1 = PFIngredient(name: "Cinnamon")
-                        let test2 = PFIngredient(name: "Garlic")
-                        testIngredients = [test1, test2]
-                    }
-
-                    // Make the table list the ingredients:
-                    // TODO - need to be able to make this first.
-                    detailsPage.ingredientList = testIngredients as! [PFIngredient]
                 }
             }
         } else if (segue.identifier == segueToCreateListPage) {
