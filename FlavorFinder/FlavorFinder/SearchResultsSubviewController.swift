@@ -370,8 +370,11 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
             }
             return true
         case 4: // Add ingredient to list action
-            if let user = currentUser {
-                // COURTNEY
+            if let _ = currentUser {
+                if let parent = parentViewController as? SearchResultsViewController {
+                    currentIngredientToAdd.append(matchIngredient)
+                    parent.addToListBtnClicked()
+                }
                 return true
             } else {
                 if let parent = parentViewController as? SearchResultsViewController {
