@@ -36,11 +36,13 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         textColor: MATCH_CELL_IMAGE_COLOR,
         size: MATCH_CELL_IMAGE_SIZE
     )
-    let ADD_IMAGE = UIImage.fontAwesomeIconWithName(
+    let ADD_TO_SEARCH_IMAGE = UIImage.fontAwesomeIconWithName(
         .Plus,
         textColor: MATCH_CELL_IMAGE_COLOR,
         size: MATCH_CELL_IMAGE_SIZE
     )
+    let ADD_TO_LIST_IMAGE = UIImage(named: "AddToList")!
+    
     // strings
     let CELL_IDENTIFIER = "globalSearchResultsCell"
     
@@ -247,6 +249,8 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
                     cell.icons.append(imageFav)
                 }
                 
+                cell.ingredientIcons.reloadData()
+                
                 cell.label.text = name
 //                cell.upvoteLabel.text = String(upvotes!)
 //                cell.downvoteLabel.text = String(downvotes!)
@@ -365,6 +369,17 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
                 print("ERROR: Add to hotpot failed.")
             }
             return true
+        case 4: // Add ingredient to list action
+            if let user = currentUser {
+                // COURTNEY
+                return true
+            } else {
+                if let parent = parentViewController as? SearchResultsViewController {
+                    parent.mustBeSignedIn()
+                }
+                return true
+            }
+
         default:
             return true
         }
@@ -390,10 +405,12 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         
         swipeSettings.transition = MGSwipeTransition.Drag
 
-        let addBtn = makeCellButton(ADD_IMAGE, backgroundColor: ADD_CELL_BTN_COLOR)
+        
         let favBtn = makeCellButton(FAV_IMAGE, backgroundColor: FAV_CELL_BTN_COLOR)
         let upvoteBtn = makeCellButton(UPVOTE_IMAGE, backgroundColor: UPVOTE_CELL_BTN_COLOR)
         let downvoteBtn = makeCellButton(DOWNVOTE_IMAGE, backgroundColor: DOWNVOTE_CELL_BTN_COLOR)
+        let addToSearchBtn = makeCellButton(ADD_TO_SEARCH_IMAGE, backgroundColor: ADD_TO_SEARCH_CELL_BTN_COLOR)
+        let addToListBtn = makeCellButton(ADD_TO_LIST_IMAGE, backgroundColor: ADD_TO_LIST_CELL_BTN_COLOR)
         
         // if we're logged in, display user-ingredient history
         if let user = currentUser {
@@ -424,7 +441,7 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
             downvoteBtn.selected = false
         }
         
-        return [upvoteBtn, downvoteBtn, favBtn, addBtn]
+        return [upvoteBtn, downvoteBtn, favBtn, addToSearchBtn, addToListBtn]
     }
     
     /* tableView - cell selected override method
