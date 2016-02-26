@@ -222,7 +222,14 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
                 let isNuts = match[_s_nuts] as! Bool
                 let isDairy = match[_s_dairy] as! Bool
                 let isVege = match[_s_vegetarian] as! Bool
-
+                
+                var isFavorite = false
+                if let user = currentUser {
+                    if let _ = isFavoriteIngredient(user, ingredient: match) {
+                        isFavorite = true
+                    }
+                }
+                
                 if isVege {
                     let imageVegan = UIImage(named: "Vegan")!
                     cell.icons.append(imageVegan)
@@ -234,6 +241,10 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
                 if isDairy {
                     let imageDairy = UIImage(named: "Dairy")!
                     cell.icons.append(imageDairy)
+                }
+                if isFavorite {
+                    let imageFav = UIImage(named: "Heart")!
+                    cell.icons.append(imageFav)
                 }
                 
                 cell.label.text = name
