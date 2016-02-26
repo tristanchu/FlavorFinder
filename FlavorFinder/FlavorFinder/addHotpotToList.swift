@@ -79,6 +79,8 @@ class AddHotpotToListController: UITableViewController {
 
         // Update table view:
         addToListTableView.reloadData()
+        
+        print(currentIngredientToAdd)
     }
 
     /*  tableView -> int
@@ -127,20 +129,38 @@ class AddHotpotToListController: UITableViewController {
             // Create new list:
             if (indexPath.row == 0){
                 var list = [PFIngredient]()
-                for ingredient in currentSearch{ list.append(ingredient) }
-                createIngredientList(currentUser!,
-                    title: newListTitle, ingredients: list)
+                if (!currentIngredientToAdd.isEmpty) {
+                    for ingredient in currentIngredientToAdd {
+                        list.append(ingredient) }
+                    createIngredientList(currentUser!, title: newListTitle, ingredients: list)
+                    currentIngredientToAdd = []
+                    
+                } else {
+                    for ingredient in currentSearch{ list.append(ingredient) }
+                    createIngredientList(currentUser!,
+                        title: newListTitle, ingredients: list)
+                }
 
             // Picked an existing list:
             } else {
                 let listObject = userLists[indexPath.row - 1]
                 var list = listObject.objectForKey(ingredientsColumnName) as! [PFIngredient]
                 // add each ingredient in current search:
-                for ingredient in currentSearch{
-                    if !list.contains(ingredient) {
-                        list.append(ingredient)
+                if (!currentIngredientToAdd.isEmpty) {
+                    for ingredient in currentIngredientToAdd {
+                        if !list.contains(ingredient) {
+                            list.append(ingredient)
+                        }
+                    }
+                    currentIngredientToAdd = []
+                } else {
+                    for ingredient in currentSearch{
+                        if !list.contains(ingredient) {
+                            list.append(ingredient)
+                        }
                     }
                 }
+
                 // update with new ingredient list:
                 listObject.setObject(list, forKey: ingredientsColumnName)
                 listObject.saveInBackground()

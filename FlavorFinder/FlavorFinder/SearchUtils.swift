@@ -15,6 +15,7 @@ import Parse
 // MARK: Properties: -----------------------------------------------
 var currentSearch : [PFIngredient] = []
 var currentResults : [(ingredient: PFIngredient, rank: Double)] = []
+var currentIngredientToAdd : [PFIngredient] = []
 
 // Parse DB Functions: -----------------------------------------------
 
