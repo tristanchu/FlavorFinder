@@ -35,6 +35,9 @@ class LoginViewPage : UIViewController, UITextFieldDelegate {
 
     let INVALID_TITLE = "Invalid Username or Password"
     let INVALID_MSG = "You must enter a valid username and password."
+    
+    // Toast Text:
+    let LOGGED_IN_MESSAGE = "Logged in as " // + username dynamically
 
 
 // MARK: Actions --------------------------------------------------
@@ -108,6 +111,9 @@ class LoginViewPage : UIViewController, UITextFieldDelegate {
                         setUserSession(user!)
                         if let parentVC = self.parentViewController?.parentViewController as! LoginModuleParentViewController? {
                             parentVC.loginSucceeded()
+                            // Test Toast:
+                            let loginMsg = self.LOGGED_IN_MESSAGE + "\(username)"
+                            parentVC.view.makeToast(loginMsg, duration: TOAST_DURATION, position: .Bottom)
                         }                        
                     } else {
                         // Alert Username and Password pair does not exist.

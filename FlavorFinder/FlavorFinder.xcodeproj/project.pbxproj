@@ -13,6 +13,7 @@
 		603E4D841C67C28B00F3D554 /* EditListPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 603E4D831C67C28B00F3D554 /* EditListPage.swift */; };
 		6056F0B81C6C26D0002B0D29 /* SettingsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6056F0B71C6C26D0002B0D29 /* SettingsPage.swift */; };
 		6062FDC11C5F3386009B2EEB /* LoginViewPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6062FDC01C5F3386009B2EEB /* LoginViewPage.swift */; };
+		6070993A1C825304003C1BD5 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607099391C825304003C1BD5 /* Toast.swift */; settings = {ASSET_TAGS = (); }; };
 		609432671C42DCA800BA0577 /* FavoritesPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609432661C42DCA800BA0577 /* FavoritesPageController.swift */; };
 		609432691C42DD6500BA0577 /* ListsPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609432681C42DD6500BA0577 /* ListsPageController.swift */; };
 		609E66611C7E89B000DE2A28 /* CreateNewList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609E66601C7E89B000DE2A28 /* CreateNewList.swift */; };
@@ -93,6 +94,7 @@
 		603E4D831C67C28B00F3D554 /* EditListPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditListPage.swift; sourceTree = "<group>"; };
 		6056F0B71C6C26D0002B0D29 /* SettingsPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsPage.swift; sourceTree = "<group>"; };
 		6062FDC01C5F3386009B2EEB /* LoginViewPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewPage.swift; sourceTree = "<group>"; };
+		607099391C825304003C1BD5 /* Toast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		609432661C42DCA800BA0577 /* FavoritesPageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesPageController.swift; sourceTree = "<group>"; };
 		609432681C42DD6500BA0577 /* ListsPageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListsPageController.swift; sourceTree = "<group>"; };
 		609E66601C7E89B000DE2A28 /* CreateNewList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateNewList.swift; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 		6743D2DA03BF229740565999 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				607099391C825304003C1BD5 /* Toast.swift */,
 				882FFD7A1BD9A5B000710F35 /* libsqlite3.tbd */,
 				882FFD781BD9A5A300710F35 /* libz.tbd */,
 				882FFD761BD9A59800710F35 /* SystemConfiguration.framework */,
@@ -588,6 +591,7 @@
 				88998E211BEC365D00087406 /* PFVote.swift in Sources */,
 				B6739A161C59973A0004F982 /* ContainerViewController.swift in Sources */,
 				8875DE321BE051B100CD50EA /* Database.swift in Sources */,
+				6070993A1C825304003C1BD5 /* Toast.swift in Sources */,
 				B685D2B31C5DE775001C37FF /* SearchResultsViewController.swift in Sources */,
 				8839994D1C554B3E003F5CD2 /* RemoveHotpotIngredientButton.swift in Sources */,
 				B6E0C4EB1C6926E2008B7E2A /* AddFavoriteViewController.swift in Sources */,

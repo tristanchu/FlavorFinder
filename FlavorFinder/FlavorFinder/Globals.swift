@@ -32,6 +32,9 @@ let F_DAIRY = "no dairy"
 let F_VEG = "vegetarian"
 let F_NUTS = "no nuts"
 
+// TOAST:
+let TOAST_DURATION = 1.0
+
 // Colors:
 let LIGHTGRAY_COLOR = UIColor(red: 230/255.0, green: 230/255.0, blue: 230/255.0, alpha: CGFloat(1))
 
