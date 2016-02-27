@@ -20,7 +20,7 @@ class GotNaviViewController : UIViewController {
     
     var backBtn: UIBarButtonItem = UIBarButtonItem()
     let backBtnAction = "backBtnClicked:"
-    let backBtnString = String.fontAwesomeIconWithName(.ChevronLeft) + " Back"
+    var backBtnString = String.fontAwesomeIconWithName(.ChevronLeft) + " Back" // default
     
     // MARK: Override Functions ---------------------------------------------
     
@@ -53,14 +53,10 @@ class GotNaviViewController : UIViewController {
     // MARK: Back Button Functions ------------------------------------------
     
     /* setUpBackButton
-    sets up the back button visuals for navigation
+    - sets up the back button visuals for navigation
     */
     func setUpBackButton() {
-        backBtn.setTitleTextAttributes(attributes, forState: .Normal)
-        backBtn.title = self.backBtnString
-        backBtn.tintColor = NAVI_BUTTON_COLOR
-        backBtn.target = self
-        backBtn.action = "backBtnClicked"  // refers to: backBtnClicked()
+        setUpNaviButton(backBtn, buttonString: backBtnString, target: self, action: "backBtnClicked")
     }
     
     /* backBtnClicked

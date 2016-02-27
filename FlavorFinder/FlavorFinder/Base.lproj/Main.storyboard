@@ -1189,7 +1189,7 @@
         <!--More Menu View Controller-->
         <scene sceneID="3Cf-76-j6x">
             <objects>
-                <tableViewController id="KKS-L4-a25" userLabel="More Menu View Controller" sceneMemberID="viewController">
+                <tableViewController id="KKS-L4-a25" userLabel="More Menu View Controller" customClass="MorePage" customModule="FlavorFinder" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="P8d-Cq-0UO" userLabel="More Table View">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
