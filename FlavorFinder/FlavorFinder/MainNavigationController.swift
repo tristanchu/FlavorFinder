@@ -38,21 +38,6 @@ class MainNavigationController: UINavigationController {
         configure_menuTableView()
     }
     
-    override func viewDidDisappear(animated: Bool) {
-        super.viewDidDisappear(animated)
-        if let navi = self.tabBarController {
-            print("got navi")
-            navi.navigationItem.setLeftBarButtonItems([], animated: true)
-            navi.navigationItem.setRightBarButtonItems([], animated: true)
-            print(navi.viewControllers)
-            
-//            if let _ = self.navTitle {
-//                self.tabBarController?.navigationItem.title = "\(self.navTitle!)"
-//            }
-        }
-        print("gone!")
-    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }

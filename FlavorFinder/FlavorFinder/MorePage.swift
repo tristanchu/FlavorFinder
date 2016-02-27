@@ -23,16 +23,10 @@ class MorePage : UITableViewController {
     // MARK: Override methods: ----------------------------------------------
     
     /* viewDidLoad:
-    - Additional setup after loading the view (upon open)
+    - Additional setup after loading the view
     */
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if currentUser != nil {
-            morePages = morePagesLoggedIn
-        } else {
-            morePages = morePagesLoggedOut
-        }
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -40,6 +34,33 @@ class MorePage : UITableViewController {
 
     }
     
+    /* viewDidAppear:
+    - Setup when view appears
+    */
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // Configure navigation bar on top
+        if let navi = self.tabBarController?.navigationController
+            as? MainNavigationController {
+                self.tabBarController?.navigationItem.setLeftBarButtonItems(
+                    [], animated: true)
+                self.tabBarController?.navigationItem.setRightBarButtonItems(
+                    [], animated: true)
+                navi.reset_navigationBar()
+                self.tabBarController?.navigationItem.title = "More"
+        }
+
+        // Determine what features user has access to
+        if currentUser != nil {
+            morePages = morePagesLoggedIn
+        } else {
+            morePages = morePagesLoggedOut
+        }
+        
+        // Reload table
+        tableView.reloadData()
+    }
     
     // MARK: Table VC methods: ----------------------------------------------
     
