@@ -715,7 +715,6 @@
         <!--Main Navigation Controller-->
         <scene sceneID="XuT-By-HT0">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Jnx-Vf-b0Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oWC-1n-3cO" customClass="MainNavigationController" customModule="FlavorFinder" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="HXZ-hJ-BA0">
@@ -731,6 +730,7 @@
                         <segue destination="dBm-Uc-8CI" kind="relationship" relationship="rootViewController" id="ESP-nB-3Sa"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jnx-Vf-b0Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-281" y="363"/>
         </scene>
@@ -1195,7 +1195,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="AqU-Ce-rdX">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="morePageCellIdentifier" id="AqU-Ce-rdX">
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AqU-Ce-rdX" id="Cj4-9s-H0M">
