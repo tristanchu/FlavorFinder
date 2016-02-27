@@ -33,7 +33,6 @@ class LandingPageController: ContainerParentViewController {
     */
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
     /* viewDidAppear
