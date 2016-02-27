@@ -16,9 +16,9 @@ class MorePage : UITableViewController {
     let morePagesLoggedOut = ["About" : "segueMoreToAbout"]
     let morePagesLoggedIn = [
         "About"             : "segueMoreToAbout",
-        "Add New Match"     : "segueMoreToNewMatch"
+        "Add New Match"     : "segueMoreToAddMatch"
     ]
-    var morePages = [String : String]()
+    var morePages = [String : String]() // PageName : SegueName
  
     // MARK: Override methods: ----------------------------------------------
     
@@ -72,7 +72,7 @@ class MorePage : UITableViewController {
     }
     
     /* tableView -> UITableViewCell
-    creates cell for each index in favoriteCells
+    - creates cell for each accessible "more" page
     */
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(moreCellIdentifier, forIndexPath: indexPath)
@@ -83,16 +83,10 @@ class MorePage : UITableViewController {
     }
     
     /* tableView -> Does something on selection of row
+    - segues to selected page
     */
-    override func tableView(tableView: UITableView,
-        didSelectRowAtIndexPath indexPath: NSIndexPath) {
-//            if (indexPath.row == 0){
-//                self.performSegueWithIdentifier(segueToAddToListPage, sender: self)
-//            } else if (indexPath.row == ingredientList.count + 1) { // start search
-//                currentSearch = ingredientList
-//                self.tabBarController?.setValue(0, forKey: "selectedIndex") // switch tabs
-//            }
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.performSegueWithIdentifier(Array(morePages.values)[indexPath.row], sender: self)
     }
 
-    
 }

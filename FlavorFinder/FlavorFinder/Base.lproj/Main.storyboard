@@ -1186,6 +1186,32 @@
             </objects>
             <point key="canvasLocation" x="-44" y="3697.5"/>
         </scene>
+        <!--Got Navi View Controller-->
+        <scene sceneID="Hrs-D3-faC">
+            <objects>
+                <viewController id="ZNT-a6-FMP" customClass="GotNaviViewController" customModule="FlavorFinder" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="woA-AD-xzo"/>
+                        <viewControllerLayoutGuide type="bottom" id="ymv-Td-N2Y"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Mm7-Ih-cDz">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Add New Match" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jpX-hc-QcL">
+                                <rect key="frame" x="191" y="154" width="122" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wB0-Bb-AI5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2123" y="-1085"/>
+        </scene>
         <!--More Menu View Controller-->
         <scene sceneID="3Cf-76-j6x">
             <objects>
@@ -1210,10 +1236,40 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Root View Controller" id="11H-cx-qLK"/>
+                    <connections>
+                        <segue destination="RsG-4X-3Wr" kind="show" identifier="segueMoreToAbout" id="gL0-fj-B64"/>
+                        <segue destination="ZNT-a6-FMP" kind="show" identifier="segueMoreToAddMatch" id="Am0-pX-q9x"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KXp-1y-XGc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1275" y="-803"/>
+            <point key="canvasLocation" x="1355" y="-1007"/>
+        </scene>
+        <!--About View Controller-->
+        <scene sceneID="rXd-09-a1s">
+            <objects>
+                <viewController id="RsG-4X-3Wr" userLabel="About View Controller" customClass="GotNaviViewController" customModule="FlavorFinder" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="kwD-hQ-KfC"/>
+                        <viewControllerLayoutGuide type="bottom" id="XNS-9t-jiC"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Jnq-i6-eKP">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="About FlavorFinder" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P5a-AQ-dkt">
+                                <rect key="frame" x="228" y="162" width="145" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZVv-in-1aq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2067" y="-1856"/>
         </scene>
         <!--More Page-->
         <scene sceneID="7tC-S3-7gk">

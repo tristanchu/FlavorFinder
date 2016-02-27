@@ -23,8 +23,7 @@ class FavoritesPageController: UITableViewController {
 
     // Visual related:
     let noUserMsg = "You must be logged in to store favorites."
-    let noFavoritesMsg =
-        "No Favorites Yet!"
+    let noFavoritesMsg = "No Favorites Yet!"
     let favoritesTitle = "Favorites"
     
     // Nav bar related:
