@@ -188,8 +188,8 @@ func getMatchForTwoIngredients(firstIngredient: PFObject, secondIngredient: PFOb
     return match
 }
 
-func addIngredient(name: String) {
-    let ingredient = PFIngredient(name: name)
+func addIngredient(name: String, isDairy: Bool, isNuts: Bool, isVege: Bool) {
+    let ingredient = PFIngredient(name: name, isDairy: isDairy, isNuts: isNuts, isVege: isVege)
     ingredient.pinInBackground()
     ingredient.saveInBackground()
 }
