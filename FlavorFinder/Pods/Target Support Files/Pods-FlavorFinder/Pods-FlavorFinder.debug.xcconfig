@@ -1,8 +1,8 @@
 EMBEDDED_CONTENT_CONTAINS_SWIFT = YES
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
 LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks'
-OTHER_CFLAGS = $(inherited) -iquote "$CONFIGURATION_BUILD_DIR/ASHorizontalScrollView.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/Bolts.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/DOFavoriteButton.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/DZNEmptyDataSet.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/FilterBar.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/FontAwesome_swift.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/MGSwipeTableCell.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/Parse.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/Toast_Swift.framework/Headers"
-OTHER_LDFLAGS = $(inherited) -framework "ASHorizontalScrollView" -framework "Bolts" -framework "DOFavoriteButton" -framework "DZNEmptyDataSet" -framework "FilterBar" -framework "FontAwesome_swift" -framework "MGSwipeTableCell" -framework "Parse" -framework "Toast_Swift"
+OTHER_CFLAGS = $(inherited) -iquote "$CONFIGURATION_BUILD_DIR/ASHorizontalScrollView.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/Bolts.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/DOFavoriteButton.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/DZNEmptyDataSet.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/FilterBar.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/FontAwesome_swift.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/MGSwipeTableCell.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/Parse.framework/Headers"
+OTHER_LDFLAGS = $(inherited) -framework "ASHorizontalScrollView" -framework "Bolts" -framework "DOFavoriteButton" -framework "DZNEmptyDataSet" -framework "FilterBar" -framework "FontAwesome_swift" -framework "MGSwipeTableCell" -framework "Parse"
 OTHER_SWIFT_FLAGS = $(inherited) "-D" "COCOAPODS"
 PODS_FRAMEWORK_BUILD_PATH = $(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/Pods-FlavorFinder
 PODS_ROOT = ${SRCROOT}/Pods
