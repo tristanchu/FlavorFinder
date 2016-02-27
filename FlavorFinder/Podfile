@@ -9,7 +9,6 @@ pod 'DZNEmptyDataSet'
 pod 'DOFavoriteButton'
 pod 'FilterBar', '~>2.0.0'
 pod 'ASHorizontalScrollView', '~>1.1'
-pod 'Toast-Swift', '~> 1.0.0'
 end
 
 target 'FlavorFinderTests' do

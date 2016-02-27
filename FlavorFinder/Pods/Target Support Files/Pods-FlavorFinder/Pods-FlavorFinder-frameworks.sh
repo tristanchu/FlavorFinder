@@ -92,7 +92,6 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-FlavorFinder/FontAwesome_swift.framework"
   install_framework "Pods-FlavorFinder/MGSwipeTableCell.framework"
   install_framework "Pods-FlavorFinder/Parse.framework"
-  install_framework "Pods-FlavorFinder/Toast_Swift.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-FlavorFinder/ASHorizontalScrollView.framework"
@@ -103,5 +102,4 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-FlavorFinder/FontAwesome_swift.framework"
   install_framework "Pods-FlavorFinder/MGSwipeTableCell.framework"
   install_framework "Pods-FlavorFinder/Parse.framework"
-  install_framework "Pods-FlavorFinder/Toast_Swift.framework"
 fi

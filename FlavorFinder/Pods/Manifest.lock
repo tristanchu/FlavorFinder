@@ -8,7 +8,6 @@ PODS:
   - MGSwipeTableCell (1.5.1)
   - Parse (1.9.0):
     - Bolts/Tasks (>= 1.3.0)
-  - Toast-Swift (1.0.0)
 
 DEPENDENCIES:
   - ASHorizontalScrollView (~> 1.1)
@@ -18,7 +17,6 @@ DEPENDENCIES:
   - FontAwesome.swift
   - MGSwipeTableCell
   - Parse
-  - Toast-Swift (~> 1.0.0)
 
 SPEC CHECKSUMS:
   ASHorizontalScrollView: 97f78b44008078b9c3ea1fe3ed7286c39e47d4e8
@@ -29,6 +27,5 @@ SPEC CHECKSUMS:
   FontAwesome.swift: d40ac0a660f079c77945bab632ca20bf46ddc1ac
   MGSwipeTableCell: a51fa670c01f0aa048f12af040acebf315223137
   Parse: 712efbc476d4f47b0f96b70db7e53101575753aa
-  Toast-Swift: 709908e9f9a96dfd72438f9301ae28e3e98c16bb
 
 COCOAPODS: 0.39.0
