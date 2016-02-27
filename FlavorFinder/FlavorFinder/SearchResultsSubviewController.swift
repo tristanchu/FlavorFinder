@@ -460,15 +460,40 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         matches.removeAll()
         
         if searchText.isEmpty {
-            matches = allMatches
+//            matches = allMatches
+            for match in allMatches {
+                if ingredientPassesFilter(match.ingredient) {
+                    matches.append(match)
+                }
+            }
         } else {
             for match in allMatches {
                 if (match.ingredient[_s_name] as! String).rangeOfString(searchText.lowercaseString) != nil {
-                    matches.append(match)
+                    if ingredientPassesFilter(match.ingredient) {
+                        matches.append(match)   
+                    }
                 }
             }
         }
         
         self.tableView.reloadData()
+    }
+    
+    func ingredientPassesFilter(ingredient: PFIngredient) -> Bool {
+        let isDairy = ingredient[_s_dairy] as! Bool
+        let isNuts = ingredient[_s_nuts] as! Bool
+        let isVege = ingredient[_s_vegetarian] as! Bool
+        
+        if filters[F_DAIRY]! && isDairy || filters[F_NUTS]! && isNuts || filters[F_VEG]! && !isVege {
+            return false
+        } else {
+            return true
+        }
+    }
+    
+    func filterButtonWasToggled(filters: [String:Bool], searchText: String) {
+        self.filters = filters
+        
+        filterResults(searchText)
     }
 }

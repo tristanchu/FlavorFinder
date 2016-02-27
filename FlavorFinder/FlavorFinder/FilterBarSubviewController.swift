@@ -26,23 +26,26 @@ class FilterBarSubviewController : UIViewController, UISearchBarDelegate {
         view.backgroundColor = NAVI_COLOR
         
         let screenSize: CGRect = UIScreen.mainScreen().bounds
-        filterView.frame = CGRectMake(0, 0, screenSize.width, K_CELL_HEIGHT)
+        filterView.frame = CGRectMake(0, 0, screenSize.width, K_CELL_HEIGHT+5)
         filterView.backgroundColor = NAVI_COLOR
-        filterView.miniAppearPxOfLastItem = 10
-        filterView.uniformItemSize = CGSizeMake(80, 30)
+        filterView.leftMarginPx = 25
+        filterView.miniAppearPxOfLastItem = 25
+        filterView.uniformItemSize = CGSizeMake(110, 33)
+        
         // this must be called after changing any size or margin property of this class to get accurate margin
         filterView.setItemsMarginOnce()
         
-        let kosherBtn = UIButton()
-        kosherBtn.setTitle(F_KOSHER.capitalizedString, forState: .Normal)
-        kosherBtn.layer.cornerRadius = 10
-        kosherBtn.layer.borderWidth = 1
-        kosherBtn.layer.borderColor = NAVI_BUTTON_COLOR.CGColor
-        kosherBtn.backgroundColor = UIColor.clearColor()
-        kosherBtn.titleLabel?.font = UIFont.fontAwesomeOfSize(15)
-        kosherBtn.tag = 1
-        kosherBtn.addTarget(self, action: "filterToggleBtnClicked:", forControlEvents: UIControlEvents.TouchUpInside)
-        filterView.addItem(kosherBtn)
+//        let kosherBtn = UIButton()
+//        kosherBtn.setTitle(F_KOSHER.capitalizedString, forState: .Normal)
+//        kosherBtn.layer.cornerRadius = 10
+//        kosherBtn.layer.borderWidth = 1
+//        kosherBtn.layer.borderColor = NAVI_BUTTON_COLOR.CGColor
+//        kosherBtn.backgroundColor = UIColor.clearColor()
+//        kosherBtn.titleLabel?.font = UIFont.fontAwesomeOfSize(15)
+//        kosherBtn.tag = 1
+//        kosherBtn.addTarget(self, action: "filterToggleBtnClicked:", forControlEvents: UIControlEvents.TouchUpInside)
+//        filterView.addItem(kosherBtn)
+        
         
         let dairyBtn = UIButton()
         dairyBtn.setTitle(F_DAIRY.capitalizedString, forState: .Normal)
@@ -53,6 +56,8 @@ class FilterBarSubviewController : UIViewController, UISearchBarDelegate {
         dairyBtn.titleLabel?.font = UIFont.fontAwesomeOfSize(15)
         dairyBtn.tag = 2
         dairyBtn.addTarget(self, action: "filterToggleBtnClicked:", forControlEvents: UIControlEvents.TouchUpInside)
+        let dairyImage = UIImage(named: "Dairy")!
+        dairyBtn.setImage(dairyImage, forState: .Normal)
         filterView.addItem(dairyBtn)
         
         let vegeBtn = UIButton()
@@ -64,6 +69,8 @@ class FilterBarSubviewController : UIViewController, UISearchBarDelegate {
         vegeBtn.titleLabel?.font = UIFont.fontAwesomeOfSize(15)
         vegeBtn.tag = 3
         vegeBtn.addTarget(self, action: "filterToggleBtnClicked:", forControlEvents: UIControlEvents.TouchUpInside)
+        let vegeImage = UIImage(named: "Vegan")!
+        vegeBtn.setImage(vegeImage, forState: .Normal)
         filterView.addItem(vegeBtn)
         
         let nutsBtn = UIButton()
@@ -75,6 +82,8 @@ class FilterBarSubviewController : UIViewController, UISearchBarDelegate {
         nutsBtn.titleLabel?.font = UIFont.fontAwesomeOfSize(15)
         nutsBtn.tag = 4
         nutsBtn.addTarget(self, action: "filterToggleBtnClicked:", forControlEvents: UIControlEvents.TouchUpInside)
+        let nutsImage = UIImage(named: "Nuts")!
+        nutsBtn.setImage(nutsImage, forState: .Normal)
         filterView.addItem(nutsBtn)
         
         self.view.addSubview(filterView)
@@ -138,7 +147,11 @@ class FilterBarSubviewController : UIViewController, UISearchBarDelegate {
         
         // Let parent know that filter button was toggled
         if let parent = parentViewController as! SearchResultsViewController? {
-            parent.filterButtonWasToggled(filters)
+            if let searchText = filterSearchBar.text {
+                parent.filterButtonWasToggled(filters, searchText: searchText)
+            } else {
+                parent.filterButtonWasToggled(filters, searchText: "")
+            }
         }
     }
     

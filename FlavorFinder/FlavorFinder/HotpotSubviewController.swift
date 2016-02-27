@@ -25,7 +25,7 @@ class HotpotSubviewController : UICollectionViewController, UICollectionViewDele
     let ITEM_WIDTH : CGFloat = 100
     let FRAME_WIDTH : CGFloat = 200 // debug: arbitrary for now
     let HOTPOT_COLOR = NAVI_COLOR
-    let CELL_LABEL_FONT = UIFont(name: "Avenir Next Bold", size: 16)
+    let CELL_LABEL_FONT = UIFont(name: "Avenir Next Medium", size: 17)
     let CELL_X_POS : CGFloat = 3
     let CELL_Y_POS : CGFloat = -3
     let CELL_LABEL_COLOR = UIColor.whiteColor()
