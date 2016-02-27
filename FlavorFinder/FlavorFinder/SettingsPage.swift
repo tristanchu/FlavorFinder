@@ -25,6 +25,7 @@ class SettingsPage : LoginModuleParentViewController {
     // Text:
     let pageTitle = "Settings"
     let loggedOutText = "You must be logged in to have settings."
+    let LOGOUT_TEXT = "Logged out of "
     
     // Placement:
     let loggedOutPlacementHeightMultiplier : CGFloat = 0.5
@@ -42,9 +43,12 @@ class SettingsPage : LoginModuleParentViewController {
 
     @IBAction func logoutBtn(sender: UIButton) {
         if currentUser != nil {
+            let userName = currentUser!.username!
+            let ToastText = "\(LOGOUT_TEXT)\(userName)"
             PFUser.logOutInBackground()
             currentUser = nil
             displayLoggedOut()
+            self.view.makeToast(ToastText, duration: TOAST_DURATION, position: .Bottom)
         }
     }
 
