@@ -193,8 +193,8 @@ class SearchResultsViewController : UIViewController {
     /* filterButtonWasToggled
         - coordinates view response after child says filter buttons were toggled
     */
-    func filterButtonWasToggled(filters: [String: Bool]) {
-        searchResultsSVC?.filters = filters
+    func filterButtonWasToggled(filters: [String: Bool], searchText: String) {
+        searchResultsSVC?.filterButtonWasToggled(filters, searchText: searchText)
     }
     
     func filterSearchTextDidChange(searchText: String) {
