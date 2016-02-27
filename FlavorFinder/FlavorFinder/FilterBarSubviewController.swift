@@ -28,9 +28,9 @@ class FilterBarSubviewController : UIViewController, UISearchBarDelegate {
         let screenSize: CGRect = UIScreen.mainScreen().bounds
         filterView.frame = CGRectMake(0, 0, screenSize.width, K_CELL_HEIGHT+5)
         filterView.backgroundColor = NAVI_COLOR
-        filterView.leftMarginPx = 25
-        filterView.miniAppearPxOfLastItem = 25
-        filterView.uniformItemSize = CGSizeMake(110, 33)
+        filterView.leftMarginPx = 20
+        filterView.miniAppearPxOfLastItem = 10
+        filterView.uniformItemSize = CGSizeMake(115, 33)
         
         // this must be called after changing any size or margin property of this class to get accurate margin
         filterView.setItemsMarginOnce()
@@ -53,7 +53,7 @@ class FilterBarSubviewController : UIViewController, UISearchBarDelegate {
         dairyBtn.layer.borderWidth = 1
         dairyBtn.layer.borderColor = NAVI_BUTTON_COLOR.CGColor
         dairyBtn.backgroundColor = UIColor.clearColor()
-        dairyBtn.titleLabel?.font = UIFont.fontAwesomeOfSize(15)
+        dairyBtn.titleLabel?.font = UIFont(name: "Avenir Next Medium", size: 15)
         dairyBtn.tag = 2
         dairyBtn.addTarget(self, action: "filterToggleBtnClicked:", forControlEvents: UIControlEvents.TouchUpInside)
         let dairyImage = UIImage(named: "Dairy")!
@@ -66,7 +66,7 @@ class FilterBarSubviewController : UIViewController, UISearchBarDelegate {
         vegeBtn.layer.borderWidth = 1
         vegeBtn.layer.borderColor = NAVI_BUTTON_COLOR.CGColor
         vegeBtn.backgroundColor = UIColor.clearColor()
-        vegeBtn.titleLabel?.font = UIFont.fontAwesomeOfSize(15)
+        vegeBtn.titleLabel?.font = UIFont(name: "Avenir Next Medium", size: 15)
         vegeBtn.tag = 3
         vegeBtn.addTarget(self, action: "filterToggleBtnClicked:", forControlEvents: UIControlEvents.TouchUpInside)
         let vegeImage = UIImage(named: "Vegan")!
@@ -79,7 +79,7 @@ class FilterBarSubviewController : UIViewController, UISearchBarDelegate {
         nutsBtn.layer.borderWidth = 1
         nutsBtn.layer.borderColor = NAVI_BUTTON_COLOR.CGColor
         nutsBtn.backgroundColor = UIColor.clearColor()
-        nutsBtn.titleLabel?.font = UIFont.fontAwesomeOfSize(15)
+        nutsBtn.titleLabel?.font = UIFont(name: "Avenir Next Medium", size: 15)
         nutsBtn.tag = 4
         nutsBtn.addTarget(self, action: "filterToggleBtnClicked:", forControlEvents: UIControlEvents.TouchUpInside)
         let nutsImage = UIImage(named: "Nuts")!
