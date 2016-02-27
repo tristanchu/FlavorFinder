@@ -1,4 +1,4 @@
-    //
+//
 //  ListDetailController.swift
 //  FlavorFinder
 //
@@ -35,11 +35,11 @@ class ListDetailController: UITableViewController {
     
     // Navigation:
     var backBtn: UIBarButtonItem = UIBarButtonItem()
-    let backBtnAction = "backBtnClicked:"
+    let backBtnAction : Selector = "backBtnClicked"
     let backBtnString = String.fontAwesomeIconWithName(.ChevronLeft) + " All Lists"
     
     var editBtn: UIBarButtonItem = UIBarButtonItem()
-    let editBtnAction = "editBtnClicked:"
+    let editBtnAction : Selector = "editBtnClicked"
     let editBtnString = "Rename List"
     
     // Segues:
@@ -259,11 +259,7 @@ class ListDetailController: UITableViewController {
         sets up the back button visuals for navigation
     */
     func setUpBackButton() {
-        backBtn.setTitleTextAttributes(attributes, forState: .Normal)
-        backBtn.title = self.backBtnString
-        backBtn.tintColor = NAVI_BUTTON_COLOR
-        backBtn.target = self
-        backBtn.action = "backBtnClicked"  // refers to: backBtnClicked()
+        setUpNaviButton(backBtn, buttonString: backBtnString, target: self, action: backBtnAction)
     }
     
     /* backBtnClicked
@@ -279,11 +275,7 @@ class ListDetailController: UITableViewController {
         sets up the edit button visuals  for navigation
     */
     func setUpEditButton() {
-        editBtn.setTitleTextAttributes(attributes, forState: .Normal)
-        editBtn.title = self.editBtnString
-        editBtn.tintColor = NAVI_BUTTON_COLOR
-        editBtn.target = self
-        editBtn.action = "editBtnClicked"   // refers to editBtnClicked()
+        setUpNaviButton(editBtn, buttonString: editBtnString, target: self, action: editBtnAction)
     }
     
     /* editBtnClicked

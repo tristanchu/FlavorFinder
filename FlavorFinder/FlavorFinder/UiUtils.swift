@@ -37,3 +37,19 @@ func alertPopup(title: String, msg: String, actionTitle: String,
             completion: nil)
 }
 
+// ----------------------------------------------------------------------
+// BUTTON FUNCTIONS -----------------------------------------------------
+// ----------------------------------------------------------------------
+
+
+/* setUpNaviButton
+- sets up a navigation button for navi style
+*/
+func setUpNaviButton(button: UIBarButtonItem, buttonString: String, target: UIViewController?, action: Selector) {
+    button.setTitleTextAttributes(attributes, forState: .Normal)
+    button.title = buttonString
+    button.tintColor = NAVI_BUTTON_COLOR
+    button.target = target
+    button.action = action
+}
+
