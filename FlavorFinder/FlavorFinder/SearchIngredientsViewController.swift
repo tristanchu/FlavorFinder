@@ -80,21 +80,15 @@ class SearchIngredientsViewController: GotNaviViewController, UISearchBarDelegat
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         
         // fills filteredResults based on text entered
-        if let allIngredients = _allIngredients as? [PFIngredient] {
-            filteredResults = allIngredients.filter({ (ingredient) -> Bool in
-                let tmp: PFObject = ingredient
-                let range = tmp[_s_name].rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
-                return range.location != NSNotFound
-            })
-            if filteredResults.isEmpty {
-                activeSearch = false
-                searchTable?.hidden = true
-            } else {
-                activeSearch = true
-                searchTable?.hidden = false
-            }
-            self.searchTable?.reloadData()
+        filteredResults = getPossibleIngredients(searchText)
+        if filteredResults.isEmpty {
+            activeSearch = false
+            searchTable?.hidden = true
+        } else {
+            activeSearch = true
+            searchTable?.hidden = false
         }
+        self.searchTable?.reloadData()
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {

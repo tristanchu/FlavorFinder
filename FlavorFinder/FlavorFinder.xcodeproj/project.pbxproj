@@ -19,6 +19,7 @@
 		609E66611C7E89B000DE2A28 /* CreateNewList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609E66601C7E89B000DE2A28 /* CreateNewList.swift */; };
 		60AD7BDF1C7A47470002A7DF /* AddToListPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60AD7BDE1C7A47470002A7DF /* AddToListPage.swift */; };
 		60B3F16D1C5AE41D0018AA29 /* ListDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B3F16C1C5AE41D0018AA29 /* ListDetailController.swift */; };
+		60C7A3481C83788B00622116 /* CreateNewListFromSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C7A3471C83788B00622116 /* CreateNewListFromSearch.swift */; settings = {ASSET_TAGS = (); }; };
 		60D22BA41C723B9B00A72FB2 /* AddHotpotToList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D22BA31C723B9B00A72FB2 /* AddHotpotToList.swift */; };
 		60DFE76E1C6148D400A6EF85 /* SearchUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DFE76D1C6148D400A6EF85 /* SearchUtils.swift */; };
 		60FEE38F1BE570E100F51BE8 /* KeychainWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 60FEE38E1BE570E100F51BE8 /* KeychainWrapper.m */; };
@@ -61,6 +62,7 @@
 		B61AD2C51C5BFB9C00081BF4 /* SearchResultsSubviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61AD2C41C5BFB9C00081BF4 /* SearchResultsSubviewController.swift */; };
 		B61FEBCE1C4430D30028F800 /* EmptySegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61FEBCD1C4430D30028F800 /* EmptySegue.swift */; };
 		B63F60211C725C0C0057D726 /* TextUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63F60201C725C0C0057D726 /* TextUtils.swift */; };
+		B6420CB51C836C8300260779 /* AddIngredientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6420CB41C836C8300260779 /* AddIngredientViewController.swift */; };
 		B64E25F01C7A3355003D53BD /* LoginModuleParentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64E25EF1C7A3355003D53BD /* LoginModuleParentViewController.swift */; };
 		B65BA8B11BF907750045CB5E /* SavedMatchesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65BA8B01BF907750045CB5E /* SavedMatchesCell.swift */; };
 		B65DE16E1C822B6F005B66AE /* GotNaviViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65DE16D1C822B6F005B66AE /* GotNaviViewController.swift */; };
@@ -103,6 +105,7 @@
 		609E66601C7E89B000DE2A28 /* CreateNewList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateNewList.swift; sourceTree = "<group>"; };
 		60AD7BDE1C7A47470002A7DF /* AddToListPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddToListPage.swift; sourceTree = "<group>"; };
 		60B3F16C1C5AE41D0018AA29 /* ListDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListDetailController.swift; sourceTree = "<group>"; };
+		60C7A3471C83788B00622116 /* CreateNewListFromSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateNewListFromSearch.swift; sourceTree = "<group>"; };
 		60D22BA31C723B9B00A72FB2 /* AddHotpotToList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddHotpotToList.swift; sourceTree = "<group>"; };
 		60DFE76D1C6148D400A6EF85 /* SearchUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchUtils.swift; sourceTree = "<group>"; };
 		60FEE38C1BE570E000F51BE8 /* FlavorFinder-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FlavorFinder-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -152,6 +155,7 @@
 		B61AD2C41C5BFB9C00081BF4 /* SearchResultsSubviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsSubviewController.swift; sourceTree = "<group>"; };
 		B61FEBCD1C4430D30028F800 /* EmptySegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptySegue.swift; sourceTree = "<group>"; };
 		B63F60201C725C0C0057D726 /* TextUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextUtils.swift; sourceTree = "<group>"; };
+		B6420CB41C836C8300260779 /* AddIngredientViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddIngredientViewController.swift; sourceTree = "<group>"; };
 		B64E25EF1C7A3355003D53BD /* LoginModuleParentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginModuleParentViewController.swift; sourceTree = "<group>"; };
 		B65BA8B01BF907750045CB5E /* SavedMatchesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedMatchesCell.swift; sourceTree = "<group>"; };
 		B65DE16D1C822B6F005B66AE /* GotNaviViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GotNaviViewController.swift; sourceTree = "<group>"; };
@@ -324,6 +328,7 @@
 				B6BFE6981C82B63F004FD05D /* AddMatchViewController.swift */,
 				8875DE381BE06FB300CD50EA /* MenuTableViewController.swift */,
 				B6739A1B1C5999D20004F982 /* NewSearchViewController.swift */,
+				B6420CB41C836C8300260779 /* AddIngredientViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -370,6 +375,7 @@
 		B6260A911C69321200BC0717 /* ListSubpages */ = {
 			isa = PBXGroup;
 			children = (
+				60C7A3471C83788B00622116 /* CreateNewListFromSearch.swift */,
 				609E66601C7E89B000DE2A28 /* CreateNewList.swift */,
 				60AD7BDE1C7A47470002A7DF /* AddToListPage.swift */,
 				60D22BA31C723B9B00A72FB2 /* AddHotpotToList.swift */,
@@ -611,8 +617,10 @@
 				B6739A141C59971B0004F982 /* ContainerParentViewController.swift in Sources */,
 				888D1A401BDEF816007F09AE /* Stack.swift in Sources */,
 				88F414011BC7513F000C0093 /* PFIngredient.swift in Sources */,
+				B6420CB51C836C8300260779 /* AddIngredientViewController.swift in Sources */,
 				B6F3B74F1BE8833E00AF791A /* PFMatch.swift in Sources */,
 				60FEE38F1BE570E100F51BE8 /* KeychainWrapper.m in Sources */,
+				60C7A3481C83788B00622116 /* CreateNewListFromSearch.swift in Sources */,
 				8875DE2C1BE04DD900CD50EA /* LoginUtils.swift in Sources */,
 				60D22BA41C723B9B00A72FB2 /* AddHotpotToList.swift in Sources */,
 				60DFE76E1C6148D400A6EF85 /* SearchUtils.swift in Sources */,

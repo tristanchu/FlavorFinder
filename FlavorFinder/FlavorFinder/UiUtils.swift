@@ -53,3 +53,15 @@ func setUpNaviButton(button: UIBarButtonItem, buttonString: String, target: UIVi
     button.action = action
 }
 
+/* configureFilterButton
+- sets up a filter button visually, but does not specify action or target
+*/
+func configureFilterButton(button: UIButton, titleString: String, image: UIImage) {
+    button.setTitle(titleString.capitalizedString, forState: .Normal)
+    button.layer.cornerRadius = 10
+    button.layer.borderWidth = 1
+    button.layer.borderColor = NAVI_BUTTON_COLOR.CGColor
+    button.backgroundColor = UIColor.clearColor()
+    button.titleLabel?.font = UIFont(name: "Avenir Next Medium", size: 15)
+    button.setImage(image, forState: .Normal)
+}
