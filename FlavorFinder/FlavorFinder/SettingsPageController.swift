@@ -1,5 +1,5 @@
 //
-//  SettingsPage.swift
+//  SettingsPageController.swift
 //  FlavorFinder
 //
 //  Created by Courtney Ligh on 2/10/16.
@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Parse
 
-class SettingsPage : LoginModuleParentViewController {
+class SettingsPageController : LoginModuleParentViewController {
     
     // MARK: Properties: --------------------------------------------------
     // Labels:
