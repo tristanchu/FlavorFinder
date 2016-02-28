@@ -19,6 +19,7 @@
 		609E66611C7E89B000DE2A28 /* CreateNewList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609E66601C7E89B000DE2A28 /* CreateNewList.swift */; };
 		60AD7BDF1C7A47470002A7DF /* AddToListPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60AD7BDE1C7A47470002A7DF /* AddToListPage.swift */; };
 		60B3F16D1C5AE41D0018AA29 /* ListDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B3F16C1C5AE41D0018AA29 /* ListDetailController.swift */; };
+		60C7A3481C83788B00622116 /* CreateNewListFromSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C7A3471C83788B00622116 /* CreateNewListFromSearch.swift */; settings = {ASSET_TAGS = (); }; };
 		60D22BA41C723B9B00A72FB2 /* AddHotpotToList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D22BA31C723B9B00A72FB2 /* AddHotpotToList.swift */; };
 		60DFE76E1C6148D400A6EF85 /* SearchUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DFE76D1C6148D400A6EF85 /* SearchUtils.swift */; };
 		60FEE38F1BE570E100F51BE8 /* KeychainWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 60FEE38E1BE570E100F51BE8 /* KeychainWrapper.m */; };
@@ -102,6 +103,7 @@
 		609E66601C7E89B000DE2A28 /* CreateNewList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateNewList.swift; sourceTree = "<group>"; };
 		60AD7BDE1C7A47470002A7DF /* AddToListPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddToListPage.swift; sourceTree = "<group>"; };
 		60B3F16C1C5AE41D0018AA29 /* ListDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListDetailController.swift; sourceTree = "<group>"; };
+		60C7A3471C83788B00622116 /* CreateNewListFromSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateNewListFromSearch.swift; sourceTree = "<group>"; };
 		60D22BA31C723B9B00A72FB2 /* AddHotpotToList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddHotpotToList.swift; sourceTree = "<group>"; };
 		60DFE76D1C6148D400A6EF85 /* SearchUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchUtils.swift; sourceTree = "<group>"; };
 		60FEE38C1BE570E000F51BE8 /* FlavorFinder-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FlavorFinder-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -367,6 +369,7 @@
 		B6260A911C69321200BC0717 /* ListSubpages */ = {
 			isa = PBXGroup;
 			children = (
+				60C7A3471C83788B00622116 /* CreateNewListFromSearch.swift */,
 				609E66601C7E89B000DE2A28 /* CreateNewList.swift */,
 				60AD7BDE1C7A47470002A7DF /* AddToListPage.swift */,
 				60D22BA31C723B9B00A72FB2 /* AddHotpotToList.swift */,
@@ -611,6 +614,7 @@
 				B6420CB51C836C8300260779 /* AddIngredientViewController.swift in Sources */,
 				B6F3B74F1BE8833E00AF791A /* PFMatch.swift in Sources */,
 				60FEE38F1BE570E100F51BE8 /* KeychainWrapper.m in Sources */,
+				60C7A3481C83788B00622116 /* CreateNewListFromSearch.swift in Sources */,
 				8875DE2C1BE04DD900CD50EA /* LoginUtils.swift in Sources */,
 				60D22BA41C723B9B00A72FB2 /* AddHotpotToList.swift in Sources */,
 				60DFE76E1C6148D400A6EF85 /* SearchUtils.swift in Sources */,
