@@ -971,10 +971,10 @@
             </objects>
             <point key="canvasLocation" x="1854" y="3017"/>
         </scene>
-        <!--Settings Page-->
+        <!--Settings Page Controller-->
         <scene sceneID="yia-nh-jLn">
             <objects>
-                <viewController id="sBa-Qh-DWZ" customClass="SettingsPage" customModule="FlavorFinder" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="sBa-Qh-DWZ" customClass="SettingsPageController" customModule="FlavorFinder" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jkl-GR-9wx"/>
                         <viewControllerLayoutGuide type="bottom" id="7OD-bm-eJJ"/>
@@ -1247,12 +1247,38 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wB0-Bb-AI5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2123" y="-1085"/>
+            <point key="canvasLocation" x="2043" y="-1824"/>
+        </scene>
+        <!--Add Ingredient View Controller-->
+        <scene sceneID="FGH-6v-Hzz">
+            <objects>
+                <viewController id="ek9-3g-hq6" userLabel="Add Ingredient View Controller" customClass="GotNaviViewController" customModule="FlavorFinder" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ANv-JC-efT"/>
+                        <viewControllerLayoutGuide type="bottom" id="by8-ey-Bha"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="CvN-rc-Ooi">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Add Ingredient Page" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OsU-zJ-7HY">
+                                <rect key="frame" x="165" y="265" width="156" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qhN-Dg-YBT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2731" y="-1833"/>
         </scene>
         <!--More Menu View Controller-->
         <scene sceneID="3Cf-76-j6x">
             <objects>
-                <tableViewController id="KKS-L4-a25" userLabel="More Menu View Controller" customClass="MorePage" customModule="FlavorFinder" sceneMemberID="viewController">
+                <tableViewController id="KKS-L4-a25" userLabel="More Menu View Controller" customClass="MorePageController" customModule="FlavorFinder" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="P8d-Cq-0UO" userLabel="More Table View">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1276,6 +1302,7 @@
                     <connections>
                         <segue destination="RsG-4X-3Wr" kind="show" identifier="segueMoreToAbout" id="gL0-fj-B64"/>
                         <segue destination="ZNT-a6-FMP" kind="show" identifier="segueMoreToAddMatch" id="Am0-pX-q9x"/>
+                        <segue destination="ek9-3g-hq6" kind="show" identifier="segueMoreToAddIngredient" id="qZN-g0-Z0r"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KXp-1y-XGc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1306,7 +1333,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZVv-in-1aq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2067" y="-1856"/>
+            <point key="canvasLocation" x="1307" y="-1824"/>
         </scene>
         <!--More Page-->
         <scene sceneID="7tC-S3-7gk">
