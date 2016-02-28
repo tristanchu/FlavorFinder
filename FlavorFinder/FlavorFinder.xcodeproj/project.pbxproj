@@ -59,6 +59,7 @@
 		B61AD2C51C5BFB9C00081BF4 /* SearchResultsSubviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61AD2C41C5BFB9C00081BF4 /* SearchResultsSubviewController.swift */; };
 		B61FEBCE1C4430D30028F800 /* EmptySegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61FEBCD1C4430D30028F800 /* EmptySegue.swift */; };
 		B63F60211C725C0C0057D726 /* TextUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63F60201C725C0C0057D726 /* TextUtils.swift */; };
+		B6420CB51C836C8300260779 /* AddIngredientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6420CB41C836C8300260779 /* AddIngredientViewController.swift */; };
 		B64E25F01C7A3355003D53BD /* LoginModuleParentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64E25EF1C7A3355003D53BD /* LoginModuleParentViewController.swift */; };
 		B65BA8B11BF907750045CB5E /* SavedMatchesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65BA8B01BF907750045CB5E /* SavedMatchesCell.swift */; };
 		B65DE16E1C822B6F005B66AE /* GotNaviViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65DE16D1C822B6F005B66AE /* GotNaviViewController.swift */; };
@@ -148,6 +149,7 @@
 		B61AD2C41C5BFB9C00081BF4 /* SearchResultsSubviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsSubviewController.swift; sourceTree = "<group>"; };
 		B61FEBCD1C4430D30028F800 /* EmptySegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptySegue.swift; sourceTree = "<group>"; };
 		B63F60201C725C0C0057D726 /* TextUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextUtils.swift; sourceTree = "<group>"; };
+		B6420CB41C836C8300260779 /* AddIngredientViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddIngredientViewController.swift; sourceTree = "<group>"; };
 		B64E25EF1C7A3355003D53BD /* LoginModuleParentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginModuleParentViewController.swift; sourceTree = "<group>"; };
 		B65BA8B01BF907750045CB5E /* SavedMatchesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedMatchesCell.swift; sourceTree = "<group>"; };
 		B65DE16D1C822B6F005B66AE /* GotNaviViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GotNaviViewController.swift; sourceTree = "<group>"; };
@@ -318,6 +320,7 @@
 				B6BFE6981C82B63F004FD05D /* AddMatchViewController.swift */,
 				8875DE381BE06FB300CD50EA /* MenuTableViewController.swift */,
 				B6739A1B1C5999D20004F982 /* NewSearchViewController.swift */,
+				B6420CB41C836C8300260779 /* AddIngredientViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -605,6 +608,7 @@
 				B6739A141C59971B0004F982 /* ContainerParentViewController.swift in Sources */,
 				888D1A401BDEF816007F09AE /* Stack.swift in Sources */,
 				88F414011BC7513F000C0093 /* PFIngredient.swift in Sources */,
+				B6420CB51C836C8300260779 /* AddIngredientViewController.swift in Sources */,
 				B6F3B74F1BE8833E00AF791A /* PFMatch.swift in Sources */,
 				60FEE38F1BE570E100F51BE8 /* KeychainWrapper.m in Sources */,
 				8875DE2C1BE04DD900CD50EA /* LoginUtils.swift in Sources */,

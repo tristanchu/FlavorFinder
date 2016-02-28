@@ -1252,7 +1252,7 @@
         <!--Add Ingredient View Controller-->
         <scene sceneID="FGH-6v-Hzz">
             <objects>
-                <viewController id="ek9-3g-hq6" userLabel="Add Ingredient View Controller" customClass="GotNaviViewController" customModule="FlavorFinder" sceneMemberID="viewController">
+                <viewController id="ek9-3g-hq6" userLabel="Add Ingredient View Controller" customClass="AddIngredientViewController" customModule="FlavorFinder" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ANv-JC-efT"/>
                         <viewControllerLayoutGuide type="bottom" id="by8-ey-Bha"/>
@@ -1278,6 +1278,9 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="nameWasEntered:" destination="ek9-3g-hq6" eventType="editingDidEndOnExit" id="qEc-xQ-Cbf"/>
+                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You will need to propose at least one flavor match to complete the process of adding an ingredient." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pRK-me-oUD">
                                 <rect key="frame" x="164" y="178" width="272" height="76"/>
@@ -1301,6 +1304,11 @@
                             <constraint firstItem="fyj-CA-fkS" firstAttribute="top" secondItem="ANv-JC-efT" secondAttribute="bottom" constant="44" id="th5-l7-wPK"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="nameTextField" destination="IrF-xD-Jyr" id="3lH-3b-vb0"/>
+                        <outlet property="promptLabel" destination="fyj-CA-fkS" id="SFm-gl-yuL"/>
+                        <outlet property="warningLabel" destination="pRK-me-oUD" id="91N-dg-e9W"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qhN-Dg-YBT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
