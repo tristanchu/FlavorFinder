@@ -14,7 +14,9 @@ class AddMatchViewController : SearchIngredientsViewController {
     // MARK: Properties:
     let pageTitle = "Add A New Match"
     let alreadyExistsText = " is already a match!"
-    let defaultPrompt = "Which ingredient are you creating a match for?"
+    let defaultPrompt = "Which ingredient are you creating a new match for?"
+    let promptPrefix = "Which ingredient matches with "
+    let promptSuffix = "?"
     var firstIngredient : PFIngredient?
     var secondIngredient : PFIngredient?
     
@@ -59,16 +61,18 @@ class AddMatchViewController : SearchIngredientsViewController {
         if let _ = firstIngredient { // try to create a match
             secondIngredient = selected
             if let _ = getMatchForTwoIngredients(firstIngredient!, secondIngredient: secondIngredient!) {
-                print("the match already exists")
+                print("the match already exists") // use feedback system
             } else {
                 addMatch(currentUser!, firstIngredient: firstIngredient!, secondIngredient: secondIngredient!)
-                print("match added")
-                reset()
+                print("match added") // use feedback system
             }
+            reset()
         } else {
             // indicate selection
             firstIngredient = selected
-            print((firstIngredient!))
+            promptLabel.text = "\(promptPrefix)\(firstIngredient!.name)\(promptSuffix)"
+            ingredientSearchBar?.text = ""
+            searchTable?.hidden = true
         }
     }
     
@@ -81,6 +85,8 @@ class AddMatchViewController : SearchIngredientsViewController {
         promptLabel.text = defaultPrompt
         firstIngredient = nil
         secondIngredient = nil
+        ingredientSearchBar?.text = ""
+        searchTable?.hidden = true
     }
     
 }
