@@ -126,42 +126,35 @@ class AddHotpotToListController: UITableViewController {
     */
     override func tableView(tableView: UITableView,
         didSelectRowAtIndexPath indexPath: NSIndexPath) {
+
             // Create new list:
             if (indexPath.row == 0){
-                var list = [PFIngredient]()
                 if (!currentIngredientToAdd.isEmpty) {
-                    for ingredient in currentIngredientToAdd {
-                        list.append(ingredient) }
-                    createIngredientList(currentUser!, title: newListTitle, ingredients: list)
-                    // toast feedback:
-                    makeListToast(newListTitle, iList: currentIngredientToAdd)
-                    
-                    // clear current Ingredient to add
+                    createNewList(newListTitle, adding: currentIngredientToAdd)
+                    // clear global var:
                     currentIngredientToAdd = []
                 } else {
-                    for ingredient in currentSearch{ list.append(ingredient) }
-                    createIngredientList(currentUser!,
-                        title: newListTitle, ingredients: list)
-                    
-                    // toast feedback:
-                    makeListToast(newListTitle, iList: currentSearch)
+                    createNewList(newListTitle, adding: currentSearch)
                 }
-                
+
             // Picked an existing list:
             } else {
                 let listObject = userLists[indexPath.row - 1]
                 
-                // add either 1 ingredient or current search:
+                // add 1 Ingredient:
                 if (!currentIngredientToAdd.isEmpty) {
                     addtoList(listObject, adding: currentIngredientToAdd)
                     // clear global var:
                     currentIngredientToAdd = []
+
+                // OR Add Current Search:
                 } else {
                     addtoList(listObject, adding: currentSearch)
                 }
+
+                // go back to search page:
+                self.navigationController?.popViewControllerAnimated(true)
             }
-        // go back to search page:
-        self.navigationController?.popViewControllerAnimated(true)
     }
 
     // MARK: Functions -------------------------------------------------
@@ -202,6 +195,7 @@ class AddHotpotToListController: UITableViewController {
     
     // MARK: Appending to list ---------------------------------------------
     /* addToList
+        can be called with current search or with the one ingredient to add
     */
     func addtoList(listObject: PFObject, adding: [PFIngredient]) {
         var list = listObject.objectForKey(ingredientsColumnName) as! [PFIngredient]
@@ -213,12 +207,26 @@ class AddHotpotToListController: UITableViewController {
             }
         }
         // Toast Feedback:
-        makeListToast(listName, iList: currentIngredientToAdd)
+        makeListToast(listName, iList: adding)
         
         // update with new ingredient list:
         listObject.setObject(list, forKey: ingredientsColumnName)
         listObject.saveInBackground()
     }
+    
+    /* createNewList
+        To be called on naming page - to create new list with a name
+    */
+    func createNewList(listName: String, adding: [PFIngredient]) {
+        var list = [PFIngredient]()
+        for ingredient in adding{ list.append(ingredient) }
+        createIngredientList(currentUser!,
+            title: listName, ingredients: list)
+        
+        // toast feedback:
+        makeListToast(newListTitle, iList: adding)
+    }
+    
     
     
     // MARK: Toast Message - --------------------------------------------------
