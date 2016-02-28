@@ -52,6 +52,8 @@
 		8875DE3B1BE0751B00CD50EA /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8875DE3A1BE0751B00CD50EA /* MainNavigationController.swift */; };
 		888D1A401BDEF816007F09AE /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888D1A3F1BDEF816007F09AE /* Stack.swift */; };
 		88998E211BEC365D00087406 /* PFVote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88998E201BEC365D00087406 /* PFVote.swift */; };
+		88A2B6951C8365A100424652 /* FavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A2B6941C8365A100424652 /* FavoriteTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		88A2B6971C83666900424652 /* ListIngredientTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A2B6961C83666900424652 /* ListIngredientTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		88F0E5011BE54111003CB35B /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F0E5001BE54111003CB35B /* Animations.swift */; };
 		88F413FA1BC74A00000C0093 /* MatchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F413F91BC74A00000C0093 /* MatchTableViewCell.swift */; };
 		88F414011BC7513F000C0093 /* PFIngredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F414001BC7513F000C0093 /* PFIngredient.swift */; };
@@ -142,6 +144,8 @@
 		8875DE3A1BE0751B00CD50EA /* MainNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		888D1A3F1BDEF816007F09AE /* Stack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		88998E201BEC365D00087406 /* PFVote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PFVote.swift; sourceTree = "<group>"; };
+		88A2B6941C8365A100424652 /* FavoriteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteTableViewCell.swift; sourceTree = "<group>"; };
+		88A2B6961C83666900424652 /* ListIngredientTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListIngredientTableViewCell.swift; sourceTree = "<group>"; };
 		88F0E5001BE54111003CB35B /* Animations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animations.swift; sourceTree = "<group>"; };
 		88F413F91BC74A00000C0093 /* MatchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchTableViewCell.swift; sourceTree = "<group>"; };
 		88F414001BC7513F000C0093 /* PFIngredient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PFIngredient.swift; path = FlavorFinderTests/PFIngredient.swift; sourceTree = SOURCE_ROOT; };
@@ -298,6 +302,8 @@
 				883AC6301BC1A3C0009136E9 /* LaunchScreen.xib */,
 				883AC62B1BC1A3C0009136E9 /* Main.storyboard */,
 				88F413F91BC74A00000C0093 /* MatchTableViewCell.swift */,
+				88A2B6941C8365A100424652 /* FavoriteTableViewCell.swift */,
+				88A2B6961C83666900424652 /* ListIngredientTableViewCell.swift */,
 				8839994A1C554ACB003F5CD2 /* HotpotCollectionViewCell.swift */,
 				B65BA8B01BF907750045CB5E /* SavedMatchesCell.swift */,
 			);
@@ -626,9 +632,11 @@
 				B6F55CA71C5E88D300854B07 /* FilterBarSubviewController.swift in Sources */,
 				60216E661BEC4F740029454B /* UiUtils.swift in Sources */,
 				B6EA63591BEEB4660017C063 /* PFFavorite.swift in Sources */,
+				88A2B6951C8365A100424652 /* FavoriteTableViewCell.swift in Sources */,
 				60B3F16D1C5AE41D0018AA29 /* ListDetailController.swift in Sources */,
 				B63F60211C725C0C0057D726 /* TextUtils.swift in Sources */,
 				8875DE2A1BE041D200CD50EA /* UITextField+LeftMargin.swift in Sources */,
+				88A2B6971C83666900424652 /* ListIngredientTableViewCell.swift in Sources */,
 				B65DE1701C82476F005B66AE /* MorePageController.swift in Sources */,
 				8875DE351BE053ED00CD50EA /* Voting.swift in Sources */,
 				883AC6281BC1A3C0009136E9 /* AppDelegate.swift in Sources */,

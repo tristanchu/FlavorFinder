@@ -250,7 +250,7 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
                 }
                 
                 cell.ingredientIcons.reloadData()
-                
+                cell.ingredientIcons.setNeedsDisplay()
                 cell.label.text = name
 //                cell.upvoteLabel.text = String(upvotes!)
 //                cell.downvoteLabel.text = String(downvotes!)

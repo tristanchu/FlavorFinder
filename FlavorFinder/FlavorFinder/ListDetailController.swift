@@ -57,10 +57,9 @@ class ListDetailController: UITableViewController {
         // Connect table view to this controller        
         ingredientListsTableView.dataSource = self
         ingredientListsTableView.delegate = self
-        ingredientListsTableView.registerClass(UITableViewCell.self,
-            forCellReuseIdentifier: listDetailCell)
-        ingredientListsTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: addToListCellIdentifier)
-        ingredientListsTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: listToSearchCellIdentifier)
+//        ingredientListsTableView.registerClass(ListIngredientTableViewCell.self, forCellReuseIdentifier: listDetailCell)
+        ingredientListsTableView.registerClass(ListIngredientTableViewCell.self, forCellReuseIdentifier: addToListCellIdentifier)
+        ingredientListsTableView.registerClass(ListIngredientTableViewCell.self, forCellReuseIdentifier: listToSearchCellIdentifier)
         
         // Table view visuals:
         ingredientListsTableView.tableFooterView = UIView(frame: CGRectZero)  // remove empty cells
@@ -166,10 +165,43 @@ class ListDetailController: UITableViewController {
             } else {
                 // set cell identifier:
                 let cell = tableView.dequeueReusableCellWithIdentifier(
-                    listDetailCell, forIndexPath: indexPath)
-                    
+                    listDetailCell, forIndexPath: indexPath) as! ListIngredientTableViewCell
+                
                 // Set cell label:
-                cell.textLabel?.text = ingredientList[indexPath.row - 1].name
+                let listIngredient = ingredientList[indexPath.row - 1]
+                cell.textLabel?.text = listIngredient.name
+                cell.textLabel?.font = UIFont(name: "Avenir Next Medium", size: 17)
+                
+                let isNuts = listIngredient[_s_nuts] as! Bool
+                let isDairy = listIngredient[_s_dairy] as! Bool
+                let isVege = listIngredient[_s_vegetarian] as! Bool
+                
+                var isFavorite = false
+                if let user = currentUser {
+                    if let _ = isFavoriteIngredient(user, ingredient: listIngredient) {
+                        isFavorite = true
+                    }
+                }
+                
+                if isVege {
+                    let imageVegan = UIImage(named: "Vegan")!
+                    cell.icons.append(imageVegan)
+                }
+                if isNuts {
+                    let imageNuts = UIImage(named: "Nuts")!
+                    cell.icons.append(imageNuts)
+                }
+                if isDairy {
+                    let imageDairy = UIImage(named: "Dairy")!
+                    cell.icons.append(imageDairy)
+                }
+                if isFavorite {
+                    let imageFav = UIImage(named: "Heart")!
+                    cell.icons.append(imageFav)
+                }
+                
+                cell.ingredientIcons.reloadData()
+                
                 return cell
             }
     }
