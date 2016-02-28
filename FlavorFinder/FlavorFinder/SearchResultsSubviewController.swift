@@ -309,9 +309,13 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
                     selBtn.select()
                     unvoteHotpot(user, hotpot: currentSearch, matchIngredient: matchIngredient, voteType: _s_downvotes)
                     upvoteHotpot(user, hotpot: currentSearch, matchIngredient: matchIngredient)
+                    // Toast message:
+                    self.parentViewController?.view.makeToast(voteFeedbackMsg(matchIngredient, upvote: true), duration: TOAST_DURATION, position: .Bottom)
                 } else { // first-time vote
                     selBtn.select()
                     upvoteHotpot(user, hotpot: currentSearch, matchIngredient: matchIngredient)
+                    // Toast message:
+                    self.parentViewController?.view.makeToast(voteFeedbackMsg(matchIngredient, upvote: true), duration: TOAST_DURATION, position: .Bottom)
                 }
                 return false
             } else {
@@ -330,9 +334,13 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
                     selBtn.select()
                     unvoteHotpot(user, hotpot: currentSearch, matchIngredient: matchIngredient, voteType: _s_upvotes)
                     downvoteHotpot(user, hotpot: currentSearch, matchIngredient: matchIngredient)
+                    // Toast message
+                    self.parentViewController?.view.makeToast(voteFeedbackMsg(matchIngredient, upvote: false), duration: TOAST_DURATION, position: .Bottom)
                 } else { // first-time vote
                     selBtn.select()
                     downvoteHotpot(user, hotpot: currentSearch, matchIngredient: matchIngredient)
+                    // Toast message
+                    self.parentViewController?.view.makeToast(voteFeedbackMsg(matchIngredient, upvote: false), duration: TOAST_DURATION, position: .Bottom)
                 }
                 return false
             } else {
@@ -496,4 +504,20 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         
         filterResults(searchText)
     }
+    
+    // Toast message ----------------------------------------------------
+    /* upvoteFeedbackMsg
+    */
+    func voteFeedbackMsg(matchIngredient : PFIngredient, upvote : Bool) -> String {
+        let matchName = matchIngredient.name
+        let searchNames: [String] = currentSearch.map { return $0.name }
+        let searchString = searchNames.joinWithSeparator(", ")
+        if upvote {
+            return "Upvoted \(matchName) with \(searchString)"
+        } else {
+            return "Downvoted \(matchName) with \(searchString)"
+        }
+    }
+    
+    
 }
