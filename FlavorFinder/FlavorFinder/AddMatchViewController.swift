@@ -12,7 +12,7 @@ import UIKit
 class AddMatchViewController : SearchIngredientsViewController {
     
     // MARK: Properties:
-    let pageTitle = "Add A New Match"
+    let pageTitle = "Add New Match"
     let ALREADY_EXISTS_SUFFIX = " is already a match!"
     let DEFAULT_PROMPT = "Which ingredient are you creating a new match for?"
     let PROMPT_PREFIX = "Which ingredient matches with "
@@ -56,6 +56,7 @@ class AddMatchViewController : SearchIngredientsViewController {
         
         if currentUser == nil {
             print("ERROR: Cannot propose a match without being logged in!")
+            self.navigationController?.popToRootViewControllerAnimated(true)
             return
         }
         

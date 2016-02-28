@@ -26,7 +26,6 @@ class GotNaviViewController : UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(self.navigationController?.viewControllers)
         if self.navigationController?.viewControllers.count > 1 {
             setUpBackButton()
         }
