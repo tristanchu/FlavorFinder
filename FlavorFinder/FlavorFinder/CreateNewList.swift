@@ -24,7 +24,7 @@ class CreateNewList: SearchIngredientsViewController, UITextFieldDelegate {
     let ListTitleColumnName = "title"
     
     // Visual related:
-    let pageTitle = "Rename List"
+    let pageTitle = "Create New List"
     
     
     @IBOutlet weak var createListPromptLabel: UILabel!

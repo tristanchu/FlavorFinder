@@ -34,6 +34,9 @@ class AddHotpotToListController: UITableViewController {
     var backBtn: UIBarButtonItem = UIBarButtonItem()
     let backBtnAction = "backBtnClicked:"
     let backBtnString = String.fontAwesomeIconWithName(.ChevronLeft) + " Cancel"
+    
+    // Segues:
+    let segueToCreateNewListFromSearch = "segueToCreateNewListFromSearch"
 
     // MARK: Override methods: ----------------------------------------------
     /* viewDidLoad:
@@ -129,13 +132,16 @@ class AddHotpotToListController: UITableViewController {
 
             // Create new list:
             if (indexPath.row == 0){
-                if (!currentIngredientToAdd.isEmpty) {
-                    createNewList(newListTitle, adding: currentIngredientToAdd)
-                    // clear global var:
-                    currentIngredientToAdd = []
-                } else {
-                    createNewList(newListTitle, adding: currentSearch)
-                }
+                
+                self.performSegueWithIdentifier(segueToCreateNewListFromSearch, sender: self)
+                
+//                if (!currentIngredientToAdd.isEmpty) {
+//                    createNewList(newListTitle, adding: currentIngredientToAdd)
+//                    // clear global var:
+//                    currentIngredientToAdd = []
+//                } else {
+//                    createNewList(newListTitle, adding: currentSearch)
+//                }
 
             // Picked an existing list:
             } else {
