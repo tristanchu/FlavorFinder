@@ -69,6 +69,7 @@
 		B685D2B31C5DE775001C37FF /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B685D2B21C5DE775001C37FF /* SearchResultsViewController.swift */; };
 		B6A779081C6C248F0005B44C /* SearchIngredientsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A779071C6C248F0005B44C /* SearchIngredientsViewController.swift */; };
 		B6B7E0571C4D7BA400ADFC9C /* IngredientList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B7E0561C4D7BA400ADFC9C /* IngredientList.swift */; };
+		B6BFE6991C82B63F004FD05D /* AddMatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BFE6981C82B63F004FD05D /* AddMatchViewController.swift */; };
 		B6E0C4EB1C6926E2008B7E2A /* AddFavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E0C4EA1C6926E2008B7E2A /* AddFavoriteViewController.swift */; };
 		B6EA63591BEEB4660017C063 /* PFFavorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EA63581BEEB4660017C063 /* PFFavorite.swift */; };
 		B6F3B74F1BE8833E00AF791A /* PFMatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F3B74E1BE8833E00AF791A /* PFMatch.swift */; };
@@ -156,6 +157,7 @@
 		B685D2B21C5DE775001C37FF /* SearchResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
 		B6A779071C6C248F0005B44C /* SearchIngredientsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchIngredientsViewController.swift; sourceTree = "<group>"; };
 		B6B7E0561C4D7BA400ADFC9C /* IngredientList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngredientList.swift; sourceTree = "<group>"; };
+		B6BFE6981C82B63F004FD05D /* AddMatchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddMatchViewController.swift; sourceTree = "<group>"; };
 		B6E0C4EA1C6926E2008B7E2A /* AddFavoriteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFavoriteViewController.swift; sourceTree = "<group>"; };
 		B6EA63581BEEB4660017C063 /* PFFavorite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PFFavorite.swift; sourceTree = "<group>"; };
 		B6F3B74E1BE8833E00AF791A /* PFMatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PFMatch.swift; sourceTree = "<group>"; };
@@ -310,6 +312,7 @@
 				B6A779091C6C249D0005B44C /* Prototype VC Classes */,
 				8875DE3A1BE0751B00CD50EA /* MainNavigationController.swift */,
 				B6E0C4EA1C6926E2008B7E2A /* AddFavoriteViewController.swift */,
+				B6BFE6981C82B63F004FD05D /* AddMatchViewController.swift */,
 				8875DE381BE06FB300CD50EA /* MenuTableViewController.swift */,
 				B6739A1B1C5999D20004F982 /* NewSearchViewController.swift */,
 			);
@@ -610,6 +613,7 @@
 				B64E25F01C7A3355003D53BD /* LoginModuleParentViewController.swift in Sources */,
 				609432691C42DD6500BA0577 /* ListsPageController.swift in Sources */,
 				B61AD2C51C5BFB9C00081BF4 /* SearchResultsSubviewController.swift in Sources */,
+				B6BFE6991C82B63F004FD05D /* AddMatchViewController.swift in Sources */,
 				B6739A181C5997760004F982 /* LandingPageController.swift in Sources */,
 				B6A779081C6C248F0005B44C /* SearchIngredientsViewController.swift in Sources */,
 				8875DE391BE06FB300CD50EA /* MenuTableViewController.swift in Sources */,
