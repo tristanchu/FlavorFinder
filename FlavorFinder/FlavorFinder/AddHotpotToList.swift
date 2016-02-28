@@ -195,6 +195,7 @@ class AddHotpotToListController: UITableViewController {
     - action for back button
     */
     func backBtnClicked() {
+        currentIngredientToAdd = []
         self.navigationController?.popViewControllerAnimated(true)
     }
     

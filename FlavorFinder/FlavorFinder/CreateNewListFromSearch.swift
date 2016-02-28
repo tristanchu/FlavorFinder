@@ -9,7 +9,7 @@
 import UIKit
 import Parse
 
-class CreateNewListFromSearch: SearchIngredientsViewController {
+class CreateNewListFromSearch: SearchIngredientsViewController, UITextFieldDelegate {
     
     // MARK: Properties:
     var ingredientList = [PFIngredient]()
@@ -34,12 +34,23 @@ class CreateNewListFromSearch: SearchIngredientsViewController {
     @IBOutlet weak var cancelNewListBtn: UIButton!
     
     @IBAction func createNewListBtnAction(sender: AnyObject) {
-        print("pressed create new list")
+        if currentIngredientToAdd.isEmpty {
+            print("Adding search")
+        } else {
+            print("Adding ingredient")
+        }
+        // Remember to empty currentIngredientToAdd
+        currentIngredientToAdd = []
+    
+        // go back to search:
+        let numControllers = self.navigationController?.viewControllers.count
+        self.navigationController?.popToViewController((self.navigationController?.viewControllers[numControllers! - 3])!, animated: true)
     }
     
     
     @IBAction func cancelNewListBtnAction(sender: AnyObject) {
-        print("pressed cancel")
+        // go back to list page:
+        self.navigationController?.popViewControllerAnimated(true)
     }
     
     
@@ -55,7 +66,7 @@ class CreateNewListFromSearch: SearchIngredientsViewController {
         super.viewDidLoad()
         
         // set up text field
-//        nameListTextField.delegate = self
-//        nameListTextField.setTextLeftPadding(5)
+        newListNameTextField.delegate = self
+        newListNameTextField.setTextLeftPadding(5)
     }
 }
