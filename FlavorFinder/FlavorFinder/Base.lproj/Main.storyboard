@@ -1264,8 +1264,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name of new ingredient :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fyj-CA-fkS">
                                 <rect key="frame" x="198" y="108" width="204" height="24"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="24" id="DIY-bi-LPD"/>
-                                    <constraint firstAttribute="width" constant="204" id="rx6-tN-BhT"/>
+                                    <constraint firstAttribute="width" constant="204" id="1U2-hP-uTG"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -1274,7 +1273,7 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IrF-xD-Jyr">
                                 <rect key="frame" x="95" y="140" width="411" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="sKy-it-8SA"/>
+                                    <constraint firstAttribute="height" constant="30" id="7oG-UI-LaN"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -1285,26 +1284,45 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You will need to propose at least one flavor match to complete the process of adding an ingredient." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pRK-me-oUD">
                                 <rect key="frame" x="164" y="178" width="272" height="76"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="272" id="NMA-aP-rdM"/>
+                                    <constraint firstAttribute="width" constant="272" id="HV8-If-waE"/>
+                                    <constraint firstAttribute="height" constant="76" id="Pae-KL-eQC"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sO6-2A-miD">
+                                <rect key="frame" x="95" y="262" width="411" height="220"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="setFilterCell" id="9zx-Uu-5lU">
+                                        <rect key="frame" x="0.0" y="28" width="411" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9zx-Uu-5lU" id="r8M-26-kiP">
+                                            <rect key="frame" x="0.0" y="0.0" width="411" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="IrF-xD-Jyr" firstAttribute="top" secondItem="fyj-CA-fkS" secondAttribute="bottom" constant="8" symbolic="YES" id="5L7-xO-R7T"/>
-                            <constraint firstItem="by8-ey-Bha" firstAttribute="top" secondItem="pRK-me-oUD" secondAttribute="bottom" constant="297" id="VNi-tD-ATt"/>
-                            <constraint firstItem="IrF-xD-Jyr" firstAttribute="leading" secondItem="CvN-rc-Ooi" secondAttribute="leadingMargin" constant="75" id="cmS-Cq-eGX"/>
-                            <constraint firstItem="fyj-CA-fkS" firstAttribute="centerX" secondItem="CvN-rc-Ooi" secondAttribute="centerX" id="fJq-pz-gaJ"/>
-                            <constraint firstItem="IrF-xD-Jyr" firstAttribute="centerX" secondItem="fyj-CA-fkS" secondAttribute="centerX" id="hbv-Ix-zKj"/>
-                            <constraint firstItem="pRK-me-oUD" firstAttribute="top" secondItem="IrF-xD-Jyr" secondAttribute="bottom" constant="8" symbolic="YES" id="jAB-8e-8TA"/>
-                            <constraint firstItem="pRK-me-oUD" firstAttribute="centerX" secondItem="IrF-xD-Jyr" secondAttribute="centerX" id="l7b-1Z-3EG"/>
-                            <constraint firstItem="fyj-CA-fkS" firstAttribute="top" secondItem="ANv-JC-efT" secondAttribute="bottom" constant="44" id="th5-l7-wPK"/>
+                            <constraint firstItem="by8-ey-Bha" firstAttribute="top" secondItem="sO6-2A-miD" secondAttribute="bottom" constant="69" id="2BL-0H-AED"/>
+                            <constraint firstItem="fyj-CA-fkS" firstAttribute="centerX" secondItem="IrF-xD-Jyr" secondAttribute="centerX" id="2ab-Jz-RWZ"/>
+                            <constraint firstItem="IrF-xD-Jyr" firstAttribute="trailing" secondItem="sO6-2A-miD" secondAttribute="trailing" id="60p-Nc-aGV"/>
+                            <constraint firstItem="pRK-me-oUD" firstAttribute="centerX" secondItem="CvN-rc-Ooi" secondAttribute="centerX" id="FoW-0Q-0fr"/>
+                            <constraint firstItem="IrF-xD-Jyr" firstAttribute="leading" secondItem="CvN-rc-Ooi" secondAttribute="leadingMargin" constant="75" id="RbM-uZ-gEk"/>
+                            <constraint firstItem="fyj-CA-fkS" firstAttribute="top" secondItem="ANv-JC-efT" secondAttribute="bottom" constant="44" id="Yac-4h-7pB"/>
+                            <constraint firstItem="sO6-2A-miD" firstAttribute="leading" secondItem="IrF-xD-Jyr" secondAttribute="leading" id="fjL-4b-10i"/>
+                            <constraint firstItem="IrF-xD-Jyr" firstAttribute="centerX" secondItem="pRK-me-oUD" secondAttribute="centerX" id="kcl-ee-dIf"/>
+                            <constraint firstItem="sO6-2A-miD" firstAttribute="top" secondItem="pRK-me-oUD" secondAttribute="bottom" constant="8" symbolic="YES" id="ovh-J2-7VQ"/>
+                            <constraint firstItem="pRK-me-oUD" firstAttribute="top" secondItem="IrF-xD-Jyr" secondAttribute="bottom" constant="8" symbolic="YES" id="qkU-ME-Tsx"/>
+                            <constraint firstItem="IrF-xD-Jyr" firstAttribute="top" secondItem="fyj-CA-fkS" secondAttribute="bottom" constant="8" symbolic="YES" id="xyj-Bp-VUJ"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="filterTable" destination="sO6-2A-miD" id="T0u-Wv-C46"/>
                         <outlet property="nameTextField" destination="IrF-xD-Jyr" id="3lH-3b-vb0"/>
                         <outlet property="promptLabel" destination="fyj-CA-fkS" id="SFm-gl-yuL"/>
                         <outlet property="warningLabel" destination="pRK-me-oUD" id="91N-dg-e9W"/>
