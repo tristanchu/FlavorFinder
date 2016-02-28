@@ -17,6 +17,24 @@ var currentSearch : [PFIngredient] = []
 var currentResults : [(ingredient: PFIngredient, rank: Double)] = []
 var currentIngredientToAdd : [PFIngredient] = []
 
+// Search Term Parsing Functions: ------------------------------------
+
+/* getPossibleIngredients
+- returns list of possible ingredients with partial name matching to string
+*/
+func getPossibleIngredients(searchText: String) -> [PFIngredient] {
+    if let allIngredients = _allIngredients as? [PFIngredient] {
+        let filteredResults = allIngredients.filter({ (ingredient) -> Bool in
+            let tmp: PFObject = ingredient
+            let range = tmp[_s_name].rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
+            return range.location != NSNotFound
+        })
+        return filteredResults
+    } else {
+        return [PFIngredient]()
+    }
+}
+
 // Parse DB Functions: -----------------------------------------------
 
 /* getMatchingIngredients
