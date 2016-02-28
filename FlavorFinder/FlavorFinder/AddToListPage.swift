@@ -107,11 +107,19 @@ class AddToListPage: SearchIngredientsViewController, UITextFieldDelegate {
     override func gotSelectedIngredient(selected: PFIngredient) {
         var userList = listObject.objectForKey(ingredientsColumnName) as! [PFIngredient]
         if !(userList.contains(selected) && selected.isDataAvailable()) {
+            // Feedback Toast:
+            let addedToastText = "Added \(selected.name) to \(listTitle)"
+            self.navigationController?.view.makeToast(addedToastText, duration: TOAST_DURATION, position: .AlmostBottom)
+            
             // add ingredient to list:
             userList.append(selected)
             listObject.setObject(userList, forKey: ingredientsColumnName)
             listObject.saveInBackground()
             
+            // return to list page
+            self.navigationController?.popViewControllerAnimated(true)
+            
+        } else {
             // return to list page
             self.navigationController?.popViewControllerAnimated(true)
         }
