@@ -26,6 +26,22 @@ class CreateNewListFromSearch: SearchIngredientsViewController {
     // Visual related:
     let pageTitle = "Add To New List"
     
+    //
+    @IBOutlet weak var createNewListPromptLabel: UILabel!
+    @IBOutlet weak var newListNameTextField: UITextField!
+    
+    @IBOutlet weak var createNewListBtn: UIButton!
+    @IBOutlet weak var cancelNewListBtn: UIButton!
+    
+    @IBAction func createNewListBtnAction(sender: AnyObject) {
+        print("pressed create new list")
+    }
+    
+    
+    @IBAction func cancelNewListBtnAction(sender: AnyObject) {
+        print("pressed cancel")
+    }
+    
     
     
     /* viewDidLoad:

@@ -141,10 +141,16 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3bp-c4-Cdg">
                                                 <rect key="frame" x="0.0" y="0.0" width="206" height="30"/>
                                                 <state key="normal" title="Create List"/>
+                                                <connections>
+                                                    <action selector="createNewListBtnAction:" destination="3E2-Ac-boW" eventType="touchUpInside" id="SnW-eN-FoU"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pXn-1J-Cqf">
                                                 <rect key="frame" x="226" y="0.0" width="206" height="30"/>
                                                 <state key="normal" title="Cancel"/>
+                                                <connections>
+                                                    <action selector="cancelNewListBtnAction:" destination="3E2-Ac-boW" eventType="touchUpInside" id="zr5-tq-Xvh"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -162,6 +168,12 @@
                             <constraint firstItem="RBP-Ei-YaJ" firstAttribute="leading" secondItem="ycB-H2-I7A" secondAttribute="leadingMargin" constant="10" id="ht6-8r-UBg"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="cancelNewListBtn" destination="pXn-1J-Cqf" id="fCw-Y0-h3S"/>
+                        <outlet property="createNewListBtn" destination="3bp-c4-Cdg" id="7gU-qx-xnl"/>
+                        <outlet property="createNewListPromptLabel" destination="Xvt-Yj-Vd3" id="Srs-XX-PoH"/>
+                        <outlet property="newListNameTextField" destination="5UC-tr-brp" id="fvF-B1-Vy4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="59Q-cn-BQt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
