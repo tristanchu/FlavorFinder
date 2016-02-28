@@ -13,6 +13,7 @@ import Parse
 class AddIngredientViewController : GotNaviViewController {
     
     // MARK: Properties
+    
     let pageTitle = "Add New Ingredient"
     let WARNING_PREFIX = "DOUBLE-CHECK that you are proposing an ingredient that isn't: "
     let WARNING_DIVIDER = ", "

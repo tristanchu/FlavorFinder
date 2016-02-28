@@ -48,42 +48,21 @@ class FilterBarSubviewController : UIViewController, UISearchBarDelegate {
         
         
         let dairyBtn = UIButton()
-        dairyBtn.setTitle(F_DAIRY.capitalizedString, forState: .Normal)
-        dairyBtn.layer.cornerRadius = 10
-        dairyBtn.layer.borderWidth = 1
-        dairyBtn.layer.borderColor = NAVI_BUTTON_COLOR.CGColor
-        dairyBtn.backgroundColor = UIColor.clearColor()
-        dairyBtn.titleLabel?.font = UIFont(name: "Avenir Next Medium", size: 15)
+        configureFilterButton(dairyBtn, titleString: F_DAIRY, image: UIImage(named: "Dairy")!)
         dairyBtn.tag = 2
         dairyBtn.addTarget(self, action: "filterToggleBtnClicked:", forControlEvents: UIControlEvents.TouchUpInside)
-        let dairyImage = UIImage(named: "Dairy")!
-        dairyBtn.setImage(dairyImage, forState: .Normal)
         filterView.addItem(dairyBtn)
         
         let vegeBtn = UIButton()
-        vegeBtn.setTitle(F_VEG.capitalizedString, forState: .Normal)
-        vegeBtn.layer.cornerRadius = 10
-        vegeBtn.layer.borderWidth = 1
-        vegeBtn.layer.borderColor = NAVI_BUTTON_COLOR.CGColor
-        vegeBtn.backgroundColor = UIColor.clearColor()
-        vegeBtn.titleLabel?.font = UIFont(name: "Avenir Next Medium", size: 15)
+        configureFilterButton(vegeBtn, titleString: F_VEG, image: UIImage(named: "Vegan")!)
         vegeBtn.tag = 3
         vegeBtn.addTarget(self, action: "filterToggleBtnClicked:", forControlEvents: UIControlEvents.TouchUpInside)
-        let vegeImage = UIImage(named: "Vegan")!
-        vegeBtn.setImage(vegeImage, forState: .Normal)
         filterView.addItem(vegeBtn)
         
         let nutsBtn = UIButton()
-        nutsBtn.setTitle(F_NUTS.capitalizedString, forState: .Normal)
-        nutsBtn.layer.cornerRadius = 10
-        nutsBtn.layer.borderWidth = 1
-        nutsBtn.layer.borderColor = NAVI_BUTTON_COLOR.CGColor
-        nutsBtn.backgroundColor = UIColor.clearColor()
-        nutsBtn.titleLabel?.font = UIFont(name: "Avenir Next Medium", size: 15)
+        configureFilterButton(nutsBtn, titleString: F_NUTS, image: UIImage(named: "Nuts")!)
         nutsBtn.tag = 4
         nutsBtn.addTarget(self, action: "filterToggleBtnClicked:", forControlEvents: UIControlEvents.TouchUpInside)
-        let nutsImage = UIImage(named: "Nuts")!
-        nutsBtn.setImage(nutsImage, forState: .Normal)
         filterView.addItem(nutsBtn)
         
         self.view.addSubview(filterView)
@@ -97,7 +76,6 @@ class FilterBarSubviewController : UIViewController, UISearchBarDelegate {
         filterSearchBar.placeholder = placeholderText
         self.view.addSubview(filterSearchBar)
     }
-    
     
     func filterToggleBtnClicked(sender: UIButton) {
         switch sender.tag {
