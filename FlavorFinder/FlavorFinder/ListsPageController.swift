@@ -122,6 +122,8 @@ class ListsPageController: UITableViewController {
         // Set cell label:
         cell.textLabel?.text = userLists[indexPath.row].objectForKey(
             ListTitleColumnName) as? String
+        cell.textLabel?.font = UIFont(name: "Avenir Next Medium", size: 17)
+
 
         // Give cell a chevron:
         cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator

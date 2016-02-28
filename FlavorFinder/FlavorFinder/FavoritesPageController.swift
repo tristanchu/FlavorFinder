@@ -43,10 +43,10 @@ class FavoritesPageController: UITableViewController {
         // Do any additional setup after loading the view, typically from a nib.
 
         // Connect table view to this controller (done in storyboard too)
-        self.tableView.dataSource = self
-        self.tableView.delegate = self
-        self.tableView.registerClass(UITableViewCell.self,
-            forCellReuseIdentifier: favoriteCellName)
+//        self.tableView.dataSource = self
+//        self.tableView.delegate = self
+//        self.tableView.registerClass(FavoriteTableViewCell.self,
+//            forCellReuseIdentifier: favoriteCellName)
 
         // Table view visuals:
         self.tableView.rowHeight = UNIFORM_ROW_HEIGHT
@@ -116,13 +116,39 @@ class FavoritesPageController: UITableViewController {
     /* tableView -> UITableViewCell
             creates cell for each index in favoriteCells
     */
-    override func tableView(tableView: UITableView,
-        cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         // set cell identifier:
         let cell = tableView.dequeueReusableCellWithIdentifier(
-            favoriteCellName, forIndexPath: indexPath)
+            favoriteCellName, forIndexPath: indexPath) as! FavoriteTableViewCell
         // set cell label:
-        cell.textLabel?.text = favoriteCells[indexPath.item].name
+        
+        let favIngredient = favoriteCells[indexPath.item]
+        cell.textLabel?.text = favIngredient.name
+        cell.textLabel?.font = UIFont(name: "Avenir Next Medium", size: 17)
+        
+        let isNuts = favIngredient[_s_nuts] as! Bool
+        let isDairy = favIngredient[_s_dairy] as! Bool
+        let isVege = favIngredient[_s_vegetarian] as! Bool
+   
+        cell.icons.removeAll()
+        
+        if isVege {
+            let imageVegan = UIImage(named: "Vegan")!
+            cell.icons.append(imageVegan)
+        }
+        if isNuts {
+            let imageNuts = UIImage(named: "Nuts")!
+            cell.icons.append(imageNuts)
+        }
+        if isDairy {
+            let imageDairy = UIImage(named: "Dairy")!
+            cell.icons.append(imageDairy)
+        }
+        
+        let imageFav = UIImage(named: "Heart")!
+        cell.icons.append(imageFav)
+        
+        cell.ingredientIcons.reloadData()
         return cell
     }
 
