@@ -149,6 +149,5 @@ class SettingsPage : LoginModuleParentViewController {
         containerVC?.view.hidden = false // embedded login module
         goToLogin()
     }
-    
 
 }
