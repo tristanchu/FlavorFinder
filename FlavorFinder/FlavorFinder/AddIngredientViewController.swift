@@ -15,9 +15,11 @@ class AddIngredientViewController : GotNaviViewController, UITableViewDelegate, 
     // MARK: Properties
     
     let pageTitle = "Add New Ingredient"
-    let WARNING_PREFIX = "DOUBLE-CHECK that you are proposing an ingredient that isn't: "
+    let WARNING_PREFIX = "Please confirm that the proposed ingredient isn't: "
     let WARNING_DIVIDER = ", "
     let CELL_IDENTIFIER = "setFilterCell"
+    let MIN_CHARS = 3
+    let MAX_CHARS = 40
     var name : String?
     
     // Outlets
@@ -25,6 +27,8 @@ class AddIngredientViewController : GotNaviViewController, UITableViewDelegate, 
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var warningLabel: UILabel!
     @IBOutlet weak var filterTable: UITableView!
+    @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var confirmButton: UIButton!
     
     // MARK: Actions
     
@@ -37,8 +41,26 @@ class AddIngredientViewController : GotNaviViewController, UITableViewDelegate, 
             reset()
             return
         }
-        name = sender.text
+        name = sender.text?.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
         gotNameFeedback()
+    }
+    
+    /* nextButtonWasPressed
+    - called when user touches up on next button
+    - moves user to next part of the form
+    */
+    @IBAction func nextButtonWasPressed() {
+        print("button pressed!")
+    }
+    
+    /* nextButtonWasPressed
+    - called when user touches up on confirm button
+    - hides warning message and filter selection part of form
+    */
+    @IBAction func confirmButtonWasPressed() {
+        confirmButton.hidden = true
+        warningLabel.hidden = true
+        enableForm()
     }
     
     // MARK: Override functions
@@ -103,8 +125,14 @@ class AddIngredientViewController : GotNaviViewController, UITableViewDelegate, 
     - resets default page view to clear form
     */
     func reset() {
+        nameTextField.text = ""
+        nameTextField.textColor = UIColor.blackColor() // should be standardized
+        nameTextField.textAlignment = NSTextAlignment.Left
+        nameTextField.enabled = true
         warningLabel.hidden = false
         filterTable.hidden = true
+        nextButton.hidden = true
+        confirmButton.hidden = true
     }
     
     /* gotNameFeedback
@@ -125,14 +153,7 @@ class AddIngredientViewController : GotNaviViewController, UITableViewDelegate, 
         if possibleIngredients.isEmpty {
             enableForm()
         } else {
-            var warningIngredientList = ""
-            for ingredient in possibleIngredients {
-                warningIngredientList.appendContentsOf("\(ingredient.name)\(WARNING_DIVIDER)")
-            }
-            let range = warningIngredientList.endIndex.advancedBy(
-                -1 * WARNING_DIVIDER.characters.count)..<warningIngredientList.endIndex
-            warningIngredientList.removeRange(range)
-            warningLabel.text = "\(WARNING_PREFIX)\(warningIngredientList)"
+            getNameConfirmation(possibleIngredients)
         }
     }
     
@@ -142,5 +163,38 @@ class AddIngredientViewController : GotNaviViewController, UITableViewDelegate, 
     func enableForm() {
         warningLabel.hidden = true
         filterTable.hidden = false
+        nextButton.hidden = false
+    }
+    
+    /* getNameConfirmation
+    - button appears to require user to certify that ingredient is not pre-existing
+    - text appears to warn user of possible pre-existing matches
+    - or, if name is exact match, or too short/long, form resets
+    */
+    func getNameConfirmation(possibleIngredients: [PFIngredient]) {
+        
+        if name?.characters.count < MIN_CHARS || name?.characters.count > MAX_CHARS {
+            showFeedback("Ingredient name must be between \(MIN_CHARS) and \(MAX_CHARS) characters", vc: self)
+            reset()
+            return
+        }
+        
+        for ingredient in possibleIngredients {
+            if ingredient.name.lowercaseString == name?.lowercaseString {
+                showFeedback("\(name!) is already an ingredient!", vc: self)
+                reset()
+                return
+            }
+        }
+        
+        var warningIngredientList = ""
+        for ingredient in possibleIngredients {
+            warningIngredientList.appendContentsOf("\(ingredient.name)\(WARNING_DIVIDER)")
+        }
+        let range = warningIngredientList.endIndex.advancedBy(
+            -1 * WARNING_DIVIDER.characters.count)..<warningIngredientList.endIndex
+        warningIngredientList.removeRange(range)
+        warningLabel.text = "\(WARNING_PREFIX)\(warningIngredientList)"
+        confirmButton.hidden = false
     }
 }

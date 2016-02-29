@@ -64,11 +64,11 @@ class AddMatchViewController : SearchIngredientsViewController {
             secondIngredient = selected
             if let _ = getMatchForTwoIngredients(firstIngredient!, secondIngredient: secondIngredient!) {
                 let alreadyExistsText = "\(firstIngredient!.name) + \(secondIngredient!.name)\(ALREADY_EXISTS_SUFFIX)"
-                showFeedback(alreadyExistsText)
+                showFeedback(alreadyExistsText, vc: self)
             } else {
                 let matchMadeText = "\(FEEDBACK_PREFIX)\(firstIngredient!.name) + \(secondIngredient!.name)"
                 addMatch(currentUser!, firstIngredient: firstIngredient!, secondIngredient: secondIngredient!)
-                showFeedback(matchMadeText)
+                showFeedback(matchMadeText, vc: self)
             }
             reset()
         } else { // first ingredient of the match was selected
@@ -80,13 +80,6 @@ class AddMatchViewController : SearchIngredientsViewController {
     }
     
     // MARK: Other functions ---------------------------------------------------
-    
-    /* showFeedback
-    - shows textual feedback to the user about success/failure of operation
-    */
-    func showFeedback(message: String) {
-        self.navigationController?.view.makeToast(message, duration: TOAST_DURATION, position: .AlmostBottom)
-    }
     
     /* reset
     - resets the view after a match has been added

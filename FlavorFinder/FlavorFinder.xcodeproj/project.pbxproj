@@ -19,7 +19,7 @@
 		609E66611C7E89B000DE2A28 /* CreateNewList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609E66601C7E89B000DE2A28 /* CreateNewList.swift */; };
 		60AD7BDF1C7A47470002A7DF /* AddToListPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60AD7BDE1C7A47470002A7DF /* AddToListPage.swift */; };
 		60B3F16D1C5AE41D0018AA29 /* ListDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B3F16C1C5AE41D0018AA29 /* ListDetailController.swift */; };
-		60C7A3481C83788B00622116 /* CreateNewListFromSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C7A3471C83788B00622116 /* CreateNewListFromSearch.swift */; settings = {ASSET_TAGS = (); }; };
+		60C7A3481C83788B00622116 /* CreateNewListFromSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C7A3471C83788B00622116 /* CreateNewListFromSearch.swift */; };
 		60D22BA41C723B9B00A72FB2 /* AddHotpotToList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D22BA31C723B9B00A72FB2 /* AddHotpotToList.swift */; };
 		60DFE76E1C6148D400A6EF85 /* SearchUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DFE76D1C6148D400A6EF85 /* SearchUtils.swift */; };
 		60FEE38F1BE570E100F51BE8 /* KeychainWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 60FEE38E1BE570E100F51BE8 /* KeychainWrapper.m */; };
@@ -53,8 +53,8 @@
 		8875DE3B1BE0751B00CD50EA /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8875DE3A1BE0751B00CD50EA /* MainNavigationController.swift */; };
 		888D1A401BDEF816007F09AE /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888D1A3F1BDEF816007F09AE /* Stack.swift */; };
 		88998E211BEC365D00087406 /* PFVote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88998E201BEC365D00087406 /* PFVote.swift */; };
-		88A2B6951C8365A100424652 /* FavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A2B6941C8365A100424652 /* FavoriteTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
-		88A2B6971C83666900424652 /* ListIngredientTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A2B6961C83666900424652 /* ListIngredientTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		88A2B6951C8365A100424652 /* FavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A2B6941C8365A100424652 /* FavoriteTableViewCell.swift */; };
+		88A2B6971C83666900424652 /* ListIngredientTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A2B6961C83666900424652 /* ListIngredientTableViewCell.swift */; };
 		88F0E5011BE54111003CB35B /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F0E5001BE54111003CB35B /* Animations.swift */; };
 		88F413FA1BC74A00000C0093 /* MatchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F413F91BC74A00000C0093 /* MatchTableViewCell.swift */; };
 		88F414011BC7513F000C0093 /* PFIngredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F414001BC7513F000C0093 /* PFIngredient.swift */; };
@@ -397,6 +397,7 @@
 		B685D2B11C5DE6E6001C37FF /* SearchResultsVC */ = {
 			isa = PBXGroup;
 			children = (
+				B685D2B41C5DE8D2001C37FF /* ContainerSystem */,
 				B685D2B21C5DE775001C37FF /* SearchResultsViewController.swift */,
 				B6F55CA61C5E88D300854B07 /* FilterBarSubviewController.swift */,
 				B6F55CA41C5E87B400854B07 /* HotpotSubviewController.swift */,
@@ -436,7 +437,6 @@
 		B6A779091C6C249D0005B44C /* Prototype VC Classes */ = {
 			isa = PBXGroup;
 			children = (
-				B685D2B41C5DE8D2001C37FF /* ContainerSystem */,
 				B6A779071C6C248F0005B44C /* SearchIngredientsViewController.swift */,
 				B65DE16D1C822B6F005B66AE /* GotNaviViewController.swift */,
 				B64E25EF1C7A3355003D53BD /* LoginModuleParentViewController.swift */,
