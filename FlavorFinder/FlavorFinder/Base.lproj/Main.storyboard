@@ -1497,11 +1497,30 @@
                         <outlet property="nextButton" destination="5Pf-9F-wjA" id="XCy-rH-Nap"/>
                         <outlet property="promptLabel" destination="fyj-CA-fkS" id="SFm-gl-yuL"/>
                         <outlet property="warningLabel" destination="pRK-me-oUD" id="91N-dg-e9W"/>
+                        <segue destination="OM5-qi-Ih2" kind="show" identifier="segueAddIngredientToMatch" id="8c2-4U-3bI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qhN-Dg-YBT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2731" y="-1833"/>
+        </scene>
+        <!--Add Ingredient Add Match View Controller-->
+        <scene sceneID="ty8-Gb-mTh">
+            <objects>
+                <viewController id="OM5-qi-Ih2" userLabel="Add Ingredient Add Match View Controller" customClass="GotNaviViewController" customModule="FlavorFinder" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ZDd-5T-Sl3"/>
+                        <viewControllerLayoutGuide type="bottom" id="QeI-qn-j93"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ekP-at-ce1">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="o5U-Lf-RJH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3543" y="-1833"/>
         </scene>
         <!--More Menu View Controller-->
         <scene sceneID="3Cf-76-j6x">

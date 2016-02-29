@@ -15,12 +15,14 @@ class AddIngredientViewController : GotNaviViewController, UITableViewDelegate, 
     // MARK: Properties
     
     let pageTitle = "Add New Ingredient"
+    let nextPageSegue = "segueAddIngredientToMatch"
     let WARNING_PREFIX = "Please confirm that the proposed ingredient isn't: "
     let WARNING_DIVIDER = ", "
     let CELL_IDENTIFIER = "setFilterCell"
     let MIN_CHARS = 3
     let MAX_CHARS = 40
     var name : String?
+    var warningDefaultText : String?
     
     // Outlets
     @IBOutlet weak var promptLabel: UILabel!
@@ -50,7 +52,7 @@ class AddIngredientViewController : GotNaviViewController, UITableViewDelegate, 
     - moves user to next part of the form
     */
     @IBAction func nextButtonWasPressed() {
-        print("button pressed!")
+        performSegueWithIdentifier(nextPageSegue, sender: self)
     }
     
     /* nextButtonWasPressed
@@ -73,6 +75,7 @@ class AddIngredientViewController : GotNaviViewController, UITableViewDelegate, 
         filterTable.delegate = self
         filterTable.dataSource = self
         setUpFilterTable()
+        warningDefaultText = warningLabel.text
         super.viewDidLoad()
     }
     
@@ -129,6 +132,7 @@ class AddIngredientViewController : GotNaviViewController, UITableViewDelegate, 
         nameTextField.textColor = UIColor.blackColor() // should be standardized
         nameTextField.textAlignment = NSTextAlignment.Left
         nameTextField.enabled = true
+        warningLabel.text = warningDefaultText
         warningLabel.hidden = false
         filterTable.hidden = true
         nextButton.hidden = true
