@@ -37,6 +37,13 @@ func alertPopup(title: String, msg: String, actionTitle: String,
             completion: nil)
 }
 
+/* showFeedback
+- shows textual feedback to the user about success/failure of operation via toast
+*/
+func showFeedback(message: String, vc: UIViewController) {
+    vc.navigationController?.view.makeToast(message, duration: TOAST_DURATION, position: .AlmostBottom)
+}
+
 // ----------------------------------------------------------------------
 // BUTTON FUNCTIONS -----------------------------------------------------
 // ----------------------------------------------------------------------

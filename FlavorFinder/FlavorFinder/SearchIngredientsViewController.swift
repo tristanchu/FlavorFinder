@@ -54,7 +54,7 @@ class SearchIngredientsViewController: GotNaviViewController, UISearchBarDelegat
         
     }
     
-// MARK: UITableViewDataSource protocol functions ----------------------
+// MARK: Delegate/DataSource protocol functions ----------------------
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
         activeSearch = true
     }
@@ -74,7 +74,7 @@ class SearchIngredientsViewController: GotNaviViewController, UISearchBarDelegat
         searchTable?.hidden = true
     }
     
-    /* searchBar - for UITableViewDataSource
+    /* searchBar
     - gives table view ingredients filtered by search:
     */
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
