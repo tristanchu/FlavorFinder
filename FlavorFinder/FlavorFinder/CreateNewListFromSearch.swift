@@ -34,14 +34,21 @@ class CreateNewListFromSearch: SearchIngredientsViewController, UITextFieldDeleg
     @IBOutlet weak var cancelNewListBtn: UIButton!
     
     @IBAction func createNewListBtnAction(sender: AnyObject) {
-        if currentIngredientToAdd.isEmpty {
-            print("Adding search")
-        } else {
-            print("Adding ingredient")
+        if newListNameTextField.text != nil && newListNameTextField.text != "" {
+            let newName = newListNameTextField.text!
+            var list = [PFIngredient]()
+            if !currentIngredientToAdd.isEmpty {
+                for ingredient in currentSearch {list.append(ingredient)}
+                createIngredientList(currentUser!, title: newName, ingredients: list)
+                makeListToast(newName, iList: currentIngredientToAdd)
+                currentIngredientToAdd = []
+            } else {
+                for ingredient in currentSearch {list.append(ingredient)}
+                createIngredientList(currentUser!, title: newName, ingredients: list)
+                makeListToast(newName, iList: currentSearch)
+            }
         }
-        // Remember to empty currentIngredientToAdd
-        currentIngredientToAdd = []
-    
+        
         // go back to search:
         let numControllers = self.navigationController?.viewControllers.count
         self.navigationController?.popToViewController((self.navigationController?.viewControllers[numControllers! - 3])!, animated: true)
@@ -68,5 +75,27 @@ class CreateNewListFromSearch: SearchIngredientsViewController, UITextFieldDeleg
         // set up text field
         newListNameTextField.delegate = self
         newListNameTextField.setTextLeftPadding(5)
+    }
+    
+    // MARK: Toast Message - --------------------------------------------------
+    /* addToListMsg
+    - creates the message "Added __, __, __ to listname"
+    */
+    func addToListMsg(listName: String, ingredients: [PFIngredient]) -> String {
+        if ingredients.count == 1 {
+            return "Added \(ingredients[0].name) to \(listName)"
+        }
+        let names: [String] = ingredients.map { return $0.name }
+        let ingredientsString = names.joinWithSeparator(", ")
+        return "Added \(ingredientsString) to \(listName)"
+    }
+    
+    /* makeListToast
+    - just to clean up the above code.
+    */
+    func makeListToast(listTitle: String, iList: [PFIngredient]) {
+        self.navigationController?.view.makeToast(addToListMsg(
+            listTitle, ingredients: iList),
+            duration: TOAST_DURATION, position: .AlmostBottom)
     }
 }
