@@ -39,6 +39,9 @@ class MatchTableViewCell: MGSwipeTableCell, UICollectionViewDataSource, UICollec
         let identifier = "ingredientIconCVCell"
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath) as UICollectionViewCell
         let icon = icons[indexPath.row]
+        for view in cell.subviews {
+            view.removeFromSuperview()
+        }
         
         cell.contentView.transform = CGAffineTransformMakeScale(-1, 1)
         
