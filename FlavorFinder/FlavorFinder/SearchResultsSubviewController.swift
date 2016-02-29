@@ -208,6 +208,7 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         let cellIdentifier = CELLIDENTIFIER_MATCH
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! MatchTableViewCell
         cell.delegate = self
+        cell.icons.removeAll()
         
         if !(matches.isEmpty) {
             
@@ -220,7 +221,6 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
                 upvotes = upvotes == nil ? 0 : upvotes
                 downvotes = downvotes == nil ? 0 : downvotes
                 
-                cell.icons.removeAll()
                 let isNuts = match[_s_nuts] as! Bool
                 let isDairy = match[_s_dairy] as! Bool
                 let isVege = match[_s_vegetarian] as! Bool
@@ -248,16 +248,14 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
                     let imageFav = UIImage(named: "Heart")!
                     cell.icons.append(imageFav)
                 }
-                
-                cell.ingredientIcons.reloadData()
-                cell.ingredientIcons.setNeedsDisplay()
+
                 cell.label.text = name
-//                cell.upvoteLabel.text = String(upvotes!)
-//                cell.downvoteLabel.text = String(downvotes!)
+                cell.ingredientIcons.reloadData()
             } else {
                 print("ERROR: Failed to fetch all data for match.")
                 matches.removeAtIndex(indexPath.row)
                 tableView.reloadData()
+                cell.ingredientIcons.reloadData()
                 return cell
             }
             

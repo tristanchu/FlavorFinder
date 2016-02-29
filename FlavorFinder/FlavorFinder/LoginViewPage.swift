@@ -67,6 +67,10 @@ class LoginViewPage : UIViewController, UITextFieldDelegate {
         passwordField.delegate = self
         usernameField.setTextLeftPadding(5)
         passwordField.setTextLeftPadding(5)
+        
+        // button visuals:
+        setDefaultButtonUI(loginButton)
+        setSecondaryButtonUI(sigupUpButton)
     }
 
     /*

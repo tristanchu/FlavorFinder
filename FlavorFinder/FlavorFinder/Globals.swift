@@ -74,3 +74,45 @@ let MATCHES_NOT_FOUND_TEXT = "No matches for this search!"
 
 // Displayed generic text:
 let OK_TEXT = "Ok"
+
+// Search Bar Formattng:
+let ROUNDED_SIZE : CGFloat = 15.0       // searchbar.layer.cornerRadius = 15
+let ROUNDED_EDGES = true    // searchbar.clipsToBounds = true
+
+// Button formatting ---------------------------:
+// Use setDefaultButtonUI() For these settings:
+let DEFAULT_BUTTON_BORDER_WIDTH : CGFloat = 2.0
+let DEFAULT_BUTTON_BORDER_COLOR : CGColorRef = UIColor.lightGrayColor().CGColor
+
+// Use setSecondaryButtonUI() for these settings:
+let SECONDARY_BUTTON_BORDER_WIDTH : CGFloat = 1.0
+let SECONDARY_BUTTON_BORDER_COLOR : CGColorRef = UIColor.lightGrayColor().CGColor
+
+
+let ROUNDED_BUTTON_SIZE : CGFloat = 10.0
+
+// STORYBOARD STYLE GUIDE:
+
+    // StackViews with Prompts - make top 60 from Top Layout Guide.bottom
+    // Text
+        // - font = Anvier Next
+                // - page prompt = medium
+                // -
+        // - color = Dark Grey
+        // - size = (page prompt - 22
+
+    // Buttons ->
+        // Login - font size = 20
+        // All other buttons - font size = 15
+                            // font = Anvier next
+                            //    - primary = medium
+                            //    - secondary = regular
+                            // padding - 5 on all sides
+                            //      -- OR - make stack view width of
+                            //              text bar nad have buttons
+                            //              fill equally with 20 spacing
+    // Search bars:
+        // - width = 0.8 of superview
+        // - height =
+
+

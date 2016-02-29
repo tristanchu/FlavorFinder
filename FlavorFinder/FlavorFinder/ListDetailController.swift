@@ -172,6 +172,8 @@ class ListDetailController: UITableViewController {
                 cell.textLabel?.text = listIngredient.name
                 cell.textLabel?.font = UIFont(name: "Avenir Next Medium", size: 17)
                 
+                cell.icons.removeAll()
+                
                 let isNuts = listIngredient[_s_nuts] as! Bool
                 let isDairy = listIngredient[_s_dairy] as! Bool
                 let isVege = listIngredient[_s_vegetarian] as! Bool

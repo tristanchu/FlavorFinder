@@ -66,6 +66,10 @@ class CreateNewList: SearchIngredientsViewController, UITextFieldDelegate {
         // set up text field
         nameListTextField.delegate = self
         nameListTextField.setTextLeftPadding(5)
+        
+        // set button borders:
+        setDefaultButtonUI(createListBtn)
+        setSecondaryButtonUI(cancelBtn)
     }
     
     
