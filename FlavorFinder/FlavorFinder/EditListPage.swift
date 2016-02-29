@@ -33,9 +33,10 @@ class EditListPage: SearchIngredientsViewController, UITextFieldDelegate {
 
     @IBOutlet weak var newNameTextField: UITextField!
 
-    @IBOutlet weak var renameListBtn: UIButton!
-    @IBOutlet weak var cancelRenameBtn: UIButton!
     
+    
+    @IBOutlet weak var renameListButton: UIButton!
+    @IBOutlet weak var cancelRenameButton: UIButton!
     
     @IBAction func submitAction(sender: AnyObject) {
         if newNameTextField.text != nil && newNameTextField.text != "" {
@@ -69,8 +70,8 @@ class EditListPage: SearchIngredientsViewController, UITextFieldDelegate {
         newNameTextField.setTextLeftPadding(5)
         
         // button borders:
-        setDefaultButtonUI(renameListBtn)
-        setSecondaryButtonUI(cancelRenameBtn)
+        setDefaultButtonUI(renameListButton)
+        setSecondaryButtonUI(cancelRenameButton)
     }
        
 }

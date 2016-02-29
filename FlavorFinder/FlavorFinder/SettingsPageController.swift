@@ -59,6 +59,10 @@ class SettingsPageController : LoginModuleParentViewController {
     */
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // set button borders:
+        setDefaultButtonUI(logoutButton)
+        setSecondaryButtonUI(resetPasswordButton)
     }
 
     /* viewDidAppear:
