@@ -34,6 +34,9 @@ class ListIngredientTableViewCell: UITableViewCell, UICollectionViewDataSource, 
         let identifier = "ListIngredientIconCVCell"
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath) as UICollectionViewCell
         let icon = icons[indexPath.row]
+        for view in cell.subviews {
+            view.removeFromSuperview()
+        }
         
         cell.contentView.transform = CGAffineTransformMakeScale(-1, 1)
         
