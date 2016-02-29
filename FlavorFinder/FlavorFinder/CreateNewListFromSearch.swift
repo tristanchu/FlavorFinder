@@ -75,6 +75,10 @@ class CreateNewListFromSearch: SearchIngredientsViewController, UITextFieldDeleg
         // set up text field
         newListNameTextField.delegate = self
         newListNameTextField.setTextLeftPadding(5)
+        
+        // set button borders:
+        setDefaultButtonUI(createNewListBtn)
+        setSecondaryButtonUI(cancelNewListBtn)
     }
     
     // MARK: Toast Message - --------------------------------------------------

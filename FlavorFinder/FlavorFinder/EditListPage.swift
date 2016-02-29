@@ -33,6 +33,10 @@ class EditListPage: SearchIngredientsViewController, UITextFieldDelegate {
 
     @IBOutlet weak var newNameTextField: UITextField!
 
+    @IBOutlet weak var renameListBtn: UIButton!
+    @IBOutlet weak var cancelRenameBtn: UIButton!
+    
+    
     @IBAction func submitAction(sender: AnyObject) {
         if newNameTextField.text != nil && newNameTextField.text != "" {
             listObject.setObject(newNameTextField.text!, forKey: ListTitleColumnName)
@@ -63,6 +67,10 @@ class EditListPage: SearchIngredientsViewController, UITextFieldDelegate {
         // set up text field
         newNameTextField.delegate = self
         newNameTextField.setTextLeftPadding(5)
+        
+        // button borders:
+        setDefaultButtonUI(renameListBtn)
+        setSecondaryButtonUI(cancelRenameBtn)
     }
        
 }

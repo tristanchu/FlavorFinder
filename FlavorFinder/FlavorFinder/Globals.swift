@@ -102,6 +102,15 @@ let ROUNDED_BUTTON_SIZE : CGFloat = 10.0
         // - size = (page prompt - 22
 
     // Buttons ->
+        // Login - font size = 20
+        // All other buttons - font size = 15
+                            // font = Anvier next
+                            //    - primary = medium
+                            //    - secondary = regular
+                            // padding - 5 on all sides
+                            //      -- OR - make stack view width of
+                            //              text bar nad have buttons
+                            //              fill equally with 20 spacing
     // Search bars:
         // - width = 0.8 of superview
         // - height =
