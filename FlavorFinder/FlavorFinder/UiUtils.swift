@@ -42,6 +42,32 @@ func alertPopup(title: String, msg: String, actionTitle: String,
 // ----------------------------------------------------------------------
 
 
+/* setDefaultButtonUI
+    - sets button with default attributes given button
+*/
+func setDefaultButtonUI(button: UIButton) {
+    // border:
+    button.layer.borderWidth = DEFAULT_BUTTON_BORDER_WIDTH
+    button.layer.borderColor = DEFAULT_BUTTON_BORDER_COLOR
+    // rounded edges:
+    button.layer.cornerRadius = ROUNDED_BUTTON_SIZE
+    button.clipsToBounds = true
+    
+}
+
+/* setSecondaryButtonUI
+    - sets secondary button ui -> lighter border color and text color
+*/
+func setSecondaryButtonUI(button: UIButton) {
+    // border:
+    button.layer.borderWidth = SECONDARY_BUTTON_BORDER_WIDTH
+    button.layer.borderColor = SECONDARY_BUTTON_BORDER_COLOR
+    // rounded:
+    button.layer.cornerRadius = ROUNDED_BUTTON_SIZE
+    button.clipsToBounds = true
+    
+}
+
 /* setUpNaviButton
 - sets up a navigation button for navi style
 */
