@@ -84,6 +84,9 @@ class RegisterView : UIViewController, UITextFieldDelegate {
         setUpTextField(pwSignUpField)
         setUpTextField(retypePwSignUpField)
         setUpTextField(emailSignUpField)
+        
+        // set border button:
+        setDefaultButtonUI(createAccountButton)
     }
 
     // MARK: Functions ------------------------------------
