@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import Parse
 
 class AddIngredientViewController : GotNaviViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -21,6 +20,11 @@ class AddIngredientViewController : GotNaviViewController, UITableViewDelegate, 
     let CELL_IDENTIFIER = "setFilterCell"
     let MIN_CHARS = 3
     let MAX_CHARS = 40
+    let filtersOn = [
+        F_DAIRY : false,
+        F_VEG : false,
+        F_NUTS : false
+    ]
     var name : String?
     var warningDefaultText : String?
     
@@ -117,6 +121,21 @@ class AddIngredientViewController : GotNaviViewController, UITableViewDelegate, 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {}
     
     // MARK: Other functions
+    
+    /* prepareForSegue
+    - sends info to add match page
+    */
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let nextPage = segue.destinationViewController as? AddIngredientAddMatchViewController {
+            nextPage.firstIngredient = PFIngredient(
+                name: name!,
+                isDairy: filtersOn[F_DAIRY]!,
+                isNuts: filtersOn[F_NUTS]!,
+                isVege: filtersOn[F_VEG]!
+            )
+        }
+        super.prepareForSegue(segue, sender: sender)
+    }
     
     /* setUpFilterTable
     - handles setup for filter table

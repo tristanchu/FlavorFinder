@@ -9,17 +9,13 @@
 import Foundation
 import UIKit
 
-class AddMatchViewController : SearchIngredientsViewController {
+class AddMatchViewController : AddMatchPrototypeViewController {
     
     // MARK: Properties:
     let pageTitle = "Add New Match"
     let ALREADY_EXISTS_SUFFIX = " is already a match!"
     let DEFAULT_PROMPT = "Which ingredient are you creating a new match for?"
-    let PROMPT_PREFIX = "Which ingredient matches with "
-    let PROMPT_SUFFIX = "?"
     let FEEDBACK_PREFIX = "New match created for "
-    var firstIngredient : PFIngredient?
-    var secondIngredient : PFIngredient?
     
     // MARK: connections:
     @IBOutlet weak var chooseIngredientSearchBar: UISearchBar!
@@ -55,8 +51,7 @@ class AddMatchViewController : SearchIngredientsViewController {
     override func gotSelectedIngredient(selected: PFIngredient) {
         
         if currentUser == nil {
-            print("ERROR: Cannot propose a match without being logged in!")
-            self.navigationController?.popToRootViewControllerAnimated(true)
+            errorLoggedOut()
             return
         }
         
