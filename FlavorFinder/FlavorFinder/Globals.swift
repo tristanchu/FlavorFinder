@@ -74,3 +74,24 @@ let MATCHES_NOT_FOUND_TEXT = "No matches for this search!"
 
 // Displayed generic text:
 let OK_TEXT = "Ok"
+
+// Search Bar Formattng:
+let ROUNDED_SIZE : CGFloat = 15.0       // searchbar.layer.cornerRadius = 15
+let ROUNDED_EDGES = true    // searchbar.clipsToBounds = true
+
+// STORYBOARD STYLE GUIDE:
+
+    // StackViews with Prompts - make top 60 from Top Layout Guide.bottom
+    // Text
+        // - font = Anvier Next
+                // - page prompt = medium
+                // -
+        // - color = Dark Grey
+        // - size = (page prompt - 22
+
+    // Buttons ->
+    // Search bars:
+        // - width = 0.8 of superview
+        // - height =
+
+

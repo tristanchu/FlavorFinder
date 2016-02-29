@@ -51,8 +51,8 @@ class NewSearchViewController : LoginModuleParentViewController,
         searchResultTableView.dataSource = self
 
         // Rounded edges for search bar:
-        self.newSearchBar.layer.cornerRadius = 15
-        self.newSearchBar.clipsToBounds = true
+        self.newSearchBar.layer.cornerRadius = ROUNDED_SIZE
+        self.newSearchBar.clipsToBounds = ROUNDED_EDGES
     }
 
     /* viewDidAppear

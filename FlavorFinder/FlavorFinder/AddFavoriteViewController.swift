@@ -34,6 +34,10 @@ class AddFavoriteViewController: SearchIngredientsViewController {
         
         // Call super
         super.viewDidLoad()
+        
+        // Rounded edges in search bar:
+        self.addIngredientSearchBar.layer.cornerRadius = ROUNDED_SIZE
+        self.addIngredientSearchBar.clipsToBounds = ROUNDED_EDGES
     }
     
     // MARK: Overriding parent class functions ------------------------------
