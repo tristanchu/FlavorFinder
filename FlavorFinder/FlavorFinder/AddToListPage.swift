@@ -56,6 +56,10 @@ class AddToListPage: SearchIngredientsViewController, UITextFieldDelegate {
         
         // Navigation Visuals:
         setUpCancelButton()
+        
+        // Rounded edges in search bar:
+        self.addIngredientSearchBar.layer.cornerRadius = ROUNDED_SIZE
+        self.addIngredientSearchBar.clipsToBounds = ROUNDED_EDGES
     }
     
     /* viewDidAppear:

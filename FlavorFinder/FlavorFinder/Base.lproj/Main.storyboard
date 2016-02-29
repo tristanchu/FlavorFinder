@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="oWC-1n-3cO">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
-        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
@@ -368,7 +367,7 @@
                                             <constraint firstAttribute="height" constant="21" id="eHl-DG-PAH"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="22"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name list here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qcu-NG-fr6">
@@ -546,16 +545,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="EiV-os-9xK">
-                                <rect key="frame" x="60" y="124" width="480" height="89"/>
+                                <rect key="frame" x="60" y="124" width="480" height="92"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Ingredient Prompt" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fam-N9-5Cs">
-                                        <rect key="frame" x="0.0" y="0.0" width="480" height="25"/>
-                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="18"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="480" height="28"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="20"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <searchBar contentMode="redraw" placeholder="type an ingredient to add" translatesAutoresizingMaskIntoConstraints="NO" id="Tur-BP-tOK">
-                                        <rect key="frame" x="0.0" y="45" width="480" height="44"/>
+                                    <searchBar contentMode="redraw" text="" placeholder="What ingredient would you like to add?" translatesAutoresizingMaskIntoConstraints="NO" id="Tur-BP-tOK">
+                                        <rect key="frame" x="0.0" y="48" width="480" height="44"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </searchBar>
                                 </subviews>
@@ -564,7 +563,7 @@
                                     <constraint firstItem="Tur-BP-tOK" firstAttribute="centerX" secondItem="EiV-os-9xK" secondAttribute="centerX" id="xGD-Ld-MBj"/>
                                 </constraints>
                             </stackView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="BN0-oZ-Fph">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="BN0-oZ-Fph">
                                 <rect key="frame" x="60" y="213" width="480" height="240"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -627,8 +626,8 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZgP-P7-KPe">
-                                                <rect key="frame" x="200" y="8" width="33" height="22"/>
-                                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="17"/>
+                                                <rect key="frame" x="195" y="8" width="43" height="22"/>
+                                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="22"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -643,7 +642,7 @@
                                                     <constraint firstAttribute="height" constant="24" id="T9G-M0-bNp"/>
                                                     <constraint firstAttribute="width" constant="97" id="zWw-Di-t7Z"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
+                                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="20"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -807,36 +806,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="7uM-oO-dwb">
-                                <rect key="frame" x="84" y="116" width="432" height="68"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="7uM-oO-dwb">
+                                <rect key="frame" x="60" y="124" width="480" height="91.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add ingredient to favorites :" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nVU-5z-2CI" userLabel="Add Ingredient Prompt">
-                                        <rect key="frame" x="0.0" y="0.0" width="432" height="24"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="24" id="ocd-zL-ldi"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="480" height="27.5"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="20"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="KBX-4D-3gW">
-                                        <rect key="frame" x="0.0" y="24" width="432" height="44"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" returnKeyType="search"/>
+                                    <searchBar contentMode="redraw" text="" placeholder="What ingredient would you like to add?" translatesAutoresizingMaskIntoConstraints="NO" id="KBX-4D-3gW">
+                                        <rect key="frame" x="0.0" y="47.5" width="480" height="44"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" returnKeyType="done"/>
                                     </searchBar>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="432" id="sA2-bd-qIz"/>
-                                </constraints>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vNy-hK-7TV" userLabel="Search Table View">
-                                <rect key="frame" x="84" y="184" width="432" height="317"/>
+                                <rect key="frame" x="59" y="215.5" width="481" height="285.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchResultCell" id="4Oe-XE-5fu">
-                                        <rect key="frame" x="0.0" y="28" width="432" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="481" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4Oe-XE-5fu" id="nSH-wT-eDb">
-                                            <rect key="frame" x="0.0" y="0.0" width="432" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="481" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -845,11 +838,12 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="7uM-oO-dwb" firstAttribute="centerY" secondItem="N7o-Yh-la7" secondAttribute="top" constant="150" id="8G1-NF-TRR"/>
+                            <constraint firstItem="7uM-oO-dwb" firstAttribute="top" secondItem="uGW-1N-BUw" secondAttribute="bottom" constant="60" id="GCU-qO-KOa"/>
                             <constraint firstItem="7uM-oO-dwb" firstAttribute="centerX" secondItem="N7o-Yh-la7" secondAttribute="centerX" id="GqF-3N-UDR"/>
                             <constraint firstItem="vNy-hK-7TV" firstAttribute="top" secondItem="7uM-oO-dwb" secondAttribute="bottom" id="Nb0-Cp-BkZ"/>
                             <constraint firstItem="uPH-iR-ISB" firstAttribute="top" secondItem="vNy-hK-7TV" secondAttribute="bottom" constant="50" id="m4P-g6-2aQ"/>
-                            <constraint firstItem="7uM-oO-dwb" firstAttribute="leading" secondItem="vNy-hK-7TV" secondAttribute="leading" id="vYW-dm-3Gz"/>
+                            <constraint firstItem="7uM-oO-dwb" firstAttribute="width" secondItem="N7o-Yh-la7" secondAttribute="width" multiplier="0.8" id="uj4-W1-U9Q"/>
+                            <constraint firstItem="7uM-oO-dwb" firstAttribute="leading" secondItem="vNy-hK-7TV" secondAttribute="leading" constant="1" id="vYW-dm-3Gz"/>
                             <constraint firstItem="vNy-hK-7TV" firstAttribute="trailing" secondItem="7uM-oO-dwb" secondAttribute="trailing" id="zY9-4q-QZh"/>
                         </constraints>
                     </view>
