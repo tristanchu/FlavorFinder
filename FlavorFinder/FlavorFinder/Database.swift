@@ -188,29 +188,28 @@ func getMatchForTwoIngredients(firstIngredient: PFObject, secondIngredient: PFOb
     return match
 }
 
-func addIngredient(name: String, isDairy: Bool, isNuts: Bool, isVege: Bool) {
+func addIngredient(name: String, isDairy: Bool, isNuts: Bool, isVege: Bool) -> PFIngredient {
     let ingredient = PFIngredient(name: name, isDairy: isDairy, isNuts: isNuts, isVege: isVege)
     ingredient.pinInBackground()
     ingredient.saveInBackground()
+    return ingredient
 }
 
 func addMatch(user: PFUser, firstIngredient: PFIngredient, secondIngredient: PFIngredient) {
     let firstMatch = PFMatch(firstIngredient: firstIngredient, secondIngredient: secondIngredient)
-    firstMatch.upvotes = 1
+    firstMatch.upvotes = 0
+    firstMatch.downvotes = 0
     firstMatch.pinInBackground()
     firstMatch.saveInBackground()
     _voteMatch(user, match: firstMatch, voteType: _s_upvotes)
     
     let secondMatch = PFMatch(firstIngredient: secondIngredient, secondIngredient: firstIngredient)
-    secondMatch.upvotes = 1
+    secondMatch.upvotes = 0
+    secondMatch.downvotes = 0
     secondMatch.pinInBackground()
     secondMatch.saveInBackground()
     _voteMatch(user, match: secondMatch, voteType: _s_upvotes)
 }
-
-
-
-
 
 func upvoteHotpot(user: PFUser, hotpot: [PFObject], matchIngredient: PFIngredient) {
     for ingredient in hotpot {

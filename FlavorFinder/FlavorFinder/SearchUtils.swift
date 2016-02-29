@@ -50,11 +50,14 @@ func getMatchingIngredients(ingredient: PFIngredient) -> [(ingredient: PFIngredi
             (match[_s_secondIngredient] as! PFIngredient == ingredient)
                 ? match[_s_firstIngredient] as! PFIngredient
                 : match[_s_secondIngredient] as! PFIngredient
-        let matchRank = match[_s_matchLevel] as! Int
+        let matchRank = match[_s_matchLevel] as? Int
         let upvotes = match[_s_upvotes] as! Int
         let downvotes = match[_s_downvotes] as! Int
         // TODO: transition off of matchLevel, or find better conversion to votes (magic # now)
-        let ups = matchRank * 30 + upvotes // magic number 30!!
+        var ups = upvotes
+        if let _ = matchRank {
+            ups += matchRank! * 30
+        }
         let downs = downvotes
         let confidenceRank = confidence(ups, downs: downs)
         results.append((ingredient: otherIngredient, rank: confidenceRank))

@@ -10,7 +10,7 @@ class AddMatchPrototypeViewController : SearchIngredientsViewController {
     
     // MARK: Properties
     
-    let PROMPT_PREFIX = "Which ingredient matches with "
+    let PROMPT_PREFIX = "Which ingredient goes well with "
     let PROMPT_SUFFIX = "?"
     
     var firstIngredient : PFIngredient?
