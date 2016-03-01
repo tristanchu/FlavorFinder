@@ -122,7 +122,7 @@ class ListsPageController: UITableViewController {
         // Set cell label:
         cell.textLabel?.text = userLists[indexPath.row].objectForKey(
             ListTitleColumnName) as? String
-        cell.textLabel?.font = UIFont(name: "Avenir Next Medium", size: 17)
+        cell.textLabel?.font = CELL_FONT
 
 
         // Give cell a chevron:

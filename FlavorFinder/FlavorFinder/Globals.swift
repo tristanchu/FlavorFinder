@@ -61,6 +61,8 @@ let EMPTY_SET_TEXT_COLOR = UIColor(red: 22.0/255.0, green: 106.0/255.0, blue: 17
 
 // Fonts:
 let attributes = [NSFontAttributeName: UIFont.fontAwesomeOfSize(15)] as Dictionary!
+let CELL_FONT_AWESOME = UIFont.fontAwesomeOfSize(16)
+let CELL_FONT = UIFont(name: "Avenir Next Medium", size: 17)
 
 // Sizes:
 let MATCH_CELL_IMAGE_SIZE = CGSizeMake(30, 30)

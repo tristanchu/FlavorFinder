@@ -135,7 +135,7 @@ class ListDetailController: UITableViewController {
                     addToListCellIdentifier, forIndexPath: indexPath)
                 // set Cell label:
                 cell.textLabel?.text = addToListText
-                cell.textLabel?.font = UIFont.fontAwesomeOfSize(16)
+                cell.textLabel?.font = CELL_FONT_AWESOME
                 cell.textLabel?.textColor = UIColor.grayColor()
                 // Give cell a chevron:
                 cell.accessoryType =
@@ -151,7 +151,7 @@ class ListDetailController: UITableViewController {
                     listToSearchCellIdentifier, forIndexPath: indexPath)
                 // set Cell label:
                 cell.textLabel?.text = listToSearchText
-                cell.textLabel?.font = UIFont.fontAwesomeOfSize(16)
+                cell.textLabel?.font = CELL_FONT_AWESOME
                 cell.textLabel?.textColor = UIColor.grayColor()
                 // Give cell a chevron:
                 cell.accessoryType =
@@ -170,7 +170,7 @@ class ListDetailController: UITableViewController {
                 // Set cell label:
                 let listIngredient = ingredientList[indexPath.row - 1]
                 cell.textLabel?.text = listIngredient.name
-                cell.textLabel?.font = UIFont(name: "Avenir Next Medium", size: 17)
+                cell.textLabel?.font = CELL_FONT
                 
                 cell.icons.removeAll()
                 
