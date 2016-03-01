@@ -63,6 +63,7 @@ let EMPTY_SET_TEXT_COLOR = UIColor(red: 22.0/255.0, green: 106.0/255.0, blue: 17
 let attributes = [NSFontAttributeName: UIFont.fontAwesomeOfSize(15)] as Dictionary!
 let CELL_FONT_AWESOME = UIFont.fontAwesomeOfSize(16)
 let CELL_FONT = UIFont(name: "Avenir Next Medium", size: 17)
+let FILTER_BUTTON_FONT =  UIFont(name: "Avenir Next Medium", size: 15)
 
 // Sizes:
 let MATCH_CELL_IMAGE_SIZE = CGSizeMake(30, 30)
@@ -85,10 +86,12 @@ let ROUNDED_EDGES = true    // searchbar.clipsToBounds = true
 // Use setDefaultButtonUI() For these settings:
 let DEFAULT_BUTTON_BORDER_WIDTH : CGFloat = 2.0
 let DEFAULT_BUTTON_BORDER_COLOR : CGColorRef = UIColor.lightGrayColor().CGColor
+let DEFAULT_BUTTON_FONT_COLOR : UIColor = UIColor.darkGrayColor()
 
 // Use setSecondaryButtonUI() for these settings:
 let SECONDARY_BUTTON_BORDER_WIDTH : CGFloat = 1.0
 let SECONDARY_BUTTON_BORDER_COLOR : CGColorRef = UIColor.lightGrayColor().CGColor
+let SECONDARY_BUTTON_FONT_COLOR : UIColor = UIColor.darkGrayColor()
 
 
 let ROUNDED_BUTTON_SIZE : CGFloat = 10.0
