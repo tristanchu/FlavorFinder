@@ -124,7 +124,7 @@ class FavoritesPageController: UITableViewController {
         
         let favIngredient = favoriteCells[indexPath.item]
         cell.textLabel?.text = favIngredient.name
-        cell.textLabel?.font = UIFont(name: "Avenir Next Medium", size: 17)
+        cell.textLabel?.font = CELL_FONT
         
         let isNuts = favIngredient[_s_nuts] as! Bool
         let isDairy = favIngredient[_s_dairy] as! Bool
