@@ -21,5 +21,6 @@ func emptyBackgroundText(text: String, view: UIView) -> UILabel {
     noDataLabel.text = text
     noDataLabel.textColor = EMPTY_SET_TEXT_COLOR
     noDataLabel.textAlignment = NSTextAlignment.Center
+    noDataLabel.font = EMPTY_SET_FONT
     return noDataLabel
 }

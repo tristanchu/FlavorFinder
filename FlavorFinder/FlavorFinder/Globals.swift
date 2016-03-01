@@ -56,7 +56,8 @@ let CELL_BTN_ON_COLOR = UIColor.blackColor()
 
 let HOTPOT_COLLECTION_COLOR = UIColor(red: 121/255.0, green: 217/255.0, blue: 255/255.0, alpha: CGFloat(0.3))
 
-let EMPTY_SET_TEXT_COLOR = UIColor(red: 22.0/255.0, green: 106.0/255.0, blue: 176.0/255.0, alpha: 1.0)
+let EMPTY_SET_TEXT_COLOR  = UIColor.darkGrayColor()
+//let EMPTY_SET_TEXT_COLOR = UIColor(red: 22.0/255.0, green: 106.0/255.0, blue: 176.0/255.0, alpha: 1.0)
 
 
 // Fonts:
@@ -64,6 +65,8 @@ let attributes = [NSFontAttributeName: UIFont.fontAwesomeOfSize(15)] as Dictiona
 let CELL_FONT_AWESOME = UIFont.fontAwesomeOfSize(16)
 let CELL_FONT = UIFont(name: "Avenir Next Medium", size: 17)
 let FILTER_BUTTON_FONT =  UIFont(name: "Avenir Next Medium", size: 15)
+
+let EMPTY_SET_FONT = UIFont(name: "Avenir Next Regular", size: 15)
 
 // Sizes:
 let MATCH_CELL_IMAGE_SIZE = CGSizeMake(30, 30)
