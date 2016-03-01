@@ -15,7 +15,7 @@ class AddIngredientAddMatchViewController : AddMatchPrototypeViewController {
     let pageTitle = "Add Matches for New Ingredient"
     let FEEDBACK_PREFIX = "Match with "
     let FEEDBACK_SUFFIX = " proposed"
-    let SUCCESS_SUFFIX = " & its matches now exist in the database!"
+    let SUCCESS_SUFFIX = " & its matches will be added to the database!" // some lag
     var proposedMatches = [PFIngredient]()
     
     // MARK: Connections:

@@ -7,3 +7,12 @@
 //
 
 import Foundation
+import UIKit
+
+class SetFilterTableViewCell : UITableViewCell {
+    
+    @IBOutlet weak var filterSwitch: UISwitch!
+    
+    var filter : String?
+    
+}
