@@ -20,11 +20,22 @@ class AddIngredientViewController : GotNaviViewController, UITableViewDelegate, 
     let CELL_IDENTIFIER = "setFilterCell"
     let MIN_CHARS = 3
     let MAX_CHARS = 40
-    let filtersOn = [
+    var filtersOn = [
         F_DAIRY : false,
         F_VEG : false,
         F_NUTS : false
     ]
+    let filtersText = [
+        F_DAIRY : "a dairy product?",
+        F_VEG : "vegetarian?",
+        F_NUTS : "a nut or nut product?"
+    ]
+    let filtersImage = [
+        F_DAIRY : "Dairy",
+        F_VEG : "Vegan",
+        F_NUTS : "Nuts"
+    ]
+    let filterSwitchSelector : Selector = "filterSwitchWasChanged:"
     var name : String?
     var warningDefaultText : String?
     
@@ -110,12 +121,31 @@ class AddIngredientViewController : GotNaviViewController, UITableViewDelegate, 
     */
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = filterTable.dequeueReusableCellWithIdentifier(
-            CELL_IDENTIFIER, forIndexPath: indexPath)
-        // set cell label:
-        let filterBtn = UIButton()
-        filterBtn.enabled = false
-        configureFilterButton(filterBtn, titleString: "This is a filter", image: UIImage(named: "Dairy")!)
-        cell.addSubview(filterBtn)
+            CELL_IDENTIFIER, forIndexPath: indexPath) as! SetFilterTableViewCell
+        
+        cell.filterSwitch.addTarget(self, action: filterSwitchSelector, forControlEvents: UIControlEvents.ValueChanged)
+        
+        var text = ""
+        var image = ""
+        switch indexPath.row {
+        case 0:
+            cell.filter = F_DAIRY
+            break
+        case 1:
+            cell.filter = F_VEG
+            break
+        case 2:
+            cell.filter = F_NUTS
+            break
+        default:
+            print("ERROR: Set filter table error.")
+            return cell
+        }
+        text = filtersText[cell.filter!]!
+        image = filtersImage[cell.filter!]!
+        cell.textLabel?.text = "Is it \(text)"
+        cell.textLabel?.backgroundColor = UIColor.clearColor() // to be able to see switch
+        cell.imageView?.image = UIImage(named: image)
         return cell
     }
     
@@ -138,6 +168,17 @@ class AddIngredientViewController : GotNaviViewController, UITableViewDelegate, 
             )
         }
         super.prepareForSegue(segue, sender: sender)
+    }
+    
+    /* filterSwitchWasChanged
+    - response to filter switch changes
+    */
+    func filterSwitchWasChanged(sender: UISwitch) {
+        if let filterCell = sender.superview?.superview as? SetFilterTableViewCell {
+            if let filter = filterCell.filter {
+                filtersOn[filter] = sender.on
+            }
+        }
     }
     
     /* setUpFilterTable
