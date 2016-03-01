@@ -34,6 +34,10 @@ class AddMatchViewController : AddMatchPrototypeViewController {
         
         // Call super
         super.viewDidLoad()
+        
+        // make search bar border round:
+        chooseIngredientSearchBar.layer.cornerRadius = ROUNDED_SIZE
+        chooseIngredientSearchBar.clipsToBounds = true
     }
     
     /* viewDidAppear:
