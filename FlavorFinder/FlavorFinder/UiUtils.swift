@@ -59,6 +59,8 @@ func setDefaultButtonUI(button: UIButton) {
     // rounded edges:
     button.layer.cornerRadius = ROUNDED_BUTTON_SIZE
     button.clipsToBounds = true
+    // font color:
+    button.titleLabel?.tintColor = DEFAULT_BUTTON_FONT_COLOR
     
 }
 
@@ -72,6 +74,8 @@ func setSecondaryButtonUI(button: UIButton) {
     // rounded:
     button.layer.cornerRadius = ROUNDED_BUTTON_SIZE
     button.clipsToBounds = true
+    // font color:
+    button.titleLabel?.tintColor = SECONDARY_BUTTON_FONT_COLOR
     
 }
 
@@ -95,6 +99,6 @@ func configureFilterButton(button: UIButton, titleString: String, image: UIImage
     button.layer.borderWidth = 1
     button.layer.borderColor = NAVI_BUTTON_COLOR.CGColor
     button.backgroundColor = UIColor.clearColor()
-    button.titleLabel?.font = UIFont(name: "Avenir Next Medium", size: 15)
+    button.titleLabel?.font = FILTER_BUTTON_FONT
     button.setImage(image, forState: .Normal)
 }
