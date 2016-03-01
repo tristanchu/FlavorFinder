@@ -239,7 +239,7 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
                 }
                 
                 if (isVege1 != nil && isVege1!) || (isVege2 != nil && isVege2!) {
-                    let imageVegan = UIImage(named: "Vegan")!
+                    let imageVegan = UIImage(named: "Vegetarian")!
                     cell.icons.append(imageVegan)
                 }
                 if (isNuts1 != nil && isNuts1!) || (isNuts2 != nil && isNuts2!) {

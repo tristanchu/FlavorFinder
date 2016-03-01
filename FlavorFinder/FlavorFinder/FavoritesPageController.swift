@@ -133,7 +133,7 @@ class FavoritesPageController: UITableViewController {
         cell.icons.removeAll()
         
         if isVege {
-            let imageVegan = UIImage(named: "Vegan")!
+            let imageVegan = UIImage(named: "Vegetarian")!
             cell.icons.append(imageVegan)
         }
         if isNuts {
