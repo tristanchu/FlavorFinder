@@ -131,7 +131,6 @@ class AddIngredientViewController : GotNaviViewController, UITableViewDelegate, 
         case 1:
             text = filtersText[F_VEG]!
             image = filtersImage[F_VEG]!
-
             break
         case 2:
             text = filtersText[F_NUTS]!
