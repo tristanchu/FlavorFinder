@@ -25,6 +25,16 @@ class AddIngredientViewController : GotNaviViewController, UITableViewDelegate, 
         F_VEG : false,
         F_NUTS : false
     ]
+    let filtersText = [
+        F_DAIRY : "a dairy product?",
+        F_VEG : "vegetarian?",
+        F_NUTS : "a nut or nut product?"
+    ]
+    let filtersImage = [
+        F_DAIRY : "Dairy",
+        F_VEG : "Vegan",
+        F_NUTS : "Nuts"
+    ]
     var name : String?
     var warningDefaultText : String?
     
@@ -111,11 +121,28 @@ class AddIngredientViewController : GotNaviViewController, UITableViewDelegate, 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = filterTable.dequeueReusableCellWithIdentifier(
             CELL_IDENTIFIER, forIndexPath: indexPath)
-        // set cell label:
-        let filterBtn = UIButton()
-        filterBtn.enabled = false
-        configureFilterButton(filterBtn, titleString: "This is a filter", image: UIImage(named: "Dairy")!)
-        cell.addSubview(filterBtn)
+        var text = ""
+        var image = ""
+        switch indexPath.row {
+        case 0:
+            text = filtersText[F_DAIRY]!
+            image = filtersImage[F_DAIRY]!
+            break
+        case 1:
+            text = filtersText[F_VEG]!
+            image = filtersImage[F_VEG]!
+
+            break
+        case 2:
+            text = filtersText[F_NUTS]!
+            image = filtersImage[F_NUTS]!
+            break
+        default:
+            print("ERROR: Set filter table error.")
+            break
+        }
+        cell.textLabel?.text = "Is it \(text)"
+        cell.imageView?.image = UIImage(named: image)
         return cell
     }
     
