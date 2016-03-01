@@ -221,9 +221,15 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
                 upvotes = upvotes == nil ? 0 : upvotes
                 downvotes = downvotes == nil ? 0 : downvotes
                 
-                let isNuts = match[_s_nuts] as! Bool
-                let isDairy = match[_s_dairy] as! Bool
-                let isVege = match[_s_vegetarian] as! Bool
+                // !! quick fix for demo to avoid crashes, need to revisit filters in database
+                
+                let isNuts1 = match[_s_nuts] as? Bool
+                let isDairy1 = match[_s_dairy] as? Bool
+                let isVege1 = match[_s_vegetarian] as? Bool
+                
+                let isNuts2 = match["isNuts"] as? Bool
+                let isDairy2 = match["isDairy"] as? Bool
+                let isVege2 = match["isVege"] as? Bool
                 
                 var isFavorite = false
                 if let user = currentUser {
@@ -232,15 +238,15 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
                     }
                 }
                 
-                if isVege {
+                if (isVege1 != nil && isVege1!) || (isVege2 != nil && isVege2!) {
                     let imageVegan = UIImage(named: "Vegan")!
                     cell.icons.append(imageVegan)
                 }
-                if isNuts {
+                if (isNuts1 != nil && isNuts1!) || (isNuts2 != nil && isNuts2!) {
                     let imageNuts = UIImage(named: "Nuts")!
                     cell.icons.append(imageNuts)
                 }
-                if isDairy {
+                if (isDairy1 != nil && isDairy1!) || (isDairy2 != nil && isDairy2!) {
                     let imageDairy = UIImage(named: "Dairy")!
                     cell.icons.append(imageDairy)
                 }
@@ -486,11 +492,27 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
     }
     
     func ingredientPassesFilter(ingredient: PFIngredient) -> Bool {
-        let isDairy = ingredient[_s_dairy] as! Bool
-        let isNuts = ingredient[_s_nuts] as! Bool
-        let isVege = ingredient[_s_vegetarian] as! Bool
         
-        if filters[F_DAIRY]! && isDairy || filters[F_NUTS]! && isNuts || filters[F_VEG]! && !isVege {
+        // need to revisit our filters in database, but quick fix for demo to prevent crashes
+        
+        var isDairy = ingredient[_s_dairy] as? Bool
+        if isDairy == nil {
+            isDairy = ingredient["isDairy"] as? Bool
+        }
+        var isNuts = ingredient[_s_nuts] as? Bool
+        if isNuts == nil {
+            isNuts = ingredient["isNuts"] as? Bool
+        }
+        var isVege = ingredient[_s_vegetarian] as? Bool
+        if isVege == nil {
+            isVege = ingredient["isVege"] as? Bool
+        }
+        
+        if isDairy == nil || isNuts == nil || isVege == nil {
+            return true
+        }
+        
+        if filters[F_DAIRY]! && isDairy! || filters[F_NUTS]! && isNuts! || filters[F_VEG]! && !isVege! {
             return false
         } else {
             return true

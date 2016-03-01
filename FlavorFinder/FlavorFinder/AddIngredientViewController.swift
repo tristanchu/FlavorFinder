@@ -112,11 +112,14 @@ class AddIngredientViewController : GotNaviViewController, UITableViewDelegate, 
         let cell = filterTable.dequeueReusableCellWithIdentifier(
             CELL_IDENTIFIER, forIndexPath: indexPath)
         // set cell label:
-        cell.textLabel?.text = "This is a filter"
+        let filterBtn = UIButton()
+        filterBtn.enabled = false
+        configureFilterButton(filterBtn, titleString: "This is a filter", image: UIImage(named: "Dairy")!)
+        cell.addSubview(filterBtn)
         return cell
     }
     
-    /* tableView -> happens on selection of row
+    /* tableView -> happens on senlection of row
     */
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {}
     
