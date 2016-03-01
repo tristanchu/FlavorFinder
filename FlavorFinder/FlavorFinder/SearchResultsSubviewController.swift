@@ -486,11 +486,27 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
     }
     
     func ingredientPassesFilter(ingredient: PFIngredient) -> Bool {
-        let isDairy = ingredient[_s_dairy] as! Bool
-        let isNuts = ingredient[_s_nuts] as! Bool
-        let isVege = ingredient[_s_vegetarian] as! Bool
         
-        if filters[F_DAIRY]! && isDairy || filters[F_NUTS]! && isNuts || filters[F_VEG]! && !isVege {
+        // need to revisit our filters in database, but quick fix for demo to prevent crashes
+        
+        var isDairy = ingredient[_s_dairy] as? Bool
+        if isDairy == nil {
+            isDairy = ingredient["isDairy"] as? Bool
+        }
+        var isNuts = ingredient[_s_nuts] as? Bool
+        if isNuts == nil {
+            isNuts = ingredient["isNuts"] as? Bool
+        }
+        var isVege = ingredient[_s_vegetarian] as? Bool
+        if isVege == nil {
+            isVege = ingredient["isVege"] as? Bool
+        }
+        
+        if isDairy == nil || isNuts == nil || isVege == nil {
+            return true
+        }
+        
+        if filters[F_DAIRY]! && isDairy! || filters[F_NUTS]! && isNuts! || filters[F_VEG]! && !isVege! {
             return false
         } else {
             return true
