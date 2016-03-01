@@ -24,15 +24,48 @@ var currentIngredientToAdd : [PFIngredient] = []
 */
 func getPossibleIngredients(searchText: String) -> [PFIngredient] {
     if let allIngredients = _allIngredients as? [PFIngredient] {
-        let filteredResults = allIngredients.filter({ (ingredient) -> Bool in
+        var filteredResults = allIngredients.filter({ (ingredient) -> Bool in
             let tmp: PFObject = ingredient
             let range = tmp[_s_name].rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
             return range.location != NSNotFound
         })
+        filteredResults = sortIngredientsByPartialStringMatch(searchText, possibleIngredients: filteredResults)
         return filteredResults
     } else {
         return [PFIngredient]()
     }
+}
+
+/* sortIngredientsByPartialStringMatch
+- sorts list of possible matches with exact match, prefix, then suffix, then general matches
+*/
+func sortIngredientsByPartialStringMatch(searchText: String, possibleIngredients: [PFIngredient]) -> [PFIngredient] {
+    return possibleIngredients.sort({ a, b -> Bool in // return true to sort a before b, false for reverse
+        if a.name == searchText {
+            return true
+        } else if b.name == searchText {
+            return false
+        } else if a.name.hasPrefix(searchText) {
+            return true
+        } else if b.name.hasPrefix(searchText) {
+            return false
+        } else if a.name.hasSuffix(searchText) {
+            return true
+        } else if b.name.hasSuffix(searchText) {
+            return false
+        } else {
+            return true
+        }
+    })
+}
+
+/* sortPrefixSuffixNeither
+- sorts two of ingredients vs. a string with prefix, then suffix, then general matches
+*/
+func sortPrefixSuffixNeither(value1: String, value2: String) -> Bool {
+    // One string is alphabetically first.
+    // ... True means value1 precedes value2.
+    return value1 < value2;
 }
 
 // Parse DB Functions: -----------------------------------------------
