@@ -32,7 +32,7 @@ class AddIngredientViewController : GotNaviViewController, UITableViewDelegate, 
     ]
     let filtersImage = [
         F_DAIRY : "Dairy",
-        F_VEG : "Vegan",
+        F_VEG : "Vegetarian",
         F_NUTS : "Nuts"
     ]
     let filterSwitchSelector : Selector = "filterSwitchWasChanged:"

@@ -186,7 +186,7 @@ class ListDetailController: UITableViewController {
                 }
                 
                 if isVege {
-                    let imageVegan = UIImage(named: "Vegan")!
+                    let imageVegan = UIImage(named: "Vegetarian")!
                     cell.icons.append(imageVegan)
                 }
                 if isNuts {

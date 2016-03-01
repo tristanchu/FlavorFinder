@@ -54,7 +54,7 @@ class FilterBarSubviewController : UIViewController, UISearchBarDelegate {
         filterView.addItem(dairyBtn)
         
         let vegeBtn = UIButton()
-        configureFilterButton(vegeBtn, titleString: F_VEG, image: UIImage(named: "Vegan")!)
+        configureFilterButton(vegeBtn, titleString: F_VEG, image: UIImage(named: "Vegetarian")!)
         vegeBtn.tag = 3
         vegeBtn.addTarget(self, action: "filterToggleBtnClicked:", forControlEvents: UIControlEvents.TouchUpInside)
         filterView.addItem(vegeBtn)

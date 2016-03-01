@@ -20,7 +20,7 @@ class FavoriteTableViewCell: UITableViewCell, UICollectionViewDataSource, UIColl
         
         ingredientIcons.transform = CGAffineTransformMakeScale(-1, 1)
         
-            let imageVegan = UIImage(named: "Vegan")!
+            let imageVegan = UIImage(named: "Vegetarian")!
             self.icons.append(imageVegan)
             let imageNuts = UIImage(named: "Nuts")!
             self.icons.append(imageNuts)
