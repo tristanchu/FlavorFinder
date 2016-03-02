@@ -36,13 +36,15 @@ let F_NUTS = "no nuts"
 let TOAST_DURATION = 1.0
 
 // Colors:
+let BACKGROUND_COLOR = UIColor(red: 246/255.0, green: 246/255.0, blue: 246/255.0, alpha: CGFloat(1))
+let ACCENT_COLOR = UIColor(red: 27/255.0, green: 149/255.0, blue: 148/255.0, alpha: CGFloat(1))
+
 let LIGHTGRAY_COLOR = UIColor(red: 230/255.0, green: 230/255.0, blue: 230/255.0, alpha: CGFloat(1))
 
 let MATCH_CELL_IMAGE_COLOR = UIColor.blackColor()
 
 let NAVI_COLOR = UIColor(red: 101/255.0, green: 219/255.0, blue: 204/255.0, alpha: CGFloat(1))
 let NAVI_LIGHT_COLOR = UIColor(red: 27/255.0, green: 151/255.0, blue: 150/255.0, alpha: CGFloat(1))
-let BACKGROUND_COLOR = UIColor(red: 234/255.0, green: 234/255.0, blue: 234/255.0, alpha: CGFloat(1))
 
 let FILTER_BUTTON_COLOR = NAVI_LIGHT_COLOR
 let NAVI_BUTTON_COLOR = UIColor.whiteColor()
@@ -92,13 +94,13 @@ let ROUNDED_EDGES = true    // searchbar.clipsToBounds = true
 // Button formatting ---------------------------:
 // Use setDefaultButtonUI() For these settings:
 let DEFAULT_BUTTON_BORDER_WIDTH : CGFloat = 2.0
-let DEFAULT_BUTTON_BORDER_COLOR : CGColorRef = UIColor.lightGrayColor().CGColor
-let DEFAULT_BUTTON_FONT_COLOR : UIColor = UIColor.darkGrayColor()
+let DEFAULT_BUTTON_BORDER_COLOR : CGColorRef = ACCENT_COLOR.CGColor
+let DEFAULT_BUTTON_FONT_COLOR : UIColor = ACCENT_COLOR
 
 // Use setSecondaryButtonUI() for these settings:
 let SECONDARY_BUTTON_BORDER_WIDTH : CGFloat = 1.0
-let SECONDARY_BUTTON_BORDER_COLOR : CGColorRef = UIColor.lightGrayColor().CGColor
-let SECONDARY_BUTTON_FONT_COLOR : UIColor = UIColor.darkGrayColor()
+let SECONDARY_BUTTON_BORDER_COLOR : CGColorRef = ACCENT_COLOR.CGColor
+let SECONDARY_BUTTON_FONT_COLOR : UIColor = ACCENT_COLOR
 
 
 let ROUNDED_BUTTON_SIZE : CGFloat = 10.0

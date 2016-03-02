@@ -38,6 +38,9 @@ class AddFavoriteViewController: SearchIngredientsViewController {
         // Rounded edges in search bar:
         self.addIngredientSearchBar.layer.cornerRadius = ROUNDED_SIZE
         self.addIngredientSearchBar.clipsToBounds = ROUNDED_EDGES
+        
+        // grey background
+        view.backgroundColor = BACKGROUND_COLOR
     }
     
     // MARK: Overriding parent class functions ------------------------------
