@@ -40,3 +40,4 @@ Flavor Finder is an iOS app built using Swift in Xcode. We use Github for versio
 
 * [**Cocoapods**](https://cocoapods.org/) for package management.
 * [**icons8**](https://icons8.com/) for free nav bar icons.
+* [**Toast-Swift**](https://github.com/scalessec/Toast-Swift) for Toast notifications as user action feedback.
