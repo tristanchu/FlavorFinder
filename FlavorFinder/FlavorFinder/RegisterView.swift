@@ -30,6 +30,9 @@ class RegisterView : UIViewController, UITextFieldDelegate {
     let GENERIC_ERROR = "Oops! An error occurred on the server. Please try again."
     let USERNAME_IN_USE = "That username is already in use. Please pick a new one!"
     let EMAIL_IN_USE = "Email already associated with an account!"
+    
+    // Toast Text:
+    let REGISTERED_MSG = "Registed new user " // + username dynamically
 
     // MARK: Properties -----------------------------------
 
@@ -156,6 +159,10 @@ class RegisterView : UIViewController, UITextFieldDelegate {
     func registerSuccess(user: PFUser) {
         setUserSession(user)
         if let parentVC = self.parentViewController?.parentViewController as! LoginModuleParentViewController? {
+            if currentUser != nil {
+                let registeredMsg = self.REGISTERED_MSG + "\(currentUser!.username!)"
+                parentVC.view.makeToast(registeredMsg, duration: TOAST_DURATION, position: .Bottom)
+            }
             parentVC.loginSucceeded()
         }
     }
