@@ -149,6 +149,7 @@ class AddIngredientViewController : GotNaviViewController, UITableViewDelegate, 
         cell.textLabel?.text = "Is it \(text)"
         cell.textLabel?.backgroundColor = UIColor.clearColor() // to be able to see switch
         cell.imageView?.image = UIImage(named: image)
+        cell.backgroundColor = BACKGROUND_COLOR
         return cell
     }
     
@@ -188,7 +189,10 @@ class AddIngredientViewController : GotNaviViewController, UITableViewDelegate, 
     - handles setup for filter table
     - whenever possible, these things should be set in storyboard instead of programmatically
     */
-    func setUpFilterTable() {}
+    func setUpFilterTable() {
+        // grey background
+        filterTable.backgroundColor = BACKGROUND_COLOR
+    }
     
     /* reset
     - resets default page view to clear form
