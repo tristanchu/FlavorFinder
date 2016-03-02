@@ -67,6 +67,9 @@ class AddIngredientAddMatchViewController : AddMatchPrototypeViewController {
         
         // Call super
         super.viewDidLoad()
+        
+        // grey background:
+        view.backgroundColor = BACKGROUND_COLOR
     }
     
     // MARK: Overriding parent class functions ------------------------------

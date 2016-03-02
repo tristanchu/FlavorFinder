@@ -85,7 +85,7 @@ class ListsPageController: UITableViewController {
 
         // Populate and display table:
         populateListsTable()
-        listsTableView.backgroundColor = UIColor.whiteColor();
+        listsTableView.backgroundColor = BACKGROUND_COLOR;
         listsTableView.backgroundView = nil;
         
         // Do not display lists if no user:

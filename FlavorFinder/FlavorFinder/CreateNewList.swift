@@ -70,6 +70,9 @@ class CreateNewList: SearchIngredientsViewController, UITextFieldDelegate {
         // set button borders:
         setDefaultButtonUI(createListBtn)
         setSecondaryButtonUI(cancelBtn)
+        
+        // grey background
+        view.backgroundColor = BACKGROUND_COLOR
     }
     
     

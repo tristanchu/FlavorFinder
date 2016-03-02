@@ -38,6 +38,9 @@ class AddMatchViewController : AddMatchPrototypeViewController {
         // make search bar border round:
         chooseIngredientSearchBar.layer.cornerRadius = ROUNDED_SIZE
         chooseIngredientSearchBar.clipsToBounds = true
+        
+        // grey background:
+        view.backgroundColor = BACKGROUND_COLOR
     }
     
     /* viewDidAppear:
