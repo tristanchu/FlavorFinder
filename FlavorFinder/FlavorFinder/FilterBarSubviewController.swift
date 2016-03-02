@@ -140,4 +140,8 @@ class FilterBarSubviewController : UIViewController, UISearchBarDelegate {
         }
     }
     
+    func newSearchTermWasAdded() {
+        filterSearchBar.text = ""
+    }
+    
 }

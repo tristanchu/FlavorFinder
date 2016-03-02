@@ -27,7 +27,7 @@ class SearchResultsViewController : UIViewController {
     
     // variables to hold the subview controllers (SVCs)
     var searchResultsSVC : SearchResultsSubviewController?
-    var filterBarSVC : UIViewController?
+    var filterBarSVC : FilterBarSubviewController?
     var hotpotSVC : HotpotSubviewController?
         
     // containers of subviews
@@ -110,7 +110,7 @@ class SearchResultsViewController : UIViewController {
             searchResultsSVC = vc as? SearchResultsSubviewController
             break
         case segueEmbedFilterBar:
-            filterBarSVC = vc
+            filterBarSVC = vc as? FilterBarSubviewController
             break
         case segueEmbedHotpot:
             hotpotSVC = vc as? HotpotSubviewController
@@ -128,6 +128,7 @@ class SearchResultsViewController : UIViewController {
     func newSearchTermWasAdded() {
         hotpotSVC?.collectionView?.reloadData()
         searchResultsSVC?.getSearchResults()
+        filterBarSVC?.newSearchTermWasAdded()
     }
     
     /* hotpotIngredientWasRemoved
