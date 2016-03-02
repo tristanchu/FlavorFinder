@@ -17,17 +17,7 @@ class FavoriteTableViewCell: UITableViewCell, UICollectionViewDataSource, UIColl
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        
         ingredientIcons.transform = CGAffineTransformMakeScale(-1, 1)
-        
-            let imageVegan = UIImage(named: "Vegetarian")!
-            self.icons.append(imageVegan)
-            let imageNuts = UIImage(named: "Nuts")!
-            self.icons.append(imageNuts)
-            let imageDairy = UIImage(named: "Dairy")!
-            self.icons.append(imageDairy)
-        
-        self.ingredientIcons.reloadData()
     }
     
     override func setSelected(selected: Bool, animated: Bool) {

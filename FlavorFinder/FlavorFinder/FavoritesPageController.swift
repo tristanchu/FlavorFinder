@@ -126,29 +126,29 @@ class FavoritesPageController: UITableViewController {
         cell.textLabel?.text = favIngredient.name
         cell.textLabel?.font = CELL_FONT
         
-        let isNuts = favIngredient[_s_nuts] as! Bool
-        let isDairy = favIngredient[_s_dairy] as! Bool
-        let isVege = favIngredient[_s_vegetarian] as! Bool
-   
-        cell.icons.removeAll()
-        
-        if isVege {
-            let imageVegan = UIImage(named: "Vegetarian")!
-            cell.icons.append(imageVegan)
-        }
-        if isNuts {
-            let imageNuts = UIImage(named: "Nuts")!
-            cell.icons.append(imageNuts)
-        }
-        if isDairy {
-            let imageDairy = UIImage(named: "Dairy")!
-            cell.icons.append(imageDairy)
-        }
-        
-        let imageFav = UIImage(named: "Heart")!
-        cell.icons.append(imageFav)
-        
-        cell.ingredientIcons.reloadData()
+//        let isNuts = favIngredient[_s_nuts] as! Bool
+//        let isDairy = favIngredient[_s_dairy] as! Bool
+//        let isVege = favIngredient[_s_vegetarian] as! Bool
+//   
+//        cell.icons.removeAll()
+//        
+//        if isVege {
+//            let imageVegan = UIImage(named: "Vegetarian")!
+//            cell.icons.append(imageVegan)
+//        }
+//        if isNuts {
+//            let imageNuts = UIImage(named: "Nuts")!
+//            cell.icons.append(imageNuts)
+//        }
+//        if isDairy {
+//            let imageDairy = UIImage(named: "Dairy")!
+//            cell.icons.append(imageDairy)
+//        }
+//        
+//        let imageFav = UIImage(named: "Heart")!
+//        cell.icons.append(imageFav)
+//        
+//        cell.ingredientIcons.reloadData()
         return cell
     }
 
