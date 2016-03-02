@@ -375,7 +375,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "251"
             endingLineNumber = "251"
-            landmarkName = "unvoteHotpot(_:hotpot:matchIngredient:voteType:)"
+            landmarkName = "_voteMatch(_:match:voteType:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -406,9 +406,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "345"
-            endingLineNumber = "345"
-            landmarkName = "getUserVotesFromCloud(_:)"
-            landmarkType = "7">
+            endingLineNumber = "345">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -599,7 +597,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "289"
             endingLineNumber = "289"
-            landmarkName = "getHotpotVoteType(_:hotpot:matchIngredient:)"
+            landmarkName = "_unvoteMatch(_:match:voteType:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -615,7 +613,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "290"
             endingLineNumber = "290"
-            landmarkName = "getHotpotVoteType(_:hotpot:matchIngredient:)"
+            landmarkName = "_unvoteMatch(_:match:voteType:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

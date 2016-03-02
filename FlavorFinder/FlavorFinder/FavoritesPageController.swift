@@ -52,7 +52,7 @@ class FavoritesPageController: UITableViewController {
         self.tableView.rowHeight = UNIFORM_ROW_HEIGHT
         self.tableView.tableFooterView = UIView(frame: CGRectZero) // remove empty cells
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
-        self.tableView.backgroundColor = UIColor.whiteColor()
+        self.tableView.backgroundColor = BACKGROUND_COLOR
         self.tableView.backgroundView = nil
         
         // Navigation visuals:

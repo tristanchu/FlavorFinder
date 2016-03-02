@@ -63,6 +63,9 @@ class SettingsPageController : LoginModuleParentViewController {
         // set button borders:
         setDefaultButtonUI(logoutButton)
         setSecondaryButtonUI(resetPasswordButton)
+        
+        
+        view.backgroundColor = BACKGROUND_COLOR
     }
 
     /* viewDidAppear:

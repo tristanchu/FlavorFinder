@@ -72,6 +72,9 @@ class EditListPage: SearchIngredientsViewController, UITextFieldDelegate {
         // button borders:
         setDefaultButtonUI(renameListButton)
         setSecondaryButtonUI(cancelRenameButton)
+        
+        // grey background:
+        view.backgroundColor = BACKGROUND_COLOR
     }
        
 }
