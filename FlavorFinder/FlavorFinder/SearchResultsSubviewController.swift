@@ -84,6 +84,9 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
         
         tableView.emptyDataSetSource = self
         tableView.emptyDataSetDelegate = self
+        
+        tableView.tableFooterView = UIView(frame: CGRectZero)  // remove empty cells
+        tableView.backgroundColor = BACKGROUND_COLOR
     }
     
     // EMPTY DATA SET DISPLAY
