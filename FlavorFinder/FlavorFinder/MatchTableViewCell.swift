@@ -42,10 +42,8 @@ class MatchTableViewCell: MGSwipeTableCell, UICollectionViewDataSource, UICollec
         for view in cell.subviews {
             view.removeFromSuperview()
         }
-        
-        cell.contentView.transform = CGAffineTransformMakeScale(-1, 1)
-        
         let imageView = UIImageView(image: icon)
+        imageView.transform = CGAffineTransformMakeScale(-1, 1)
         imageView.backgroundColor = UIColor.clearColor()
 //        imageView.frame = CGRect(x: 0, y: 5, width: 30, height: 30)
         cell.addSubview(imageView)
