@@ -58,6 +58,8 @@ class AddFavoriteViewController: SearchIngredientsViewController {
                 if selected.isDataAvailable() {
                     promptLabel.text = "Added \(selected.name)"
                     favoriteIngredient(currentUser!, ingredient: selected)
+                    addIngredientSearchBar.text = ""
+                    searchTableView.hidden = true
                 }
             }
         } else {
