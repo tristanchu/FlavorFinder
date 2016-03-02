@@ -38,6 +38,7 @@ func getPossibleIngredients(searchText: String) -> [PFIngredient] {
 
 /* sortIngredientsByPartialStringMatch
 - sorts list of possible matches with exact match, prefix, then suffix, then general matches
+- sorts alphabetically within those categories
 */
 func sortIngredientsByPartialStringMatch(searchText: String, possibleIngredients: [PFIngredient]) -> [PFIngredient] {
     return possibleIngredients.sort({ a, b -> Bool in // return true to sort a before b, false for reverse
@@ -46,12 +47,22 @@ func sortIngredientsByPartialStringMatch(searchText: String, possibleIngredients
         } else if b.name == searchText {
             return false
         } else if a.name.hasPrefix(searchText) {
-            return true
+            if b.name.hasPrefix(searchText) && a.name > b.name {
+                return false
+            } else {
+                return true
+            }
         } else if b.name.hasPrefix(searchText) {
             return false
         } else if a.name.hasSuffix(searchText) {
-            return true
+            if b.name.hasSuffix(searchText) && a.name > b.name {
+                return false
+            } else {
+                return true
+            }
         } else if b.name.hasSuffix(searchText) {
+            return false
+        } else if a.name > b.name {
             return false
         } else {
             return true
