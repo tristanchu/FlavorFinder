@@ -32,6 +32,12 @@ class MorePageController : UITableViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: moreCellIdentifier)
+        
+        
+        // remove empty cells
+        tableView.tableFooterView = UIView(frame: CGRectZero)
+        tableView.rowHeight = UNIFORM_ROW_HEIGHT
+        tableView.backgroundColor = BACKGROUND_COLOR
 
     }
     

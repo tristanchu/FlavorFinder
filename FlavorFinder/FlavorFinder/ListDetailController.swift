@@ -64,6 +64,7 @@ class ListDetailController: UITableViewController {
         // Table view visuals:
         ingredientListsTableView.tableFooterView = UIView(frame: CGRectZero)  // remove empty cells
         ingredientListsTableView.rowHeight = UNIFORM_ROW_HEIGHT
+        ingredientListsTableView.backgroundColor = BACKGROUND_COLOR
 
         // Navigation Visuals:
         setUpBackButton()

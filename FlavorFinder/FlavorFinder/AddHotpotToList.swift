@@ -51,6 +51,7 @@ class AddHotpotToListController: UITableViewController {
         addToListTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: createListCellIdentitfier)
 
         // Table view visuals:
+        addToListTableView.backgroundColor = BACKGROUND_COLOR
         // remove empty cells
         addToListTableView.tableFooterView = UIView(frame: CGRectZero)
         addToListTableView.rowHeight = UNIFORM_ROW_HEIGHT
