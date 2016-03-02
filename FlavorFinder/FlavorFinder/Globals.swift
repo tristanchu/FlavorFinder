@@ -44,6 +44,7 @@ let NAVI_COLOR = UIColor(red: 101/255.0, green: 219/255.0, blue: 204/255.0, alph
 let NAVI_LIGHT_COLOR = UIColor(red: 27/255.0, green: 151/255.0, blue: 150/255.0, alpha: CGFloat(1))
 let BACKGROUND_COLOR = UIColor(red: 234/255.0, green: 234/255.0, blue: 234/255.0, alpha: CGFloat(1))
 
+let FILTER_BUTTON_COLOR = NAVI_LIGHT_COLOR
 let NAVI_BUTTON_COLOR = UIColor.whiteColor()
 // UIColor(red: 51/255.0, green: 202/255.0, blue: 252/255.0, alpha: CGFloat(1))
 let NAVI_BUTTON_DARK_COLOR = UIColor(red: 135/255.0, green: 212/255.0, blue: 186/255.0, alpha: CGFloat(1))
