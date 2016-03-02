@@ -99,7 +99,7 @@ class ListDetailController: UITableViewController {
         // NOTE: no population because data passed in during segue.
 
         // reset background:
-        ingredientListsTableView.backgroundColor = UIColor.whiteColor();
+        ingredientListsTableView.backgroundColor = BACKGROUND_COLOR;
         ingredientListsTableView.backgroundView = nil;
         
         // If no data, display message:
@@ -239,14 +239,18 @@ class ListDetailController: UITableViewController {
                     // Tell parse to remove ingredient in list from local db:
                     removeIngredientFromList(userList, ingredient: self.ingredientList[indexPath.row - 1])
                     
-                    // remove from display table:
-                    self.ingredientList.removeAtIndex(indexPath.row - 1)
-                    tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
-                    
-                    // Show empty message if needed:
-                    if self.ingredientList.isEmpty {
-                        ingredientListsTableView.backgroundView = emptyBackgroundText(
-                        self.listTitle + self.noIngredients, view: ingredientListsTableView as UIView)
+                    if (indexPath.row - 1 == 0) {
+                        self.navigationController?.popViewControllerAnimated(true)
+                    } else {
+                        // remove from display table:
+                        self.ingredientList.removeAtIndex(indexPath.row - 1)
+                        tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+                        
+                        // Show empty message if needed:
+                        if self.ingredientList.isEmpty {
+                            ingredientListsTableView.backgroundView = emptyBackgroundText(
+                                self.listTitle + self.noIngredients, view: ingredientListsTableView as UIView)
+                        }
                     }
                 }
             }
