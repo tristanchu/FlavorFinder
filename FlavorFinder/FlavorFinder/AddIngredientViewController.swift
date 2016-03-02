@@ -92,6 +92,9 @@ class AddIngredientViewController : GotNaviViewController, UITableViewDelegate, 
         setUpFilterTable()
         warningDefaultText = warningLabel.text
         super.viewDidLoad()
+        
+        view.backgroundColor = BACKGROUND_COLOR
+        
     }
     
     /* viewDidAppear

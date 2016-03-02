@@ -79,6 +79,9 @@ class CreateNewListFromSearch: SearchIngredientsViewController, UITextFieldDeleg
         // set button borders:
         setDefaultButtonUI(createNewListBtn)
         setSecondaryButtonUI(cancelNewListBtn)
+        
+        // grey background:
+        view.backgroundColor = BACKGROUND_COLOR
     }
     
     // MARK: Toast Message - --------------------------------------------------
