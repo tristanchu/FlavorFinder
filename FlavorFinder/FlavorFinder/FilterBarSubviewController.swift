@@ -86,7 +86,7 @@ class FilterBarSubviewController : UIViewController, UISearchBarDelegate {
                 sender.backgroundColor = UIColor.clearColor()
             } else {
                 filters[F_KOSHER] = true
-                sender.backgroundColor = NAVI_BUTTON_COLOR
+                sender.backgroundColor = FILTER_BUTTON_COLOR
             }
             break
         case 2:
@@ -96,7 +96,7 @@ class FilterBarSubviewController : UIViewController, UISearchBarDelegate {
                 sender.backgroundColor = UIColor.clearColor()
             } else {
                 filters[F_DAIRY] = true
-                sender.backgroundColor = NAVI_BUTTON_COLOR
+                sender.backgroundColor = FILTER_BUTTON_COLOR
             }
             break
         case 3:
@@ -106,7 +106,7 @@ class FilterBarSubviewController : UIViewController, UISearchBarDelegate {
                 sender.backgroundColor = UIColor.clearColor()
             } else {
                 filters[F_VEG] = true
-                sender.backgroundColor = NAVI_BUTTON_COLOR
+                sender.backgroundColor = FILTER_BUTTON_COLOR
             }
             break
         case 4:
@@ -116,7 +116,7 @@ class FilterBarSubviewController : UIViewController, UISearchBarDelegate {
                 sender.backgroundColor = UIColor.clearColor()
             } else {
                 filters[F_NUTS] = true
-                sender.backgroundColor = NAVI_BUTTON_COLOR
+                sender.backgroundColor = FILTER_BUTTON_COLOR
             }
             break
         default:
