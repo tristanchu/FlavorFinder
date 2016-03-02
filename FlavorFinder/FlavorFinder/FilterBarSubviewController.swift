@@ -48,7 +48,7 @@ class FilterBarSubviewController : UIViewController, UISearchBarDelegate {
         
         
         let dairyBtn = UIButton()
-        configureFilterButton(dairyBtn, titleString: F_DAIRY, image: UIImage(named: "Dairy")!)
+        configureFilterButton(dairyBtn, titleString: F_DAIRY, image: UIImage(named: "NoDairy")!)
         dairyBtn.tag = 2
         dairyBtn.addTarget(self, action: "filterToggleBtnClicked:", forControlEvents: UIControlEvents.TouchUpInside)
         filterView.addItem(dairyBtn)
@@ -60,7 +60,7 @@ class FilterBarSubviewController : UIViewController, UISearchBarDelegate {
         filterView.addItem(vegeBtn)
         
         let nutsBtn = UIButton()
-        configureFilterButton(nutsBtn, titleString: F_NUTS, image: UIImage(named: "Nuts")!)
+        configureFilterButton(nutsBtn, titleString: F_NUTS, image: UIImage(named: "NoNuts")!)
         nutsBtn.tag = 4
         nutsBtn.addTarget(self, action: "filterToggleBtnClicked:", forControlEvents: UIControlEvents.TouchUpInside)
         filterView.addItem(nutsBtn)
