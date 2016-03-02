@@ -42,7 +42,8 @@ let MATCH_CELL_IMAGE_COLOR = UIColor.blackColor()
 
 let NAVI_COLOR = UIColor(red: 205/255.0, green: 239/255.0, blue: 250/255.0, alpha: CGFloat(1))
 let NAVI_LIGHT_COLOR = UIColor(red: 151/255.0, green: 224/255.0, blue: 252/255.0, alpha: CGFloat(1))
-let NAVI_BUTTON_COLOR = UIColor(red: 51/255.0, green: 202/255.0, blue: 252/255.0, alpha: CGFloat(1))
+let NAVI_BUTTON_COLOR = UIColor.whiteColor()
+// UIColor(red: 51/255.0, green: 202/255.0, blue: 252/255.0, alpha: CGFloat(1))
 let NAVI_BUTTON_DARK_COLOR = UIColor(red: 135/255.0, green: 212/255.0, blue: 186/255.0, alpha: CGFloat(1))
 
 let SEARCH_RESULTS_CELL_COLOR = UIColor.whiteColor()
