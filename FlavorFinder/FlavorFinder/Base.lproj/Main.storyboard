@@ -291,6 +291,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="hs9-Da-RRs"/>
                                         </constraints>
+                                        <color key="barTintColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" returnKeyType="search"/>
                                     </searchBar>
                                 </subviews>
@@ -569,7 +570,12 @@
                                     </label>
                                     <searchBar contentMode="redraw" text="" placeholder="What ingredient would you like to add?" translatesAutoresizingMaskIntoConstraints="NO" id="Tur-BP-tOK">
                                         <rect key="frame" x="0.0" y="48" width="480" height="44"/>
+                                        <color key="barTintColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <scopeButtonTitles>
+                                            <string>Title</string>
+                                            <string>Title</string>
+                                        </scopeButtonTitles>
                                     </searchBar>
                                 </subviews>
                                 <constraints>
@@ -840,6 +846,7 @@
                                     </label>
                                     <searchBar contentMode="redraw" text="" placeholder="What ingredient would you like to add?" translatesAutoresizingMaskIntoConstraints="NO" id="KBX-4D-3gW">
                                         <rect key="frame" x="0.0" y="48" width="480" height="44"/>
+                                        <color key="barTintColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" returnKeyType="done"/>
                                     </searchBar>
                                 </subviews>
@@ -911,7 +918,7 @@
                         <viewControllerLayoutGuide type="bottom" id="eKW-5o-wKA"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="hlX-Xv-nsN">
-                        <rect key="frame" x="0.0" y="0.0" width="540" height="270"/>
+                        <rect key="frame" x="0.0" y="0.0" width="540" height="276"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </view>
                     <connections>
@@ -1375,6 +1382,7 @@
                                     </label>
                                     <searchBar contentMode="redraw" text="" placeholder="Type and ingredient name here" translatesAutoresizingMaskIntoConstraints="NO" id="PBK-ye-MHS">
                                         <rect key="frame" x="0.0" y="48" width="480" height="44"/>
+                                        <color key="barTintColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </searchBar>
                                 </subviews>
@@ -1561,6 +1569,7 @@
                             </label>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="jLX-Sj-cSw">
                                 <rect key="frame" x="74" y="151" width="453" height="44"/>
+                                <color key="barTintColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bxT-OB-wHh">
@@ -1768,6 +1777,6 @@
         <image name="SettingsFilled" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="eUS-5B-FIU"/>
+        <segue reference="w9Y-38-Udg"/>
     </inferredMetricsTieBreakers>
 </document>
