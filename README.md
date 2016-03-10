@@ -28,6 +28,6 @@ Flavor Finder is an iOS app built using Swift in Xcode. We use Github for versio
 * [**Toast-Swift**](https://github.com/scalessec/Toast-Swift) for Toast notifications as user action feedback
 * [**MGSwipeTableCell**](https://github.com/MortimerGoro/MGSwipeTableCell) for table row actions
 * [**DOFavoriteButton**](https://github.com/okmr-d/DOFavoriteButton) for button animations and effects
-* 
+
 ## Seed Data
 * Excerpt from [**The Flavor Bible** (2008)](http://www.amazon.com/Flavor-Bible-Essential-Creativity-Imaginative/dp/0316118400/) by Karen Page and Andrew Dornenburg for seed data, for educational purposes in a class setting and not available for public redistribution
