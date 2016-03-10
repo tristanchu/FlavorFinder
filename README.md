@@ -36,8 +36,7 @@ This winter term we plan on focusing heavily on UI/UX.
 Flavor Finder is an iOS app built using Swift in Xcode. We use Github for version control and file sharing among the group members. For our initial test data, we will use a small portion of The Flavor Bible book as a model set. Ideally, we will move into having a community-driven data set, but the Flavor Bible works as a strictly educational source as it closely models the type of data and relations that we want to capture, convey, and query.
 
 ## Frameworks Used
-* [**Parse**](https://www.parse.com/?) to host our User data and allow for secure User authentication.
-
+* [**Parse**](https://www.parse.com/?) as a backend solution.
 * [**Cocoapods**](https://cocoapods.org/) for package management.
-* [**icons8**](https://icons8.com/) for free nav bar icons.
+* [**icons8**](https://icons8.com/), [**Font Awesome**](http://fontawesome.io), [**The Noun Project**](https://thenounproject.com/) for icons.
 * [**Toast-Swift**](https://github.com/scalessec/Toast-Swift) for Toast notifications as user action feedback.
