@@ -4,7 +4,7 @@ The app for finding and saving your new favorite flavor combinations. Created fo
 Project by: Courtney Ligh, Jaki Kimball, Tristan Chu, and Jon
 
 ## Pitch
-The Flavor Finder is a flavor pairing lookup mobile app—a creative culinary tool for inspiration, experimentation, and reference with user-generated content. There is currently no easy mobile way to look up what flavors go well together or what flavors go well with the ingredients you currently have. A book called [The Flavor Bible](http://www.amazon.com/The-Flavor-Bible-Creativity-Imaginative/dp/0316118400) offer some flavor lookup capabilities, but it is incomplete in certain respects, most notably in static content limitations, accessibility via digital mobile platforms, and the medium's lack of multi-search lookup capabilities.
+The Flavor Finder is a flavor pairing lookup mobile app—a creative culinary tool for inspiration, experimentation, and reference with user-generated content. There is currently no easy mobile way to look up what flavors go well together or what flavors go well with the ingredients you currently have. A book called [The Flavor Bible](http://www.amazon.com/The-Flavor-Bible-Creativity-Imaginative/dp/0316118400) offers some flavor lookup capabilities, but it is incomplete in certain respects, most notably in static content limitations, accessibility via digital mobile platforms, and the medium's lack of multi-search lookup capabilities.
 
 **Target users:** experienced and experimental cooks looking to break free from following exact recipes
 
