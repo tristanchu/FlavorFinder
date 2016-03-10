@@ -112,4 +112,17 @@ class FlavorFinderTests: XCTestCase {
 //        }
 //    }
     
+    func testUserRegistrationAndAuthentication() {
+        let username = "testingUser"
+        let password = "testingUser"
+        let email = "testingUser@gmail.com"
+        XCTAssertTrue(fieldsAreValid(email, username: username, password: password), "User fields are invalid")
+        
+        requestNewUser(email, username: username, password: password, pwRetyped: password)
+        loginUser(username, password: password)
+        
+        let user = currentUser
+        XCTAssertNotEqual(user, nil, "User was unable to log in.")
+    }
+    
 }
