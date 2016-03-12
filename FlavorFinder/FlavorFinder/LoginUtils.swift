@@ -99,7 +99,6 @@ func isInvalidPassword(password: String) -> Bool {
         password.characters.contains(" ")
     }
 
-
 // ----------------------------------------------------------------------
 // KEYCHAIN FUNCTIONS ---------------------------------------------------
 // ----------------------------------------------------------------------
@@ -149,29 +148,6 @@ func getPasswordFromKeychain() -> String {
 // ----------------------------------------------------------------------
 // USER UTILITIES ---------------------------------------------------
 // ----------------------------------------------------------------------
-
-/**
-setDefaultProfilePicture --> deprecated, to be removed soon
-
-gets defaultProfilePicture from Parse Config and sets it as the
-profilePicture on the new user.
-*/
-func setDefaultProfilePicture(user: PFUser!){
-
-    PFConfig.getConfigInBackgroundWithBlock {
-        (var config: PFConfig?, error: NSError?) -> Void in
-        if error == nil {
-            print("Config was fetched on server! (TO DELETE).")
-        } else {
-            print("Failed to fetch config. Using Cached Config.")
-            config = PFConfig.currentConfig()
-        }
-
-        if let userImage = config!["defaultProfilePicture"] as? PFFile {
-            user["profilePicture"] = userImage
-        }
-    }
-}
 
 /**
 requestPasswordReset

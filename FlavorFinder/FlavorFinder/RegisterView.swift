@@ -105,7 +105,7 @@ class RegisterView : UIViewController, UITextFieldDelegate {
     /* requestNewUser
         requests that Parse creates a new user
     */
-    func requestNewUser(email: String, username: String, password: String, pwRetyped: String) {
+    func requestNewUser(email: String, username: String, password: String, pwRetyped: String) -> PFUser? {
         if fieldsAreValid(email, username: username, password: password, pwRetyped: pwRetyped) {
             let newUser = PFUser()
             newUser.username = username
@@ -122,7 +122,9 @@ class RegisterView : UIViewController, UITextFieldDelegate {
                     self.handleError(error)
                 }
             }
+            return newUser
         }
+        return nil
     }
 
     /* fieldsAreValid

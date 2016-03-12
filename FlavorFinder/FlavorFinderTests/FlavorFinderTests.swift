@@ -112,17 +112,21 @@ class FlavorFinderTests: XCTestCase {
 //        }
 //    }
     
+// Parse Integration Test: User Registration & Authentication
     func testUserRegistrationAndAuthentication() {
         let username = "testingUser"
         let password = "testingUser"
         let email = "testingUser@gmail.com"
-        XCTAssertTrue(fieldsAreValid(email, username: username, password: password), "User fields are invalid")
+        let registerVC = RegisterView()
+        XCTAssertTrue(registerVC.fieldsAreValid(email, username: username, password: password, pwRetyped: password), "valid user fields seen as invalid")
         
-        requestNewUser(email, username: username, password: password, pwRetyped: password)
-        loginUser(username, password: password)
+        let newUser = registerVC.requestNewUser(email, username: username, password: password, pwRetyped: password) as PFUser?
+        XCTAssertNotNil(newUser, "user not generated for validated fields")
         
-        let user = currentUser
-        XCTAssertNotEqual(user, nil, "User was unable to log in.")
+        if let _ = newUser {
+            setUserSession(newUser!)
+        }
+        XCTAssertTrue(isUserLoggedIn(), "user was unable to log in.")
     }
     
 }
