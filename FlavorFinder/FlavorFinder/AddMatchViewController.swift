@@ -27,6 +27,12 @@ class AddMatchViewController : AddMatchPrototypeViewController {
     /* viewDidLoad:
     */
     override func viewDidLoad() {
+        
+        if !isUserLoggedIn() {
+            self.navigationController?.popToRootViewControllerAnimated(true)
+            return
+        }
+        
         // Assign values to parent class variables
         ingredientSearchBar = chooseIngredientSearchBar
         searchTable = searchTableView
@@ -57,7 +63,7 @@ class AddMatchViewController : AddMatchPrototypeViewController {
     */
     override func gotSelectedIngredient(selected: PFIngredient) {
         
-        if currentUser == nil {
+        if !isUserLoggedIn() {
             errorLoggedOut()
             return
         }

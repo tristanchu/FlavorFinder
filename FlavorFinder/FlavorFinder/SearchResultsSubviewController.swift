@@ -172,10 +172,10 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
     /* pinFavorites
         - pins favorites to top of search results, in rank order with respect
             to each other assuming the results have already been sorted by rank
-        - does nothing if currentUser == nil
+        - does nothing if not logged in
     */
     func pinFavorites() {
-        if (currentUser != nil) {
+        if isUserLoggedIn() {
             var matchesWithPins = [(ingredient: PFIngredient, rank: Double)]()
             var insertFavIndex = 0
             for match in allMatches {
@@ -268,7 +268,7 @@ class SearchResultsSubviewController : UITableViewController, MGSwipeTableCellDe
                 return cell
             }
             
-            if currentUser != nil {
+            if isUserLoggedIn() {
                 cell.backgroundColor = SEARCH_RESULTS_CELL_COLOR
             }
         }

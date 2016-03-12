@@ -378,7 +378,7 @@ func isFavoriteIngredient(user: PFUser, ingredient: PFObject) -> PFObject? {
     return _favorite
 }
 
-func favoriteIngredient(user: PFUser, ingredient: PFObject) {
+func favoriteIngredient(user: PFUser, ingredient: PFIngredient) {
     let _favorite = PFFavorite(user: user, ingredient: ingredient)
     
     _favorite.pinInBackground()
@@ -450,10 +450,7 @@ func removeIngredientFromList(list: PFObject, ingredient: PFObject) {
 
 func createIngredientList(user: PFUser, title: String,
                           ingredients: [PFIngredient]) -> PFList {
-    let _userList = PFList(user: user)
-        _userList.title = title
-        _userList.ingredients = ingredients
-
+    let _userList = PFList(user: user, title: title, ingredients: ingredients)
     _userList.pinInBackground()
     _userList.saveInBackground()
     return _userList

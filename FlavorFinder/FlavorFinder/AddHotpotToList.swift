@@ -14,7 +14,7 @@ class AddHotpotToListController: UITableViewController {
     // MARK: Properties:
     let listCellIdentifier = "listAddCellIdentifier"
     let createListCellIdentitfier = "createListCellIdentifier"
-    var userLists = [PFObject]()
+    var userLists = [PFList]()
 
     // Parse related:
     let listClassName = "List"
@@ -135,14 +135,6 @@ class AddHotpotToListController: UITableViewController {
             if (indexPath.row == 0){
                 
                 self.performSegueWithIdentifier(segueToCreateNewListFromSearch, sender: self)
-                
-//                if (!currentIngredientToAdd.isEmpty) {
-//                    createNewList(newListTitle, adding: currentIngredientToAdd)
-//                    // clear global var:
-//                    currentIngredientToAdd = []
-//                } else {
-//                    createNewList(newListTitle, adding: currentSearch)
-//                }
 
             // Picked an existing list:
             } else {
@@ -175,7 +167,7 @@ class AddHotpotToListController: UITableViewController {
         
         // Get user's lists from Parse local db if user logged in:
         if let user = currentUser {
-            userLists = getUserListsFromLocal(user)
+            userLists = getUserListsFromLocal(user) as! [PFList]
         }
     }
 
@@ -205,21 +197,17 @@ class AddHotpotToListController: UITableViewController {
     /* addToList
         can be called with current search or with the one ingredient to add
     */
-    func addtoList(listObject: PFObject, adding: [PFIngredient]) {
-        var list = listObject.objectForKey(ingredientsColumnName) as! [PFIngredient]
+    func addtoList(listObject: PFList, adding: [PFIngredient]) {
+        let list = listObject.objectForKey(ingredientsColumnName) as! [PFIngredient]
         let listName = listObject.objectForKey(ListTitleColumnName) as! String
         
         for ingredient in adding {
             if !list.contains(ingredient) {
-                list.append(ingredient)
+                listObject.addIngredient(ingredient)
             }
         }
         // Toast Feedback:
         makeListToast(listName, iList: adding)
-        
-        // update with new ingredient list:
-        listObject.setObject(list, forKey: ingredientsColumnName)
-        listObject.saveInBackground()
     }
     
     /* createNewList
@@ -260,4 +248,3 @@ class AddHotpotToListController: UITableViewController {
     }
 
 }
-

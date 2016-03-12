@@ -70,7 +70,7 @@ class SearchResultsViewController : UIViewController {
         }
         
         // disable/enable add to list button if user:
-        if currentUser != nil {
+        if isUserLoggedIn() {
             self.addToListBtn.enabled = true
         } else {
             self.addToListBtn.enabled = false

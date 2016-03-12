@@ -9,18 +9,18 @@
 import UIKit
 import Parse
 
-class PFFavorite : PFObject, PFSubclassing {
+public class PFFavorite : PFObject, PFSubclassing {
     
     @NSManaged var user: PFUser
-    @NSManaged var ingredient: PFObject
+    @NSManaged var ingredient: PFIngredient
     
-    convenience init(user: PFUser, ingredient: PFObject) {
+    convenience init(user: PFUser, ingredient: PFIngredient) {
         self.init()
         self.user = user
         self.ingredient = ingredient
     }
     
-    override class func initialize() {
+    override public class func initialize() {
         struct Static {
             static var onceToken: dispatch_once_t = 0
         }
@@ -29,8 +29,16 @@ class PFFavorite : PFObject, PFSubclassing {
         }
     }
     
-    static func parseClassName() -> String {
+    static public func parseClassName() -> String {
         return "Favorite"
+    }
+    
+    func getUser() -> PFUser {
+        return user
+    }
+    
+    func getIngredient() -> PFIngredient {
+        return ingredient
     }
 
 }

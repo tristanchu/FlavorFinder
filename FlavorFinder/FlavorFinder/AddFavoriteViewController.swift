@@ -27,6 +27,7 @@ class AddFavoriteViewController: SearchIngredientsViewController {
     /* viewDidLoad:
     */
     override func viewDidLoad() {
+        
         // Assign values to parent class variables
         ingredientSearchBar = addIngredientSearchBar
         searchTable = searchTableView
@@ -49,7 +50,7 @@ class AddFavoriteViewController: SearchIngredientsViewController {
     - handle selection of ingredient in search: add to favs if not already in favs
     */
     override func gotSelectedIngredient(selected: PFIngredient) {
-        if currentUser != nil {
+        if isUserLoggedIn() {
             if isFavoriteIngredient(currentUser!, ingredient: selected) != nil {
                 if selected.isDataAvailable() {
                     promptLabel.text = "\(selected.name)\(alreadyContainsText)"

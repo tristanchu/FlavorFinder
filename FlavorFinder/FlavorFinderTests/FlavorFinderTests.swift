@@ -8,9 +8,9 @@
 
 import UIKit
 import XCTest
+import Parse
 
 @testable import FlavorFinder
-import Parse
 
 class FlavorFinderTests: XCTestCase {
     
@@ -69,60 +69,77 @@ class FlavorFinderTests: XCTestCase {
         
         let user = PFUser()
         let name = "New List"
-        let newList = IngredientList(user: user, name: name)
-        
+        let newList = FlavorFinder.PFList(user: user, title: name)
+
         // Test that new IngredientList was created
         XCTAssertNotNil(newList, "list creation failed")
 
-        // Test that new IngredientList is associated with a PFUser user
-        XCTAssertEqual(newList!.getUser(), user, "user not associated with new list")
+        // Test that new list is associated with a PFUser user
+        XCTAssertEqual(newList.getUser(), user, "user not associated with new list")
         
-        // Test that new IngredientList is associated with a String name
-        XCTAssertEqual(newList!.getName(), name, "name not associated with new list")
+        // Test that new list is associated with a String name
+        XCTAssertEqual(newList.getName(), name, "name not associated with new list")
+
+        // Test that new list is empty
+        XCTAssertTrue(newList.getList().isEmpty, "new list was not empty")
         
-        // Rename tests...
-        // Test that IngredientList can be renamed with good input
-        let goodName = "Good Name"
-        newList!.rename(goodName)
-        XCTAssertEqual(newList!.getName(), goodName, "failed to rename list")
-        
-        // Test that IngredientList will not be renamed with empty string
-        let noName = ""
-        newList!.rename(noName)
-        XCTAssertGreaterThan(newList!.getName().characters.count, 1, "renamed list to empty string")
-        
-        // Test that IngredientList will not be renamed with overly long string
-        let longName = "long names are bad for your UI so set some limits!"
-        newList!.rename(longName)
-        XCTAssertLessThan(newList!.getName().characters.count, newList!.NAME_MAX_CHAR, "renamed list to too long string")
-        
-        // Bad initialization tests...
-        XCTAssertNil(IngredientList(user: user, name: noName), "new list created with no name")
-        XCTAssertNil(IngredientList(user: user, name: longName), "new list created with too long name")
-        
-        // Future tests: things related to content of list
-        
+        // Test that ingredient can be added to list
+        let ingredient = FlavorFinder.PFIngredient()
+        newList.addIngredient(ingredient)
+        XCTAssertFalse(newList.getList().isEmpty, "ingredient did not get added to list")
+
     }
     
+// Favorites Feature Unit Test
+    func testFavoritesFeature() {
+        
+        let user = PFUser()
+        let ingredient = FlavorFinder.PFIngredient()
+        let fav = FlavorFinder.PFFavorite(user: user, ingredient: ingredient)
+        
+        // Test that favorite ingredients can be created
+        XCTAssertNotNil(fav, "favorite not created")
+        
+        // Test that new favorite is associated with a PFUser user
+        XCTAssertEqual(fav.getUser(), user, "user not associated with new favorite")
+        
+        // Test that new favorite is associated with a PFIngredient
+        XCTAssertEqual(fav.getIngredient(), ingredient, "ingredient not associated with new favorite")
+    }
     
-//    func testPerformanceExample() {
-//        // This is an example of a performance test case.
-//        self.measureBlock() {
-//            // Put the code you want to measure the time of here.
-//        }
-//    }
-    
+// Parse Integration Test: User Registration & Authentication
     func testUserRegistrationAndAuthentication() {
         let username = "testingUser"
         let password = "testingUser"
         let email = "testingUser@gmail.com"
-        XCTAssertTrue(fieldsAreValid(email, username: username, password: password), "User fields are invalid")
+        let registerVC = RegisterView()
         
-        requestNewUser(email, username: username, password: password, pwRetyped: password)
-        loginUser(username, password: password)
+        // Test that the fields we supplied are valid
+        XCTAssertTrue(registerVC.fieldsAreValid(email, username: username, password: password, pwRetyped: password), "test user fields flagged as invalid")
         
-        let user = currentUser
-        XCTAssertNotEqual(user, nil, "User was unable to log in.")
+        // Test that a new user can be created
+        let newUser = registerVC.requestNewUser(email, username: username, password: password, pwRetyped: password) as PFUser?
+        XCTAssertNotNil(newUser, "user not generated for validated fields")
+        
+        // Test that the newly created user can now log in
+        PFUser.logInWithUsernameInBackground(username, password: password) {
+            (user: PFUser?, error: NSError?) -> Void in
+            if user != nil {
+                XCTAssertEqual(user, newUser, "users are not equal")
+                user?.deleteEventually()
+            } else {
+                XCTAssertNotNil(user, "error logging in")
+            }
+        }
+        
+        // Test that in-app user session accepts the new user
+        if let _ = newUser {
+            setUserSession(newUser!)
+        }
+        XCTAssertTrue(isUserLoggedIn(), "user was unable to log in")
+        
+        // Clean up so we can register the same test login credentials
+        newUser?.deleteEventually()
     }
     
 }

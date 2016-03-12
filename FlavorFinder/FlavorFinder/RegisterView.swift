@@ -105,7 +105,7 @@ class RegisterView : UIViewController, UITextFieldDelegate {
     /* requestNewUser
         requests that Parse creates a new user
     */
-    func requestNewUser(email: String, username: String, password: String, pwRetyped: String) {
+    func requestNewUser(email: String, username: String, password: String, pwRetyped: String) -> PFUser? {
         if fieldsAreValid(email, username: username, password: password, pwRetyped: pwRetyped) {
             let newUser = PFUser()
             newUser.username = username
@@ -122,7 +122,9 @@ class RegisterView : UIViewController, UITextFieldDelegate {
                     self.handleError(error)
                 }
             }
+            return newUser
         }
+        return nil
     }
 
     /* fieldsAreValid
@@ -159,7 +161,7 @@ class RegisterView : UIViewController, UITextFieldDelegate {
     func registerSuccess(user: PFUser) {
         setUserSession(user)
         if let parentVC = self.parentViewController?.parentViewController as! LoginModuleParentViewController? {
-            if currentUser != nil {
+            if isUserLoggedIn() {
                 let registeredMsg = self.REGISTERED_MSG + "\(currentUser!.username!)"
                 parentVC.view.makeToast(registeredMsg, duration: TOAST_DURATION, position: .Bottom)
             }

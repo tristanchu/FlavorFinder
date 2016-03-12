@@ -42,7 +42,7 @@ class SettingsPageController : LoginModuleParentViewController {
     }
 
     @IBAction func logoutBtn(sender: UIButton) {
-        if currentUser != nil {
+        if isUserLoggedIn() {
             let userName = currentUser!.username!
             let ToastText = "\(LOGOUT_TEXT)\(userName)"
             PFUser.logOutInBackground()
@@ -97,7 +97,7 @@ class SettingsPageController : LoginModuleParentViewController {
         
         setUpLoginContainerUI()
 
-        if currentUser != nil {
+        if isUserLoggedIn() {
             displayLoggedIn()
         } else {
             displayLoggedOut()

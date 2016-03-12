@@ -32,6 +32,12 @@ class SearchIngredientsViewController: GotNaviViewController, UISearchBarDelegat
      - Additional setup after loading the view
     */
     override func viewDidLoad() {
+        
+        if !isUserLoggedIn() {
+            self.navigationController?.popToRootViewControllerAnimated(true)
+            return
+        }
+        
         super.viewDidLoad()
         
         // set up delegates search bar and table view:
@@ -47,6 +53,12 @@ class SearchIngredientsViewController: GotNaviViewController, UISearchBarDelegat
     - Setup when user goes into page
     */
     override func viewDidAppear(animated: Bool) {
+        
+        if !isUserLoggedIn() {
+            self.navigationController?.popToRootViewControllerAnimated(true)
+            return
+        }
+        
         super.viewDidAppear(animated)
         
         // Hide search bar results on load:
