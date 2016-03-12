@@ -12,8 +12,7 @@ import Parse
 class AddToListPage: SearchIngredientsViewController, UITextFieldDelegate {
     
     // MARK: Properties:
-    var ingredientList = [PFIngredient]()
-    var listObject: PFObject!
+    var listObject: PFList!
     var listTitle = ""
     
     // Parse related:
@@ -114,14 +113,13 @@ class AddToListPage: SearchIngredientsViewController, UITextFieldDelegate {
     override func gotSelectedIngredient(selected: PFIngredient) {
         var userList = listObject.objectForKey(ingredientsColumnName) as! [PFIngredient]
         if !(userList.contains(selected) && selected.isDataAvailable()) {
+            
+            // add ingredient to list:
+            listObject.addIngredient(selected)
+            
             // Feedback Toast:
             let addedToastText = "Added \(selected.name) to \(listTitle)"
             self.navigationController?.view.makeToast(addedToastText, duration: TOAST_DURATION, position: .AlmostBottom)
-            
-            // add ingredient to list:
-            userList.append(selected)
-            listObject.setObject(userList, forKey: ingredientsColumnName)
-            listObject.saveInBackground()
             
             // return to list page
             self.navigationController?.popViewControllerAnimated(true)

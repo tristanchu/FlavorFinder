@@ -16,7 +16,7 @@ class ListDetailController: UITableViewController {
     let addToListCellIdentifier = "addToListCellIdentifier"
     let listToSearchCellIdentifier = "listToSearchCellIdentifier"
     var ingredientList = [PFIngredient]()
-    var userList: PFObject!  // reference to list for editing
+    var userList: PFList!  // reference to list for editing
     
     // Parse related:
     let listClassName = "List"
@@ -172,38 +172,6 @@ class ListDetailController: UITableViewController {
                 let listIngredient = ingredientList[indexPath.row - 1]
                 cell.textLabel?.text = listIngredient.name
                 cell.textLabel?.font = CELL_FONT
-                
-//                cell.icons.removeAll()
-//                
-//                let isNuts = listIngredient[_s_nuts] as! Bool
-//                let isDairy = listIngredient[_s_dairy] as! Bool
-//                let isVege = listIngredient[_s_vegetarian] as! Bool
-//                
-//                var isFavorite = false
-//                if let user = currentUser {
-//                    if let _ = isFavoriteIngredient(user, ingredient: listIngredient) {
-//                        isFavorite = true
-//                    }
-//                }
-//                
-//                if isVege {
-//                    let imageVegan = UIImage(named: "Vegetarian")!
-//                    cell.icons.append(imageVegan)
-//                }
-//                if isNuts {
-//                    let imageNuts = UIImage(named: "Nuts")!
-//                    cell.icons.append(imageNuts)
-//                }
-//                if isDairy {
-//                    let imageDairy = UIImage(named: "Dairy")!
-//                    cell.icons.append(imageDairy)
-//                }
-//                if isFavorite {
-//                    let imageFav = UIImage(named: "Heart")!
-//                    cell.icons.append(imageFav)
-//                }
-//                
-//                cell.ingredientIcons.reloadData()
                 
                 return cell
             }

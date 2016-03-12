@@ -13,7 +13,7 @@ class ListsPageController: UITableViewController {
 
     // MARK: Properties:
     let listCellIdentifier = "listCellIdentifier"
-    var userLists = [PFObject]()
+    var userLists = [PFList]()
 
     // Parse related:
     let listClassName = "List"
@@ -194,7 +194,7 @@ class ListsPageController: UITableViewController {
         
         // Get user's lists from Parse local db if user logged in:
         if let user = currentUser {
-            userLists = getUserListsFromLocal(user)
+            userLists = getUserListsFromLocal(user) as! [PFList]
         }
     }
 
