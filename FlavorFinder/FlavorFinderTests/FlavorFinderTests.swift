@@ -8,9 +8,9 @@
 
 import UIKit
 import XCTest
+import Parse
 
 @testable import FlavorFinder
-import Parse
 
 class FlavorFinderTests: XCTestCase {
     
@@ -69,48 +69,35 @@ class FlavorFinderTests: XCTestCase {
         
         let user = PFUser()
         let name = "New List"
-        let newList = IngredientList(user: user, name: name)
-        
+        let newList = FlavorFinder.PFList(user: user, title: name)
+
         // Test that new IngredientList was created
         XCTAssertNotNil(newList, "list creation failed")
 
         // Test that new IngredientList is associated with a PFUser user
-        XCTAssertEqual(newList!.getUser(), user, "user not associated with new list")
+        XCTAssertEqual(newList.getUser(), user, "user not associated with new list")
         
         // Test that new IngredientList is associated with a String name
-        XCTAssertEqual(newList!.getName(), name, "name not associated with new list")
+        XCTAssertEqual(newList.getName(), name, "name not associated with new list")
+
+        // Test that new list is empty
+        XCTAssertTrue(newList.getList().isEmpty, "new list was not empty")
         
-        // Rename tests...
-        // Test that IngredientList can be renamed with good input
-        let goodName = "Good Name"
-        newList!.rename(goodName)
-        XCTAssertEqual(newList!.getName(), goodName, "failed to rename list")
-        
-        // Test that IngredientList will not be renamed with empty string
-        let noName = ""
-        newList!.rename(noName)
-        XCTAssertGreaterThan(newList!.getName().characters.count, 1, "renamed list to empty string")
-        
-        // Test that IngredientList will not be renamed with overly long string
-        let longName = "long names are bad for your UI so set some limits!"
-        newList!.rename(longName)
-        XCTAssertLessThan(newList!.getName().characters.count, newList!.NAME_MAX_CHAR, "renamed list to too long string")
-        
-        // Bad initialization tests...
-        XCTAssertNil(IngredientList(user: user, name: noName), "new list created with no name")
-        XCTAssertNil(IngredientList(user: user, name: longName), "new list created with too long name")
-        
-        // Future tests: things related to content of list
-        
+        // Test that ingredient can be added to list
+        let ingredient = FlavorFinder.PFIngredient()
+        newList.addIngredient(ingredient)
+        XCTAssertFalse(newList.getList().isEmpty, "ingredient did not get added to list")
+
     }
     
-    
-//    func testPerformanceExample() {
-//        // This is an example of a performance test case.
-//        self.measureBlock() {
-//            // Put the code you want to measure the time of here.
-//        }
-//    }
+// Favorites Feature Unit Test
+    func testFavoritesFeature() {
+        
+        let user = PFUser()
+        let ingredient = FlavorFinder.PFIngredient()
+        
+        
+    }
     
 // Parse Integration Test: User Registration & Authentication
     func testUserRegistrationAndAuthentication() {

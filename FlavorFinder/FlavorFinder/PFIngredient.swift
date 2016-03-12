@@ -9,7 +9,7 @@
 import UIKit
 import Parse
 
-class PFIngredient : PFObject, PFSubclassing {
+public class PFIngredient : PFObject, PFSubclassing {
     
     @NSManaged var name: String
     @NSManaged var isDairy: Bool
@@ -24,7 +24,7 @@ class PFIngredient : PFObject, PFSubclassing {
         self.isVege = isVege
     }
     
-    override class func initialize() {
+    override public class func initialize() {
         struct Static {
             static var onceToken : dispatch_once_t = 0;
         }
@@ -33,7 +33,7 @@ class PFIngredient : PFObject, PFSubclassing {
         }
     }
     
-    static func parseClassName() -> String {
+    public static func parseClassName() -> String {
         return "Ingredient"
     }
 }

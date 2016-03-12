@@ -111,7 +111,7 @@ class AddToListPage: SearchIngredientsViewController, UITextFieldDelegate {
     - handle selection of ingredient in search: add to list if not already in list
     */
     override func gotSelectedIngredient(selected: PFIngredient) {
-        var userList = listObject.objectForKey(ingredientsColumnName) as! [PFIngredient]
+        let userList = listObject.objectForKey(ingredientsColumnName) as! [PFIngredient]
         if !(userList.contains(selected) && selected.isDataAvailable()) {
             
             // add ingredient to list:

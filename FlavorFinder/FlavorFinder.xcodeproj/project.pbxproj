@@ -57,10 +57,9 @@
 		88A2B6971C83666900424652 /* ListIngredientTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A2B6961C83666900424652 /* ListIngredientTableViewCell.swift */; };
 		88F0E5011BE54111003CB35B /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F0E5001BE54111003CB35B /* Animations.swift */; };
 		88F413FA1BC74A00000C0093 /* MatchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F413F91BC74A00000C0093 /* MatchTableViewCell.swift */; };
-		88F414011BC7513F000C0093 /* PFIngredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F414001BC7513F000C0093 /* PFIngredient.swift */; };
-		88F414021BC7513F000C0093 /* PFIngredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F414001BC7513F000C0093 /* PFIngredient.swift */; };
 		B61AD2C51C5BFB9C00081BF4 /* SearchResultsSubviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61AD2C41C5BFB9C00081BF4 /* SearchResultsSubviewController.swift */; };
 		B61FEBCE1C4430D30028F800 /* EmptySegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61FEBCD1C4430D30028F800 /* EmptySegue.swift */; };
+		B62AF0031C93E5DD003E43BF /* PFIngredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62AF0021C93E5DD003E43BF /* PFIngredient.swift */; };
 		B63F60211C725C0C0057D726 /* TextUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63F60201C725C0C0057D726 /* TextUtils.swift */; };
 		B6420CB51C836C8300260779 /* AddIngredientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6420CB41C836C8300260779 /* AddIngredientViewController.swift */; };
 		B64E25F01C7A3355003D53BD /* LoginModuleParentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64E25EF1C7A3355003D53BD /* LoginModuleParentViewController.swift */; };
@@ -75,7 +74,6 @@
 		B698B6881C84E24E0067F8E8 /* AddIngredientAddMatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B698B6871C84E24E0067F8E8 /* AddIngredientAddMatchViewController.swift */; };
 		B69E27EA1C85834C00BA964C /* SetFilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69E27E91C85834C00BA964C /* SetFilterTableViewCell.swift */; };
 		B6A779081C6C248F0005B44C /* SearchIngredientsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A779071C6C248F0005B44C /* SearchIngredientsViewController.swift */; };
-		B6B7E0571C4D7BA400ADFC9C /* IngredientList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B7E0561C4D7BA400ADFC9C /* IngredientList.swift */; };
 		B6BFE6991C82B63F004FD05D /* AddMatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BFE6981C82B63F004FD05D /* AddMatchViewController.swift */; };
 		B6E0C4EB1C6926E2008B7E2A /* AddFavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E0C4EA1C6926E2008B7E2A /* AddFavoriteViewController.swift */; };
 		B6EA63591BEEB4660017C063 /* PFFavorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EA63581BEEB4660017C063 /* PFFavorite.swift */; };
@@ -153,9 +151,9 @@
 		88A2B6961C83666900424652 /* ListIngredientTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListIngredientTableViewCell.swift; sourceTree = "<group>"; };
 		88F0E5001BE54111003CB35B /* Animations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animations.swift; sourceTree = "<group>"; };
 		88F413F91BC74A00000C0093 /* MatchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchTableViewCell.swift; sourceTree = "<group>"; };
-		88F414001BC7513F000C0093 /* PFIngredient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PFIngredient.swift; path = FlavorFinderTests/PFIngredient.swift; sourceTree = SOURCE_ROOT; };
 		B61AD2C41C5BFB9C00081BF4 /* SearchResultsSubviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsSubviewController.swift; sourceTree = "<group>"; };
 		B61FEBCD1C4430D30028F800 /* EmptySegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptySegue.swift; sourceTree = "<group>"; };
+		B62AF0021C93E5DD003E43BF /* PFIngredient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PFIngredient.swift; sourceTree = "<group>"; };
 		B63F60201C725C0C0057D726 /* TextUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextUtils.swift; sourceTree = "<group>"; };
 		B6420CB41C836C8300260779 /* AddIngredientViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddIngredientViewController.swift; sourceTree = "<group>"; };
 		B64E25EF1C7A3355003D53BD /* LoginModuleParentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginModuleParentViewController.swift; sourceTree = "<group>"; };
@@ -170,7 +168,6 @@
 		B698B6871C84E24E0067F8E8 /* AddIngredientAddMatchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddIngredientAddMatchViewController.swift; sourceTree = "<group>"; };
 		B69E27E91C85834C00BA964C /* SetFilterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetFilterTableViewCell.swift; sourceTree = "<group>"; };
 		B6A779071C6C248F0005B44C /* SearchIngredientsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchIngredientsViewController.swift; sourceTree = "<group>"; };
-		B6B7E0561C4D7BA400ADFC9C /* IngredientList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngredientList.swift; sourceTree = "<group>"; };
 		B6BFE6981C82B63F004FD05D /* AddMatchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddMatchViewController.swift; sourceTree = "<group>"; };
 		B6E0C4EA1C6926E2008B7E2A /* AddFavoriteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFavoriteViewController.swift; sourceTree = "<group>"; };
 		B6EA63581BEEB4660017C063 /* PFFavorite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PFFavorite.swift; sourceTree = "<group>"; };
@@ -341,12 +338,11 @@
 		8875DE2F1BE0500100CD50EA /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				B62AF0021C93E5DD003E43BF /* PFIngredient.swift */,
 				60DFE76D1C6148D400A6EF85 /* SearchUtils.swift */,
 				8875DE311BE051B100CD50EA /* Database.swift */,
 				8875DE2B1BE04DD900CD50EA /* LoginUtils.swift */,
-				B6B7E0561C4D7BA400ADFC9C /* IngredientList.swift */,
 				B6EA63581BEEB4660017C063 /* PFFavorite.swift */,
-				88F414001BC7513F000C0093 /* PFIngredient.swift */,
 				8839994E1C555A34003F5CD2 /* PFList.swift */,
 				B6F3B74E1BE8833E00AF791A /* PFMatch.swift */,
 				88998E201BEC365D00087406 /* PFVote.swift */,
@@ -623,7 +619,6 @@
 				60AD7BDF1C7A47470002A7DF /* AddToListPage.swift in Sources */,
 				B6739A141C59971B0004F982 /* ContainerParentViewController.swift in Sources */,
 				888D1A401BDEF816007F09AE /* Stack.swift in Sources */,
-				88F414011BC7513F000C0093 /* PFIngredient.swift in Sources */,
 				B698B6881C84E24E0067F8E8 /* AddIngredientAddMatchViewController.swift in Sources */,
 				B6420CB51C836C8300260779 /* AddIngredientViewController.swift in Sources */,
 				B6F3B74F1BE8833E00AF791A /* PFMatch.swift in Sources */,
@@ -632,6 +627,7 @@
 				8875DE2C1BE04DD900CD50EA /* LoginUtils.swift in Sources */,
 				60D22BA41C723B9B00A72FB2 /* AddHotpotToList.swift in Sources */,
 				60DFE76E1C6148D400A6EF85 /* SearchUtils.swift in Sources */,
+				B62AF0031C93E5DD003E43BF /* PFIngredient.swift in Sources */,
 				B698B6861C84E0000067F8E8 /* AddMatchPrototypeViewController.swift in Sources */,
 				6062FDC11C5F3386009B2EEB /* LoginViewPage.swift in Sources */,
 				B65DE16E1C822B6F005B66AE /* GotNaviViewController.swift in Sources */,
@@ -644,7 +640,6 @@
 				B6739A181C5997760004F982 /* LandingPageController.swift in Sources */,
 				B6A779081C6C248F0005B44C /* SearchIngredientsViewController.swift in Sources */,
 				8875DE391BE06FB300CD50EA /* MenuTableViewController.swift in Sources */,
-				B6B7E0571C4D7BA400ADFC9C /* IngredientList.swift in Sources */,
 				602B7CBF1C5FC4D80068D847 /* RegisterView.swift in Sources */,
 				B6F55CA71C5E88D300854B07 /* FilterBarSubviewController.swift in Sources */,
 				60216E661BEC4F740029454B /* UiUtils.swift in Sources */,
@@ -668,7 +663,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				883AC63E1BC1A3C0009136E9 /* FlavorFinderTests.swift in Sources */,
-				88F414021BC7513F000C0093 /* PFIngredient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

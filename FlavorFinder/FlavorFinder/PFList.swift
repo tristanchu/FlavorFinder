@@ -9,7 +9,7 @@
 import UIKit
 import Parse
 
-class PFList : PFObject, PFSubclassing {
+public class PFList : PFObject, PFSubclassing {
     
     @NSManaged var user: PFUser
     @NSManaged var ingredients: [PFIngredient]
@@ -29,7 +29,8 @@ class PFList : PFObject, PFSubclassing {
         self.ingredients = [PFIngredient]()
     }
     
-    override class func initialize() {
+    
+    override public class func initialize() {
         struct Static {
             static var onceToken : dispatch_once_t = 0;
         }
@@ -37,8 +38,8 @@ class PFList : PFObject, PFSubclassing {
             self.registerSubclass()
         }
     }
-    
-    static func parseClassName() -> String {
+
+    static public func parseClassName() -> String {
         return "List"
     }
     
