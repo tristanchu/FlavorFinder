@@ -378,7 +378,7 @@ func isFavoriteIngredient(user: PFUser, ingredient: PFObject) -> PFObject? {
     return _favorite
 }
 
-func favoriteIngredient(user: PFUser, ingredient: PFObject) {
+func favoriteIngredient(user: PFUser, ingredient: PFIngredient) {
     let _favorite = PFFavorite(user: user, ingredient: ingredient)
     
     _favorite.pinInBackground()

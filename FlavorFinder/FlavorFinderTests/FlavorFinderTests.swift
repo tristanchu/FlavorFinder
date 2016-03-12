@@ -74,10 +74,10 @@ class FlavorFinderTests: XCTestCase {
         // Test that new IngredientList was created
         XCTAssertNotNil(newList, "list creation failed")
 
-        // Test that new IngredientList is associated with a PFUser user
+        // Test that new list is associated with a PFUser user
         XCTAssertEqual(newList.getUser(), user, "user not associated with new list")
         
-        // Test that new IngredientList is associated with a String name
+        // Test that new list is associated with a String name
         XCTAssertEqual(newList.getName(), name, "name not associated with new list")
 
         // Test that new list is empty
@@ -95,8 +95,16 @@ class FlavorFinderTests: XCTestCase {
         
         let user = PFUser()
         let ingredient = FlavorFinder.PFIngredient()
+        let fav = FlavorFinder.PFFavorite(user: user, ingredient: ingredient)
         
+        // Test that favorite ingredients can be created
+        XCTAssertNotNil(fav, "favorite not created")
         
+        // Test that new favorite is associated with a PFUser user
+        XCTAssertEqual(fav.getUser(), user, "user not associated with new favorite")
+        
+        // Test that new favorite is associated with a PFIngredient
+        XCTAssertEqual(fav.getIngredient(), ingredient, "ingredient not associated with new favorite")
     }
     
 // Parse Integration Test: User Registration & Authentication
