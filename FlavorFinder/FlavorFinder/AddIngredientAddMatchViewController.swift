@@ -32,6 +32,7 @@ class AddIngredientAddMatchViewController : AddMatchPrototypeViewController {
         if (!isUserLoggedIn()) || firstIngredient == nil {
             self.navigationController?.popToRootViewControllerAnimated(true)
             print("ERROR: Invalid attempt to access add ingredient add match page.")
+            return
         }
         
         let ingredient = addIngredient((firstIngredient?.name.lowercaseString)!, isDairy: (firstIngredient?.isDairy)!, isNuts: (firstIngredient?.isNuts)!, isVege: (firstIngredient?.isVege)!)
@@ -53,6 +54,7 @@ class AddIngredientAddMatchViewController : AddMatchPrototypeViewController {
         if (!isUserLoggedIn()) || firstIngredient == nil {
             self.navigationController?.popToRootViewControllerAnimated(true)
             print("ERROR: Invalid attempt to access add ingredient add match page.")
+            return
         }
         
         // Assign values to parent class variables

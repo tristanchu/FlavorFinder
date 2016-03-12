@@ -27,6 +27,7 @@ class AddFavoriteViewController: SearchIngredientsViewController {
     /* viewDidLoad:
     */
     override func viewDidLoad() {
+        
         // Assign values to parent class variables
         ingredientSearchBar = addIngredientSearchBar
         searchTable = searchTableView
