@@ -118,13 +118,17 @@ class LoginViewPage : UIViewController, UITextFieldDelegate {
                             // Test Toast:
                             let loginMsg = self.LOGGED_IN_MESSAGE + "\(username)"
                             parentVC.view.makeToast(loginMsg, duration: TOAST_DURATION, position: .Bottom)
-                        }                        
+                            print("SUCCESS: logged in")
+                        } else {
+                            print("ERROR: could not find user")
+                        }
                     } else {
                         // Alert Username and Password pair does not exist.
                         alertPopup(self.INCORRECT_U_OR_P_TITLE,
                             msg: self.INCORRECT_U_OR_P_MSG as String,
                             actionTitle: OK_TEXT,
                             currController: self)
+                        print("ERROR: username and password pair do not exist")
                     }
             }
         } else {

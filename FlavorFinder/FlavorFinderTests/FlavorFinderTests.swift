@@ -113,15 +113,33 @@ class FlavorFinderTests: XCTestCase {
         let password = "testingUser"
         let email = "testingUser@gmail.com"
         let registerVC = RegisterView()
-        XCTAssertTrue(registerVC.fieldsAreValid(email, username: username, password: password, pwRetyped: password), "valid user fields seen as invalid")
         
+        // Test that the fields we supplied are valid
+        XCTAssertTrue(registerVC.fieldsAreValid(email, username: username, password: password, pwRetyped: password), "test user fields flagged as invalid")
+        
+        // Test that a new user can be created
         let newUser = registerVC.requestNewUser(email, username: username, password: password, pwRetyped: password) as PFUser?
         XCTAssertNotNil(newUser, "user not generated for validated fields")
         
+        // Test that the newly created user can now log in
+        PFUser.logInWithUsernameInBackground(username, password: password) {
+            (user: PFUser?, error: NSError?) -> Void in
+            if user != nil {
+                XCTAssertEqual(user, newUser, "users are not equal")
+                user?.deleteEventually()
+            } else {
+                XCTAssertNotNil(user, "error logging in")
+            }
+        }
+        
+        // Test that in-app user session accepts the new user
         if let _ = newUser {
             setUserSession(newUser!)
         }
-        XCTAssertTrue(isUserLoggedIn(), "user was unable to log in.")
+        XCTAssertTrue(isUserLoggedIn(), "user was unable to log in")
+        
+        // Clean up so we can register the same test login credentials
+        newUser?.deleteEventually()
     }
     
 }
