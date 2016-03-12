@@ -76,7 +76,7 @@ class FavoritesPageController: UITableViewController {
             self.tabBarController?.navigationItem.title = favoritesTitle
         }
         
-        if currentUser != nil {
+        if isUserLoggedIn() {
             self.addBtn.enabled = true
         } else {
             self.addBtn.enabled = false
@@ -88,7 +88,7 @@ class FavoritesPageController: UITableViewController {
         // if nothing in cell array, display background message:
         if favoriteCells.isEmpty {
             // if user not logged in, needs to log in to store favs:
-            if currentUser == nil {
+            if !isUserLoggedIn() {
                 self.tableView.backgroundView =
                     emptyBackgroundText(noUserMsg, view: self.tableView as UIView)
             // if user logged in, tell them how to have favs:

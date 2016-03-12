@@ -29,7 +29,7 @@ class AddIngredientAddMatchViewController : AddMatchPrototypeViewController {
     
     @IBAction func submitButtonWasPressed(sender: AnyObject) {
         
-        if currentUser == nil || firstIngredient == nil {
+        if (!isUserLoggedIn()) || firstIngredient == nil {
             self.navigationController?.popToRootViewControllerAnimated(true)
             print("ERROR: Invalid attempt to access add ingredient add match page.")
         }
@@ -50,7 +50,7 @@ class AddIngredientAddMatchViewController : AddMatchPrototypeViewController {
     */
     override func viewDidLoad() {
         
-        if currentUser == nil || firstIngredient == nil {
+        if (!isUserLoggedIn()) || firstIngredient == nil {
             self.navigationController?.popToRootViewControllerAnimated(true)
             print("ERROR: Invalid attempt to access add ingredient add match page.")
         }
@@ -79,7 +79,7 @@ class AddIngredientAddMatchViewController : AddMatchPrototypeViewController {
     */
     override func gotSelectedIngredient(selected: PFIngredient) {
         // check that we're logged in
-        if currentUser == nil {
+        if (!isUserLoggedIn()) {
             errorLoggedOut()
             return
         }

@@ -76,7 +76,7 @@ class ListsPageController: UITableViewController {
             self.tabBarController?.navigationItem.title = listsTitle;
             
             // enable new list button if user logged in:
-            if currentUser != nil {
+            if isUserLoggedIn() {
                 self.newListBtn.enabled = true
             } else {
                 self.newListBtn.enabled = false
@@ -89,7 +89,7 @@ class ListsPageController: UITableViewController {
         listsTableView.backgroundView = nil;
         
         // Do not display lists if no user:
-        if currentUser == nil {
+        if !isUserLoggedIn() {
             listsTableView.backgroundView = emptyBackgroundText(noUserMsg, view: listsTableView as UIView);
 
         // Yes user - no data; display message:

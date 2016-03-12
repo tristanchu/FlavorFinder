@@ -57,7 +57,7 @@ class AddMatchViewController : AddMatchPrototypeViewController {
     */
     override func gotSelectedIngredient(selected: PFIngredient) {
         
-        if currentUser == nil {
+        if !isUserLoggedIn() {
             errorLoggedOut()
             return
         }

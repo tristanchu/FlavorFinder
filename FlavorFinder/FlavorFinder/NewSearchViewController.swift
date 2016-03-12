@@ -65,7 +65,7 @@ class NewSearchViewController : LoginModuleParentViewController,
         searchResultTableView.hidden = true
 
         // Hide/Show login container based on if user is logged in:
-        if currentUser != nil {
+        if isUserLoggedIn() {
             containerVC?.view.hidden = true
         } else {
             containerVC?.view.hidden = false

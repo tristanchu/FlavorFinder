@@ -159,7 +159,7 @@ class RegisterView : UIViewController, UITextFieldDelegate {
     func registerSuccess(user: PFUser) {
         setUserSession(user)
         if let parentVC = self.parentViewController?.parentViewController as! LoginModuleParentViewController? {
-            if currentUser != nil {
+            if isUserLoggedIn() {
                 let registeredMsg = self.REGISTERED_MSG + "\(currentUser!.username!)"
                 parentVC.view.makeToast(registeredMsg, duration: TOAST_DURATION, position: .Bottom)
             }

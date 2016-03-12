@@ -59,7 +59,7 @@ class MorePageController : UITableViewController {
         }
 
         // Determine what features user has access to
-        if currentUser != nil {
+        if isUserLoggedIn() {
             morePages = morePagesLoggedIn
         } else {
             morePages = morePagesLoggedOut
