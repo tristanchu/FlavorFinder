@@ -107,6 +107,7 @@ class FlavorFinderTests: XCTestCase {
         XCTAssertEqual(fav.getIngredient(), ingredient, "ingredient not associated with new favorite")
     }
     
+    
 // Parse Integration Test: User Registration & Authentication
     func testUserRegistrationAndAuthentication() {
         let username = "testingUser"
@@ -140,6 +141,33 @@ class FlavorFinderTests: XCTestCase {
         
         // Clean up so we can register the same test login credentials
         newUser?.deleteEventually()
+    }
+    
+// Parse Integration Test: Queries:
+    func testGetMatchingIngredentsExisting() {
+        
+        // Test can find existing ingredient:
+        let ingredient = _getIngredientWithNameSubstring("quinoa")
+        let i = ingredient[0] as! FlavorFinder.PFIngredient
+        let result :[(ingredient: PFIngredient, rank: Double)] = getMatchingIngredients(i)
+        
+        // Test that results are not empty:
+        XCTAssertFalse(result.isEmpty)
+        
+        // Test that there is only tomatoes in the result:
+        XCTAssertEqual(result.count, 1)
+        
+        XCTAssertEqual(result[0].ingredient.name, "tomatoes")
+    }
+    
+// Parse Integration Test: Bad Query:
+    func testGetMatchingIngredientsNoExist() {
+        
+        // Test do not get anything for bad query:
+        let query = _getIngredientWithNameSubstring("does not exist")
+        
+        // Test that results are not empty:
+        XCTAssertTrue(query.isEmpty)
     }
     
 }
